@@ -32,7 +32,7 @@ export const dict = {
       welcomeLabel: "Welcome",
       welcomeTitle: "A Sanctuary of Stillness",
       welcomeBody:
-        "Vadavai Matha Church has stood as a quiet refuge for generations of devotees — a place to pause, to pray, and to be at peace. Whether you come in faith, in seeking, or in sorrow, you are welcome here.",
+        "Vadakankulam Matha Church has stood as a quiet refuge for generations of devotees — a place to pause, to pray, and to be at peace. Whether you come in faith, in seeking, or in sorrow, you are welcome here.",
 
       showcaseLabel: "Sacred Moments",
       showcaseTitle: "Where Light Meets Devotion",
@@ -63,7 +63,7 @@ export const dict = {
       label: "Our Heritage",
       title: "A Story Carried by Generations",
       intro:
-        "For over a century and a half, Vadavai Matha Church has been a quiet witness to the faith of countless families, festivals, and silent prayers offered before Our Blessed Mother.",
+        "For over a century and a half, Vadakankulam Matha Church has been a quiet witness to the faith of countless families, festivals, and silent prayers offered before Our Blessed Mother.",
       timeline: [
         {
           year: "1872",
@@ -146,7 +146,7 @@ export const dict = {
       label: "Reach Us",
       title: "Visit & Connect",
       intro: "We would love to hear from you. Reach out, drop in, or simply pray with us.",
-      address: "Vadavai Matha Church, Vadakancherry, Tamil Nadu, India",
+      address: "Vadakankulam Matha Church, Vadakankulam, Tamil Nadu, India",
       phone: "+91 00000 00000",
       email: "info@vadavaimatha.org",
       formName: "Your Name",
@@ -194,7 +194,7 @@ export const dict = {
       welcomeLabel: "வருக",
       welcomeTitle: "அமைதியின் புகலிடம்",
       welcomeBody:
-        "வடவை மாதா திருச்சபை, தலைமுறை தலைமுறையாக பக்தர்களின் அமைதியான புகலிடமாக நின்றுள்ளது — இடைவெளி கொள்ள, ஜெபிக்க, அமைதியாக இருக்க ஓரிடம். நம்பிக்கையோடு, தேடலோடு அல்லது துன்பத்தோடு நீங்கள் வந்தாலும், இங்கே வரவேற்கப்படுகிறீர்கள்.",
+        "வடகாங்குளம் மாதா திருச்சபை, தலைமுறை தலைமுறையாக பக்தர்களின் அமைதியான புகலிடமாக நின்றுள்ளது — இடைவெளி கொள்ள, ஜெபிக்க, அமைதியாக இருக்க ஓரிடம். நம்பிக்கையோடு, தேடலோடு அல்லது துன்பத்தோடு நீங்கள் வந்தாலும், இங்கே வரவேற்கப்படுகிறீர்கள்.",
 
       showcaseLabel: "புனிதமான தருணங்கள்",
       showcaseTitle: "ஒளி, பக்தியில் கலக்கும் இடம்",
@@ -225,7 +225,7 @@ export const dict = {
       label: "எங்கள் பாரம்பரியம்",
       title: "தலைமுறைகளால் சுமக்கப்பட்ட கதை",
       intro:
-        "ஒன்றரை நூற்றாண்டுக்கு மேலாக, வடவை மாதா திருச்சபை எண்ணற்ற குடும்பங்களின் நம்பிக்கை, திருவிழாக்கள், அமைதியான ஜெபங்களுக்கு சாட்சியாக நின்றுள்ளது.",
+        "ஒன்றரை நூற்றாண்டுக்கு மேலாக, வடகாங்குளம் மாதா திருச்சபை எண்ணற்ற குடும்பங்களின் நம்பிக்கை, திருவிழாக்கள், அமைதியான ஜெபங்களுக்கு சாட்சியாக நின்றுள்ளது.",
       timeline: [
         {
           year: "1872",
@@ -309,7 +309,7 @@ export const dict = {
       title: "வருகை மற்றும் தொடர்பு",
       intro:
         "உங்களிடமிருந்து கேட்க விரும்புகிறோம். தொடர்பு கொள்ளுங்கள், வாருங்கள், அல்லது எங்களோடு ஜெபியுங்கள்.",
-      address: "வடவை மாதா திருச்சபை, வடகாஞ்சேரி, தமிழ்நாடு, இந்தியா",
+      address: "வடகாங்குளம் மாதா திருச்சபை, வடகாங்குளம், தமிழ்நாடு, இந்தியா",
       phone: "+91 00000 00000",
       email: "info@vadavaimatha.org",
       formName: "உங்கள் பெயர்",

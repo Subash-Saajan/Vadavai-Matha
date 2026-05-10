@@ -113,7 +113,7 @@ export default function ContactPage() {
 
             <div className="pt-4">
               <a
-                href="https://maps.google.com/?q=Vadakancherry+Matha+Church"
+                href="https://maps.google.com/?q=Vadakankulam+Matha+Church"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-navy text-white text-sm tracking-wide hover:bg-gold hover:text-navy transition-all duration-500 group"

@@ -158,7 +158,7 @@ export function Hero() {
             ref={headingRef}
             className="text-5xl md:text-7xl lg:text-8xl font-bold text-white tracking-tight leading-[0.9]"
           >
-            <span className="block">Vadakancherry</span>
+            <span className="block">Vadakankulam</span>
             <span className="block mt-2 text-gradient-gold">Matha Church</span>
           </h1>
 

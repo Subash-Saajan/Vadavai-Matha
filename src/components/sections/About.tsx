@@ -134,7 +134,7 @@ export function About() {
             >
               <Image
                 src="/images/church-night.png"
-                alt="Vadakancherry Matha Church"
+                alt="Vadakankulam Matha Church"
                 fill
                 className="object-contain object-bottom"
                 sizes="(max-width: 1024px) 80vw, 35vw"
@@ -169,8 +169,8 @@ export function About() {
             </h2>
 
             <p className="reveal-item text-lg text-text-muted leading-relaxed">
-              Vadakancherry Matha Church stands as a beacon of spirituality and
-              community in the heart of Vadakancherry. For over a century, this
+              Vadakankulam Matha Church stands as a beacon of spirituality and
+              community in the heart of Vadakankulam. For over a century, this
               sacred place has been a home for the faithful, a shelter for the
               weary, and a testament to unwavering devotion.
             </p>

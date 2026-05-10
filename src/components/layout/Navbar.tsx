@@ -47,7 +47,7 @@ export function Navbar() {
               scrolled ? "text-navy" : "text-white"
             }`}
           >
-            Vadavai Matha
+            Vadakankulam Matha
           </span>
         </Link>
 

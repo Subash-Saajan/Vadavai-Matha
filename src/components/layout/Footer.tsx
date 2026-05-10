@@ -17,7 +17,7 @@ export function Footer() {
           <div className="flex items-center gap-3 mb-4">
             <span className="w-2 h-2 rounded-full bg-gold" />
             <span className="font-serif text-2xl tracking-wide">
-              Vadavai Matha
+              Vadakankulam Matha
             </span>
           </div>
           <p className="text-white/60 max-w-sm leading-relaxed">{t.footer.tagline}</p>
@@ -48,7 +48,7 @@ export function Footer() {
 
       <div className="relative border-t border-white/10">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-white/40">
-          <p>© {year} Vadavai Matha Church · {t.footer.rights}</p>
+          <p>© {year} Vadakankulam Matha Church · {t.footer.rights}</p>
           <p className="font-serif italic">In faith, in stillness, in light.</p>
         </div>
       </div>

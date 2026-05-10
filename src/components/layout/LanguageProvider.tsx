@@ -31,7 +31,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   }, [lang, setLang]);
 
   return (
-    <LanguageContext.Provider value={{ lang, setLang, toggle, t: dict[lang] }}>
+    <LanguageContext.Provider value={{ lang, setLang, toggle, t: dict[lang] as Dict }}>
       {children}
     </LanguageContext.Provider>
   );

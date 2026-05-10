@@ -28,9 +28,9 @@ const tiroTamil = Tiro_Tamil({
 });
 
 export const metadata: Metadata = {
-  title: "Vadavai Matha — A Sanctuary of Faith",
+  title: "Vadakankulam Matha — A Sanctuary of Faith",
   description:
-    "Vadavai Matha Church · A sacred sanctuary of faith, prayer, and community.",
+    "Vadakankulam Matha Church · A sacred sanctuary of faith, prayer, and community.",
 };
 
 export default function RootLayout({
