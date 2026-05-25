@@ -1,21 +1,21 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-// Host-based routing for the single deployment that serves two domains:
-//   • vadavaimatha.net  → the full Holy Family Church site
-//   • littlerome.net    → the /coming-soon holding page
+// "Coming soon" launch gate for littlerome.net.
+//
+// While the full Holy Family Church site is being finished, every request is
+// rewritten to the /coming-soon holding page. To go live, set the env var
+// COMING_SOON to anything other than "true" (or remove it) and redeploy —
+// no code change needed. Locally it is unset, so `npm run dev` shows the
+// full site for development.
 //
 // In Next.js 16 the former `middleware` convention is renamed to `proxy`.
-const COMING_SOON_HOSTS = new Set([
-  "littlerome.net",
-  "www.littlerome.net",
-]);
+const COMING_SOON = process.env.COMING_SOON === "true";
 
 export function proxy(request: NextRequest) {
-  const host = request.headers.get("host")?.split(":")[0].toLowerCase() ?? "";
   const { pathname } = request.nextUrl;
 
-  if (COMING_SOON_HOSTS.has(host) && pathname !== "/coming-soon") {
+  if (COMING_SOON && pathname !== "/coming-soon") {
     return NextResponse.rewrite(new URL("/coming-soon", request.url));
   }
 

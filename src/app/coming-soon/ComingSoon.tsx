@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Globe, ArrowUpRight } from "lucide-react";
+import { Globe } from "lucide-react";
 import { useLang } from "@/components/layout/LanguageProvider";
 import { images } from "@/lib/images";
 
@@ -15,8 +15,7 @@ const copy = {
     tagline:
       "A sanctuary of faith in the heart of Tamil Nadu — devotion three centuries deep.",
     status: "Our new home is coming soon.",
-    note: "Until then, visit our parish",
-    cta: "vadavaimatha.net",
+    blessing: "Pray for us, O Holy Mother of God.",
   },
   ta: {
     eyebrow: "திருக்குடும்ப ஆலயம் · வடகாங்குளம்",
@@ -24,8 +23,7 @@ const copy = {
     tagline:
       "தமிழ்நாட்டின் இதயத்தில் நம்பிக்கையின் ஒரு புகலிடம் — மூன்று நூற்றாண்டுகளின் பக்தி.",
     status: "எங்கள் புதிய இணையதளம் விரைவில் வருகிறது.",
-    note: "அதுவரை, எங்கள் பங்கைப் பார்வையிடுங்கள்",
-    cta: "vadavaimatha.net",
+    blessing: "தேவமாதாவே, எங்களுக்காக வேண்டிக்கொள்ளும்.",
   },
 };
 
@@ -130,23 +128,16 @@ export function ComingSoon() {
         </motion.div>
       </div>
 
-      {/* Footer note */}
-      <motion.div
+      {/* Footer blessing */}
+      <motion.p
         custom={5}
         variants={fade}
         initial="hidden"
         animate="show"
-        className="absolute bottom-8 inset-x-0 z-10 flex flex-col items-center gap-2 text-sm text-white/50"
+        className="absolute bottom-8 inset-x-0 z-10 text-center px-6 font-serif italic text-sm text-white/45"
       >
-        <span>{c.note}</span>
-        <a
-          href="https://vadavaimatha.net"
-          className="inline-flex items-center gap-1 text-gold hover:text-gold-light transition-colors font-medium tracking-wide"
-        >
-          {c.cta}
-          <ArrowUpRight className="w-4 h-4" />
-        </a>
-      </motion.div>
+        {c.blessing}
+      </motion.p>
     </main>
   );
 }
