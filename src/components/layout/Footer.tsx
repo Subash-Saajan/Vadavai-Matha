@@ -29,7 +29,7 @@ export function Footer() {
           </p>
           <ul className="space-y-2 text-white/70 text-sm">
             <li><Link href="/history" className="hover:text-gold transition-colors">{t.nav.history}</Link></li>
-            <li><Link href="/festivals" className="hover:text-gold transition-colors">{t.nav.festivals}</Link></li>
+            <li><Link href="/mass-timings#festivals" className="hover:text-gold transition-colors">{t.nav.festivals}</Link></li>
             <li><Link href="/gallery" className="hover:text-gold transition-colors">{t.nav.gallery}</Link></li>
             <li><Link href="/mass-timings" className="hover:text-gold transition-colors">{t.nav.mass}</Link></li>
           </ul>

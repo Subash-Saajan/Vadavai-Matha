@@ -9,7 +9,6 @@ module.exports = {
     { loc: "/", priority: 1.0, changefreq: "daily" },
     { loc: "/history", priority: 0.8 },
     { loc: "/gallery", priority: 0.7 },
-    { loc: "/festivals", priority: 0.8 },
     { loc: "/mass-timings", priority: 0.9 },
     { loc: "/contact", priority: 0.7 },
   ],

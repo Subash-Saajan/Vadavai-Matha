@@ -22,7 +22,6 @@ export function Navbar() {
     { href: "/", label: t.nav.home },
     { href: "/history", label: t.nav.history },
     { href: "/mass-timings", label: t.nav.mass },
-    { href: "/festivals", label: t.nav.festivals },
     { href: "/gallery", label: t.nav.gallery },
     { href: "/contact", label: t.nav.contact },
   ];

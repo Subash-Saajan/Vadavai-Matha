@@ -81,7 +81,7 @@ export function FestivalsTeaser() {
           </div>
 
           <Link
-            href="/festivals"
+            href="/mass-timings#festivals"
             className="inline-flex items-center gap-2 self-start md:self-auto px-6 py-3 rounded-full bg-navy text-white text-sm tracking-wide hover:bg-gold hover:text-navy transition-all duration-500 group"
           >
             {t.home.festivalsCta}

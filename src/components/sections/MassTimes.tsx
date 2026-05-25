@@ -3,7 +3,7 @@
 import { useRef, useEffect } from "react";
 import Link from "next/link";
 import { gsap } from "@/lib/gsap";
-import { Clock, Calendar, Music, ArrowUpRight } from "lucide-react";
+import { Sunrise, Church, MoonStar, ArrowUpRight } from "lucide-react";
 import { useLang } from "@/components/layout/LanguageProvider";
 
 export function MassTimes({ withCta = true }: { withCta?: boolean }) {
@@ -13,33 +13,23 @@ export function MassTimes({ withCta = true }: { withCta?: boolean }) {
 
   const scheduleData = [
     {
-      icon: Clock,
+      icon: Sunrise,
       title: lang === "en" ? "Daily Mass" : "தினசரி திருப்பலி",
       times:
         lang === "en"
-          ? ["Morning · 6:30 AM", "Evening · 5:30 PM"]
-          : ["காலை · 6:30", "மாலை · 5:30"],
+          ? ["5:00 AM", "6:10 AM"]
+          : ["காலை 5:00", "காலை 6:10"],
     },
     {
-      icon: Calendar,
+      icon: Church,
       title: lang === "en" ? "Sunday Mass" : "ஞாயிறு திருப்பலி",
       times:
         lang === "en"
-          ? [
-              "6:00 AM — Tamil",
-              "8:00 AM — Malayalam",
-              "10:00 AM — English",
-              "5:30 PM — Tamil",
-            ]
-          : [
-              "6:00 — தமிழ்",
-              "8:00 — மலையாளம்",
-              "10:00 — ஆங்கிலம்",
-              "5:30 — தமிழ்",
-            ],
+          ? ["5:00 AM", "7:00 AM", "9:30 AM"]
+          : ["காலை 5:00", "காலை 7:00", "காலை 9:30"],
     },
     {
-      icon: Music,
+      icon: MoonStar,
       title: lang === "en" ? "Adoration & Novena" : "ஆராதனை மற்றும் நவநாள்",
       times:
         lang === "en"

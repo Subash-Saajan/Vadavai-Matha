@@ -1,6 +1,7 @@
 import { Hero } from "@/components/sections/Hero";
 import { Patroness } from "@/components/sections/Patroness";
 import { About } from "@/components/sections/About";
+import { Saints } from "@/components/sections/Saints";
 import { Verse } from "@/components/sections/Verse";
 import { ScrollShowcase } from "@/components/sections/ScrollShowcase";
 import { FestivalsTeaser } from "@/components/sections/FestivalsTeaser";
@@ -14,6 +15,7 @@ export default function Home() {
       <Hero />
       <Patroness />
       <About />
+      <Saints />
       <Verse />
       <ScrollShowcase />
       <FestivalsTeaser />

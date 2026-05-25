@@ -110,16 +110,6 @@ export function Patroness() {
             {/* Subtle gold inner border */}
             <div className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-inset ring-gold/30" />
           </div>
-
-          {/* Decorative star ornaments */}
-          <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-            <svg width="24" height="24" viewBox="0 0 24 24" className="text-gold animate-float">
-              <path
-                fill="currentColor"
-                d="M12 2l2.4 7.2H22l-6 4.4 2.3 7.2L12 16.4 5.7 20.8 8 13.6 2 9.2h7.6L12 2z"
-              />
-            </svg>
-          </div>
         </div>
 
         {/* Text side */}

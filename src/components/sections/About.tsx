@@ -3,18 +3,38 @@
 import { useRef, useEffect } from "react";
 import Image from "next/image";
 import { gsap } from "@/lib/gsap";
+import { useLang } from "@/components/layout/LanguageProvider";
 
 export function About() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const compositeRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const haloRef = useRef<HTMLDivElement>(null);
   const skyRef = useRef<HTMLDivElement>(null);
   const churchRef = useRef<HTMLDivElement>(null);
-  const glowRef = useRef<HTMLDivElement>(null);
-  const textBlockRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
+  const { t, lang } = useLang();
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // ── 3D Parallax layers: sky moves slow, church moves medium ──
+      // Card entrance
+      gsap.fromTo(
+        cardRef.current,
+        { y: 80, opacity: 0, scale: 0.95 },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 1.4,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: cardRef.current,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+
+      // ── Parallax: sky drifts slow, church drifts faster ──
       gsap.to(skyRef.current, {
         yPercent: -8,
         ease: "none",
@@ -27,7 +47,7 @@ export function About() {
       });
 
       gsap.to(churchRef.current, {
-        yPercent: -20,
+        yPercent: -22,
         ease: "none",
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -37,170 +57,127 @@ export function About() {
         },
       });
 
-      // Glow pulse on church layer
-      gsap.to(glowRef.current, {
-        opacity: 0.6,
-        scale: 1.05,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 50%",
-          end: "bottom top",
-          scrub: 1,
-        },
+      // Halo glow pulse
+      gsap.to(haloRef.current, {
+        scale: 1.15,
+        opacity: 0.85,
+        duration: 4,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1,
       });
 
-      // Composite entrance — scale up
-      gsap.fromTo(
-        compositeRef.current,
-        { scale: 0.88, opacity: 0 },
-        {
-          scale: 1,
-          opacity: 1,
-          duration: 1.4,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: compositeRef.current,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-
-      // Text reveals
-      const items = textBlockRef.current?.querySelectorAll(".reveal-item");
-      if (items) {
-        items.forEach((el, i) => {
-          gsap.fromTo(
-            el,
-            { y: 50, opacity: 0 },
-            {
-              y: 0,
-              opacity: 1,
-              duration: 1,
-              ease: "power3.out",
-              scrollTrigger: {
-                trigger: el,
-                start: "top 85%",
-                toggleActions: "play none none none",
-              },
-              delay: i * 0.1,
-            }
-          );
-        });
-      }
+      // Text staggered reveal
+      const items = textRef.current?.querySelectorAll(".reveal-item");
+      items?.forEach((el, i) => {
+        gsap.fromTo(
+          el,
+          { y: 40, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 88%",
+              toggleActions: "play none none none",
+            },
+            delay: i * 0.1,
+          }
+        );
+      });
     }, sectionRef);
-
     return () => ctx.revert();
-  }, []);
+  }, [lang]);
 
   return (
     <section
       ref={sectionRef}
-      className="section-padding bg-cream overflow-visible"
+      className="relative section-padding bg-cream overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto">
-        {/* Section label */}
-        <div className="reveal-item mb-16">
-          <p className="text-xs uppercase tracking-[0.3em] text-gold font-medium flex items-center gap-3">
+      {/* Soft gold ambient glow in the corners */}
+      <div className="pointer-events-none absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-gold/10 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-40 -left-40 w-[600px] h-[600px] rounded-full bg-gold/10 blur-3xl" />
+
+      <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+        {/* Text side */}
+        <div ref={textRef} className="lg:col-span-7 space-y-6 order-2 lg:order-1">
+          <p className="reveal-item text-xs uppercase tracking-[0.4em] text-gold font-medium flex items-center gap-3">
             <span className="w-10 h-px bg-gold/60" />
-            Our Heritage
+            {t.home.aboutLabel}
           </p>
+
+          <h2 className="reveal-item font-serif text-5xl md:text-6xl lg:text-7xl text-navy leading-[1.05]">
+            {t.home.aboutTitle}
+          </h2>
+
+          <p className="reveal-item text-2xl md:text-3xl font-serif italic text-gradient-gold">
+            {t.home.aboutSubtitle}
+          </p>
+
+          <div className="reveal-item space-y-5 pt-2">
+            <p className="text-text-muted text-lg leading-relaxed">
+              {t.home.aboutP1}
+            </p>
+            <p className="text-text-muted text-lg leading-relaxed">
+              {t.home.aboutP2}
+            </p>
+          </div>
+
+          <div className="reveal-item pt-6 border-t border-gold/20">
+            <p className="font-serif italic text-navy/80 text-lg flex items-start gap-3">
+              <span className="text-gold text-2xl leading-none mt-1">"</span>
+              {t.home.aboutQuote}
+            </p>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* ── Layered 3D composite: same bottom, church taller ── */}
-          <div ref={compositeRef} className="relative mt-52">
-            {/* Sky background — shorter, sits at bottom */}
+        {/* Image side — parallax composite inside Patroness-style card */}
+        <div className="lg:col-span-5 relative flex items-center justify-center order-1 lg:order-2">
+          {/* Halo glow behind the card */}
+          <div
+            ref={haloRef}
+            className="absolute inset-0 m-auto w-[80%] h-[80%] rounded-full bg-gradient-to-b from-gold/40 via-gold/15 to-transparent blur-3xl"
+          />
+
+          <div
+            ref={cardRef}
+            className="relative w-full max-w-md aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl ring-1 ring-gold/20 bg-navy"
+          >
+            {/* Sky background — oversized so parallax shift never reveals edges */}
             <div
               ref={skyRef}
-              className="relative w-full rounded-2xl overflow-hidden shadow-lg"
-              style={{ aspectRatio: "16 / 10" }}
+              className="absolute inset-0 -top-[10%] h-[120%] will-change-transform"
             >
               <Image
                 src="/background.jpeg"
                 alt=""
                 fill
                 className="object-cover object-center"
-                sizes="(max-width: 1024px) 100vw, 50vw"
+                sizes="(max-width: 1024px) 80vw, 40vw"
               />
             </div>
 
-            {/* Church (transparent PNG) — bottom-aligned with bg, rises above */}
+            {/* Church (transparent PNG) — anchored to bottom, taller for parallax */}
             <div
               ref={churchRef}
-              className="absolute bottom-0 left-1/2 -translate-x-1/2 z-10"
-              style={{ width: "95%", height: "220%" }}
+              className="absolute inset-x-0 bottom-0 h-[115%] will-change-transform"
             >
               <Image
                 src="/images/church-night.png"
                 alt="Vadakankulam Matha Church"
                 fill
                 className="object-contain object-bottom"
-                sizes="(max-width: 1024px) 80vw, 35vw"
+                sizes="(max-width: 1024px) 80vw, 40vw"
                 style={{
-                  filter: "drop-shadow(0 25px 50px rgba(10,22,40,0.3))",
+                  filter: "drop-shadow(0 25px 50px rgba(10,22,40,0.4))",
                 }}
               />
             </div>
 
-            {/* Gold glow behind church */}
-            <div
-              ref={glowRef}
-              className="absolute bottom-[10%] left-1/2 -translate-x-1/2 z-5 w-[50%] h-[30%] rounded-full blur-3xl bg-gold/25 opacity-0"
-            />
-
-            {/* Floating stat card */}
-            <div className="relative z-20 mx-4 mt-6 bg-white/90 backdrop-blur-md rounded-xl p-5 shadow-lg">
-              <p className="text-3xl font-bold text-navy">Est. 1872</p>
-              <p className="text-sm text-text-muted mt-1">
-                Over 150 years of faith and service
-              </p>
-            </div>
-          </div>
-
-          {/* Text content */}
-          <div ref={textBlockRef} className="space-y-6">
-            <h2 className="reveal-item text-4xl md:text-5xl lg:text-6xl font-bold text-navy leading-tight">
-              A Legacy of
-              <span className="text-gradient-gold block">
-                Faith & Devotion
-              </span>
-            </h2>
-
-            <p className="reveal-item text-lg text-text-muted leading-relaxed">
-              Vadakankulam Matha Church stands as a beacon of spirituality and
-              community in the heart of Vadakankulam. For over a century, this
-              sacred place has been a home for the faithful, a shelter for the
-              weary, and a testament to unwavering devotion.
-            </p>
-
-            <p className="reveal-item text-lg text-text-muted leading-relaxed">
-              Our church is dedicated to the Blessed Virgin Mary, and every
-              corner of this holy ground echoes with prayers, hymns, and the
-              warmth of a community bound together by love and faith.
-            </p>
-
-            <div className="reveal-item pt-4">
-              <div className="flex gap-8">
-                <div>
-                  <p className="text-3xl font-bold text-gradient-gold">5000+</p>
-                  <p className="text-sm text-text-muted mt-1">Parish Members</p>
-                </div>
-                <div>
-                  <p className="text-3xl font-bold text-gradient-gold">150+</p>
-                  <p className="text-sm text-text-muted mt-1">
-                    Years of Service
-                  </p>
-                </div>
-                <div>
-                  <p className="text-3xl font-bold text-gradient-gold">12</p>
-                  <p className="text-sm text-text-muted mt-1">
-                    Weekly Services
-                  </p>
-                </div>
-              </div>
-            </div>
+            {/* Subtle gold inner border */}
+            <div className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-inset ring-gold/30" />
           </div>
         </div>
       </div>

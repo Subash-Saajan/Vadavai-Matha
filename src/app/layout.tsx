@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Cormorant_Garamond, Tiro_Tamil } from "next/font/google";
-import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { LanguageProvider } from "@/components/layout/LanguageProvider";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -44,13 +41,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${cormorant.variable} ${tiroTamil.variable} antialiased`}
     >
       <body className="min-h-screen">
-        <LanguageProvider>
-          <SmoothScroll>
-            <Navbar />
-            <main>{children}</main>
-            <Footer />
-          </SmoothScroll>
-        </LanguageProvider>
+        <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
   );

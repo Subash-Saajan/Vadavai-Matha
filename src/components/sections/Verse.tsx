@@ -2,27 +2,44 @@
 
 import { useRef, useEffect } from "react";
 import Image from "next/image";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
-import { images } from "@/lib/images";
+import { gsap } from "@/lib/gsap";
 import { useLang } from "@/components/layout/LanguageProvider";
 
 export function Verse() {
   const sectionRef = useRef<HTMLElement>(null);
   const imgRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const wordsRef = useRef<HTMLParagraphElement>(null);
   const { t, lang } = useLang();
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Background image slow parallax
-      gsap.to(imgRef.current, {
-        yPercent: 15,
+      // Layered parallax: background drifts down + subtle scale breathing
+      gsap.fromTo(
+        imgRef.current,
+        { yPercent: -8, scale: 1.18 },
+        {
+          yPercent: 12,
+          scale: 1.05,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1.2,
+          },
+        }
+      );
+
+      // Counter-parallax on text — drifts up slightly as image drifts down
+      gsap.to(contentRef.current, {
+        yPercent: -10,
         ease: "none",
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top bottom",
           end: "bottom top",
-          scrub: 1,
+          scrub: 1.5,
         },
       });
 
@@ -57,18 +74,20 @@ export function Verse() {
       ref={sectionRef}
       className="relative h-[90vh] flex items-center justify-center overflow-hidden bg-navy"
     >
-      <div ref={imgRef} className="absolute inset-0 scale-110">
+      <div ref={imgRef} className="absolute inset-0 will-change-transform">
         <Image
-          src={images.candleLight}
+          src="/church-interior.jpeg"
           alt=""
           fill
-          className="object-cover opacity-50"
+          className="object-cover opacity-55"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-navy/90 via-navy/40 to-navy/90" />
+        {/* Vignette + atmospheric gradient */}
+        <div className="absolute inset-0 bg-linear-to-b from-navy/85 via-navy/30 to-navy/95" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(10,22,40,0.7)_85%)]" />
       </div>
 
-      <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
+      <div ref={contentRef} className="relative z-10 max-w-4xl mx-auto px-6 text-center will-change-transform">
         <p className="text-xs uppercase tracking-[0.4em] text-gold mb-8 ornament-divider">
           {t.home.verseLabel}
         </p>

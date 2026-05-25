@@ -18,6 +18,12 @@ const nextConfig: NextConfig = {
   compress: true,
   poweredByHeader: false,
   reactStrictMode: true,
+  async redirects() {
+    return [
+      // Festivals were merged into the combined "Mass & Festivals" page.
+      { source: "/festivals", destination: "/mass-timings", permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;
