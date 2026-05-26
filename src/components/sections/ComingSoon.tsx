@@ -4,7 +4,6 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Globe } from "lucide-react";
 import { useLang } from "@/components/layout/LanguageProvider";
-import { images } from "@/lib/images";
 
 // Bilingual holding page for littlerome.net. Self-contained branding —
 // deliberately kept apart from the main vadavaimatha.net dictionary.
@@ -45,14 +44,14 @@ export function ComingSoon() {
       {/* Backdrop */}
       <div className="absolute inset-0">
         <Image
-          src={images.churchSunset}
+          src="/church-interior.jpeg"
           alt=""
           fill
           priority
-          className="object-cover"
+          className="object-cover opacity-60"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-navy/75" />
+        <div className="absolute inset-0 bg-navy/70" />
         <div className="absolute inset-0 parallax-overlay" />
       </div>
 
