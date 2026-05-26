@@ -2,9 +2,9 @@ import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 
-// The main church site — smooth scroll + navbar/footer chrome.
-// The standalone /coming-soon route lives outside this group so it renders
-// bare (no navbar/footer) while the site is gated behind the launch flag.
+// The main church site (/home and sub-routes) — smooth scroll + navbar/footer
+// chrome. The root "/" coming-soon page lives outside this group so it renders
+// bare (no navbar/footer).
 export default function SiteLayout({
   children,
 }: Readonly<{

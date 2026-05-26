@@ -19,7 +19,7 @@ export function Navbar() {
   }, []);
 
   const links = [
-    { href: "/", label: t.nav.home },
+    { href: "/home", label: t.nav.home },
     { href: "/history", label: t.nav.history },
     { href: "/mass-timings", label: t.nav.mass },
     { href: "/gallery", label: t.nav.gallery },
@@ -37,7 +37,7 @@ export function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 group">
+        <Link href="/home" className="flex items-center gap-3 group">
           <span
             className={`inline-block w-2 h-2 rounded-full bg-gold transition-transform duration-500 group-hover:scale-150`}
           />
