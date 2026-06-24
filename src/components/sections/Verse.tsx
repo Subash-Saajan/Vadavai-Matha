@@ -14,7 +14,7 @@ export function Verse() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Layered parallax: background drifts down + subtle scale breathing
+      // Layered parallax: backdrop drifts down + breathes
       gsap.fromTo(
         imgRef.current,
         { yPercent: -8, scale: 1.18 },
@@ -31,7 +31,7 @@ export function Verse() {
         }
       );
 
-      // Counter-parallax on text — drifts up slightly as image drifts down
+      // Counter-parallax on text
       gsap.to(contentRef.current, {
         yPercent: -10,
         ease: "none",
@@ -43,12 +43,12 @@ export function Verse() {
         },
       });
 
-      // Word-by-word reveal
+      // Word-by-word illumination
       const words = wordsRef.current?.querySelectorAll("span.w");
       if (words) {
         gsap.fromTo(
           words,
-          { opacity: 0.15, y: 8 },
+          { opacity: 0.12, y: 8 },
           {
             opacity: 1,
             y: 0,
@@ -72,29 +72,37 @@ export function Verse() {
   return (
     <section
       ref={sectionRef}
-      className="relative h-[90vh] flex items-center justify-center overflow-hidden bg-navy"
+      className="relative h-[92vh] flex items-center justify-center overflow-hidden bg-navy"
     >
       <div ref={imgRef} className="absolute inset-0 will-change-transform">
         <Image
           src="/church-interior.jpeg"
           alt=""
           fill
-          className="object-cover opacity-55"
+          className="object-cover opacity-60"
           sizes="100vw"
         />
-        {/* Vignette + atmospheric gradient */}
-        <div className="absolute inset-0 bg-linear-to-b from-navy/85 via-navy/30 to-navy/95" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(10,22,40,0.7)_85%)]" />
+        {/* Soft navy wash — lighter, no red, still holds the verse text */}
+        <div className="absolute inset-0 bg-linear-to-b from-navy/70 via-navy/25 to-navy/75" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_42%,rgba(10,19,34,0.42)_92%)]" />
       </div>
 
+      {/* Faint engraved cross watermark */}
+      <svg
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-gold/5 w-[70vh] h-[70vh] pointer-events-none"
+        viewBox="0 0 100 140"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path d="M50 4v132M14 40h72" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      </svg>
+
       <div ref={contentRef} className="relative z-10 max-w-4xl mx-auto px-6 text-center will-change-transform">
-        <p className="text-xs uppercase tracking-[0.4em] text-gold mb-8 ornament-divider">
-          {t.home.verseLabel}
-        </p>
+        <p className="kicker justify-center mb-9 text-gold/90!">{t.home.verseLabel}</p>
         <p
           ref={wordsRef}
-          className={`font-serif text-3xl md:text-5xl lg:text-6xl text-white/95 leading-[1.2] ${
-            lang === "ta" ? "leading-[1.5]" : ""
+          className={`font-serif text-3xl md:text-5xl lg:text-6xl text-white/95 leading-tight ${
+            lang === "ta" ? "leading-normal" : ""
           }`}
         >
           {verseWords.map((w, i) => (
@@ -103,8 +111,13 @@ export function Verse() {
             </span>
           ))}
         </p>
-        <p className="mt-10 text-sm tracking-[0.3em] uppercase text-gold/70">
-          — {t.home.verseRef}
+        <div className="cross-rule w-40 mx-auto mt-10">
+          <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M7 0v14M0 7h14" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
+          </svg>
+        </div>
+        <p className="mt-6 font-display text-sm tracking-[0.32em] uppercase text-gold/75">
+          {t.home.verseRef}
         </p>
       </div>
     </section>

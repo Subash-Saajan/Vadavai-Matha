@@ -7,8 +7,9 @@ import { ChevronDown } from "lucide-react";
 export function Hero() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const kickerRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
-  const subRef = useRef<HTMLParagraphElement>(null);
+  const subRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const [videoReady, setVideoReady] = useState(false);
@@ -17,15 +18,9 @@ export function Hero() {
     const video = videoRef.current;
     if (!video) return;
 
-    const onLoaded = () => {
-      setVideoReady(true);
-    };
-
-    // Ensure video is ready for frame scrubbing
+    const onLoaded = () => setVideoReady(true);
     video.addEventListener("loadedmetadata", onLoaded);
-    // If already loaded
     if (video.readyState >= 1) onLoaded();
-
     return () => video.removeEventListener("loadedmetadata", onLoaded);
   }, []);
 
@@ -36,19 +31,26 @@ export function Hero() {
     if (!video || !video.duration) return;
 
     const ctx = gsap.context(() => {
-      // ── Entrance animation ──
-      const tl = gsap.timeline({ delay: 0.2 });
+      // ── Entrance: stone rises out of darkness, line by line ──
+      const lines = headingRef.current?.querySelectorAll(".title-line");
+      const tl = gsap.timeline({ delay: 0.25 });
 
       tl.fromTo(
-        headingRef.current,
-        { y: 80, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1.2, ease: "power3.out" }
+        kickerRef.current,
+        { y: 24, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, ease: "power3.out" }
       )
         .fromTo(
+          lines ? Array.from(lines) : [],
+          { yPercent: 115, opacity: 0 },
+          { yPercent: 0, opacity: 1, duration: 1.3, ease: "power4.out", stagger: 0.12 },
+          "-=0.6"
+        )
+        .fromTo(
           subRef.current,
-          { y: 40, opacity: 0 },
+          { y: 32, opacity: 0 },
           { y: 0, opacity: 1, duration: 1, ease: "power3.out" },
-          "-=0.7"
+          "-=0.8"
         )
         .fromTo(
           scrollRef.current,
@@ -57,11 +59,8 @@ export function Hero() {
           "-=0.3"
         );
 
-      // ── Scroll-driven video scrub ──
-      // This is the core Apple-style effect:
-      // Scroll position maps directly to video.currentTime
+      // ── Scroll-driven video scrub (the Apple-style core effect) ──
       const videoScrub = { time: 0 };
-
       gsap.to(videoScrub, {
         time: video.duration,
         ease: "none",
@@ -69,39 +68,37 @@ export function Hero() {
           trigger: sectionRef.current,
           start: "top top",
           end: "bottom bottom",
-          scrub: 0.5, // Smooth 0.5s lag for buttery feel
-          pin: false,
+          scrub: 0.5,
         },
         onUpdate: () => {
-          if (video.readyState >= 2) {
-            video.currentTime = videoScrub.time;
-          }
+          if (video.readyState >= 2) video.currentTime = videoScrub.time;
         },
       });
 
-      // ── Text fade out on scroll ──
+      // ── Text drifts up + fades as you descend ──
       ScrollTrigger.create({
         trigger: sectionRef.current,
         start: "top top",
-        end: "30% top",
+        end: "32% top",
         scrub: 1,
         animation: gsap
           .timeline()
-          .to(headingRef.current, { y: -120, opacity: 0, ease: "none" })
-          .to(subRef.current, { y: -80, opacity: 0, ease: "none" }, 0)
+          .to(headingRef.current, { y: -130, opacity: 0, ease: "none" })
+          .to(subRef.current, { y: -90, opacity: 0, ease: "none" }, 0)
+          .to(kickerRef.current, { y: -70, opacity: 0, ease: "none" }, 0)
           .to(scrollRef.current, { opacity: 0, ease: "none" }, 0),
       });
 
-      // ── Overlay darkens as you scroll deeper ──
+      // ── Overlay deepens gently (soft navy) as you scroll ──
       gsap.fromTo(
         overlayRef.current,
-        { opacity: 0.3 },
+        { opacity: 0.1 },
         {
-          opacity: 0.85,
+          opacity: 0.5,
           ease: "none",
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "50% top",
+            start: "45% top",
             end: "bottom bottom",
             scrub: 1,
           },
@@ -116,11 +113,10 @@ export function Hero() {
     <section
       ref={sectionRef}
       className="relative bg-navy"
-      style={{ height: "300vh" }} /* 3x viewport = scroll runway for the video */
+      style={{ height: "300vh" }} /* scroll runway for the video scrub */
     >
-      {/* Sticky video container — stays pinned while you scroll */}
+      {/* Sticky stage */}
       <div className="sticky top-0 h-screen w-full overflow-hidden">
-        {/* Video */}
         <video
           ref={videoRef}
           src="/hero-video.mp4"
@@ -130,52 +126,67 @@ export function Hero() {
           className="absolute inset-0 w-full h-full object-cover"
         />
 
-        {/* Dark gradient overlay */}
+        {/* Light legibility wash — just enough to hold the title */}
+        <div className="absolute inset-0 bg-linear-to-b from-navy/30 via-transparent to-navy/45 pointer-events-none" />
+        {/* Soft vignette */}
+        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_52%,rgba(10,19,34,0.38)_100%)]" />
+        {/* Gentle scroll-driven deepening (soft navy, no red) */}
         <div
           ref={overlayRef}
-          className="absolute inset-0 bg-gradient-to-b from-navy/40 via-navy/20 to-navy/60 pointer-events-none"
+          className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-navy/40 pointer-events-none"
         />
 
-        {/* Content overlay */}
+        {/* Content */}
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6">
-          {/* Cross ornament */}
-          <div className="mb-6 animate-float">
-            <svg
-              width="32"
-              height="32"
-              viewBox="0 0 32 32"
-              fill="none"
-              className="text-gold"
-            >
-              <path
-                d="M14 2h4v12h12v4H18v12h-4V18H2v-4h12V2z"
-                fill="currentColor"
-              />
+          {/* Kicker */}
+          <div
+            ref={kickerRef}
+            className="mb-7 flex flex-col items-center gap-3"
+          >
+            <svg width="16" height="24" viewBox="0 0 13 20" fill="none" className="text-gold animate-float" aria-hidden="true">
+              <path d="M6.5 0v20M0.5 6h12" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
             </svg>
+            <span className="font-display text-[0.72rem] md:text-sm tracking-[0.55em] uppercase text-gold-light drop-shadow-[0_2px_8px_rgba(0,0,0,0.55)]">
+              Little Rome
+            </span>
           </div>
 
+          {/* Monumental title — line-by-line stone reveal */}
           <h1
             ref={headingRef}
-            className="text-5xl md:text-7xl lg:text-8xl font-bold text-white tracking-tight leading-[0.9]"
+            className="font-display font-semibold text-white uppercase tracking-[0.04em] leading-[0.92]"
           >
-            <span className="block">Vadakankulam</span>
-            <span className="block mt-2 text-gradient-gold">Matha Church</span>
+            <span className="block overflow-hidden">
+              <span className="title-line block text-5xl md:text-7xl lg:text-[7.5rem]">
+                Our Lady
+              </span>
+            </span>
+            <span className="block overflow-hidden mt-1 md:mt-2">
+              <span className="title-line block text-[2.75rem] md:text-6xl lg:text-[6rem] text-gradient-gold">
+                of Assumption
+              </span>
+            </span>
           </h1>
 
-          <p
-            ref={subRef}
-            className="mt-6 text-lg md:text-xl text-white/70 max-w-xl font-light tracking-wide"
-          >
-            A sacred sanctuary of faith, prayer, and community
-          </p>
+          {/* Cross divider + tagline */}
+          <div ref={subRef} className="mt-8 flex flex-col items-center gap-5 max-w-xl">
+            <div className="cross-rule w-60 max-w-[72vw]">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M7 0v14M0 7h14" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
+              </svg>
+            </div>
+            <p className="text-base md:text-lg text-white/75 font-serif italic tracking-wide leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
+              A sacred sanctuary of faith, prayer &amp; community
+            </p>
+          </div>
 
           {/* Scroll indicator */}
           <div
             ref={scrollRef}
-            className="absolute bottom-12 flex flex-col items-center gap-2"
+            className="absolute bottom-10 flex flex-col items-center gap-2"
           >
-            <span className="text-xs uppercase tracking-[0.3em] text-white/50">
-              Scroll to explore
+            <span className="font-display text-[0.6rem] uppercase tracking-[0.35em] text-white/55">
+              Scroll to enter
             </span>
             <ChevronDown className="w-5 h-5 text-gold animate-scroll-bounce" />
           </div>

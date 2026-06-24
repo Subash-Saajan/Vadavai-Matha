@@ -25,7 +25,6 @@ export function FestivalsTeaser() {
       if (!els) return;
 
       Array.from(els).forEach((el, i) => {
-        // Each card: parallax-y at slightly different speeds
         gsap.to(el, {
           yPercent: i % 2 === 0 ? -10 : -25,
           ease: "none",
@@ -37,7 +36,6 @@ export function FestivalsTeaser() {
           },
         });
 
-        // Entrance
         gsap.fromTo(
           el,
           { y: 80, opacity: 0 },
@@ -64,25 +62,27 @@ export function FestivalsTeaser() {
   return (
     <section
       ref={sectionRef}
-      className="section-padding bg-cream relative overflow-hidden"
+      className="section-padding bg-cream parchment-sheen relative overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto">
+      <span className="section-numeral pointer-events-none absolute -top-6 right-4 md:right-12 text-[7rem] md:text-[12rem] opacity-[0.06] select-none">
+        IV
+      </span>
+
+      <div className="relative max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-gold font-medium mb-4">
-              {t.home.festivalsLabel}
-            </p>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-navy leading-tight font-serif">
+            <p className="kicker mb-5">{t.home.festivalsLabel}</p>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl text-navy leading-tight font-serif">
               {t.home.festivalsTitle}
             </h2>
-            <p className="mt-5 text-text-muted max-w-xl leading-relaxed">
+            <p className="mt-5 text-text-muted max-w-xl leading-relaxed text-lg">
               {t.home.festivalsBody}
             </p>
           </div>
 
           <Link
             href="/mass-timings#festivals"
-            className="inline-flex items-center gap-2 self-start md:self-auto px-6 py-3 rounded-full bg-navy text-white text-sm tracking-wide hover:bg-gold hover:text-navy transition-all duration-500 group"
+            className="inline-flex items-center gap-2 self-start md:self-auto px-6 py-3 rounded-full bg-navy text-white font-display text-xs uppercase tracking-[0.2em] hover:bg-gold hover:text-navy transition-all duration-500 group"
           >
             {t.home.festivalsCta}
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -98,7 +98,7 @@ export function FestivalsTeaser() {
             return (
               <article
                 key={c.key}
-                className="group relative aspect-[3/4] rounded-3xl overflow-hidden bg-navy will-change-transform"
+                className="group relative aspect-[3/4] rounded-3xl overflow-hidden bg-navy will-change-transform ring-1 ring-gold/10"
               >
                 <Image
                   src={c.img}
@@ -107,9 +107,9 @@ export function FestivalsTeaser() {
                   className="object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-110"
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/30 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-night-deep/95 via-navy/30 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-7">
-                  <p className="text-xs uppercase tracking-[0.3em] text-gold mb-2">
+                  <p className="font-display text-[0.6rem] uppercase tracking-[0.28em] text-gold mb-2">
                     {item.date}
                   </p>
                   <h3 className="text-2xl font-serif text-white mb-2">
@@ -119,6 +119,8 @@ export function FestivalsTeaser() {
                     {item.body}
                   </p>
                 </div>
+                <span className="pointer-events-none absolute top-4 left-4 w-6 h-6 border-t border-l border-gold/0 group-hover:border-gold/50 transition-colors duration-700" />
+                <div className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-inset ring-gold/0 group-hover:ring-gold/30 transition-all duration-700" />
               </article>
             );
           })}

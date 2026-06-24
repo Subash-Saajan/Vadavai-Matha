@@ -63,14 +63,17 @@ export function GalleryPreview() {
   return (
     <section
       ref={sectionRef}
-      className="section-padding bg-navy relative overflow-hidden"
+      className="section-padding cathedral-depth relative overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <p className="text-xs uppercase tracking-[0.3em] text-gold font-medium mb-4">
-            {t.home.galleryLabel}
-          </p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight font-serif">
+      <div className="light-shaft absolute -top-10 left-[6%] w-[42%] h-[120%] -rotate-12" />
+
+      <div className="relative max-w-7xl mx-auto">
+        <div className="relative text-center mb-16">
+          <span className="section-numeral pointer-events-none absolute left-1/2 -translate-x-1/2 -top-24 text-[10rem] opacity-[0.07] select-none">
+            VI
+          </span>
+          <p className="kicker justify-center mb-5 text-gold!">{t.home.galleryLabel}</p>
+          <h2 className="font-display uppercase tracking-[0.03em] text-4xl md:text-5xl lg:text-6xl text-white leading-tight">
             {t.home.galleryTitle}
           </h2>
         </div>
@@ -82,7 +85,7 @@ export function GalleryPreview() {
           {tiles.map((tile, i) => (
             <div
               key={i}
-              className={`relative ${tile.span} rounded-2xl overflow-hidden group will-change-transform`}
+              className={`relative ${tile.span} rounded-2xl overflow-hidden group will-change-transform ring-1 ring-white/5`}
             >
               <Image
                 src={tile.img}
@@ -91,7 +94,8 @@ export function GalleryPreview() {
                 className="object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110"
                 sizes="(max-width: 768px) 50vw, 30vw"
               />
-              <div className="absolute inset-0 bg-navy/20 group-hover:bg-navy/0 transition-colors duration-700" />
+              <div className="absolute inset-0 bg-navy/25 group-hover:bg-navy/0 transition-colors duration-700" />
+              <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-gold/0 group-hover:ring-gold/30 transition-all duration-700" />
             </div>
           ))}
         </div>
@@ -99,7 +103,7 @@ export function GalleryPreview() {
         <div className="mt-16 text-center">
           <Link
             href="/gallery"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gold text-navy text-sm uppercase tracking-[0.2em] font-medium hover:bg-white transition-all duration-500 group"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gold text-navy font-display text-xs uppercase tracking-[0.22em] hover:bg-white transition-all duration-500 group"
           >
             {t.home.galleryCta}
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

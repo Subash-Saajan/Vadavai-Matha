@@ -3,7 +3,6 @@ import { Patroness } from "@/components/sections/Patroness";
 import { About } from "@/components/sections/About";
 import { Saints } from "@/components/sections/Saints";
 import { Verse } from "@/components/sections/Verse";
-import { ScrollShowcase } from "@/components/sections/ScrollShowcase";
 import { FestivalsTeaser } from "@/components/sections/FestivalsTeaser";
 import { MassTimes } from "@/components/sections/MassTimes";
 import { GalleryPreview } from "@/components/sections/GalleryPreview";
@@ -17,7 +16,6 @@ export default function Home() {
       <About />
       <Saints />
       <Verse />
-      <ScrollShowcase />
       <FestivalsTeaser />
       <MassTimes />
       <GalleryPreview />

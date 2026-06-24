@@ -37,7 +37,6 @@ export function Saints() {
       if (!cards) return;
 
       Array.from(cards).forEach((el, i) => {
-        // Subtle interleaved parallax — even cards drift less, odd cards drift more
         gsap.to(el, {
           yPercent: i % 2 === 0 ? -12 : -22,
           ease: "none",
@@ -49,7 +48,6 @@ export function Saints() {
           },
         });
 
-        // Entrance
         gsap.fromTo(
           el,
           { y: 90, opacity: 0, scale: 0.96 },
@@ -78,17 +76,16 @@ export function Saints() {
     <section
       id="saints"
       ref={sectionRef}
-      className="section-padding bg-cream relative overflow-hidden scroll-mt-24"
+      className="section-padding bg-cream parchment-sheen relative overflow-hidden scroll-mt-24"
     >
-      {/* Soft ambient gold glows */}
-      <div className="pointer-events-none absolute -top-40 left-1/3 w-[500px] h-[500px] rounded-full bg-gold/8 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-40 -right-40 w-[600px] h-[600px] rounded-full bg-gold/8 blur-3xl" />
+      <div className="light-shaft absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[90%]" />
 
       <div className="relative max-w-7xl mx-auto">
-        <div ref={headerRef} className="text-center max-w-2xl mx-auto mb-20">
-          <p className="reveal-item text-xs uppercase tracking-[0.4em] text-gold font-medium mb-4">
-            {t.saints.label}
-          </p>
+        <div ref={headerRef} className="relative text-center max-w-2xl mx-auto mb-20">
+          <span className="section-numeral pointer-events-none absolute left-1/2 -translate-x-1/2 -top-24 text-[10rem] opacity-[0.06] select-none">
+            III
+          </span>
+          <p className="reveal-item kicker justify-center mb-5">{t.saints.label}</p>
           <h2 className="reveal-item font-serif text-4xl md:text-5xl lg:text-6xl text-navy leading-[1.05] mb-6">
             {t.saints.title}
           </h2>
@@ -108,13 +105,13 @@ export function Saints() {
 
             const inner = (
               <>
-                {/* Layered backdrop: deep navy with gold radial bloom */}
-                <div className="absolute inset-0 bg-linear-to-b from-navy via-navy to-[#06101e]" />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,rgba(201,168,76,0.28),transparent_60%)]" />
+                {/* Cathedral-depth backdrop with gold bloom */}
+                <div className="absolute inset-0 bg-linear-to-b from-navy via-[#0a1322] to-[#05080f]" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_16%,rgba(196,160,73,0.30),transparent_62%)]" />
 
-                {/* Iconographic flourish */}
-                <div className="absolute top-7 left-1/2 -translate-x-1/2 text-gold/70 transition-transform duration-700 group-hover:scale-110">
-                  <svg width="28" height="36" viewBox="0 0 28 36" fill="none" aria-hidden="true">
+                {/* Iconographic cross flourish */}
+                <div className="absolute top-7 left-1/2 -translate-x-1/2 text-gold/70 transition-transform duration-700 group-hover:scale-110 group-hover:-translate-y-0.5">
+                  <svg width="26" height="36" viewBox="0 0 28 36" fill="none" aria-hidden="true">
                     <path
                       d="M14 1v34M3 10h22M14 1l-4 4M14 1l4 4"
                       stroke="currentColor"
@@ -127,13 +124,13 @@ export function Saints() {
 
                 {/* Content */}
                 <div className="absolute inset-x-0 bottom-0 p-7 text-center">
-                  <p className="text-[10px] uppercase tracking-[0.3em] text-gold/80 mb-3">
+                  <p className="font-display text-[0.6rem] uppercase tracking-[0.3em] text-gold/80 mb-3">
                     {s.feast}
                   </p>
                   <h3 className="text-xl md:text-2xl font-serif text-white leading-tight mb-2 transition-colors duration-500 group-hover:text-gold">
                     {s.name}
                   </h3>
-                  <p className="text-xs italic text-gold/70 mb-4">
+                  <p className="text-xs italic text-gold/70 mb-4 font-serif">
                     {s.epithet}
                   </p>
                   <div className="w-12 h-px bg-gold/40 mx-auto mb-4" />
@@ -141,7 +138,7 @@ export function Saints() {
                     {s.body}
                   </p>
                   {href && (
-                    <span className="mt-4 inline-flex items-center gap-1.5 text-[11px] uppercase tracking-[0.25em] text-gold/0 group-hover:text-gold/90 transition-colors duration-500">
+                    <span className="mt-4 inline-flex items-center gap-1.5 font-display text-[0.6rem] uppercase tracking-[0.25em] text-gold/0 group-hover:text-gold/90 transition-colors duration-500">
                       Read his story
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                         <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -150,8 +147,10 @@ export function Saints() {
                   )}
                 </div>
 
-                {/* Hover gold edge */}
+                {/* Hover gold edge + corner serifs */}
                 <div className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-inset ring-gold/0 group-hover:ring-gold/40 transition-all duration-700" />
+                <span className="pointer-events-none absolute top-3.5 left-3.5 w-5 h-5 border-t border-l border-gold/0 group-hover:border-gold/50 transition-colors duration-700" />
+                <span className="pointer-events-none absolute bottom-3.5 right-3.5 w-5 h-5 border-b border-r border-gold/0 group-hover:border-gold/50 transition-colors duration-700" />
               </>
             );
 

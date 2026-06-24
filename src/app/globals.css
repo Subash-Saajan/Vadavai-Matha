@@ -1,17 +1,43 @@
 @import "tailwindcss";
 
+/* ======================================================================
+   "LITTLE ROME" — design system for Vadakankulam Matha
+   ----------------------------------------------------------------------
+   Two voices:
+     · font-display (Cinzel)   → the voice of STONE  — Roman inscriptional
+                                  caps. Wordmark, eyebrows, numerals, the
+                                  big cinematic headings.
+     · font-serif (Cormorant)  → the voice of PRAYER — flowing devotional
+                                  serif. Body, quotes, editorial headings.
+   Palette: parchment / travertine light, midnight-navy → oxblood-porphyry
+   dark, gold-leaf accent. Theme color NAMES are preserved (navy/gold/cream)
+   so existing utility classes keep working — only the values evolved.
+   ====================================================================== */
 :root {
-  --background: #faf8f5;
-  --foreground: #1a1a2e;
-  --navy: #0a1628;
-  --navy-light: #162036;
-  --gold: #c9a84c;
-  --gold-light: #e0c872;
-  --gold-dark: #a68a3a;
-  --cream: #faf8f5;
-  --cream-dark: #f0ece4;
+  /* ── Light base: warm parchment / travertine ── */
+  --background: #f4eee1;
+  --foreground: #1c1a15;
+  --cream: #f4eee1;
+  --cream-dark: #e8dec9;
+
+  /* ── Dark: cathedral depth (midnight navy bleeding into oxblood) ── */
+  --navy: #0a1322;
+  --navy-light: #14203a;
+  --night-deep: #060c18;
+  --oxblood: #3e1216;
+  --oxblood-deep: #260a0d;
+
+  /* ── Gold leaf ── */
+  --gold: #c4a049;
+  --gold-light: #ecd28a;
+  --gold-dark: #9a7a30;
+
   --white: #ffffff;
-  --text-muted: #6b7280;
+  --text-muted: #6f6650;
+
+  /* hairline tones */
+  --line-gold: rgba(196, 160, 73, 0.28);
+  --line-ink: rgba(28, 26, 21, 0.12);
 }
 
 @theme inline {
@@ -19,6 +45,9 @@
   --color-foreground: var(--foreground);
   --color-navy: var(--navy);
   --color-navy-light: var(--navy-light);
+  --color-night-deep: var(--night-deep);
+  --color-oxblood: var(--oxblood);
+  --color-oxblood-deep: var(--oxblood-deep);
   --color-gold: var(--gold);
   --color-gold-light: var(--gold-light);
   --color-gold-dark: var(--gold-dark);
@@ -27,28 +56,33 @@
   --color-text-muted: var(--text-muted);
   --font-sans: var(--font-geist-sans);
   --font-serif: var(--font-serif);
+  --font-display: var(--font-display);
   --font-tamil: var(--font-tamil);
 }
 
+/* ── Display / monument voice ── */
+.font-display {
+  font-family: var(--font-display), var(--font-serif), Georgia, serif;
+}
+
+/* Tamil falls back to the Tamil serif everywhere a serif is used */
 html[lang="ta"] body,
-html[lang="ta"] .font-serif {
+html[lang="ta"] .font-serif,
+html[lang="ta"] .font-display {
   font-family: var(--font-tamil), var(--font-serif), system-ui, serif;
 }
 
-/* Smooth scroll - Lenis */
+/* ── Smooth scroll - Lenis ── */
 html.lenis,
 html.lenis body {
   height: auto;
 }
-
 .lenis.lenis-smooth {
   scroll-behavior: auto !important;
 }
-
 .lenis.lenis-smooth [data-lenis-prevent] {
   overscroll-behavior: contain;
 }
-
 .lenis.lenis-stopped {
   overflow: hidden;
 }
@@ -65,29 +99,211 @@ body {
   color: var(--navy);
 }
 
+/* ======================================================================
+   FILM GRAIN — a single fixed, blend-mode texture layer over everything.
+   Gives the whole site an aged-paper / photographic tactility instead of
+   flat digital fills. Pointer-events off; cheap, GPU-friendly.
+   ====================================================================== */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+/* ======================================================================
+   SIGNATURE ORNAMENTS
+   ====================================================================== */
+
+/* Roman-numeral section marker — oversized, engraved gold-leaf glyph that
+   ties the "Little Rome" thread through every section. */
+.section-numeral {
+  font-family: var(--font-display), serif;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  background: linear-gradient(160deg, var(--gold-light), var(--gold) 45%, var(--gold-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Eyebrow / kicker label */
+.kicker {
+  font-family: var(--font-display), serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+.kicker::before {
+  content: "";
+  width: 2.25rem;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold));
+}
+
+/* Liturgical cross divider (rule — cross — rule) */
+.cross-rule {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  color: var(--gold);
+}
+.cross-rule::before,
+.cross-rule::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--line-gold), transparent);
+}
+
+/* legacy alias kept for any markup still using it */
+.ornament-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.ornament-divider::before,
+.ornament-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+}
+
+/* Gold hairline */
+.rule-gold {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--line-gold), transparent);
+}
+
+/* ── Gold gradient text (gold-leaf) ── */
+.text-gradient-gold {
+  background: linear-gradient(135deg, var(--gold-light), var(--gold) 55%, var(--gold-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ======================================================================
+   ATMOSPHERE
+   ====================================================================== */
+
+/* Soft devotional light-shaft — a diagonal beam of warm light, replacing
+   the old evenly-scattered blur blobs with directional drama. */
+.light-shaft {
+  position: absolute;
+  pointer-events: none;
+  background: linear-gradient(
+    155deg,
+    rgba(236, 210, 138, 0.18) 0%,
+    rgba(236, 210, 138, 0.05) 32%,
+    transparent 60%
+  );
+  filter: blur(8px);
+  mix-blend-mode: screen;
+}
+
+/* Parchment paper sheen for light sections */
+.parchment-sheen {
+  background-image:
+    radial-gradient(120% 80% at 50% -10%, rgba(255, 252, 244, 0.9), transparent 60%),
+    radial-gradient(90% 60% at 100% 100%, rgba(196, 160, 73, 0.05), transparent 55%);
+}
+
+/* Cathedral depth gradient for dark sections */
+.cathedral-depth {
+  background:
+    radial-gradient(110% 80% at 18% 0%, rgba(22, 34, 60, 0.5), transparent 55%),
+    linear-gradient(180deg, var(--navy) 0%, var(--night-deep) 72%, #05080f 130%);
+}
+
+.parallax-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 19, 34, 0) 0%,
+    rgba(10, 19, 34, 0.4) 55%,
+    rgba(6, 12, 24, 0.85) 100%
+  );
+}
+
+/* ======================================================================
+   MOTION PRIMITIVES
+   ====================================================================== */
+
+/* Cinematic clip wipe (driven by JS adding .revealed, or used inline) */
+.clip-reveal {
+  clip-path: inset(0 0 100% 0);
+  will-change: clip-path;
+}
+.clip-reveal.revealed {
+  clip-path: inset(0 0 0% 0);
+  transition: clip-path 1.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Scroll-reveal helpers (weightier, expo-style easing) */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(64px);
+}
+.reveal-up.revealed {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-60px);
+}
+.reveal-left.revealed {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-right {
+  opacity: 0;
+  transform: translateX(60px);
+}
+.reveal-right.revealed {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.stagger-children > * {
+  transition-delay: calc(var(--stagger-index, 0) * 0.1s);
+}
+
 /* ── Hero clip-path animation ── */
 .hero-clip {
   clip-path: inset(0 0 0 0);
   transition: clip-path 0.1s linear;
 }
 
-/* ── Parallax perspective container ── */
+/* ── Parallax perspective + tilt card ── */
 .perspective-container {
   perspective: 1200px;
   perspective-origin: center;
 }
-
-/* ── 3D tilt card ── */
 .tilt-card {
   transform-style: preserve-3d;
   transition: transform 0.15s ease-out;
   will-change: transform;
 }
-
 .tilt-card-inner {
   transform: translateZ(40px);
 }
-
 .tilt-card-shine {
   background: linear-gradient(
     135deg,
@@ -101,135 +317,45 @@ body {
   opacity: 0;
   transition: opacity 0.3s;
 }
-
 .tilt-card:hover .tilt-card-shine {
   opacity: 1;
 }
 
-/* ── Scroll reveal ── */
-.reveal-up {
-  opacity: 0;
-  transform: translateY(60px);
-}
-
-.reveal-up.revealed {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.reveal-left {
-  opacity: 0;
-  transform: translateX(-60px);
-}
-
-.reveal-left.revealed {
-  opacity: 1;
-  transform: translateX(0);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.reveal-right {
-  opacity: 0;
-  transform: translateX(60px);
-}
-
-.reveal-right.revealed {
-  opacity: 1;
-  transform: translateX(0);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* ── Stagger children ── */
-.stagger-children > * {
-  transition-delay: calc(var(--stagger-index, 0) * 0.1s);
-}
-
-/* ── Gold gradient text ── */
-.text-gradient-gold {
-  background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* ── Divider ornament ── */
-.ornament-divider {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.ornament-divider::before,
-.ornament-divider::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    var(--gold),
-    transparent
-  );
-}
-
 /* ── Navbar blur ── */
 .navbar-blur {
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
 }
 
-/* ── Magnetic button ── */
 .magnetic-btn {
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ── Image parallax overlay ── */
-.parallax-overlay {
-  background: linear-gradient(
-    to bottom,
-    rgba(10, 22, 40, 0) 0%,
-    rgba(10, 22, 40, 0.4) 60%,
-    rgba(10, 22, 40, 0.9) 100%
-  );
-}
-
-/* ── Cross icon animation ── */
+/* ── Looping ambient keyframes ── */
 @keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
-
 .animate-float {
   animation: float 3s ease-in-out infinite;
 }
 
-/* ── Scroll indicator bounce ── */
 @keyframes scrollBounce {
-  0%,
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  50% {
-    transform: translateY(12px);
-    opacity: 0.5;
-  }
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(12px); opacity: 0.5; }
 }
-
 .animate-scroll-bounce {
   animation: scrollBounce 2s ease-in-out infinite;
 }
 
-/* ── Smooth image zoom on scroll ── */
+@keyframes emberPulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.06); }
+}
+.animate-ember {
+  animation: emberPulse 6s ease-in-out infinite;
+}
+
 .scroll-zoom {
   will-change: transform, opacity;
 }
@@ -238,15 +364,25 @@ body {
 .section-padding {
   padding: 6rem 1.5rem;
 }
-
 @media (min-width: 768px) {
   .section-padding {
     padding: 8rem 2rem;
   }
 }
-
 @media (min-width: 1024px) {
   .section-padding {
     padding: 10rem 4rem;
+  }
+}
+
+/* ── Respect reduced-motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-scroll-bounce,
+  .animate-ember {
+    animation: none !important;
+  }
+  .clip-reveal {
+    clip-path: none;
   }
 }

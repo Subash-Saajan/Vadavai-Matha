@@ -9,14 +9,17 @@ import { useLang } from "@/components/layout/LanguageProvider";
 import { images } from "@/lib/images";
 
 const cardIcons = [Sunrise, Church, MoonStar];
+// One image per entry in t.festivals.list (8 items, matched by index).
+// Feasts with a local church photo use that; others fall back to devotional imagery.
 const yearImages = [
-  images.candlesLit,
-  images.procession,
-  images.flowers,
-  images.candleLight,
-  images.lampLights,
-  images.marian,
-  images.cross,
+  "/images/vadavai-st-sebasthiyarchurch.jpg", // 0 – St. Sebastian Church Feast
+  images.marian,                               // 1 – Presentation / Kannikai Matha
+  images.candlesLit,                           // 2 – St. John de Britto Feast
+  "/images/our-lady-of-lourdes.jpg",           // 3 – Our Lady of Lourdes
+  "/images/st-anthonys-church.jpg",            // 4 – St. Anthony's Church Feast
+  "/images/vadava-st-george-church.jpg",       // 5 – St. George Church Feast
+  "/images/vellankannni.jpg",                  // 6 – Our Lady of Velankanni Feast
+  "/images/vadavai-st-michel-church.jpg",      // 7 – St. Michael Church Feast
 ];
 
 export default function MassFestivalsPage() {
@@ -52,7 +55,7 @@ export default function MassFestivalsPage() {
         label={t.mass.label}
         title={t.mass.title}
         intro={t.mass.intro}
-        image={images.pews}
+        image="/images/fest-noon.jpg"
       />
 
       {/* ─────────────  MASS TIMINGS  ───────────── */}
@@ -159,7 +162,7 @@ export default function MassFestivalsPage() {
             <div className="grid md:grid-cols-2">
               <div className="relative min-h-[280px] md:min-h-full">
                 <Image
-                  src={images.candlesLit}
+                  src="/images/fest-drone-2.jpg"
                   alt={t.festivals.featured.name}
                   fill
                   className="object-cover"
@@ -211,6 +214,7 @@ export default function MassFestivalsPage() {
                   src={yearImages[i % yearImages.length]}
                   alt={f.name}
                   fill
+                  unoptimized
                   className="object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-110"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />

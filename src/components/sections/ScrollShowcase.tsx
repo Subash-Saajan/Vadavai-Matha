@@ -21,7 +21,7 @@ export function ScrollShowcase() {
       // Image: card → full-bleed
       gsap.fromTo(
         imageRef.current,
-        { scale: 0.5, borderRadius: 32 },
+        { scale: 0.5, borderRadius: 36 },
         {
           scale: 1,
           borderRadius: 0,
@@ -58,7 +58,6 @@ export function ScrollShowcase() {
       className="relative bg-cream"
       style={{ height: "260vh" }}
     >
-      {/* Sticky stage — CSS pin, NOT GSAP pin */}
       <div
         ref={stageRef}
         className="sticky top-0 h-screen w-full overflow-hidden"
@@ -75,9 +74,8 @@ export function ScrollShowcase() {
               fill
               className="object-cover"
               sizes="100vw"
-              preload
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-navy/40" />
+            <div className="absolute inset-0 bg-linear-to-b from-night-deep/25 via-transparent to-navy/45" />
           </div>
         </div>
 
@@ -86,13 +84,16 @@ export function ScrollShowcase() {
           className="relative z-10 h-full flex items-center justify-center px-6 pointer-events-none"
         >
           <div className="text-center max-w-3xl">
-            <p className="text-xs uppercase tracking-[0.4em] text-gold mb-6">
-              {t.home.showcaseLabel}
-            </p>
-            <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl text-white drop-shadow-2xl leading-tight">
+            <p className="kicker justify-center mb-7 text-gold!">{t.home.showcaseLabel}</p>
+            <h2 className="font-display uppercase tracking-[0.03em] text-4xl md:text-6xl lg:text-7xl text-white drop-shadow-2xl leading-[0.98]">
               {t.home.showcaseTitle}
             </h2>
-            <p className="mt-6 text-white/90 text-lg max-w-xl mx-auto leading-relaxed drop-shadow-lg">
+            <div className="cross-rule w-44 mx-auto mt-8">
+              <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M7 0v14M0 7h14" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
+              </svg>
+            </div>
+            <p className="mt-7 text-white/90 text-lg max-w-xl mx-auto leading-relaxed drop-shadow-lg font-serif">
               {t.home.showcaseBody}
             </p>
           </div>

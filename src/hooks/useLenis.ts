@@ -14,6 +14,10 @@ export function useLenis() {
 
     lenis.on("scroll", ScrollTrigger.update);
 
+    // Expose the instance so components can scroll smoothly via Lenis
+    // (a raw window.scrollTo would be reverted by Lenis on the next frame).
+    (window as unknown as { __lenis?: Lenis }).__lenis = lenis;
+
     const raf = (time: number) => {
       lenis.raf(time);
       requestAnimationFrame(raf);
@@ -22,6 +26,7 @@ export function useLenis() {
 
     return () => {
       lenis.destroy();
+      delete (window as unknown as { __lenis?: Lenis }).__lenis;
     };
   }, []);
 }

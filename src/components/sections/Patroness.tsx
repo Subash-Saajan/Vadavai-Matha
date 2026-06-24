@@ -8,32 +8,33 @@ import { useLang } from "@/components/layout/LanguageProvider";
 export function Patroness() {
   const sectionRef = useRef<HTMLElement>(null);
   const imgWrapRef = useRef<HTMLDivElement>(null);
+  const imgInnerRef = useRef<HTMLDivElement>(null);
   const haloRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const { t, lang } = useLang();
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Image entrance + slow scroll parallax
+      // Cinematic clip-wipe reveal of the portrait
       gsap.fromTo(
-        imgWrapRef.current,
-        { y: 80, opacity: 0, scale: 0.95 },
+        imgInnerRef.current,
+        { clipPath: "inset(0 0 100% 0)", scale: 1.12 },
         {
-          y: 0,
-          opacity: 1,
+          clipPath: "inset(0 0 0% 0)",
           scale: 1,
-          duration: 1.4,
-          ease: "power3.out",
+          duration: 1.5,
+          ease: "power4.out",
           scrollTrigger: {
             trigger: imgWrapRef.current,
-            start: "top 85%",
+            start: "top 82%",
             toggleActions: "play none none none",
           },
         }
       );
 
+      // Slow scroll parallax on the whole frame
       gsap.to(imgWrapRef.current, {
-        yPercent: -8,
+        yPercent: -7,
         ease: "none",
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -43,7 +44,7 @@ export function Patroness() {
         },
       });
 
-      // Halo glow pulse
+      // Halo glow breathing
       gsap.to(haloRef.current, {
         scale: 1.15,
         opacity: 0.85,
@@ -58,7 +59,7 @@ export function Patroness() {
       items?.forEach((el, i) => {
         gsap.fromTo(
           el,
-          { y: 40, opacity: 0 },
+          { y: 42, opacity: 0 },
           {
             y: 0,
             opacity: 1,
@@ -80,46 +81,49 @@ export function Patroness() {
   return (
     <section
       ref={sectionRef}
-      className="relative section-padding bg-cream overflow-hidden"
+      className="relative section-padding bg-cream parchment-sheen overflow-hidden"
     >
-      {/* Soft gold ambient glow in the corner */}
-      <div className="pointer-events-none absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-gold/10 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-40 -right-40 w-[600px] h-[600px] rounded-full bg-gold/10 blur-3xl" />
+      {/* Directional devotional light + oversized engraved numeral */}
+      <div className="light-shaft absolute -top-20 -left-10 w-[55%] h-[120%] rotate-6" />
+      <span className="section-numeral pointer-events-none absolute -top-6 right-4 md:right-12 text-[7rem] md:text-[12rem] opacity-[0.06] select-none">
+        I
+      </span>
 
       <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
-        {/* Image side */}
+        {/* Portrait */}
         <div className="lg:col-span-5 relative flex items-center justify-center">
-          {/* Halo glow behind statue */}
           <div
             ref={haloRef}
-            className="absolute inset-0 m-auto w-[80%] h-[80%] rounded-full bg-gradient-to-b from-gold/40 via-gold/15 to-transparent blur-3xl"
+            className="absolute inset-0 m-auto w-[82%] h-[82%] rounded-full bg-linear-to-b from-gold/40 via-gold/15 to-transparent blur-3xl"
           />
-
           <div
             ref={imgWrapRef}
-            className="relative w-full max-w-md aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl ring-1 ring-gold/20"
+            className="relative w-full max-w-md aspect-[4/5] will-change-transform"
           >
-            <Image
-              src="/images/matha.png"
-              alt="Vadakankulam Matha — Our Lady of Good Health"
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 80vw, 40vw"
-              preload
-            />
-            {/* Subtle gold inner border */}
-            <div className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-inset ring-gold/30" />
+            <div
+              ref={imgInnerRef}
+              className="relative w-full h-full rounded-[1.75rem] overflow-hidden shadow-2xl ring-1 ring-gold/25 will-change-transform"
+            >
+              <Image
+                src="/images/home_1.jpg"
+                alt="Vadakankulam Matha — Our Lady of Good Health"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 80vw, 40vw"
+              />
+              <div className="pointer-events-none absolute inset-0 rounded-[1.75rem] ring-1 ring-inset ring-gold/30" />
+              {/* corner serifs */}
+              <span className="pointer-events-none absolute top-4 left-4 w-7 h-7 border-t border-l border-gold/50" />
+              <span className="pointer-events-none absolute bottom-4 right-4 w-7 h-7 border-b border-r border-gold/50" />
+            </div>
           </div>
         </div>
 
-        {/* Text side */}
+        {/* Text */}
         <div ref={textRef} className="lg:col-span-7 space-y-6">
-          <p className="reveal-item text-xs uppercase tracking-[0.4em] text-gold font-medium flex items-center gap-3">
-            <span className="w-10 h-px bg-gold/60" />
-            {t.home.patronessLabel}
-          </p>
+          <p className="reveal-item kicker">{t.home.patronessLabel}</p>
 
-          <h2 className="reveal-item font-serif text-5xl md:text-6xl lg:text-7xl text-navy leading-[1.05]">
+          <h2 className="reveal-item font-serif text-5xl md:text-6xl lg:text-7xl text-navy leading-[1.04]">
             {t.home.patronessTitle}
           </h2>
 
@@ -136,9 +140,9 @@ export function Patroness() {
             </p>
           </div>
 
-          <div className="reveal-item pt-6 border-t border-gold/20">
-            <p className="font-serif italic text-navy/80 text-lg flex items-start gap-3">
-              <span className="text-gold text-2xl leading-none mt-1">"</span>
+          <div className="reveal-item pt-7 mt-1 border-t border-gold/25">
+            <p className="font-serif italic text-navy/80 text-xl leading-relaxed flex items-start gap-3">
+              <span className="text-gold text-3xl leading-none mt-1 font-display">&ldquo;</span>
               {t.home.patronessQuote}
             </p>
           </div>

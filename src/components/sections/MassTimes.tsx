@@ -67,13 +67,15 @@ export function MassTimes({ withCta = true }: { withCta?: boolean }) {
   }, [lang]);
 
   return (
-    <section ref={sectionRef} className="section-padding bg-cream-dark">
-      <div className="max-w-7xl mx-auto">
+    <section ref={sectionRef} className="section-padding bg-cream-dark parchment-sheen relative overflow-hidden">
+      <span className="section-numeral pointer-events-none absolute -top-6 left-4 md:left-12 text-[7rem] md:text-[12rem] opacity-[0.05] select-none">
+        V
+      </span>
+
+      <div className="relative max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <p className="text-xs uppercase tracking-[0.3em] text-gold font-medium mb-4">
-            {t.home.massLabel}
-          </p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-navy font-serif">
+          <p className="kicker justify-center mb-5">{t.home.massLabel}</p>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl text-navy font-serif">
             {t.home.massTitle}
           </h2>
         </div>
@@ -84,28 +86,32 @@ export function MassTimes({ withCta = true }: { withCta?: boolean }) {
             return (
               <div
                 key={item.title}
-                className="group relative bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-shadow duration-500 overflow-hidden"
+                className="group relative bg-white/90 backdrop-blur-sm rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden ring-1 ring-gold/10"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-gold/15 to-gold/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                {/* Gold top rule */}
+                <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-gold/50 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-br from-gold/12 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 <div className="relative z-10">
                   <div className="w-14 h-14 rounded-xl bg-navy flex items-center justify-center mb-6 group-hover:bg-gold transition-colors duration-500">
                     <Icon className="w-6 h-6 text-gold group-hover:text-navy transition-colors duration-500" />
                   </div>
 
-                  <h3 className="text-2xl font-bold text-navy mb-4 font-serif">
+                  <h3 className="text-2xl text-navy mb-5 font-serif">
                     {item.title}
                   </h3>
 
-                  <ul className="space-y-2">
+                  <ul className="space-y-2.5">
                     {item.times.map((time) => (
-                      <li key={time} className="text-text-muted flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0" />
+                      <li key={time} className="text-text-muted flex items-center gap-2.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-gold shrink-0" />
                         {time}
                       </li>
                     ))}
                   </ul>
                 </div>
+
+                <span className="pointer-events-none absolute bottom-4 right-4 w-6 h-6 border-b border-r border-gold/0 group-hover:border-gold/40 transition-colors duration-700" />
               </div>
             );
           })}
@@ -115,7 +121,7 @@ export function MassTimes({ withCta = true }: { withCta?: boolean }) {
           <div className="mt-14 text-center">
             <Link
               href="/mass-timings"
-              className="inline-flex items-center gap-2 text-navy font-medium tracking-wide hover:text-gold-dark transition-colors group"
+              className="inline-flex items-center gap-2 text-navy font-display text-xs uppercase tracking-[0.2em] hover:text-gold-dark transition-colors group"
             >
               {t.home.massCta}
               <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

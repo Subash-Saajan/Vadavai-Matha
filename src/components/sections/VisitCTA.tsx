@@ -53,7 +53,7 @@ export function VisitCTA() {
   return (
     <section
       ref={sectionRef}
-      className="relative h-[80vh] min-h-[600px] overflow-hidden flex items-center justify-center"
+      className="relative h-[82vh] min-h-[600px] overflow-hidden flex items-center justify-center"
     >
       <div ref={imgRef} className="absolute inset-0 will-change-transform">
         <Image
@@ -63,26 +63,30 @@ export function VisitCTA() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-navy/70 via-navy/40 to-navy/80" />
+        <div className="absolute inset-0 bg-linear-to-b from-navy/55 via-navy/25 to-navy/65" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_42%,rgba(10,19,34,0.42)_100%)]" />
       </div>
 
       <div
         ref={contentRef}
         className="relative z-10 text-center max-w-3xl mx-auto px-6"
       >
-        <p className="reveal-item text-xs uppercase tracking-[0.4em] text-gold mb-6">
-          {t.home.visitLabel}
-        </p>
-        <h2 className="reveal-item text-4xl md:text-6xl lg:text-7xl font-serif text-white leading-tight">
+        <div className="reveal-item flex justify-center mb-6">
+          <svg width="16" height="24" viewBox="0 0 13 20" fill="none" className="text-gold animate-float" aria-hidden="true">
+            <path d="M6.5 0v20M0.5 6h12" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+          </svg>
+        </div>
+        <p className="reveal-item kicker justify-center mb-6 text-gold!">{t.home.visitLabel}</p>
+        <h2 className="reveal-item font-display uppercase tracking-[0.03em] text-4xl md:text-6xl lg:text-7xl text-white leading-[0.98]">
           {t.home.visitTitle}
         </h2>
-        <p className="reveal-item mt-6 text-white/80 text-lg max-w-xl mx-auto leading-relaxed">
+        <p className="reveal-item mt-7 text-white/80 text-lg max-w-xl mx-auto leading-relaxed font-serif">
           {t.home.visitBody}
         </p>
         <div className="reveal-item mt-10">
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gold text-navy text-sm uppercase tracking-[0.2em] font-medium hover:bg-white transition-all duration-500 group"
+            className="inline-flex items-center gap-2 px-9 py-4 rounded-full bg-gold text-navy font-display text-xs uppercase tracking-[0.22em] hover:bg-white transition-all duration-500 group"
           >
             {t.home.visitCta}
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

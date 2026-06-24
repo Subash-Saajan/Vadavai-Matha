@@ -9,19 +9,21 @@ import { useLang } from "@/components/layout/LanguageProvider";
 // deliberately kept apart from the main vadavaimatha.net dictionary.
 const copy = {
   en: {
-    eyebrow: "Holy Family Church · Vadakkankulam",
+    eyebrow: "Holy Family Shrine · Vadakkankulam",
+    centenary: "100 Years of",
     title: "Little Rome",
     tagline:
-      "A sanctuary of faith in the heart of Tamil Nadu — devotion three centuries deep.",
-    status: "Our new home is coming soon.",
+      "A sanctuary of faith in the heart of South India — devotion five centuries deep.",
+    status: "Our website goes live on August 7, 2026 — stay tuned!",
     blessing: "Pray for us, O Holy Mother of God.",
   },
   ta: {
-    eyebrow: "திருக்குடும்ப ஆலயம் · வடகாங்குளம்",
+    eyebrow: "திருக்குடும்ப திருத்தலம் · வடகாங்குளம்",
+    centenary: "100 ஆண்டுகள்",
     title: "சின்ன ரோம்",
     tagline:
-      "தமிழ்நாட்டின் இதயத்தில் நம்பிக்கையின் ஒரு புகலிடம் — மூன்று நூற்றாண்டுகளின் பக்தி.",
-    status: "எங்கள் புதிய இணையதளம் விரைவில் வருகிறது.",
+      "தென்னிந்தியாவின் இதயத்தில் நம்பிக்கையின் ஒரு புகலிடம் — ஐந்து நூற்றாண்டுகளின் பக்தி.",
+    status: "எங்கள் இணையதளம் ஆகஸ்ட் 7, 2026 அன்று வெளியாகும் — காத்திருங்கள்!",
     blessing: "தேவமாதாவே, எங்களுக்காக வேண்டிக்கொள்ளும்.",
   },
 };
@@ -80,6 +82,16 @@ export function ComingSoon() {
           {c.eyebrow}
         </motion.p>
 
+        <motion.p
+          custom={1}
+          variants={fade}
+          initial="hidden"
+          animate="show"
+          className="font-serif italic text-2xl md:text-4xl text-gold/85 mb-2"
+        >
+          {c.centenary}
+        </motion.p>
+
         <motion.h1
           custom={1}
           variants={fade}
@@ -115,13 +127,13 @@ export function ComingSoon() {
           variants={fade}
           initial="hidden"
           animate="show"
-          className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-gold/30 bg-white/5 backdrop-blur"
+          className="inline-flex items-center gap-3 px-5 py-3 rounded-full border border-gold/30 bg-white/5 backdrop-blur max-w-[92vw]"
         >
-          <span className="relative flex h-2 w-2">
+          <span className="relative flex h-2 w-2 shrink-0">
             <span className="absolute inline-flex h-full w-full rounded-full bg-gold opacity-60 animate-ping" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-gold" />
           </span>
-          <span className="text-sm tracking-[0.2em] uppercase text-white/90">
+          <span className="text-xs md:text-sm tracking-[0.15em] uppercase text-white/90 text-center">
             {c.status}
           </span>
         </motion.div>

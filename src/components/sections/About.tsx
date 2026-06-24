@@ -16,19 +16,17 @@ export function About() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Card entrance
+      // Clip-wipe reveal of the composite card
       gsap.fromTo(
         cardRef.current,
-        { y: 80, opacity: 0, scale: 0.95 },
+        { clipPath: "inset(0 0 100% 0)" },
         {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 1.4,
-          ease: "power3.out",
+          clipPath: "inset(0 0 0% 0)",
+          duration: 1.5,
+          ease: "power4.out",
           scrollTrigger: {
             trigger: cardRef.current,
-            start: "top 85%",
+            start: "top 82%",
             toggleActions: "play none none none",
           },
         }
@@ -45,7 +43,6 @@ export function About() {
           scrub: 1,
         },
       });
-
       gsap.to(churchRef.current, {
         yPercent: -22,
         ease: "none",
@@ -57,7 +54,7 @@ export function About() {
         },
       });
 
-      // Halo glow pulse
+      // Halo glow breathing
       gsap.to(haloRef.current, {
         scale: 1.15,
         opacity: 0.85,
@@ -72,7 +69,7 @@ export function About() {
       items?.forEach((el, i) => {
         gsap.fromTo(
           el,
-          { y: 40, opacity: 0 },
+          { y: 42, opacity: 0 },
           {
             y: 0,
             opacity: 1,
@@ -94,21 +91,19 @@ export function About() {
   return (
     <section
       ref={sectionRef}
-      className="relative section-padding bg-cream overflow-hidden"
+      className="relative section-padding bg-cream parchment-sheen overflow-hidden"
     >
-      {/* Soft gold ambient glow in the corners */}
-      <div className="pointer-events-none absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-gold/10 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-40 -left-40 w-[600px] h-[600px] rounded-full bg-gold/10 blur-3xl" />
+      <div className="light-shaft absolute -top-20 right-0 w-[50%] h-[120%] -rotate-6" />
+      <span className="section-numeral pointer-events-none absolute -top-6 left-4 md:left-12 text-[7rem] md:text-[12rem] opacity-[0.06] select-none">
+        II
+      </span>
 
       <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
-        {/* Text side */}
+        {/* Text */}
         <div ref={textRef} className="lg:col-span-7 space-y-6 order-2 lg:order-1">
-          <p className="reveal-item text-xs uppercase tracking-[0.4em] text-gold font-medium flex items-center gap-3">
-            <span className="w-10 h-px bg-gold/60" />
-            {t.home.aboutLabel}
-          </p>
+          <p className="reveal-item kicker">{t.home.aboutLabel}</p>
 
-          <h2 className="reveal-item font-serif text-5xl md:text-6xl lg:text-7xl text-navy leading-[1.05]">
+          <h2 className="reveal-item font-serif text-5xl md:text-6xl lg:text-7xl text-navy leading-[1.04]">
             {t.home.aboutTitle}
           </h2>
 
@@ -125,27 +120,25 @@ export function About() {
             </p>
           </div>
 
-          <div className="reveal-item pt-6 border-t border-gold/20">
-            <p className="font-serif italic text-navy/80 text-lg flex items-start gap-3">
-              <span className="text-gold text-2xl leading-none mt-1">"</span>
+          <div className="reveal-item pt-7 mt-1 border-t border-gold/25">
+            <p className="font-serif italic text-navy/80 text-xl leading-relaxed flex items-start gap-3">
+              <span className="text-gold text-3xl leading-none mt-1 font-display">&ldquo;</span>
               {t.home.aboutQuote}
             </p>
           </div>
         </div>
 
-        {/* Image side — parallax composite inside Patroness-style card */}
+        {/* Composite parallax card */}
         <div className="lg:col-span-5 relative flex items-center justify-center order-1 lg:order-2">
-          {/* Halo glow behind the card */}
           <div
             ref={haloRef}
-            className="absolute inset-0 m-auto w-[80%] h-[80%] rounded-full bg-gradient-to-b from-gold/40 via-gold/15 to-transparent blur-3xl"
+            className="absolute inset-0 m-auto w-[82%] h-[82%] rounded-full bg-linear-to-b from-gold/40 via-gold/15 to-transparent blur-3xl"
           />
 
           <div
             ref={cardRef}
-            className="relative w-full max-w-md aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl ring-1 ring-gold/20 bg-navy"
+            className="relative w-full max-w-md aspect-[4/5] rounded-[1.75rem] overflow-hidden shadow-2xl ring-1 ring-gold/25 bg-navy will-change-transform"
           >
-            {/* Sky background — oversized so parallax shift never reveals edges */}
             <div
               ref={skyRef}
               className="absolute inset-0 -top-[10%] h-[120%] will-change-transform"
@@ -159,7 +152,6 @@ export function About() {
               />
             </div>
 
-            {/* Church (transparent PNG) — anchored to bottom, taller for parallax */}
             <div
               ref={churchRef}
               className="absolute inset-x-0 bottom-0 h-[115%] will-change-transform"
@@ -170,14 +162,13 @@ export function About() {
                 fill
                 className="object-contain object-bottom"
                 sizes="(max-width: 1024px) 80vw, 40vw"
-                style={{
-                  filter: "drop-shadow(0 25px 50px rgba(10,22,40,0.4))",
-                }}
+                style={{ filter: "drop-shadow(0 25px 50px rgba(10,22,40,0.45))" }}
               />
             </div>
 
-            {/* Subtle gold inner border */}
-            <div className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-inset ring-gold/30" />
+            <div className="pointer-events-none absolute inset-0 rounded-[1.75rem] ring-1 ring-inset ring-gold/30" />
+            <span className="pointer-events-none absolute top-4 left-4 w-7 h-7 border-t border-l border-gold/50 z-10" />
+            <span className="pointer-events-none absolute bottom-4 right-4 w-7 h-7 border-b border-r border-gold/50 z-10" />
           </div>
         </div>
       </div>
