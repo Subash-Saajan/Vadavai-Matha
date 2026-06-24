@@ -5,13 +5,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { gsap } from "@/lib/gsap";
 import { ArrowUpRight } from "lucide-react";
-import { images } from "@/lib/images";
 import { useLang } from "@/components/layout/LanguageProvider";
 
+// Local imagery matched to the first three feasts (St Sebastian, Presentation
+// of the BVM, St John de Britto) shown by this teaser.
 const cards = [
-  { img: images.candlesLit, key: 0 },
-  { img: images.procession, key: 1 },
-  { img: images.flowers, key: 2 },
+  { img: "/images/vadavai-st-sebasthiyarchurch.jpg", key: 0 }, // St Sebastian Church Feast
+  { img: "/images/kannikai-matha-church.jpg", key: 1 }, // Presentation of the BVM (Kannikai Matha)
+  { img: "/images/de-britto-grotto.jpg", key: 2 }, // St John de Britto Feast (grotto)
 ];
 
 export function FestivalsTeaser() {
