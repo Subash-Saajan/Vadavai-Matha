@@ -112,6 +112,7 @@ export function Hero() {
   return (
     <section
       ref={sectionRef}
+      data-nav-hero /* Navbar stays transparent while this is behind it */
       className="relative bg-navy"
       style={{ height: "300vh" }} /* scroll runway for the video scrub */
     >

@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# pre-optimization image backups — local safety copies of downscaled originals.
+# They live under public/ so they must NOT ship, or the multi-MB originals would
+# be publicly served and bloat every deploy. Kept on disk, never committed.
+*.original.*
+_original/

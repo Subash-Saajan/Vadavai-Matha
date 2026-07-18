@@ -2,8 +2,15 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X, Globe } from "lucide-react";
 import { useLang } from "./LanguageProvider";
+
+/* How far up the screen the hero's bottom edge must travel before the bar
+   solidifies, as a share of the viewport. At 50% the bar begins its fade once
+   the section below the hero has risen to fill half the screen — a touch early,
+   so the change has settled by the time that section is fully in view. */
+const SOLIDIFY_AT = 50;
 
 /* A slender engraved Latin cross — the wordmark's devotional mark. */
 function CrossMark({ className = "" }: { className?: string }) {
@@ -19,19 +26,37 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    // On a page with a full-bleed hero (the home video), the bar stays
+    // transparent over the hero and solidifies as the section beneath it comes
+    // up. Elsewhere: the usual short threshold.
+    const hero = document.querySelector("[data-nav-hero]");
+
+    if (!hero) {
+      const onScroll = () => setScrolled(window.scrollY > 60);
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+      return () => window.removeEventListener("scroll", onScroll);
+    }
+
+    // Raising the root's top edge to mid-viewport means the hero stops
+    // intersecting once its bottom crosses that line — i.e. once the next
+    // section has claimed the lower half of the screen.
+    const io = new IntersectionObserver(
+      ([entry]) => setScrolled(!entry.isIntersecting),
+      { rootMargin: `-${SOLIDIFY_AT}% 0px 0px 0px` }
+    );
+    io.observe(hero);
+    return () => io.disconnect();
+  }, [pathname]);
 
   const links = [
-    { href: "/home", label: t.nav.home },
+    { href: "/", label: t.nav.home },
     { href: "/history", label: t.nav.history },
     { href: "/mass-timings", label: t.nav.mass },
-    { href: "/gallery", label: t.nav.gallery },
+    { href: "/architecture", label: t.nav.architecture },
     { href: "/contact", label: t.nav.contact },
   ];
 
@@ -44,9 +69,9 @@ export function Navbar() {
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 lg:px-10 h-16 md:h-20 flex items-center justify-between">
         {/* Wordmark */}
-        <Link href="/home" className="flex items-center gap-3 group">
+        <Link href="/" className="flex items-center gap-3 group">
           <CrossMark
             className={`transition-all duration-500 group-hover:-translate-y-0.5 ${
               scrolled ? "text-gold-dark" : "text-gold"
@@ -58,14 +83,14 @@ export function Navbar() {
                 scrolled ? "text-navy" : "text-white"
               }`}
             >
-              Vadakankulam Matha
+              Little Rome
             </span>
             <span
-              className={`hidden md:block mt-0.5 text-[0.55rem] tracking-[0.45em] uppercase transition-colors ${
+              className={`hidden md:block mt-0.5 text-[0.55rem] tracking-[0.4em] uppercase transition-colors ${
                 scrolled ? "text-gold-dark/70" : "text-gold/80"
               }`}
             >
-              Little Rome
+              Our Lady of Assumption
             </span>
           </span>
         </Link>

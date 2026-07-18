@@ -8,13 +8,49 @@ import { gsap } from "@/lib/gsap";
 import { images } from "@/lib/images";
 import { useLang } from "@/components/layout/LanguageProvider";
 
-// Asymmetric mosaic with parallax — each tile drifts at a different rate
+// Asymmetric mosaic with parallax — each tile drifts at a different rate.
+//
+// NOTE: every tile below is an UNSPLASH STOCK photograph (see src/lib/images.ts)
+// — generic devotional imagery, not Vadakkankulam. The alt text therefore
+// describes only what is genuinely in each frame and never claims it is this
+// shrine, because it is not.
+//
+// This is worth fixing rather than annotating: the parish now has ~70 real
+// photographs in /public/images (the façade, the two naves, the vault, the
+// glass, the feast). Stock imagery is duplicated across thousands of sites and
+// is worth precisely nothing in image search, whereas these photographs are
+// unique and are the single most ownable asset the shrine has online.
 const tiles = [
-  { img: images.cathedralCeiling, span: "row-span-2 col-span-2", drift: -25 },
-  { img: images.candlesLit, span: "col-span-1 row-span-1", drift: -10 },
-  { img: images.stainedGlass, span: "col-span-1 row-span-1", drift: -45 },
-  { img: images.rosary, span: "col-span-1 row-span-1", drift: -30 },
-  { img: images.archInterior, span: "col-span-2 row-span-1", drift: -15 },
+  {
+    img: images.cathedralCeiling,
+    alt: "A vaulted church ceiling",
+    span: "row-span-2 col-span-2",
+    drift: -25,
+  },
+  {
+    img: images.candlesLit,
+    alt: "A cluster of lit devotional candles",
+    span: "col-span-1 row-span-1",
+    drift: -10,
+  },
+  {
+    img: images.stainedGlass,
+    alt: "Coloured light falling through stained glass",
+    span: "col-span-1 row-span-1",
+    drift: -45,
+  },
+  {
+    img: images.rosary,
+    alt: "A rosary held in the hand",
+    span: "col-span-1 row-span-1",
+    drift: -30,
+  },
+  {
+    img: images.archInterior,
+    alt: "The arches of a church interior",
+    span: "col-span-2 row-span-1",
+    drift: -15,
+  },
 ];
 
 export function GalleryPreview() {
@@ -89,7 +125,7 @@ export function GalleryPreview() {
             >
               <Image
                 src={tile.img}
-                alt=""
+                alt={tile.alt}
                 fill
                 className="object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110"
                 sizes="(max-width: 768px) 50vw, 30vw"
@@ -102,7 +138,7 @@ export function GalleryPreview() {
 
         <div className="mt-16 text-center">
           <Link
-            href="/gallery"
+            href="/architecture"
             className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gold text-navy font-display text-xs uppercase tracking-[0.22em] hover:bg-white transition-all duration-500 group"
           >
             {t.home.galleryCta}

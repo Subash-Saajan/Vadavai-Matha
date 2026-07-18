@@ -2,6 +2,9 @@
 
 import Link from "next/link";
 import { useLang } from "./LanguageProvider";
+// Never retype the phone number. NAP consistency is what lets Google and AI
+// assistants merge every mention of this shrine into a single place.
+import { PHONE } from "@/lib/contact";
 
 export function Footer() {
   const { t } = useLang();
@@ -23,13 +26,13 @@ export function Footer() {
               <path d="M6.5 0v20M0.5 6h12" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
             </svg>
             <span className="font-display text-2xl tracking-[0.16em] uppercase">
-              Vadakankulam Matha
+              Little Rome
             </span>
           </div>
-          <p className="text-[0.6rem] tracking-[0.45em] uppercase text-gold/80 mb-5 ml-7">
-            Little Rome
+          <p className="text-[0.6rem] tracking-[0.4em] uppercase text-gold mb-5 ml-7">
+            Our Lady of Assumption
           </p>
-          <p className="text-white/55 max-w-sm leading-relaxed font-serif text-lg">
+          <p className="text-white/75 max-w-sm leading-relaxed font-serif text-lg">
             {t.footer.tagline}
           </p>
         </div>
@@ -38,11 +41,13 @@ export function Footer() {
           <p className="font-display text-[0.65rem] uppercase tracking-[0.32em] text-gold mb-5">
             {t.footer.explore}
           </p>
-          <ul className="space-y-2.5 text-white/65 text-sm">
+          <ul className="space-y-2.5 text-white/80 text-sm">
             <li><Link href="/history" className="hover:text-gold transition-colors">{t.nav.history}</Link></li>
             <li><Link href="/mass-timings#festivals" className="hover:text-gold transition-colors">{t.nav.festivals}</Link></li>
-            <li><Link href="/gallery" className="hover:text-gold transition-colors">{t.nav.gallery}</Link></li>
+            <li><Link href="/architecture" className="hover:text-gold transition-colors">{t.nav.architecture}</Link></li>
             <li><Link href="/mass-timings" className="hover:text-gold transition-colors">{t.nav.mass}</Link></li>
+            <li><Link href="/faq" className="hover:text-gold transition-colors">{t.nav.faq}</Link></li>
+            <li><Link href="/sources" className="hover:text-gold transition-colors">{t.nav.sources}</Link></li>
           </ul>
         </div>
 
@@ -50,17 +55,25 @@ export function Footer() {
           <p className="font-display text-[0.65rem] uppercase tracking-[0.32em] text-gold mb-5">
             {t.footer.connect}
           </p>
-          <ul className="space-y-2.5 text-white/65 text-sm">
+          <ul className="space-y-2.5 text-white/80 text-sm">
             <li><Link href="/contact" className="hover:text-gold transition-colors">{t.nav.contact}</Link></li>
-            <li className="text-white/45 leading-relaxed">{t.contact.address}</li>
+            <li>
+              <a
+                href={`tel:${PHONE.e164}`}
+                className="hover:text-gold transition-colors tabular-nums"
+              >
+                {PHONE.display}
+              </a>
+            </li>
+            <li className="text-white/60 leading-relaxed">{t.contact.address}</li>
           </ul>
         </div>
       </div>
 
-      <div className="relative border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-white/40">
+      <div className="relative border-t border-white/15">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-white/60">
           <p>© {year} Vadakankulam Matha Church · {t.footer.rights}</p>
-          <p className="font-serif italic text-white/55">In faith, in stillness, in light.</p>
+          <p className="font-serif italic text-white/75">In faith, in stillness, in light.</p>
         </div>
       </div>
     </footer>

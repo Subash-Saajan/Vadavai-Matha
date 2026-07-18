@@ -194,6 +194,43 @@ body::after {
   background-clip: text;
 }
 
+/* Gold-leaf text for LIGHT grounds (white plaques, cream).
+   .text-gradient-gold opens on --gold-light (#ecd28a), which is luminous against
+   navy but disappears into white — it's below 2:1 there. This keeps the gilded
+   sheen by brightening through --gold at the midpoint, but anchors both ends in
+   the darker leaf so the letterforms actually hold their edge on paper. */
+.text-gradient-gold-deep {
+  background: linear-gradient(135deg, #8a6c28, var(--gold) 50%, var(--gold-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* The /contact sentence — "I have come [to offer a Mass]." The clause is
+   swapped out under the visitor's finger, so it is re-typeset rather than
+   simply re-coloured: it rises the height of its own descender as it lands.
+   Declared here rather than as a Tailwind animate-* utility so that reduced
+   motion can actually switch it off (a utility would sit in a later cascade
+   layer and win). */
+@keyframes clause-swap {
+  from {
+    opacity: 0;
+    transform: translateY(0.22em);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.clause-swap {
+  animation: clause-swap 0.45s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .clause-swap {
+    animation: none;
+  }
+}
+
 /* ======================================================================
    ATMOSPHERE
    ====================================================================== */
@@ -220,6 +257,29 @@ body::after {
     radial-gradient(90% 60% at 100% 100%, rgba(196, 160, 73, 0.05), transparent 55%);
 }
 
+/* Parchment swell — a shaded band for light sections that need to sit apart
+   from their neighbours.
+   Cream and cream-dark are only a few steps apart, so butting them against each
+   other gives a hard seam that reads as a banding artefact, not a decision. This
+   instead rises out of cream into the deeper tone and settles back to cream at
+   the foot, which leaves every seam cream-on-cream — invisible — while the
+   section still carries its own weight. Use it INSTEAD of .parchment-sheen (it
+   folds the same paper radials in; both set background-image, so they cannot be
+   stacked as two classes). */
+.parchment-swell {
+  background-color: var(--cream);
+  background-image:
+    radial-gradient(120% 80% at 50% -10%, rgba(255, 252, 244, 0.9), transparent 60%),
+    radial-gradient(90% 60% at 100% 100%, rgba(196, 160, 73, 0.05), transparent 55%),
+    linear-gradient(
+      180deg,
+      var(--cream) 0%,
+      var(--cream-dark) 20%,
+      var(--cream-dark) 80%,
+      var(--cream) 100%
+    );
+}
+
 /* Cathedral depth gradient for dark sections */
 .cathedral-depth {
   background:
@@ -234,6 +294,47 @@ body::after {
     rgba(10, 19, 34, 0.4) 55%,
     rgba(6, 12, 24, 0.85) 100%
   );
+}
+
+/* ── Interactive floor plan (the Creed section) ──
+   Reading a line of the creed lifts one region of the plan and settles the
+   rest back. Opacity multiplies with each group's own gold alpha, so `--off`
+   dims to a faint context outline rather than vanishing; the lit region then
+   BREATHES — a slow fade-in / fade-out with a swelling gold halo — so the eye
+   is drawn to it and held, rather than to a flat, static highlight. */
+.plan-region {
+  transition:
+    opacity 0.5s ease,
+    filter 0.5s ease;
+}
+.plan-region--off {
+  opacity: 0.2;
+}
+.plan-region--on {
+  opacity: 1;
+  animation: plan-breathe 2.6s ease-in-out infinite;
+}
+@keyframes plan-breathe {
+  0%,
+  100% {
+    opacity: 0.68;
+    filter: drop-shadow(0 0 3px rgba(236, 210, 138, 0.3));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 14px rgba(236, 210, 138, 0.9));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .plan-region {
+    transition: none;
+  }
+  /* No breathing when motion is reduced — just a steady, clearly lit state. */
+  .plan-region--on {
+    animation: none;
+    opacity: 1;
+    filter: drop-shadow(0 0 8px rgba(236, 210, 138, 0.6));
+  }
 }
 
 /* ======================================================================
@@ -375,7 +476,31 @@ body::after {
   }
 }
 
-/* ── Respect reduced-motion ── */
+/* The contact page is a switchboard, not a narrative scroll: its sections are
+   short and are meant to be scanned in one pass, so the sitewide rhythm (which
+   doubles at every seam — 20rem between two adjacent sections on desktop) reads
+   as dead space here. Halve the vertical run; leave the gutters alone. */
+.contact-page .section-padding {
+  padding-block: 3.5rem;
+}
+@media (min-width: 768px) {
+  .contact-page .section-padding {
+    padding-block: 4.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .contact-page .section-padding {
+    padding-block: 5rem;
+  }
+}
+
+/* ── Respect reduced-motion ──
+   NOTE: these are our own unlayered classes, so `!important` reliably wins.
+   It will NOT suppress a Tailwind utility such as `animate-ping`: utilities
+   live in `@layer utilities`, and for important declarations the cascade
+   reverses layer order, ranking unlayered styles last. Components that use a
+   Tailwind animation utility must therefore not render it at all under
+   reduced motion — see `usePrefersReducedMotion`. */
 @media (prefers-reduced-motion: reduce) {
   .animate-float,
   .animate-scroll-bounce,
@@ -385,4 +510,45 @@ body::after {
   .clip-reveal {
     clip-path: none;
   }
+}
+
+/* ======================================================================
+   CANDLELIGHT — the /contact page is lit like the church at night.
+   Content emerges from near-black in pools of warm light; these are the
+   primitives that make the glow, so components stay free of blur markup.
+   ====================================================================== */
+
+/* A soft pool of candlelight. Position and size it per placement; drop
+   `.animate-ember` alongside for the slow breathing (reduced-motion safe). */
+.candle-bloom {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle,
+    rgba(236, 210, 138, 0.16),
+    rgba(196, 160, 73, 0.05) 42%,
+    transparent 70%
+  );
+  filter: blur(44px);
+}
+
+/* Warm light that blooms from the left of an entry as it lights up. Sits
+   behind a row; opacity is toggled by the component (hover / selected). */
+.entry-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    58% 130% at 4% 50%,
+    rgba(196, 160, 73, 0.16),
+    rgba(196, 160, 73, 0) 60%
+  );
+}
+
+/* A hairline of gold leaf that fades to nothing at both ends — the divider
+   between entries, brighter under the one currently lit. */
+.leaf-rule {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--line-gold) 12%, var(--line-gold) 88%, transparent);
 }

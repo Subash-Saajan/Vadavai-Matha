@@ -4,6 +4,7 @@ import { useRef, useEffect } from "react";
 import Image from "next/image";
 import { gsap } from "@/lib/gsap";
 import { useLang } from "@/components/layout/LanguageProvider";
+import { PhotoOrnaments } from "@/components/ornaments/CornerOrnament";
 
 export function About() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -167,8 +168,9 @@ export function About() {
             </div>
 
             <div className="pointer-events-none absolute inset-0 rounded-[1.75rem] ring-1 ring-inset ring-gold/30" />
-            <span className="pointer-events-none absolute top-4 left-4 w-7 h-7 border-t border-l border-gold/50 z-10" />
-            <span className="pointer-events-none absolute bottom-4 right-4 w-7 h-7 border-b border-r border-gold/50 z-10" />
+
+            {/* The site's standard framed-photo mark, same as the Patroness portrait. */}
+            <PhotoOrnaments />
           </div>
         </div>
       </div>

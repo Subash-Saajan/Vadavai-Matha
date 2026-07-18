@@ -9,9 +9,46 @@ interface Props {
   title: string;
   intro?: string;
   image: string;
+  /**
+   * Required, not optional, and deliberately so.
+   *
+   * This photograph is the largest thing on the page — it is the LCP element
+   * and, on four of six routes, the only picture Google Images has to go on.
+   * It shipped as alt="" everywhere, which told assistive tech and the crawler
+   * alike that the shrine's own photographs were decoration. Making the prop
+   * required means a new page cannot quietly repeat that.
+   *
+   * Describe what is actually in the frame. Do not restate the <h1> — the
+   * heading is already read out — and do not stuff it with keywords.
+   */
+  alt: string;
+  /**
+   * Override the scrim when the photograph is bright behind the text. The gold
+   * kicker fails contrast over a pale sky, and this hero carries a telephone
+   * number that elderly pilgrims must be able to read.
+   */
+  overlayClassName?: string;
+  /**
+   * Where to hold the crop. The hero is far wider than it is tall, so a
+   * landscape photograph loses most of its height to `object-cover` — and a
+   * centred crop keeps whatever happens to sit in the middle of the frame,
+   * which on a drone shot is sky. Push this toward `100%` to hold the bottom
+   * of the picture (the building) instead.
+   */
+  imagePosition?: string;
 }
 
-export function PageHero({ label, title, intro, image }: Props) {
+const DEFAULT_OVERLAY = "bg-gradient-to-b from-navy/40 via-navy/30 to-navy/90";
+
+export function PageHero({
+  label,
+  title,
+  intro,
+  image,
+  alt,
+  overlayClassName,
+  imagePosition,
+}: Props) {
   const sectionRef = useRef<HTMLElement>(null);
   const imgRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -65,13 +102,13 @@ export function PageHero({ label, title, intro, image }: Props) {
       <div ref={imgRef} className="absolute inset-0 will-change-transform">
         <Image
           src={image}
-          alt=""
+          alt={alt}
           fill
-          className="object-cover"
+          className={`object-cover ${imagePosition ?? "object-center"}`}
           sizes="100vw"
           preload
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-navy/40 via-navy/30 to-navy/90" />
+        <div className={`absolute inset-0 ${overlayClassName ?? DEFAULT_OVERLAY}`} />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 pb-20 md:pb-28 w-full">

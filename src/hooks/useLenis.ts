@@ -6,6 +6,12 @@ import { ScrollTrigger } from "@/lib/gsap";
 
 export function useLenis() {
   useEffect(() => {
+    // Desktop only. Lenis ships with `syncTouch: false`, so on a touch device it
+    // was never smoothing anything — it just ran a rAF loop every frame and fed
+    // ScrollTrigger a second scroll signal. Skipping it on touch costs nothing
+    // visible and keeps the pinned /history stage on the browser's own scroll.
+    if (!window.matchMedia("(min-width: 768px)").matches) return;
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
