@@ -6,7 +6,6 @@ import Image from "next/image";
 import { gsap } from "@/lib/gsap";
 import { PageHero } from "@/components/sections/PageHero";
 import { useLang } from "@/components/layout/LanguageProvider";
-import { images } from "@/lib/images";
 
 export default function DevasahayamPage() {
   const pageRef = useRef<HTMLDivElement>(null);
@@ -57,13 +56,11 @@ export default function DevasahayamPage() {
         label={s.label}
         title={s.name}
         intro={s.intro}
-        image={images.cross}
-        // Honest, and deliberately unglamorous: images.cross is an Unsplash
-        // stock photograph, not a picture of anything at Vadakkankulam. The alt
-        // text must not imply otherwise — claiming it were the shrine would
-        // teach Google Images and the AI crawlers a fact that is simply false.
-        // This hero wants replacing with a real photograph; see the SEO notes.
-        alt="A cross standing against an open sky"
+        image="/images/saints/gnanapoo-ammal-tomb.jpg"
+        // A real photograph, and the most intimate one the parish holds: the
+        // tomb of Gnanapoo Ammal (d. 1766), wife of St. Devasahayam Pillai,
+        // with its old stone cross. The alt text states exactly what it is.
+        alt="The tomb of Gnanapoo Ammal, who died in 1766, wife of St. Devasahayam Pillai, sheltered under a white arched memorial with a stone cross"
       />
 
       {/* ── Quick-facts strip ─────────────────────── */}
@@ -133,7 +130,7 @@ export default function DevasahayamPage() {
       <section className="relative overflow-hidden bg-navy text-white">
         <div ref={bondImgRef} className="absolute inset-0 will-change-transform opacity-25">
           <Image
-            src={images.altar}
+            src="/images/architecture/altar.jpg"
             alt=""
             fill
             className="object-cover"

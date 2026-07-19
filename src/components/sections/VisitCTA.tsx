@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { gsap } from "@/lib/gsap";
 import { ArrowUpRight } from "lucide-react";
-import { images } from "@/lib/images";
 import { useLang } from "@/components/layout/LanguageProvider";
 
 export function VisitCTA() {
@@ -57,7 +56,7 @@ export function VisitCTA() {
     >
       <div ref={imgRef} className="absolute inset-0 will-change-transform">
         <Image
-          src={images.churchSunset}
+          src="/images/facade-day.jpg"
           alt=""
           fill
           className="object-cover"

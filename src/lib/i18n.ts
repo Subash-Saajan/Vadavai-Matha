@@ -290,8 +290,8 @@ export const dict = {
             },
             {
               year: `1861`,
-              title: `Two bells cast in Lyon`,
-              body: `The parish's twin bells were cast in 1861 at the Burdin foundry of Lyon in France, the gift of a benefactor named Casimir Grégoire. Packed in crates, they came by sea to Madras and up through Tirunelveli, and were finally hung in 1872, one in each of the church's two new towers, their joined ringing giving, the people still say, a sweetness of sound heard nowhere else in this land.`,
+              title: `Two bells cast in France`,
+              body: `The parish's twin bells were cast in France in 1861, the gift of a benefactor named Casimir Grégoire — the bell in the tower still bears his name in its bronze. Packed in crates, they came by sea to Madras and up through Tirunelveli, and were finally hung in 1872, one in each of the church's two new towers, their joined ringing giving, the people still say, a sweetness of sound heard nowhere else in this land.`,
             },
             {
               year: `1863`,
@@ -515,7 +515,7 @@ export const dict = {
           feast: "Feast — February 4",
           epithet: "Arulanandar, Our Founder",
           body: "Known in Tamil as Arulanandar, the Jesuit who raised our first thatched chapel here in 1685 and dedicated it to the Holy Family, before his martyrdom in 1693.",
-          image: "/images/history/first-inland-parish-1.jpg",
+          image: "/images/de-britto-grotto.jpg",
           href: "/history",
         },
       ],
@@ -600,6 +600,74 @@ export const dict = {
       sources: {
         heading: "Sources",
         body: "Compiled principally from Auguste Jean, S.J., Le Maduré: l'ancienne et la nouvelle mission, Vol. I (Paris, 1894), pp. 196–203, and from the Notice sur le P. J.-B. Bouttari in Joseph Bertrand, S.J., La Mission du Maduré, Vol. IV (Paris, 1847), pp. 385–420. Both works are preserved in the parish's Maduré Mission library.",
+      },
+    },
+    saintDeBritto: {
+      back: "Saints of Our Parish",
+      label: "The Founder of Our Parish",
+      name: "St John de Britto",
+      epithet: "Arulanandar — “the bliss of grace”",
+      intro:
+        "The Portuguese Jesuit who, in 1685, raised the first thatched chapel of the Holy Family at Vadakkankulam — the founding act from which this whole shrine descends. Martyred for the faith at Oriyur in 1693, he is venerated across the Tamil land as Arulanandar.",
+      feast: "Feast — 4 February",
+      canonised: "Canonised 1947 by Pope Pius XII",
+      facts: [
+        { label: "Birth name", value: "João de Brito — born 1 March 1647, Lisbon, Portugal" },
+        { label: "Religious order", value: "Society of Jesus (the Jesuits) — entered 1662" },
+        { label: "Mission", value: "The Madurai Mission of South India, from 1673; Superior of the Mission, 1685–86" },
+        { label: "Founded this parish", value: "1685 — the thatched Holy Family chapel at Vadakkankulam, baptising some two hundred" },
+        { label: "Martyred", value: "4 February 1693, at Oriyur — beheaded for the faith" },
+        { label: "Canonised", value: "1947, by Pope Pius XII (beatified 1853)" },
+      ],
+      quote:
+        "The whole crime of which I am accused is that I teach the law of the true God. How glorious to suffer and to die for so beautiful a cause!",
+      quoteAttribution:
+        "— from his own hand, written in the prison of Oriyur the night before his death, 3 February 1693",
+      sections: [
+        {
+          heading: "A Nobleman of Lisbon",
+          body: "João de Brito was born in Lisbon on 1 March 1647, into a noble family of the Portuguese court; as a boy he was a companion of the future King Pedro II. At fifteen he laid aside every prospect of that world and entered the Society of Jesus, and in time asked to be sent to the mission of the Indies — the hardest and most distant field the Society then knew.",
+        },
+        {
+          heading: "The Sannyasi Missionary",
+          body: "In South India he took up the method of Roberto de Nobili: to reach the Tamil people he laid aside the European's dress and diet and lived as a pandaraswami, a wandering ascetic — no meat, no comfort, travelling on foot from village to village. It carried the Gospel where a foreigner in foreign clothes could never have gone. The mission he served, the vast inland kingdom of Madurai, reached down into this southern country.",
+        },
+        {
+          heading: "He Founded This Parish, 1685",
+          body: "In 1685, while he was Superior of the Madurai Mission, de Britto came to the forest clearing of Vadakkankulam, where a Christian woman had already raised a roadside cross, and built a small thatched chapel — a “hut of branches” — dedicated to the Holy Family, baptising some two hundred people. That chapel is the seed of everything that followed: the stone church of 1752, the great two-nave church of 1872, the shrine declared in 1993. Every stone of Little Rome traces back to his hut. The colonial district gazetteer independently dates Christianity here to “the closing years of the seventeenth century.”",
+        },
+        {
+          heading: "Recalled, and Returned",
+          body: "Arrested and left for dead once already, de Britto was sent back to Portugal in 1687, where the court received him with honour and begged him to stay. He refused. Knowing that a return to the mission almost certainly meant death, he asked to go back to his Tamil Christians — and did, reaching the mission again in 1691.",
+        },
+        {
+          heading: "Martyrdom at Oriyur",
+          body: "Within two years he was seized again. Imprisoned at Oriyur, he wrote a last letter of serene joy the night before he died. On 4 February 1693 he was beheaded for the faith. His body was venerated at once; the King of Portugal had a church raised on the ground of his martyrdom, and pilgrims still go to Oriyur. He was beatified in 1853 and canonised by Pope Pius XII in 1947. To the Tamil Church he is Arulanandar — “the bliss of grace.”",
+        },
+      ],
+      bond: {
+        label: "Our Parish Bond",
+        title: "Why This Shrine Calls Him Its Founder",
+        intro:
+          "St John de Britto is honoured across the Tamil land, but at Vadakkankulam he is more than a saint venerated — he is the founder. The parish begins with his hands.",
+        pillars: [
+          {
+            heading: "He raised the first chapel, 1685",
+            body: "The thatched chapel of the Holy Family that de Britto built here in 1685 is the first church of Vadakkankulam. The parish, the shrine, the whole story of Little Rome begins with it.",
+          },
+          {
+            heading: "From his hut to Little Rome",
+            body: "An unbroken line runs from his hut of branches to the stone church of 1752, the great two-nave church blessed in 1872, and the shrine proclaimed in 1993. Four churches on one ground — and his is the first.",
+          },
+          {
+            heading: "Venerated here as Arulanandar",
+            body: "The martyr-founder is kept in devotion at the parish he began — including the John de Britto grotto within the shrine grounds, where he stands as Arulanandar between St Michael and St Raphael.",
+          },
+        ],
+      },
+      sources: {
+        heading: "Sources",
+        body: "Compiled from Giuseppe Boero, S.J., Vita del beato Giovanni de Britto (Rome: La Civiltà Cattolica, 1853); from de Britto's own prison letter of 3 February 1693, printed in Joseph Bertrand, S.J., La Mission du Maduré, Vol. III; and from F. W. Faber, The Lives of… the Ven. John de Britto (London, 1851). See the shrine's Sources page.",
       },
     },
     gallery: {
@@ -825,23 +893,23 @@ export const dict = {
       towersLabel: "The Skyline",
       towersTitle: "Why They Call It Little Rome",
       towersBody:
-        "Two white towers stand ninety-two feet above the façade, octagonal from the ground to the spire, with sixteen smaller pinnacles ringing the roofline. In each tower hangs one of the twin bells cast at the Burdin foundry in Lyon in 1861 and carried here by sea. It is chiefly for these towers that, in 1926, the first Bishop of Tuticorin gave the village the name it still answers to — Chinna Romapuri, Little Rome.",
+        "Two white towers stand ninety-two feet above the façade, octagonal from the ground to the spire, with sixteen smaller pinnacles ringing the roofline. In each tower hangs one of the twin bells cast in France in 1861 and carried here by sea. It is chiefly for these towers that, in 1926, the first Bishop of Tuticorin gave the village the name it still answers to — Chinna Romapuri, Little Rome.",
       towerStats: [
         { v: "92 ft", k: "twin octagonal towers" },
         { v: "16", k: "pinnacle turrets" },
-        { v: "1861", k: "Burdin bells, one to a tower" },
+        { v: "1861", k: "French bells, one to a tower" },
       ],
       towersCaption: "The twin towers and the pinnacled roofline",
 
       bellsLabel: "The Bells",
-      bellsTitle: "The Twin Bells of Lyon",
+      bellsTitle: "The Twin Bells from France",
       bellsBody:
-        "High in each of the two towers hangs a bronze bell, cast in 1861 at the Fonderie Burdin aîné in Lyon and carried to Vadakkankulam by sea. They have called the parish to prayer for more than a century and a half.",
+        "High in each of the two towers hangs a bronze bell, cast in France in 1861 and carried to Vadakkankulam by sea. They have called the parish to prayer for more than a century and a half.",
       bellsBeats: [
         {
           year: "1861",
-          title: "Cast in Lyon",
-          body: "The two bells are founded at the Burdin works in Lyon and given to the church by Casimir Grégoire, a French benefactor — by every account a kinsman of the parish priest, Fr Joseph Grégoire.",
+          title: "Cast in France",
+          body: "The bells are given to the church by Casimir Grégoire, a French benefactor — by every account a kinsman of the parish priest, Fr Joseph Grégoire — and the bell in the tower still carries his name in its bronze: “Donateur Casimir Grégoire”.",
         },
         {
           year: "By sea",
@@ -858,7 +926,9 @@ export const dict = {
       bellsOlder:
         "An older bell hung in the stone church of 1752 — the bell that was rung one October morning in 1803 to call the whole village to come and see the Mother whose statue had begun to weep.",
       bellsFootnote:
-        "The bells' history is the parish's own record; the Burdin foundry of Lyon is independently documented in the city's archives.",
+        "The bells' story is the parish's own record. Published accounts have named the Burdin foundry of Lyon; the bell itself is cast “Vve Grégoire de Valence (Drôme)” — and where the record and the bronze differ, the bronze has the last word.",
+      bellsCaption:
+        "The bell in its tower, cast “Vve Grégoire de Valence (Drôme) — Donateur Casimir Grégoire”",
 
       lightLabel: "Light & Colour",
       lightTitle: "Glass, Dye and Gold",
@@ -897,7 +967,7 @@ export const dict = {
         { role: "Directing pastor", name: "Fr Joseph Grégoire, S.J." },
         { role: "Architect & engineer", name: "Br Joseph Bergenthal, S.J." },
         { role: "Consecrated by", name: "Bishop Alexis Canoz, S.J., 1872" },
-        { role: "Bells", name: "Fonderie Burdin aîné, Lyon, 1861" },
+        { role: "Bells", name: "Fonderie Vve Grégoire, Valence (Drôme), 1861" },
         { role: "Bells given by", name: "Casimir Grégoire" },
       ],
       sourcesNote:
@@ -1506,8 +1576,8 @@ export const dict = {
             },
             {
               year: `1861`,
-              title: `லியோனில் வார்க்கப்பட்ட இரண்டு மணிகள்`,
-              body: `இப்பங்கின் இரட்டை மணிகள் 1861-ஆம் ஆண்டில், பிரான்சின் லியோன் நகரிலுள்ள புர்தின் வார்ப்பகத்தில், காசிமிர் கிரெகோய்ர் என்ற கொடையாளியின் கொடையாக வார்க்கப்பட்டன. பெட்டிகளில் அடைக்கப்பட்டு, கடல்வழியாக சென்னைக்கும் அங்கிருந்து திருநெல்வேலி வழியாகவும் வந்து, இறுதியில் 1872-ஆம் ஆண்டில், ஆலயத்தின் புதிய இரு கோபுரங்களிலும் தலா ஒன்றாகத் தொங்கவிடப்பட்டன; அவற்றின் இணைந்த ஒலி, இந்த நாட்டில் வேறெங்கும் கேட்க முடியாத இனிமையைத் தருகிறது என மக்கள் இன்றும் கூறுகின்றனர்.`,
+              title: `பிரான்சில் வார்க்கப்பட்ட இரண்டு மணிகள்`,
+              body: `இப்பங்கின் இரட்டை மணிகள் 1861-ஆம் ஆண்டில் பிரான்சில், காசிமிர் கிரெகோய்ர் என்ற கொடையாளியின் கொடையாக வார்க்கப்பட்டன — கோபுர மணியின் வெண்கலத்தில் இன்றும் அவரது பெயர் பொறிந்துள்ளது. பெட்டிகளில் அடைக்கப்பட்டு, கடல்வழியாக சென்னைக்கும் அங்கிருந்து திருநெல்வேலி வழியாகவும் வந்து, இறுதியில் 1872-ஆம் ஆண்டில், ஆலயத்தின் புதிய இரு கோபுரங்களிலும் தலா ஒன்றாகத் தொங்கவிடப்பட்டன; அவற்றின் இணைந்த ஒலி, இந்த நாட்டில் வேறெங்கும் கேட்க முடியாத இனிமையைத் தருகிறது என மக்கள் இன்றும் கூறுகின்றனர்.`,
             },
             {
               year: `1863`,
@@ -1731,7 +1801,7 @@ export const dict = {
           feast: "திருவிழா — பிப்ரவரி 4",
           epithet: "எங்கள் ஆலய நிறுவனர்",
           body: "தமிழில் அருளானந்தர் என அறியப்படும் இயேசுசபை அருட்தந்தை; 1685-ல் இங்கு முதல் கோயிலை அமைத்து புனித குடும்பத்திற்கு அர்ப்பணித்து, 1693-ல் இரத்தசாட்சியானார்.",
-          image: "/images/history/first-inland-parish-1.jpg",
+          image: "/images/de-britto-grotto.jpg",
           href: "/history",
         },
       ],
@@ -1816,6 +1886,74 @@ export const dict = {
       sources: {
         heading: "மூலங்கள்",
         body: "முக்கியமாக அகஸ்து ஜாங், இ.ச., லெ மதுரே: பழைய மற்றும் புதிய பணி, தொகுதி I (பாரிஸ், 1894), பக். 196–203, மற்றும் ஜோசப் பெர்ட்ரான், இ.ச., லா மிஷன் து மதுரே, தொகுதி IV (பாரிஸ், 1847), பக். 385–420 — அருட்தந்தை ஜெ.-பா. பூத்தாரியின் வாழ்க்கை குறிப்பு — ஆகியவற்றிலிருந்து தொகுக்கப்பட்டது. இவ்விரு நூல்களும் ஆலயத்தின் மதுரே மிஷன் நூலகத்தில் பாதுகாக்கப்படுகின்றன.",
+      },
+    },
+    saintDeBritto: {
+      back: "எங்கள் ஆலய புனிதர்கள்",
+      label: "எங்கள் ஆலயத்தின் நிறுவனர்",
+      name: "புனித ஜான் தெ பிரிட்டோ",
+      epithet: "அருளானந்தர் — “அருளின் ஆனந்தம்”",
+      intro:
+        "1685-ஆம் ஆண்டு வடக்கன்குளத்தில் திருக்குடும்பத்திற்கு அர்ப்பணிக்கப்பட்ட முதல் ஓலைக் குடிசைக் கோவிலை எழுப்பிய போர்த்துகீசிய இயேசு சபை மறைப்பணியாளர்; இந்தத் திருத்தலம் முழுவதும் இதிலிருந்தே தோன்றியது. 1693-இல் ஓரியூரில் விசுவாசத்திற்காக மறைசாட்சியாக மரித்த இவர், தமிழகமெங்கும் அருளானந்தர் என வணங்கப்படுகிறார்.",
+      feast: "திருவிழா — பிப்ரவரி 4",
+      canonised: "1947-இல் திருத்தந்தை பன்னிரண்டாம் பயஸ் அவர்களால் புனிதராக அறிவிக்கப்பட்டார்",
+      facts: [
+        { label: "இயற்பெயர்", value: "ஜோவான் தெ பிரிட்டோ — 1647 மார்ச் 1, போர்த்துகல் நாட்டு லிஸ்பனில் பிறந்தார்" },
+        { label: "துறவற சபை", value: "இயேசு சபை — 1662-இல் இணைந்தார்" },
+        { label: "மறைப்பணி", value: "தென்னிந்திய மதுரை மறைப்பணி, 1673 முதல்; 1685–86-இல் பணித் தலைவர்" },
+        { label: "இந்த ஆலயத்தை நிறுவினார்", value: "1685 — வடக்கன்குளத்தில் திருக்குடும்ப ஓலைக் குடிசைக் கோவில்; ஏறத்தாழ இருநூறு பேருக்கு ஞானஸ்நானம்" },
+        { label: "மறைசாட்சி", value: "1693 பிப்ரவரி 4, ஓரியூரில் — விசுவாசத்திற்காக தலை துண்டிக்கப்பட்டார்" },
+        { label: "புனிதர் பட்டம்", value: "1947 (1853-இல் அருளாளர் பட்டம்)" },
+      ],
+      quote:
+        "உண்மைக் கடவுளின் சட்டத்தைப் போதிக்கிறேன் என்பதே என்மேல் சுமத்தப்பட்ட குற்றம். இத்தகைய அழகிய நோக்கத்திற்காகத் துன்பப்பட்டு மரிப்பது எத்துணை மகிமை!",
+      quoteAttribution:
+        "— தமது மரணத்திற்கு முந்தைய இரவில், ஓரியூர் சிறையில் தாமே எழுதியது, 1693 பிப்ரவரி 3",
+      sections: [
+        {
+          heading: "லிஸ்பன் நகரப் பிரபு",
+          body: "ஜான் தெ பிரிட்டோ 1647 மார்ச் 1-ஆம் நாள் லிஸ்பனில், போர்த்துகீசிய அரசவைப் பிரபுக் குடும்பத்தில் பிறந்தார்; சிறுவயதில் பின்னாளில் அரசராகப்போகும் இரண்டாம் பேத்ரோவின் தோழராக இருந்தார். பதினைந்து வயதில் அவ்வுலக வாழ்வைத் துறந்து இயேசு சபையில் சேர்ந்து, தொலைதூர இந்திய மறைப்பணிக்குச் செல்ல விரும்பினார்.",
+        },
+        {
+          heading: "துறவி மறைப்பணியாளர்",
+          body: "தென்னிந்தியாவில் ரொபேர்ட்டோ தெ நொபிலியின் வழிமுறையைப் பின்பற்றி, தமிழ் மக்களை அணுகும்பொருட்டு ஐரோப்பிய உடையையும் உணவையும் விடுத்து, பண்டாரசாமியாக — ஊர் ஊராய் நடந்து செல்லும் துறவியாக — வாழ்ந்தார். இதனால் அயலவர் செல்ல இயலாத இடங்களுக்கும் நற்செய்தியைக் கொண்டுசென்றார். அவர் பணிபுரிந்த மதுரை மறைப்பணி இத்தென்னாட்டு வரை பரவியிருந்தது.",
+        },
+        {
+          heading: "இந்த ஆலயத்தை நிறுவினார், 1685",
+          body: "1685-இல், மதுரை மறைப்பணித் தலைவராக இருந்தபோது, ஒரு கிறிஸ்தவப் பெண் ஏற்கனவே சிலுவை நட்டிருந்த வடக்கன்குளக் காட்டுவெளிக்கு வந்து, ஓலையால் வேயப்பட்ட சிறு கோவிலை எழுப்பி, திருக்குடும்பத்திற்கு அர்ப்பணித்து, ஏறத்தாழ இருநூறு பேருக்கு ஞானஸ்நானம் அளித்தார். அந்தக் குடிசையே தொடர்ந்து வந்த அனைத்திற்கும் விதை: 1752 கல்லாலயம், 1872 இரட்டை நடைக் கோவில், 1993 திருத்தலம் — சின்ன ரோமாபுரியின் ஒவ்வொரு கல்லும் அவரது குடிசையிலிருந்தே தொடங்குகிறது.",
+        },
+        {
+          heading: "திரும்ப அழைக்கப்பட்டு, மீண்டும் வந்தார்",
+          body: "ஒருமுறை கைது செய்யப்பட்டு மரணத்தின் விளிம்பில் விடப்பட்ட பின், 1687-இல் போர்த்துகலுக்கு அனுப்பப்பட்டார்; அரசவை அவரை மதிப்புடன் வரவேற்று அங்கேயே தங்கிவிடும்படி வேண்டியது. அவர் மறுத்தார். மறைப்பணிக்குத் திரும்புவது மரணத்தையே அர்த்தப்படுத்தும் என்று அறிந்தும், தம் தமிழ்க் கிறிஸ்தவர்களிடம் திரும்பச் சென்று 1691-இல் மீண்டும் மறைப்பணியை அடைந்தார்.",
+        },
+        {
+          heading: "ஓரியூரில் மறைசாட்சி",
+          body: "இரண்டு ஆண்டுகளுக்குள் மீண்டும் பிடிபட்டார். ஓரியூரில் சிறையிலிருந்தபோது, மரணத்திற்கு முந்தைய இரவில் அமைதியான மகிழ்ச்சியுடன் இறுதிக் கடிதம் எழுதினார். 1693 பிப்ரவரி 4-ஆம் நாள் விசுவாசத்திற்காக தலை துண்டிக்கப்பட்டார். 1853-இல் அருளாளராகவும், 1947-இல் திருத்தந்தை பன்னிரண்டாம் பயஸ் அவர்களால் புனிதராகவும் அறிவிக்கப்பட்டார். தமிழ்த் திருச்சபைக்கு அவர் அருளானந்தர்.",
+        },
+      ],
+      bond: {
+        label: "எங்கள் ஆலயத் தொடர்பு",
+        title: "இந்தத் திருத்தலம் அவரை நிறுவனராகக் கொள்வது ஏன்",
+        intro:
+          "புனித ஜான் தெ பிரிட்டோ தமிழகமெங்கும் போற்றப்படுகிறார்; ஆனால் வடக்கன்குளத்தில் அவர் வணங்கப்படும் புனிதர் மட்டுமல்ல — நிறுவனர். இப்பங்கு அவரது கைகளால் தொடங்குகிறது.",
+        pillars: [
+          {
+            heading: "முதல் கோவிலை எழுப்பினார், 1685",
+            body: "1685-இல் அவர் இங்கு எழுப்பிய திருக்குடும்ப ஓலைக் குடிசைக் கோவிலே வடக்கன்குளத்தின் முதல் ஆலயம். பங்கு, திருத்தலம், சின்ன ரோமாபுரியின் முழு வரலாறும் அதிலிருந்தே தொடங்குகிறது.",
+          },
+          {
+            heading: "அவரது குடிசையிலிருந்து சின்ன ரோமாபுரி வரை",
+            body: "அவரது ஓலைக் குடிசையிலிருந்து 1752 கல்லாலயம், 1872-இல் ஆசீர்வதிக்கப்பட்ட இரட்டை நடைக் கோவில், 1993 திருத்தலம் வரை ஓர் அறுபடா வரிசை. ஒரே நிலத்தில் நான்கு ஆலயங்கள் — அவற்றுள் முதலாவது அவருடையது.",
+          },
+          {
+            heading: "இங்கு அருளானந்தராக வணக்கம்",
+            body: "தாம் தொடங்கிய பங்கில் இம்மறைசாட்சி-நிறுவனர் பக்தியுடன் போற்றப்படுகிறார் — திருத்தல வளாகத்திலுள்ள ஜான் தெ பிரிட்டோ குகை உட்பட; அங்கு அவர் புனித மிக்கேல், புனித ரக்பேல் ஆகியோருக்கிடையே அருளானந்தராக நிற்கிறார்.",
+          },
+        ],
+      },
+      sources: {
+        heading: "ஆதாரங்கள்",
+        body: "ஜூசெப்பே பொயெரோ, இ.ச., Vita del beato Giovanni de Britto (ரோம், 1853); 1693 பிப்ரவரி 3-இல் தெ பிரிட்டோ தாமே எழுதிய சிறைக் கடிதம் (Bertrand, La Mission du Maduré, தொகுதி III-இல்); F. W. Faber, The Lives of… the Ven. John de Britto (லண்டன், 1851) ஆகியவற்றிலிருந்து தொகுக்கப்பட்டது. ஆதாரங்கள் பக்கத்தைக் காண்க.",
       },
     },
     gallery: {
@@ -2042,23 +2180,23 @@ export const dict = {
       towersLabel: "வான்ரேகை",
       towersTitle: "ஏன் சின்ன ரோம் என்கிறார்கள்",
       towersBody:
-        "முகப்பிற்கு மேல் தொண்ணூற்றிரண்டு அடி உயரத்தில் இரு வெண்கோபுரங்கள் — அடி முதல் சிகரம் வரை எண்கோண வடிவம். கூரையைச் சுற்றிப் பதினாறு சிறு கோபுரங்கள். ஒவ்வொரு கோபுரத்திலும், 1861-இல் லியோன் நகர் பர்டின் பட்டறையில் வார்க்கப்பட்டு கடல் கடந்து வந்த இரட்டை மணிகளில் ஒன்று. இக்கோபுரங்களுக்காகவே, 1926-இல், தூத்துக்குடியின் முதல் ஆயர் இவ்வூருக்குச் சின்ன ரோமாபுரி எனப் பெயரிட்டார்.",
+        "முகப்பிற்கு மேல் தொண்ணூற்றிரண்டு அடி உயரத்தில் இரு வெண்கோபுரங்கள் — அடி முதல் சிகரம் வரை எண்கோண வடிவம். கூரையைச் சுற்றிப் பதினாறு சிறு கோபுரங்கள். ஒவ்வொரு கோபுரத்திலும், 1861-இல் பிரான்சில் வார்க்கப்பட்டு கடல் கடந்து வந்த இரட்டை மணிகளில் ஒன்று. இக்கோபுரங்களுக்காகவே, 1926-இல், தூத்துக்குடியின் முதல் ஆயர் இவ்வூருக்குச் சின்ன ரோமாபுரி எனப் பெயரிட்டார்.",
       towerStats: [
         { v: "92 அடி", k: "இரட்டை எண்கோணக் கோபுரங்கள்" },
         { v: "16", k: "சிறு கோபுரங்கள்" },
-        { v: "1861", k: "பர்டின் மணிகள் — கோபுரத்திற்கு ஒன்று" },
+        { v: "1861", k: "பிரெஞ்சு மணிகள் — கோபுரத்திற்கு ஒன்று" },
       ],
       towersCaption: "இரட்டைக் கோபுரங்களும், சிகரங்கள் சூழ்ந்த கூரையும்",
 
       bellsLabel: "ஆலய மணிகள்",
-      bellsTitle: "லியோனின் இரட்டை மணிகள்",
+      bellsTitle: "பிரான்சின் இரட்டை மணிகள்",
       bellsBody:
-        "இரு கோபுரங்களிலும் ஒவ்வொன்றிலும் ஒரு வெண்கல மணி தொங்குகிறது — 1861-இல் லியோன் நகர “Fonderie Burdin aîné” பட்டறையில் வார்க்கப்பட்டு கடல் கடந்து வடக்கன்குளம் வந்தவை. நூற்றைம்பது ஆண்டுகளுக்கும் மேலாக அவை பங்கை ஜெபத்திற்கு அழைத்து வருகின்றன.",
+        "இரு கோபுரங்களிலும் ஒவ்வொன்றிலும் ஒரு வெண்கல மணி தொங்குகிறது — 1861-இல் பிரான்சில் வார்க்கப்பட்டு கடல் கடந்து வடக்கன்குளம் வந்தவை. நூற்றைம்பது ஆண்டுகளுக்கும் மேலாக அவை பங்கை ஜெபத்திற்கு அழைத்து வருகின்றன.",
       bellsBeats: [
         {
           year: "1861",
-          title: "லியோனில் வார்ப்பு",
-          body: "லியோன் பர்டின் பட்டறையில் இரு மணிகள் வார்க்கப்பட்டு, காசிமர் கிரகோயர் என்னும் பிரெஞ்சு அறக்கொடையாளரால் ஆலயத்திற்கு அளிக்கப்பட்டன — அனைத்துக் குறிப்புகளின்படி அவர் பங்குத்தந்தை அருள்பணி ஜோசப் கிரகோயரின் உறவினர்.",
+          title: "பிரான்சில் வார்ப்பு",
+          body: "காசிமர் கிரகோயர் என்னும் பிரெஞ்சு அறக்கொடையாளரால் மணிகள் ஆலயத்திற்கு அளிக்கப்பட்டன — அனைத்துக் குறிப்புகளின்படி அவர் பங்குத்தந்தை அருள்பணி ஜோசப் கிரகோயரின் உறவினர். கோபுர மணியின் வெண்கலத்தில் இன்றும் அவரது பெயர் பொறிந்துள்ளது: “Donateur Casimir Grégoire”.",
         },
         {
           year: "கடல் வழி",
@@ -2075,7 +2213,9 @@ export const dict = {
       bellsOlder:
         "1752-இன் கல் ஆலயத்தில் ஒரு பழைய மணி தொங்கியது — 1803-இல் ஒரு ஐப்பசி காலையில், கண்ணீர் சிந்தத் தொடங்கிய அன்னையைக் கண்டுகொள்ள ஊர் முழுவதையும் அழைத்த மணி இதுவே.",
       bellsFootnote:
-        "மணிகளின் வரலாறு பங்கின் சொந்தப் பதிவு; லியோனின் பர்டின் பட்டறை அந்நகரின் ஆவணக் காப்பகங்களில் தனித்தே உறுதிசெய்யப்பட்டுள்ளது.",
+        "மணிகளின் வரலாறு பங்கின் சொந்தப் பதிவு. வெளியான குறிப்புகள் லியோனின் பர்டின் பட்டறையைக் குறிப்பிட்டு வந்தன; ஆனால் மணியின் வெண்கலத்தில் “Vve Grégoire de Valence (Drôme)” என்றே வார்க்கப்பட்டுள்ளது — பதிவும் வெண்கலமும் வேறுபடும் இடத்தில், வெண்கலத்தின் சொல்லே இறுதி.",
+      bellsCaption:
+        "கோபுரத்தில் தொங்கும் மணி — “Vve Grégoire de Valence (Drôme) — Donateur Casimir Grégoire” என வார்க்கப்பட்டது",
 
       lightLabel: "ஒளியும் நிறமும்",
       lightTitle: "கண்ணாடி, சாயம், பொன்",
@@ -2114,7 +2254,7 @@ export const dict = {
         { role: "வழிநடத்திய பங்குத்தந்தை", name: "அருள்பணி ஜோசப் கிரகோயர், S.J." },
         { role: "கட்டிடக் கலைஞர்", name: "சகோதரர் ஜோசப் பெர்கந்தால், S.J." },
         { role: "அர்ப்பணித்தவர்", name: "ஆயர் அலெக்சிஸ் கானோஸ், S.J., 1872" },
-        { role: "மணிகள்", name: "பர்டின் பட்டறை, லியோன், 1861" },
+        { role: "மணிகள்", name: "விதவை கிரகோயர் (Vve Grégoire) பட்டறை, வாலென்ஸ், 1861" },
         { role: "மணிகளை அளித்தவர்", name: "காசிமர் கிரகோயர்" },
       ],
       sourcesNote:

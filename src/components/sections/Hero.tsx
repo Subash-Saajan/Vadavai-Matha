@@ -1,34 +1,45 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
+import Image from "next/image";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { useScrubMedia } from "@/hooks/useScrubMedia";
 import { ChevronDown } from "lucide-react";
+
+/**
+ * Mobile scrub frames — generated from hero-video.mp4 by
+ * scripts/gen-scrub-frames.mjs. Phones can't scrub a <video> smoothly (every
+ * currentTime set is a full async seek through the media pipeline), so under
+ * md the hero draws these onto a canvas instead, Apple-product-page style.
+ */
+const FRAME_COUNT = 150;
+const frameSrc = (i: number) => `/hero-frames/f${String(i + 1).padStart(3, "0")}.webp`;
 
 export function Hero() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const kickerRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const subRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
-  const [videoReady, setVideoReady] = useState(false);
+
+  // Desktop scrubs the real video; touch draws the frame sequence (and never
+  // downloads the 8 MB video). mode is null until mounted, so SSR paints
+  // only the poster.
+  const { mode, mediaReady, frameTargetRef, drawRef } = useScrubMedia({
+    videoRef,
+    canvasRef,
+    frameCount: FRAME_COUNT,
+    frameSrc,
+  });
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const onLoaded = () => setVideoReady(true);
-    video.addEventListener("loadedmetadata", onLoaded);
-    if (video.readyState >= 1) onLoaded();
-    return () => video.removeEventListener("loadedmetadata", onLoaded);
-  }, []);
-
-  useEffect(() => {
-    if (!videoReady) return;
+    if (!mediaReady || !mode) return;
 
     const video = videoRef.current;
-    if (!video || !video.duration) return;
+    if (mode === "video" && (!video || !video.duration)) return;
 
     const ctx = gsap.context(() => {
       // ── Entrance: stone rises out of darkness, line by line ──
@@ -59,21 +70,41 @@ export function Hero() {
           "-=0.3"
         );
 
-      // ── Scroll-driven video scrub (the Apple-style core effect) ──
-      const videoScrub = { time: 0 };
-      gsap.to(videoScrub, {
-        time: video.duration,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 0.5,
-        },
-        onUpdate: () => {
-          if (video.readyState >= 2) video.currentTime = videoScrub.time;
-        },
-      });
+      // ── Scroll-driven scrub (the Apple-style core effect) ──
+      if (mode === "video" && video) {
+        const videoScrub = { time: 0 };
+        gsap.to(videoScrub, {
+          time: video.duration,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 0.5,
+          },
+          onUpdate: () => {
+            if (video.readyState >= 2) video.currentTime = videoScrub.time;
+          },
+        });
+      } else {
+        const frameScrub = { frame: 0 };
+        gsap.to(frameScrub, {
+          frame: FRAME_COUNT - 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top top",
+            end: "bottom bottom",
+            // More catch-up than desktop's 0.5: raw touch scroll has no Lenis
+            // easing in front of it, so the scrub supplies the glide instead.
+            scrub: 1,
+          },
+          onUpdate: () => {
+            frameTargetRef.current = frameScrub.frame;
+            drawRef.current?.();
+          },
+        });
+      }
 
       // ── Text drifts up + fades as you descend ──
       ScrollTrigger.create({
@@ -107,7 +138,7 @@ export function Hero() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [videoReady]);
+  }, [mediaReady, mode, frameTargetRef, drawRef]);
 
   return (
     <section
@@ -118,14 +149,30 @@ export function Hero() {
     >
       {/* Sticky stage */}
       <div className="sticky top-0 h-screen w-full overflow-hidden">
-        <video
-          ref={videoRef}
-          src="/hero-video.mp4"
-          muted
-          playsInline
-          preload="auto"
-          className="absolute inset-0 w-full h-full object-cover"
+        {/* First frame as instant poster under whichever scrub medium mounts —
+            also the mobile LCP, since phones never load the video itself. */}
+        <Image
+          src="/hero-frames/poster.webp"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
         />
+
+        {mode === "video" && (
+          <video
+            ref={videoRef}
+            src="/hero-video.mp4"
+            muted
+            playsInline
+            preload="auto"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        )}
+        {mode === "canvas" && (
+          <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
+        )}
 
         {/* Light legibility wash — just enough to hold the title */}
         <div className="absolute inset-0 bg-linear-to-b from-navy/30 via-transparent to-navy/45 pointer-events-none" />

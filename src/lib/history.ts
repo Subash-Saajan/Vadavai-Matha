@@ -130,16 +130,18 @@ export const PEOPLE = {
 } as const;
 
 /* ── The bells ─────────────────────────────────────────────────────────────
-   A small, concrete, verifiable, *ownable* fact. The Burdin foundry of Lyon is
-   independently confirmed in the Lyon municipal archives; a bell cast in 1861
-   would be signed "BURDIN FILS AINE". The KB flags that the bells' actual
-   inscriptions have never been photographed — so we state the casting, not the
-   inscription.                                                                */
+   A small, concrete, verifiable, *ownable* fact — now anchored to the object
+   itself. The single Tamil web source said "Burdin of Lyon", and the KB long
+   flagged that the bells' inscriptions had never been photographed. They now
+   have been (photo live on /architecture): the bell's crown is cast
+   "Vve Grégoire de Valence (Drôme) — Donateur Casimir Grégoire". The bronze
+   names its own foundry and confirms the donor, so we state the casting from
+   the bell, not from the web page. Do not revert to Burdin/Lyon as fact.      */
 export const BELLS = {
   count: 2,
   castYear: 1861,
-  foundry: "Burdin",
-  city: "Lyon",
+  foundry: "Veuve Grégoire",
+  city: "Valence (Drôme)",
   country: "France",
   donor: "Casimir Grégoire",
   installedYear: 1872,

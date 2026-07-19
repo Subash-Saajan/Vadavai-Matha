@@ -1,36 +1,40 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
+import Image from "next/image";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { useScrubMedia } from "@/hooks/useScrubMedia";
 import { useLang } from "@/components/layout/LanguageProvider";
 
 /**
  * The "peel film" — one continuous AI-generated film of the church peeling
  * open in space and back in time (see PEEL_FILM_STORYBOARD.md), scrubbed by
- * scroll exactly like the home Hero. Chapter captions crossfade as the film
- * moves through its seven transitions.
+ * scroll exactly like the home Hero: desktop seeks the video, phones draw
+ * the pre-extracted frame sequence onto a canvas (useScrubMedia).
  *
  * Film: /peel-film.mp4 (stitched by scripts/gen-peel-video.mjs --stitch)
- * Poster: /peel/keyframes/k0.png
+ * Frames + poster: /peel-frames/ (scripts/gen-scrub-frames.mjs peel —
+ * re-run it whenever the film itself is replaced)
  */
+const FRAME_COUNT = 150;
+const frameSrc = (i: number) => `/peel-frames/f${String(i + 1).padStart(3, "0")}.webp`;
+
 export function PeelFilm() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const hintRef = useRef<HTMLDivElement>(null);
-  const [videoReady, setVideoReady] = useState(false);
   const [chapter, setChapter] = useState(0);
   const { t } = useLang();
   const p = t.architecture.peel;
   const n = p.chapters.length;
 
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    const onLoaded = () => setVideoReady(true);
-    video.addEventListener("loadedmetadata", onLoaded);
-    if (video.readyState >= 1) onLoaded();
-    return () => video.removeEventListener("loadedmetadata", onLoaded);
-  }, []);
+  const { mode, mediaReady, frameTargetRef, drawRef } = useScrubMedia({
+    videoRef,
+    canvasRef,
+    frameCount: FRAME_COUNT,
+    frameSrc,
+  });
 
   // Chapter captions + hint — driven by section progress, independent of the
   // video, so the storytelling still works if the film fails to load.
@@ -61,30 +65,50 @@ export function PeelFilm() {
 
   // Scroll-driven film scrub (the Apple-style core effect).
   useEffect(() => {
-    if (!videoReady) return;
+    if (!mediaReady || !mode) return;
     const video = videoRef.current;
-    if (!video || !video.duration) return;
+    if (mode === "video" && (!video || !video.duration)) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) return;
+    if (reduce) return; // frame 0 / poster stays put
 
     const ctx = gsap.context(() => {
-      const scrub = { time: 0 };
-      gsap.to(scrub, {
-        time: video.duration,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 0.5,
-        },
-        onUpdate: () => {
-          if (video.readyState >= 2) video.currentTime = scrub.time;
-        },
-      });
+      if (mode === "video" && video) {
+        const scrub = { time: 0 };
+        gsap.to(scrub, {
+          time: video.duration,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 0.5,
+          },
+          onUpdate: () => {
+            if (video.readyState >= 2) video.currentTime = scrub.time;
+          },
+        });
+      } else {
+        const scrub = { frame: 0 };
+        gsap.to(scrub, {
+          frame: FRAME_COUNT - 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top top",
+            end: "bottom bottom",
+            // More catch-up than desktop's 0.5: raw touch scroll has no Lenis
+            // easing in front of it, so the scrub supplies the glide instead.
+            scrub: 1,
+          },
+          onUpdate: () => {
+            frameTargetRef.current = scrub.frame;
+            drawRef.current?.();
+          },
+        });
+      }
     }, sectionRef);
     return () => ctx.revert();
-  }, [videoReady]);
+  }, [mediaReady, mode, frameTargetRef, drawRef]);
 
   return (
     <section
@@ -93,15 +117,29 @@ export function PeelFilm() {
       style={{ height: `${120 + n * 80}vh` }} /* scroll runway for the film */
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
-        <video
-          ref={videoRef}
-          src="/peel-film.mp4"
-          poster="/peel/keyframes/k0.png"
-          muted
-          playsInline
-          preload="auto"
-          className="absolute inset-0 w-full h-full object-cover"
+        {/* First frame as instant paint under whichever scrub medium mounts
+            (phones never download the film itself). */}
+        <Image
+          src="/peel-frames/poster.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover"
         />
+
+        {mode === "video" && (
+          <video
+            ref={videoRef}
+            src="/peel-film.mp4"
+            muted
+            playsInline
+            preload="auto"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        )}
+        {mode === "canvas" && (
+          <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
+        )}
 
         {/* Legibility washes — same family as the home Hero */}
         <div className="absolute inset-0 pointer-events-none bg-linear-to-b from-navy/40 via-transparent to-navy/70" />

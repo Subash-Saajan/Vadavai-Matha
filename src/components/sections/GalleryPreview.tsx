@@ -5,49 +5,39 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { gsap } from "@/lib/gsap";
-import { images } from "@/lib/images";
 import { useLang } from "@/components/layout/LanguageProvider";
 
 // Asymmetric mosaic with parallax — each tile drifts at a different rate.
-//
-// NOTE: every tile below is an UNSPLASH STOCK photograph (see src/lib/images.ts)
-// — generic devotional imagery, not Vadakkankulam. The alt text therefore
-// describes only what is genuinely in each frame and never claims it is this
-// shrine, because it is not.
-//
-// This is worth fixing rather than annotating: the parish now has ~70 real
-// photographs in /public/images (the façade, the two naves, the vault, the
-// glass, the feast). Stock imagery is duplicated across thousands of sites and
-// is worth precisely nothing in image search, whereas these photographs are
-// unique and are the single most ownable asset the shrine has online.
+// Every tile is a real photograph of the shrine (sources in PIcs/selected,
+// see PIcs/selected/_MAPPING.md), so the alt text can say so plainly.
 const tiles = [
   {
-    img: images.cathedralCeiling,
-    alt: "A vaulted church ceiling",
+    img: "/images/vault-chandelier.jpg",
+    alt: "The painted rib vault, chandelier and coloured-glass window inside Holy Family Church, Vadakkankulam",
     span: "row-span-2 col-span-2",
     drift: -25,
   },
   {
-    img: images.candlesLit,
-    alt: "A cluster of lit devotional candles",
+    img: "/images/matha-midnight.jpg",
+    alt: "The crowned statue of Vadavai Matha covered in gold offerings on her feast night",
     span: "col-span-1 row-span-1",
     drift: -10,
   },
   {
-    img: images.stainedGlass,
-    alt: "Coloured light falling through stained glass",
+    img: "/images/tracery-window.jpg",
+    alt: "Coloured glass diamonds glowing in the plaster tracery of a nave window",
     span: "col-span-1 row-span-1",
     drift: -45,
   },
   {
-    img: images.rosary,
-    alt: "A rosary held in the hand",
+    img: "/images/holy-family-tympanum.jpg",
+    alt: "The Holy Family sculpture group above the main entrance of the church",
     span: "col-span-1 row-span-1",
     drift: -30,
   },
   {
-    img: images.archInterior,
-    alt: "The arches of a church interior",
+    img: "/images/heritage-door-1839.jpg",
+    alt: "A heritage doorway of the parish, its arch painted with the year 1839",
     span: "col-span-2 row-span-1",
     drift: -15,
   },

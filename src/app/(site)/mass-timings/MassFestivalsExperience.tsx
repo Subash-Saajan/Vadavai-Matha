@@ -6,15 +6,14 @@ import { gsap } from "@/lib/gsap";
 import { Sunrise, Church, MoonStar, Sparkles, CalendarDays, Star } from "lucide-react";
 import { PageHero } from "@/components/sections/PageHero";
 import { useLang } from "@/components/layout/LanguageProvider";
-import { images } from "@/lib/images";
 
 const cardIcons = [Sunrise, Church, MoonStar];
 // One image per entry in t.festivals.list (8 items, matched by index).
-// Feasts with a local church photo use that; others fall back to devotional imagery.
+// Every feast now uses a real local photo (same pairings as FestivalsTeaser).
 const yearImages = [
   "/images/vadavai-st-sebasthiyarchurch.jpg", // 0 – St. Sebastian Church Feast
-  images.marian,                               // 1 – Presentation / Kannikai Matha
-  images.candlesLit,                           // 2 – St. John de Britto Feast
+  "/images/kannikai-matha-church.jpg",        // 1 – Presentation / Kannikai Matha
+  "/images/de-britto-grotto.jpg",             // 2 – St. John de Britto Feast
   "/images/our-lady-of-lourdes.jpg",           // 3 – Our Lady of Lourdes
   "/images/st-anthonys-church.jpg",            // 4 – St. Anthony's Church Feast
   "/images/vadava-st-george-church.jpg",       // 5 – St. George Church Feast

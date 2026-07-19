@@ -1,16 +1,21 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { useLang } from "@/components/layout/LanguageProvider";
+import { PhotoOrnaments } from "@/components/ornaments/CornerOrnament";
 import { useReveal } from "./useReveal";
 
 /**
  * V — the twin bells the towers were raised to carry.
  *
- * The 1861 Lyon/Burdin bells, their long carriage by sea, and the older bell of
- * the 1752 chapel that was rung at the 1803 apparition. The footnote keeps the
- * page honest: the account is the parish's own record; the Burdin foundry itself
- * is independently documented in the Lyon archives. Do not drop that caveat.
+ * The 1861 French bells, their long carriage by sea, and the older bell of the
+ * 1752 chapel that was rung at the 1803 apparition. The photograph is primary
+ * evidence: the bell's crown is cast "Vve Grégoire de Valence (Drôme) —
+ * Donateur Casimir Grégoire", which corrects the single-web-source "Burdin of
+ * Lyon" account (KB file 04, open question 16 — inscriptions never inspected
+ * until this photo). The footnote states the divergence plainly — do not drop
+ * that caveat, and do not reintroduce Lyon as fact.
  */
 export function Bells() {
   const ref = useRef<HTMLElement>(null);
@@ -29,14 +34,36 @@ export function Bells() {
       </span>
 
       <div className="relative max-w-6xl mx-auto">
-        <div className="max-w-2xl">
-          <p className="reveal-item kicker text-gold! mb-6">{a.bellsLabel}</p>
-          <h2 className="reveal-item font-display uppercase tracking-[0.03em] text-4xl md:text-5xl lg:text-6xl text-white leading-tight">
-            {a.bellsTitle}
-          </h2>
-          <p className="reveal-item text-white/70 text-lg leading-relaxed mt-7">
-            {a.bellsBody}
-          </p>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          <div className="lg:col-span-7">
+            <p className="reveal-item kicker text-gold! mb-6">{a.bellsLabel}</p>
+            <h2 className="reveal-item font-display uppercase tracking-[0.03em] text-4xl md:text-5xl lg:text-6xl text-white leading-tight">
+              {a.bellsTitle}
+            </h2>
+            <p className="reveal-item text-white/70 text-lg leading-relaxed mt-7">
+              {a.bellsBody}
+            </p>
+          </div>
+
+          {/* The bell itself, photographed looking up its tower shaft */}
+          <figure className="lg:col-span-5 reveal-item">
+            <div className="relative w-full aspect-3/4 max-w-sm mx-auto">
+              <div className="relative w-full h-full rounded-[1.75rem] overflow-hidden shadow-2xl ring-1 ring-gold/25">
+                <Image
+                  src="/images/architecture/bell.jpg"
+                  alt={a.bellsCaption}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 80vw, 35vw"
+                />
+                <div className="pointer-events-none absolute inset-0 rounded-[1.75rem] ring-1 ring-inset ring-gold/30" />
+                <PhotoOrnaments />
+              </div>
+            </div>
+            <figcaption className="mt-4 text-center font-display text-[0.62rem] uppercase tracking-[0.24em] text-white/45">
+              {a.bellsCaption}
+            </figcaption>
+          </figure>
         </div>
 
         {/* The three beats of the bells' journey, along one gold hairline */}

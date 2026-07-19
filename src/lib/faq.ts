@@ -107,8 +107,8 @@ export const FAQS: Faq[] = [
   },
   {
     q: "What are the two bells?",
-    a: `The church's twin bells were cast in ${BELLS.castYear} in ${BELLS.city}, ${BELLS.country}, by the ${BELLS.foundry} foundry, given by the French benefactor ${BELLS.donor}, and installed in ${BELLS.installedYear} when the new church was blessed — one bell in each of the two towers. The Burdin foundry of Lyon is independently confirmed in the Lyon municipal archives. The bells' own cast inscriptions have never been photographed, so we do not claim to know what they say.`,
-    source: "Parish records; Archives municipales de Lyon",
+    a: `The church's twin bells were cast in ${BELLS.castYear} in ${BELLS.country}, given by the French benefactor ${BELLS.donor}, and installed in ${BELLS.installedYear} when the new church was blessed — one bell in each of the two towers. The bell photographed in its tower is cast “Vve Grégoire de Valence (Drôme) — Donateur ${BELLS.donor}”: the bronze names its own foundry — the ${BELLS.foundry} works at ${BELLS.city} — and confirms the donor by name. Published accounts had said the Burdin foundry of Lyon; where the record and the bronze differ, the bronze has the last word.`,
+    source: "The bell's own cast inscription; parish records",
   },
   {
     q: "What is the statue of Our Lady of the Assumption, and where did it come from?",

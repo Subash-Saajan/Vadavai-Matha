@@ -54,6 +54,7 @@ export type RouteKey =
   | "massTimings"
   | "contact"
   | "devasahayam"
+  | "deBritto"
   | "faq"
   | "sources";
 
@@ -155,6 +156,18 @@ export const ROUTES: Record<RouteKey, RouteDef> = {
     image: "/images/saints/devasahayam-pillai.jpg",
     ogImage: "/og/devasahayam.jpg",
   },
+  deBritto: {
+    path: "/saints/john-de-britto",
+    title: "St John de Britto",
+    fullTitle: "St John de Britto (Arulanandar) — founder of the parish, 1685",
+    description:
+      "St John de Britto — the Tamil martyr Arulanandar — raised the first thatched chapel of the Holy Family at Vadakkankulam in 1685, founding the parish that became Little Rome. Born in Lisbon in 1647; martyred at Oriyur in 1693; canonised in 1947.",
+    crumb: "St John de Britto",
+    priority: 0.8,
+    changeFrequency: "yearly",
+    image: "/images/de-britto-grotto.jpg",
+    ogImage: "/og/john-de-britto.jpg",
+  },
   faq: {
     path: "/faq",
     title: "Questions & Answers",
@@ -190,6 +203,7 @@ export const INDEXABLE: RouteKey[] = [
   "contact",
   "history",
   "devasahayam",
+  "deBritto",
   "faq",
   "architecture",
   "sources",
