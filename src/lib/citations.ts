@@ -114,7 +114,7 @@ export const HISTORY_CITATIONS: Record<string, DotCitation[]> = {
     // 1
     {
       tier: "documented",
-      photo: "placeholder.jpg",
+      photo: "clearing-in-the-forest-7.jpg",
       keys: ["pate_gazetteer_1917", "cronin_1959"],
       note: "Cronin (1959, p.30) carries the whole dot: Christianity \"lay entrenched without the walls of India\" until de Nobili's party left Tuticorin for Madurai in November 1606, and it was to that inland mission that de Britto succeeded in 1683. He is a modern biographer, not a document, and none of this is about Vadakkankulam — the dot explains how a Jesuit came to be on a forest path in the far south, and claims nothing more.",
     },
@@ -149,7 +149,7 @@ export const HISTORY_CITATIONS: Record<string, DotCitation[]> = {
     // 6
     {
       tier: "documented",
-      photo: "placeholder.jpg",
+      photo: "clearing-in-the-forest-8.jpg",
       keys: ["debritto_prison_letter_1693", "faber_1851"],
       note: "The document is its own citation: de Britto's letter from the prison of Oriyur, 3 February 1693, printed by Bertrand and by Faber (1851, pp.445–446), who supplies the straw for a pen and the powdered coal moistened with spittle for ink. Maldonado was removed — it is a martyrology, and it fixes the date of the death, not of the letter.",
     },
@@ -172,7 +172,7 @@ export const HISTORY_CITATIONS: Record<string, DotCitation[]> = {
     // 1
     {
       tier: "documented",
-      photo: "placeholder.jpg",
+      photo: "first-inland-parish-4.jpg",
       keys: ["auguste_jean_1894", "bertrand_1847"],
       note: "The anchor of the era: the Jesuit Annual Letter of 1709, printed by Bertrand (vol. IV, p.100n), which sets Fr Maria Xavier Borghese \"at the head of the district of Vadakencoulam\" — the earliest document of its own century to name this place. Auguste Jean (p.157) puts the same man in the same charge, but he is following Bertrand, not confirming him independently.",
     },
@@ -187,8 +187,8 @@ export const HISTORY_CITATIONS: Record<string, DotCitation[]> = {
     {
       tier: "documented",
       photo: "first-inland-parish-3.jpg",
-      keys: ["pate_gazetteer_1917", "caldwell_1881", "history_2026"],
-      note: "Clean and doubly independent: Fr Calini's letter of 1716, quoted by Pate, says the station \"had two years previously become a residence\", and Caldwell credits Fr Brandolini with founding the congregation in 1714. Neither source calls it the senior interior station or the first great inland parish — those are the page's own words, and they are not carried by these keys.",
+      keys: ["pate_gazetteer_1917", "caldwell_1881", "bertrand_1847", "history_2026"],
+      note: "Clean and doubly independent: Fr Calini's letter of 1716, quoted by Pate, says the station \"had two years previously become a residence\", and Caldwell credits Fr Brandolini with founding the congregation in 1714. Bertrand's Vol IV adds the primary the others only summarise: the mission's own relation of 1714–16 speaks in the first person of an impostor who came \"into the church of Vadakencoulam where I then was\", deceiving the catechist who accompanied the priest — a resident missionary, a functioning church and an honoured catechist here in those very years, with Beschi the neighbouring district priest (pp.345–346). Neither source calls it the senior interior station or the first great inland parish — those are the page's own words, and they are not carried by these keys.",
     },
   ],
   "statue-and-the-saint": [
@@ -208,33 +208,40 @@ export const HISTORY_CITATIONS: Record<string, DotCitation[]> = {
     },
     // 2
     {
+      tier: "documented",
+      photo: "statue-and-the-saint-8.jpg",
+      keys: ["bertrand_1847"],
+      note: "Bertrand's Vol IV (pp.385–386), from the mission's own papers, is the witness: in 1745 the church of Vadakencoulam, \"which depended on the residence of Néman\", was persecuted — the catechist tortured with the kittei for refusing a temple-tax — until Fr Buttari appealed to \"the nabab, on whom Vadakencoulam depended and who honoured him with his friendship\", who ordered the Christians protected. It is the same year as the baptism, and these pages (385–386) sit just before those the baptism dot cites. The nabab's sovereignty over the village is the pre-1801 civil fact the page otherwise tells only from the British side; Ferroli (1951), from the same Jesuit letters, corroborates it.",
+    },
+    // 3
+    {
       tier: "tradition",
       photo: "statue-and-the-saint-3.jpg",
       keys: ["auguste_jean_1894", "bertrand_lettres_1865", "souvenir_150yr", "history_2026"],
       note: "Bertrand (1865), drawing on the church's own archives, records only that Buttari \"laid the foundations of its present church\" — and he does not date it; the year 1749, the kankol festival and the ceremony are the parish's souvenir and chronology, which is why this dot is tradition and no longer documented. Note also that the parish's own English history says broad BRICKS from Perungudi: \"stone and mortar\" is in no source for this building.",
     },
-    // 3
+    // 4
     {
       tier: "documented",
       photo: "statue-and-the-saint-7.jpg",
-      keys: ["auguste_jean_1894"],
-      note: "Auguste Jean (1894) is the single witness and carries the whole dot — the timber running short, Devasahayam's errand to his old friend at the Travancore court, the quarrel over religion, the threat and the royal warrant that followed. He tiers as documented because he stands outside the parish, but he is one chronicler retelling the Jesuit tradition, not an independent second line.",
+      keys: ["auguste_jean_1894", "bertrand_1847"],
+      note: "The two Jesuit chroniclers give this dot different triggers, and the page follows Auguste Jean's (1894): the church timber running short, Devasahayam's errand to his old friend at the Travancore court, the quarrel over religion, the threat and the royal warrant. Bertrand's Vol IV (pp.386–387) instead makes the trigger a brahmin favourite's insult — \"renounce the Christian faith, or you will pay me with your head\" — and names \"M. Eustache-Benoît Lanoë\" (Eustachius De Lannoy) as the Frenchman who first spoke to Devasahayam of the faith, and to whom the prisoner later wrote from his chains. Two accounts of one event; neither is an independent second line — both retell the Jesuit tradition.",
     },
-    // 4
+    // 5
     {
       tier: "tradition",
       photo: "statue-and-the-saint-4.jpg",
       keys: ["auguste_jean_1894", "bertrand_lettres_1865", "parish_english_history", "souvenir_150yr", "history_2026"],
       note: "Only the Buttari-to-Thomassini handover is printed (Bertrand 1865, from the church archives; Auguste Jean reproduces him almost word for word and is NOT a second witness); the year 1752, the cross plan and the eastward orientation are the parish's own record, said to rest on two inscriptions inside the old church, and the fabric was brick. The claim that the Assumption became the principal feast \"to this day\" is contradicted by this dot's own cited source: Bertrand records the titular feast of this church as St Francis Xavier's, kept with a great December novena, right up to the re-dedication of 1872.",
     },
-    // 5
+    // 6
     {
       tier: "documented",
       photo: "statue-and-the-saint-5.jpg",
       keys: ["holy_see_canonisation_rite_2022", "auguste_jean_1894", "bertrand_1847", "history_2026", "diocese_thoothukudi_page"],
-      note: "The execution of 14 January 1752 is documented in the near-contemporary Jesuit accounts, and Auguste Jean (vol. I, p.203) is the oldest witness that this church already held \"a part of his garment and the chains with which he was bound\". Two of the dot's details are not his: \"Kattadimalai\" appears in no historical source — the witnesses describe the Travancore lines at the Aralvaimozhi gap and never name the spot — and the head-turban relic is the diocese's modern account, which has quietly displaced the chains.",
+      note: "The execution of 14 January 1752 is documented in the near-contemporary Jesuit accounts, and Auguste Jean (vol. I, p.203) is the oldest witness that this church already held \"a part of his garment and the chains with which he was bound\". Bertrand's Vol IV (p.397) settles where the body went: gathered into the church of St Francis Xavier at Kottar, with the Te Deum sung in Cochin cathedral and the bishop's own panegyric — the garment and chains kept at Vadakkankulam are secondary relics beside that burial. Two of the dot's other details are not carried here: \"Kattadimalai\" appears in no historical source — the witnesses describe the Travancore lines at the Aralvaimozhi gap and never name the spot — and the head-turban relic is the diocese's modern account, which has quietly displaced the chains.",
     },
-    // 6
+    // 7
     {
       tier: "documented",
       photo: "statue-and-the-saint-6.jpg",
@@ -253,21 +260,21 @@ export const HISTORY_CITATIONS: Record<string, DotCitation[]> = {
     // 1
     {
       tier: "documented",
-      photo: "placeholder.jpg",
+      photo: "the-weeping-madonna-5.jpg",
       keys: ["auguste_jean_1894", "bertrand_lettres_1865"],
       note: "Bertrand's Lettres (vol. II, 1865) is the witness, and what he attests is the cult rather than the man: ninety years after Thomassini's death he still writes in the present tense that the Christians \"venerate him as a saint, give his name to their children, and visit his tomb with an extreme devotion\", and that non-Christians invoke him for rain. Auguste Jean repeats him and is not a second witness.",
     },
     // 2
     {
       tier: "documented",
-      photo: "placeholder.jpg",
+      photo: "the-weeping-madonna-6.jpg",
       keys: ["india_orientalis_christiana_1794"],
       note: "The earliest appearance of this village in a European printed book, and both page references are verified against the archive.org scan: Paulinus (Rome, 1794) lists \"XIV. Vadakencollam\" at p.158 among the churches subject to the Bishop of Cochin, and places the same name \"in promontorio Comorino\" at p.117. It is a name in a list and claims nothing more — in particular it carries no founding date, though the parish's own compilation has long read one into it.",
     },
     // 3
     {
       tier: "documented",
-      photo: "placeholder.jpg",
+      photo: "the-weeping-madonna-7.jpg",
       keys: ["pate_gazetteer_1917"],
       note: "Pate's gazetteer carries this dot whole: the agreement of 31 July 1801 handing \"the sole and exclusive administration\" of the Carnatic to the Company in perpetuity, Mr Lushington as first Collector of Tinnevelly, and the province taken over \"without the smallest disturbance\". It is documented context for 1803 and says nothing about the parish itself.",
     },
@@ -295,14 +302,14 @@ export const HISTORY_CITATIONS: Record<string, DotCitation[]> = {
     // 7
     {
       tier: "documented",
-      photo: "placeholder.jpg",
+      photo: "the-weeping-madonna-8.jpg",
       keys: ["cms_intelligencer_1880", "badley_directory_1886", "trento_2022", "history_2026"],
       note: "The family, at last, has outside witnesses — all of them Protestant, none with any reason to flatter a Catholic shrine. Trento (2022, p.285) identifies the village's Mr Bilderbeck from the parish's own 1915 genealogical manuscript as the merchant Christopher Bilderbeck (b. c.1758, d. 1817); the CMS Intelligencer's obituary (Aug. 1880, pp.512–513) records his son John as \"born in India… of a Roman Catholic family, and trained for the priesthood of that Church\"; Badley's Methodist directory supplies the birth year, 1809. That this documented household is the household of the 1803 account is an identification by name, place and period — the sources know one Bilderbeck family here — and the boon-story the parish attaches to them is cited, as tradition, on the era of the church they are remembered to have helped.",
     },
     // 8
     {
       tier: "devotion",
-      photo: "placeholder.jpg",
+      photo: "the-weeping-madonna-9.jpg",
       keys: ["besse_1914"],
       note: "This is the dot in which the page says what it does not claim, so it rests on the one book everything traces to and on nothing else: Besse (1914), four known copies, not one of them opened by anyone on this project. Neill was removed because he is not a second witness — his footnote cites Besse at p.477, a list of COASTAL stations that excludes Vadakkankulam — and the diocesan devotional page cannot be the citation for a statement about what the parish refuses to assert.",
     },
@@ -325,14 +332,14 @@ export const HISTORY_CITATIONS: Record<string, DotCitation[]> = {
     // 2
     {
       tier: "tradition",
-      photo: "placeholder.jpg",
+      photo: "great-two-nave-church-8.jpg",
       keys: ["auguste_jean_1894", "parish_english_history"],
       note: "Auguste Jean (p.301) attests only that Bishop Canoz visited Vadakenkoulam on his pastoral tour of 1848. The date of 21 June and — the whole point of the dot — the request that the people begin gathering money for a large new church are the parish's own history alone; no outside source remembers what he asked for.",
     },
     // 3
     {
       tier: "tradition",
-      photo: "placeholder.jpg",
+      photo: "great-two-nave-church-9.jpg",
       keys: ["auguste_jean_1894", "trento_2022", "history_2026", "souvenir_150yr"],
       note: "The benefaction is the parish's own memory and is tiered as such: the twenty-seven childless years, the boon and the generous giving come from the parish compilation, and the souvenir's Tamil telling (\"within one year a male child\") is the same witness family retold, never corroboration. What the outside record contributes is the check, not the confirmation: Auguste Jean credits the church to Fr Grégoire's persevering energy and names no lay benefactor anywhere in his two volumes, and Trento's dates put Christopher Bilderbeck's death in 1817, thirty-eight years before the foundation stone — so the gift, if it happened as remembered, belonged to the old church or to his heirs. Besse, unread, is where the claim could still be settled, and the dot says so.",
     },
@@ -360,7 +367,7 @@ export const HISTORY_CITATIONS: Record<string, DotCitation[]> = {
     // 7
     {
       tier: "documented",
-      photo: "placeholder.jpg",
+      photo: "great-two-nave-church-10.jpg",
       keys: ["auguste_jean_1894", "dessal_1902"],
       note: "Auguste Jean's Nécrologe carries the tomb verbatim: the Christians of Vadakenkoulam raised a modest tomb beside their church to Fr Eugène Rossignol, dead on 25 January 1863 of the cholera he caught nursing the Christians of Callikoulam. The date of Fr Delpech's death, 16 January 1887, is DESSAL's alone — Auguste Jean says he died \"un samedi\", a Saturday, and 16 January 1887 was a Sunday — so the date must be attributed, not asserted.",
     },
@@ -381,7 +388,7 @@ export const HISTORY_CITATIONS: Record<string, DotCitation[]> = {
     // 10
     {
       tier: "documented",
-      photo: "placeholder.jpg",
+      photo: "great-two-nave-church-11.jpg",
       keys: ["auguste_jean_1894", "dessal_1902"],
       note: "Both chroniclers record Fr Grégoire sent home on his doctors' advice and dying in the crossing of the Red Sea, anointed by Fr Delpech — and they AGREE on the day, differing only on the year. Both give 19 September (Auguste Jean, pp.446–447: the 18th is the day the ship entered the Red Sea and he died \"le lendemain… vers 2 heures\"), Auguste Jean in 1873 and Dessal in 1875; the page's \"18 September\" is a misreading of Jean.",
     },
@@ -404,7 +411,7 @@ export const HISTORY_CITATIONS: Record<string, DotCitation[]> = {
     // 2
     {
       tier: "documented",
-      photo: "placeholder.jpg",
+      photo: "little-rome-6.jpg",
       keys: ["arsi_tolosana_1914", "jemparc_book450", "la_mission_du_madure_periodical"],
       note: "Book 450 exists and is catalogued at Shembaganur, but the catalogue's date-range is the only thing supporting \"1881–1923\": Caussanel was ordained in 1884 and reached India in 1888, ARSI 1900 puts another priest here, ARSI 1921 puts him at Kallikulam, the parish's own list gives him 1910–1919, and 1914 is the ONE year a catalogue sets him at Vadakkankulam. The Jesuits' own magazine says what the book actually is — he wrote \"des diaires, une histoire du pays\" and \"recherche les vieux manuscrits et les déchiffre\" — a retrospective compilation from old manuscripts, not a diary kept day by day in place.",
     },
@@ -425,7 +432,7 @@ export const HISTORY_CITATIONS: Record<string, DotCitation[]> = {
     // 5
     {
       tier: "documented",
-      photo: "placeholder.jpg",
+      photo: "little-rome-7.jpg",
       keys: ["la_mission_du_madure_periodical"],
       note: "The Jesuits' own magazine (1930, pp.7–8) is the single witness, and it is verbatim for the sacristan: brother of a vicar general and of a convent superior, still serving the church at eighty-two, given the Bene Merenti medal by Pius XI. It does NOT support the quotation as the page uses it — \"two priests and a bishop… what a happy mother!\" stands in a different paragraph, about Bishop Roche's own family (the next sentence sends a gold rosary to \"la mère de Mgr Roche\"), and the sacristan's family had no bishop in it.",
     },
@@ -492,7 +499,7 @@ export const HISTORY_CITATIONS: Record<string, DotCitation[]> = {
     // 4
     {
       tier: "documented",
-      photo: "placeholder.jpg",
+      photo: "shrine-and-the-saint-6.jpg",
       keys: ["osservatore_romano_2012", "pope_francis_homily_2022", "ccbi_patron_laity_2025"],
       note: "Every step of the chain is externally documented: L'Osservatore Romano (5 December 2012, written by the cause's Vice-Postulator) for the recognition of the martyrdom and Cardinal Amato's beatification at Nagercoil, the homily of 15 May 2022 for the canonisation itself, and the CCBI for the decree of 16 July 2025 naming him Patron of the Laity in India. Note what the last one is: the Conference of Catholic Bishops of India reporting a decree of the Dicastery for Divine Worship — the chip now reads \"CCBI 2025\", not \"Holy See 2025\".",
     },
