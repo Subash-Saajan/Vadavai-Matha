@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { localePath } from "@/lib/locale";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -24,7 +25,7 @@ import { abs } from "@/lib/seo";
  * really carries the first. Where it doesn't, `establishes` says so out loud.
  */
 
-type Params = { era: string; dot: string; source: string };
+type Params = { lang: string; era: string; dot: string; source: string };
 
 const moment = (era: string, dot: number) => {
   const e = dict.en.history.eras.find((x) => x.id === era);
@@ -65,7 +66,9 @@ export default async function ReferencePage({
 }: {
   params: Promise<Params>;
 }) {
-  const { era, dot: dotStr, source } = await params;
+  const { lang: rawLang, era, dot: dotStr, source } = await params;
+  const lang = rawLang === "ta" ? "ta" : "en";
+  const L = (p: string) => localePath(lang, p);
   const dotIndex = Number(dotStr);
   const leaf = getLeaf(era, dotIndex, source);
   const m = moment(era, dotIndex);
@@ -97,7 +100,7 @@ export default async function ReferencePage({
         <div className="ref-inner">
           {/* ── The claim. First, and on its own. ── */}
           <nav className="ref-crumb">
-            <Link href="/history">The History</Link>
+            <Link href={L("/history")}>The History</Link>
             <span aria-hidden>·</span>
             <span>{m.era.heading}</span>
           </nav>
@@ -126,7 +129,7 @@ export default async function ReferencePage({
                 return (
                   <Link
                     key={sid}
-                    href={`/reference/${era}/${dotIndex}/${sid}`}
+                    href={L(`/reference/${era}/${dotIndex}/${sid}`)}
                     className={`ref-tab ${active ? "is-active" : ""}`}
                     aria-current={active ? "page" : undefined}
                   >
@@ -151,10 +154,10 @@ export default async function ReferencePage({
           )}
 
           <footer className="ref-foot">
-            <Link href="/history" className="ref-back">
+            <Link href={L("/history")} className="ref-back">
               ← Back to the history
             </Link>
-            <Link href={`/sources#${source}`} className="ref-back">
+            <Link href={L(`/sources#${source}`)} className="ref-back">
               This book in the bibliography →
             </Link>
             {biblio?.url && (

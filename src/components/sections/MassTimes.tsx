@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import Link from "next/link";
+import { Link } from "@/components/LocaleLink";
 import { gsap } from "@/lib/gsap";
 import { Sunrise, Church, MoonStar, ArrowUpRight } from "lucide-react";
 import { useLang } from "@/components/layout/LanguageProvider";
@@ -34,7 +34,7 @@ export function MassTimes({ withCta = true }: { withCta?: boolean }) {
       times:
         lang === "en"
           ? ["Wednesday · 5:00 PM", "Friday · 6:00 PM", "First Saturday · 4:00 PM"]
-          : ["புதன் · 5:00", "வெள்ளி · 6:00", "முதல் சனி · 4:00"],
+          : ["புதன் · மாலை 5:00", "வெள்ளி · மாலை 6:00", "முதல் சனி · மாலை 4:00"],
     },
   ];
 

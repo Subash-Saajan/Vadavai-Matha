@@ -89,7 +89,11 @@ export function useScrubMedia({
     drawRef.current = draw;
 
     const size = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      // Render at native density (capped at 3×) — capping lower makes the
+      // browser upscale the canvas element itself, which visibly softens
+      // the film on flagship phones. One full-screen canvas at 3× is only
+      // ~12 MB of backing store; drawImage cost is unaffected by dpr here.
+      const dpr = Math.min(window.devicePixelRatio || 1, 3);
       const w = Math.round(canvas.clientWidth * dpr);
       const h = Math.round(canvas.clientHeight * dpr);
       if (canvas.width === w && canvas.height === h) return; // address-bar churn

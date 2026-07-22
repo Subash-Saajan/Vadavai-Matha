@@ -4,7 +4,8 @@ import Link from "next/link";
 import { JsonLd } from "@/components/JsonLd";
 import { FAQS } from "@/lib/faq";
 import { faqPage, graph, trailTo } from "@/lib/schema";
-import { pageMetadata } from "@/lib/seo";
+import { localizedMetadata } from "@/lib/seo";
+import { localePath } from "@/lib/locale";
 
 /**
  * Questions & Answers.
@@ -18,11 +19,19 @@ import { pageMetadata } from "@/lib/seo";
  * construction the same text. The most common way sites get FAQ markup wrong is
  * emitting one answer to Google and showing another to the reader.
  */
-export const metadata: Metadata = pageMetadata("faq");
+export const generateMetadata = localizedMetadata("faq");
 
 const jsonLd = graph(faqPage(FAQS), trailTo("faq"));
 
-export default function FaqRoute() {
+export default async function FaqRoute({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang: raw } = await params;
+  const lang = raw === "ta" ? "ta" : "en";
+  const L = (p: string) => localePath(lang, p);
+
   return (
     <>
       <JsonLd data={jsonLd} />
@@ -66,7 +75,7 @@ export default function FaqRoute() {
             Every historical claim above rests on a document, and we say which —
             including where the evidence is thin.{" "}
             <Link
-              href="/sources"
+              href={L("/sources")}
               className="text-gold-dark underline underline-offset-4 decoration-gold/50 hover:decoration-gold-dark transition-colors"
             >
               See our sources and further reading

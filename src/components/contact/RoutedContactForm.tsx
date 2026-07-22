@@ -4,7 +4,7 @@ import { useActionState, useEffect, useId, useRef, useState } from "react";
 import Script from "next/script";
 import { Phone, Copy, Check, AlertCircle, MessageCircle } from "lucide-react";
 import { useLang } from "@/components/layout/LanguageProvider";
-import { sendContact } from "@/app/(site)/contact/actions";
+import { sendContact } from "@/app/[lang]/(site)/contact/actions";
 import {
   PHONE,
   config,

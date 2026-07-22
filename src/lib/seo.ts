@@ -17,6 +17,8 @@
 import type { Metadata } from "next";
 
 import { SITE_URL } from "./contact";
+import { localePath, type Locale } from "./locale";
+import { ROUTES_TA, type RouteCopy } from "./seo-ta";
 
 export { SITE_URL };
 
@@ -212,28 +214,93 @@ export const INDEXABLE: RouteKey[] = [
 /* ── Metadata builder ──────────────────────────────────────────────────────
    Every page calls this. It guarantees the three things the live site is
    currently missing on every route: a canonical, an og:url, and a share card. */
-export function pageMetadata(key: RouteKey, overrides: Metadata = {}): Metadata {
+/**
+ * The title/description/crumb for a route in a language.
+ * Tamil falls back to English when `seo-ta.ts` has no entry, so a missing
+ * translation degrades to English rather than to an empty tag.
+ */
+export function routeCopy(key: RouteKey, lang: Locale): RouteCopy {
   const r = ROUTES[key];
-  const url = abs(r.path);
+  const en: RouteCopy = {
+    title: r.title,
+    fullTitle: r.fullTitle,
+    description: r.description,
+    crumb: r.crumb,
+  };
+  return lang === "ta" ? { ...en, ...(ROUTES_TA[key] ?? {}) } : en;
+}
+
+/** The `<title>` template and default, per language. */
+export function siteTitle(lang: Locale): { template: string; default: string } {
+  return lang === "ta"
+    ? {
+        template: "%s · சின்ன ரோமாபுரி",
+        default: "திருக்குடும்ப திருத்தலம், வடக்கன்குளம் — சின்ன ரோமாபுரி",
+      }
+    : {
+        template: "%s · Little Rome",
+        default: "Holy Family Shrine, Vadakkankulam — Little Rome",
+      };
+}
+
+export function siteDescription(lang: Locale): string {
+  return routeCopy("home", lang).description;
+}
+
+/**
+ * The `generateMetadata` export for a static route under `app/[lang]`.
+ * Pages say `export const generateMetadata = localizedMetadata("faq")` — the
+ * locale is read from the route, so `/faq` and `/ta/faq` get different tags.
+ */
+export function localizedMetadata(key: RouteKey) {
+  return async function generateMetadata({
+    params,
+  }: {
+    params: Promise<{ lang: string }>;
+  }): Promise<Metadata> {
+    const { lang } = await params;
+    return pageMetadata(key, lang === "ta" ? "ta" : "en");
+  };
+}
+
+export function pageMetadata(
+  key: RouteKey,
+  lang: Locale = "en",
+  overrides: Metadata = {},
+): Metadata {
+  const r = ROUTES[key];
+  const c = routeCopy(key, lang);
+  const url = abs(localePath(lang, r.path));
 
   return {
-    title: r.title,
-    description: r.description,
-    alternates: { canonical: r.path },
+    title: c.title,
+    description: c.description,
+    // The canonical is this language's own URL, and the two language twins point
+    // at each other with hreflang. Without this pair Google treats `/faq` and
+    // `/ta/faq` as duplicates and picks one; with it, each ranks for its own
+    // language. `x-default` sends an unmatched locale to the English page.
+    alternates: {
+      canonical: localePath(lang, r.path),
+      languages: {
+        "en-IN": abs(r.path),
+        "ta-IN": abs(localePath("ta", r.path)),
+        "x-default": abs(r.path),
+      },
+    },
     openGraph: {
-      title: r.fullTitle,
-      description: r.description,
+      title: c.fullTitle,
+      description: c.description,
       url,
       siteName: SITE_NAME,
-      locale: "en_IN",
-      alternateLocale: "ta_IN",
+      locale: lang === "ta" ? "ta_IN" : "en_IN",
+      alternateLocale: lang === "ta" ? "en_IN" : "ta_IN",
       type: "website",
-      images: [{ url: r.ogImage, width: 1200, height: 630, alt: r.fullTitle }],
+      images: [{ url: r.ogImage, width: 1200, height: 630, alt: c.fullTitle }],
     },
     twitter: {
       card: "summary_large_image",
-      title: r.fullTitle,
-      description: r.description,
+      title: c.fullTitle,
+      description: c.description,
       images: [r.ogImage],
     },
     ...overrides,

@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 
 import { JsonLd } from "@/components/JsonLd";
 import { DEVASAHAYAM_ID, devasahayam, graph, pageNode, trailTo } from "@/lib/schema";
-import { pageMetadata } from "@/lib/seo";
+import { localizedMetadata } from "@/lib/seo";
 
 import DevasahayamExperience from "./DevasahayamExperience";
 
 /** Server half of /saints/devasahayam-pillai — see ../../history/page.tsx. */
-export const metadata: Metadata = pageMetadata("devasahayam");
+export const generateMetadata = localizedMetadata("devasahayam");
 
 /**
  * Strategically this is the most valuable page on the site.

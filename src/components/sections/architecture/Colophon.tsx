@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import Link from "next/link";
+import { Link } from "@/components/LocaleLink";
 import { ArrowUpRight } from "lucide-react";
 import { useLang } from "@/components/layout/LanguageProvider";
 import { useReveal } from "./useReveal";

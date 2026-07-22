@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 
 import { JsonLd } from "@/components/JsonLd";
 import { apparitionFeast, feast, graph, pageNode, trailTo } from "@/lib/schema";
-import { pageMetadata } from "@/lib/seo";
+import { localizedMetadata } from "@/lib/seo";
 
 import MassFestivalsExperience from "./MassFestivalsExperience";
 
 /** Server half of /mass-timings — see the note in ../history/page.tsx. */
-export const metadata: Metadata = pageMetadata("massTimings");
+export const generateMetadata = localizedMetadata("massTimings");
 
 /**
  * The feast carries a real date range, so it is the one node on this site that

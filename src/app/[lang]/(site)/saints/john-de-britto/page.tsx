@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { JsonLd } from "@/components/JsonLd";
 import { DE_BRITTO_ID, deBritto, graph, pageNode, trailTo } from "@/lib/schema";
-import { pageMetadata } from "@/lib/seo";
+import { localizedMetadata } from "@/lib/seo";
 
 import DeBrittoExperience from "./DeBrittoExperience";
 
@@ -17,7 +17,7 @@ import DeBrittoExperience from "./DeBrittoExperience";
  * and `sameAs` his Wikipedia article, so Google and the AI crawlers bind a
  * canonised martyr-saint to this parish.
  */
-export const metadata: Metadata = pageMetadata("deBritto");
+export const generateMetadata = localizedMetadata("deBritto");
 
 const jsonLd = graph(
   {

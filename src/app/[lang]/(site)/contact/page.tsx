@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 
 import { JsonLd } from "@/components/JsonLd";
 import { graph, pageNode, trailTo } from "@/lib/schema";
-import { pageMetadata } from "@/lib/seo";
+import { localizedMetadata } from "@/lib/seo";
 
 import { ContactExperience } from "./ContactExperience";
 
@@ -20,7 +20,7 @@ import { ContactExperience } from "./ContactExperience";
  * genuinely its own: that it is the ContactPage, and where it sits in the tree.
  * One entity, described once.
  */
-export const metadata: Metadata = pageMetadata("contact");
+export const generateMetadata = localizedMetadata("contact");
 
 export const viewport: Viewport = {
   themeColor: "#0a1322",

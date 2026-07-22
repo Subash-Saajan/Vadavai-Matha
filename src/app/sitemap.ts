@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { INDEXABLE, ROUTES, abs } from "@/lib/seo";
+import { LOCALES, localePath } from "@/lib/locale";
 
 /**
  * The sitemap.
@@ -25,14 +26,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // if the content ever settles, move to a per-route date rather than lying.
   const lastModified = new Date();
 
-  return INDEXABLE.map((key) => {
+  // Every page is listed once per language. The `alternates.languages` pair is
+  // the sitemap half of the hreflang contract the pages declare in their
+  // metadata — Google wants the relationship asserted in both places, and
+  // without it `/faq` and `/ta/faq` compete as duplicates instead of ranking
+  // each for its own language.
+  return INDEXABLE.flatMap((key) => {
     const r = ROUTES[key];
-    return {
-      url: abs(r.path),
+    const languages = {
+      "en-IN": abs(r.path),
+      "ta-IN": abs(localePath("ta", r.path)),
+    };
+
+    return LOCALES.map((lang) => ({
+      url: abs(localePath(lang, r.path)),
       lastModified,
       changeFrequency: r.changeFrequency,
       priority: r.priority,
       images: [abs(r.image)],
-    };
+      alternates: { languages },
+    }));
   });
 }

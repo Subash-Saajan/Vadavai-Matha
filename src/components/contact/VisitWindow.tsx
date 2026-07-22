@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/components/LocaleLink";
 import { ArrowUpRight, Shirt, Camera, Accessibility, HandCoins } from "lucide-react";
 import { useLang } from "@/components/layout/LanguageProvider";
 import { SCHEDULE, hasUpi, upiLink, config } from "@/lib/contact";

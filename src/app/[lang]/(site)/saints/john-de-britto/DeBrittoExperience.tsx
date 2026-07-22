@@ -1,17 +1,27 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import Link from "next/link";
+import { Link } from "@/components/LocaleLink";
 import Image from "next/image";
 import { gsap } from "@/lib/gsap";
 import { PageHero } from "@/components/sections/PageHero";
 import { useLang } from "@/components/layout/LanguageProvider";
 
-export default function DevasahayamPage() {
+/**
+ * The client half of /saints/john-de-britto. Structure and choreography mirror
+ * the Devasahayam page exactly (same reveal idiom, same section rhythm), so the
+ * two saints read as a matched pair. Content comes from t.saintDeBritto; the
+ * server page.tsx owns metadata and the JSON-LD.
+ *
+ * Like the Devasahayam hero (Gnanapoo Ammal's tomb), this page opens on a
+ * REAL photograph — the John de Britto grotto in the shrine's own grounds —
+ * so the alt text describes exactly what is in it.
+ */
+export default function DeBrittoPage() {
   const pageRef = useRef<HTMLDivElement>(null);
   const bondImgRef = useRef<HTMLDivElement>(null);
   const { t, lang } = useLang();
-  const s = t.saintDevasahayam;
+  const s = t.saintDeBritto;
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -56,11 +66,9 @@ export default function DevasahayamPage() {
         label={s.label}
         title={s.name}
         intro={s.intro}
-        image="/images/saints/gnanapoo-ammal-tomb.jpg"
-        // A real photograph, and the most intimate one the parish holds: the
-        // tomb of Gnanapoo Ammal (d. 1766), wife of St. Devasahayam Pillai,
-        // with its old stone cross. The alt text states exactly what it is.
-        alt="The tomb of Gnanapoo Ammal, who died in 1766, wife of St. Devasahayam Pillai, sheltered under a white arched memorial with a stone cross"
+        image="/images/de-britto-grotto.jpg"
+        alt="The John de Britto grotto in the grounds of the Holy Family Shrine, Vadakkankulam — a wooden Gothic shrine holding a statue of St John de Britto (Arulanandar), flanked by St Michael and St Raphael, beneath a neem tree"
+        imagePosition="object-[center_42%]"
       />
 
       {/* ── Quick-facts strip ─────────────────────── */}
@@ -130,7 +138,7 @@ export default function DevasahayamPage() {
       <section className="relative overflow-hidden bg-navy text-white">
         <div ref={bondImgRef} className="absolute inset-0 will-change-transform opacity-25">
           <Image
-            src="/images/architecture/altar.jpg"
+            src="/images/architecture/facade.jpg"
             alt=""
             fill
             className="object-cover"

@@ -4,7 +4,8 @@ import Link from "next/link";
 import { firstLeafFor } from "@/lib/references";
 import { JsonLd } from "@/components/JsonLd";
 import { graph, pageNode, trailTo } from "@/lib/schema";
-import { pageMetadata } from "@/lib/seo";
+import { localizedMetadata } from "@/lib/seo";
+import { localePath } from "@/lib/locale";
 import { SOURCE_GROUPS, WEIGHING_NOTE } from "@/lib/sources";
 
 /**
@@ -13,11 +14,19 @@ import { SOURCE_GROUPS, WEIGHING_NOTE } from "@/lib/sources";
  * The single strongest trust signal on the site, and it costs nothing but
  * candour. See the note at the head of src/lib/sources.ts.
  */
-export const metadata: Metadata = pageMetadata("sources");
+export const generateMetadata = localizedMetadata("sources");
 
 const jsonLd = graph(pageNode("sources"), trailTo("sources"));
 
-export default function SourcesRoute() {
+export default async function SourcesRoute({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang: raw } = await params;
+  const lang = raw === "ta" ? "ta" : "en";
+  const L = (p: string) => localePath(lang, p);
+
   return (
     <>
       <JsonLd data={jsonLd} />
@@ -93,7 +102,7 @@ export default function SourcesRoute() {
                       if (!leaf) return null;
                       return (
                         <Link
-                          href={`/reference/${leaf.era}/${leaf.dot}/${leaf.source}`}
+                          href={L(`/reference/${leaf.era}/${leaf.dot}/${leaf.source}`)}
                           className="mt-3 inline-flex items-center gap-2 font-display text-[0.62rem] tracking-[0.2em] uppercase text-gold-dark hover:text-navy transition-colors"
                         >
                           Open the page ❧

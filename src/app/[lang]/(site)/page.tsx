@@ -11,9 +11,9 @@ import { MassTimes } from "@/components/sections/MassTimes";
 import { GalleryPreview } from "@/components/sections/GalleryPreview";
 import { VisitCTA } from "@/components/sections/VisitCTA";
 import { apparitionFeast, feast, graph, pageNode, trailTo } from "@/lib/schema";
-import { pageMetadata } from "@/lib/seo";
+import { localizedMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = pageMetadata("home");
+export const generateMetadata = localizedMetadata("home");
 
 // Both dated observances ride on the home page: they are the facts most people
 // arrive wanting, and the home page is the URL most likely to be cited. The

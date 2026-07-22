@@ -12,7 +12,7 @@ import {
   santhaayi,
   trailTo,
 } from "@/lib/schema";
-import { pageMetadata } from "@/lib/seo";
+import { localizedMetadata } from "@/lib/seo";
 
 import HistoryExperience from "./HistoryExperience";
 
@@ -25,7 +25,7 @@ import HistoryExperience from "./HistoryExperience";
  * /saints — has shipped with no title, no description and no share card since
  * it was written. The interactive half is unchanged in HistoryExperience.
  */
-export const metadata: Metadata = pageMetadata("history");
+export const generateMetadata = localizedMetadata("history");
 
 // Everyone whose story this page actually tells.
 //

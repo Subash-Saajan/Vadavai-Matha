@@ -320,8 +320,8 @@ export const SOURCE_GROUPS: SourceGroup[] = [
         id: "bertrand_1847",
         author: "Joseph Bertrand, S.J.",
         title: "La mission du Maduré d'après des documents inédits",
-        detail: "4 vols., Lyon/Paris, 1847–1854 — vol. IV, pp. 386–397",
-        note: "Records the baptism and passion of Devasahayam from the mission's own papers — a century before any canonisation dossier existed. With Auguste Jean, the earliest printed witness that the baptism happened here.",
+        detail: "4 vols., Lyon/Paris, 1847–1854 — esp. vol. IV, pp. 100n, 345–346, 382–398",
+        note: "Records the baptism and passion of Devasahayam from the mission's own papers — a century before any canonisation dossier existed. With Auguste Jean, the earliest printed witness that the baptism happened here. Volume IV carries this parish across more than the passion pages long cited for it: Fr Borghese \"at the head of the district of Vadakencoulam\" in the annual letter of 1709 (p.100n); a missionary's first-person relation from inside \"the church of Vadakencoulam where I then was\" in 1714–16, with Beschi in the next district (pp.345–346); the 1745 persecution of that church and the nabab \"who honoured [Buttari] with his friendship\" (pp.385–386); and the baptism, passion and burial at Kottar of Devasahayam (pp.386–398). It does NOT record the 1803 weeping — that is Dessal (1905) and Besse (1914), not Bertrand.",
         url: "https://archive.org/details/lamissiondumadur0000unse_o9q8",
       },
       {

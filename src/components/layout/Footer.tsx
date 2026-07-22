@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/components/LocaleLink";
 import { useLang } from "./LanguageProvider";
 // Never retype the phone number. NAP consistency is what lets Google and AI
 // assistants merge every mention of this shrine into a single place.

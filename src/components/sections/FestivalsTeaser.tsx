@@ -2,7 +2,7 @@
 
 import { useRef, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/components/LocaleLink";
 import { gsap } from "@/lib/gsap";
 import { ArrowUpRight } from "lucide-react";
 import { useLang } from "@/components/layout/LanguageProvider";
