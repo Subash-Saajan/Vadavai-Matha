@@ -552,3 +552,17 @@ body::after {
   height: 1px;
   background: linear-gradient(to right, transparent, var(--line-gold) 12%, var(--line-gold) 88%, transparent);
 }
+
+/* ── History prose: what is quoted, and what is not ours ──
+   A source's own words (“…”, kept in its marks) and non-English terms/glosses
+   are set in the italic of the serif "voice of prayer", so the reader can see
+   at a glance which words belong to the book and which are the narration.
+   Tamil has no italic convention, so on /ta these stay upright. */
+.prose-quote,
+.prose-term {
+  font-style: italic;
+}
+html[lang="ta"] .prose-quote,
+html[lang="ta"] .prose-term {
+  font-style: normal;
+}

@@ -89,6 +89,28 @@ export type Leaf = {
    * prevent, and the fact that we crop for a reason does not make it invisible.
    */
   windowed?: boolean;
+  /**
+   * The cited page plus its caste-free neighbours, so a reader can follow a
+   * sentence that finishes overleaf, or check the run-up to the quote. Present
+   * only on public-domain / parish leaves that have neighbours to give. The one
+   * page carrying the citation is the entry with a `span`.
+   */
+  pages?: {
+    /** The number printed on this page. */
+    n?: number;
+    /** The whole printed page, as prose. */
+    text: string;
+    /**
+     * Where a highlight sits on this page. On the cited page it is the passage
+     * itself; on a neighbour it is the tail (or head) of a sentence that ran
+     * across the page break, so the citation stays highlighted as it continues.
+     */
+    span?: [number, number] | null;
+    /** True on the one page the citation actually rests on. */
+    cited?: boolean;
+    /** The scanned page, where the law allows it. */
+    scan?: string;
+  }[];
 };
 
 /**

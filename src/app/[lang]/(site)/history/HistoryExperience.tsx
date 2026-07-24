@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Link } from "@/components/LocaleLink";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { PageHero } from "@/components/sections/PageHero";
+import { useReveal } from "@/components/sections/architecture/useReveal";
 import { useLang } from "@/components/layout/LanguageProvider";
 import {
   citationsFor,
@@ -12,19 +13,54 @@ import {
   SOURCE_SHORT,
   TIER_LABEL,
 } from "@/lib/citations";
+import { noteFor } from "@/lib/historyNotes";
+import { renderProse } from "@/lib/prose";
 import { SOURCE_INDEX } from "@/lib/sources";
 // Not from references.ts — that module carries the books themselves, and this is a client
 // component. See the note at the head of referenceIndex.ts.
 import { hasLeaf } from "@/lib/referenceIndex";
 
+/**
+ * /history — the pinned era timeline, with a table of contents in front of it.
+ *
+ * THE STAGE IS THE ORIGINAL and is deliberately unchanged: each era pins, its
+ * photographs crossfade, and the years step through the panel beside them. What
+ * changed in July 2026 was the WRITING, not the choreography.
+ *
+ * WHY THE WRITING CHANGED. The citation audit behind this page is unusually
+ * careful — every claim read against the books, tiered by how strongly it is
+ * evidenced, then attacked to see what survived. All of that scrupulousness had
+ * leaked into the narrative, so each moment told its story in one sentence and
+ * withdrew it in the next: "it is memory, and this page records it as memory";
+ * "no printed history we have opened names any benefactor"; "It survives; we
+ * have not yet read it". One moment was actually titled "What the parish does
+ * not claim". A reader came for the story of a village and got the working
+ * papers.
+ *
+ * So the doubt moved out of the prose and under it, where a book keeps it:
+ *
+ *   the narrative  — i18n `history.eras[].dots[]`, rewritten to be read
+ *   the tier       — citations.ts: documented / parish tradition / devotion
+ *   the sources    — citations.ts keys, chips that open the actual page
+ *   the difficulty — historyNotes.ts, a footnote, only where the tier isn't enough
+ *
+ * Nothing was softened to buy that. Every conflicting date, every unread book,
+ * every figure a second witness disputes is still on this page — it is set below
+ * the line now, in smaller type, instead of interrupting the sentence.
+ *
+ * THE ONLY STRUCTURAL ADDITION is the Contents, between the preface and the
+ * first era. Fifty-six pinned moments is a long way to scroll to reach 1872, and
+ * before it there was no way to reach 1872 at all except through 1685.
+ */
+
 const ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
 
 // Vertical scroll (in vh) allotted to each year-dot within a pinned era.
 //
-// Mobile gets a shorter step on purpose. There are 53 dots across the eight
-// eras, so at the desktop pace a phone would have to be thumbed through ~28
+// Mobile gets a shorter step on purpose. There are 56 dots across the eight
+// eras, so at the desktop pace a phone would have to be thumbed through ~29
 // screens of pinned scroll — well past where readers give up. 40vh keeps the
-// same choreography inside ~21.
+// same choreography inside ~22.
 const STEP_VH = { desktop: 52, mobile: 40 };
 
 // One generated still per year, in /public/images/history. The filename used to
@@ -39,7 +75,15 @@ const photoFor = (eraId: string, di: number) => {
 
 export default function HistoryPage() {
   const rootRef = useRef<HTMLDivElement>(null);
+  const frontRef = useRef<HTMLDivElement>(null);
   const { t, lang } = useLang();
+
+  const h = t.history;
+
+  // The preface and the contents are ordinary bands above every pin, so the
+  // house reveal is safe here. Scoped to `frontRef` so it can never touch a
+  // `.reveal-item` inside a pinned stage.
+  useReveal(frontRef, lang);
 
   useEffect(() => {
     // iOS collapses its URL bar as you scroll, which fires a resize and would
@@ -143,34 +187,77 @@ export default function HistoryPage() {
     return () => mm.revert();
   }, [lang]);
 
+  // Contents jumps. An era's section top is exactly where its pin begins, so
+  // landing on it drops the reader at that era's first year. Lenis is
+  // desktop-only; a phone falls through to the browser's own smooth scroll.
+  const jumpToEra = (id: string) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const lenis = (
+      window as unknown as {
+        __lenis?: { scrollTo: (t: Element, o?: object) => void };
+      }
+    ).__lenis;
+    if (lenis?.scrollTo) lenis.scrollTo(el, { duration: 1.1 });
+    else el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <div ref={rootRef} className="history-timeline">
       <PageHero
-        label={t.history.label}
-        title={t.history.title}
-        intro={t.history.intro}
+        label={h.label}
+        title={h.title}
+        intro={h.intro}
         image="/images/bw-old-pic.jpg"
         alt="An archival black-and-white photograph of the great two-nave church at Vadakkankulam, its spires and pinnacles against a clouded sky"
       />
 
-      {/* Intro / overview band */}
-      <section className="relative bg-cream parchment-sheen section-padding overflow-hidden">
-        <div className="max-w-3xl mx-auto text-center">
-          <p className="kicker justify-center mb-8">{t.history.overlineLabel}</p>
-          <p className="font-serif text-2xl md:text-3xl text-navy leading-snug">
-            {t.history.overview}
-          </p>
-          <div className="cross-rule mt-12 max-w-xs mx-auto">
-            <span className="text-gold text-lg">✦</span>
+      <div ref={frontRef}>
+        {/* Preface — the book's opening leaf. */}
+        <section className="relative bg-cream parchment-sheen section-padding overflow-hidden">
+          <div className="relative max-w-3xl mx-auto text-center">
+            <p className="reveal-item kicker justify-center mb-10">
+              {h.overlineLabel}
+            </p>
+            <p className="reveal-item book-lede font-serif text-[1.4rem] md:text-[1.65rem] text-navy leading-[1.6] text-left">
+              {h.overview}
+            </p>
+            <div className="reveal-item cross-rule mt-14 max-w-xs mx-auto">
+              <span className="text-gold text-lg">✦</span>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+
+        {/* Contents — the eight eras, and the only way to reach 1872 without
+            scrolling through 1685. */}
+        <section className="relative bg-cream-dark parchment-swell section-padding overflow-hidden">
+          <div className="relative max-w-3xl mx-auto">
+            <p className="reveal-item kicker mb-10">{h.contentsLabel}</p>
+            <ol className="border-t border-gold/20">
+              {h.eras.map((era, i) => (
+                <li key={era.id} className="reveal-item border-b border-gold/20">
+                  <button
+                    type="button"
+                    onClick={() => jumpToEra(era.id)}
+                    className="contents-row group"
+                  >
+                    <span className="contents-numeral">{ROMAN[i] ?? i + 1}</span>
+                    <span className="contents-title font-serif">{era.heading}</span>
+                    <span className="contents-span font-display">{era.span}</span>
+                  </button>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+      </div>
 
       {/* The chapters */}
       <div className="bg-cream">
-        {t.history.eras.map((era, i) => (
+        {h.eras.map((era, i) => (
           <section
             key={era.id}
+            id={era.id}
             className="era relative border-t border-gold/15"
           >
             {/* Pinned stage — sticks for the length of this era's dots */}
@@ -185,9 +272,13 @@ export default function HistoryPage() {
                 </span>
               </div>
 
-              <div className="stage-inner relative w-full max-w-6xl mx-auto px-6 lg:px-10 py-24 md:py-0 grid md:grid-cols-2 gap-12 md:gap-16 lg:gap-20 items-center">
-                {/* IMAGE */}
-                <div className="era-media">
+              <div className="stage-inner relative w-full max-w-7xl mx-auto px-6 lg:px-10 py-24 md:py-0 grid md:grid-cols-[minmax(0,31rem)_1fr] gap-12 md:gap-16 lg:gap-20 items-center">
+                {/* IMAGE — held to its existing width (31rem) even as the stage
+                    widens to match the navbar's max-w-7xl, so the extra room
+                    goes entirely to the text column instead of stretching the
+                    photo. Nudged left so it doesn't just re-center in the new,
+                    wider track. */}
+                <div className="era-media md:-ml-2 lg:-ml-4">
                   <div className="era-frame relative aspect-[4/5] md:h-[70vh] md:aspect-auto rounded-[2rem] overflow-hidden shadow-2xl ring-1 ring-gold/20">
                     {era.dots.map((dot, di) => (
                       <div
@@ -211,12 +302,6 @@ export default function HistoryPage() {
                       <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-white leading-tight">
                         {era.heading}
                       </h2>
-                      {/* The blurb is a summary the years then tell properly. On a
-                          phone the photo is only ~44svh tall, so it would swallow
-                          the picture — the years carry it instead. */}
-                      <p className="era-blurb mt-4 text-white/75 leading-relaxed max-w-md">
-                        {era.blurb}
-                      </p>
                     </div>
                   </div>
                 </div>
@@ -245,50 +330,63 @@ export default function HistoryPage() {
                   </ul>
 
                   <div className="panel-wrap relative flex-1 md:min-h-[26rem]">
-                    {era.dots.map((dot, di) => (
-                      <article
-                        key={di}
-                        className={`dot-panel flex flex-col justify-center ${
-                          di === 0 ? "is-active" : ""
-                        }`}
-                      >
-                        {/* Reduced-motion only. Nothing is pinned there, so the
-                            crossfading stack above never advances past photo 1 —
-                            each year carries its own picture instead. Hidden (and
-                            so, being lazy, never fetched) in the animated paths. */}
-                        <div className="panel-photo relative">
-                          <Image
-                            src={photoFor(era.id, di)}
-                            alt={`${era.heading} — ${dot.year}`}
-                            fill
-                            className="object-cover"
-                            sizes="(max-width: 768px) 100vw, 45vw"
-                          />
-                        </div>
-                        <p className="panel-count font-display text-text-muted text-xs tracking-[0.4em] uppercase mb-4">
-                          {String(di + 1).padStart(2, "0")} / {String(era.dots.length).padStart(2, "0")}
-                        </p>
-                        <p className="dot-year font-display text-4xl md:text-6xl leading-none text-gradient-gold">
-                          {dot.year}
-                        </p>
-                        <h3 className="mt-4 font-serif text-2xl md:text-3xl text-navy">
-                          {dot.title}
-                        </h3>
-                        <p className="dot-body mt-3 text-text-muted text-lg leading-relaxed max-w-xl">
-                          {dot.body}
-                        </p>
+                    {era.dots.map((dot, di) => {
+                      const cite = citationsFor(era.id, di);
+                      const cited = (cite?.keys ?? [])
+                        .map((k) => SOURCE_INDEX[k])
+                        .filter(Boolean);
+                      const note = noteFor(era.id, di, lang);
 
-                        {/* What this moment actually rests on. The tier is not
-                            decoration — it is the honest strength of the claim,
-                            and the documented half of this page is believed
-                            precisely because the rest is labelled honestly. */}
-                        {(() => {
-                          const cite = citationsFor(era.id, di);
-                          if (!cite) return null;
-                          const cited = cite.keys
-                            .map((k) => SOURCE_INDEX[k])
-                            .filter(Boolean);
-                          return (
+                      return (
+                        <article
+                          key={di}
+                          className={`dot-panel flex flex-col justify-center ${
+                            di === 0 ? "is-active" : ""
+                          }`}
+                        >
+                          {/* Reduced-motion only. Nothing is pinned there, so the
+                              crossfading stack above never advances past photo 1 —
+                              each year carries its own picture instead. Hidden (and
+                              so, being lazy, never fetched) in the animated paths. */}
+                          <div className="panel-photo relative">
+                            <Image
+                              src={photoFor(era.id, di)}
+                              alt={`${era.heading} — ${dot.year}`}
+                              fill
+                              className="object-cover"
+                              sizes="(max-width: 768px) 100vw, 45vw"
+                            />
+                          </div>
+                          <p className="panel-count font-display text-text-muted text-xs tracking-[0.4em] uppercase mb-4">
+                            {String(di + 1).padStart(2, "0")} / {String(era.dots.length).padStart(2, "0")}
+                          </p>
+                          <p className="dot-year font-display text-4xl md:text-6xl leading-none text-gradient-gold">
+                            {dot.year}
+                          </p>
+                          <h3 className="mt-4 font-serif text-2xl md:text-3xl text-navy">
+                            {dot.title}
+                          </h3>
+                          <p className="dot-body mt-3 text-lg leading-relaxed">
+                            {renderProse(dot.body)}
+                          </p>
+
+                          {/* ── Below the line ──
+                              The footnote, where this moment has one: a date two
+                              sources disagree on, a figure a second witness
+                              disputes, a book nobody has opened. It is here so the
+                              story above it never has to stop and hedge. */}
+                          {note && (
+                            <p className="dot-note">
+                              <span className="dot-note-label">{h.noteLabel}</span>
+                              {note}
+                            </p>
+                          )}
+
+                          {/* What this moment actually rests on. The tier is not
+                              decoration — it is the honest strength of the claim,
+                              and the documented half of this page is believed
+                              precisely because the rest is labelled honestly. */}
+                          {cite && (
                             <div className="dot-cite">
                               <span className={`dot-tier dot-tier--${cite.tier}`}>
                                 {TIER_LABEL[cite.tier][lang]}
@@ -325,10 +423,10 @@ export default function HistoryPage() {
                                 <span className="cite-none">{NO_SOURCE_LABEL[lang]}</span>
                               )}
                             </div>
-                          );
-                        })()}
-                      </article>
-                    ))}
+                          )}
+                        </article>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -338,6 +436,70 @@ export default function HistoryPage() {
       </div>
 
       <style>{`
+        /* ── The preface's drop cap ──
+           Cinzel — the voice of stone — dropped three lines into Cormorant.
+
+           NOT in Tamil. A Tamil letter carries combining vowel signs above and
+           below its base glyph, and ::first-letter takes only the base: the sign
+           is orphaned onto the following line at body size. English only. */
+        html[lang="en"] .history-timeline .book-lede::first-letter {
+          font-family: var(--font-display), serif;
+          float: left;
+          font-size: 3.5em;
+          line-height: 0.82;
+          margin: 0.08em 0.1em 0 0;
+          color: var(--gold-dark);
+        }
+
+        /* ── Contents ── */
+        .history-timeline .contents-row {
+          display: grid;
+          grid-template-columns: 2.75rem 1fr auto;
+          align-items: baseline;
+          gap: 1rem;
+          width: 100%;
+          padding: 1.15rem 0;
+          text-align: left;
+          background: transparent;
+          border: 0;
+          cursor: pointer;
+          -webkit-tap-highlight-color: transparent;
+        }
+        .history-timeline .contents-row:focus-visible {
+          outline: 2px solid var(--gold);
+          outline-offset: 4px;
+          border-radius: 4px;
+        }
+        .history-timeline .contents-numeral {
+          font-family: var(--font-display), serif;
+          font-size: 0.78rem;
+          letter-spacing: 0.12em;
+          color: var(--gold-dark);
+          opacity: 0.75;
+        }
+        .history-timeline .contents-title {
+          font-size: 1.35rem;
+          line-height: 1.25;
+          color: var(--navy);
+          transition: color 0.35s ease;
+        }
+        .history-timeline .contents-row:hover .contents-title { color: var(--gold-dark); }
+        .history-timeline .contents-span {
+          font-size: 0.7rem;
+          letter-spacing: 0.16em;
+          color: var(--text-muted);
+          font-variant-numeric: tabular-nums;
+          white-space: nowrap;
+        }
+        @media (max-width: 480px) {
+          .history-timeline .contents-row {
+            grid-template-columns: 2.25rem 1fr;
+            row-gap: 0.3rem;
+          }
+          .history-timeline .contents-span { grid-column: 2; }
+          .history-timeline .contents-title { font-size: 1.15rem; }
+        }
+
         .history-timeline .era-photo {
           position: absolute;
           inset: 0;
@@ -420,6 +582,34 @@ export default function HistoryPage() {
         /* The per-year photo inside a panel is for the reduced-motion path only;
            everywhere else the crossfading stack in .era-frame does the work. */
         .history-timeline .panel-photo { display: none; }
+
+        /* ── Book ink ──
+           --text-muted is right for a caption and a little pale for four hundred
+           words of it. The story gets a darker ink; the apparatus below keeps
+           --text-muted, so the two read as different registers. */
+        .history-timeline .dot-body { color: rgba(28, 26, 21, 0.84); }
+
+        /* ── The footnote ──
+           Only seven of the fifty-six moments carry one. Set against a gold
+           hairline so it reads as an aside to the story rather than part of it. */
+        .history-timeline .dot-note {
+          margin-top: 1.25rem;
+          padding-left: 0.95rem;
+          border-left: 1px solid var(--line-gold);
+          font-size: 0.84rem;
+          line-height: 1.62;
+          color: var(--text-muted);
+          max-width: 34rem;
+        }
+        .history-timeline .dot-note-label {
+          font-family: var(--font-display), serif;
+          font-size: 0.55rem;
+          letter-spacing: 0.26em;
+          text-transform: uppercase;
+          color: var(--gold-dark);
+          margin-right: 0.7em;
+          white-space: nowrap;
+        }
 
         /* ── The citation line ──
            Gold on cream, the house voice. It has to sit UNDER the story without
@@ -580,7 +770,6 @@ export default function HistoryPage() {
             border-radius: 1.5rem;
           }
           .history-timeline .era-caption { padding: 1.25rem 1.35rem; }
-          .history-timeline .era-blurb { display: none; }
 
           /* On desktop the numeral is a faint mark up in the corner. On a phone
              that corner is the photo, where it reads as a smudge on the picture.
@@ -633,9 +822,15 @@ export default function HistoryPage() {
             line-height: 1.62;
             margin-top: 0.6rem;
           }
-          /* The citation line is real content on a phone too — it just has to
-             cost less height. The panel sizes to its tallest year, so this comes
-             out of the photo's flex, not out of the text. */
+          /* The footnote and the citation line are real content on a phone too —
+             they just have to cost less height. The panel sizes to its tallest
+             year, so this comes out of the photo's flex, not out of the text. */
+          .history-timeline .dot-note {
+            margin-top: 0.75rem;
+            padding-left: 0.7rem;
+            font-size: 0.76rem;
+            line-height: 1.55;
+          }
           .history-timeline .dot-cite {
             margin-top: 0.9rem;
             gap: 0.3rem 0.45rem;

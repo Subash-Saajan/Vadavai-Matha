@@ -120,45 +120,38 @@ export const HISTORY_CITATIONS: Record<string, DotCitation[]> = {
     },
     // 2
     {
-      tier: "tradition",
+      tier: "documented",
       photo: "clearing-in-the-forest-2.jpg",
-      keys: ["bayly_1989", "history_2026"],
-      note: "Bayly (pp.405–406) is the one leg of this dot that stands outside the parish, and she records a woman founder and \"a small shrine containing a cross\". The parish's own book agrees on the cross and gives the motive as her being firm in her Catholic faith: nothing in either witness supports a Marian devotion in 1680, which would be the 1803 apparition read backwards into a cross-shrine.",
+      keys: ["bayly_1989", "hardgrave_1969"],
+      note: "Upgraded from tradition (23 Jul 2026), and the upgrade is earned: TWO outside scholars, working from different sources for different purposes, independently put a woman founder at Vadakkankulam in 1680. Bayly (pp.405–406) works from the Jesuit manuscripts at the Madura Mission Archives and records \"a small shrine containing a cross\", calling her the actual founder of the village; Hardgrave, writing the social history of the Nadar community, gives the date flatly — \"In 1680, the first congregation of Nadars was started at Vadakkankulam … with the conversion of a Nadar woman; a church was built in 1685\". Neither is the parish talking about itself, so the shape of this moment — a woman, a cross, 1680, a village grown around her — is documented. Her NAME (Santhaayi Ammaiyar) and her origin at Thoppuvilai remain the parish's own record, which is why history_2026 stays on the row. Two things to keep straight. (1) Both scholars identify her by caste, as a Shanar/Nadar woman; the page tells her story without it, by the parish's standing decision, and the reference leaves carry the sentences as the books wrote them — the story is edited, the evidence is not. (2) Heideman 2001 was deliberately NOT added as a third chip: he is the source behind the Wikipedia line, but he is almost certainly downstream of Hardgrave, and we hold no words of his at all. Three chips where there are two witnesses is the stacking this file forbids. NEITHER Bayly NOR Hardgrave is on this disk — both leaves say so; the tier rests on what they wrote, not on our having opened them.",
     },
     // 3
     {
       tier: "tradition",
       photo: "clearing-in-the-forest-3.jpg",
-      keys: ["pate_gazetteer_1917", "history_2026"],
-      note: "Only de Britto's penetration as far south as Vadakkankulam (Pate, p.90) is external; the halting-place on the Travancore road, the cotton field and the priest on horseback are the parish's own memory, and Pate's dating also means the encounter cannot safely be put at 1680. Auguste Jean was removed from this dot: his earliest mention of the village is Fr Borghese in 1709 and he has nothing whatever on Santhaayi.",
+      keys: ["pate_gazetteer_1917", "besse_moumas_typescript"],
+      note: "Only de Britto's penetration as far south as Vadakkankulam (Pate, p.90) is external; the halting-place on the Travancore road, the cotton field and the priest on horseback are the parish's own memory, and Pate's dating also means the encounter cannot safely be put at 1680. Auguste Jean was removed from this dot: his earliest mention of the village is Fr Borghese in 1709 and he has nothing whatever on Santhaayi. BESSE READ (25 Jul 2026, Moumas typescript p.805) and he supplies the SETTING, flatly and without hedging: a missionary judged the locality convenient as 'a stopping place between Travancore and the Pandiyan kingdom' and resolved to build a residence there - 'Such was the origin of Vadakenkulam.' That is now the printed source behind this moment's frontier road. It says nothing of Santhaayi, the cotton field or the blessing, which remain the parish's own.",
     },
     // 4
     {
-      tier: "tradition",
+      tier: "documented",
       photo: "clearing-in-the-forest-4.jpg",
-      keys: ["pate_gazetteer_1917", "neill_1985", "history_2026"],
-      note: "Pate is the documented half — a congregation \"definitely formed by 1685\" and de Britto present in the village. That de Britto personally raised the chapel, that it was thatched, and that he dedicated it to the Holy Family are the parish's own record alone, which is why the dot as a whole is tradition and not documented.",
+      keys: ["pate_gazetteer_1917", "besse_moumas_typescript", "neill_1985", "hardgrave_1969"],
+      note: "Documented (24 Jul 2026). Three outside witnesses carry the core: Pate (p.90) and Neill both attest a congregation here by 1685, and Hardgrave, from the social history of the Nadars, states flatly that \"a church was built in 1685\" — so that a church rose here in that year is externally established, not parish memory. What the books do NOT carry, and the prose therefore drops: the DEDICATION (no source names one for the 1685 chapel — St Francis Xavier is documented only from the stone church of 1839, Holy Family only from the 1872 re-dedication) and the BUILDER (Pate has de Britto reach the village and be \"called back unexpectedly to Kumbakonam\", and Hardgrave names no builder, so de Britto's founding role is documented, not that he raised the chapel himself). \"Thatch\" is the parish's own ordinary detail, kept as colour. The 1934 Gazetteer Supplement was NOT added: it restates Pate and names the caste. BESSE READ (25 Jul 2026, Moumas typescript p.805): the mission's own historian records the attribution AND HEDGES IT - 'The Missionary who built a church in the new village IS SAID TO BE no other than Fr. John de Britto and the year 1685.' He will not assert it, and two sentences later he draws his own line - 'Here tradition is met with historic documents' - before producing the Annual Letter of 1701. So Besse confirms the 1685 attribution was already old and held in the mission's archives, but does NOT prove de Britto built it. The documented tier here still rests on Hardgrave for the church and Pate/Neill for the congregation, never on de Britto's authorship - which the prose deliberately does not claim. FRAMING (25 Jul 2026): the prose no longer says he 'came this far south' - that arrival belongs to the previous moment - but that these were the years the whole mission was in his charge, which is Pate's own sentence ('In 1683 Father John de Britto succeeded to the charge of the Madura Mission'). Better sourced than the arrival phrasing it replaced.",
     },
     // 5
     {
       tier: "tradition",
       photo: "clearing-in-the-forest-5.jpg",
-      keys: ["pate_gazetteer_1917", "history_2026", "bishop_stephen_jubilee_2022"],
-      note: "The two hundred baptisms are parish record, and the two parish witnesses disagree: history_2026 puts them in 1685 \"on the same occasion\" as the chapel, while Bishop Stephen's jubilee message of 2022 — quoted by name in the dot and until now credited to nobody — dates de Britto's coming, the baptisms and the church together to 1686. Pate, from outside, gives no number at all and has de Britto called away to Kumbakonam rather than returning for a second visit.",
+      keys: ["pate_gazetteer_1917", "faber_1851", "bishop_stephen_jubilee_2022", "diocese_thoothukudi_page"],
+      note: "The 'two hundred' is the parish's founding memory, and a full-corpus sweep (all 173 texts, 24 Jul 2026) found NO book behind the number: de Britto's own biographers (Faber, Boero, the 1854 Abrégé) never name the village, Bertrand's earliest mention is Borghese in 1709, and Dessal's 1905 history does not reach the founding. The figure's cleanest statement was the in-house compilation, now removed; the 150-Year Souvenir carries it too but only in a degraded, mis-paginated passage (garbled geography), so it is not chipped. What IS attested is the EVENT, not the count: Bishop Stephen's 2022 jubilee message has de Britto come to Vadakkankulam in 1686 and give baptism. Pate supplies the documented frame — a congregation \"definitely formed by 1685\" — but no number. So the dot is tradition: the founding is real and externally framed; the count of two hundred is the parish's own. CORRECTION (25 Jul 2026): an earlier sweep here searched only the book texts and missed _extraction/, and wrongly reported the figure as having no clean source. It has one: the Diocese of Thoothukudi's own parish page states 'He baptized more than 200 people in 1686' - now chipped. It is still parish-family, not outside corroboration, so the tier does not move. Note also that the diocese and Bishop Stephen both date the baptisms to 1686 and describe a RETURN, while History_2026 and the Souvenir put them in 1685 'on the same occasion' as the chapel, and Pate has de Britto called away to Kumbakonam rather than returning. The prose therefore says only 'not long after' and the year label straddles 1685-86; it must not assert either reading. SCALE (added 24 Jul 2026): Faber (1851, p.396) records de Britto baptising two thousand seven hundred catechumens in two months, prepared by catechists while the missionaries were driven out - which is why the parish's two hundred is KEPT rather than doubted: it is a modest, in-character number for this man, not an inflated boast. Faber is chipped for THAT clause only, never for the 200. The oft-quoted 8,000-in-18-months was deliberately NOT used: it is web-sourced (Wikipedia/clairval.com), belongs to 1690-92 in the Marava, and post-dates our baptisms by five years.",
     },
-    // 6
+    // 6  (the prison letter of 3 Feb and the martyrdom of 4 Feb, merged into one moment 25 Jul 2026)
     {
       tier: "documented",
       photo: "clearing-in-the-forest-8.jpg",
-      keys: ["debritto_prison_letter_1693", "faber_1851"],
-      note: "The document is its own citation: de Britto's letter from the prison of Oriyur, 3 February 1693, printed by Bertrand and by Faber (1851, pp.445–446), who supplies the straw for a pen and the powdered coal moistened with spittle for ink. Maldonado was removed — it is a martyrology, and it fixes the date of the death, not of the letter.",
-    },
-    // 7
-    {
-      tier: "documented",
-      photo: "clearing-in-the-forest-6.jpg",
       keys: ["debritto_prison_letter_1693", "maldonado_1697", "boero_1853", "faber_1851"],
-      note: "The martyrdom at Oriyur on 4 February 1693 is documented at the highest level — the saint's own letter of the night before, and a printed Latin martyrology of 1697 whose title alone fixes the date; Faber and Boero descend from the same seventeenth-century Jesuit dossier and corroborate the tradition rather than test it. Two of the dot's sentences are NOT carried by these keys: \"canonised in 1947\" has no support anywhere in the corpus, and that de Britto founded this mission is parish tradition — which is why Pate (who credits the conversion work to Fr Borghese) and history_2026 were removed from here rather than left to lend it authority.",
+      note: "Two moments made one: the prison letter of 3 February 1693 and the martyrdom the next morning, both at Oriyur. THE LETTER is its own citation, printed by Faber (1851, pp.445-446), who supplies the straw pen, the charcoal-and-spittle ink, the three days on a little milk, the aborted execution (the soldiers 'on the point of firing' before the Regulo sent him back), and the signature verbatim. THE DEATH of 4 February 1693 at age forty-five is documented at the highest level: the saint's own letter of the night before, a printed Latin martyrology of 1697 (Maldonado) whose title fixes the date, and Boero ('in eta di quarantacinque anni') - Faber and Boero descending from the same 17th-c. Jesuit dossier, corroborating rather than testing. FLAGGED, not chipped: the CANONISATION ('Rome would name him a saint') is a public act of the Church, 1947, in the standard references but NOT in our pre-1947 books; and that de Britto FOUNDED this mission is parish tradition, which is why Pate (who credits the conversion work to Fr Borghese) does not chip it. MISMATCH (file 21 J1): Faber says the ink was charcoal moistened with SPITTLE, Auguste Jean 1894 says diluted in WATER; the prose follows Faber. RELEVANCE: no de Britto biography names Vadakkankulam and the letter never mentions it (Oriyur is ~200 km away in the Marava); the tie to the village rests on Pate placing him here, on the 1685 church, and on the parish's living devotion to Arulanandar.",
     },
   ],
   "first-inland-parish": [
@@ -166,7 +159,7 @@ export const HISTORY_CITATIONS: Record<string, DotCitation[]> = {
     {
       tier: "tradition",
       photo: "first-inland-parish-1.jpg",
-      keys: ["pate_gazetteer_1917", "neill_1985", "history_2026"],
+      keys: ["pate_gazetteer_1917", "neill_1985"],
       note: "The first pastor rests on the parish's own succession register alone, and that register cannot hold his name or his year steady — Bernard de Saa 1697, Bennet de Souza 1698, \"Fr Ponnaiya\". The first EXTERNAL attestation of any priest here is Fr Borghese in 1709, which is why Auguste Jean, who has nothing earlier, no longer chips this dot.",
     },
     // 1
@@ -178,16 +171,16 @@ export const HISTORY_CITATIONS: Record<string, DotCitation[]> = {
     },
     // 2
     {
-      tier: "tradition",
+      tier: "documented",
       photo: "first-inland-parish-2.jpg",
-      keys: ["history_2026"],
-      note: "The \"nearly eight hundred adults\" of 1712–13 exist in exactly one document in the whole corpus — the parish's own 2026 compilation, which cites nothing for the figure; the phrase returns no hit in any of the printed mission histories. Bertrand was removed: he attests the mission's general flourishing under Borghese, and no number.",
+      keys: ["besse_moumas_typescript"],
+      note: "REPAIRED AND UPGRADED 25 Jul 2026. This was the one keyless moment on the page, and the old note here was wrong: it said the figure existed in only the parish's 2026 compilation and 'returns no hit in any of the printed mission histories'. It does. Besse (Moumas English typescript, p.822), writing from the mission's records, gives the church 'at least 4128 adults and a large number of children' in 1713, 'about 800 baptisms of adults, besides the children' across 1712 and 1713, and 85 more adults preparing in October 1713. The page's 'nearly eight hundred adults, besides their children' is a faithful rendering of that sentence, not an invention. Besse states it as a statistic and does NOT hedge it as he hedges the 1685 founding, so the tier is documented. The same 4,128 recurs in the 1934 Gazetteer Supplement (p.166) but is NOT stacked here as a second witness - it appears to descend from this same datum.",
     },
     // 3
     {
       tier: "documented",
       photo: "first-inland-parish-3.jpg",
-      keys: ["pate_gazetteer_1917", "caldwell_1881", "bertrand_1847", "history_2026"],
+      keys: ["pate_gazetteer_1917", "caldwell_1881", "bertrand_1847"],
       note: "Clean and doubly independent: Fr Calini's letter of 1716, quoted by Pate, says the station \"had two years previously become a residence\", and Caldwell credits Fr Brandolini with founding the congregation in 1714. Bertrand's Vol IV adds the primary the others only summarise: the mission's own relation of 1714–16 speaks in the first person of an impostor who came \"into the church of Vadakencoulam where I then was\", deceiving the catechist who accompanied the priest — a resident missionary, a functioning church and an honoured catechist here in those very years, with Beschi the neighbouring district priest (pp.345–346). Neither source calls it the senior interior station or the first great inland parish — those are the page's own words, and they are not carried by these keys.",
     },
   ],
@@ -196,14 +189,14 @@ export const HISTORY_CITATIONS: Record<string, DotCitation[]> = {
     {
       tier: "tradition",
       photo: "statue-and-the-saint-1.jpg",
-      keys: ["history_2026", "diocese_thoothukudi_page", "catholictamil_182"],
+      keys: ["diocese_thoothukudi_page", "catholictamil_182"],
       note: "The weakest pillar on the page: the box from Portugal, the landing at Kootapuli and the three-way division of the images have zero external corroboration, and Kamanayakkanpatti tells a different origin story for its own image. Auguste Jean was removed — he has nothing about a box, Portugal, Kootapuli or a statue anywhere — so every key here is now parish-side, which is exactly what the tier says.",
     },
     // 1
     {
       tier: "documented",
       photo: "statue-and-the-saint-2.jpg",
-      keys: ["vatican_news_canonisation", "osservatore_romano_2012", "auguste_jean_1894", "bertrand_1847", "history_2026"],
+      keys: ["vatican_news_canonisation", "osservatore_romano_2012", "auguste_jean_1894", "bertrand_1847"],
       note: "The strongest fact on the page. Bertrand (1847) and Auguste Jean (1894) record Buttari's baptism of Devasahayam here from the mission's own papers, a century before any canonisation dossier existed, and the DATE — 14 May 1745 — comes from the Vatican side (Vatican News; L'Osservatore Romano, written by the cause's Vice-Postulator), not from the rite of canonisation, which recites only the name. The diocesan page was dropped: parish-side stacking adds nothing to a dot the Holy See already carries.",
     },
     // 2
@@ -217,7 +210,7 @@ export const HISTORY_CITATIONS: Record<string, DotCitation[]> = {
     {
       tier: "tradition",
       photo: "statue-and-the-saint-3.jpg",
-      keys: ["auguste_jean_1894", "bertrand_lettres_1865", "souvenir_150yr", "history_2026"],
+      keys: ["auguste_jean_1894", "bertrand_lettres_1865", "souvenir_150yr"],
       note: "Bertrand (1865), drawing on the church's own archives, records only that Buttari \"laid the foundations of its present church\" — and he does not date it; the year 1749, the kankol festival and the ceremony are the parish's souvenir and chronology, which is why this dot is tradition and no longer documented. Note also that the parish's own English history says broad BRICKS from Perungudi: \"stone and mortar\" is in no source for this building.",
     },
     // 4
@@ -231,21 +224,21 @@ export const HISTORY_CITATIONS: Record<string, DotCitation[]> = {
     {
       tier: "tradition",
       photo: "statue-and-the-saint-4.jpg",
-      keys: ["auguste_jean_1894", "bertrand_lettres_1865", "parish_english_history", "souvenir_150yr", "history_2026"],
+      keys: ["auguste_jean_1894", "bertrand_lettres_1865", "parish_english_history", "souvenir_150yr"],
       note: "Only the Buttari-to-Thomassini handover is printed (Bertrand 1865, from the church archives; Auguste Jean reproduces him almost word for word and is NOT a second witness); the year 1752, the cross plan and the eastward orientation are the parish's own record, said to rest on two inscriptions inside the old church, and the fabric was brick. The claim that the Assumption became the principal feast \"to this day\" is contradicted by this dot's own cited source: Bertrand records the titular feast of this church as St Francis Xavier's, kept with a great December novena, right up to the re-dedication of 1872.",
     },
     // 6
     {
       tier: "documented",
       photo: "statue-and-the-saint-5.jpg",
-      keys: ["holy_see_canonisation_rite_2022", "auguste_jean_1894", "bertrand_1847", "history_2026", "diocese_thoothukudi_page"],
+      keys: ["holy_see_canonisation_rite_2022", "auguste_jean_1894", "bertrand_1847", "diocese_thoothukudi_page"],
       note: "The execution of 14 January 1752 is documented in the near-contemporary Jesuit accounts, and Auguste Jean (vol. I, p.203) is the oldest witness that this church already held \"a part of his garment and the chains with which he was bound\". Bertrand's Vol IV (p.397) settles where the body went: gathered into the church of St Francis Xavier at Kottar, with the Te Deum sung in Cochin cathedral and the bishop's own panegyric — the garment and chains kept at Vadakkankulam are secondary relics beside that burial. Two of the dot's other details are not carried here: \"Kattadimalai\" appears in no historical source — the witnesses describe the Travancore lines at the Aralvaimozhi gap and never name the spot — and the head-turban relic is the diocese's modern account, which has quietly displaced the chains.",
     },
     // 7
     {
       tier: "documented",
       photo: "statue-and-the-saint-6.jpg",
-      keys: ["caldwell_1881", "auguste_jean_1894", "bertrand_lettres_1865", "history_2026"],
+      keys: ["caldwell_1881", "auguste_jean_1894", "bertrand_lettres_1865"],
       note: "The suppression of 1773 and the handover to Padroado priests from Goa are documented — though Caldwell's \"died one by one\" is Stuart's sentence two years earlier, so those two are one gazetteer witness and not two. Auguste Jean (p.230) settles the death of Thomassini, and the page now follows him: he had himself carried to Fr Antoine Douarte at Talai and died THERE in 1775, aged seventy-five, not at Vadakkankulam.",
     },
   ],
@@ -254,7 +247,7 @@ export const HISTORY_CITATIONS: Record<string, DotCitation[]> = {
     {
       tier: "documented",
       photo: "the-weeping-madonna-1.jpg",
-      keys: ["caldwell_1881", "auguste_jean_1894", "history_2026"],
+      keys: ["caldwell_1881", "auguste_jean_1894"],
       note: "The sixty-three-year Jesuit absence and the Goa/Padroado succession are documented (Caldwell and Stuart are one gazetteer witness, near word-for-word). Two things these keys do NOT support: \"tended only by visiting priests\" — the parish's own roll shows an unbroken line of resident pastors across the whole gap — and the jurisdiction, since that roll is headed \"the Priest of Cochin\" and the page's own 1794 dot cites Paulinus placing the village under the Bishop of Cochin, not Cranganore.",
     },
     // 1
@@ -282,28 +275,28 @@ export const HISTORY_CITATIONS: Record<string, DotCitation[]> = {
     {
       tier: "devotion",
       photo: "the-weeping-madonna-2.jpg",
-      keys: ["history_2026", "diocese_thoothukudi_page"],
+      keys: ["diocese_thoothukudi_page"],
       note: "One witness stands behind every account of 1803 — Besse (1914), resting in turn on the parish's own record of that year — and the diocesan page and the parish compilation are Besse retold, so these keys are one witness family and never corroboration. It has never been submitted to Rome and no Vatican commission has examined it; the conflicting dates and the weekday are a known open question (CITATION_AUDIT §F) and are deliberately out of scope for this pass.",
     },
     // 5
     {
       tier: "devotion",
       photo: "the-weeping-madonna-3.jpg",
-      keys: ["history_2026", "catholictamil_182"],
+      keys: ["catholictamil_182"],
       note: "The details of the scene — the catechist wiping the tears, the bell, the village hurrying in at an unusual hour, the Parce Domine — come from two Tamil parish texts that are near word-for-word identical: one witness, printed twice, and the order of events on the page is an editorial harmonisation of two retellings that narrate it differently. Besse was removed as a per-detail chip: nobody on this project has opened the book, and a source we have not read cannot be cited line by line.",
     },
     // 6
     {
       tier: "devotion",
       photo: "the-weeping-madonna-4.jpg",
-      keys: ["history_2026", "catholictamil_182"],
+      keys: ["catholictamil_182"],
       note: "The named witnesses (Zacharias, Vyagappar, Henriette Bilderbeck) and Fr Cardoza's same-day declaration come from those same two parish texts — one witness printed twice, and no outside key at all on the era's most extraordinary claim. The one genuinely checkable detail is that the parish's own priest-list independently places Fr John Louis Cardoza in office here in exactly 1803.",
     },
     // 7
     {
       tier: "documented",
       photo: "the-weeping-madonna-8.jpg",
-      keys: ["cms_intelligencer_1880", "badley_directory_1886", "trento_2022", "history_2026"],
+      keys: ["cms_intelligencer_1880", "badley_directory_1886", "trento_2022"],
       note: "The family, at last, has outside witnesses — all of them Protestant, none with any reason to flatter a Catholic shrine. Trento (2022, p.285) identifies the village's Mr Bilderbeck from the parish's own 1915 genealogical manuscript as the merchant Christopher Bilderbeck (b. c.1758, d. 1817); the CMS Intelligencer's obituary (Aug. 1880, pp.512–513) records his son John as \"born in India… of a Roman Catholic family, and trained for the priesthood of that Church\"; Badley's Methodist directory supplies the birth year, 1809. That this documented household is the household of the 1803 account is an identification by name, place and period — the sources know one Bilderbeck family here — and the boon-story the parish attaches to them is cited, as tradition, on the era of the church they are remembered to have helped.",
     },
     // 8
@@ -319,7 +312,7 @@ export const HISTORY_CITATIONS: Record<string, DotCitation[]> = {
     {
       tier: "documented",
       photo: "great-two-nave-church-1.jpg",
-      keys: ["auguste_jean_1894", "bertrand_lettres_1865", "neill_1985", "history_2026"],
+      keys: ["auguste_jean_1894", "bertrand_lettres_1865", "neill_1985"],
       note: "Fr Martin's letter of 14 July 1838 is a printed eyewitness document — that is the real citation; Neill's version is Besse retold and not a second witness. Two errors to fix: the building was the 1749–52 STONE church, not \"the old chapel\", and it was the MEP priest Mousset, not the Jesuits, who seated the children of all castes together.",
     },
     // 1
@@ -340,14 +333,14 @@ export const HISTORY_CITATIONS: Record<string, DotCitation[]> = {
     {
       tier: "tradition",
       photo: "great-two-nave-church-9.jpg",
-      keys: ["auguste_jean_1894", "trento_2022", "history_2026", "souvenir_150yr"],
+      keys: ["auguste_jean_1894", "trento_2022", "souvenir_150yr"],
       note: "The benefaction is the parish's own memory and is tiered as such: the twenty-seven childless years, the boon and the generous giving come from the parish compilation, and the souvenir's Tamil telling (\"within one year a male child\") is the same witness family retold, never corroboration. What the outside record contributes is the check, not the confirmation: Auguste Jean credits the church to Fr Grégoire's persevering energy and names no lay benefactor anywhere in his two volumes, and Trento's dates put Christopher Bilderbeck's death in 1817, thirty-eight years before the foundation stone — so the gift, if it happened as remembered, belonged to the old church or to his heirs. Besse, unread, is where the claim could still be settled, and the dot says so.",
     },
     // 4
     {
       tier: "tradition",
       photo: "great-two-nave-church-2.jpg",
-      keys: ["parish_english_history", "history_2026", "diocese_thoothukudi_page"],
+      keys: ["parish_english_history", "diocese_thoothukudi_page"],
       note: "Auguste Jean was removed: he says nothing about 1855, the stone, or the motto. Bishop Canoz's blessing of the foundation stone on 9 August 1855 and the motto \"Templum sit duplex, ara sed una\" survive only in parish-side books (possibly one book counted twice), the Latin is textually corrupt where the page does not quote it, and history_2026 says only that a priest COMPOSED a verse — nobody has ever inspected the stone, so the page must not say the words were cut into it.",
     },
     // 5
@@ -382,7 +375,7 @@ export const HISTORY_CITATIONS: Record<string, DotCitation[]> = {
     {
       tier: "documented",
       photo: "great-two-nave-church-5.jpg",
-      keys: ["pate_gazetteer_1917", "auguste_jean_1894", "parish_english_history", "history_2026"],
+      keys: ["pate_gazetteer_1917", "auguste_jean_1894", "parish_english_history"],
       note: "The completion of \"the present handsome church… in 1872\" stands in a British government gazetteer — the single best external anchor on the page — and the plan of two converging naves meeting in a common chancel is described from outside the parish as well as within it. Keep the hedge: all three Jesuit witnesses say \"probably\" or \"perhaps\" without equal in the world, never flatly. The ninety-two-foot towers, the vegetable dyes and the \"Little Rome\" naming are parish-side, not documented.",
     },
     // 10
@@ -405,7 +398,7 @@ export const HISTORY_CITATIONS: Record<string, DotCitation[]> = {
     {
       tier: "documented",
       photo: "little-rome-2.jpg",
-      keys: ["arsi_tolosana_1914", "la_mission_du_madure_periodical", "pate_gazetteer_1917", "neill_1985", "history_2026"],
+      keys: ["arsi_tolosana_1914", "la_mission_du_madure_periodical", "pate_gazetteer_1917", "neill_1985"],
       note: "The best externally-evidenced strand on the page — Pate (writing within years, with Caussanel himself as informant), the Madras High Court of 1926, and the Jesuit catalogues. But every witness says the outcome was LITIGATION, not reconciliation: the page's \"true act of reconciliation\" is contradicted by all of them. The year 1910 and the two walls rest on Sivasubramanian alone.",
     },
     // 2
@@ -426,7 +419,7 @@ export const HISTORY_CITATIONS: Record<string, DotCitation[]> = {
     {
       tier: "tradition",
       photo: "little-rome-4.jpg",
-      keys: ["catholic_directory_1924", "parish_english_history", "souvenir_150yr", "history_2026", "diocese_thoothukudi_page"],
+      keys: ["catholic_directory_1924", "parish_english_history", "souvenir_150yr", "diocese_thoothukudi_page"],
       note: "The naming of Vadakkankulam \"Chinna Romapuri\" in 1926 is remembered only in parish and diocesan telling — one institutional witness family — and appears in no colonial or academic source, and in no 1926 document of any kind. The 1914 Roman catalogue and Neill were removed: a catalogue printed twelve years before the event, and a historian who never mentions the naming, are not evidence for it, and six chips on a claim with no document behind it is the exact stacking this file forbids.",
     },
     // 5
@@ -440,7 +433,7 @@ export const HISTORY_CITATIONS: Record<string, DotCitation[]> = {
     {
       tier: "tradition",
       photo: "little-rome-5.jpg",
-      keys: ["history_2026", "rosariancr_fatimagiri"],
+      keys: ["rosariancr_fatimagiri"],
       note: "One witness: the Rosarian congregation's own website (the Knowledge Base files that appear to corroborate it all trace back to that single URL). \"Servant of God\" is the order's own usage with no Holy See decree in evidence, and the \"rocky hill above the village\" and the spread of the Rosarians from here have no source at all; the Bethany Sisters' document was removed because it concerns 1970 and says nothing of 1944 or the Rosarians.",
     },
   ],
@@ -472,7 +465,7 @@ export const HISTORY_CITATIONS: Record<string, DotCitation[]> = {
     {
       tier: "tradition",
       photo: "shrine-and-the-saint-1.jpg",
-      keys: ["souvenir_150yr", "history_2026", "diocese_thoothukudi_page"],
+      keys: ["souvenir_150yr", "diocese_thoothukudi_page"],
       note: "The declaration of 6 August 1993 by Bishop S. T. Amalanathar is attested only by the parish and the diocese reporting their own act — one institutional witness family, and no decree text is held; the souvenir is the source of the date and is now chipped for it. Every 1993 witness says the HOLY FAMILY church was declared a shrine: the Marian title is the shrine's present style, first attested in 2022, and must not be back-dated twenty-nine years.",
     },
     // 1
@@ -507,7 +500,7 @@ export const HISTORY_CITATIONS: Record<string, DotCitation[]> = {
     {
       tier: "tradition",
       photo: "shrine-and-the-saint-5.jpg",
-      keys: ["census_2011", "maalaimalar_2022", "history_2026", "diocese_thoothukudi_page"],
+      keys: ["census_2011", "maalaimalar_2022", "diocese_thoothukudi_page"],
       note: "Both external keys REFUTE the head-count the dot asserts: the 2011 census puts the whole town at 9,220 people (and 94.28% literacy, which the page cites and never shows), and the diocese's own page gives about 7,350 Catholics in about 1,600 families against the parish's 10,500 in 4,000 — the figure must be attributed, not asserted. Maalaimalar (5 August 2022) is added as the only external, non-parish witness to the living cult: it reports the chariot procession at about 1 a.m. on 15 August drawing roughly a lakh of pilgrims, many of them from Kerala.",
     },
   ],
@@ -523,6 +516,7 @@ export const SOURCE_SHORT: Record<string, string> = {
   "auguste_jean_1894": "Auguste Jean 1894",
   "bayly_1989": "Bayly 1989",
   "bell_inscription_photograph": "The bell itself",
+  "besse_moumas_typescript": "Besse (Moumas tr.)",
   "bertrand_1847": "Bertrand 1847",
   "bertrand_lettres_1865": "Bertrand 1865",
   "besse_1914": "Besse 1914",
@@ -539,7 +533,7 @@ export const SOURCE_SHORT: Record<string, string> = {
   "dessal_1902": "Dessal 1902",
   "diocese_thoothukudi_page": "Diocese page",
   "faber_1851": "Faber 1851",
-  "history_2026": "Parish history 2026",
+  "hardgrave_1969": "Hardgrave 1969",
   "holy_see_canonisation_rite_2022": "Holy See 2022",
   "india_orientalis_christiana_1794": "Paulinus 1794",
   "jemparc_book450": "The parish diary",

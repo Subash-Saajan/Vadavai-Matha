@@ -301,6 +301,14 @@ export const SOURCE_GROUPS: SourceGroup[] = [
         archiveOnly: true,
       },
       {
+        id: "besse_moumas_typescript",
+        author: "Léon Besse, S.J. — English translation by Fr Moumas, S.J.",
+        title: "New Madurai Mission: Madurai Mission Southern District, Vol. IV (1715–1913)",
+        detail: "Typescript, c.1970s–80s — the parish library's own copy, accession 215 (= JEMPARC Shembaganur, Book 95)",
+        note: "Besse's book, at last, in a form we can read. The entry above says no one on this project had opened it; that stopped being true in July 2026, when seven pages of the Vadakkankulam chapter (pp. 805–844) of the parish's own English typescript were photographed and transcribed. It is Besse's text, so we read it as Besse and not as the parish — but we read his hedges too. Where he writes that the church's builder “is said to be” de Britto, he is recording a tradition, not asserting a fact, and we do not promote him past what he claims; two sentences later he draws the line himself — “Here tradition is met with historic documents” — and only then produces the Annual Letter of 1701. What he does give flatly, from the mission's records, is the village's origin as a staging post between two kingdoms and the 1713 statistics the parish has quoted ever since. The translation is an unpublished internal document: we quote it and never reproduce it.",
+        archiveOnly: true,
+      },
+      {
         id: "auguste_jean_1894",
         author: "Auguste Jean, S.J.",
         title: "Le Maduré : l'ancienne et la nouvelle mission",
@@ -358,8 +366,16 @@ export const SOURCE_GROUPS: SourceGroup[] = [
         author: "Susan Bayly",
         title: "Saints, Goddesses and Kings",
         detail: "Cambridge University Press, 1989 — pp. 405–406",
-        note: "A scholar of South Indian religion, writing independently of the parish, who records the tradition of a woman founder and “a small shrine containing a cross”. Outside corroboration for Santhaayi.",
+        note: "A scholar of South Indian religion who works from the Jesuit manuscripts at the Madura Mission Archives rather than from anything the parish published — and who says more for Santhaayi than the parish claims for her, calling her the founder of the village rather than merely its first Christian. We do not hold the volume: it is quoted here at second hand, and it is still in copyright.",
         url: "https://archive.org/details/saintsgoddessesk0000bayl",
+      },
+      {
+        id: "hardgrave_1969",
+        author: "Robert L. Hardgrave Jr.",
+        title: "The Nadars of Tamilnad",
+        detail: "University of California Press, 1969",
+        note: "The standard social history of the community, written with no interest in this church whatever — which is exactly what makes it useful here. It sets down 1680, a woman, and a church in 1685 as plain fact, and it reached them by a different road from Bayly's. Between the two of them the founding of Vadakkankulam stops being something only the parish says. Not held on this project: quoted at second hand, and still in copyright.",
+        url: "https://archive.org/details/nadarsoftamilnad0000hard",
       },
       {
         id: "cronin_1959",
@@ -411,13 +427,6 @@ export const SOURCE_GROUPS: SourceGroup[] = [
         title: "ஆலய 150-வது ஆண்டுவிழா மலர் — the 150-Year Jubilee Souvenir",
         detail: "2022 — the parish's own jubilee book, cited openly and always as tradition",
         note: "Our own jubilee book, published for the sesquicentenary of the 1872 consecration. This note used to promise that nothing on this website was cited to it. That promise was not kept, and we would rather say so than go on making it: the history page was leaning on the souvenir all along — for the kankol festival of 1749, for the east-facing plan of the church, for the date of 6 August 1993, for the chariot of 1891 and the new one of 2014, for the years of the lace school. Using a book while publicly swearing you do not use it is the one real dishonesty available to a page built on honesty. So we cite it now, in the open, wherever it is genuinely the source. It is always tiered as tradition and never as documentation: a parish's own book cannot be independent proof of a parish's own claim, and calling it one would be a circle, not a citation. Where the souvenir points to an older witness we still go to that witness and cite it too. And an honest note about the book: it dates the apparition to 1805, where every other source — diocesan, Jesuit and Tamil — gives 1803, and our own priest-list places Fr John Louis Cardoza here in exactly 1803. We follow 1803 and treat 1805 as a copying slip in our own souvenir.",
-        archiveOnly: true,
-      },
-      {
-        id: "history_2026",
-        title: "Vadakankulam History (2026)",
-        detail: "The parish's own in-house compilation",
-        note: "A compilation rather than a witness. Several of the facts that appear only here — the eight hundred baptisms of 1712–13, the two hundred of 1685 — carry no source of their own, and we say so rather than lend them a borrowed authority.",
         archiveOnly: true,
       },
       {

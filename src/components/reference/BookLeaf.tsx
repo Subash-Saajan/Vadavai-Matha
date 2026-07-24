@@ -20,16 +20,48 @@ import { RIGHTS_NOTE } from "@/lib/referenceIndex";
  * from the unfaded page. It doubles as the accessibility escape hatch, since
  * blurred low-contrast text is unreadable for many people by default.
  */
-export function BookLeaf({ leaf }: { leaf: Leaf }) {
+export function BookLeaf({ leaf, url }: { leaf: Leaf; url?: string }) {
+  // The pages we can turn through: the cited page plus any caste-free neighbours
+  // the build could reach. Most leaves have only the one, and behave as before.
+  const pages = leaf.pages;
+  // Open on THE cited page — not on a run-up page that only carries the head of a
+  // sentence spilling into the cited one.
+  const anchorIdx = pages ? Math.max(0, pages.findIndex((p) => p.cited)) : 0;
+
+  const [pageIdx, setPageIdx] = useState(anchorIdx);
   const [plain, setPlain] = useState(false);   // context un-faded
   const [scan, setScan] = useState(false);     // the real photographed page
 
-  const hasPage = leaf.kind === "leaf" && leaf.pageText && leaf.span;
-  const [start, end] = (leaf.span ?? [0, 0]) as [number, number];
-  const text = leaf.pageText ?? "";
+  // The page currently on the desk — one of the neighbours, or the single leaf.
+  const cur = pages
+    ? pages[pageIdx]
+    : { n: leaf.page, text: leaf.pageText ?? "", span: leaf.span ?? null, scan: leaf.scan, cited: true };
+  const curText = cur.text ?? "";
+  const curScan = cur.scan;
+  // Only the cited page carries a highlight; the neighbours are run-up or continuation.
+  const cited = (cur.span ?? null) as [number, number] | null;
+
+  const turn = (delta: number) => {
+    if (!pages) return;
+    setPageIdx((i) => Math.min(pages.length - 1, Math.max(0, i + delta)));
+    setScan(false);   // a turned page lands on its reading text, not its facsimile
+    setPlain(false);
+  };
+
+  // Where the book lives, named by its host — "archive.org", not a raw URL. A
+  // reader deciding whether to follow a link deserves to know where it goes.
+  let host = "";
+  try {
+    if (url) host = new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    host = "";
+  }
+
+  const hasPage = leaf.kind === "leaf" && curText.length > 0;
+  const [start, end] = (cited ?? [0, 0]) as [number, number];
   // Where the whole page IS the citation, there is nothing to un-dim, and offering to
   // "read the whole page" would be a button that does nothing.
-  const hasContext = Boolean(hasPage) && (start > 0 || end < text.length);
+  const hasContext = hasPage && !!cited && (start > 0 || end < curText.length);
 
   return (
     <div className="leaf-wrap">
@@ -37,27 +69,31 @@ export function BookLeaf({ leaf }: { leaf: Leaf }) {
       <article className={`leaf ${plain ? "is-plain" : ""}`}>
         <header className="leaf-head">
           <span className="leaf-head-title">{leaf.short}</span>
-          {leaf.page ? <span className="leaf-head-folio">p. {leaf.page}</span> : null}
+          {cur.n ? <span className="leaf-head-folio">p. {cur.n}</span> : null}
         </header>
 
-        {scan && leaf.scan ? (
+        {scan && curScan ? (
           <div className="leaf-scan">
             <Image
-              src={leaf.scan}
-              alt={`The printed page ${leaf.page} of ${leaf.title}, photographed from the book`}
+              src={curScan}
+              alt={`The printed page ${cur.n} of ${leaf.title}, photographed from the book`}
               width={1300}
               height={2000}
               className="w-full h-auto"
               sizes="(max-width: 768px) 100vw, 44rem"
             />
           </div>
-        ) : hasPage ? (
-          // The printed page, with the cited passage found inside it.
+        ) : hasPage && cited ? (
+          // The cited page, with the passage found inside it and the rest dimmed.
           <div className="leaf-body" lang={leaf.lang}>
-            <span className="ctx">{text.slice(0, start)}</span>
-            <mark className="cited">{text.slice(start, end)}</mark>
-            <span className="ctx">{text.slice(end)}</span>
+            <span className="ctx">{curText.slice(0, start)}</span>
+            <mark className="cited">{curText.slice(start, end)}</mark>
+            <span className="ctx">{curText.slice(end)}</span>
           </div>
+        ) : hasPage ? (
+          // A neighbour page: nothing on it is cited, so nothing is dimmed — the
+          // whole page in full ink, there only to be read.
+          <div className="leaf-body" lang={leaf.lang}>{curText}</div>
         ) : (
           // No page to print — either the law forbids it, or we have never
           // opened the book. Both say so plainly rather than faking a leaf.
@@ -74,8 +110,83 @@ export function BookLeaf({ leaf }: { leaf: Leaf }) {
           </div>
         )}
 
-        {leaf.page && !scan ? <div className="leaf-folio">{leaf.page}</div> : null}
+        {/* ── Our reading of it, on the sheet ──
+            A quotation of six words alone on a large sheet reads as an empty
+            page, and an empty page reads as a weak citation — when in fact the
+            limit is the law, not the evidence. So where we may print only a
+            fragment, our own account of what the book establishes comes up onto
+            the sheet to sit beside it.
+
+            IT MUST NEVER BE MISTAKEN FOR THE BOOK. The quotation keeps the book's
+            voice — serif, ruled, full ink. This is set apart and labelled: it is
+            us, talking about them. Paraphrase is ours to write freely; their
+            sentences are not ours to lengthen. */}
+        {leaf.kind !== "leaf" && leaf.establishes && (
+          <section className="leaf-gloss">
+            <p className="leaf-gloss-label">What this source establishes</p>
+            <p className="leaf-gloss-body">{leaf.establishes}</p>
+          </section>
+        )}
+
+        {/* ── Where the rest of it is ──
+            A leaf that can only ever show a quotation must not dead-end. Stopping
+            at six words and saying nothing more is a citation asking to be taken
+            on trust, which is the exact habit this reader exists to break: if the
+            law will not let us print the page, the least we owe is the door.
+
+            Only on leaves with no page of their own. Where a facsimile is already
+            on the sheet, the reader HAS the rest, and the link belongs in the
+            footer with the other navigation, not in the middle of the evidence. */}
+        {leaf.kind !== "leaf" && url && host && (
+          <p className="leaf-onward">
+            {leaf.kind === "unavailable"
+              ? "Nobody here has opened this book. If you want to, it is at "
+              : "This is as much of it as we may lawfully print. The rest is at "}
+            <a
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="leaf-onward-link"
+            >
+              {host}
+              <span aria-hidden> ↗</span>
+            </a>
+            .
+          </p>
+        )}
+
+        {cur.n && !scan ? <div className="leaf-folio">{cur.n}</div> : null}
       </article>
+
+      {/* ── Turning the pages ──
+          Where the build could reach the cited page's neighbours (public-domain or
+          our own, and caste-free), the reader can leaf forward to follow a sentence
+          that finishes overleaf, or back to see the run-up. The cited page is marked
+          so it is never lost among its neighbours. */}
+      {pages && pages.length > 1 && (
+        <nav className="leaf-pager" aria-label="Turn the pages of this book">
+          <button
+            type="button"
+            className="leaf-page-btn"
+            onClick={() => turn(-1)}
+            disabled={pageIdx === 0}
+          >
+            ← Previous page
+          </button>
+          <span className="leaf-pager-at">
+            {cur.n ? `p. ${cur.n}` : `page ${pageIdx + 1}`}
+            {cur.cited ? " · the cited page" : cited ? " · the passage continues" : ""}
+          </span>
+          <button
+            type="button"
+            className="leaf-page-btn"
+            onClick={() => turn(1)}
+            disabled={pageIdx === pages.length - 1}
+          >
+            Next page →
+          </button>
+        </nav>
+      )}
 
       {/* A crop the reader cannot see is precisely the cherry-picking this page exists to
           prevent. That we crop for a reason does not earn us the right to crop silently. */}
@@ -97,7 +208,7 @@ export function BookLeaf({ leaf }: { leaf: Leaf }) {
             {plain ? "Dim the rest of the page" : "Read the whole page"}
           </button>
         )}
-        {leaf.scan && (
+        {curScan && (
           <button
             type="button"
             className="leaf-btn"
@@ -201,8 +312,8 @@ export function BookLeaf({ leaf }: { leaf: Leaf }) {
            lean in — but stepped back, so the eye lands on the sentence we relied
            on. Reduce the ink, don't delete the words. */
         .ctx {
-          color: rgba(28,26,21,.34);
-          filter: blur(.35px);
+          color: rgba(28,26,21,.58);
+          filter: blur(.15px);
           transition: color .5s ease, filter .5s ease;
         }
         /* The sentence the history page actually stands on. Full ink, set heavier,
@@ -243,6 +354,61 @@ export function BookLeaf({ leaf }: { leaf: Leaf }) {
           font-size: .9rem;
           font-style: italic;
           color: var(--text-muted);
+        }
+
+        /* Our gloss, on the sheet but never in the book's voice: no serif
+           quotation face, no rule down the side, a label over it. The reader
+           must be able to tell at a glance which words are Bayly's and which
+           are ours. */
+        .leaf-gloss {
+          margin-top: 1.7rem;
+          padding-top: 1.25rem;
+          border-top: 1px solid rgba(196,160,73,.28);
+        }
+        .leaf-gloss-label {
+          font-family: var(--font-display), serif;
+          font-size: .56rem;
+          letter-spacing: .28em;
+          text-transform: uppercase;
+          color: var(--gold-dark);
+          margin-bottom: .6rem;
+        }
+        .leaf-gloss-body {
+          font-family: var(--font-sans), system-ui, sans-serif;
+          font-size: .93rem;
+          line-height: 1.72;
+          color: rgba(28,26,21,.66);
+        }
+
+        /* The way onward, set on the sheet itself — quieter than the quotation
+           it follows, but unmistakably a door. */
+        .leaf-onward {
+          margin-top: 1.5rem;
+          padding-top: 1.1rem;
+          border-top: 1px solid rgba(196,160,73,.28);
+          font-family: var(--font-serif), Georgia, serif;
+          font-size: .95rem;
+          line-height: 1.7;
+          color: rgba(28,26,21,.6);
+        }
+        .leaf-onward-link {
+          color: var(--gold-dark);
+          font-weight: 600;
+          text-decoration: underline;
+          text-underline-offset: 3px;
+          text-decoration-thickness: 1px;
+          text-decoration-color: rgba(196,160,73,.55);
+          white-space: nowrap;
+          transition: color .3s ease, text-decoration-color .3s ease;
+        }
+        .leaf-onward-link:hover {
+          color: #6f5620;
+          text-decoration-color: var(--gold-dark);
+        }
+        .leaf-onward-link:focus-visible {
+          outline: 2px solid var(--gold);
+          outline-offset: 3px;
+          border-radius: 2px;
         }
 
         .leaf-scan { margin: -0.4rem 0 0.6rem; }
@@ -295,6 +461,42 @@ export function BookLeaf({ leaf }: { leaf: Leaf }) {
           color: #6f5620;
         }
         .leaf-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+        /* ── The pager: turning to the neighbouring pages ── */
+        .leaf-pager {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1rem;
+          margin-top: 1rem;
+          padding-top: 1rem;
+          border-top: 1px dashed rgba(196,160,73,.32);
+        }
+        .leaf-pager-at {
+          font-family: var(--font-display), serif;
+          font-size: .58rem;
+          letter-spacing: .16em;
+          text-transform: uppercase;
+          color: var(--text-muted);
+          text-align: center;
+          flex: 1;
+        }
+        .leaf-page-btn {
+          font-family: var(--font-display), serif;
+          font-size: .6rem;
+          letter-spacing: .16em;
+          text-transform: uppercase;
+          color: var(--gold-dark);
+          background: transparent;
+          border: none;
+          padding: .4rem .2rem;
+          cursor: pointer;
+          white-space: nowrap;
+          transition: color .3s ease, opacity .3s ease;
+        }
+        .leaf-page-btn:hover:not(:disabled) { color: #6f5620; }
+        .leaf-page-btn:disabled { opacity: .3; cursor: default; }
+        .leaf-page-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
 
         /* ── The English, under the original ── */
         .leaf-trans {

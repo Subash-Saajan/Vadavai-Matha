@@ -7,6 +7,7 @@ import { BookLeaf } from "@/components/reference/BookLeaf";
 import { JsonLd } from "@/components/JsonLd";
 import { citationsFor, SOURCE_SHORT, TIER_LABEL } from "@/lib/citations";
 import { dict } from "@/lib/i18n";
+import { plainProse, renderProse } from "@/lib/prose";
 import { allLeafKeys, getLeaf, siblingsOf } from "@/lib/references";
 import { SOURCE_INDEX } from "@/lib/sources";
 import { abs } from "@/lib/seo";
@@ -85,7 +86,7 @@ export default async function ReferencePage({
         data={{
           "@context": "https://schema.org",
           "@type": "Claim",
-          text: m.dot.body,
+          text: plainProse(m.dot.body),
           appearance: { "@type": "WebPage", url: abs("/history") },
           citation: {
             "@type": "CreativeWork",
@@ -108,7 +109,7 @@ export default async function ReferencePage({
           <header className="ref-claim">
             <p className="ref-year">{m.dot.year}</p>
             <h1 className="ref-title">{m.dot.title}</h1>
-            <p className="ref-body">{m.dot.body}</p>
+            <p className="ref-body">{renderProse(m.dot.body)}</p>
             <div className="ref-tier-row">
               <span className={`ref-tier ref-tier--${cite.tier}`}>
                 {TIER_LABEL[cite.tier].en}
@@ -140,13 +141,19 @@ export default async function ReferencePage({
             </nav>
           )}
 
-          {/* ── The evidence. ── */}
-          <BookLeaf leaf={leaf} />
+          {/* ── The evidence. ──
+              The bibliography's link is handed down so a leaf that can only show
+              a quotation can point at the book itself, on the sheet, where the
+              reader hits the limit rather than three sections later. */}
+          <BookLeaf leaf={leaf} url={biblio?.url} />
 
           {/* What the book actually settles — including where it settles less
               than the moment above claims. This is the sentence that makes the
               page worth having; without it we are just decorating a footnote. */}
-          {leaf.establishes && (
+          {/* Where there is no page to print, BookLeaf carries this up onto the
+              sheet itself, so a fragment-only citation does not read as an empty
+              one. Rendering it here as well would say it twice. */}
+          {leaf.establishes && leaf.kind === "leaf" && (
             <section className="ref-establishes">
               <p className="ref-establishes-label">What this source establishes</p>
               <p className="ref-establishes-body">{leaf.establishes}</p>

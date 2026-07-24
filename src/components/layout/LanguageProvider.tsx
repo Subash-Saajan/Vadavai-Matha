@@ -51,13 +51,16 @@ export function LanguageProvider({
 
   const setLang = useCallback(
     (l: Locale) => {
-      router.push(localePath(l, basePath));
+      // scroll: false — a language switch is the same page in the other
+      // tongue, not a new destination. Without it Next.js jumps to the top
+      // of the page on every toggle, same as any other route change.
+      router.push(localePath(l, basePath), { scroll: false });
     },
     [router, basePath],
   );
 
   const toggle = useCallback(() => {
-    router.push(otherHref);
+    router.push(otherHref, { scroll: false });
   }, [router, otherHref]);
 
   const value = useMemo<Ctx>(
