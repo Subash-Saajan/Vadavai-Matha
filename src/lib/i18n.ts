@@ -77,12 +77,17 @@ export const dict = {
       title: "A Story Carried by Generations",
       intro:
         "Three hundred years of one village, told straight through — from a woman's roadside cross in a southern forest to the great two-nave church they call Little Rome.",
-      overlineLabel: `Preface`,
-      overview: `For more than three hundred years the story of this village has been written under the roof of one church and around the love of one Mother. It begins in forest, with a woman who set up a cross outside her door. It runs through the baptism of a saint, a statue that wept on an October morning, and seventeen years of building, to the great two-nave church that gave Vadakkankulam its second name. What follows is that story told straight through — and beneath each part of it, quietly, the letters, registers and printed books it comes from.`,
       contentsLabel: `Contents`,
+      contentsHint: `Choose a chapter below to jump straight to it — no need to scroll through the ones before.`,
       chapterWord: `Chapter`,
       biblioLink: `The full bibliography`,
       noteLabel: `Note`,
+      // The four steps at the foot of a chapter on mobile.
+      navPrev: `Previous`,
+      navNext: `Next`,
+      navPrevChapter: `Previous chapter`,
+      navNextChapter: `Next chapter`,
+      navTapAgain: `Tap again to go`,
       eras: [
         {
           id: `clearing-in-the-forest`,
@@ -117,12 +122,12 @@ export const dict = {
             },
             {
               year: `1685–86`,
-              title: `Two hundred at the water`,
+              title: `The first harvest`,
               body: `In these years de Britto was baptising thousands across the south. In one stretch of two months alone, his biographer counted “two thousand seven hundred”. At Vadakkankulam it is believed he baptised around two hundred. These were the first Christians the village ever had, men, women and children brought to the water together. It was its founding harvest, and from it grew the great Christian community this place would one day be known for.`,
             },
             {
               year: `1693`,
-              title: `Oriyur`,
+              title: `The martyr`,
               body: `Eight years after the thatch went up at Vadakkankulam, he was in irons. On the eve of his death, in the prison at Oriyur, he wrote to his brethren. A straw served him for a pen, and his ink was charcoal moistened with his own spittle. “The only crime I am accused of is, that of having taught the law of Jesus Christ… as this crime is a virtue, the punishment cannot be otherwise than honourable to me.” The next morning he was beheaded, forty-five years old, and two and a half centuries later Rome named him a saint. To the wider Church he is a martyr of the far south. To Vadakkankulam he has always been Arulanandar, the priest it remembers as its founder, whose feast it keeps each February.`,
             },
           ],
@@ -131,17 +136,22 @@ export const dict = {
           id: `first-inland-parish`,
           span: `1698–1740`,
           heading: `The First Inland Parish`,
-          blurb: `Priests of its own, a name in a Jesuit letter sent to Rome, and eight hundred baptisms in two seasons: the clearing became a parish.`,
+          blurb: `A first priest beaten for a treasure he never had and brought back by a queen's word, a name in a letter to Rome, and eight hundred baptisms in two seasons: the clearing became a parish.`,
           dots: [
             {
               year: `1698`,
-              title: `Priests of its own`,
-              body: `From about 1698 the clearing had priests of its own. The parish's roll of pastors begins here and runs on without a break to the priest who says Mass this morning. What had been a place a missionary passed through was now a parish with a shepherd living in it, and it was growing into the first great inland Catholic parish in the country that is today the Diocese of Thoothukudi.`,
+              title: `The first parish priest`,
+              body: `For years a priest had only ridden through. Then the mission judged the place worth a house of its own, set as it was on the border of Travancore and the Pandiyan country and convenient to both. The first priest sent to live here, about 1698, was Fr Bernard de Saa. From him the parish's roll of pastors begins, and it has run on without a break to the priest who says Mass this morning.`,
+            },
+            {
+              year: `1700`,
+              title: `The priest and the queen`,
+              body: `De Saa had not been long among them when the persecution fell. Men who were certain the priest was hiding money came for him one night while the fever was on him, dragged him from his bed, struck him, bound him with ropes and carried him before the Governor, who held him a while and then drove him out of the district. A fellow Jesuit, Fr Pierre Martin, came upon him months afterward still broken from it, and set down what he saw: “the traces of the beatings, and how all his teeth had been knocked out.” What brought him back was a word from a throne. Fr Laynez carried his case to Mangammal, the queen who then ruled Madurai, and she let him return to Vadakkankulam.`,
             },
             {
               year: `1709`,
               title: `The name in a Jesuit letter`,
-              body: `The earliest document of its own century to name this place is the Jesuit Annual Letter of 1709. It sets down Fr Maria Xavier Borghese at the head of the district of Vadakencoulam, and says of him: “He labours for the conversion of the heathen with an admirable zeal; the ardour of his spirit supplies for the strength of the body.” It is one line in a report sent to Rome, and it says nothing about the church or the village. It is also the moment this place steps out of memory and into the written record, and it has not left it since.`,
+              body: `By 1709 this place had its name in the letters the Jesuits sent home to Rome. The Annual Letter of that year puts Fr Maria Xavier Borghese at the head of the district of Vadakencoulam, and says of him: “He labours for the conversion of the heathen with an admirable zeal; the ardour of his spirit supplies for the strength of the body.” It is one line in a report, and it tells us nothing of the church or the village. But from here the record does not break again: the parish keeps its place in the written history of the mission from this year on.`,
             },
             {
               year: `1712–1713`,
@@ -151,7 +161,7 @@ export const dict = {
             {
               year: `1714`,
               title: `A residence on the frontier`,
-              body: `By 1714 the Society of Jesus had made Vadakkankulam a residence in its own right — no longer a village on a circuit but a house where a father lived. In the mission's own account of those years a missionary writes in the first person of an impostor who came “into the church of Vadakencoulam where I then was”, and who was found out by the catechist walking at his side. A resident priest, a working church, a catechist beside him: within thirty years of the thatch, the parish had arrived.`,
+              body: `By 1714 the Society of Jesus had made Vadakkankulam a residence in its own right, no longer a village on a circuit but a house where a father lived. In the mission's own account of those years a missionary writes in the first person of an impostor who came “into the church of Vadakencoulam where I then was”, found out by the catechist walking at his side. A resident priest, a working church, a catechist beside him: within thirty years of the thatch, the parish had arrived.`,
             },
           ],
         },
@@ -162,44 +172,39 @@ export const dict = {
           blurb: `The golden years of Fr Buttari — a statue washed ashore from the sea, the baptism of a future saint, and the first lasting church rising in the shape of a cross.`,
           dots: [
             {
-              year: `1742–43`,
+              year: `1742`,
               title: `A box out of the sea`,
-              body: `In 1742 or 1743 the sea put a wooden box ashore at Kootapuli, on the coast below the village. It was stencilled “To Vadakankulam, From Portugal”, and it held carved images of Our Lady. The fishermen carried it up to the parish priest, Fr John Baptist Buttari. He kept one image for his own church, sent a second to Kamanayakkanpatti, and gave the third into the Bishop's care. The one that stayed here is Our Lady of the Assumption — the statue that stands above this altar, and the statue that would one day weep.`,
+              body: `In 1742 the sea put a wooden box ashore at Kootapuli, on the coast below the village. It was stencilled “To Vadakankulam, From Portugal”, and it held carved images of Our Lady. The fishermen carried it up to the parish priest, Fr John Baptist Buttari. He kept one image for his own church, sent a second to Kamanayakkanpatti, and gave the third into the Bishop's care. The one that stayed here is Our Lady of the Assumption, the statue that stands above this altar, and the statue that would one day weep.`,
             },
             {
               year: `1745`,
               title: `The baptism of Neelakanta Pillai`,
-              body: `On 14 May 1745, after nine months of instruction, Fr Buttari baptised a Nair officer of the court of Travancore in the Holy Family Church. His name had been Neelakanta Pillai. He took the name Devasahayam — God is my help — and his godfather was the catechist Gnanaprakasam Pillai. Two hundred and seventy-seven years later the Church would raise that man to the altars as the first Indian layman ever canonised, and the record of Rome would name the place where the water was poured: this village, this church, this font.`,
-            },
-            {
-              year: `1745`,
-              title: `The catechist's hands`,
-              body: `The same year brought the church its first trial. A complaint reached the governor that the Christians would not contribute toward a temple, and the catechist who refused was seized and tortured with the kittei — his fingers crushed between two blocks of wood until the blood sprang from under the nails — while the houses of the new Christians were plundered. Fr Buttari sent two men with a letter to the nabab on whom Vadakkankulam depended, and who honoured him with his friendship. A commissioner came down with orders that the Christians were to be protected from then on, and afterwards, one account says, the priest “found himself surrounded with respect and awe”.`,
+              body: `Neelakanta Pillai was already a man of standing when he came to the font: an officer at the court of the king of Travancore, of good family, and thirty-two years old. It was Eustache de Lannoy, an officer of the king's own army, who first spoke to him of the Christian faith and sent him on to Fr Buttari, the priest of Vadakkankulam. Buttari could see the persecution such a convert would draw, and he did not hurry. He “judged it necessary to defer the grace he so ardently desired; and, having tested him long, admitted him to the sacrament of regeneration.” The instruction ran nine months. On 14 May 1745 the water was poured in the church here, with the catechist Gnanaprakasam Pillai standing as his godfather, and the officer took the name Lazarus, and in Tamil Devasahayam, God is my help.`,
             },
             {
               year: `1749`,
-              title: `The kankol festival`,
-              body: `By 1749 de Britto's thatch could not hold the congregation any longer, and Fr Buttari held the kankol — the foundation-stone festival — for a lasting church. It was raised of broad bricks carted from Perungudi. Its bell, half a century later, would call the village in at an hour when no bell was ever rung.`,
+              title: `From thatch to brick`,
+              body: `By 1749 de Britto's thatch could no longer hold the congregation, and Fr Buttari set about a lasting church to replace it. He “laid the foundations” of it, and Fr Thomassini carried it to completion. By the parish's own record it rose in broad bricks, its foundation stone blessed at a kankol festival the parish dates to 1749.`,
             },
             {
               year: `c.1749`,
               title: `The errand for timber`,
-              body: `The church was rising and the timber ran short. To help his priest, Devasahayam went to an old friend at the king's court to ask leave to cut wood in the royal forests. They never got as far as the timber. They fell to arguing about religion instead, and the man went away threatening his life. The warrant followed soon after. When it came, Devasahayam gave himself up without resistance.`,
+              body: `Fr Buttari was “occupied in building his church”, and it wanted timber. To help his priest, Devasahayam went to an old friend at the king's court to ask leave to cut wood in the royal forests. They never got as far as the timber. They fell to arguing about religion instead, and the man went away threatening his life. The warrant followed soon after, and when it came, Devasahayam gave himself up without resistance.`,
             },
             {
               year: `1752`,
               title: `A church in the shape of a cross`,
-              body: `In 1752 the brick church was finished — built in the form of a cross, its altar facing east toward the rising sun. Fr Buttari had begun it and Fr Clement Thomassini carried it to the end. Its patron in those years was not yet the Holy Family but St Francis Xavier, whose feast the village kept every December with a great novena; and it was under Thomassini that the Feast of the Assumption first took root here as the day the whole country came.`,
+              body: `By 1752 the church stood finished, raised in the form of a cross with its altar facing east toward the rising sun. Like de Britto's chapel before it, it was “dedicated to the Holy Family”. Its great feast was St Francis Xavier's, kept every December with a solemn novena. The parish fixes the year by two inscriptions once set inside the church's walls.`,
             },
             {
               year: `1752`,
-              title: `Aralvaimozhi`,
-              body: `Three years of it: paraded through the towns on a buffalo, scourged, and chained for months to a tree in the wilderness. On 14 January 1752 they took him out to the Travancore lines at the Aralvaimozhi gap and shot him, and he died with the names of Jesus and Mary on his lips. His body was gathered into the church of St Francis Xavier at Kottar, where the Bishop of Cochin had the Te Deum sung and preached the martyr's panegyric himself. Vadakkankulam kept what it could of him — a part of his garment, and the chains he had been bound with. His wife, baptised Gnanapoo Theresa, lies in the parish cemetery.`,
+              title: `A martyr's death`,
+              body: `Three years of it: paraded through the towns on a buffalo, scourged, and chained for months to a tree in the wilderness. On 14 January 1752 they took him out to the Travancore lines at the Aralvaimozhi gap and shot him, and “the martyr expired, repeating the sweet names of Jesus and Mary”. His body was gathered into the church of St Francis Xavier at Kottar, where the Bishop of Cochin had the Te Deum sung and preached the martyr's panegyric himself. Vadakkankulam kept what it could of him: a part of his garment, and the chains he had been bound with. His wife, baptised Gnanapoo Theresa, lies in the parish cemetery.`,
             },
             {
               year: `1773–1775`,
               title: `The Society is suppressed`,
-              body: `In 1773 Pope Clement XIV suppressed the Society of Jesus in every country in the world. The Jesuits left in Tinnevelly — here, at Talai, at Manapar — died one by one, and priests from Goa took their places. The last of the old fathers here was Clement Thomassini. Feeling his end near, he had himself carried to Fr Antoine Douarte at Talai, and there he died in 1775, seventy-five years old. With him the first Jesuit century at Vadakkankulam closed.`,
+              body: `In 1773 Pope Clement XIV suppressed the Society of Jesus in every country in the world. The Jesuits left in Tinnevelly, here and at Talai and Manapar, died one by one, and priests from Goa took their places. The last of the old fathers here was Clement Thomassini. Feeling his end near, he “had himself carried to Talai, to Fr Antoine Douarte”, and there he died in 1775, seventy-five years old. With him the first Jesuit century at Vadakkankulam closed.`,
             },
           ],
         },
@@ -212,47 +217,37 @@ export const dict = {
             {
               year: `1775–1838`,
               title: `Sixty-three years`,
-              body: `For sixty-three years no Jesuit served this parish. It was not abandoned. Priests came from Goa under the Bishop of Cochin, and the roll of them runs without a gap — Deva Varadhanar, Ignatius, John Louis Cardoza and their successors. The feast was kept, the children were baptised, the dead were buried. The village held its faith on its own for two generations, and the most extraordinary thing that has ever happened here happened in the middle of that time.`,
+              body: `For sixty-three years no Jesuit served this parish. It was not abandoned. Priests came from Goa under the Bishop of Cochin, and the roll of them runs without a gap: Deva Varadhanar, Ignatius, John Louis Cardoza and their successors. The feast was kept, the children were baptised, the dead were buried. And the village did more than hold on. From about 1780 it became “the sole centre of the inland mission”, with four divisional centres set under it, Sendamangalam, Andipatti, Kamanayakkanpatti and the village itself, served by priests from Cochin who “did their best to keep up the foundations already existing” until they made over the whole charge, in 1837, to the first new Jesuits at Palamcottah. Through all of it, the most extraordinary thing that has ever happened here happened in the middle of that time.`,
             },
             {
               year: `after 1775`,
               title: `The father they would not let go`,
-              body: `They never let go of Thomassini. Ninety years after his death a Jesuit writing about this district still used the present tense: “The Christians venerate him as a saint, give his name to their children, and visit his tomb with an extreme devotion.” Even those who were not Christians, he added, called on him in their troubles, holding that his intercession brought the rain down on their harvests.`,
-            },
-            {
-              year: `1794`,
-              title: `A name in a book printed at Rome`,
-              body: `In 1794 the village turned up in a book printed at Rome. Among the churches subject to the Bishop of Cochin, at page 158, stands the entry: “XIV. Vadakencollam.” Forty pages earlier the same name is set on the Cape Comorin coast, in promontorio Comorino. It is a name in a list and it claims nothing more. But it is this parish, in a European printed book, on a shelf in Rome, nine years before the morning that everything here turns on.`,
-            },
-            {
-              year: `1801`,
-              title: `Under a new flag`,
-              body: `Two years before that morning the village changed sovereign. On 31 July 1801 an agreement with the new Nawab handed the sole and exclusive administration of the Carnatic to the Company in perpetuity. The same day Mr Lushington was appointed the first Collector of Tinnevelly under the new sovereign power, and a week later he reported the province brought in without the smallest disturbance. The village went to sleep under one power and woke under another, and nothing about it changed.`,
+              body: `They never let go of Thomassini. In his lifetime he had won them by his gentleness, he had finished their church, and he was the last Jesuit they would have for sixty-three years. He had died away from the village and was buried elsewhere, but his own people “raised a monument in their midst” and kept his memory as a saint's. Ninety years after his death a Jesuit writing about this district still used the present tense: “The Christians venerate him as a saint, give his name to their children, and visit his tomb with an extreme devotion.” Even those who were not Christians, he added, called on him in their troubles, holding that his intercession brought the rain down on their harvests.`,
             },
             {
               year: `1803`,
               title: `A Friday forenoon in Aippasi`,
-              body: `On a Friday forenoon in the month of Aippasi, in the Tamil year 979, a man named Savarimuthu Pillai came into the church to pray. The doors of the niche above the altar stood open, and Our Lady of the Assumption was in it. As he prayed, a thin transparent cloud gathered about her face. Her eyes lifted toward heaven and filled, and the tears ran down; and her folded hands opened, and stretched outward toward him.`,
+              body: `On the forenoon of Friday, 21 October 1803, in the Tamil month of Aippasi of the year 979, a man named Savarimuthu Pillai, who had come from Tirunelveli to see Mr Bilderbeck, a European settled in the village, went into the church to pray. The statue of Our Lady of the Assumption stood above the altar in a recess closed by a double door, and that morning both its leaves were open. As he knelt, a thin transparent cloud gathered behind her and wrapped her round. Her eyes lifted toward heaven and filled, and the tears ran down her cheeks; her face turned sorrowful; and her folded hands parted and stretched out until they touched the walls of the recess. And every other statue on the altar, the record says, “expressed compassion and mourning”.`,
             },
             {
               year: `1803`,
               title: `The bell at the wrong hour`,
-              body: `The catechist Madurendira Annaviyar climbed up to the altar and wiped her face, and the tears came again, and would not stop. Then they rang the bell. It was not an hour at which the bell was ever rung, and the whole village came in from the fields and the houses to see why. They stood and looked at her, and then they wept, and then they sang the old penitential chant that is sung when a people is afraid — Parce Domine, parce populo tuo, spare, O Lord, spare your people — until at last the face above the altar was an ordinary carved face again.`,
+              body: `The catechist Madurendira Annaviyar climbed up to the altar and wiped her face, and the tears came again, and would not stop. Then they rang the bell. It was not an hour at which the bell was ever rung, and the whole village came in from the fields and the houses to see why. They stood and looked, and then they wept and prayed, and sang the old penitential chant that is sung when a people is afraid: Parce Domine, parce populo tuo, spare, O Lord, spare your people. And as they prayed, the statue and all the other images “resumed their customary aspect”, and the face above the altar was an ordinary carved face again.`,
             },
             {
               year: `1803`,
               title: `Those who saw it`,
-              body: `Many saw it. The catechists Zacharias, Vyagappar and Yagappar Pillai were there; and Henriette Bilderbeck, a European laywoman of the village, who went up close and examined the statue and afterwards affirmed all three signs — the clouding of the face, the tears, and the opening of the hands. That same day the parish priest, Fr John Louis Cardoza, with another priest and with Henriette, set his hand to a declaration that what had happened was an extraordinary marvel. The village has kept the day ever since. It keeps it still, on the 22nd and 23rd of October.`,
+              body: `Many saw it, and the mission's own record names two of them. Fearing his eyes had deceived him, Savarimuthu called the catechist Yagappar Pillai and Miss Henriette Bilderbeck, the European's daughter; they came, looked closely, and saw the same thing for themselves: the clouded face, the tears, and the hands stretched out to the walls of the niche. Nor did the account come down as rumour. The parish's chronicler, Sebastian Pillai, wrote it from the mouths of those who had seen it, the honourable catechist and the most trustworthy people of the village, taking it down, he says, at their own dictation.`,
             },
             {
               year: `1803–1817`,
               title: `The family in the church that morning`,
-              body: `The Bilderbecks were flesh and blood, and they can be named. Christopher Bilderbeck, born about 1758, was a merchant of European descent who settled at Vadakkankulam late in the eighteenth century and died here in 1817. Henriette belonged to his household. A son, John, was born in 1809, six years after the weeping; and when John died in 1880 an English missionary journal recorded of him that he had been “born in India… of a Roman Catholic family, and trained for the priesthood of that Church.” The family that stood in this church that morning left a paper trail of its own — in Protestant hands, kept by people with no reason at all to flatter a Catholic shrine.`,
+              body: `The Bilderbecks were flesh and blood, and they can be named. Christopher Bilderbeck, born about 1758, was a merchant of European descent who settled at Vadakkankulam late in the eighteenth century and died here in 1817. They were people of standing, holding the revenue-farm of Nangunery; and Henriette, who had examined the statue that morning, was his daughter. A son, John, was born in 1809, six years after the weeping; and when John died in 1880 an English missionary journal recorded of him that he had been “born in India… of a Roman Catholic family, and trained for the priesthood of that Church.” The family that stood in this church that morning left a paper trail of its own, in Protestant hands, kept by people with no reason at all to flatter a Catholic shrine.`,
             },
             {
               year: `1914`,
-              title: `The book that carries it`,
-              body: `Everything the world knows of that morning comes down a single line. In 1914 the Jesuit historian Léon Besse, working at Trichinopoly, gathered up the papers of the Madurai mission into La Mission du Maduré and set the parish's own record of 1803 into print. That book has never been digitised, and four copies of it are known to survive. So the weeping reaches us as this village has always carried it: a dated morning, named witnesses, a priest's declaration written the same day, and two hundred and twenty years of keeping the feast.`,
+              title: `The books that carry it`,
+              body: `For a long time it was thought the whole of that morning came down a single line: Léon Besse's La Mission du Maduré, printed at Trichinopoly in 1914, which gathered up the papers of the Madurai mission and set the parish's record of 1803 into print. It does not. Nine years before Besse, a Jesuit of this mission, Fr Dessal, had already printed the account in full; and in 1930 a life of Devasahayam, written in Malayalam and in another tradition entirely, recorded the same European woman examining the same three signs. Three witnesses, in three hands, none of them copying the others. It was never carried to Rome, and no commission has ever weighed it. But it reaches us the way this village has always carried it: a dated morning, named witnesses, and two hundred and twenty years of keeping the feast.`,
             },
           ],
         },
@@ -1020,7 +1015,7 @@ export const dict = {
     },
     contact: {
       label: "Visit · Write · Pray",
-      title: "Come to Little Rome",
+      title: "Come to the Shrine",
       intro:
         "The doors of the Holy Family Shrine have stood open since 1685. Whether you are planning a pilgrimage or need to reach the parish office, begin here.",
       address:
@@ -1348,12 +1343,16 @@ export const dict = {
       label: `எங்கள் பாரம்பரியம்`,
       title: `தலைமுறைகளால் சுமக்கப்பட்ட கதை`,
       intro: `மூன்று நூற்றாண்டுகளுக்கும் மேலாக — 1685-ல் புனித அருளானந்தர் ஓலைக் கூரை வேய்ந்த முதல் சிற்றாலயத்தை இங்கே எழுப்பியது முதல் — வடக்கன்குளத்து அன்னை எண்ணற்ற குடும்பங்களின் விசுவாசத்திற்கும், திருவிழாக்களுக்கும், தம் திருமுன் சமர்ப்பிக்கப்பட்ட அமைதியான செபங்களுக்கும் மௌனச் சாட்சியாய் நின்று வருகிறார்.`,
-      overlineLabel: `முன்னுரை`,
       contentsLabel: `உள்ளடக்கம்`,
+      contentsHint: `கீழே உள்ள ஒரு அத்தியாயத்தைத் தேர்ந்தெடுத்தால், நேரடியாக அங்கு செல்லலாம் — முந்தையவற்றைக் கடந்து செல்ல வேண்டிய அவசியமில்லை.`,
       chapterWord: `அத்தியாயம்`,
       biblioLink: `முழு நூற்பட்டியல்`,
       noteLabel: `குறிப்பு`,
-      overview: `மூன்று நூற்றாண்டுகளுக்கும் மேலாக வடக்கன்குளத்தின் கதை ஒரே ஆலயத்தின் கூரையின் கீழும், ஒரே அன்னையின் அன்பைச் சுற்றியும் எழுதப்பட்டு வந்துள்ளது. தென்னகக் காட்டில் ஒரு கிறிஸ்தவப் பெண்மணி எழுப்பிய சாலையோரக் குருசடியிலிருந்து, பரலோக மாதா ஒரு காலத்தில் கண்ணீர் சிந்திய, தனித்துவமான இரட்டை மண்டபச் “சின்ன ரோமாபுரி” வரை — இதுவே திருக்குடும்பத் திருத்தலமாகிய வடவை மாதாவின் வாழும் வரலாறு.`,
+      navPrev: `முந்தையது`,
+      navNext: `அடுத்தது`,
+      navPrevChapter: `முந்தைய அத்தியாயம்`,
+      navNextChapter: `அடுத்த அத்தியாயம்`,
+      navTapAgain: `செல்ல மீண்டும் தட்டவும்`,
       eras: [
         {
           id: `clearing-in-the-forest`,
@@ -1402,17 +1401,22 @@ export const dict = {
           id: `first-inland-parish`,
           span: `1698–1740`,
           heading: `முதல் உள்நாட்டுப் பங்கு`,
-          blurb: `தனக்கேயுரிய பங்குத் தந்தையரின் கீழும், இயேசு சபையின் கீழும், அந்தக் காட்டு வெளி, தென்னகப் பணிக்களம் முழுவதிலும் மூத்த உள்நாட்டுக் கிறிஸ்தவச் சமூகமாகச் செழித்தோங்கியது.`,
+          blurb: `தன்னிடம் இல்லாத செல்வத்திற்காகக் கொடுமைப்படுத்தப்பட்டு, மங்கம்மாள் அரசியின் வார்த்தையால் மீண்டும் அழைத்துவரப்பட்ட முதல் பங்குத் தந்தை; உரோமைக்கு அனுப்பப்பட்ட கடிதம் ஒன்றில் இப்பங்கின் பெயர்; இரண்டே பருவங்களில் எண்ணூறு பேர் திருமுழுக்கு — இவ்வாறு அந்தக் காட்டு வெளி ஒரு பங்காயிற்று.`,
           dots: [
             {
               year: `1698`,
               title: `முதல் பங்குத் தந்தையர்`,
-              body: `சுமார் 1698-ஆம் ஆண்டிலிருந்து வடக்கன்குளம் தனக்கேயுரிய, அர்ப்பணிப்பு மிக்க பங்குத் தந்தையரைப் பெற்றது; இக்காலம் முதல் அந்தக் காட்டு வெளி, தடையின்றித் தொடர்ந்த அருட்தந்தையர் வரிசையால் மேய்க்கப்பட்ட உண்மையான பங்காக விளங்கியது. இன்றைய தூத்துக்குடி மறைமாவட்டத்தின் எல்லைக்குள் அமைந்த முதல் பெரிய உள்நாட்டுக் கத்தோலிக்கப் பங்காக அது வளர்ந்து வந்தது.`,
+              body: `பல ஆண்டுகள் அருள்பணியாளர் இவ்வழியே கடந்து மட்டுமே சென்றனர். பின், திருவாங்கூர், பாண்டிய நாடு ஆகிய இரு அரசுகளுக்கும் இடையே, இருபுறத்திற்கும் வசதியாக அமைந்திருந்த இவ்விடத்தில் ஒரு தனி இல்லம் அமைப்பது தகும் என்று பணிக்களம் கருதியது. சுமார் 1698-ஆம் ஆண்டில் இங்கு நிரந்தரமாகத் தங்கிப் பணியாற்ற அனுப்பப்பட்ட முதல் அருட்தந்தை பெர்னார்ட் டெ சா ஆவார். அவரிலிருந்து இப்பங்கின் அருட்தந்தையர் வரிசை தொடங்குகிறது; இன்று திருப்பலி நிறைவேற்றும் தந்தையர் வரை அது தடையின்றித் தொடர்கிறது.`,
+            },
+            {
+              year: `1700`,
+              title: `அருட்தந்தையும் அரசியும்`,
+              body: `டெ சா இங்கு வந்து சில நாட்களே ஆகியிருந்தன, அப்போதே துன்புறுத்தல் வந்தது. அருட்தந்தை செல்வத்தை மறைத்து வைத்திருப்பதாக நம்பிய சிலர், அவருக்குக் காய்ச்சல் இருந்த ஒரு இரவில் வந்து, படுக்கையிலிருந்து இழுத்து, அடித்து, கயிற்றால் கட்டி, ஆளுநர் முன் கொண்டு சென்றனர்; அவர் சிறிது காலம் சிறையில் அடைத்து, பின் மாவட்டத்தைவிட்டு விரட்டினார். மாதங்கள் கழித்து அவரைக் கண்ட சக இயேசு சபை அருட்தந்தை பியேர் மார்ட்டின், தான் கண்டதை எழுதிவைத்தார்: “அடிபட்ட தழும்புகளையும், அவரது பற்கள் அனைத்தும் உடைக்கப்பட்டிருந்ததையும்” கண்டேன் என்றார். அவரை மீண்டும் கொண்டுவந்தது ஓர் அரச வார்த்தையே. அருட்தந்தை லெய்னெஸ் அவரது வழக்கை, மதுரையை அப்போது ஆண்ட மங்கம்மாள் அரசியிடம் எடுத்துச் சென்றார்; அவர் அவரை வடக்கன்குளம் திரும்ப அனுமதித்தார்.`,
             },
             {
               year: `1709`,
-              title: `எழுத்தில் முதன்முறையாக இப்பங்கு`,
-              body: `இப்பங்கின் பெயரைக் குறிப்பிடும், அதன் சொந்த நூற்றாண்டைச் சேர்ந்த மிகப் பழமையான ஆவணம், 1709-ஆம் ஆண்டின் இயேசு சபை ஆண்டறிக்கைக் கடிதமே. பெர்த்ராண்ட் பதிப்பித்த அதன் ஒரு பகுதி, அருட்தந்தை மரிய சவேரி போர்கேசே “வடக்கன்குளம் மாவட்டத்தின் தலைமையில்” இருந்ததைக் காட்டுகிறது; அவரைப் பற்றி, “வியத்தகு வைராக்கியத்துடன் அவர் மனமாற்றப் பணியில் உழைக்கிறார்; உடலின் வலிமைக் குறைவை அவரது உள்ளத்தின் வேகம் ஈடுசெய்கிறது” எனக் கூறுகிறது. அதே அருட்தந்தையை, அதே பணியில், “குமரி முனைக்கு அருகில்” என்று அகுஸ்த் ஜானும் குறிப்பிடுகிறார்.`,
+              title: `எழுத்தில் இப்பங்கு`,
+              body: `1709-ஆம் ஆண்டளவில், இயேசு சபையினர் உரோமைக்கு அனுப்பிய கடிதங்களில் இப்பங்கின் பெயர் இடம்பெற்றது. அவ்வாண்டின் ஆண்டறிக்கைக் கடிதம், அருட்தந்தை மரிய சவேரி போர்கேசே “வடக்கன்குளம் மாவட்டத்தின் தலைமையில்” இருந்ததைக் காட்டுகிறது; அவரைப் பற்றி, “வியத்தகு வைராக்கியத்துடன் அவர் மனமாற்றப் பணியில் உழைக்கிறார்; உடலின் வலிமைக் குறைவை அவரது உள்ளத்தின் வேகம் ஈடுசெய்கிறது” எனக் கூறுகிறது. அது ஓர் அறிக்கையின் ஒரு வரி மட்டுமே; ஆலயத்தைப் பற்றியோ ஊரைப் பற்றியோ எதுவும் சொல்லவில்லை. ஆயினும், அவ்வாண்டு முதல் இப்பங்கு பணிக்களத்தின் எழுத்து வரலாற்றில் தொடர்ந்து இடம்பெறுகிறது.`,
             },
             {
               year: `1712–1713`,
@@ -1433,24 +1437,19 @@ export const dict = {
           blurb: `அருட்தந்தை புத்தாரியின் பொற்காலம்: கடலிலிருந்து கரைக்குக் கொண்டுவரப்பட்ட அன்னையின் திருவுருவம், வருங்காலப் புனிதர் ஒருவரின் திருமுழுக்கு, சிலுவை வடிவில் எழுந்த முதல் நிலையான ஆலயம்.`,
           dots: [
             {
-              year: `1742–43`,
+              year: `1742`,
               title: `கடலிலிருந்து திருவுருவம் வந்து சேர்கிறது`,
-              body: `1742–43-ஆம் ஆண்டுகளில், “வடக்கன்குளத்திற்கு, போர்த்துகலிலிருந்து” என எழுதப்பட்ட, அன்னையின் செதுக்கப்பட்ட திருவுருவங்களைக் கொண்ட ஒரு மரப்பெட்டி, கடல் நீரோட்டங்களால் அடித்துவரப்பட்டு கூட்டப்புளியில் கரையேறியது. மீனவர்கள் அதைப் பங்குத் தந்தை ஜான் பாப்டிஸ்ட் புத்தாரி அவர்களிடம் கொண்டுவந்தனர்; அவர் ஒரு திருவுருவத்தை வடக்கன்குளத்திற்கென வைத்துக்கொண்டு, இரண்டாவதைக் காமநாயக்கன்பட்டிக்கும், மூன்றாவதை ஆயரின் பராமரிப்பிற்கும் அளித்தார். இங்கே வைக்கப்பட்ட விண்ணேற்பு மாதாவின் திருவுருவமே, ஒரு நாள் கண்ணீர் சிந்தவிருந்த அதே திருவுருவம்.`,
+              body: `1742-ஆம் ஆண்டில், “வடக்கன்குளத்திற்கு, போர்த்துகலிலிருந்து” என எழுதப்பட்ட, அன்னையின் செதுக்கப்பட்ட திருவுருவங்களைக் கொண்ட ஒரு மரப்பெட்டி, கடல் நீரோட்டங்களால் அடித்துவரப்பட்டு கூட்டப்புளியில் கரையேறியது. மீனவர்கள் அதைப் பங்குத் தந்தை ஜான் பாப்டிஸ்ட் புத்தாரி அவர்களிடம் கொண்டுவந்தனர்; அவர் ஒரு திருவுருவத்தை வடக்கன்குளத்திற்கென வைத்துக்கொண்டு, இரண்டாவதைக் காமநாயக்கன்பட்டிக்கும், மூன்றாவதை ஆயரின் பராமரிப்பிற்கும் அளித்தார். இங்கே வைக்கப்பட்ட விண்ணேற்பு மாதாவின் திருவுருவமே, ஒரு நாள் கண்ணீர் சிந்தவிருந்த அதே திருவுருவம்.`,
             },
             {
               year: `1745`,
               title: `புனித தேவசகாயம் பிள்ளை இங்கே திருமுழுக்குப் பெறுகிறார்`,
-              body: `1745-ஆம் ஆண்டு மே 14-ஆம் நாள், ஒன்பது மாத மறைக்கல்விக்குப் பின், அருட்தந்தை புத்தாரி, திருவிதாங்கூர் அரசவையின் நாயர் அதிகாரியாயிருந்த நீலகண்ட பிள்ளைக்குத் திருக்குடும்ப ஆலயத்தில் திருமுழுக்கு அளித்து, அவருக்குத் தேவசகாயம் (“கடவுளே என் துணை”) என்ற பெயரிட்டார்; அவருடைய ஞானத்தந்தை மறைக்கல்வியாளர் ஞானப்பிரகாசம் பிள்ளை. இந்தத் திருமுழுக்கு நடைபெற்ற இடம் வடக்கன்குளமே என்பதைத் திருப்பீடமே உறுதிப்படுத்துகிறது — இப்பங்கின் வரலாறு முழுவதிலும் மிகச் சிறப்பாக ஆவணப்படுத்தப்பட்ட செய்தி இதுவே.`,
-            },
-            {
-              year: `1745`,
-              title: `மறைக்கல்வியாளரும் நவாபும்`,
-              body: `அதே ஆண்டு ஆலயத்திற்கு ஒரு சோதனையையும் கொண்டுவந்தது. வடக்கன்குளம் அப்போது நேமம் பணிக்களத்தைச் சார்ந்திருந்தது; ஒரு பிராமணர், பிறசமய ஆளுநரைத் தூண்டி, ஒரு கோயிலுக்கான நன்கொடையைச் செலுத்தும்படி கோரச் செய்தார். மறைக்கல்வியாளர் மறுத்ததால், நகங்களிலிருந்து இரத்தம் பீறிடும்வரை இரு மரக்கட்டைகளுக்கு இடையே விரல்களை நசுக்கும் “கிட்டை” எனும் சித்திரவதைக்கு அவர் உள்ளாக்கப்பட்டார்; புதிதாய் மனந்திரும்பியவர்களின் வீடுகளும் கொள்ளையடிக்கப்பட்டன. அருட்தந்தை புத்தாரி உடனே ஒரு கடிதத்துடன் இரண்டு கிறிஸ்தவர்களை, “வடக்கன்குளம் யாரைச் சார்ந்திருந்ததோ, யார் தம் நட்பால் அவரைக் கௌரவித்தாரோ” அந்த நவாபிடம் அனுப்பினார். அந்தப் பிரபு, இனி கிறிஸ்தவர்களைப் பாதுகாக்கும்படி ஆணையிட்டு ஓர் அதிகாரியை அனுப்பினார்; அதன்பின் அருட்தந்தை “மரியாதையாலும் அச்சத்தாலும் சூழப்பட்டார்” என்று பெர்த்ராண்ட் பதிவு செய்கிறார்.`,
+              body: `திருவிதாங்கூர் அரசவையின் அதிகாரியாக, நற்குடிப் பிறந்தவராக, முப்பத்திரண்டு வயதுடையவராக விளங்கிய நீலகண்ட பிள்ளை, ஏற்கெனவே மதிப்புமிக்க ஒருவராகவே திருமுழுக்கை நோக்கி வந்தார். அரசனின் படைத் தளபதியாயிருந்த எஸ்தாஷ் து லனோய் என்பவரே முதலில் அவருக்குக் கிறிஸ்தவ விசுவாசத்தைப் பற்றிப் பேசி, வடக்கன்குளத்தின் பங்குத் தந்தை புத்தாரியிடம் அவரை அனுப்பிவைத்தார். இத்தகைய ஒரு மனந்திரும்பியவர் எத்தகைய துன்புறுத்தலை ஈர்ப்பார் என்பதை அறிந்திருந்த புத்தாரி அவசரப்படவில்லை. அவர் “அவர் அவாவுற்று விரும்பிய அருளை ஒத்திவைப்பது அவசியம் எனக் கருதி, நெடிது சோதித்தபின், மறுபிறப்பின் அருட்சாதனத்திற்கு அவரை ஏற்றுக்கொண்டார்.” மறைக்கல்வி ஒன்பது மாதங்கள் நீடித்தது. 1745-ஆம் ஆண்டு மே 14-ஆம் நாள், இவ்வூர் ஆலயத்தில், மறைக்கல்வியாளர் ஞானப்பிரகாசம் பிள்ளை ஞானத்தந்தையாக நிற்க, திருமுழுக்கு அளிக்கப்பட்டது; அந்த அதிகாரி லாசர் என்றும், தமிழில் தேவசகாயம் (“கடவுளே என் துணை”) என்றும் பெயர் பெற்றார்.`,
             },
             {
               year: `1749`,
-              title: `முதல் கல் ஆலயத்தின் அடிக்கல்`,
-              body: `1749-ஆம் ஆண்டில், கத்தோலிக்கச் சமூகம் அருளானந்தரின் பழைய ஓலைக் கூரைச் சிற்றாலயத்திற்கு அடங்காத அளவுக்குப் பெருகியதால், விசாலமான, நிலையான ஓர் ஆலயத்திற்காக அருட்தந்தை புத்தாரி கங்கோல் (அடிக்கல்) விழாவை நடத்தினார். பெருங்குடியிலிருந்து கொண்டுவரப்பட்ட அகன்ற செங்கற்களால் அது எழுப்பப்பட்டது என்று இப்பங்கின் சொந்த வரலாறு கூறுகிறது. இங்கு முதல் நிலையான ஆலயத்தின் தொடக்கம் அதுவே; அதன் மணிதான், அரை நூற்றாண்டுக்குப் பின், அன்னையின் கண்ணீர்க் காட்சிக்கு ஊரையே அழைக்கவிருந்தது.`,
+              title: `ஓலையிலிருந்து செங்கலுக்கு`,
+              body: `1749-ஆம் ஆண்டளவில், அருளானந்தரின் பழைய ஓலைச் சிற்றாலயம் பெருகிய சமூகத்தைத் தாங்க இயலாமல் போகவே, அதற்குப் பதிலாக அருட்தந்தை புத்தாரி செங்கல்லில் ஒரு நிலையான ஆலயத்தைத் தொடங்கினார். அவர் “அதன் அடிக்கல்லை இட்டார்,” அதனை அருட்தந்தை தோமசினி முழுமைக்குக் கொண்டுசென்றார். இப்பங்கின் சொந்தப் பதிவின்படி அது அகன்ற செங்கற்களால் எழுந்தது; அதன் அடிக்கல் ஆசீர்வதிக்கப்பட்ட நாளை இப்பங்கு தன் கங்கோல் விழாவாகக் கொண்டாடி, அதை 1749 என்று குறிக்கிறது.`,
             },
             {
               year: `c.1749`,
@@ -1459,8 +1458,8 @@ export const dict = {
             },
             {
               year: `1752`,
-              title: `சிலுவை வடிவ ஆலயம் நிறைவுபெறுகிறது`,
-              body: `1752-ஆம் ஆண்டில், சிலுவை வடிவில் கட்டப்பட்டு, உதயச் சூரியனை நோக்கிக் கிழக்கு முகமாக அமைந்த அந்தச் செங்கல் ஆலயம் நிறைவுபெற்றது; அருட்தந்தை புத்தாரி தொடங்கிய இப்பணியை அருட்தந்தை கிளமெண்ட் தோமஸினி நிறைவேற்றினார். தோமஸினி அவர்களின் காலத்தில், மாபெரும் விண்ணேற்பு மாதா திருவிழா இங்கே இப்பங்கின் முதன்மைத் திருவிழாவாக வேரூன்றியது என்று இப்பங்கின் சொந்த வரலாறு பதிவு செய்கிறது. பணிக்களத்திற்குள்ளிருந்தே எழுதிய பெர்த்ராண்ட், இவ்வாலயத்தின் பெயர்த் திருவிழாவாக வேறொன்றைக் குறிக்கிறார்: ஆண்டுதோறும் டிசம்பரில் மாபெரும் நவநாளுடன் கொண்டாடப்பட்ட புனித சவேரியாரின் திருவிழாவையே.`,
+              title: `சிலுவை வடிவ ஆலயம்`,
+              body: `1752-ஆம் ஆண்டில் அந்த ஆலயம் நிறைவுபெற்று நின்றது: சிலுவை வடிவில் கட்டப்பட்டு, உதயச் சூரியனை நோக்கிக் கிழக்கு முகமாக அமைந்தது. அருளானந்தரின் முந்தைய சிற்றாலயத்தைப் போலவே, அது “திருக்குடும்பத்திற்கு அர்ப்பணிக்கப்பட்டது.” இதன் மாபெரும் திருவிழா புனித சவேரியாருடையதே — ஆண்டுதோறும் டிசம்பரில் மாபெரும் நவநாளுடன் கொண்டாடப்பட்டது. இவ்வாண்டை, ஆலயச் சுவர்களுக்குள் ஒருகாலத்தில் இருந்த இரண்டு கல்வெட்டுகளால் இப்பங்கு உறுதிப்படுத்துகிறது.`,
             },
             {
               year: `1752`,
@@ -1470,7 +1469,7 @@ export const dict = {
             {
               year: `1773–1775`,
               title: `இயேசு சபை ஒடுக்கப்படுகிறது; பழைய பணிக்களம் முடிகிறது`,
-              body: `1773-ஆம் ஆண்டில், திருத்தந்தை பதினான்காம் கிளமெண்ட் உலகெங்கும் இயேசு சபையை ஒடுக்கினார். திருநெல்வேலியில் எஞ்சியிருந்த இயேசு சபைத் தந்தையர் — இங்கும், தளையிலும், மணப்பாட்டிலும் — "ஒவ்வொருவராக இறந்தனர்" என்று ஆயர் கால்டுவெல் பதிவு செய்கிறார்; அவர்களுடைய இடங்களைக் கோவாவிலிருந்து வந்த அருட்தந்தையர் நிரப்பினர். இங்கிருந்த பழைய இயேசு சபைத் தந்தையருள் கடைசியானவரான அருட்தந்தை கிளமெண்ட் தோமஸினி, தம் முடிவு நெருங்குவதை உணர்ந்து, தளையில் இருந்த அருட்தந்தை அந்தோணி துவார்த்தேயிடம் தம்மைத் தூக்கிச் செல்லச் செய்து, 1775-ஆம் ஆண்டில் தம் எழுபத்தைந்தாம் வயதில் அங்கே இறந்தார்.`,
+              body: `1773-ஆம் ஆண்டில், திருத்தந்தை பதினான்காம் கிளமெண்ட் உலகெங்கும் இயேசு சபையை ஒடுக்கினார். திருநெல்வேலியில் எஞ்சியிருந்த இயேசு சபைத் தந்தையர், இங்கும் தளையிலும் மணப்பாட்டிலும், “ஒவ்வொருவராக இறந்தனர்” என்று ஆயர் கால்டுவெல் பதிவு செய்கிறார்; அவர்களுடைய இடங்களைக் கோவாவிலிருந்து வந்த அருட்தந்தையர் நிரப்பினர். இங்கிருந்த பழைய இயேசு சபைத் தந்தையருள் கடைசியானவரான அருட்தந்தை கிளமெண்ட் தோமஸினி, தம் முடிவு நெருங்குவதை உணர்ந்து, தளையில் இருந்த அருட்தந்தை அந்தோணி துவார்த்தேயிடம் தம்மைத் தூக்கிச் செல்லச் செய்து, 1775-ஆம் ஆண்டில் தம் எழுபத்தைந்தாம் வயதில் அங்கே இறந்தார்.`,
             },
           ],
         },
@@ -1483,47 +1482,37 @@ export const dict = {
             {
               year: `1775–1838`,
               title: `இயேசு சபை அருட்தந்தை இல்லாத அறுபத்து மூன்று ஆண்டுகள்`,
-              body: `கடைசி இயேசு சபைத் தந்தையான அருட்தந்தை கிளமெண்ட் தோமஸினி 1775-ஆம் ஆண்டில் இறந்த பின், அறுபத்து மூன்று ஆண்டுகளுக்கு எந்த இயேசு சபை அருட்தந்தையும் வடக்கன்குளத்தில் பணியாற்றவில்லை. ஆயினும் இப்பங்கு தன்னந்தனியே விடப்படவில்லை. திருநெல்வேலியில் எஞ்சியிருந்த இயேசு சபைத் தந்தையர் — வடக்கன்குளத்தில் இருந்தவர்களும் அவர்களுள் அடங்குவர் — "ஒவ்வொருவராக இறந்தனர்; அவர்களுடைய இடங்கள் கோவாவைச் சேர்ந்த சுதேச அருட்தந்தையரால் நிரப்பப்பட்டன" என ஆயர் கால்டுவெல்லின் வரலாறு பதிவு செய்கிறது. கொச்சி ஆயரின் கீழ் அதன்பின் இப்பங்கை மேய்த்த அருட்தந்தையரை இப்பங்கின் சொந்தப் பட்டியல் பெயரிட்டுக் குறிக்கிறது — அருட்தந்தை தேவ வரதனார், அருட்தந்தை இஞ்ஞாசியார், அருட்தந்தை ஜான் லூயிஸ் கர்டோசா, மற்றும் அவர்களுக்குப் பின் வந்தவர்கள்.`,
+              body: `கடைசி இயேசு சபைத் தந்தையான அருட்தந்தை கிளமெண்ட் தோமஸினி 1775-ஆம் ஆண்டில் இறந்த பின், அறுபத்து மூன்று ஆண்டுகளுக்கு எந்த இயேசு சபை அருட்தந்தையும் வடக்கன்குளத்தில் பணியாற்றவில்லை. ஆயினும் இப்பங்கு தன்னந்தனியே விடப்படவில்லை. எஞ்சியிருந்த இயேசு சபைத் தந்தையர் “ஒவ்வொருவராக இறந்தனர்; அவர்களுடைய இடங்கள் கோவாவைச் சேர்ந்த சுதேச அருட்தந்தையரால் நிரப்பப்பட்டன” என ஆயர் கால்டுவெல் பதிவு செய்கிறார். கொச்சி ஆயரின் கீழ் இப்பங்கை மேய்த்த அருட்தந்தையர் தேவ வரதனார், இஞ்ஞாசியார், ஜான் லூயிஸ் கர்டோசா மற்றும் அவர்களுக்குப் பின் வந்தவர்கள் என்று இப்பங்கின் சொந்தப் பட்டியல் பெயரிட்டுக் குறிக்கிறது. ஆனால் இப்பங்கு வெறுமனே பிடித்து நின்றதல்ல. சுமார் 1780 முதல் இது “உள்நாட்டுப் பணிக்களத்தின் ஒரே மையமாக” ஆயிற்று; சேந்தமங்கலம், ஆண்டிபட்டி, காமநாயக்கன்பட்டி, மற்றும் இவ்வூர் ஆகிய நான்கு பிரிவு மையங்கள் இதன் கீழ் அமைந்தன; 1837-இல் புதிய இயேசு சபையினரிடம் அப்பொறுப்பை ஒப்படைக்கும் வரை கொச்சியிலிருந்து வந்த அருட்தந்தையர் இதைப் பேணிவந்தனர். இவை அனைத்திற்கும் நடுவில்தான், இவ்வூரில் இதுவரை நிகழ்ந்த மிக அற்புதமான நிகழ்வு நிகழ்ந்தது.`,
             },
             {
               year: `1775-க்குப் பின்`,
               title: `அவர்கள் விட்டுவிடாத தந்தை`,
-              body: `தாங்கள் இழந்த அருட்தந்தையை அவர்கள் விட்டுவிடவில்லை. அருட்தந்தை தோமஸினி, தம் எழுபத்தைந்தாம் வயதில், இறப்பதற்காகத் தம்மைத் தூக்கிச் செல்லச் செய்து 1775-இல் காலமானார். தொண்ணூறு ஆண்டுகளுக்குப் பின்பும் பெர்த்ராண்ட் அவரைப் பற்றி நிகழ்காலத்திலேயே எழுதுகிறார்: "கிறிஸ்தவர்கள் அவரைப் புனிதராகப் போற்றுகிறார்கள், தம் பிள்ளைகளுக்கு அவரது பெயரைச் சூட்டுகிறார்கள், மிகுந்த பக்தியுடன் அவரது கல்லறையைத் தரிசிக்கிறார்கள்." கிறிஸ்தவர் அல்லாதவர்களும் தம் துன்பங்களில் அவரை மன்றாடுகிறார்கள்; அவரது பரிந்துரையால்தான் தம் பயிர்கள் மீது மழை பொழிகிறது என்று நம்புகிறார்கள் என்றும் அவர் சேர்த்துக் கூறுகிறார்.`,
-            },
-            {
-              year: `1794`,
-              title: `ஐரோப்பிய அச்சு நூலில் இவ்வூர்`,
-              body: `1794-ஆம் ஆண்டு ரோமையில் அச்சிடப்பட்ட ஒரு நூலில் இவ்வூர் இடம்பெற்றது. புனித பர்த்தலோமேயுவின் பவுலினுஸ் (Paulinus a S. Bartholomaeo) எழுதிய "இந்தியா ஓரியந்தாலிஸ் கிறிஸ்தியானா" என்னும் நூல், கொச்சி ஆயருக்கு உட்பட்ட ஆலயங்களின் பட்டியலில், 158-ஆம் பக்கத்தில் "XIV. Vadakencollam" எனப் பதிவு செய்கிறது; 117-ஆம் பக்கத்தில் அதே பெயரைக் குமரி முனைக் கரையில் — "in promontorio Comorino" — வைக்கிறது. அது ஒரு பட்டியலில் இடம்பெற்ற பெயர் மட்டுமே; அதற்கு மேல் எதையும் அது கூறவில்லை. ஆயினும், மாதா கண்ணீர் சிந்தியதாகச் சொல்லப்படும் ஆண்டுக்கு ஒன்பது ஆண்டுகளுக்கு முன்பே, ஐரோப்பிய அச்சு நூலில் இப்பங்கு இடம்பெற்றது.`,
-            },
-            {
-              year: `1801`,
-              title: `புதிய ஆட்சியின் கீழ்`,
-              body: `மாதா கண்ணீர் சிந்துவதற்கு இரண்டு ஆண்டுகளுக்கு முன், இவ்வூரின் ஆட்சி மாறியது. "1801-ஆம் ஆண்டு ஜூலை 31-ஆம் நாள்" புதிய நவாபுடன் செய்யப்பட்ட ஒப்பந்தத்தின்படி, கர்நாடகத்தின் "முழுமையான, தனித்த நிர்வாகம்" "நிரந்தரமாகக் கம்பெனியிடம்" ஒப்படைக்கப்பட்டது என்று மாவட்டக் கெசட்டியர் நூல் பதிவு செய்கிறது. அதே நாளில், "புதிய இறையாண்மையின் கீழ்" திருநெல்வேலியின் முதல் ஆட்சியராகத் திரு. லஷிங்டன் நியமிக்கப்பட்டார்; ஒரு வாரத்தில், "சிறு கலவரம்கூட இன்றி" மாகாணம் கைக்கொள்ளப்பட்டதாக அவர் அறிக்கை அனுப்பினார்.`,
+              body: `தாங்கள் இழந்த அருட்தந்தையை அவர்கள் விட்டுவிடவில்லை. அவர் தம் வாழ்நாளில் தம் மென்மையான குணத்தால் அவர்களை வென்றிருந்தார், அவர்களுடைய ஆலயத்தை நிறைவுசெய்திருந்தார், மேலும் அறுபத்து மூன்று ஆண்டுகளுக்கு அவர்களுக்குக் கிடைத்த கடைசி இயேசு சபைத் தந்தை அவரே. தோமஸினி இவ்வூரில் இறக்கவுமில்லை, இங்கே அடக்கம் செய்யவுமில்லை; ஆயினும் அவரது மக்கள் “தங்கள் நடுவே ஒரு நினைவுச் சின்னத்தை எழுப்பி” அவரது நினைவைப் புனிதராகக் காத்தனர். தொண்ணூறு ஆண்டுகளுக்குப் பின்பும் பெர்த்ராண்ட் அவரைப் பற்றி நிகழ்காலத்திலேயே எழுதுகிறார்: “கிறிஸ்தவர்கள் அவரைப் புனிதராகப் போற்றுகிறார்கள், தம் பிள்ளைகளுக்கு அவரது பெயரைச் சூட்டுகிறார்கள், மிகுந்த பக்தியுடன் அவரது கல்லறையைத் தரிசிக்கிறார்கள்.” கிறிஸ்தவர் அல்லாதவர்களும் தம் துன்பங்களில் அவரை மன்றாடுகிறார்கள்; அவரது பரிந்துரையால்தான் தம் பயிர்கள் மீது மழை பொழிகிறது என்று நம்புகிறார்கள் என்றும் அவர் சேர்த்துக் கூறுகிறார்.`,
             },
             {
               year: `1803`,
               title: `மாதாவின் கண்ணீர்க் காட்சி`,
-              body: `பங்கு மரபின்படி, தமிழ் வருடம் 979, ஐப்பசி மாதம், ஒரு வெள்ளிக்கிழமை முற்பகலில், சவரிமுத்து பிள்ளை என்பவர் பீடத்திற்கு மேலேயிருந்த விண்ணேற்பு மாதாவின் திருவுருவத்தின் முன்பு செபிக்க வந்தார்; மாடத்தின் கதவுகள் திறந்திருந்தன. அவர் செபித்துக்கொண்டிருந்தபோது, ஒளி ஊடுருவும் மேகம் ஒன்று அன்னையைச் சூழ்ந்தது, அவருடைய கண்கள் விண்ணை நோக்கி உயர்ந்து கண்ணீரால் நிறைந்தன, கூப்பிய அவருடைய கைகள் விரிந்து வெளிநோக்கி நீண்டன — என இப்பங்கின் சொந்த வரலாறு பதிவு செய்கிறது. அவ்வரலாறு அந்த வெள்ளிக்கிழமையை அக்டோபர் 21 எனக் குறிக்கிறது; திருவிழாவோ அக்டோபர் 23-ஆம் நாள் கொண்டாடப்படுகிறது.`,
+              body: `1803-ஆம் ஆண்டு அக்டோபர் 21, வெள்ளிக்கிழமை முற்பகலில் (தமிழ் ஆண்டு 979, ஐப்பசி மாதம்), திருநெல்வேலியிலிருந்து இவ்வூரில் குடியேறியிருந்த ஐரோப்பியரான திரு. பில்டர்பெக்கைச் சந்திக்க வந்திருந்த சவரிமுத்து பிள்ளை, ஆலயத்திற்குள் செபிக்கச் சென்றார். பீடத்திற்கு மேலே, இரட்டைக் கதவுள்ள ஒரு மாடத்தில் விண்ணேற்பு மாதாவின் திருவுருவம் இருந்தது; அன்று காலை அதன் இரு கதவுகளும் திறந்திருந்தன. அவர் மண்டியிட்டிருக்கையில், ஒளி ஊடுருவும் மேகம் ஒன்று அன்னைக்குப் பின்னால் எழுந்து அவரைச் சூழ்ந்தது. அவருடைய கண்கள் விண்ணை நோக்கி உயர்ந்து நிறைந்தன, கன்னங்களில் கண்ணீர் வழிந்தது; முகம் துயரம் கொண்டது; கூப்பிய கைகள் விரிந்து, மாடத்தின் சுவர்களைத் தொடும் அளவுக்கு வெளிநோக்கி நீண்டன. பீடத்திலிருந்த மற்ற எல்லாத் திருவுருவங்களும் “இரக்கத்தையும் துயரத்தையும் வெளிப்படுத்தின” என்று பதிவு கூறுகிறது.`,
             },
             {
               year: `1803`,
               title: `கிராமமே வந்து கண்ணீர் வடித்தது`,
-              body: `மறைக்கல்வியாளர் மதுரேந்திர அண்ணாவியார் பீடத்தில் ஏறிக் கண்ணீரைத் துடைத்தார்; ஆனால் அது நிற்கவில்லை. பின்னர் ஆலய மணி முழங்கியது; வழக்கத்திற்கு மாறான அந்நேரத்தில் ஊரே விரைந்து வந்து கூடியது. அந்தப் புதுமையை உற்றுநோக்கியபடி மக்கள் கண்ணீர் வடித்து, "Parce Domine, parce populo tuo" ("ஆண்டவரே, பொறுத்தருளும்; உம் மக்களைப் பொறுத்தருளும்") என்னும் பழைய மனந்திரும்புதல் பாடல்களைப் பாடினர்; இறுதியில் திருவுருவம் தன் வழக்கமான தோற்றத்திற்குத் திரும்பியது.`,
+              body: `மறைக்கல்வியாளர் மதுரேந்திர அண்ணாவியார் பீடத்தில் ஏறிக் கண்ணீரைத் துடைத்தார்; ஆனால் அது நிற்கவில்லை. பின்னர் ஆலய மணி முழங்கியது; வழக்கத்திற்கு மாறான அந்நேரத்தில் ஊரே வயல்களிலிருந்தும் வீடுகளிலிருந்தும் விரைந்து வந்து கூடியது. அந்தப் புதுமையை உற்றுநோக்கியபடி மக்கள் கண்ணீர் வடித்து, “Parce Domine, parce populo tuo” (“ஆண்டவரே, பொறுத்தருளும்; உம் மக்களைப் பொறுத்தருளும்”) என்னும் பழைய மனந்திரும்புதல் பாடலைப் பாடினர். அவர்கள் மன்றாடிக்கொண்டிருக்கையில், திருவுருவமும் மற்ற எல்லாத் திருஉருவங்களும் “தம் வழக்கமான தோற்றத்திற்குத் திரும்பின”; பீடத்திற்கு மேலிருந்த முகம் மீண்டும் ஒரு சாதாரணச் செதுக்கு முகமாயிற்று.`,
             },
             {
               year: `1803`,
               title: `கண்டு உறுதிப்படுத்திய சாட்சிகள்`,
-              body: `இப்புதுமையைப் பல கண்கள் கண்டன: மறைக்கல்வியாளர்களான சகரியா, வியாகப்பர், யாகப்பர் பிள்ளை ஆகியோரும், ஐரோப்பியப் பொதுநிலைப் பெண்மணி ஹென்ரியட் பில்டர்பெக்கும். திருவுருவத்தை நெருங்கி ஆராய்ந்த ஹென்ரியட், மேகம் படர்ந்த முகம், கண்ணீர், விரிந்த கைகள் ஆகிய மூன்று அடையாளங்களையும் உண்மையென உறுதிப்படுத்தினார். அதே நாளில், பங்குத் தந்தை அருட்தந்தை ஜான் லூயிஸ் கர்டோசா, மற்றொரு அருட்தந்தையுடனும் ஹென்ரியட்டுடனும் சேர்ந்து, இதை ஓர் அசாதாரணப் புதுமை என அறிவித்தனர்; அன்றிலிருந்து இப்பங்கு பற்றுறுதியுடன் காத்து வரும் போற்றத்தக்க உள்ளூர் மரபு இது.`,
+              body: `இப்புதுமையைப் பலர் கண்டனர்; அவர்களுள் இருவரைப் பணிக்களத்தின் சொந்தப் பதிவே பெயரிட்டுக் குறிக்கிறது: மறைக்கல்வியாளர் யாகப்பர் பிள்ளையும், ஐரோப்பியரின் மகள் மிஸ் ஹென்ரியட் பில்டர்பெக்கும். தம் கண்கள் தம்மை ஏமாற்றிவிட்டனவோ என அஞ்சிய சவரிமுத்து அவர்களை அழைத்தார்; அவர்கள் வந்து, அருகில் நின்று உற்றுநோக்கி, மேகம் படர்ந்த முகம், கண்ணீர், மாடத்தின் சுவர்களை நோக்கி நீண்ட கைகள் ஆகிய அதே காட்சியைத் தாங்களே கண்டனர். இப்பதிவு வதந்தியாக வரவில்லை: கண்ணால் கண்டவர்களின் வாய்மொழியிலிருந்து — மதிப்பிற்குரிய மறைக்கல்வியாளரிடமிருந்தும், ஊரின் நம்பிக்கைக்குரிய மக்களிடமிருந்தும் — அவர்களே சொல்லச் சொல்ல, பங்கின் வரலாற்றாசிரியர் செபஸ்தியான் பிள்ளை இதை எழுதிவைத்தார்.`,
             },
             {
               year: `1803–1817`,
               title: `புதுமைக் காலையின் அந்தக் குடும்பம்`,
-              body: `1803-ஆம் ஆண்டு நிகழ்வுப் பதிவில் வரும் பில்டர்பெக் குடும்பத்தினர் — சவரிமுத்து பிள்ளை சந்திக்க வந்த ஐரோப்பியக் குடியிருப்பாளரும், திருவுருவத்தை ஆராய்ந்த ஹென்ரியட்டும் — உண்மையாக வாழ்ந்தவர்களே; இன்றைய ஆய்வறிஞர்களால் அக்குடும்பத்தைப் பெயரிட்டுக் கூற முடிகிறது: கிறிஸ்டோபர் பில்டர்பெக் — ஏறத்தாழ 1758-இல் பிறந்து, பதினெட்டாம் நூற்றாண்டின் இறுதியில் வடக்கன்குளத்தில் குடியேறிய ஐரோப்பிய வம்சாவளி வணிகர்; 1817-இல் காலமானார். மாதா கண்ணீர் சிந்தி ஆறு ஆண்டுகளுக்குப் பின், 1809-இல், ஜான் என்னும் மகன் பிறந்தார். 1880-இல் ஜான் இறந்தபோது, ஓர் ஆங்கில மறைப்பணிச் சங்கத்தின் இதழ் அவரைப் பற்றி இவ்வாறு பதிவு செய்தது: "இந்தியாவில் பிறந்தவர்… ஒரு ரோமன் கத்தோலிக்கக் குடும்பத்தைச் சேர்ந்தவர், அத்திருச்சபையின் குருத்துவத்திற்காகப் பயிற்றுவிக்கப்பட்டவர்."`,
+              body: `1803-ஆம் ஆண்டு நிகழ்வுப் பதிவில் வரும் பில்டர்பெக் குடும்பத்தினர் உண்மையாக வாழ்ந்தவர்களே; இன்றைய ஆய்வறிஞர்களால் அக்குடும்பத்தைப் பெயரிட்டுக் கூற முடிகிறது. கிறிஸ்டோபர் பில்டர்பெக், ஏறத்தாழ 1758-இல் பிறந்து, பதினெட்டாம் நூற்றாண்டின் இறுதியில் வடக்கன்குளத்தில் குடியேறிய ஐரோப்பிய வம்சாவளி வணிகர்; 1817-இல் காலமானார். நங்குநேரியின் வரிவசூல் உரிமையைக் கொண்டிருந்த மதிப்புமிக்க குடும்பம் அது; அன்று திருவுருவத்தை ஆராய்ந்த ஹென்ரியட் அவரது மகள். மாதா கண்ணீர் சிந்தி ஆறு ஆண்டுகளுக்குப் பின், 1809-இல், ஜான் என்னும் மகன் பிறந்தார். 1880-இல் ஜான் இறந்தபோது, ஓர் ஆங்கில மறைப்பணிச் சங்கத்தின் இதழ் அவரைப் பற்றி இவ்வாறு பதிவு செய்தது: “இந்தியாவில் பிறந்தவர்… ஒரு ரோமன் கத்தோலிக்கக் குடும்பத்தைச் சேர்ந்தவர், அத்திருச்சபையின் குருத்துவத்திற்காகப் பயிற்றுவிக்கப்பட்டவர்.”`,
             },
             {
               year: `1803`,
-              title: `பங்கு உரிமை கோராதவை`,
-              body: `இது எதன் மீது நிற்கிறது என்பதைச் சொல்வதே நேர்மை. 1803-ஆம் ஆண்டு நிகழ்வைப் பற்றிய ஒவ்வொரு பதிவும் ஒரே ஒரு அச்சு நூலிலிருந்தே வருகிறது: லெயோன் பெஸ் எழுதிய "லா மிஸியோன் து மதுரே" (திருச்சிராப்பள்ளி, 1914). அந்நூல் இதுவரை மின்னாக்கம் செய்யப்படவில்லை; நான்கு பிரதிகளே அறியப்படுகின்றன; இப்பணியில் ஈடுபட்ட எவரும் அவற்றைப் படித்ததில்லை. இக்காட்சி ரோமுக்குச் சமர்ப்பிக்கப்பட்டதே இல்லை; திருப்பீட ஆய்வுக்குழு எதுவும் இதை ஆராயவில்லை. இப்பங்கு காத்து வருவது — நாளும் பெயர்களும் கொண்ட, உள்ளூரில் உறுதிசெய்யப்பட்ட, இரு நூற்றாண்டுகளாகப் போற்றப்பட்டு வரும் ஒரு நிகழ்வு. அதற்கு மேல் அது எதையும் உரிமை கோரவில்லை.`,
+              title: `இதைச் சுமக்கும் நூல்கள்`,
+              body: `1803-ஆம் ஆண்டு நிகழ்வின் முழுப் பதிவும் ஒரே ஒரு அச்சு நூலிலிருந்தே — லெயோன் பெஸ்ஸின் “லா மிஸியோன் து மதுரே” (திருச்சிராப்பள்ளி, 1914) — வருகிறது என நெடுங்காலம் கருதப்பட்டது. அது அப்படியல்ல. பெஸ்ஸுக்கு ஒன்பது ஆண்டுகளுக்கு முன்பே, இப்பணிக்களத்தின் ஓர் இயேசு சபை அருட்தந்தை தெசால், இந்நிகழ்வை முழுமையாக அச்சிட்டிருந்தார்; 1930-இல், மலையாளத்தில், முற்றிலும் வேறொரு மரபில் எழுதப்பட்ட தேவசகாயத்தின் வாழ்க்கை வரலாறு ஒன்று, அதே ஐரோப்பியப் பெண்மணி அதே மூன்று அடையாளங்களை ஆராய்ந்ததைப் பதிவு செய்தது. மூன்று சாட்சிகள், மூன்று வெவ்வேறு கைகளால், ஒருவரையொருவர் நகலெடுக்காமல். இது ரோமுக்குக் கொண்டு செல்லப்பட்டதே இல்லை; எந்த ஆய்வுக்குழுவும் இதை நிறுத்தி எடைபோட்டதில்லை. ஆயினும் இப்பங்கு எப்போதும் சுமந்து வந்தவாறே இது நம்மை வந்தடைகிறது: நாளும் பெயர்களும் கொண்ட ஒரு காலை, இரு நூற்றாண்டுகளாகப் போற்றப்படும் ஒரு திருவிழா.`,
             },
           ],
         },
@@ -2380,7 +2369,7 @@ FIDES VNA SIT, VNAQVE MENS.`,
     },
     contact: {
       label: `வாருங்கள் · எழுதுங்கள் · செபியுங்கள்`,
-      title: `சின்ன ரோமாபுரிக்கு வாருங்கள்`,
+      title: `திருத்தலத்திற்கு வாருங்கள்`,
       intro: `திருக்குடும்பத் திருத்தலத்தின் கதவுகள் 1685 முதல் திறந்தே இருக்கின்றன. நீங்கள் திருப்பயணம் ஒன்றைத் திட்டமிட்டாலும், பங்கு அலுவலகத்தைத் தொடர்புகொள்ள விரும்பினாலும், இங்கிருந்தே தொடங்குங்கள்.`,
       address: `திருக்குடும்பத் திருத்தலம், கிழக்குத் தெரு, வடக்கன்குளம், ராதாபுரம் வட்டம், திருநெல்வேலி மாவட்டம், தமிழ்நாடு 627116, இந்தியா`,
       directions: `வழி காட்டுங்கள்`,
