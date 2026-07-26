@@ -9,7 +9,7 @@
   "quote": "baptised by Father Michael Vaz and his assistant priests",
   "translation": "",
   "establishes": "That the ~20,000 Paravas of thirty villages were baptised by Fr Michael Vaz after the Portuguese fleet of 1532 — a decade BEFORE St Francis Xavier arrived. Caldwell also says no inland village joined that coastal movement, so this page is the beginning of the story only in the sense that it is not yet about Vadakkankulam.",
-  "page": 92,
+  "page": 74,
   "pdfPage": 92,
   "match": "exact",
   "kind": "leaf",
@@ -276,26 +276,17 @@
   "establishes": "The earliest printed martyrology of de Britto, Antwerp 1697 — four years after his death. Its title alone fixes the date. We do not hold a copy; there is no page to show you.",
   "kind": "unavailable"
  },
- "first-inland-parish:0:pate_gazetteer_1917": {
-  "source": "pate_gazetteer_1917",
-  "short": "Pate 1917",
-  "title": "Madras District Gazetteers: Tinnevelly, Vol. I",
-  "imprint": "Madras: Government Press, 1917",
+ "first-inland-parish:0:besse_moumas_typescript": {
+  "source": "besse_moumas_typescript",
+  "short": "Besse (Moumas tr.)",
+  "title": "New Madurai Mission: Madurai Mission Southern District, Vol. IV (1715-1913)",
+  "imprint": "Leon Besse SJ, La Mission du Madure (1914), English tr. Fr Moumas SJ - typescript; parish accession 215 (= JEMPARC Book 95)",
   "lang": "en",
-  "rights": "pd",
-  "quote": "under Father Borghese, the first resi",
+  "rights": "in-copyright",
+  "quote": "Fr. Bernard de Saa was ordered in 1698 to go to Vadakenkulam.",
   "translation": "",
-  "establishes": "Pate makes Borghese the first resident missionary of KAMANAYAKKANPATTI, not of Vadakkankulam — and puts a permanent inland residence there in 1684, before this congregation existed. He is therefore evidence AGAINST the page's old claim to be the first inland parish.",
-  "page": 90,
-  "pdfPage": 106,
-  "match": "exact",
-  "kind": "leaf",
-  "pageText": "CHAP. Il.\n\nTHE\n\nCHRISTIANS,\n\n90 TINNEVELLY\n\nproportion to the excursions we make, after the manner of hunters. My time is spent in running all over the district.” By 1666 the mission had got seriously to work and congregations are found existing all over the district, at places as far apart as Tenkasi, Marandai, Palamcotta, Pannikulam, Kayattar, Perunkulam, Punnavanam and Kamandyakkanpatti. It was a period however of great political commotions, and in 1676 were added the horrors of a famine. “How can religion,” writes Father Britto in 1683, “become securely established in a land whose population is unstable as the waves of the sea, shifting like the sands of the desert, in.a country where it wants only a war, an epidemic, a famine, a political change, a foreign invasion, to destroy one-half of its inhabitants and to change almost its whole population? ”\n\nIn 1683 Father John de Britto succeeded to the charge of the Madura Mission and in the following year, after visiting almost every part of the Tinnevelly district, ordered the establishment of a permanent residence at Kamanayakkanpatti instead of Mullipadi. It was during this visit that the first steps were taken in that important movement by which Christianity ultimately spread so widely amongst the Shanans. Father de Britto who had penetrated as far south as Vadakkankulam (Nangunéri taluk) was called back unexpectedly to Kumbakonam. A congregation, however, of Shandans appears definitely to have been formed by 1685 at Vadakkankulam ; and, under Father Borghese, the first resident missionary of Kamanayakkanpatti, the work of conversion amongst that caste, whose members now constitute nearly one-half of the Roman Catholic population of the district, progressed rapidly in the south of the taluk of Nangunéri and in south Travancore. “By its numbers and its wealth,” wrote Father Calini in 1716, stationed at Vadakkankulam, which had two years previously becomea residence, “the Shanan caste is in comparison with all other castes admirably adapted to Christianity. In fact the Shandns could easily observe the Christian practices. The nature of their life, the necessity of climbing palmyras, preserves them from laziness, the fountain of all disorders. Besides, they are gifted with an excellent disposition, most inclined to religious matters.”\n\nMeanwhile the Fishery Coast remained under the control of the Bishop of Cochin. In a letter of 1604 we read of six principal residences occupied by Jesuit Priests, and of the seacoast villages the “ Catalogus ” reports : ‘ Omnes hi Vici instar magnarum urbium Sunt, Et omnes Christianis incoluntur’ The chief place of the coast was still Tuticorin; but here, as",
-  "span": [
-   1408,
-   1812
-  ],
-  "scan": "/refs/pate_gazetteer_1917-p106.jpg"
+  "establishes": "The first resident priest, named and dated from the mission's own records: Fr Bernard de Saa, 1698. On the same page Besse gives the village's origin — a residence built where the road ran between Travancore and the Pandiyan kingdom. The unbroken roll of pastors after de Saa is the parish's own reckoning; the first pastor is not. In copyright: quoted, not reproduced.",
+  "kind": "quote-only"
  },
  "first-inland-parish:0:neill_1985": {
   "source": "neill_1985",
@@ -306,7 +297,7 @@
   "rights": "in-copyright",
   "quote": "there had been congregations at Kayattar and Vadakkankulam",
   "translation": "",
-  "establishes": "That the congregation is seventeenth-century — and that there were two inland congregations, not one. Still in copyright: quoted, not reproduced.",
+  "establishes": "That a congregation already stood here in the seventeenth century, before it had a priest of its own. Still in copyright: quoted, not reproduced.",
   "page": 71,
   "pdfPage": 71,
   "match": "exact",
@@ -317,7 +308,31 @@
    946
   ]
  },
- "first-inland-parish:1:auguste_jean_1894": {
+ "first-inland-parish:1:ferroli_1951": {
+  "source": "ferroli_1951",
+  "short": "Ferroli 1951",
+  "title": "The Jesuits in Malabar, Vol. II",
+  "imprint": "D. Ferroli, S.J. — Bangalore: Bangalore Press, 1951",
+  "lang": "en",
+  "rights": "in-copyright",
+  "quote": "Fr. Martin saw the traces of the beatings, and how all his teeth had been knocked out. Later on Fr. Laynez interceded with the Queen of Madura, Mangammal, and Fr. De Sa was allowed to return to Vadakenkulam.",
+  "translation": "",
+  "establishes": "The ordeal of the parish's first priest, from de Saa's own letter of 14 October 1713. Men who believed he was hiding money dragged him from a sick-bed, beat him and drove him out of the district; Fr Pierre Martin, seeing him in June 1700, found all his teeth knocked out. He was restored to Vadakkankulam only after Fr Laynez appealed to Mangammal, the queen-regent of Madurai. In copyright: quoted, not reproduced.",
+  "kind": "quote-only"
+ },
+ "first-inland-parish:1:besse_moumas_typescript": {
+  "source": "besse_moumas_typescript",
+  "short": "Besse (Moumas tr.)",
+  "title": "New Madurai Mission: Madurai Mission Southern District, Vol. IV (1715-1913)",
+  "imprint": "Leon Besse SJ, La Mission du Madure (1914), English tr. Fr Moumas SJ - typescript; parish accession 215 (= JEMPARC Book 95)",
+  "lang": "en",
+  "rights": "in-copyright",
+  "quote": "an extract from the Annual Letter of 1701, relating a persecution in which Fr. Bernard de Saa was particularly ill-treated in his residence of Vadakenkulam",
+  "translation": "",
+  "establishes": "That 1700 was not the only blow. Besse marks the point where “tradition is met with historic documents” and produces the Annual Letter of 1701, attesting a persecution in which the same priest was ill-treated in the same village. In copyright: quoted, not reproduced.",
+  "kind": "quote-only"
+ },
+ "first-inland-parish:2:auguste_jean_1894": {
   "source": "auguste_jean_1894",
   "short": "Auguste Jean 1894",
   "title": "Le Maduré : l'ancienne et la nouvelle mission",
@@ -326,8 +341,8 @@
   "rights": "pd",
   "quote": "chargé des chrétiens de Vadakenkoulam, près du cap",
   "translation": "\"His rest was not long; for the following year he was charged with the Christians of Vadakenkoulam, near Cape Comorin. One of his Brothers gives this last testimony of him: 'He labours for the conversion of the heathen with an admirable zeal.'\"",
-  "establishes": "The earliest EXTERNAL attestation of a priest at Vadakkankulam: Fr Maria Xavier Borghese, in 1709. Every earlier pastor on the page rests on the parish's own register alone.",
-  "page": 157,
+  "establishes": "The earliest attestation of a priest here in the printed mission histories: Fr Maria Xavier Borghese, in 1709. De Saa, before him, reaches us through Besse's typescript and de Saa's own letter — the two moments before this one.",
+  "page": 131,
   "pdfPage": 157,
   "match": "exact",
   "kind": "leaf",
@@ -338,7 +353,7 @@
   ],
   "scan": "/refs/auguste_jean_1894-p157.jpg"
  },
- "first-inland-parish:1:bertrand_1847": {
+ "first-inland-parish:2:bertrand_1847": {
   "source": "bertrand_1847",
   "short": "Bertrand 1847",
   "title": "La mission du Maduré d'après des documents inédits, vol. IV",
@@ -347,7 +362,7 @@
   "rights": "pd",
   "quote": "à la tête du district de Vadakencoulam",
   "translation": "\"At last, in 1708, the Superiors, seeing his strength diminished by excess of fatigue, were obliged to send him to the Fishery Coast to rest. He could not, however, bear that rest for long; for a fragment of the Annual Letter of 1709 shows him again at the head of the district of Vadakencoulam, and says of him: 'He labours for the conversion of the heathen with an admirable zeal; the ardour of his spirit supplies in him for the strength of the body.'\"",
-  "establishes": "The 1709 Annual Letter — the earliest document to name this place. Bertrand prints the fragment: Borghese at the head of the district, labouring \"with an admirable zeal\".",
+  "establishes": "The 1709 Annual Letter, printed by Bertrand: Borghese at the head of the district of Vadakencoulam, labouring “with an admirable zeal”.",
   "page": 110,
   "pdfPage": 110,
   "match": "exact",
@@ -359,7 +374,7 @@
   ],
   "scan": "/refs/bertrand_1847-p110.jpg"
  },
- "first-inland-parish:3:pate_gazetteer_1917": {
+ "first-inland-parish:4:pate_gazetteer_1917": {
   "source": "pate_gazetteer_1917",
   "short": "Pate 1917",
   "title": "Madras District Gazetteers: Tinnevelly, Vol. I",
@@ -380,7 +395,7 @@
   ],
   "scan": "/refs/pate_gazetteer_1917-p106.jpg"
  },
- "first-inland-parish:3:caldwell_1881": {
+ "first-inland-parish:4:caldwell_1881": {
   "source": "caldwell_1881",
   "short": "Caldwell 1881",
   "title": "A Political and General History of the District of Tinnevelly",
@@ -390,7 +405,7 @@
   "quote": "Brandolini, who founded the congregation",
   "translation": "",
   "establishes": "Caldwell credits Fr Brandolini with FOUNDING the congregation here in 1714 — which is a second, doubly independent witness to the 1714 residence, and at the same time a direct contradiction of the 1685 founding this page gives two eras earlier. Both are printed; neither is hidden.",
-  "page": 258,
+  "page": 240,
   "pdfPage": 258,
   "match": "exact",
   "kind": "leaf",
@@ -459,7 +474,7 @@
   "quote": "prêt à recevoir le baptême. Son ami l'adressa au",
   "translation": "\"Nilen was soon convinced of the falsity of paganism and of the divinity of the Christian faith. From then on, listening only to his conscience, he declared himself ready to receive baptism. His friend directed him to Fr John Baptist Bouttari, who was then in charge of the Christians of Vadakenkoulam.\"",
   "establishes": "A Jesuit historian recording the baptism from the mission's own papers in 1894 — a century before any canonisation dossier existed. He follows Bertrand closely and is not a fully independent second witness.",
-  "page": 223,
+  "page": 197,
   "pdfPage": 223,
   "match": "exact",
   "kind": "leaf",
@@ -491,6 +506,27 @@
   ],
   "scan": "/refs/bertrand_1847-p397.jpg"
  },
+ "statue-and-the-saint:1:mackenzie_1901": {
+  "source": "mackenzie_1901",
+  "short": "Mackenzie 1901",
+  "title": "Christianity in Travancore",
+  "imprint": "G. T. Mackenzie — Trivandrum: Government Press, 1901",
+  "lang": "en",
+  "rights": "pd",
+  "quote": "a Travancore convert who is reverenced as a martyr",
+  "translation": "",
+  "establishes": "The outside witness to the parish's central fact. G. T. Mackenzie, a British administrator surveying Christianity in Travancore, records from the other side that Fr Bouttari baptised the convert here in 1745 — a man of good family who held office in the court of the Raja, baptised \"being then thirty-two years of age\", who took the name Devasagayam. He names the man who first drew him toward the faith, Eustache de Lannoy, and traces the death four years' imprisonment later, in 1752.",
+  "page": 80,
+  "pdfPage": 101,
+  "match": "exact",
+  "kind": "leaf",
+  "pageText": "80 Another Jesuit Father who was for a time at Ambalakada is the Martyr, B. John de Brito. He arrived at Ambalakada in 1673 and seems to have spent three years there, preparing to join the Madura mission. In 1676 or later he set out with Father Andre Freire, S. J., and walked to Sattiamangalam in the Ooimbatore district, that being the nearest church of the Madura mission, and there John de Britto had to rest for a month before he was able to continue his journey. Mission du Madure, iii. 255. When Mgr. deTournon expressed disapproval of some of the methods of the Madura mission, one priest, Father Simon Carvalho, left Madura and founded a mission station at Neman near Vadakenkulam, on the Tinnevelly frontier of South Travancore in the year 1708. This station from 1743 was under Father Bouttari, S. J., who in 1745 baptised a Travancore convert who is reverenced as a martyr. Nilakandan Pillai, a man of good family, held office in the Court of the Raja. He was disposed to become a Christian and after discussions on Christianity with Bustache de Lannoy, a Belgian officer in the Travancore Army, Nilakandan Pillai was baptised, being then thirtytwo years of age, and he took the Christian name Devasagayam. Four years afterwards he was imprsoned because of his change of religion and after three years of imprisonment he was shot in 1752 by order of the Raja at Aramboli about the fifty-first mile on the road from Trevandrum to Tin nevelly. His corpse was thrown into the jungle, but the Christians got possession of the corpse, burned it and buried the ashes in a tomb which still exists in the centre of the church of St. Francis Xavier at Kottar. (81) . In the time of Bishop Florentius a young French Savant, named Anquetil du Perron, was at Cochin. The Dutch Commandeur refused him permission to visit Verapoly. but he went without leave and has written a very lively account of his visit in Zendaresta. clvi. Ho gives the number of Christians as two hundred thousand, of whom one hundred thousand were Romo-Syrians, fifty thousand were Latin Catholics and fifty thousand were under Mar Thomas. It was also in the time of Bishop Florentius that Rama Varma, the victorious Raja of Travancore, along with his General. Eustache de Lannoy, visited Verapoly. It is said that the Raja then confirmed the rent free tenure of the ground, including the accretions which had formed since the original grant by the Raja of Cochin. In the incursions by Hyder Ali and Tippoo Sultan some of the Mysore troops did reach Verapoly, but they caused little damage, except that the archives of the mission during the hasty removal were lost in the lagoon. There is little on record to show what was the state of affairs under those two bishops who ruled from 1712 to 1773, sixty-one years, but there is an order issued by Propaganda, dated August 31st 1771, requiring a stricter discipline among the Christians. Students admitted to the Seminary must be seventeen years of age and all candidates for the priesthood, Latin and Syrian, must be educated together in the Seminary at Verapoly. The Missionaries are ordered to visit every church, remaining at least twenty days at each church. The ignorance and negligence of the Native Clergy are deplored and rules are laid down to remedy this. (82) . The bishop was Bavarian and the missionaries at Verapoly were Italian and that may have been one reason why there was discord between the bishop and his European Clergy. When the dissension became acute Bishop Charles of St. Conrad came from Bombay, and endeavoured to bring about a reconciliation but without success. He had been Coadjutor at Verapoly from 1764 to 1773 before he went to Bombay so he knew this coast. When Bishop Francis left India, Bishop Charles administered the Verapoly mission, with the consent of the Dutch. They called him Bishop Vanischt, so he probably was Flemish. List of Ancient Dutch Records in Fort St. George. 1053, 1131. India Orientalis Christiana, SS.",
+  "span": [
+   756,
+   886
+  ],
+  "scan": "/refs/mackenzie_1901-p101.jpg"
+ },
  "statue-and-the-saint:2:bertrand_lettres_1865": {
   "source": "bertrand_lettres_1865",
   "short": "Bertrand 1865",
@@ -501,7 +537,7 @@
   "quote": "jeta les fondements de son église actuelle",
   "translation": "\"Fr Bouttari, who baptised Devasahayam… He administered the Christian community of Vadakencoulam and laid the foundations of its present church; he left that country to replace Fr Thomassin in the district of Aour.\"",
   "establishes": "The documented core, and all of it: Fr Buttari \"laid the foundations of its present church\". Bertrand gives NO year. The 1749 date, the kankol festival and the fabric of the building are all parish-side — which is why this dot is tiered tradition, not documented.",
-  "page": 18,
+  "page": 4,
   "pdfPage": 18,
   "match": "exact",
   "kind": "leaf",
@@ -522,7 +558,7 @@
   "quote": "Il acheva l'église que le P. Bouttari avait",
   "translation": "\"He completed the church that Fr Bouttari had begun, and made faith, piety and fervour flourish in that Christian community.\"",
   "establishes": "That Buttari began the church and Thomassini finished it. Auguste Jean reproduces Bertrand almost word for word here and is NOT a second witness.",
-  "page": 256,
+  "page": 230,
   "pdfPage": 256,
   "match": "exact",
   "kind": "leaf",
@@ -554,6 +590,18 @@
   ],
   "scan": "/refs/souvenir_150yr-p4.jpg"
  },
+ "statue-and-the-saint:2:parish_english_history": {
+  "source": "parish_english_history",
+  "short": "Parish history (English)",
+  "title": "The English history of the Holy Family Church",
+  "imprint": "Parish copy; title, author and year still being confirmed",
+  "lang": "en",
+  "rights": "parish",
+  "quote": "built of broad bricks from Perungudi",
+  "translation": "",
+  "establishes": "The fabric of Buttari's church, from the parish's own English history: broad bricks carted from Perungudi, not stone. Its date is said to rest on two inscriptions once set inside the old church, which nobody on this project has seen.",
+  "kind": "quote-only"
+ },
  "statue-and-the-saint:3:auguste_jean_1894": {
   "source": "auguste_jean_1894",
   "short": "Auguste Jean 1894",
@@ -564,7 +612,7 @@
   "quote": "Le P. Bouttari était alors occupé à bâtir son église",
   "translation": "\"Fr Bouttari was then occupied in building his church at Vadakenkoulam. As he lacked the timber needed for his construction, Devasahayam, wishing to help him, applied to a Brahmin who had long been his friend, and whose credit with the king was all-powerful. He begged him to use his influence to obtain, in the Father's favour, permission to cut wood in the royal forests.\"",
   "establishes": "The whole dot, cleanly and from one source: the timber shortage, the friend at court, the quarrel over religion, the threat, the warrant obtained by intrigue, and the surrender without resistance. Auguste Jean calls the antagonist a Brahmin whose credit with the king was all-powerful.",
-  "page": 224,
+  "page": 198,
   "pdfPage": 224,
   "match": "exact",
   "kind": "leaf",
@@ -575,6 +623,18 @@
   ],
   "scan": "/refs/auguste_jean_1894-p224.jpg"
  },
+ "statue-and-the-saint:4:besse_moumas_typescript": {
+  "source": "besse_moumas_typescript",
+  "short": "Besse (Moumas tr.)",
+  "title": "New Madurai Mission: Madurai Mission Southern District, Vol. IV (1715-1913)",
+  "imprint": "Leon Besse SJ, La Mission du Madure (1914), English tr. Fr Moumas SJ - typescript; parish accession 215 (= JEMPARC Book 95)",
+  "lang": "en",
+  "rights": "in-copyright",
+  "quote": "Just like the first, it was dedicated to the Holy Family.",
+  "translation": "",
+  "establishes": "Besse (Moumas typescript, pp.843–844), from the mission’s records, says the 1752 church was dedicated to the Holy Family, “just like the first” — de Britto’s chapel — so the Holy Family title runs continuous, not new in 1872. At its building, then, this was a Holy Family church. In copyright: quoted, not reproduced.",
+  "kind": "quote-only"
+ },
  "statue-and-the-saint:4:bertrand_lettres_1865": {
   "source": "bertrand_lettres_1865",
   "short": "Bertrand 1865",
@@ -582,40 +642,19 @@
   "imprint": "1865",
   "lang": "fr",
   "rights": "pd",
-  "quote": "Le P. Thomassin, qui vint occuper le poste de Vada",
-  "translation": "\"Fr Thomassin, who came to occupy the post of Vadakencoulam, completed the building of the church, won the Christians by his patience, his gentleness and his humility, rooted out abuses and superstitions, and made faith, piety and fervour flourish in that Christian community.\"",
-  "establishes": "The Buttari→Thomassini hand-over and the completion of the church — the one printed, documented thing in this dot. Bertrand's own volume records that the titular feast of this church was ST FRANCIS XAVIER'S, kept with a December novena, right up to the re-dedication of 1872.",
-  "page": 19,
-  "pdfPage": 19,
+  "quote": "la grande neuvaine et la fête solennelle de saint François-Xavier à Vadakencoulam",
+  "translation": "“…to celebrate the great novena and the solemn feast of St Francis Xavier at Vadakencoulam, and that from there I should betake myself to Palamcottah…”",
+  "establishes": "The great December feast of the parish in these years — but a devotional feast, not the dedication. Bertrand’s Lettres (vol. II) has him keep “the great novena and the solemn feast of St Francis Xavier at Vadakencoulam”. The church itself was dedicated to the Holy Family (see Besse); Xavier was its patronal feast. Windowed to the feast sentence, away from the caste material elsewhere in this volume.",
+  "page": 174,
+  "pdfPage": 186,
   "match": "exact",
   "kind": "leaf",
-  "pageText": "INTRODUCTION, 5\n\n20 Le P. Thomassin, qui vint occuper le poste de Vadakencoulam, acheva la construction de l’église, gagna les chrétiens par sa patience, sa douceur et son humilité, extirpa les abus et les superstitions et fit fleurir la foi, la piété et la ferveur dans cette chrétienté. Sentant sa fin approcher, il se fit porter auprès du P. Ant. Douarte, provincial, reçut les derniers sacrements et mourut en 1775, âgé de soixante-quinze ans. Les chrétiens le vénèrent commé un saint, donnent son nom à leurs enfants et visitent son tombeau avec une extrême dévotion. Les païens eux-mêmes n’en parlent qu’avec respect, l’invoquent dans leurs détresses et prétendent que souvent son intervention fait tomber les pluies du ciel sur leurs moissons.\n\n3° Le P. Massour, vers le même temps.\n\n49 Le P. Ant. Douarte, dernier provincial, résidant à ‘ Manapade. On loue sa modestie et sa douceur qui lui avaient gagné tous les cœurs. Chargé d’années et d’infirmités, il fut saisi d’une violente crise dans la visite de ses chrétientés, déclara qu'il n’avait plus que trois jours à vivre, se fit porter à Manapade, convoqua tous les chrétiens, leur donna ses derniers avis comme un père à ses enfants, les exhorta à la paix, à l’union et à la constance dans la foi, leur promit que la Compagnie de Jésus serait, rétablie et leur enverrait de nouveaux missionnaires. Un témoin oculaire, de qui nous tenons ce récit, ajoute que tous les chrétiens fondaient en larmes et répondaient à leur père par leurs cris et leurs sanglots. Ensuite le P. Douarte enferma certains papiers dans une boîte de ferblanc, qu'il scella de son sceau et remit aux chefs de la chrétienté, en les chargeant de la conserver avec soin et de la remettre au futur provincial, qui seul avait le droit",
+  "windowed": true,
+  "pageText": "1% LETTRES. ÉDIFIANTES ET CURIEUSES.\n\npour célébrer la grande neuvaine et la fête solennelle de saint François-Xavier à Vadakencoulam, et que de là je me rendisse à Paléamcottey pour y suivre la marche des procès dont l'issue devait être pour nous d’une extrême importance, pent-être une question de vie ou de mort pour notre missiop. Malgré tout non chagrin d'abandonner ainsi Sa Grandeur seule au milieu de nos chrétiens, je dus céder à la force des raisons et à son désir. Et je dois avouer que j’obéissais en même temps à une autre nécessité, celle de ma santé, gravement compromise par l'excès et la continuité des faligues. Je me sentais les entrailles enflammées , l'estomac délabré, la poitrine souffrante, la tête et la gorge prises par une fluxion opiniâtre. 11 était temps que je vinse consulter un docteur anglais et profiter de ses soins. Je me trouve en ce moment beaucoup mieux et en état de reprendre mes travaux ordinaires. |\n\nPour vous montrer que ce repos n’était pas inutile et vous donner une idée de nos excursions pendant toute cette visite épiscopale, je retrace ici le journal de ma dernière semaine.\n\nLe 17 novembre. Arrivée à Viravanellour ; confessions jusqu’à neuf heures du soir ; puis souper, coucker à onze heures. ",
   "span": [
-   17,
-   289
-  ],
-  "scan": "/refs/bertrand_lettres_1865-p19.jpg"
- },
- "statue-and-the-saint:4:auguste_jean_1894": {
-  "source": "auguste_jean_1894",
-  "short": "Auguste Jean 1894",
-  "title": "Le Maduré : l'ancienne et la nouvelle mission",
-  "imprint": "Paris/Bruges, 1894",
-  "lang": "fr",
-  "rights": "pd",
-  "quote": "Il acheva l'église que le P. Bouttari avait",
-  "translation": "",
-  "establishes": "Auguste Jean reproduces Bertrand here phrase for phrase. One narrative, not two.",
-  "page": 256,
-  "pdfPage": 256,
-  "match": "exact",
-  "kind": "leaf",
-  "pageText": "230\n\nPREMIÈRE PARTIE. CHAPITRE V.\n\nkoulam. Il acheva l'église que le P. Bouttari avait\n\ncommencée, et fit fleurir la foi, la piété et la ferveur\n\ndans cette chrétienté. Sentant sa fin approcher, il se\n\nfit transporter à Taley, auprès du P. Antoine Douarte,\n\net mourut en 1775, âgé de 75 ans. Il laissa après lui\n\nle parfum de ses vertus. Les chrétiens chérirent long-\n\ntemps\n\nsa\n\nmémoire ;\n\nils aimaient\n\nà\n\ndonner son\n\nnom à\n\nleurs enfants. Les païens eux-mêmes le vénéraient et\n\nallaient jusqu'à l'invoquer dans les temps de séche-\n\nresse.\n\nLe P. Ant. Douarte, qui reçut le dernier soupir du P. Tomassini, était Provincial du Malabar à l'époque de la suppression de la Compagnie de Jésus. Ne pouvant résider sur le territoire portugais, il avait fixé sa résidence à Manapade, sur la côte de la Pêcherie qui était passée sous la domination hollandaise. Après la suppression de la Compagnie, il devint simple missionnaire. L'humilité et la douceur étaient ses vertus ca-\n\nractéristiques ; elles lui ouvraient tous les cœurs.\n\nChargé d'infirmités, il se traînait néanmoins d'un\n\nvillage à l'autre partout où il y avait des chrétiens. Il\n\nadministrait ceux de Virapandiapatnam, lorsqu'il fut saisi d'une attaque violente. On le transporta à Manapade, où il mourut le 30 août 1788, au même âge que\n\nle P. Tomassini. Avant de mourir, il appela les fidèles\n\nauprès de son lit, les exhorta à rester constants dans\n\nleur foi, leur prédit que la Compagnie de Jésus serait\n\nrétablie et qu'elle leur enverrait un jour d'autres mis-\n\nUn sionnaires.\n\ntémoin de cette prédiction vivait encore,\n\nquand arrivèrent dans l'Inde les quatre Pères qui\n\ninaugurèrent la Nouvelle Mission,",
-  "span": [
-   43,
-   169
-  ],
-  "scan": "/refs/auguste_jean_1894-p256.jpg"
+   38,
+   335
+  ]
  },
  "statue-and-the-saint:4:souvenir_150yr": {
   "source": "souvenir_150yr",
@@ -626,7 +665,7 @@
   "rights": "parish",
   "quote": "in the year AD 1752, the church was completed",
   "translation": "",
-  "establishes": "The year 1752, the cross plan and the eastward orientation — said to rest on two inscriptions inside the old church, which nobody on this project has seen.",
+  "establishes": "The year 1752, the cross plan and the eastward orientation — the parish’s own record, said to rest on two inscriptions once inside the old church, which nobody on this project has seen.",
   "page": 4,
   "pdfPage": 4,
   "match": "exact",
@@ -660,7 +699,7 @@
   "quote": "L'église de Vadakenkoulam possède une par",
   "translation": "\"Thus died, after three years of cruel sufferings, this Christian hero, on 14 January 1742 [recte 1752]. His holy body was buried at Cottar, in the church of St Francis Xavier. The church of Vadakenkoulam possesses a part of his garment and the chains with which he was bound.\"",
   "establishes": "The oldest and only primary witness to the relic — and it says the church holds \"a part of his garment and the chains with which he was bound\". NOT a turban. The head-cloth is the diocese's modern account. (This same page carries Jean's known misprint of the martyrdom year as 1742; it is 1752.)",
-  "page": 229,
+  "page": 203,
   "pdfPage": 229,
   "match": "exact",
   "kind": "leaf",
@@ -747,7 +786,7 @@
   "quote": "il se fit transporter à Taley, auprès du P. Antoine Douarte",
   "translation": "\"Feeling his end approach, he had himself carried to Talai, to Fr Antoine Douarte, and died in 1775, aged 75.\"",
   "establishes": "The only primary witness to Fr Thomassini's death: he had himself carried to Talai, to Fr Antoine Douarte, and died THERE in 1775, aged seventy-five. Not at Vadakkankulam.",
-  "page": 256,
+  "page": 230,
   "pdfPage": 256,
   "match": "exact",
   "kind": "leaf",
@@ -768,7 +807,7 @@
   "quote": "il se fit porter auprès du P. Ant. Douarte",
   "translation": "",
   "establishes": "Bertrand, independently, has the same death at Talai. This is the passage Auguste Jean is following.",
-  "page": 19,
+  "page": 5,
   "pdfPage": 19,
   "match": "exact",
   "kind": "leaf",
@@ -810,7 +849,7 @@
   "quote": "Goa, il est vrai, leur envoyait de ses prêtres",
   "translation": "\"The ranks of the old missionaries of the Maduré were thinning more and more, and the replacements they called for with all their prayers did not arrive. Goa, it is true, sent them its priests; but the seminaries of Goa had lost their old directors.\"",
   "establishes": "The thinning of the old missionaries and the arrival of Goanese priests, from the Jesuit side.",
-  "page": 257,
+  "page": 231,
   "pdfPage": 257,
   "match": "exact",
   "kind": "leaf",
@@ -820,6 +859,51 @@
    523
   ],
   "scan": "/refs/auguste_jean_1894-p257.jpg"
+ },
+ "the-weeping-madonna:0:krishnaswami_ayyar_1934": {
+  "source": "krishnaswami_ayyar_1934",
+  "short": "Gazetteer Suppl. 1934",
+  "title": "Madras District Gazetteers: Tinnevelly, Vol. II — Statistical Appendix & Supplement",
+  "imprint": "K. N. Krishnaswami Ayyar — Madras: Government Press, 1934, p. 169",
+  "lang": "en",
+  "rights": "pd",
+  "quote": "Vadakkankulam then became the sole centre of the inland mission",
+  "translation": "",
+  "establishes": "The upgrade that turns the ‘empty’ years around. The 1934 Tinnevelly Gazetteer Supplement (p.169), a government record with no interest in the parish, sets down that Vadakkankulam “became the sole centre of the inland mission with four divisional centres… Sendamangalam, Andipatti, Kamanayakkanpatti and Vadakkankulam itself”, served from Cochin until the charge was made over to the new Jesuits in 1837. Windowed to this sentence: its neighbours on the page carry the 1744 caste decree, which the parish keeps off the site.",
+  "page": 169,
+  "pdfPage": 1,
+  "match": "exact",
+  "kind": "leaf",
+  "windowed": true,
+  "pageText": "In 1759, the Society of Jesus was declared suppressed in Portugal and its dominions and all the Jesuits on whom the Portuguese could lay hands were seized and deported to the prisons of Lisbon. The priests of Mysore and Madura, and of the Fishery and Travancore coasts continued in their jurisdiction as before, though it was not possible to fill in by fresh recruits any vacancies that occurred among them. In 1773 came Pope Clement XIV^s Bull of suppression of the Jesuits throughout the world which,\n\n^*An exact description of Malabar bj Philip Baldaeus, Amsterdam, 1692.\n\n169\n\nhowever, left the position of the missionaries in the district in tlie same state as before.\n\nTill 1780, the two Jesuit missions working in the district had been attached to two different Ordinaries, the Fishery Coast mission to that of Cochin, and the inland mission to Cranganore but the distinction ceased about this time and both were administered by the Ordinary of Cochin. Vadakkankulam then became the sole centre of the inland mission with four divisional centres under separate categories Sendamangalam, Andipatti, Kamanayakkanpatti and Vadakkankulam itself. This centre was served by priests from Cochin with the real missionary spirit who did their best to keep up the foundations already existing and made over their charge in 1837 to the first new J esuit missionaries who arrived in Palarncotta that year. But the Goanese priests who had stepped into the places of the old Jesuits in the Fishery Coast showed at first some reluctance to surrender their charges, and trouble arose in consequence. They had allowed all sorts of abuses to creep in, and the adminis- tration and enjoyment of church revenue had fallen into the hands of the local Pattangattis and of their chief. The new mis- sionaries were, however, welcomed everywhere and the Padroado priests submitted themselves to the new order and departed, but the attempts of the new priests met with opposition from those who had secured an unjust hold over the revenues and goods of the church and organized a campaign of insubordi- nation to the lawful jurisdiction of the Vicar Apostolic of the Coromandel Coast.\n",
+  "span": [
+   960,
+   1149
+  ]
+ },
+ "the-weeping-madonna:0:besse_moumas_typescript": {
+  "source": "besse_moumas_typescript",
+  "short": "Besse (Moumas tr.)",
+  "title": "New Madurai Mission: Madurai Mission Southern District, Vol. IV (1715-1913)",
+  "imprint": "Leon Besse SJ, La Mission du Madure (1914), English tr. Fr Moumas SJ - typescript; parish accession 215 (= JEMPARC Book 95)",
+  "lang": "en",
+  "rights": "in-copyright",
+  "quote": "During the 63 years between the death of Fr. Thomassini and the arrival of the new Jesuits in 1838",
+  "translation": "",
+  "establishes": "Besse’s own words open this era, from the parish’s Moumas typescript (p.842): the 63 years between Thomassini’s death and the new Jesuits of 1838, in which “many interesting events took place but have… been more or less disfigured by tradition. One however seems to have all guarantees of its authenticity” — the sentence that leads straight into the 1803 account. In copyright: quoted, not reproduced.",
+  "kind": "quote-only"
+ },
+ "the-weeping-madonna:0:ferroli_1951": {
+  "source": "ferroli_1951",
+  "short": "Ferroli 1951",
+  "title": "The Jesuits in Malabar, Vol. II",
+  "imprint": "D. Ferroli, S.J. — Bangalore: Bangalore Press, 1951",
+  "lang": "en",
+  "rights": "in-copyright",
+  "quote": "Of all the churches in the Madura Mission, four namely Surano, Camanaikempatti, Tirunaveli and Vadakencollam, were under the Bishop of Cochin.",
+  "translation": "",
+  "establishes": "Corroborates the Cochin jurisdiction from a second printed history: Ferroli lists Vadakencollam among the four Madura-Mission churches that “were under the Bishop of Cochin” in these years. In copyright: quoted, not reproduced.",
+  "kind": "quote-only"
  },
  "the-weeping-madonna:1:bertrand_lettres_1865": {
   "source": "bertrand_lettres_1865",
@@ -831,7 +915,7 @@
   "quote": "Les chrétiens le vénèrent",
   "translation": "\"The Christians venerate him as a saint, give his name to their children, and visit his tomb with an extreme devotion. Even the pagans speak of him only with respect, invoke him in their distress, and claim that his intercession often brings the rains of heaven down upon their harvests.\"",
   "establishes": "Ninety years after his death Bertrand still writes of Fr Thomassini in the PRESENT tense — they venerate him as a saint, give his name to their children, visit his tomb. This is the only source for the present tense, the saint, the tomb and the rains.",
-  "page": 19,
+  "page": 5,
   "pdfPage": 19,
   "match": "exact",
   "kind": "leaf",
@@ -852,7 +936,7 @@
   "quote": "il se fit transporter à Taley, auprès du P. Antoine Douarte",
   "translation": "",
   "establishes": "The death only. Auguste Jean uses the PAST tense — they cherished his memory \"for a long time\" — and speaks of drought, not harvests. He does not second Bertrand's present-tense veneration, and neither source locates the tomb at Vadakkankulam.",
-  "page": 256,
+  "page": 230,
   "pdfPage": 256,
   "match": "exact",
   "kind": "leaf",
@@ -863,40 +947,19 @@
   ],
   "scan": "/refs/auguste_jean_1894-p256.jpg"
  },
- "the-weeping-madonna:2:india_orientalis_christiana_1794": {
-  "source": "india_orientalis_christiana_1794",
-  "short": "Paulinus 1794",
-  "title": "India Orientalis Christiana",
-  "imprint": "Rome: Typis Salomonianis, 1794 — p. 158",
-  "lang": "la",
-  "rights": "none",
-  "quote": "XIV. Vadakencollam",
-  "translation": "\"XII. Camanaikenpatti, XIII. Tirunaveli, XIV. Vadakencollam. Of these, the churches numbered 11, 12, 13 and 14 are subject to the Bishop of Cochin.\"",
-  "establishes": "The earliest appearance of this village in a European printed book: listed among the churches under the Bishop of COCHIN, and placed on the Cape Comorin coast. Both page numbers (p.158 and p.117) have been verified. It is also the source we ourselves long cited wrongly — our own compilation gives \"Rome 1714, p.168\", and reads into it a founding \"after 1545\". The book is Rome 1794, the entry is p.158, and no founding date appears in it at all.",
-  "kind": "unavailable"
- },
- "the-weeping-madonna:3:pate_gazetteer_1917": {
-  "source": "pate_gazetteer_1917",
-  "short": "Pate 1917",
-  "title": "Madras District Gazetteers: Tinnevelly, Vol. I",
-  "imprint": "Madras: Government Press, 1917",
+ "the-weeping-madonna:1:besse_moumas_typescript": {
+  "source": "besse_moumas_typescript",
+  "short": "Besse (Moumas tr.)",
+  "title": "New Madurai Mission: Madurai Mission Southern District, Vol. IV (1715-1913)",
+  "imprint": "Leon Besse SJ, La Mission du Madure (1914), English tr. Fr Moumas SJ - typescript; parish accession 215 (= JEMPARC Book 95)",
   "lang": "en",
-  "rights": "pd",
-  "quote": "On the 31st July, 1801, an agreement was effected with the new Nawab",
+  "rights": "in-copyright",
+  "quote": "the Christians of Vadakenkulam raised a monument in their midst",
   "translation": "",
-  "establishes": "The change of sovereign two years before the weeping — the Carnatic handed to the Company in perpetuity, Mr Lushington appointed first Collector, the province taken \"without the smallest disturbance\". Every quoted fragment is verbatim.",
-  "page": 85,
-  "pdfPage": 101,
-  "match": "exact",
-  "kind": "leaf",
-  "pageText": "POLITICAL HISTORY 85\n\nwith the capture of Kalaiyarkovil, on the tst October 1801. In a few days Kattaboma Nayakkan and his younger brother were captured, sent to Panjalankurichi and there hanged. Colone] Agnew who had commanded the force in Sivaganga returned to Palamcotta. The Panjalankurichi fort was razed tothe ground; the site was ploughed over and sown with castor seed, and the name of the place was expunged from all the registers of the district. During Colonel Agnew’s absence Mr. Lushington had been busy hunting down gangs of rebels that were still at large; the ‘‘Dalavay Pillai,” one of the chief supporters of Panjalankurichi, fled to the Maravans of Nangunéri for refuge, and a little rebellion which they got up together in October had to be suppressed by troops. Some of the rebels were sent to the fortress of Kamudi in the Ramnad country, others to Madras.\n\nBut before the insurgents in Sivaganga and in Nangunéri were reduced, the Tinnevelly district had become a possession of the East India Company. On the fall of Seringapatam and the death of Tippu Sultan in 1799 correspondence came to light which showed that the Nawab had been engaged in a treasonable conspiracy with Tippu. Whilst the matter was under enquiry, the Nawab died, and, as his heir declined to accept the conditions which the Madras Government thought it necessary to impose on him, the NawAbship was given toa junior member of the family. On the 31st July, 1801, an agreement was effected with the new Nawab, by which the sole and exclusive administration of the civil and military Governments of all the territories and dependencies of the Carnatic was handed over to the Company in perpetuity.\n\nOn the same day Mr. Lushington was appointed the first Collector of the district under the new sovereign power, and moved from Ramnad to Tinnevelly. A week afterwards he reported to Madras that the “ Province of Tinnevelly has been brought without the smallest disturbance under the Company’s authority.” “By the energy and justice of Government,” he added later, “ the rebellions have been subdued; the oppressed have been upheld and exalted; the obedient have been liberally rewarded; and the extinction of a divided authority has restored the fairest province of the Carnatic from an acknowledged state of anarchy and confusion toa state of subordination and prosperity.”\n\nCHAP. TL.\n\nENGLISH PERIOD.\n\nCession of the country to the English.\n\nMr. Lushington, Collector of Tinnevelly.",
-  "span": [
-   1432,
-   1689
-  ],
-  "scan": "/refs/pate_gazetteer_1917-p101.jpg"
+  "establishes": "From Besse’s own typescript (Moumas): “To testify to their gratitude the Christians of Vadakenkulam raised a monument in their midst.” It also settles that Thomassini was NOT buried here — Besse has him dying and buried at Our Lady of Sands near Periatalai — so what stands at Vadakkankulam is a monument, a cenotaph, not his grave. (Auguste Jean and the page’s suppression dot have him dying at Talai; the burial place is a logged mismatch.) In copyright: quoted, not reproduced.",
+  "kind": "quote-only"
  },
- "the-weeping-madonna:4:diocese_thoothukudi_page": {
+ "the-weeping-madonna:2:diocese_thoothukudi_page": {
   "source": "diocese_thoothukudi_page",
   "short": "Diocese page",
   "title": "Diocese of Thoothukudi — parish page",
@@ -908,7 +971,52 @@
   "establishes": "The diocese gives 23 October as the date the weeping HAPPENED, not as a commemoration.",
   "kind": "quote-only"
  },
- "the-weeping-madonna:5:catholictamil_182": {
+ "the-weeping-madonna:2:dessal_gemert_1905": {
+  "source": "dessal_gemert_1905",
+  "short": "Dessal 1905",
+  "title": "Vadakencoulam — son histoire, sa merveille, son jubilé",
+  "imprint": "J.-B. Dessal, S.J. — Lettres de Gemert, 1905",
+  "lang": "fr",
+  "rights": "pd",
+  "quote": "était venu de Tirounouvelly pour voir Monsieur Birdelpech",
+  "translation": "“Saveri-Mouttou Pillai, son of Satiavasagam Pillai, had come from Tirunelveli to see Monsieur Bilderbeck, a European who lived at Vadakencoulam. Saveri-Mouttou was a fervent Christian; about eleven in the morning he went to the church to make his devotions. The statue of the Blessed Virgin, placed above the altar, was in a niche with a double door that could be opened or closed at will. At that moment the two leaves were open…”",
+  "establishes": "The earliest printed witness, a Jesuit of this mission (Lettres de Gemert, 1905), nine years before Besse. He sets down the whole scene: Saveri-Mouttou Pillai, son of Satiavasagam Pillai, come from Tirunelveli to see Monsieur Bilderbeck; the statue in a niche with a double door, both leaves open that morning; the cloud, the tears, the outstretched hands. He also, honestly, records that the Goa priest was absent and no ecclesiastical document approving it exists.",
+  "page": 59,
+  "pdfPage": 59,
+  "match": "exact",
+  "kind": "leaf",
+  "pageText": "chant par le maître d’école dudit village, qui était lui-même un sectateur de Siva. Saveri-Mouttou Pillai, fils de Satiavasagam Pillai, était venu de Tirounouvelly pour voir Monsieur Birdelpech, un européen, qui habitait Vadakencoulam. Savéri-Mouttouétait un chrétien fervent ; vers les onze heures du matin il se rendit à l’église pour faire ses dévotions. La statue de la S\" Vierge, placée au-dessus de l’autel, était dans une niche à double porte qu’on ouvrait ou fermait à volonté. A ce moment les deux battants étaient ouverts ; ni voile ni rideau ne cachait Notre-Dame. Quand le visiteur s’age nouilla pour vénérer Marie, la statue était dans sa pose ordinaire, les mains jointes et regardant devant elle. Comme il priait, un nuage transparent s’éleva derrière Notre-Dame et l’enveloppa; les yeux de la Vierge se portè rent vers le ciel et se remplirent de larmes; toute sa figure exprima la tristesse ; ses mains jointes se séparèrent, et elle les étendit jusqu’à toucher les parois de la niche. En même temps toutes les autres statues de l'autel exprimèrent la compassion et le deuil. « Je suis le sujet d’une illusion, » pensa le voyant. Il regar da plus attentivement : la vision continuait. Pour s’assurer de la réalité du fait, il va chercher le catéchiste Yagapa Pillai. Celui-ci se rend à l’église. Il voit la statue de la Mère de Dieu entourée de fumée et d’obscurité, la figure désolée, les bras ouverts, les yeux élevés au ciel et versant des larmes. Le prodige constaté, le catéchiste fit appeler au plus vite la fille de M. Birdelpech, Ennériammal(Henriette). La pieuse jeune fille accourue à l’église constata le mira cle à son tour. En fixant le visage de Notre-Dame, elle vit ses yeux comme des étoiles; les larmes qui s’en échap paient étaient si abondantes qu’elles coulaient à terre et la mouillaient. Les statues des saints, toutes ensemble, baissaient la tête, de douleur. Pour rendre tout Vadaken coulam témoin du merveilleux évènement, le catéchiste sonna la cloche. Ce signal à une heure si indue amena tout le monde à",
+  "span": [
+   84,
+   236
+  ],
+  "scan": "/refs/dessal_gemert_1905-p59.jpg"
+ },
+ "the-weeping-madonna:2:besse_moumas_typescript": {
+  "source": "besse_moumas_typescript",
+  "short": "Besse (Moumas tr.)",
+  "title": "New Madurai Mission: Madurai Mission Southern District, Vol. IV (1715-1913)",
+  "imprint": "Leon Besse SJ, La Mission du Madure (1914), English tr. Fr Moumas SJ - typescript; parish accession 215 (= JEMPARC Book 95)",
+  "lang": "en",
+  "rights": "in-copyright",
+  "quote": "a transparent cloud arose behind Our Lady and wrapped her up; the eyes of the Virgin looked up and filled up with tears; all her face expressed sadness; her joint hands parted and she stretched them out so far as to touch the walls of the recess. At the same time all the other statues on the altar expressed compassion and mourning.",
+  "translation": "",
+  "establishes": "Besse’s own account, from the parish’s Moumas typescript (p.842), independent of Dessal and agreeing with him — the statue in a double-doored recess open at that moment, the cloud, the tears, the hands reaching the walls, and the detail found in none of the online retellings: “all the other statues on the altar expressed compassion and mourning”. In copyright: quoted, not reproduced.",
+  "kind": "quote-only"
+ },
+ "the-weeping-madonna:2:catholictamil_182": {
+  "source": "catholictamil_182",
+  "short": "CatholicTamil",
+  "title": "பரிசுத்த திருக்குடும்ப தேவாலயம், வடக்கன்குளம்",
+  "imprint": "church.catholictamil.com, p. 182",
+  "lang": "ta",
+  "rights": "web",
+  "quote": "Suddenly the Mother’s face was dimmed by a kind of cloud, and down her coral-like cheeks the tears flowed",
+  "translation": "",
+  "establishes": "The Tamil parish account of the weeping itself, the moment the modern devotion rests on: “Suddenly the Mother’s face was dimmed by a kind of cloud. Down her coral-like cheeks the tears flowed.” A web/parish source, quoted.",
+  "kind": "quote-only"
+ },
+ "the-weeping-madonna:3:catholictamil_182": {
   "source": "catholictamil_182",
   "short": "CatholicTamil",
   "title": "பரிசுத்த திருக்குடும்ப தேவாலயம், வடக்கன்குளம்",
@@ -920,19 +1028,73 @@
   "establishes": "The Tamil retelling. Near word-for-word identical to vadavaimatha.net — one witness printed twice, never two.",
   "kind": "quote-only"
  },
- "the-weeping-madonna:6:catholictamil_182": {
-  "source": "catholictamil_182",
-  "short": "CatholicTamil",
-  "title": "பரிசுத்த திருக்குடும்ப தேவாலயம், வடக்கன்குளம்",
-  "imprint": "church.catholictamil.com, p. 182",
-  "lang": "ta",
-  "rights": "web",
-  "quote": "the catechists Zacharias and Vyagappar, and the European lady Henriette Bilderbeck, who examined the statue closely",
+ "the-weeping-madonna:3:dessal_gemert_1905": {
+  "source": "dessal_gemert_1905",
+  "short": "Dessal 1905",
+  "title": "Vadakencoulam — son histoire, sa merveille, son jubilé",
+  "imprint": "J.-B. Dessal, S.J. — Lettres de Gemert, 1905",
+  "lang": "fr",
+  "rights": "pd",
+  "quote": "toutes les autres images des saints reprirent leur aspect accoutum",
+  "translation": "“As they besought the divine Mother of heaven with tears, swift as lightning her statue returned to its first pose; and all the other images of the saints resumed their accustomed aspect.”",
+  "establishes": "Dessal (1905) on the ending: as the village wept and prayed, the statue returned to its first pose and all the other saints’ images resumed their normal aspect — the same resumption Besse gives.",
+  "page": 60,
+  "pdfPage": 60,
+  "match": "exact",
+  "kind": "leaf",
+  "pageText": "l’église. Tous virent de leurs yeux le prodige, pleurèrent et prièrent. Pendant qu'ils suppliaient avec larmes la divine Mère des cieux, rapide comme l'éclair, sa statue revint à sa première pose; et toutes les autres images des saints reprirent leur aspect accoutumé. Cet évènement miraculeux, conclut notre second chroni queur, Ko. Sébastien Pillai, je le tiens de ceux qui l’ont vu de leurs yeux, de l’honorable catéchiste et des autres per sonnes du village les plus dignes de foi : j’en ai écrit le récit sous leur dictée. Il serait bien difficile de refuser son assentiment à un tel récit : un seul témoin assiste à la transformation de pose de la statue de la Vierge; mais ce témoin offre toutes les garanties d’honnêteté, c’est un bon chrétien. Loin de crier au miracle dès l'abord, il se défie de la première impression de sa vue. Une inspection minutieuse et prolongée ne le convainc pas encore; pour croire au témoignage de ses sens, il le veut corroboré du témoignage d’autrui. Le caté chiste, personnage grave, voit exactement ce qu’il a vu s’opérer; des yeux d’européenne le voient aussi; tout le peuple de Vadakencoulam, qui porte dans son regard, imprimée par une vue journalière, l’image en bois de la Mère de Dieu, le voit également. Ce n’est plus l’attitude de la statue familière à tous et à chacun. Et pour bien montrer que la fraude, aidée de prestidigitation, n’a pas accompli une substitution réalisable, sous les yeux grand ouverts de tant de spectateurs attentifs, la forme transitoire con templée s’évanouit, et la statue réapparait telle que la tailla le sculpteur. Ce changement n’est pas imaginaire, il n’est pas dû à une disposition particulière d’âme ; il est matériel, tombe sous le regard; tous le voient également et de la même manière, chrétiens et païens. Bien plus, le prodige a été touché des mains. Toutes les personnes par lesquelles nous nous sommes fait raconter l’évènement, ajoutaient invariablement la circonstance sui vante transmise par la tradition orale : « Après que l’église se fut remplie de fidèles, tous étant à genoux et les nom-",
+  "span": [
+   72,
+   269
+  ],
+  "scan": "/refs/dessal_gemert_1905-p60.jpg"
+ },
+ "the-weeping-madonna:3:besse_moumas_typescript": {
+  "source": "besse_moumas_typescript",
+  "short": "Besse (Moumas tr.)",
+  "title": "New Madurai Mission: Madurai Mission Southern District, Vol. IV (1715-1913)",
+  "imprint": "Leon Besse SJ, La Mission du Madure (1914), English tr. Fr Moumas SJ - typescript; parish accession 215 (= JEMPARC Book 95)",
+  "lang": "en",
+  "rights": "in-copyright",
+  "quote": "the statue of the Virgin and those of the other Saints resumed their customary aspect",
   "translation": "",
-  "establishes": "The named witnesses and Fr Cardoza's on-the-spot declaration. One witness family, printed twice.",
+  "establishes": "Besse’s typescript (Moumas, p.842): “Finally they rang the bell and the whole village summoned at this undue hour, could all see the marvel with their own eyes. Whilst they were weeping and praying the statue of the Virgin and those of the other Saints resumed their customary aspect.” In copyright: quoted, not reproduced.",
   "kind": "quote-only"
  },
- "the-weeping-madonna:7:cms_intelligencer_1880": {
+ "the-weeping-madonna:4:dessal_gemert_1905": {
+  "source": "dessal_gemert_1905",
+  "short": "Dessal 1905",
+  "title": "Vadakencoulam — son histoire, sa merveille, son jubilé",
+  "imprint": "J.-B. Dessal, S.J. — Lettres de Gemert, 1905",
+  "lang": "fr",
+  "rights": "pd",
+  "quote": "de l’honorable catéchiste et des autres",
+  "translation": "“I hold it from those who saw it with their own eyes, from the honourable catechist and the other most trustworthy persons of the village: I wrote the account under their dictation.”",
+  "establishes": "Dessal (1905) on the basis of the record: the chronicler Sébastien Pillai says he wrote the account under the dictation of those who saw it with their own eyes — the honourable catechist and the most trustworthy people of the village. The witnesses named in print, from the earliest source.",
+  "page": 60,
+  "pdfPage": 60,
+  "match": "exact",
+  "kind": "leaf",
+  "pageText": "l’église. Tous virent de leurs yeux le prodige, pleurèrent et prièrent. Pendant qu'ils suppliaient avec larmes la divine Mère des cieux, rapide comme l'éclair, sa statue revint à sa première pose; et toutes les autres images des saints reprirent leur aspect accoutumé. Cet évènement miraculeux, conclut notre second chroni queur, Ko. Sébastien Pillai, je le tiens de ceux qui l’ont vu de leurs yeux, de l’honorable catéchiste et des autres per sonnes du village les plus dignes de foi : j’en ai écrit le récit sous leur dictée. Il serait bien difficile de refuser son assentiment à un tel récit : un seul témoin assiste à la transformation de pose de la statue de la Vierge; mais ce témoin offre toutes les garanties d’honnêteté, c’est un bon chrétien. Loin de crier au miracle dès l'abord, il se défie de la première impression de sa vue. Une inspection minutieuse et prolongée ne le convainc pas encore; pour croire au témoignage de ses sens, il le veut corroboré du témoignage d’autrui. Le caté chiste, personnage grave, voit exactement ce qu’il a vu s’opérer; des yeux d’européenne le voient aussi; tout le peuple de Vadakencoulam, qui porte dans son regard, imprimée par une vue journalière, l’image en bois de la Mère de Dieu, le voit également. Ce n’est plus l’attitude de la statue familière à tous et à chacun. Et pour bien montrer que la fraude, aidée de prestidigitation, n’a pas accompli une substitution réalisable, sous les yeux grand ouverts de tant de spectateurs attentifs, la forme transitoire con templée s’évanouit, et la statue réapparait telle que la tailla le sculpteur. Ce changement n’est pas imaginaire, il n’est pas dû à une disposition particulière d’âme ; il est matériel, tombe sous le regard; tous le voient également et de la même manière, chrétiens et païens. Bien plus, le prodige a été touché des mains. Toutes les personnes par lesquelles nous nous sommes fait raconter l’évènement, ajoutaient invariablement la circonstance sui vante transmise par la tradition orale : « Après que l’église se fut remplie de fidèles, tous étant à genoux et les nom-",
+  "span": [
+   334,
+   528
+  ],
+  "scan": "/refs/dessal_gemert_1905-p60.jpg"
+ },
+ "the-weeping-madonna:4:besse_moumas_typescript": {
+  "source": "besse_moumas_typescript",
+  "short": "Besse (Moumas tr.)",
+  "title": "New Madurai Mission: Madurai Mission Southern District, Vol. IV (1715-1913)",
+  "imprint": "Leon Besse SJ, La Mission du Madure (1914), English tr. Fr Moumas SJ - typescript; parish accession 215 (= JEMPARC Book 95)",
+  "lang": "en",
+  "rights": "in-copyright",
+  "quote": "Savarimuthu called the catechist Yagapillai and Miss Henrietta Bilderbeck, who saw for themselves the same phenomenon",
+  "translation": "",
+  "establishes": "Besse’s typescript (Moumas, p.842) names the witnesses summoned — the catechist Yagapillai and “Miss” Henrietta Bilderbeck (an unmarried daughter), who saw the same thing. In copyright: quoted, not reproduced.",
+  "kind": "quote-only"
+ },
+ "the-weeping-madonna:6:cms_intelligencer_1880": {
   "source": "cms_intelligencer_1880",
   "short": "CM Intelligencer 1880",
   "title": "The Church Missionary Intelligencer and Record, vol. V",
@@ -953,7 +1115,7 @@
   ],
   "scan": "/refs/cms_intelligencer_1880-p520.jpg"
  },
- "the-weeping-madonna:7:badley_directory_1886": {
+ "the-weeping-madonna:6:badley_directory_1886": {
   "source": "badley_directory_1886",
   "short": "Badley 1886",
   "title": "Indian Missionary Directory and Memorial Volume",
@@ -974,7 +1136,7 @@
   ],
   "scan": "/refs/badley_directory_1886-p51.jpg"
  },
- "the-weeping-madonna:7:trento_2022": {
+ "the-weeping-madonna:6:trento_2022": {
   "source": "trento_2022",
   "short": "Trento 2022",
   "title": "Writing Tamil Catholicism",
@@ -994,7 +1156,19 @@
    1839
   ]
  },
- "the-weeping-madonna:8:besse_1914": {
+ "the-weeping-madonna:6:besse_moumas_typescript": {
+  "source": "besse_moumas_typescript",
+  "short": "Besse (Moumas tr.)",
+  "title": "New Madurai Mission: Madurai Mission Southern District, Vol. IV (1715-1913)",
+  "imprint": "Leon Besse SJ, La Mission du Madure (1914), English tr. Fr Moumas SJ - typescript; parish accession 215 (= JEMPARC Book 95)",
+  "lang": "en",
+  "rights": "in-copyright",
+  "quote": "the Bilderbeck family, in common with Mudalies, had farmed out the collection of tiryais (dues) of Nangunery",
+  "translation": "",
+  "establishes": "Besse’s typescript (Moumas, p.842, footnote 1) on the family’s standing: under the Nabob of Arcot the Bilderbecks had farmed the revenue (tiryais/dues) of Nangunery — revenue-farmers, which is what makes the benefactor tradition materially plausible. In copyright: quoted, not reproduced.",
+  "kind": "quote-only"
+ },
+ "the-weeping-madonna:9:besse_1914": {
   "source": "besse_1914",
   "short": "Besse 1914",
   "title": "La Mission du Maduré : Historique de ses Pangous",
@@ -1006,6 +1180,60 @@
   "establishes": "Nothing — and that is the point. Every account of 1803 descends from this one printed book. It has never been digitised; four physical copies are known (Paris, Canberra, Toulouse, Shembaganur); and nobody working on this website has opened any of them. There is no page to show you here, and we would rather say so than show you a page we have not read.",
   "kind": "unavailable"
  },
+ "the-weeping-madonna:9:dessal_gemert_1905": {
+  "source": "dessal_gemert_1905",
+  "short": "Dessal 1905",
+  "title": "Vadakencoulam — son histoire, sa merveille, son jubilé",
+  "imprint": "J.-B. Dessal, S.J. — Lettres de Gemert, 1905",
+  "lang": "fr",
+  "rights": "pd",
+  "quote": "est attestée par l'exubérante vitalité de la tradition",
+  "translation": "“Better, perhaps, than by the rhythmic narration already quoted, the truth of the miracle of Vadakencoulam, on 21 October 1803, is attested by the exuberant vitality of the tradition.”",
+  "establishes": "Dessal, printing in 1905 nine years before Besse, has already given the parish's own verse narration in full and names the date outright — 21 October 1803. This is the sentence in which he says what he rests it on. Same page as the new 1838 dot, a different line of it.",
+  "page": 61,
+  "pdfPage": 61,
+  "match": "exact",
+  "kind": "leaf",
+  "pageText": "breux cierges de l’autel une fois allumés, quelqu’un s’en alla essuyer les larmes qui coulaient des yeux de la Vierge sans parvenir à les interrompre ni à les diminuer. Cette com passion sans résultat excita des pleurs et des sanglots dans l’assistance; on se frappait la poitrine, on disait l’invoca tion : « Seigneur, ayez pitié de nous! » on récitait le Salve Regina... » Coïncidence de grande valeur : A cette même époque, en 1803 et ses environs, nombre de Madonnes en Italie et en Espagne, voire même plusieurs de nos Vierges françaises, pleurèrent et s’attristèrent devant le peuple étonné et terrifié. A l’appui de la véracité de l'évènement miraculeux de Vadakencoulam, on aimerait à lire le témoignage appro batif de l’autorité ecclésiastique. Ce document n’existe pas, et pour de bonnes raisons. Le prêtre de Goa qui adminis trait le village ne s’y trouvait pas quand s’effectua le pro dige ; il n’y habitait même pas en temps ordinaire. Le siège de Cochin, dont la chrétienté relevait, était sans titulaire; un simple gouverneur ecclésiastique en expédiait les affai res. Enquête, instruction canonique sur de pareils faits, l'idée n’en venait même pas aux Indes, il y a moins d’un siècle : souvenons-nous en quel tranquille sommeil fut laissé le martyr Tévasagayam Pillai. Mieux, peut-être, que par la narration rythmée déjà citée, la vérité du miracle de Vadakencoulam, le 21 octobre 1803, est attestée par l’exubérante vitalité de la tradition. Pour tous et chacun, dans la dévote bourgade et aux alentours, l’évènement s’est prolongé ; il dure encore. Un charmant enfant interrogé par nous s’il connaissait l’histoire de la Vierge de son église, nous répondait avec une surprise mêlée de quelque pitié pour notre ignorance : « Mais toute l’Eglise catholique la sait, cette histoire; et, ici, les enfants nés d’avant-hier vous la diraient. » Cette hyperbole tout indienne dit assez quelles racines profondes le prodige a poussées dans les mémoires; il se transmet de génération en génération, comme une science héréditaire que chacun sait sans l’avoir apprise.",
+  "span": [
+   1286,
+   1460
+  ],
+  "scan": "/refs/dessal_gemert_1905-p61.jpg"
+ },
+ "the-weeping-madonna:9:besse_moumas_typescript": {
+  "source": "besse_moumas_typescript",
+  "short": "Besse (Moumas tr.)",
+  "title": "New Madurai Mission: Madurai Mission Southern District, Vol. IV (1715-1913)",
+  "imprint": "Leon Besse SJ, La Mission du Madure (1914), English tr. Fr Moumas SJ - typescript; parish accession 215 (= JEMPARC Book 95)",
+  "lang": "en",
+  "rights": "in-copyright",
+  "quote": "The centenary of this event was celebrated at Vadakenkulam in 1903.",
+  "translation": "",
+  "establishes": "Besse’s typescript (Moumas, p.842) closes the 1803 account with the centenary of 1903 — the same centenary Dessal independently records, and one of the internal proofs the year is 1803, not 1805 (an event cannot have its centenary in its own year). In copyright: quoted, not reproduced.",
+  "kind": "quote-only"
+ },
+ "great-two-nave-church:0:bertrand_lettres_1865": {
+  "source": "bertrand_lettres_1865",
+  "short": "Bertrand 1865",
+  "title": "Lettres édifiantes et curieuses de la nouvelle mission du Maduré, vol. II",
+  "imprint": "1865",
+  "lang": "fr",
+  "rights": "pd",
+  "quote": "visiter leurs églises depuis longtemps privées de leurs pasteurs",
+  "translation": "“We went to Vadakencoulam, a Christian community considerable in the number and the nobility of its inhabitants, who received us with a most touching explosion of joy. The next day the deputations of all the neighbouring villages came running to offer us their gifts and to beg us to go and visit their churches, long deprived of their pastors… In the afternoon we conferred baptism on forty-five children.”",
+  "establishes": "Fr Martin’s letter to Fr Bertrand, Punnaikayal, 14 July 1838 — a printed eyewitness document, and the real citation for the Jesuits’ return. He set out from Palamcottah on 15 June and was at Cape Comorin by the 19th, so the visit falls in the middle of that week. Windowed: the caste row that followed stands on the same printed page and is not published here.",
+  "page": 53,
+  "pdfPage": 67,
+  "match": "exact",
+  "kind": "leaf",
+  "windowed": true,
+  "pageText": "Le jour suivant, les dépuiations de tous les- villages voisins accoururent pour nous offrir leurs présents et nous conjurer d'aller visiter leurs églises depuis longtemps privées de leurs pasteurs. ",
+  "span": [
+   0,
+   198
+  ]
+ },
  "great-two-nave-church:0:auguste_jean_1894": {
   "source": "auguste_jean_1894",
   "short": "Auguste Jean 1894",
@@ -1015,8 +1243,8 @@
   "rights": "pd",
   "quote": "Il acheva l'église que le P. Bouttari avait",
   "translation": "",
-  "establishes": "Auguste Jean has nothing on the 1838 return; he is here for continuity only.",
-  "page": 256,
+  "establishes": "Not a witness to 1838 — Auguste Jean has nothing on the return. He is here for the building the returning fathers found: the church Fr Bouttari began and Fr Tomassini “acheva”, finished, which stood from 1752 until it came down for the present one.",
+  "page": 230,
   "pdfPage": 256,
   "match": "exact",
   "kind": "leaf",
@@ -1026,26 +1254,6 @@
    169
   ],
   "scan": "/refs/auguste_jean_1894-p256.jpg"
- },
- "great-two-nave-church:0:neill_1985": {
-  "source": "neill_1985",
-  "short": "Neill 1985",
-  "title": "A History of Christianity in India: 1707–1858",
-  "imprint": "Cambridge University Press, 1985",
-  "lang": "en",
-  "rights": "in-copyright",
-  "quote": "there had been congregations at Kayattar and Vadakkankulam",
-  "translation": "",
-  "establishes": "Neill's footnote for this passage cites Besse 1914 — so he is Besse retold, not an independent witness. Still in copyright: quoted, not reproduced.",
-  "page": 71,
-  "pdfPage": 71,
-  "match": "exact",
-  "kind": "leaf",
-  "pageText": "The Period of Schwartz\n\n53\n\nseems to have been the exception; there is no evidence in the records of his making use of such methods, except once with a young apprentice who seemed to Schwartz to need this kind of fatherly correction. He believed in the power of love and gentleness to heal all ills. It seems that Pohle in time learnt from him. He served in the mission for no less than forty years and in his later years was greatly respected by all. He, like the younger Kohlhoff, served as a link between the earlier and the later phases of the mission.\n\nOnce free from the narrowness of Tranquebar and the many cares of Tiruchirapalli, Schwartz was able to turn his eyes to yet wider fields. The Roman Catholic missions had in the past been strong in the extreme south of India. The largest number ofadherents was among the Paravas on the Coast, but from the seventeenth century on there had been congregations at Kayattar and Vadakkankulam. But the withdrawal of the Jesuits and the final dissolution of their order had had the lamentable consequences elsewhere described, and the time was ripe for a new beginning. The first reference to Palayankottai (Palamcottah) and to the district of Tirunelveli, is to be found in Schwartz' journal for 1771.87 The progress of the church in India was at all times linked to the mobility of Christians, and especially of Christian soldiers in the armies of the Company and of the local rulers. A member of the Lutheran congregation named Savarimuthu was resident in Palayankottai. An English sergeant, who had an Indian wife, was interested in the Christian cause. A young accountant had listened with pleasure to the teaching; the sergeant had instructed him in the essentials of the Christian faith and had then proceeded to baptise him. Schwartz was disturbed by this action, not so much because it had been carried out by a layman, as because it ran contrary to his concern for careful preparation before baptism. In February 1778 Schwartz was called to Palayankottai by a European officer who wished to be married and who informed him also that there was a number of children to be baptised. The congregation in Palayankottai now numbered about fifty - evidence of the strength of the Christian movement in places further north, from which these soldiers and their families had migrated. On this occasion Schwartz encountered a Brahman widow with whom he had already had dealings in Thanjavur. This lady had been living in irregular union with an English officer,88 who had given her some instruction in the Christian faith but who for some reason was unwilling to regularise the union. Schwartz had been in a difficulty; it was against his rule to marry unbaptised persons, but equally he felt it impossible to baptise a woman who was living, by strict Christian standards, in a sinful liaison. At that time nothing could be done, but now the difficulty had been removed - the officer",
-  "span": [
-   783,
-   946
-  ]
  },
  "great-two-nave-church:1:bertrand_lettres_1865": {
   "source": "bertrand_lettres_1865",
@@ -1057,7 +1265,7 @@
   "quote": "arrivée à Vadakenccoulam",
   "translation": "\"The 23rd. — On horseback at half past two; at eight o'clock, arrival at Vadakencoulam, mass and the opening of the novena and of the administration.\"",
   "establishes": "Bertrand's own journal of 23 November 1839 — on horseback at half past two in the morning, at the church by eight, mass to open the novena. He is the superior of the mission and the author, and he explicitly calls the passage a journal.",
-  "page": 187,
+  "page": 175,
   "pdfPage": 187,
   "match": "exact",
   "kind": "leaf",
@@ -1078,7 +1286,7 @@
   "quote": "visita Vadakenkoulam",
   "translation": "\"After some weeks of well-earned rest, he resumed his apostolic journeys, visited Vadakenkoulam; and, continuing his march, sometimes along the coast, sometimes inland, across a sandy plain, he arrived at last at Tuticorin.\"",
   "establishes": "All that an outside source says: on his pastoral tour of 1848 Bishop Canoz \"visited Vadakenkoulam\". The 21 June date and the request that the people begin gathering money for a large new church are the parish's own history, and no outside source remembers them.",
-  "page": 329,
+  "page": 301,
   "pdfPage": 329,
   "match": "exact",
   "kind": "leaf",
@@ -1111,7 +1319,7 @@
   "quote": "que cette belle chrétienté est redevable de sa grande église",
   "translation": "It is chiefly to his persevering energy that this fine Christian community owes its great church.",
   "establishes": "The outside check on the funding tradition: the mission’s own chronicler credits the great church to Fr Grégoire’s persevering energy, and names no lay benefactor anywhere in his two volumes.",
-  "page": 474,
+  "page": 446,
   "pdfPage": 474,
   "match": "exact",
   "kind": "leaf",
@@ -1218,7 +1426,7 @@
   "quote": "fut donc surtout l'apôtre de",
   "translation": "\"Fr Joseph Grégoire was therefore above all the apostle of Vadakenkoulam. It is chiefly to his persevering energy that this fine Christian community owes its great church.\"",
   "establishes": "\"The apostle of Vadakenkoulam\" — and it is ONE chronicler who says it, not several. Auguste Jean, p.446. The same man supplies \"probably without equal in the world\"; Dessal's independent hedge is weaker (\"unique in the world, perhaps\").",
-  "page": 474,
+  "page": 446,
   "pdfPage": 474,
   "match": "exact",
   "kind": "leaf",
@@ -1320,7 +1528,7 @@
   "quote": "tombeau au P. Eugène Rossignol",
   "translation": "\"The piety of the Christians of Vadakenkoulam raised, near their church, a modest tomb to Fr Eugène Rossignol, who died on 25 January 1863. It was in giving his care to the Christians of Callikoulam, then afflicted with cholera, that he contracted the illness of which he died.\"",
   "establishes": "What the long building cost, written beside the church: a modest tomb to Fr Eugène Rossignol, who died 25 January 1863 of the cholera he caught nursing the Christians of Callikoulam. Verbatim and exact.",
-  "page": 430,
+  "page": 402,
   "pdfPage": 430,
   "match": "exact",
   "kind": "leaf",
@@ -1362,7 +1570,7 @@
   "quote": "for Native Nuns at Vadakankulam",
   "translation": "",
   "establishes": "A British district manual, written with no interest in the parish, listing three convents in the whole Jesuit mission of Tinnevelly — and this is the only one away from the fishery coast. Stuart says so himself: he splits the mission into the Palamcottah district (which contains Vadakankulam) and the fishery coast (which contains the other two). Sisters were living here while the great church was still being built, and no parish record dates a convent here so early.",
-  "page": 71,
+  "page": 62,
   "pdfPage": 71,
   "match": "exact",
   "kind": "leaf",
@@ -1416,7 +1624,7 @@
   "quote": "Le navire qui le portait venait d'entrer dans la Mer Rouge",
   "translation": "\"The ship that carried him had just entered the Red Sea; it was 18 September 1873… He withdrew to his cabin, and at once the delirium declared itself. The next day, at six o'clock, the sick man opened his eyes, but without being able to speak… About two o'clock he gave his soul back to God.\"",
   "establishes": "Fr Grégoire's death at sea. Read it carefully: 18 September is the day the SHIP ENTERED the Red Sea and the delirium began. He died \"le lendemain\" — the next day — around two in the afternoon. So Auguste Jean's date is 19 September 1873, and Dessal's is 19 September 1875. The two chroniclers AGREE ON THE DAY and differ only on the year.",
-  "page": 475,
+  "page": 447,
   "pdfPage": 475,
   "match": "exact",
   "kind": "leaf",
@@ -1760,7 +1968,7 @@
   "quote": "for Native Nuns at Vadakankulam",
   "translation": "",
   "establishes": "The outside check nobody had used here: a British district manual puts a convent of native nuns at Vadakkankulam by about 1864 — nearly thirty years before this dot. The women's religious life of this town is older than any of our own books claim.",
-  "page": 71,
+  "page": 62,
   "pdfPage": 71,
   "match": "exact",
   "kind": "leaf",
@@ -1781,7 +1989,7 @@
   "quote": "et partout elles dirigent des",
   "translation": "\"In April 1892 the congregation of Our Lady of the Seven Sorrows numbered 65 members… They are established, besides, at Negapatam, at Maduré, at Palamcottah, at Vadakenkoulam, and everywhere they direct flourishing schools.\"",
   "establishes": "April 1892: the Sisters of Our Lady of the Seven Sorrows, formed at Trichinopoly in 1876, numbered sixty-five; Vadakkankulam is one of the four houses they kept beyond that city; their special work is the education of girls, and \"everywhere they direct flourishing schools\". Verbatim and exact.",
-  "page": 447,
+  "page": 419,
   "pdfPage": 447,
   "match": "exact",
   "kind": "leaf",
@@ -1945,7 +2153,7 @@
   "quote": "L'église de Vadakenkoulam possède une par",
   "translation": "\"The church of Vadakenkoulam possesses a part of his garment and the chains with which he was bound.\"",
   "establishes": "The relic, at its true strength: the oldest and only primary witness says the church holds \"a part of his garment and the chains with which he was bound\" — as of 1894. The head-cloth, and the annual exposition in a glass case, are the diocese's modern account and are attributed as such.",
-  "page": 229,
+  "page": 203,
   "pdfPage": 229,
   "match": "exact",
   "kind": "leaf",
@@ -2086,7 +2294,7 @@
   "quote": "he baptized two thousand seven hundred catechumens",
   "translation": "",
   "establishes": "Not the two hundred baptised here - Faber never mentions Vadakkankulam at all. What he establishes is the SCALE de Britto worked at: two thousand seven hundred catechumens baptised in two months, prepared by catechists while persecution had driven the missionaries out. It is the reason the parish’s modest two hundred reads as ordinary for this man rather than as a boast.",
-  "page": 495,
+  "page": 396,
   "pdfPage": 495,
   "match": "exact",
   "kind": "leaf",
@@ -2121,7 +2329,7 @@
   "establishes": "Read the hedge, because Besse meant it. Writing in 1914 with the mission's archives before him, he does not say de Britto built the church — he says the builder IS SAID TO BE de Britto, and the year 1685. Two sentences later he marks his own dividing line, “Here tradition is met with historic documents”, and only then produces the Annual Letter of 1701. So this page proves the attribution was already old and archived, not that it is true. The moment's documented tier rests on Hardgrave and Pate, not on this sentence.",
   "kind": "quote-only"
  },
- "first-inland-parish:2:besse_moumas_typescript": {
+ "first-inland-parish:3:besse_moumas_typescript": {
   "source": "besse_moumas_typescript",
   "short": "Besse (Moumas tr.)",
   "title": "New Madurai Mission: Madurai Mission Southern District, Vol. IV (1715-1913)",
@@ -2144,5 +2352,110 @@
   "translation": "",
   "establishes": "Where the number actually comes from. The diocese's own parish page carries the figure this moment rests on - and dates it 1686, a return rather than the same visit as the chapel. It is the diocese reporting on its own parish, so it is tradition and not outside corroboration; but it is the cleanest statement of the two hundred that exists, and it is why the moment keeps the number rather than doubting it.",
   "kind": "quote-only"
+ },
+ "great-two-nave-church:0:stuart_manual_1879": {
+  "source": "stuart_manual_1879",
+  "short": "Stuart 1879",
+  "title": "A Manual of the Tinnevelly District",
+  "imprint": "Madras: Government Press, 1879",
+  "lang": "en",
+  "rights": "pd",
+  "quote": "Fathers Martin and Duranquet, arrived",
+  "translation": "",
+  "establishes": "A British district manual, with no interest in the parish, dating the return and naming both men: “in 1838 two Jesuit Missionaries, Fathers Martin and Duranquet, arrived in Palamcottah to recommence their mission in Tinnevelly.” Caldwell 1881 p.243 prints the same sentence — he is Stuart copied, one witness, and is not chipped beside him. Page 62 is the same page that carries the convent of native nuns cited later in this era.",
+  "page": 62,
+  "pdfPage": 71,
+  "match": "exact",
+  "kind": "leaf",
+  "pageText": "62 MANUAL OF THE TINNEVELLY DISTRICT.\n\nCuarren 111. Kaitér. Subsequently he went to Madura and Trichinopoly, Fourmioal where he became for some years Dewan to Chanda Saheb. At his\n\noverthrow he fied into the Maravar country, Ramnad, and settled at Manapérai in Tinnevelly, where in 1746 he died.\n\nSome years after Besche’s death troubles began to gather round the missions of the Jesuits allover the world. In 1755 the support of the Missionaries from Europe ceased. In 1760 the Jesuits at Goa were deported to Lisbon by Pombal’s orders. Those Jesuits that remained in Tinnevelly, at Vadakankulam, Talai, Manapar, Virapandiun-pattanam, &c., died one by one, and their places were supplied by native priests from Goa.\n\nIn 1778 the Society of Jesus was formally suppressed by the then Pope, Clement XIV.\n\nTn 1814 the society was restored by Pope Pius VII, and in 1838 two Jesuit Missionaries, ‘Fathers Martin and Duranquet, arrived in Palamcottah to recommence their mission in Tinnevelly.\n\nTinnevelly has always been attached to the Madura Mission, the history of which, associated with the names of Fathers Robert deNobili, deBrito, Banchet, Arland, from 1616 to 1748 is of much interest. At the latter date it was estimated that there were 385,000 Christians in the eastern part of India ; then, as above stated, there followed the suppression of the Jesuits, by which the Madura Mission was for the time destroyed.\n\nAbout the year 1881 the restoration and return of the Jesuits to Madura took place and the Mission recommenced afresh.\n\nOne branch of this Mission is that of Palamcottah, and is now divided into two districts, viz , Palamcottah with five residences : Palamoottah, Anakarai, Vadakankulam, Andipatti, Kannunaikerpatti; and the fishery coast with six residences : Tuticorin, Panneikayél, Adeikalapuram, Virapandiun-pattanam, Manapad, and Obary.\n\nThe superior is Father Verdier; the total number of Catholic converts in 1864 is given as 51,000.\n\nThe staff consisted of—\n\n11 European Missionaries 4 Native do 1 Lay Brother.\n\n12 European Nuns.\n\n17 Native do.\n\nThe Mission had—\n\n99 Churches.\n\n50 Chapels.\n\nA Convent and a School at Tuticorin.\n\nA Convent and Orphanage at Adeikalapuram. A Oonvent for Native Nuns at Vadakankulam. Two Boys’ Schools.\n\nOne Girls’ School.",
+  "span": [
+   803,
+   988
+  ],
+  "scan": "/refs/stuart_manual_1879-p71.jpg"
+ },
+ "the-weeping-madonna:7:dessal_gemert_1905": {
+  "source": "dessal_gemert_1905",
+  "short": "Dessal 1905",
+  "title": "Vadakencoulam — son histoire, sa merveille, son jubilé",
+  "imprint": "J.-B. Dessal, S.J. — Lettres de Gemert, 1905",
+  "lang": "fr",
+  "rights": "pd",
+  "quote": "les premiers Pères qui abordèrent Vadakencoulam",
+  "translation": "“When the Society of Jesus returned to the Maduré, in 1838, the first Fathers who reached Vadakencoulam were as if wrapped and steeped in the powerful atmosphere of this tradition. Only thirty-five years separated them from its source; many witnesses of the marvellous transformation were still living; they had only to listen to their willing accounts to learn everything, and to become in their turn witnesses by tradition.”",
+  "establishes": "The whole dot, and the closest the 1803 account ever comes to an eyewitness chain: the fathers who returned in 1838 were thirty-five years from the event and could still put the question to people who had been in the church. Dessal is a Jesuit of this mission writing in 1905, so he reports what they found rather than recording it at the time — he is the only witness to it, and nothing else in the corpus says it.",
+  "page": 62,
+  "pdfPage": 62,
+  "match": "exact",
+  "kind": "leaf",
+  "pageText": "Quand la Compagnie de Jésus rentra au Maduré, en 1838, les premiers Pères qui abordèrent Vadakencoulam furent comme enveloppés et pénétrés par l’atmosphère puissante de cette tradition. Trente-cinq années seulement les sépa raient de sa source; des témoins de la transformation mer veilleuse beaucoup vivaient encore; ils n'eurent qu’à écou ter leurs complaisants récits pour tout apprendre, et devenir à leur tour témoins, traditionnels. Cette riche sève de notre tradition a fait naitre une repro duction du miracle. Ce n’est pas une œuvre d’art, loin de là : le mécanicien villageois qui l’a conçue ne se réclame en rien de l’artiste contemporain. Dans les flancs creux d’une imitation aussi fidèle que possible de la statue miraculeuse, il a disposé un système de fil de fer et de tirants dont la mise en jeu fait lever la tête, porter les yeux au ciel, dis joindre les mains et écarter les bras à la vierge : un second mouvement remet tout en place. On a bien voulu refaire le miracle pour nous. L’opération n’alla pas sans encombre: plusieurs fois l’exécutant brouilla ses tirages. Si cette œuvre simpliste, avec son mécanisme de marionnette, ne repro duit que grossièrement le fait prodigieux qu’elle veut rap porter, elle reste comme un témoin fidèle de la tradition, à l’acquit de l’authenticité du fait lui-même. La miraculeuse vierge, l’objet d’une si tendre vénération à Vadakencoulam, et comme le palladium du village, est en place d’honneur sur le bel autel de la nouvelle église. Elle trône solitaire, un peu au-delà du tabernacle et le dominant, sans aucun ouvrage de menuiserie qui la marque. Les grandes statues du rétable, loin de l’écraser de leurs proportions très supérieures, semblent l’indiquer du regard et la mettre en relief. C’est là que nous avons pu la consi dérer de près et tout à notre aise. L’œuvre, faite par un ouvrier indigène, n’a aucun mérite artistique et les gaucheries y abondent. La figure assez régulière n’a pas la moindre expression, en cela très authen tique production de la statuaire indienne. Elle est taillée dans un tronçon de bois de l’arbre œrassou-maram ou ficus",
+  "span": [
+   0,
+   186
+  ],
+  "scan": "/refs/dessal_gemert_1905-p62.jpg",
+  "pages": [
+   {
+    "n": 61,
+    "text": "breux cierges de l’autel une fois allumés, quelqu’un s’en alla essuyer les larmes qui coulaient des yeux de la Vierge sans parvenir à les interrompre ni à les diminuer. Cette com passion sans résultat excita des pleurs et des sanglots dans l’assistance; on se frappait la poitrine, on disait l’invoca tion : « Seigneur, ayez pitié de nous! » on récitait le Salve Regina... » Coïncidence de grande valeur : A cette même époque, en 1803 et ses environs, nombre de Madonnes en Italie et en Espagne, voire même plusieurs de nos Vierges françaises, pleurèrent et s’attristèrent devant le peuple étonné et terrifié. A l’appui de la véracité de l'évènement miraculeux de Vadakencoulam, on aimerait à lire le témoignage appro batif de l’autorité ecclésiastique. Ce document n’existe pas, et pour de bonnes raisons. Le prêtre de Goa qui adminis trait le village ne s’y trouvait pas quand s’effectua le pro dige ; il n’y habitait même pas en temps ordinaire. Le siège de Cochin, dont la chrétienté relevait, était sans titulaire; un simple gouverneur ecclésiastique en expédiait les affai res. Enquête, instruction canonique sur de pareils faits, l'idée n’en venait même pas aux Indes, il y a moins d’un siècle : souvenons-nous en quel tranquille sommeil fut laissé le martyr Tévasagayam Pillai. Mieux, peut-être, que par la narration rythmée déjà citée, la vérité du miracle de Vadakencoulam, le 21 octobre 1803, est attestée par l’exubérante vitalité de la tradition. Pour tous et chacun, dans la dévote bourgade et aux alentours, l’évènement s’est prolongé ; il dure encore. Un charmant enfant interrogé par nous s’il connaissait l’histoire de la Vierge de son église, nous répondait avec une surprise mêlée de quelque pitié pour notre ignorance : « Mais toute l’Eglise catholique la sait, cette histoire; et, ici, les enfants nés d’avant-hier vous la diraient. » Cette hyperbole tout indienne dit assez quelles racines profondes le prodige a poussées dans les mémoires; il se transmet de génération en génération, comme une science héréditaire que chacun sait sans l’avoir apprise.",
+    "span": [
+     1855,
+     2075
+    ],
+    "scan": "/refs/dessal_gemert_1905-p61.jpg"
+   },
+   {
+    "n": 62,
+    "text": "Quand la Compagnie de Jésus rentra au Maduré, en 1838, les premiers Pères qui abordèrent Vadakencoulam furent comme enveloppés et pénétrés par l’atmosphère puissante de cette tradition. Trente-cinq années seulement les sépa raient de sa source; des témoins de la transformation mer veilleuse beaucoup vivaient encore; ils n'eurent qu’à écou ter leurs complaisants récits pour tout apprendre, et devenir à leur tour témoins, traditionnels. Cette riche sève de notre tradition a fait naitre une repro duction du miracle. Ce n’est pas une œuvre d’art, loin de là : le mécanicien villageois qui l’a conçue ne se réclame en rien de l’artiste contemporain. Dans les flancs creux d’une imitation aussi fidèle que possible de la statue miraculeuse, il a disposé un système de fil de fer et de tirants dont la mise en jeu fait lever la tête, porter les yeux au ciel, dis joindre les mains et écarter les bras à la vierge : un second mouvement remet tout en place. On a bien voulu refaire le miracle pour nous. L’opération n’alla pas sans encombre: plusieurs fois l’exécutant brouilla ses tirages. Si cette œuvre simpliste, avec son mécanisme de marionnette, ne repro duit que grossièrement le fait prodigieux qu’elle veut rap porter, elle reste comme un témoin fidèle de la tradition, à l’acquit de l’authenticité du fait lui-même. La miraculeuse vierge, l’objet d’une si tendre vénération à Vadakencoulam, et comme le palladium du village, est en place d’honneur sur le bel autel de la nouvelle église. Elle trône solitaire, un peu au-delà du tabernacle et le dominant, sans aucun ouvrage de menuiserie qui la marque. Les grandes statues du rétable, loin de l’écraser de leurs proportions très supérieures, semblent l’indiquer du regard et la mettre en relief. C’est là que nous avons pu la consi dérer de près et tout à notre aise. L’œuvre, faite par un ouvrier indigène, n’a aucun mérite artistique et les gaucheries y abondent. La figure assez régulière n’a pas la moindre expression, en cela très authen tique production de la statuaire indienne. Elle est taillée dans un tronçon de bois de l’arbre œrassou-maram ou ficus",
+    "span": [
+     0,
+     186
+    ],
+    "cited": true,
+    "scan": "/refs/dessal_gemert_1905-p62.jpg"
+   }
+  ]
+ },
+ "the-weeping-madonna:5:dessal_gemert_1905": {
+  "source": "dessal_gemert_1905",
+  "short": "Dessal 1905",
+  "title": "Vadakencoulam — son histoire, sa merveille, son jubilé",
+  "imprint": "J.-B. Dessal, S.J. — Lettres de Gemert, 1905",
+  "lang": "fr",
+  "rights": "pd",
+  "quote": "et à cinq strophes, fut composé immédiatement après",
+  "translation": "“A first account, in verse and in five stanzas, was composed immediately after the events it relates. Its author, wholly a pagan and a schoolmaster at Vadakencoulam, had seen them with his own eyes. A second account, signed by one Sebastian Pillai, reproduces the first exactly, paraphrases it and completes it. The writer does not give himself out as a witness; he rests his account on the spoken testimony of the spectators who saw the scene unfold with their own eyes.”",
+  "establishes": "The whole dot, and a correction to the page: the FIRST record of the 1803 weeping was a five-stanza song, made straight after the event by the village schoolmaster, an eyewitness, whom Dessal identifies overleaf as a worshipper of Siva. Sebastian Pillai came second and never claimed to have been there. Dessal is the only source in the corpus that knows this.",
+  "page": 58,
+  "pdfPage": 58,
+  "match": "exact",
+  "kind": "leaf",
+  "pageText": "Le P. Tomassini dut être le dernier missionnaire jésuite de Vadakencoulam, avant la suppression de la Compagnie. Nous savons très certainement qu’il mourut à Périatalei, en 1775, à l’âge de soixante-quinze ans. « Le 26 août 1886, Mgr Alexis Canoz constatait par des fouilles, faites dans l’église de S1 Jean et de S1 Etienne à Périatalei, que les restes des PP. François Tomassini, Antoine Souza, Jean Pereira et Pierre-Nicolas Grassi reposaient dans le sanc tuaire de ladite église. » II La merveille. De ces sombres jours, où les prêtres portugais adminis trèrent les chrétientés de Vadakencoulam, nous ne connais sons pas le détail. La tradition seule nous a transmis quel ques faits; encore les a-t-elle défigurés. Un évènement pourtant a fait exception, et a été écrit par des témoins; et cet évènement est celui-là même dont Vadakencoulam vient de célébrer le centenaire. Un premier récit, en vers et à cinq strophes, fut composé immédiatement après les faits qu’il relate. Son auteur, tout païen et maître d’école à Vadakencoulam, les avait vus de ses yeux. Un second récit, signé d’un Sébastien Pillai, reproduit exactement le premier, le paraphrase et le complète. L’écrivain ne se donne pas comme témoin ; il appuie son dire sur les témoi gnages oraux des spectateurs qui ont vu de leurs yeux se dérouler la scène décrite. Nous allons donner la substance du chant et de son commentaire, abstraction faite de la poésie et du rythme. Ce condiment, savoureux au goût des Indiens, serait plutôt désagréable au nôtre. — Le 21 octobre 1803, un vendredi, vers les onze heures du matin, dans l’église de Vadakencoulam, dédiée à Jésus, Marie, Joseph, une miraculeuse transformation survint à la statue de la Mère de Dieu. L’évènement fut alors mis en",
+  "span": [
+   878,
+   980
+  ],
+  "scan": "/refs/dessal_gemert_1905-p58.jpg"
+ },
+ "the-weeping-madonna:8:dessal_gemert_1905": {
+  "source": "dessal_gemert_1905",
+  "short": "Dessal 1905",
+  "title": "Vadakencoulam — son histoire, sa merveille, son jubilé",
+  "imprint": "J.-B. Dessal, S.J. — Lettres de Gemert, 1905",
+  "lang": "fr",
+  "rights": "pd",
+  "quote": "désunir ces deux mains d'une seule pièce, ouvrir ces bras",
+  "translation": "“We examine the upper joints, those of the arms, the shoulders and the neck. We try to straighten the head, to raise the eyelids, to make the eyes roll; above all we want to separate those two hands of a single piece, to open those rigid arms… Wasted labour! It is inertia, the resisting force of raw matter, of the dried tree-trunk.”",
+  "establishes": "The one time anybody put their hands on the statue and said what happened. Dessal, who has just had the village's wire-and-rod replica worked in front of him, tests the figure itself and finds it immovable — hands carved from one block, arms rigid, the dead weight of dried wood — then lays down what he calls his usurped office of inquisitor of the Faith and kneels.",
+  "page": 63,
+  "pdfPage": 63,
+  "match": "exact",
+  "kind": "leaf",
+  "pageText": "religiosa. De l’extrémité de la tête à la plante des pieds, elle mesure deux pieds neuf pouces. Le socle qui la sup porte, et ne fait qu’un avec elle, a une élévation de huit pouces, dimension très visiblement disproportionnée. La hauteur totale est de trois pieds cinq pouces. Le bloc est de plein bois. Les yeux hagards regardent devant eux et partout. Les bras sont fortement collés au corps ; rien d’ajouré dans les mains jointes. Hormis le visage et les extrémités, tout le reste de la statue est doré. Sur cette image sans art, presque fruste, la toute-puissan ce divine a opéré l’une de ses merveilles. Nous examinons les jointures supérieures, celles des bras, des épaules et du cou. Nous essayons de redresser la tête, de relever les paupières, de faire rouler les yeux; nous voulons surtout désunir ces deux mains d’une seule pièce, ouvrir ces bras rigides... Peine perdue! c’est l’inertie, la force de résistance de la matière brute, du tronc d’arbre desséché. Le seul pouvoir d’en-haut a pu opérer ces mouvements; lui seul les reproduirait. Ces fonctions usurpées d’inquisiteur de la Foi, nous les quittons très joyeusement, pour bénir et véné rer à deux genoux, dans la simplicité et la vérité de la foi du charbonnier, Notre-Dame de Vadakencoulam. Cette bonne Mère nous aura pardonné cette curiosité raisonneuse. Car cet examen, dont n’avait pas besoin notre amoureuse foi, établira peut-être en plus d’un esprit la vérité du pro dige singulier qu’Elle daigna accomplir un jour en sa bourgade indienne. (A suivre) J.-B. Dessal.",
+  "span": [
+   692,
+   870
+  ],
+  "scan": "/refs/dessal_gemert_1905-p63.jpg"
  }
 }

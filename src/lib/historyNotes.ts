@@ -45,15 +45,16 @@ export const HISTORY_NOTES: Record<string, HistoryNote> = {
   // by a year, and neither is stronger than the other.
   /* ── IV. The Weeping Madonna ───────────────────────────────────────────── */
 
-  // The day of the week is fixed (a Friday in Aippasi); the day of the month is
-  // not, and the feast is kept on neither of the days the accounts give.
-  "the-weeping-madonna:4": {
-    en: "The parish's history dates that Friday to 21 October. The feast has always been kept on the 22nd and 23rd.",
+  // The event date and the feast date differ; the page gives the event date and
+  // flags the feast below the line. (Re-keyed :4→:2 after the 1794/1801 dots were cut.)
+  "the-weeping-madonna:2": {
+    en: "The two earliest printed accounts give this Friday as 21 October, and 21 October 1803 was a Friday; the feast is kept on the 22nd and 23rd.",
   },
 
-  // The single most important thing a reader of this page can know.
-  "the-weeping-madonna:8": {
-    en: "Four copies of Besse are known, in four libraries, and nobody working on this account has opened one of them. The weeping has never been submitted to Rome, and no Vatican commission has examined it. What the parish holds is a dated morning, named witnesses and an unbroken feast — and it claims no more than that.",
+  // The honest boundary of the whole miracle. (Re-keyed :8→:6, and updated: Besse has
+  // now been read in the parish's English translation, and it is not the only witness.)
+  "the-weeping-madonna:9": {
+    en: "The weeping has never been submitted to Rome, and no Vatican commission has examined it. It reaches us in three independent printed accounts, the earliest from 1905, and it claims no more than a dated morning, named witnesses, and an unbroken feast.",
   },
 
   /* ── V. The Great Two-Nave Church ──────────────────────────────────────── */

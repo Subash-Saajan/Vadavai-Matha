@@ -155,28 +155,35 @@ export const HISTORY_CITATIONS: Record<string, DotCitation[]> = {
     },
   ],
   "first-inland-parish": [
-    // 0
+    // 0  (1698 — the first parish priest; UPGRADED from tradition and rewritten 25 Jul 2026)
     {
-      tier: "tradition",
+      tier: "documented",
       photo: "first-inland-parish-1.jpg",
-      keys: ["pate_gazetteer_1917", "neill_1985"],
-      note: "The first pastor rests on the parish's own succession register alone, and that register cannot hold his name or his year steady — Bernard de Saa 1697, Bennet de Souza 1698, \"Fr Ponnaiya\". The first EXTERNAL attestation of any priest here is Fr Borghese in 1709, which is why Auguste Jean, who has nothing earlier, no longer chips this dot.",
+      keys: ["besse_moumas_typescript", "neill_1985"],
+      note: "Upgraded from tradition 25 Jul 2026. The old note said the first pastor rested on the parish's own register alone. He does not. Besse (Moumas typescript, p.805), writing from the mission's records, names Fr Bernard de Saa ordered to Vadakenkulam in 1698, and gives the village's origin on the same page: a residence set on the border between Travancore and the Pandiyan kingdom. What stays parish-side is only the claim that the roll of pastors has run unbroken ever since — and the page no longer calls this the first great inland parish, a phrase no source carries. The name still wobbles across parish sources (de Saa 1697 / de Souza 1698 / Ponnaiya); Besse settles it as de Saa, 1698 (mismatch 21 B1).",
     },
-    // 1
+    // 1  (1700 — the ordeal of the first priest; NEW MOMENT 25 Jul 2026)
+    {
+      tier: "documented",
+      photo: "first-inland-parish-1.jpg",
+      keys: ["besse_moumas_typescript", "ferroli_1951"],
+      note: "New moment, 25 Jul 2026, documented from a primary source. The beating and the queen's reprieve are told by de Saa himself, in his letter of 14 October 1713, printed by Ferroli (vol. II, 1951, p.354) and eyewitnessed by Fr Pierre Martin, who saw the marks of it in June 1700. Besse's typescript (p.805) corroborates an earlier persecution of the same priest from the Annual Letter of 1701. One source (the 1934 Gazetteer Supplement) frames the persecution as a caste quarrel and adds a figure of 1,635 baptisms that year; both are kept off the page — the caste framing per the parish's wish, the figure because we do not yet chip that source. The prose rests on de Saa's own account, in which the motive is treasure, not caste. PHOTO: reuses the dot-0 painting as a placeholder; a dedicated image for this moment is still to be made.",
+    },
+    // 2  (1709 — the name in a Jesuit letter; was dot 1)
     {
       tier: "documented",
       photo: "first-inland-parish-4.jpg",
       keys: ["auguste_jean_1894", "bertrand_1847"],
-      note: "The anchor of the era: the Jesuit Annual Letter of 1709, printed by Bertrand (vol. IV, p.100n), which sets Fr Maria Xavier Borghese \"at the head of the district of Vadakencoulam\" — the earliest document of its own century to name this place. Auguste Jean (p.157) puts the same man in the same charge, but he is following Bertrand, not confirming him independently.",
+      note: "The 1709 Annual Letter, printed by Bertrand (vol. IV, p.100n) and followed by Auguste Jean (p.157), sets Fr Maria Xavier Borghese at the head of the district of Vadakencoulam and praises his admirable zeal. It is the earliest of these letters to survive in the printed mission histories; the earlier 1701 persecution reaches us only through Besse's typescript, at the moment before this one. The old note here called this 'the earliest document to name this place' — no longer true, now that de Saa (1698) and the 1701 letter stand ahead of it. Auguste Jean here follows Bertrand, not an independent witness.",
     },
-    // 2
+    // 3  (1712–13 — eight hundred in two seasons; was dot 2)
     {
       tier: "documented",
       photo: "first-inland-parish-2.jpg",
       keys: ["besse_moumas_typescript"],
-      note: "REPAIRED AND UPGRADED 25 Jul 2026. This was the one keyless moment on the page, and the old note here was wrong: it said the figure existed in only the parish's 2026 compilation and 'returns no hit in any of the printed mission histories'. It does. Besse (Moumas English typescript, p.822), writing from the mission's records, gives the church 'at least 4128 adults and a large number of children' in 1713, 'about 800 baptisms of adults, besides the children' across 1712 and 1713, and 85 more adults preparing in October 1713. The page's 'nearly eight hundred adults, besides their children' is a faithful rendering of that sentence, not an invention. Besse states it as a statistic and does NOT hedge it as he hedges the 1685 founding, so the tier is documented. The same 4,128 recurs in the 1934 Gazetteer Supplement (p.166) but is NOT stacked here as a second witness - it appears to descend from this same datum.",
+      note: "REPAIRED AND UPGRADED 25 Jul 2026. This was once the one keyless moment on the page, and its old note was wrong: it said the figure existed only in the parish's 2026 compilation. It does not. Besse (Moumas English typescript, p.822), writing from the mission's records, gives the church 'at least 4128 adults and a large number of children' in 1713, 'about 800 baptisms of adults, besides the children' across 1712 and 1713, and 85 more adults preparing in October 1713. The page's 'nearly eight hundred adults, besides their children' is a faithful rendering of that sentence, not an invention. Besse states it as a statistic and does NOT hedge it as he hedges the 1685 founding, so the tier is documented. The same 4,128 recurs in the 1934 Gazetteer Supplement (p.166) but is NOT stacked here as a second witness — it appears to descend from this same datum.",
     },
-    // 3
+    // 4  (1714 — a residence on the frontier; was dot 3)
     {
       tier: "documented",
       photo: "first-inland-parish-3.jpg",
@@ -196,45 +203,38 @@ export const HISTORY_CITATIONS: Record<string, DotCitation[]> = {
     {
       tier: "documented",
       photo: "statue-and-the-saint-2.jpg",
-      keys: ["vatican_news_canonisation", "osservatore_romano_2012", "auguste_jean_1894", "bertrand_1847"],
-      note: "The strongest fact on the page. Bertrand (1847) and Auguste Jean (1894) record Buttari's baptism of Devasahayam here from the mission's own papers, a century before any canonisation dossier existed, and the DATE — 14 May 1745 — comes from the Vatican side (Vatican News; L'Osservatore Romano, written by the cause's Vice-Postulator), not from the rite of canonisation, which recites only the name. The diocesan page was dropped: parish-side stacking adds nothing to a dot the Holy See already carries.",
+      keys: ["vatican_news_canonisation", "osservatore_romano_2012", "mackenzie_1901", "auguste_jean_1894", "bertrand_1847"],
+      note: "The strongest fact on the page, and now four-ways attested. The place comes from the Holy See (Vatican News) and the DATE — 14 May 1745, nine months' instruction — from L'Osservatore Romano, written by the cause's Vice-Postulator, not from the rite of canonisation, which recites only the name. Bertrand (1847) and Auguste Jean (1894) record the baptism here from the mission's own papers a century before any dossier existed (Auguste Jean follows Bertrand and is not a fully independent line). Added 25 Jul 2026: Mackenzie's Christianity in Travancore (1901, p.80) — a British administrator with no interest in the parish — is the outside witness, giving the man's standing (\"held office in the court of the Raja\"), his age (\"thirty-two years of age\") and the place. The prose no longer carries the canonisation forward-reference; that belongs to the Shrine era. Caste is off the page per the parish's rule: the Vatican biography's Nambudiri-father / Nair-mother parentage stays KB-side.",
     },
     // 2
     {
       tier: "documented",
-      photo: "statue-and-the-saint-8.jpg",
-      keys: ["bertrand_1847"],
-      note: "Bertrand's Vol IV (pp.385–386), from the mission's own papers, is the witness: in 1745 the church of Vadakencoulam, \"which depended on the residence of Néman\", was persecuted — the catechist tortured with the kittei for refusing a temple-tax — until Fr Buttari appealed to \"the nabab, on whom Vadakencoulam depended and who honoured him with his friendship\", who ordered the Christians protected. It is the same year as the baptism, and these pages (385–386) sit just before those the baptism dot cites. The nabab's sovereignty over the village is the pre-1801 civil fact the page otherwise tells only from the British side; Ferroli (1951), from the same Jesuit letters, corroborates it.",
+      photo: "statue-and-the-saint-3.jpg",
+      keys: ["auguste_jean_1894", "bertrand_lettres_1865", "parish_english_history", "souvenir_150yr"],
+      note: "Upgraded to documented and reframed onto the building, 25 Jul 2026. Bertrand (1865), from the church's own archives, records that Buttari \"laid the foundations of its present church\", and Auguste Jean has Fr Thomassini \"complete\" it — a documented building event, carried by the printed mission histories (Auguste Jean follows Bertrand and is not an independent second witness). What is NOT documented is the specific year 1749 and the word \"kankol\": both come only from the parish jubilee souvenir, so the page keeps them as the parish's own reckoning and the tier does not rest on them. The fabric — broad bricks from Perungudi — is the parish's own English history (an earlier draft's \"stone\" is in no source). Note that Bertrand's \"present church\" (1865) is Buttari's brick church of 1752, later replaced by the 1872 building — not the church standing today.",
     },
     // 3
-    {
-      tier: "tradition",
-      photo: "statue-and-the-saint-3.jpg",
-      keys: ["auguste_jean_1894", "bertrand_lettres_1865", "souvenir_150yr"],
-      note: "Bertrand (1865), drawing on the church's own archives, records only that Buttari \"laid the foundations of its present church\" — and he does not date it; the year 1749, the kankol festival and the ceremony are the parish's souvenir and chronology, which is why this dot is tradition and no longer documented. Note also that the parish's own English history says broad BRICKS from Perungudi: \"stone and mortar\" is in no source for this building.",
-    },
-    // 4
     {
       tier: "documented",
       photo: "statue-and-the-saint-7.jpg",
       keys: ["auguste_jean_1894", "bertrand_1847"],
       note: "The two Jesuit chroniclers give this dot different triggers, and the page follows Auguste Jean's (1894): the church timber running short, Devasahayam's errand to his old friend at the Travancore court, the quarrel over religion, the threat and the royal warrant. Bertrand's Vol IV (pp.386–387) instead makes the trigger a brahmin favourite's insult — \"renounce the Christian faith, or you will pay me with your head\" — and names \"M. Eustache-Benoît Lanoë\" (Eustachius De Lannoy) as the Frenchman who first spoke to Devasahayam of the faith, and to whom the prisoner later wrote from his chains. Two accounts of one event; neither is an independent second line — both retell the Jesuit tradition.",
     },
-    // 5
+    // 4
     {
-      tier: "tradition",
+      tier: "documented",
       photo: "statue-and-the-saint-4.jpg",
-      keys: ["auguste_jean_1894", "bertrand_lettres_1865", "parish_english_history", "souvenir_150yr"],
-      note: "Only the Buttari-to-Thomassini handover is printed (Bertrand 1865, from the church archives; Auguste Jean reproduces him almost word for word and is NOT a second witness); the year 1752, the cross plan and the eastward orientation are the parish's own record, said to rest on two inscriptions inside the old church, and the fabric was brick. The claim that the Assumption became the principal feast \"to this day\" is contradicted by this dot's own cited source: Bertrand records the titular feast of this church as St Francis Xavier's, kept with a great December novena, right up to the re-dedication of 1872.",
+      keys: ["besse_moumas_typescript", "bertrand_lettres_1865", "parish_english_history", "souvenir_150yr"],
+      note: "Corrected and upgraded to documented, 25 Jul 2026. An earlier draft said the patron was not the Holy Family but St Francis Xavier — an over-reading of Bertrand, who records only a FEAST of St Francis Xavier here (the great December novena, Lettres vol. II, pp.182, 186–187), never a dedication. Besse (Moumas typescript, pp.843–844), from the mission's records, says the 1752 church was \"dedicated to the Holy Family\", \"just like the first\" — so the Holy Family title runs continuous from de Britto's chapel, and did not first arrive in 1872. So at its building this WAS a Holy Family church; St Francis Xavier was its patronal feast, not its dedication. What stays parish-side is the cross plan, the eastward orientation and the exact year 1752 (souvenir; two inscriptions once inside the old church, unseen). The August Assumption feast was removed from this moment — Besse dates it to Thomassini's time generally, not to the 1752 building. Auguste Jean was dropped too: his line here is Thomassini \"completing\" the church, told now at the previous moment.",
     },
-    // 6
+    // 5
     {
       tier: "documented",
       photo: "statue-and-the-saint-5.jpg",
       keys: ["holy_see_canonisation_rite_2022", "auguste_jean_1894", "bertrand_1847", "diocese_thoothukudi_page"],
       note: "The execution of 14 January 1752 is documented in the near-contemporary Jesuit accounts, and Auguste Jean (vol. I, p.203) is the oldest witness that this church already held \"a part of his garment and the chains with which he was bound\". Bertrand's Vol IV (p.397) settles where the body went: gathered into the church of St Francis Xavier at Kottar, with the Te Deum sung in Cochin cathedral and the bishop's own panegyric — the garment and chains kept at Vadakkankulam are secondary relics beside that burial. Two of the dot's other details are not carried here: \"Kattadimalai\" appears in no historical source — the witnesses describe the Travancore lines at the Aralvaimozhi gap and never name the spot — and the head-turban relic is the diocese's modern account, which has quietly displaced the chains.",
     },
-    // 7
+    // 6
     {
       tier: "documented",
       photo: "statue-and-the-saint-6.jpg",
@@ -247,64 +247,80 @@ export const HISTORY_CITATIONS: Record<string, DotCitation[]> = {
     {
       tier: "documented",
       photo: "the-weeping-madonna-1.jpg",
-      keys: ["caldwell_1881", "auguste_jean_1894"],
-      note: "The sixty-three-year Jesuit absence and the Goa/Padroado succession are documented (Caldwell and Stuart are one gazetteer witness, near word-for-word). Two things these keys do NOT support: \"tended only by visiting priests\" — the parish's own roll shows an unbroken line of resident pastors across the whole gap — and the jurisdiction, since that roll is headed \"the Priest of Cochin\" and the page's own 1794 dot cites Paulinus placing the village under the Bishop of Cochin, not Cranganore.",
+      keys: ["krishnaswami_ayyar_1934", "caldwell_1881", "besse_moumas_typescript", "auguste_jean_1894", "ferroli_1951"],
+      note: "Enriched 25 Jul 2026 with every reference that carries these years. The 63-year absence is Besse's own framing — the Moumas typescript (p.842) opens the era, \"During the 63 years between the death of Fr. Thomassini and the arrival of the new Jesuits in 1838…\". Caldwell has the old missionaries \"died one by one, and their places were supplied by native priests from Goa\" (Stuart 1879 carries the same sentence, so those two are one witness); Auguste Jean tells it from the Jesuit side. The upgrade is the 1934 Tinnevelly Gazetteer Supplement (p.169), a government record with no interest in the parish: Vadakkankulam \"became the sole centre of the inland mission with four divisional centres… Sendamangalam, Andipatti, Kamanayakkanpatti and Vadakkankulam itself\", served from Cochin until the 1837 handover — the village commanded the whole inland mission, it did not merely survive. Ferroli (1951) corroborates the jurisdiction, listing Vadakencollam among the four Madura-Mission churches \"under the Bishop of Cochin\". The gazetteer leaf is windowed to the sole-centre sentence: its neighbours carry the 1744 caste decree, kept off the site.",
     },
     // 1
     {
       tier: "documented",
       photo: "the-weeping-madonna-5.jpg",
-      keys: ["auguste_jean_1894", "bertrand_lettres_1865"],
-      note: "Bertrand's Lettres (vol. II, 1865) is the witness, and what he attests is the cult rather than the man: ninety years after Thomassini's death he still writes in the present tense that the Christians \"venerate him as a saint, give his name to their children, and visit his tomb with an extreme devotion\", and that non-Christians invoke him for rain. Auguste Jean repeats him and is not a second witness.",
+      keys: ["besse_moumas_typescript", "bertrand_lettres_1865", "auguste_jean_1894"],
+      note: "Bertrand's Lettres (vol. II, 1865) is the witness to the cult: ninety years after Thomassini's death he still writes in the present tense that the Christians \"venerate him as a saint, give his name to their children, and visit his tomb with an extreme devotion\", and that non-Christians invoke him for rain (Auguste Jean repeats him and is not a second witness). Besse's own typescript (Moumas) adds and corrects: the Christians \"raised a monument in their midst\", because Thomassini was NOT buried here — Besse has him dying and buried at Our Lady of Sands near Periatalai. So the tomb-shrine they visit is that monument, a cenotaph, not his grave. (The page's suppression dot, following Auguste Jean, has him dying at Talai; the burial place is a logged mismatch, both kept.)",
     },
     // 2
     {
-      tier: "documented",
-      photo: "the-weeping-madonna-6.jpg",
-      keys: ["india_orientalis_christiana_1794"],
-      note: "The earliest appearance of this village in a European printed book, and both page references are verified against the archive.org scan: Paulinus (Rome, 1794) lists \"XIV. Vadakencollam\" at p.158 among the churches subject to the Bishop of Cochin, and places the same name \"in promontorio Comorino\" at p.117. It is a name in a list and claims nothing more — in particular it carries no founding date, though the parish's own compilation has long read one into it.",
+      tier: "devotion",
+      photo: "the-weeping-madonna-2.jpg",
+      keys: ["dessal_gemert_1905", "besse_moumas_typescript", "diocese_thoothukudi_page", "catholictamil_182"],
+      note: "Re-sourced 25 Jul 2026. The weeping is a devotional claim and the tier says so — but the old note here (\"one witness stands behind every account… Besse, never opened\") is now out of date. The moment is carried by the two EARLIEST printed witnesses, both on disk. Dessal (Lettres de Gemert, 1905), a Jesuit of this mission writing nine years before Besse and while the 1803 generation's grandchildren still lived, gives the whole scene: Saveri-Mouttou Pillai come from Tirunelveli to see \"Monsieur Birdelpech\", the statue \"dans une niche à double porte\" with both leaves open, the cloud, the tears, the outstretched hands. Besse's own typescript (Moumas, p.842) gives the same account independently and adds that \"all the other statues on the altar expressed compassion\". The diocese and the Tamil parish page (catholictamil) are the modern retellings — one witness family — but they no longer stand alone. It remains a recognised local devotion, never a Vatican-investigated apparition. The day is now given as 21 October — the reading with the most proof: both earliest printed witnesses (Dessal 1905, Besse/Moumas) give 21 October, and 21 October 1803 was a Friday, the one Gregorian date that matches the Tamil anchor of Aippasi 7, a Friday (23 October 1803 was a Sunday). The 23rd the diocese uses is the commemoration date; the village keeps the feast on the 22nd and 23rd (see the witnesses moment). The souvenir's stray \"1805\" is a copying slip, kept in the register.",
     },
     // 3
     {
-      tier: "documented",
-      photo: "the-weeping-madonna-7.jpg",
-      keys: ["pate_gazetteer_1917"],
-      note: "Pate's gazetteer carries this dot whole: the agreement of 31 July 1801 handing \"the sole and exclusive administration\" of the Carnatic to the Company in perpetuity, Mr Lushington as first Collector of Tinnevelly, and the province taken over \"without the smallest disturbance\". It is documented context for 1803 and says nothing about the parish itself.",
+      tier: "devotion",
+      photo: "the-weeping-madonna-3.jpg",
+      keys: ["dessal_gemert_1905", "besse_moumas_typescript", "catholictamil_182"],
+      note: "Re-sourced 25 Jul 2026. The scene — the catechist wiping the tears, the bell rung at the wrong hour, the village hurrying in, the Parce Domine — is the parish's own (catholictamil), but the ENDING is now documented from both printed witnesses. Besse's typescript (Moumas, p.842): once they rang the bell and prayed, \"the statue of the Virgin and those of the other Saints resumed their customary aspect\"; Dessal (1905) has the same, the statue back \"à sa première pose\" and \"toutes les autres images des saints reprirent leur aspect accoutumé\". The old note here said Besse was never opened — no longer true; the typescript has been read.",
     },
     // 4
     {
-      tier: "devotion",
-      photo: "the-weeping-madonna-2.jpg",
-      keys: ["diocese_thoothukudi_page"],
-      note: "One witness stands behind every account of 1803 — Besse (1914), resting in turn on the parish's own record of that year — and the diocesan page and the parish compilation are Besse retold, so these keys are one witness family and never corroboration. It has never been submitted to Rome and no Vatican commission has examined it; the conflicting dates and the weekday are a known open question (CITATION_AUDIT §F) and are deliberately out of scope for this pass.",
+      tier: "documented",
+      photo: "the-weeping-madonna-4.jpg",
+      keys: ["besse_moumas_typescript", "dessal_gemert_1905"],
+      note: "Made documented and pared to what the printed record attests, 25 Jul 2026. Besse's typescript (Moumas, p.842) names the two witnesses Savarimuthu summoned — \"the catechist Yagapillai and Miss Henrietta Bilderbeck\", who \"saw for themselves the same phenomenon\". Dessal (1905) corroborates that the chronicler wrote the account from \"the honourable catechist and the other most trustworthy persons of the village\". Removed at the owner's direction, as not documented or out of scope for this moment: the parish-only extra catechists (Zacharias, Vyagappar), the same-day Cardoza declaration (parish tradition, and disputed — the register keeps both it and Dessal's counter-caution about the absent priest), and the 22–23 October feast date. The event date, the 21st, is given at the weeping moment.",
     },
     // 5
     {
-      tier: "devotion",
-      photo: "the-weeping-madonna-3.jpg",
-      keys: ["catholictamil_182"],
-      note: "The details of the scene — the catechist wiping the tears, the bell, the village hurrying in at an unusual hour, the Parce Domine — come from two Tamil parish texts that are near word-for-word identical: one witness, printed twice, and the order of events on the page is an editorial harmonisation of two retellings that narrate it differently. Besse was removed as a per-detail chip: nobody on this project has opened the book, and a source we have not read cannot be cited line by line.",
+      tier: "documented",
+      // PLACEHOLDER — this painting is a colonial office in 1801, left unused when
+      // the era was cut from 9 dots to 7. Needs its own: the village schoolmaster
+      // composing the song. Prompt drafted for the owner.
+      photo: "the-weeping-madonna-7.jpg",
+      keys: ["dessal_gemert_1905"],
+      note: "NEW DOT, 26 Jul 2026, and the strongest thing in the 1803 file: Dessal p.58 says the FIRST account was in verse, five stanzas, composed immediately after the event by the village schoolmaster, who had seen it himself and who p.59 identifies as a worshipper of Siva. Sebastian Pillai's prose came SECOND and \"reproduces the first exactly, paraphrases and completes it\", and he never claims to have been present. This corrects the page's own earlier framing, which made Sebastian Pillai the origin of the record — he is the second hand, not the first. Dessal alone carries it; the Moumas/Besse typescript, which otherwise tracks this account closely, has nothing about the song or the schoolmaster. \"A worshipper of Siva\" is the owner's chosen wording for Dessal's \"tout païen\" / \"sectateur de Siva\" — the point of the moment is that the first witness to set it down was not a Christian.",
     },
     // 6
     {
-      tier: "devotion",
-      photo: "the-weeping-madonna-4.jpg",
-      keys: ["catholictamil_182"],
-      note: "The named witnesses (Zacharias, Vyagappar, Henriette Bilderbeck) and Fr Cardoza's same-day declaration come from those same two parish texts — one witness printed twice, and no outside key at all on the era's most extraordinary claim. The one genuinely checkable detail is that the parish's own priest-list independently places Fr John Louis Cardoza in office here in exactly 1803.",
+      tier: "documented",
+      photo: "the-weeping-madonna-8.jpg",
+      keys: ["besse_moumas_typescript", "cms_intelligencer_1880", "badley_directory_1886", "trento_2022"],
+      note: "The family, at last, has outside witnesses — all of them Protestant, none with any reason to flatter a Catholic shrine. Trento (2022, p.285) identifies the village's Mr Bilderbeck from the parish's own 1915 genealogical manuscript as the merchant Christopher Bilderbeck (b. c.1758, d. 1817); the CMS Intelligencer's obituary (Aug. 1880, pp.512–513) records his son John as \"born in India… of a Roman Catholic family, and trained for the priesthood of that Church\"; Badley's Methodist directory supplies the birth year, 1809. Besse's typescript (Moumas, p.842 n.1) adds their standing: the Bilderbecks \"had farmed out the collection of tiryais (dues) of Nangunery\" — revenue-farmers, which makes the benefactor tradition materially plausible. Henriette, the witness of 1803, was his daughter (Besse and Dessal both call her \"Miss\"). The boon-story is cited, as tradition, on the era of the church they are remembered to have helped; the strong \"funded the great church\" claim is NOT made here — Christopher died in 1817, thirty-eight years before that foundation stone was laid.",
     },
     // 7
     {
       tier: "documented",
-      photo: "the-weeping-madonna-8.jpg",
-      keys: ["cms_intelligencer_1880", "badley_directory_1886", "trento_2022"],
-      note: "The family, at last, has outside witnesses — all of them Protestant, none with any reason to flatter a Catholic shrine. Trento (2022, p.285) identifies the village's Mr Bilderbeck from the parish's own 1915 genealogical manuscript as the merchant Christopher Bilderbeck (b. c.1758, d. 1817); the CMS Intelligencer's obituary (Aug. 1880, pp.512–513) records his son John as \"born in India… of a Roman Catholic family, and trained for the priesthood of that Church\"; Badley's Methodist directory supplies the birth year, 1809. That this documented household is the household of the 1803 account is an identification by name, place and period — the sources know one Bilderbeck family here — and the boon-story the parish attaches to them is cited, as tradition, on the era of the church they are remembered to have helped.",
+      // PLACEHOLDER — this painting is Rome, 1794, a Carmelite scholar; it was left
+      // unused when this era was cut from 9 dots to 7. The dot needs its own picture:
+      // 1838, the two French fathers in the village listening to old people who were
+      // in the church that morning. Prompt drafted for the owner.
+      photo: "the-weeping-madonna-6.jpg",
+      keys: ["dessal_gemert_1905"],
+      note: "NEW DOT, 26 Jul 2026. This was the strongest thing in the whole 1803 case and it was told nowhere — it sat only in the establishes-note of the Dessal leaf on the following dot, invisible unless a reader clicked the chip. Dessal 1905, p.62: when the Society returned in 1838 the first fathers to reach Vadakencoulam found the tradition alive around them, only thirty-five years from its source, with many who had seen the transformation still living, and they learned it by listening. ONE witness, and he is mission-side, writing in 1905 about what the 1838 fathers found — not a document made in 1838. It is tiered documented on the same footing as the dot that follows (the mission's own printed historians), not because anyone outside the mission recorded it. Besse does NOT corroborate it and says something close to the opposite of those sixty-three years generally: most of what happened \"has not come to our knowledge or have been more or less disfigured by tradition\" — that line is already the anchor on dot 0, and the contrast is deliberate. Adding this dot re-keyed everything after it: the books dot moved 6 → 7 in i18n (en AND ta), citations, historyNotes and refs_quotes.",
     },
     // 8
     {
-      tier: "devotion",
+      tier: "documented",
+      // PLACEHOLDER — shares dot 9's picture until this dot has its own: the priest
+      // with his hands on the statue, and the wire-and-rod replica. Prompt drafted.
       photo: "the-weeping-madonna-9.jpg",
-      keys: ["besse_1914"],
-      note: "This is the dot in which the page says what it does not claim, so it rests on the one book everything traces to and on nothing else: Besse (1914), four known copies, not one of them opened by anyone on this project. Neill was removed because he is not a second witness — his footnote cites Besse at p.477, a list of COASTAL stations that excludes Vadakkankulam — and the diocesan devotional page cannot be the citation for a statement about what the parish refuses to assert.",
+      keys: ["dessal_gemert_1905"],
+      note: "NEW DOT, 26 Jul 2026. Dessal pp.62–63, and the only occasion on record when anyone examined the statue: the village's wire-and-rod working replica was operated for him (\"On a bien voulu refaire le miracle pour nous\"; the operator tangled his strings several times), then he handled the statue itself and tried to straighten the head, lift the eyelids, roll the eyes, part the two hands carved from one piece and force the rigid arms — \"Peine perdue!\", the inertia of a dried tree-trunk — and gave up his \"fonctions usurpées d'inquisiteur de la Foi\" to kneel. Tiered documented because what it reports is what a named man did with his hands and what he found, not the miracle; he is nevertheless mission-side and openly devout, and the dot lets him say so. Dated 1905 from the printing; his visit is undated, near the 1903 centenary, so the prose says \"a hundred years after\" and no more.",
+    },
+    // 9
+    {
+      tier: "documented",
+      photo: "the-weeping-madonna-9.jpg",
+      keys: ["dessal_gemert_1905", "besse_1914", "besse_moumas_typescript"],
+      note: "Rewritten and upgraded to documented, 25 Jul 2026. The old framing — \"the whole of that morning comes down a single line, Besse 1914, never opened\" — is dead. There are THREE independent printed witnesses. Besse's La Mission du Maduré (1914) is the famous one, still un-inspected in the French (four known copies), but it has now been read in the parish's own Moumas English typescript (p.842). Nine years earlier, Dessal printed the full account in Lettres de Gemert (1905) — on disk, its page shown here. And in 1930 a Malayalam life of Devasahayam, in another tradition entirely, recorded the same European laywoman and the same three signs (attested via Trento 2022; we do not hold it directly). Three hands, none copying the others — which is why the dot is now documented as a matter of RECORD, though the weeping itself stays a devotion. It was never a Vatican process.",
     },
   ],
   "great-two-nave-church": [
@@ -312,8 +328,8 @@ export const HISTORY_CITATIONS: Record<string, DotCitation[]> = {
     {
       tier: "documented",
       photo: "great-two-nave-church-1.jpg",
-      keys: ["auguste_jean_1894", "bertrand_lettres_1865", "neill_1985"],
-      note: "Fr Martin's letter of 14 July 1838 is a printed eyewitness document — that is the real citation; Neill's version is Besse retold and not a second witness. Two errors to fix: the building was the 1749–52 STONE church, not \"the old chapel\", and it was the MEP priest Mousset, not the Jesuits, who seated the children of all castes together.",
+      keys: ["stuart_manual_1879", "bertrand_lettres_1865", "auguste_jean_1894"],
+      note: "Rewritten on the eyewitness. Fr Martin's letter of 14 July 1838 (Bertrand, Lettres vol. II, Second Letter, pp.52–53) is a first-person account of the day the Jesuits came back to this village in June 1838 — the reception, the deputations from the neighbouring villages, the forty-five children baptised that afternoon — and every quoted phrase in the dot is his. Stuart's district manual independently names both fathers, Martin and Duranquet, arriving in 1838 to recommence the mission; Caldwell 1881 p.243 prints the same sentence and is Stuart copied, so he is NOT stacked here. Neill was dropped: his version is Besse retold, not a second witness, and he is in copyright. Auguste Jean is kept for one thing only — the church Buttari began and Thomassini finished, which is the building still standing when they returned. Two cautions: \"brick\" is the parish's own word (KB file 02 §3.4 calls the same building stone — unresolved, logged in file 21), and the growing congregation is a general statement, NOT the reason for the new church; the printed histories give a different reason, which this page does not tell. The leaf is windowed and lands on the deputations sentence rather than the reception sentence: the reception sentence's page-position runs its highlight back into the Callikoulam clause, which the caste guard refuses.",
     },
     // 1
     {
@@ -517,6 +533,7 @@ export const SOURCE_SHORT: Record<string, string> = {
   "bayly_1989": "Bayly 1989",
   "bell_inscription_photograph": "The bell itself",
   "besse_moumas_typescript": "Besse (Moumas tr.)",
+  "dessal_gemert_1905": "Dessal 1905",
   "bertrand_1847": "Bertrand 1847",
   "bertrand_lettres_1865": "Bertrand 1865",
   "besse_1914": "Besse 1914",
@@ -524,6 +541,7 @@ export const SOURCE_SHORT: Record<string, string> = {
   "bishop_stephen_jubilee_2022": "Bishop Stephen 2022",
   "boero_1853": "Boero 1853",
   "caldwell_1881": "Caldwell 1881",
+  "ferroli_1951": "Ferroli 1951",
   "catholic_directory_1924": "Catholic Directory 1924",
   "catholictamil_182": "CatholicTamil",
   "ccbi_patron_laity_2025": "CCBI 2025",
@@ -539,6 +557,8 @@ export const SOURCE_SHORT: Record<string, string> = {
   "jemparc_book450": "The parish diary",
   "la_mission_du_madure_periodical": "Mission du Maduré",
   "maalaimalar_2022": "Maalaimalar 2022",
+  "mackenzie_1901": "Mackenzie 1901",
+  "krishnaswami_ayyar_1934": "Gazetteer Suppl. 1934",
   "maldonado_1697": "Maldonado 1697",
   "neill_1985": "Neill 1985",
   "osservatore_romano_2012": "Osservatore Romano",
