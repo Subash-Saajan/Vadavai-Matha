@@ -58,6 +58,7 @@ export type RouteKey =
   | "devasahayam"
   | "deBritto"
   | "faq"
+  | "priests"
   | "sources";
 
 export type RouteDef = {
@@ -182,6 +183,24 @@ export const ROUTES: Record<RouteKey, RouteDef> = {
     image: "/images/architecture/altar.jpg",
     ogImage: "/og/faq.jpg",
   },
+  // The most *original* page on the site, and the description is written to say
+  // so. Sixty-nine named priests since 1697 exist in no indexed database
+  // anywhere — not the diocese's site, not Wikipedia, not the Jesuit archives'
+  // own catalogue. Six of these names (Bergenthal, Calini, Massour, Rossignol,
+  // Giuliani, Cardoza) return nothing on the open web at all, so this page is a
+  // net addition to the record rather than a restatement of it.
+  priests: {
+    path: "/priests",
+    title: "The Fathers of Vadavai",
+    fullTitle: "The Fathers of Vadavai — the parish priests of Vadakkankulam since 1697",
+    description:
+      "The complete succession of parish priests of the Holy Family Shrine, Vadakkankulam (Vadavai Matha), numbered 1 to 69 from Fr Bernard de Saa in 1697 to today — with their Tamil honorific names, the Jesuits of the old Madurai Mission, the priest who authenticated the weeping of 1803, the builders of the 1872 church, and the six who are buried behind it.",
+    crumb: "The Fathers",
+    priority: 0.7,
+    changeFrequency: "yearly",
+    image: "/images/architecture/archival.jpg",
+    ogImage: "/og/priests.jpg",
+  },
   sources: {
     path: "/sources",
     title: "Sources & Further Reading",
@@ -208,6 +227,7 @@ export const INDEXABLE: RouteKey[] = [
   "deBritto",
   "faq",
   "architecture",
+  "priests",
   "sources",
 ];
 

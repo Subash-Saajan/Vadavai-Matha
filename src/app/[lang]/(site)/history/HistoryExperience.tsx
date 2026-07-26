@@ -56,19 +56,27 @@ import { hasLeaf } from "@/lib/referenceIndex";
  *
  * ── THE MOBILE STAGE (July 2026) ──
  *
- * The choreography is the same at both breakpoints and always was: pin the
- * stage, step the year with scroll progress. What differs on a phone is that the
- * stage is restacked and the paragraph reads BEFORE it advances:
+ * Desktop pins the stage and scrubs the year off scroll progress. A PHONE DOES
+ * NOT SCRUB, and this is the thing to understand before changing anything here:
+ * a scrub maps scroll DISTANCE to the year, and a phone fling carries a thousand
+ * pixels of momentum the reader never asked for, so one flick tore through six
+ * years at once. Distance is the wrong input. The GESTURE is the input — one
+ * swipe means one year, however far it throws.
+ *
+ * So on a phone each era is a plain 100svh block, the page does not scroll inside
+ * a chapter at all (touchmove is prevented), and every move — year, chapter, dot,
+ * button — is driven by hand. See buildMobile. The layout that sits on top of it:
  *
  *   the photograph — fixed at 45svh, about half the screen and identical in every
  *                    year. It now carries the year, the year's title and the
  *                    counter inside it; the era's big heading is gone, and a
  *                    hairline label top-left is all that is left of it.
- *   the paragraph  — its own scroll box in what remains, and deliberately NOT
- *                    overscroll-contained. A finger in the text scrolls the text;
- *                    when the text runs out the same gesture chains into the page,
- *                    which is the pinned scrub, which steps to the next year. Read
- *                    to the end, keep going, move on.
+ *   the paragraph  — its own scroll box in what remains, overscroll-CONTAINED so
+ *                    it can never leak a gesture to the page. The touch handler
+ *                    watches it: a finger in the text scrolls the text, and the
+ *                    moment the text has no more to give, that same gesture
+ *                    becomes the step to the next year. Read to the end, keep
+ *                    going, move on.
  *   the dots       — untouched: a row of beads, tap any one to go to that year.
  *   the four steps — an overlay held at the foot of the stage for the whole
  *                    chapter, one line, « ‹ in the left corner and › » in the
@@ -78,30 +86,28 @@ import { hasLeaf } from "@/lib/referenceIndex";
  *                    Losing your place to a mistap is expensive, so it asks first
  *                    — and shows you the destination while it asks.
  *
- * (A one-card deck was tried here — eight chapters stacked in 100svh, buttons
- * only, no pin. It stopped the thumb wandering between chapters, but a single
- * flick then carried the reader clean past the deck to the footer. Worse than
- * what it fixed; don't rebuild it.)
+ * The reader is let go in exactly two places: swiping back at the first year of
+ * the first chapter (up into the Contents) and swiping on at the last year of the
+ * last (down to the end of the page). Those are the covers of the book.
  *
- * ONE AUTHORITY: SCROLL POSITION. Every way of moving — swipe, dot, ‹ ›, « », the
- * Contents index — ends in a scroll, and the trigger works out the year from
- * where the scroll landed. No control holds an index of its own, so no two
- * controls can disagree. React keeps a MIRROR of that index (`activeDots`), but
- * only on mobile and only so ‹ › can grey out at the ends of a chapter: desktop,
- * where the scrub is fastest, does no React work per year at all.
+ * (A one-card deck was tried here — eight chapters stacked in 100svh with no
+ * gesture handling at all. A single flick carried the reader clean past it to the
+ * footer. It is the same idea as buildMobile minus the one part that makes it
+ * work; don't rebuild it without the handler.)
+ *
+ * TWO AUTHORITIES, NEVER BOTH LIVE. Desktop derives the year from scroll
+ * position; mobile holds it in `current` inside buildMobile and never consults
+ * scroll. matchMedia builds exactly one of them. React keeps a MIRROR of the
+ * index (`activeDots`) on mobile only, purely so ‹ › can grey out at the ends of
+ * a chapter — desktop, where the scrub is fastest, does no React work per year.
  */
 
 const ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
 
-// Vertical scroll (in vh) allotted to each year-dot within a pinned era. This is
-// the pace of the swipe: raise it and each year takes more thumb to leave, which
-// is what stops a single flick tearing through five of them.
-//
-// Mobile is deliberately shorter than desktop. There are 56 dots across the eight
-// eras, so at the desktop pace a phone would be thumbed through ~29 screens of
-// pinned scroll. 46 keeps it near ~25 while still costing enough per year that
-// one swipe reads as one step rather than a blur.
-const STEP_VH = { desktop: 52, mobile: 46 };
+// Vertical scroll (in vh) allotted to each year-dot within a pinned era.
+// DESKTOP ONLY — a phone doesn't measure the year in scroll distance at all; it
+// counts gestures. See buildMobile.
+const STEP_VH = { desktop: 52 };
 
 // How long an armed chapter button stays armed before it forgets. Long enough to
 // read the destination and decide; short enough that a button left open by a
@@ -151,64 +157,59 @@ export default function HistoryPage() {
 
     const mm = gsap.matchMedia(rootRef);
 
-    // Both breakpoints run the same choreography — pin the stage, step the
-    // active year with scroll progress — and differ only in how the stage is
-    // laid out (CSS) and how much scroll each year is given. matchMedia builds
-    // and reverts each variant as the breakpoint crosses, so nothing leaks.
-    const build = (stepVh: number, mirrorToReact: boolean) => {
-      const cleanups: Array<() => void> = [];
-      const eras = gsap.utils.toArray<HTMLElement>(".era");
+    // Shared by both variants: find an era's moving parts and return the one
+    // function that lights up a year. Everything it does is a class toggle, so
+    // stepping a year costs no React work at all — a desktop scrub crosses years
+    // continuously, and re-rendering eight chapters of citations on each one
+    // would be jank bought for nothing.
+    const wire = (era: HTMLElement, mirrorToReact: boolean) => {
+      const panels = gsap.utils.toArray<HTMLElement>(".dot-panel", era);
+      const photos = gsap.utils.toArray<HTMLElement>(".era-photo", era);
+      const frameDots = gsap.utils.toArray<HTMLElement>(".frame-dot", era);
+      const railDots = gsap.utils.toArray<HTMLElement>(".rail-dot", era);
+      const railBtns = gsap.utils.toArray<HTMLElement>(".rail-btn", era);
+      const n = panels.length;
 
-      eras.forEach((era) => {
-        const panels = gsap.utils.toArray<HTMLElement>(".dot-panel", era);
-        const photos = gsap.utils.toArray<HTMLElement>(".era-photo", era);
-        const frameDots = gsap.utils.toArray<HTMLElement>(".frame-dot", era);
-        const railDots = gsap.utils.toArray<HTMLElement>(".rail-dot", era);
-        const railBtns = gsap.utils.toArray<HTMLElement>(".rail-btn", era);
-        const n = panels.length;
-        if (!n) return;
+      let current = -1;
+      const setActive = (idx: number) => {
+        if (idx === current) return;
+        current = idx;
+        // Panels above the active one slide up & out; below ones wait below,
+        // so the previous year always exits upward when scrolling down (and
+        // downward when scrolling back up).
+        panels.forEach((p, k) => {
+          p.classList.toggle("is-active", k === idx);
+          p.classList.toggle("is-above", k < idx);
+        });
+        photos.forEach((p, k) => p.classList.toggle("is-active", k === idx));
+        frameDots.forEach((f, k) => f.classList.toggle("is-active", k === idx));
+        railDots.forEach((d, k) => {
+          d.classList.toggle("is-active", k === idx);
+          d.classList.toggle("is-past", k < idx);
+        });
 
-        let current = -1;
-        const setActive = (idx: number) => {
-          if (idx === current) return;
-          current = idx;
-          // Panels above the active one slide up & out; below ones wait below,
-          // so the previous year always exits upward when scrolling down (and
-          // downward when scrolling back up).
-          panels.forEach((p, k) => {
-            p.classList.toggle("is-active", k === idx);
-            p.classList.toggle("is-above", k < idx);
-          });
-          photos.forEach((p, k) => p.classList.toggle("is-active", k === idx));
-          frameDots.forEach((f, k) =>
-            f.classList.toggle("is-active", k === idx)
+        // The mirror exists only so ‹ › can grey out at the ends of a chapter,
+        // and those buttons only exist on a phone — so desktop, where the scrub
+        // is fastest, does not pay for it. It is handed the same index just
+        // written to the DOM, so the two never disagree.
+        if (mirrorToReact) {
+          setActiveDots((prev) =>
+            prev[era.id] === idx ? prev : { ...prev, [era.id]: idx }
           );
-          railDots.forEach((d, k) => {
-            d.classList.toggle("is-active", k === idx);
-            d.classList.toggle("is-past", k < idx);
-          });
+        }
+      };
 
-          // Everything above is a class, toggled by hand, costing no React work
-          // at all — which is the point. A scrub crosses years continuously, and
-          // re-rendering eight chapters of citations on each one would be jank
-          // bought for nothing.
-          //
-          // The mirror below exists only so ‹ › can grey out at the ends of a
-          // chapter, and those buttons only exist on a phone. So desktop, where
-          // the scrub is fastest and the buttons are display:none, does not pay
-          // for it. It is handed the same index just written to the DOM, so the
-          // two never disagree and reconciliation has nothing to undo.
-          if (mirrorToReact) {
-            setActiveDots((prev) =>
-              prev[era.id] === idx ? prev : { ...prev, [era.id]: idx }
-            );
-          }
-        };
+      return { panels, railBtns, n, setActive, at: () => current };
+    };
+
+    // ── DESKTOP: pin the stage, scrub the year off scroll progress ──
+    const buildDesktop = () => {
+      const cleanups: Array<() => void> = [];
+
+      gsap.utils.toArray<HTMLElement>(".era").forEach((era) => {
+        const { railBtns, n, setActive } = wire(era, false);
+        if (!n) return;
         setActive(0);
-        // Put the stage back to year one when this variant is torn down — GSAP's
-        // matchMedia reverts its OWN work, and classes toggled by hand here are
-        // not its work. Otherwise crossing the breakpoint mid-chapter leaves the
-        // rebuilt stage showing whichever year the old one stopped on.
         cleanups.push(() => setActive(0));
 
         const stage = era.querySelector<HTMLElement>(".stage");
@@ -219,25 +220,20 @@ export default function HistoryPage() {
         const st = ScrollTrigger.create({
           trigger: era,
           start: "top top",
-          end: () => "+=" + (n * stepVh * window.innerHeight) / 100,
+          end: () => "+=" + (n * STEP_VH.desktop * window.innerHeight) / 100,
           pin: stage,
           pinSpacing: true,
           anticipatePin: 1,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
-            const idx = Math.max(
-              0,
-              Math.min(n - 1, Math.floor(self.progress * n))
+            setActive(
+              Math.max(0, Math.min(n - 1, Math.floor(self.progress * n)))
             );
-            setActive(idx);
           },
         });
 
-        // Clickable dots — jump straight to a year.
         const goTo = (k: number) => {
           const target = st.start + (st.end - st.start) * ((k + 0.5) / n);
-          // Lenis is desktop-only now, so on a phone this falls through to the
-          // browser's own smooth scroll.
           const lenis = (
             window as unknown as {
               __lenis?: { scrollTo: (t: number, o?: object) => void };
@@ -251,11 +247,154 @@ export default function HistoryPage() {
           btn.addEventListener("click", handler);
           cleanups.push(() => btn.removeEventListener("click", handler));
         });
+        goToRef.current[era.id] = goTo;
+        cleanups.push(() => {
+          delete goToRef.current[era.id];
+        });
+      });
 
-        // Hand the same jump to the ‹ › buttons, which are React's and live
-        // outside this effect. They step the SCROLL, not an index — so a tap and
-        // a swipe arrive at the identical place by the identical route, and
-        // there is never a second opinion about which year is showing.
+      return () => cleanups.forEach((fn) => fn());
+    };
+
+    // ── MOBILE: one gesture, one year ──
+    //
+    // NOT a scrub. A scrub maps scroll DISTANCE to the year, so a long flick —
+    // which on a phone carries a thousand pixels of momentum the reader never
+    // asked for — tore through six years at once. Distance is the wrong input.
+    // The gesture is the input: one swipe means one year, however far it throws.
+    //
+    // So each era is a plain 100svh block and the page does not scroll inside it
+    // at all. A touch is read directly, and while a chapter is mid-way the page
+    // scroll is prevented outright. Everything else — moving between chapters,
+    // the buttons, the dots — is a programmatic, animated scroll, so the stage is
+    // always square with the viewport and never has to be re-aligned.
+    //
+    // The reader is let go in exactly two places: swiping back at the very first
+    // year of the first chapter (up to the Contents) and swiping on at the very
+    // last year of the last (down to the end of the page). Those are the two
+    // edges of the book, and holding them would be a trap rather than a design.
+    const buildMobile = () => {
+      const cleanups: Array<() => void> = [];
+      const eras = gsap.utils.toArray<HTMLElement>(".era");
+
+      eras.forEach((era, eraIdx) => {
+        const { panels, railBtns, n, setActive, at } = wire(era, true);
+        if (!n) return;
+        setActive(0);
+        cleanups.push(() => setActive(0));
+
+        const stage = era.querySelector<HTMLElement>(".stage");
+        if (!stage) return;
+
+        // While a step is playing out, the rest of that gesture is swallowed —
+        // this is what stops a fling being read as six swipes in a row.
+        let settling = 0;
+        const busy = () => settling !== 0;
+        const hold = (ms: number) => {
+          window.clearTimeout(settling);
+          settling = window.setTimeout(() => {
+            settling = 0;
+          }, ms);
+        };
+        cleanups.push(() => window.clearTimeout(settling));
+
+        // The paragraph reads first. It is overscroll-contained, so it never
+        // leaks the gesture to the page; when it has no more to give, the same
+        // gesture becomes the step to the next year.
+        const paragraphWants = (dir: number) => {
+          const p = panels[at()];
+          if (!p) return false;
+          return dir > 0
+            ? p.scrollTop + p.clientHeight < p.scrollHeight - 2
+            : p.scrollTop > 2;
+        };
+
+        const scrollToEra = (el: HTMLElement) => {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+          hold(700);
+        };
+
+        // True if this gesture was consumed and the page must not scroll.
+        const advance = (dir: number) => {
+          if (busy()) return true;
+
+          const next = at() + dir;
+          const leaving = next < 0 || next >= n;
+          const neighbour = leaving ? eras[eraIdx + dir] : undefined;
+
+          // The two edges of the book. Checked FIRST, and before the alignment
+          // guard below: a reader who is on their way up out of the first chapter
+          // is by definition no longer square with the viewport, and squaring them
+          // up would drag them back into the chapter they are trying to leave.
+          if (leaving && !neighbour) return false;
+
+          // Arrived by free-scrolling down from the Contents and stopped
+          // half-way? Square the stage up, and spend this gesture doing it.
+          if (Math.abs(era.getBoundingClientRect().top) > 4) {
+            scrollToEra(era);
+            return true;
+          }
+
+          if (!leaving) {
+            setActive(next);
+            hold(520);
+            return true;
+          }
+          scrollToEra(neighbour!);
+          return true;
+        };
+
+        let startY = 0;
+        let spent = false;
+        const onTouchStart = (e: TouchEvent) => {
+          startY = e.touches[0].clientY;
+          spent = false;
+        };
+        const onTouchMove = (e: TouchEvent) => {
+          const dy = startY - e.touches[0].clientY;
+          if (Math.abs(dy) < 16) return; // not yet a gesture, just a wobble
+          const dir = dy > 0 ? 1 : -1;
+          // Already stepped on this gesture: hold the page still for whatever is
+          // left of it, so the follow-through cannot step again.
+          if (spent) {
+            e.preventDefault();
+            return;
+          }
+          if (paragraphWants(dir)) return;
+          if (advance(dir)) {
+            spent = true;
+            e.preventDefault();
+          }
+        };
+
+        // Trackpads and mice, for a narrow desktop window. These fire in bursts,
+        // so `busy()` is what collapses a burst into one step.
+        const onWheel = (e: WheelEvent) => {
+          if (Math.abs(e.deltaY) < 4) return;
+          const dir = e.deltaY > 0 ? 1 : -1;
+          if (paragraphWants(dir)) return;
+          if (advance(dir)) e.preventDefault();
+        };
+
+        stage.addEventListener("touchstart", onTouchStart, { passive: true });
+        stage.addEventListener("touchmove", onTouchMove, { passive: false });
+        stage.addEventListener("wheel", onWheel, { passive: false });
+        cleanups.push(() => {
+          stage.removeEventListener("touchstart", onTouchStart);
+          stage.removeEventListener("touchmove", onTouchMove);
+          stage.removeEventListener("wheel", onWheel);
+        });
+
+        // A dot, or ‹ ›. No scroll involved — the year IS the state here.
+        const goTo = (k: number) => {
+          setActive(Math.max(0, Math.min(n - 1, k)));
+          hold(520);
+        };
+        railBtns.forEach((btn, k) => {
+          const handler = () => goTo(k);
+          btn.addEventListener("click", handler);
+          cleanups.push(() => btn.removeEventListener("click", handler));
+        });
         goToRef.current[era.id] = goTo;
         cleanups.push(() => {
           delete goToRef.current[era.id];
@@ -267,14 +406,14 @@ export default function HistoryPage() {
 
     mm.add(
       "(min-width: 768px) and (prefers-reduced-motion: no-preference)",
-      () => build(STEP_VH.desktop, false)
+      buildDesktop
     );
     mm.add(
       "(max-width: 767px) and (prefers-reduced-motion: no-preference)",
-      () => build(STEP_VH.mobile, true)
+      buildMobile
     );
-    // Under prefers-reduced-motion nothing is pinned and no trigger is built.
-    // CSS lays every year out in normal flow, each with its own photo.
+    // Under prefers-reduced-motion nothing is pinned, no trigger is built and no
+    // gesture is intercepted. CSS lays every year out in normal flow.
 
     return () => mm.revert();
   }, [lang]);
@@ -1020,6 +1159,23 @@ export default function HistoryPage() {
            svh, not vh or dvh: dvh re-flows as the URL bar animates, and a card
            that resizes under a reader's thumb loses their place mid-sentence. */
         @media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
+          /* The touch handler owns every gesture that starts INSIDE a chapter,
+             but it cannot own the one that arrives from outside: a fling thrown
+             in the Contents is still travelling when it crosses into the first
+             chapter, and no touch is on the glass to catch it. Proximity snap
+             catches it instead, so a fling settles square on a chapter rather
+             than half-way across one.
+
+             Proximity, never mandatory: mandatory has to snap to SOMETHING, and
+             the nearest something to a reader halfway down the Contents is the
+             first chapter — it would yank them out of the index they are reading.
+
+             The rule on html is safe to leak. If it ever outlived this page it
+             would be inert, because scroll-snap-align lives only on .era and .era
+             only exists here. */
+          html { scroll-snap-type: y proximity; }
+          .history-timeline .era { scroll-snap-align: start; }
+
           .history-timeline .stage {
             height: 100svh;
             display: flex;
@@ -1200,17 +1356,13 @@ export default function HistoryPage() {
             min-height: 0;
           }
 
-          /* ── The paragraph reads, then hands the scroll back ──
-             Each year is its own scroll box, and deliberately does NOT set
-             overscroll-behavior: the default chains. So a finger dragging in the
-             text scrolls the text, and the moment the text runs out that same
-             gesture continues into the page — which is the pinned scrub, which
-             steps to the next year. Read to the end, keep going, move on: one
-             gesture, no gear change.
-
-             Containing the overscroll here would strand the reader at the last
-             line with nothing happening until they moved their thumb onto the
-             photograph. */
+          /* ── The paragraph reads, then hands the gesture back ──
+             Each year is its own scroll box. Containment stops it EVER leaking a
+             gesture to the page: the page must not move inside a chapter, or a
+             fling would carry the reader clean out of it. What happens instead is
+             that the touch handler watches this box, and the moment it has no
+             more to give, that same gesture becomes the step to the next year.
+             Read to the end, keep going, move on. */
           .history-timeline .dot-panel {
             grid-area: 1 / 1;
             /* MUST override Tailwind's flex + flex-col + justify-center. In a
@@ -1221,6 +1373,7 @@ export default function HistoryPage() {
             display: block;
             min-height: 0;
             overflow-y: auto;
+            overscroll-behavior-y: contain;
             /* Clears the button overlay, so the last line of a year can be
                scrolled out from under the circles instead of sitting behind them. */
             padding-bottom: 4.75rem;

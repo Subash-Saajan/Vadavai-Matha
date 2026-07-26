@@ -59,15 +59,25 @@ export const HISTORY_NOTES: Record<string, HistoryNote> = {
 
   /* ── V. The Great Two-Nave Church ──────────────────────────────────────── */
 
-  // A cherished family story that the outside record cannot reach — and one
-  // date in it that does not sit easily.
-  "great-two-nave-church:3": {
-    en: "This is the parish's own memory. No printed history of the mission names any lay benefactor of this church — Auguste Jean credits it to Fr Grégoire's persevering energy alone — and Christopher Bilderbeck died in 1817, thirty-eight years before the foundation stone was laid. If the gift fell as the village remembers it, it belonged to the older church, or to his heirs.",
+  // The visit is the bishop's own; the errand he came on is the village's memory.
+  "great-two-nave-church:2": {
+    en: "The visit is in Bishop Canoz's own hand, but he says nothing of any church or any money. The day, the 21st of June, and the request that the people begin saving for a large new church come down through the parish's own history alone.",
   },
 
-  // Two chroniclers, one day, two years.
-  "great-two-nave-church:10": {
-    en: "His two chroniclers agree on the day and differ on the year: Auguste Jean gives 1873, Dessal 1875.",
+  // (great-two-nave-church:3 — footnote REMOVED at the owner's instruction, 26 Jul 2026.
+  // The dot is told as a story and the tier badge carries the honesty on its own. What the
+  // note used to say is preserved in full in that dot's citations.ts audit note and in
+  // Mismatch J7/J8: no printed history names a lay benefactor of this church, Auguste Jean
+  // credits it to Grégoire's persevering energy alone, Christopher Bilderbeck died in 1817,
+  // and the parish's own shrine board attaches the gift to the Matha shrine, not this church.
+  // Do NOT reinstate it here without asking — its removal was a deliberate decision.)
+
+  // The two chroniclers agree. What they differ on is who sent him home — and that is
+  // the only thing left worth telling the reader, which is why the prose says only
+  // "they sent him home". (The old note here claimed they differed on the YEAR, on the
+  // strength of an OCR misreading of Dessal; the scan reads 1873. See citations.ts.)
+  "great-two-nave-church:11": {
+    en: "Auguste Jean says he accepted his superiors' invitation to spend a few months at home; Dessal says he sailed on his doctors' advice.",
   },
 
   /* ── VIII. The Shrine and the Saint ────────────────────────────────────── */
