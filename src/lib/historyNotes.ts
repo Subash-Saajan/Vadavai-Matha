@@ -49,12 +49,14 @@ export const HISTORY_NOTES: Record<string, HistoryNote> = {
   // flags the feast below the line. (Re-keyed :4→:2 after the 1794/1801 dots were cut.)
   "the-weeping-madonna:2": {
     en: "The two earliest printed accounts give this Friday as 21 October, and 21 October 1803 was a Friday; the feast is kept on the 22nd and 23rd.",
+    ta: "மிகப் பழைய இரு அச்சுப் பதிவுகளும் இந்த வெள்ளிக்கிழமையை அக்டோபர் 21 என்றே தருகின்றன; 1803 அக்டோபர் 21 ஒரு வெள்ளிக்கிழமையே. திருவிழாவோ 22, 23 ஆகிய நாட்களில் கொண்டாடப்படுகிறது.",
   },
 
   // The honest boundary of the whole miracle. (Re-keyed :8→:6, and updated: Besse has
   // now been read in the parish's English translation, and it is not the only witness.)
   "the-weeping-madonna:9": {
     en: "The weeping has never been submitted to Rome, and no Vatican commission has examined it. It reaches us in three independent printed accounts, the earliest from 1905, and it claims no more than a dated morning, named witnesses, and an unbroken feast.",
+    ta: "இந்தக் கண்ணீர் நிகழ்வு ஒருபோதும் உரோமைக்குச் சமர்ப்பிக்கப்படவில்லை; வத்திக்கானின் எந்த ஆய்வுக்குழுவும் இதை ஆராய்ந்ததில்லை. ஒன்றையொன்று சாராத மூன்று அச்சுப் பதிவுகள் வழியாகவே இது நம்மை வந்தடைகிறது — அவற்றுள் மிகப் பழையது 1905-ஆம் ஆண்டைச் சேர்ந்தது. நாள் குறிக்கப்பட்ட ஒரு காலைப் பொழுது, பெயர் சொல்லப்பட்ட சாட்சிகள், அறுபடாமல் தொடரும் ஒரு திருவிழா — இதற்கு மேல் இது எதையும் உரிமை கோரவில்லை.",
   },
 
   /* ── V. The Great Two-Nave Church ──────────────────────────────────────── */
@@ -62,6 +64,7 @@ export const HISTORY_NOTES: Record<string, HistoryNote> = {
   // The visit is the bishop's own; the errand he came on is the village's memory.
   "great-two-nave-church:2": {
     en: "The visit is in Bishop Canoz's own hand, but he says nothing of any church or any money. The day, the 21st of June, and the request that the people begin saving for a large new church come down through the parish's own history alone.",
+    ta: "அந்த வருகை ஆயர் கனோஸ் அவர்களின் சொந்தக் கையெழுத்திலேயே உள்ளது; ஆனால் ஆலயத்தைப் பற்றியோ பணத்தைப் பற்றியோ அவர் ஒன்றும் சொல்லவில்லை. ஜூன் 21 என்னும் அந்த நாளும், புதிய பெரிய ஆலயத்திற்காக மக்கள் சேமிக்கத் தொடங்க வேண்டும் என்ற வேண்டுகோளும், இப்பங்கின் சொந்த வரலாற்றின் வழியாக மட்டுமே நம்மை வந்தடைகின்றன.",
   },
 
   // (great-two-nave-church:3 — footnote REMOVED at the owner's instruction, 26 Jul 2026.
@@ -78,6 +81,7 @@ export const HISTORY_NOTES: Record<string, HistoryNote> = {
   // strength of an OCR misreading of Dessal; the scan reads 1873. See citations.ts.)
   "great-two-nave-church:11": {
     en: "Auguste Jean says he accepted his superiors' invitation to spend a few months at home; Dessal says he sailed on his doctors' advice.",
+    ta: "சில மாதங்கள் சொந்த நாட்டில் தங்கும்படி மேலதிகாரிகள் அளித்த அழைப்பை அவர் ஏற்றுக்கொண்டார் என்று அகுஸ்த் ஜான் சொல்கிறார்; மருத்துவர்களின் அறிவுரையின்பேரிலேயே அவர் கப்பலேறினார் என்று தெசால் சொல்கிறார்.",
   },
 
   /* ── VIII. The Shrine and the Saint ────────────────────────────────────── */
@@ -86,11 +90,13 @@ export const HISTORY_NOTES: Record<string, HistoryNote> = {
   // back-dating it by twenty-nine years would be a small, easy untruth.
   "shrine-and-the-saint:0": {
     en: "Every witness of 1993 names the church by its old dedication, to the Holy Family. The Marian style the shrine carries today — Our Lady of the Assumption — is first found in the diocese's letters of 2022.",
+    ta: "1993-ஆம் ஆண்டின் ஒவ்வொரு சான்றும் இவ்வாலயத்தை அதன் பழைய அர்ப்பணப் பெயரான திருக்குடும்ப ஆலயம் என்றே குறிக்கிறது. இன்று இத்திருத்தலம் தாங்கும் மரியன்னை அடையாளம் — விண்ணேற்பு மாதா — முதன்முதலில் காணப்படுவது 2022-ஆம் ஆண்டு மறைமாவட்டக் கடிதங்களிலேயே.",
   },
 
   // Two institutions count the same people and reach different totals.
   "shrine-and-the-saint:5": {
     en: "The head-count is the parish's own. The diocese's roll gives a smaller figure: about 7,350 Catholics in some 1,600 families.",
+    ta: "இந்தத் தலைக்கணக்கு இப்பங்கின் சொந்தக் கணக்கு. மறைமாவட்டப் பதிவேடோ இதைவிடச் சிறிய எண்ணிக்கையைத் தருகிறது: சுமார் 1,600 குடும்பங்களில் சுமார் 7,350 கத்தோலிக்கர்.",
   },
 };
 

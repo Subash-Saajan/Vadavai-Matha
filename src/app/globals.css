@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+/* A SHORT WINDOW, not a narrow one.
+   Every other breakpoint on this site is about width. This one is about
+   HEIGHT, and it exists for the pinned sections: a pinned element is held at
+   exactly one viewport, so anything taller than the screen has its bottom edge
+   clipped for the whole pin — and on a 1366×768 laptop that edge is the thing
+   the section was built to show. `short:` lets those sections give back a
+   little type size and a little card height instead of losing the bottom of
+   themselves. 820px is chosen so a 768-tall laptop is inside it and a 900-tall
+   window is not. */
+@custom-variant short (@media (max-height: 820px));
+
 /* ======================================================================
    "LITTLE ROME" — design system for Vadakankulam Matha
    ----------------------------------------------------------------------
@@ -296,6 +307,54 @@ body::after {
   );
 }
 
+/* Hero scrim for a photograph whose subject stands on the RIGHT.
+   A single top-to-bottom wash has to be dark enough for white type over the
+   brightest part of the frame, which means it greys out the subject too — the
+   picture ends up dull everywhere to keep one corner readable. This weights the
+   navy across the frame instead: heavy on the left, where the kicker, heading
+   and intro sit, and nearly clear over the right, so the subject keeps its own
+   light. The second, vertical layer only does the two jobs the horizontal one
+   cannot — darkening the band beneath the header nav and grounding the foot of
+   the hero, where the status card overlaps. */
+/* Narrow screens get the ordinary vertical wash: the hero crops to a quarter of
+   the frame's width there, so the subject IS the picture and a left-weighted
+   scrim would only drop a vignette across the statue. */
+.hero-scrim-subject-right {
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 19, 34, 0.42) 0%,
+    rgba(10, 19, 34, 0.14) 24%,
+    rgba(10, 19, 34, 0.34) 50%,
+    rgba(10, 19, 34, 0.7) 72%,
+    rgba(6, 12, 24, 0.94) 100%
+  );
+}
+
+/* From md up the type sits beside the subject rather than under it, so the
+   weight moves to the horizontal axis. The vertical layer keeps only the two
+   jobs the horizontal one cannot do: darkening the band beneath the header nav,
+   and grounding the foot of the hero where the status card overlaps. */
+@media (min-width: 768px) {
+  .hero-scrim-subject-right {
+    background:
+      linear-gradient(
+        to right,
+        rgba(10, 19, 34, 0.72) 0%,
+        rgba(10, 19, 34, 0.54) 40%,
+        rgba(10, 19, 34, 0.2) 62%,
+        rgba(10, 19, 34, 0.08) 80%,
+        rgba(10, 19, 34, 0.24) 100%
+      ),
+      linear-gradient(
+        to bottom,
+        rgba(10, 19, 34, 0.5) 0%,
+        rgba(10, 19, 34, 0.16) 30%,
+        rgba(10, 19, 34, 0.3) 70%,
+        rgba(6, 12, 24, 0.82) 100%
+      );
+  }
+}
+
 /* ── Interactive floor plan (the Creed section) ──
    Reading a line of the creed lifts one region of the plan and settles the
    rest back. Opacity multiplies with each group's own gold alpha, so `--off`
@@ -565,4 +624,110 @@ body::after {
 html[lang="ta"] .prose-quote,
 html[lang="ta"] .prose-term {
   font-style: normal;
+}
+
+/* ── The saints' pages: the citation apparatus ──
+   /saints/john-de-britto and /saints/devasahayam-pillai carry the same
+   tier-and-chip line under every chapter that /history carries under every
+   moment, and it is deliberately the SAME visual idiom — a reader who learns
+   what a filled gold badge means on one page must not have to relearn it on
+   another. The history page's own copy of these rules lives inside its
+   component, scoped to `.history-timeline`; these live here because two pages
+   share them, and a rule duplicated in two components is a rule that will
+   eventually disagree with itself.
+
+   Everything is scoped under `.saint-page` so nothing leaks into the rest of
+   the site. */
+.saint-page .saint-note {
+  margin-top: 1.5rem;
+  padding-left: 1.1rem;
+  border-left: 1px solid rgba(196, 160, 73, 0.4);
+  font-size: 0.92rem;
+  line-height: 1.75;
+  color: var(--text-muted);
+  opacity: 0.9;
+}
+.saint-page .saint-note-label {
+  font-family: var(--font-display), serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  margin-right: 0.7em;
+  white-space: nowrap;
+}
+.saint-page .saint-cite {
+  margin-top: 1.4rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.55rem;
+}
+.saint-page .saint-tier {
+  font-family: var(--font-display), serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  line-height: 1;
+  padding: 0.36rem 0.6rem 0.32rem;
+  border-radius: 9999px;
+  white-space: nowrap;
+}
+/* Someone outside this parish, with no reason to flatter it, wrote it down.
+   That earns the filled badge — nothing else does. */
+.saint-page .saint-tier--documented {
+  color: var(--gold-dark);
+  background: rgba(196, 160, 73, 0.15);
+  box-shadow: inset 0 0 0 1px rgba(196, 160, 73, 0.4);
+}
+.saint-page .saint-tier--tradition {
+  color: var(--text-muted);
+  box-shadow: inset 0 0 0 1px rgba(111, 102, 80, 0.3);
+}
+.saint-page .saint-tier--devotion {
+  color: var(--gold-dark);
+  box-shadow: inset 0 0 0 1px rgba(196, 160, 73, 0.32);
+}
+.saint-page .saint-chip {
+  font-family: var(--font-display), serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  color: var(--navy);
+  opacity: 0.68;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+  text-decoration-color: rgba(196, 160, 73, 0.5);
+  transition: opacity 0.3s ease, color 0.3s ease, text-decoration-color 0.3s ease;
+}
+.saint-page .saint-chip:hover {
+  opacity: 1;
+  color: var(--gold-dark);
+  text-decoration-color: var(--gold-dark);
+}
+.saint-page .saint-chip:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* The paintings drift inside their frame; the frame itself never moves, so
+   nothing on these pages can cause a horizontal scrollbar.
+
+   The overscan is HEIGHT, not a scale utility. GSAP animates yPercent by
+   writing the transform property, and whether a Tailwind scale class survives
+   that depends on which strategy the build emits — if it loses, the drift
+   exposes a bare strip at the top and bottom of every plate. Sizing the image
+   112% tall and pulling it up 6% needs no transform at all, so the two cannot
+   fight, and the still image is correctly framed even if the script never runs.
+   `!important` because next/image's `fill` writes its sizing inline. */
+.saint-page .plate-img {
+  height: 112% !important;
+  top: -6% !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .saint-page .plate-img {
+    transform: none !important;
+  }
 }

@@ -71,20 +71,31 @@ export function ContactExperience() {
 
   return (
     <div ref={rootRef} className="contact-page">
-      {/* The shrine's own twin spires — the landmark the map copy promises is
-          visible from the highway. Not a stock photograph. The sunset sky
-          behind them is pale, so the scrim is deepened for legibility.
+      {/* Inside the shrine rather than above it: the kneeling angel beside the
+          pulpit, with the flower-dressed high altar behind. A page that asks a
+          pilgrim to come should show what they would be walking into.
 
-          The church sits in the lower half of the frame, so the crop is held
-          near the bottom: centred, this hero was mostly sky. */}
+          The angel stands in the right third, so the scrim is weighted to the
+          left rather than washed evenly over everything — see
+          .hero-scrim-subject-right. An even wash has to be dark enough for white
+          type over the brightest part of the frame, which is what made this hero
+          read as dull: the statue was being dimmed to keep the heading legible.
+
+          The frame is 2.53:1 — wider than the hero at any ordinary window size —
+          so `object-cover` scales it by height and the wings are never clipped.
+          The right wingtip clears the top edge by five pixels; there is no
+          vertical room to give, which is why the crop is held on the horizontal
+          axis alone. At 75% the angel lands around two-thirds across on a
+          desktop and centred on a phone, where the hero keeps only a quarter of
+          this frame's width. */}
       <PageHero
         label={t.contact.label}
         title={t.contact.title}
         intro={t.contact.intro}
-        image="/images/fest-drone.jpg"
-        alt="The twin spires and domed roof of the Holy Family Shrine at sunset, with the hills of the Western Ghats on the horizon"
-        overlayClassName="bg-linear-to-b from-navy/55 via-navy/35 to-navy/85"
-        imagePosition="object-[center_85%]"
+        image="/images/sanctuary-angel.jpg"
+        alt="A carved angel in a rose-coloured robe kneels with hands joined in prayer beside the pulpit of the shrine, the flower-dressed high altar and its saints out of focus behind"
+        overlayClassName="hero-scrim-subject-right"
+        imagePosition="object-[75%_center]"
       />
 
       <ThresholdBar />

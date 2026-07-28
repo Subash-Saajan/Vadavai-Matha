@@ -6,17 +6,69 @@ import Image from "next/image";
 import { gsap } from "@/lib/gsap";
 import { PageHero } from "@/components/sections/PageHero";
 import { useLang } from "@/components/layout/LanguageProvider";
+import { SOURCE_SHORT, TIER_LABEL, type Tier } from "@/lib/citations";
+import { SOURCE_INDEX } from "@/lib/sources";
+import {
+  deBrittoCiteFor as citeFor,
+  DE_BRITTO_BIBLIOGRAPHY,
+} from "@/lib/saintSources";
 
 /**
- * The client half of /saints/john-de-britto. Structure and choreography mirror
- * the Devasahayam page exactly (same reveal idiom, same section rhythm), so the
- * two saints read as a matched pair. Content comes from t.saintDeBritto; the
- * server page.tsx owns metadata and the JSON-LD.
+ * The client half of /saints/john-de-britto. Content comes from t.saintDeBritto;
+ * the server page.tsx owns metadata and the JSON-LD.
  *
- * Like the Devasahayam hero (Gnanapoo Ammal's tomb), this page opens on a
- * REAL photograph — the John de Britto grotto in the shrine's own grounds —
- * so the alt text describes exactly what is in it.
+ * WHAT THIS PAGE IS FOR. He is the only saint the parish claims as its FOUNDER,
+ * and the page has to do two things at once that pull against each other: tell
+ * that story with the warmth it deserves, and be honest that the founding itself
+ * is the parish's memory rather than a document. It does both the way /history
+ * does — the story runs above the line, and what the story rests on is printed
+ * under it, tier and all. A page that says where it is weak is believed where it
+ * is strong.
+ *
+ * THE PAINTINGS ARE THE HISTORY PAGE'S OWN. The founding era on /history was
+ * painted moment by moment; four of those canvases are de Britto's own scenes,
+ * so they are reused here rather than reinvented. Same hand, same man, same
+ * face — the two pages agree visually as well as factually. Which chapter gets
+ * which painting is declared in lib/saintSources.ts, never derived from position.
+ *
+ * Like the Devasahayam page, this one opens on a REAL photograph — the John de
+ * Britto grotto in the shrine's own grounds — so the alt text describes exactly
+ * what is in it.
  */
+
+/**
+ * The citation line under a chapter: the honest tier, then the witnesses,
+ * strongest first. Chips go to the bibliography anchor on /sources.
+ *
+ * Deliberately NOT the /reference deep-link the history page uses. Those URLs
+ * are keyed to an era and a dot INDEX, so pointing at them from here would tie
+ * this page's chapters to the ordering of a completely different page's array —
+ * exactly the coupling lib/saintSources.ts was written to avoid.
+ */
+function Citation({ tier, sources }: { tier: Tier; sources: { id: string }[] }) {
+  const { lang } = useLang();
+  return (
+    <div className="saint-cite">
+      <span className={`saint-tier saint-tier--${tier}`}>{TIER_LABEL[tier][lang]}</span>
+      {sources.map((s) => {
+        const full = SOURCE_INDEX[s.id];
+        return (
+          <Link
+            key={s.id}
+            href={`/sources#${s.id}`}
+            className="saint-chip"
+            title={`${full?.author ? full.author + " — " : ""}${full?.title ?? ""}${
+              full?.detail ? ` (${full.detail})` : ""
+            }`}
+          >
+            {SOURCE_SHORT[s.id] ?? full?.title ?? s.id}
+          </Link>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function DeBrittoPage() {
   const pageRef = useRef<HTMLDivElement>(null);
   const bondImgRef = useRef<HTMLDivElement>(null);
@@ -44,6 +96,26 @@ export default function DeBrittoPage() {
         );
       });
 
+      // The paintings drift a little slower than the prose beside them. Nothing
+      // is pinned on this page, so no pin-spacer is created and a passive effect
+      // is safe here — see the note in lib/gsap.ts for when it would not be.
+      pageRef.current?.querySelectorAll<HTMLElement>(".plate-img").forEach((el) => {
+        gsap.fromTo(
+          el,
+          { yPercent: -5 },
+          {
+            yPercent: 5,
+            ease: "none",
+            scrollTrigger: {
+              trigger: el.parentElement,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 1.2,
+            },
+          }
+        );
+      });
+
       if (bondImgRef.current) {
         gsap.to(bondImgRef.current, {
           yPercent: 12,
@@ -60,8 +132,20 @@ export default function DeBrittoPage() {
     return () => ctx.revert();
   }, [lang]);
 
+  /**
+   * The alt text for a chapter's painting.
+   *
+   * Falls back to the chapter heading rather than to "". The alts are keyed by
+   * the same slug as the chapter, and the first draft keyed the prison painting
+   * `prison` while its chapter was `oriyur` — which typechecked perfectly and
+   * would have shipped a real content image, in both languages, with no alt at
+   * all. A wrong-but-present alt is a bug someone notices; an empty one is not.
+   */
+  const altFor = (key: string, heading: string) =>
+    (s.alts as Record<string, string>)[key] || heading;
+
   return (
-    <div ref={pageRef}>
+    <div ref={pageRef} className="saint-page">
       <PageHero
         label={s.label}
         title={s.name}
@@ -97,7 +181,7 @@ export default function DeBrittoPage() {
         </div>
       </section>
 
-      {/* ── Opening quote ─────────────────────── */}
+      {/* ── The prison letter ─────────────────────── */}
       <section className="bg-cream section-padding relative overflow-hidden">
         <div className="pointer-events-none absolute -top-40 left-1/4 w-[500px] h-[500px] rounded-full bg-gold/8 blur-3xl" />
         <div className="relative max-w-3xl mx-auto px-6 text-center">
@@ -105,32 +189,110 @@ export default function DeBrittoPage() {
             <svg width="40" height="32" viewBox="0 0 40 32" fill="none" aria-hidden="true" className="mx-auto mb-6 text-gold/60">
               <path d="M0 32V18C0 8 5 2 16 0v6c-5 1-8 5-8 10h8v16H0zm24 0V18c0-10 5-16 16-18v6c-5 1-8 5-8 10h8v16H24z" fill="currentColor" />
             </svg>
-            <p className="font-serif text-3xl md:text-4xl text-navy italic leading-snug">
+            <p className="font-serif text-2xl md:text-3xl text-navy italic leading-snug">
               {s.quote}
             </p>
-            <p className="mt-6 text-xs uppercase tracking-[0.3em] text-text-muted">
+            <p className="mt-6 text-xs uppercase tracking-[0.25em] text-text-muted leading-relaxed max-w-xl mx-auto">
               {s.quoteAttribution}
             </p>
           </div>
         </div>
       </section>
 
-      {/* ── Story sections ─────────────────────── */}
-      <section className="bg-cream pb-24 md:pb-32 relative">
-        <div className="max-w-3xl mx-auto px-6 space-y-16">
-          {s.sections.map((sec, i) => (
-            <article key={i} className="reveal-item">
-              <p className="text-[11px] uppercase tracking-[0.35em] text-gold/80 mb-3">
-                {String(i + 1).padStart(2, "0")}
-              </p>
-              <h2 className="font-serif text-3xl md:text-4xl text-navy mb-5 leading-tight">
-                {sec.heading}
-              </h2>
-              <p className="text-text-muted text-lg leading-relaxed">
-                {sec.body}
-              </p>
-            </article>
-          ))}
+      {/* ── The life, chapter by chapter ─────────────────────── */}
+      <section className="bg-cream pb-4 relative">
+        <div className="max-w-3xl mx-auto px-6 text-center">
+          <p className="reveal-item kicker justify-center mb-5">{s.lifeLabel}</p>
+          <h2 className="reveal-item font-serif text-4xl md:text-5xl text-navy leading-[1.05] mb-6">
+            {s.lifeTitle}
+          </h2>
+          <p className="reveal-item text-text-muted text-lg leading-relaxed">{s.lifeIntro}</p>
+        </div>
+      </section>
+
+      <section className="bg-cream pb-24 md:pb-32 pt-14 md:pt-16 relative">
+        <div className="max-w-3xl mx-auto px-6 space-y-16 md:space-y-20">
+          {s.sections.map((sec, i) => {
+            const cite = citeFor(sec.key);
+            return (
+              <article key={sec.key} className="reveal-item">
+                <p className="text-[11px] uppercase tracking-[0.35em] text-gold/80 mb-3">
+                  {String(i + 1).padStart(2, "0")}
+                </p>
+                <h3 className="font-serif text-3xl md:text-4xl text-navy mb-5 leading-tight">
+                  {sec.heading}
+                </h3>
+
+                {/* The painting rides between the heading and the prose, so a
+                    reader scrolling fast still meets the scene before the
+                    sentences that explain it. */}
+                {cite?.photo && (
+                  <figure className="plate relative my-7 overflow-hidden rounded-2xl bg-navy ring-1 ring-gold/20 aspect-4/3">
+                    <Image
+                      src={cite.photo}
+                      alt={altFor(sec.key, sec.heading)}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 48rem"
+                      className="plate-img object-cover will-change-transform"
+                    />
+                    <span className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-gold/15 rounded-2xl" />
+                  </figure>
+                )}
+
+                <p className="text-text-muted text-lg leading-relaxed">{sec.body}</p>
+
+                {/* Below the line: the doubt, where this chapter has one. It is
+                    here so the prose above never has to stop and hedge. */}
+                {sec.note && (
+                  <p className="saint-note">
+                    <span className="saint-note-label">{s.noteLabel}</span>
+                    {sec.note}
+                  </p>
+                )}
+
+                {cite && <Citation tier={cite.tier} sources={cite.sources} />}
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* ── How much of this is proved ─────────────────────── */}
+      <section className="bg-cream-dark section-padding relative overflow-hidden border-y border-gold/20">
+        <div className="light-shaft pointer-events-none absolute -top-10 left-[12%] h-[130%] w-[55%] -rotate-12 opacity-50" />
+        <div className="relative max-w-4xl mx-auto px-6">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <p className="reveal-item kicker justify-center mb-5">{s.evidence.label}</p>
+            <h2 className="reveal-item font-serif text-4xl md:text-5xl text-navy leading-[1.05] mb-6">
+              {s.evidence.title}
+            </h2>
+            <p className="reveal-item text-text-muted text-lg leading-relaxed">
+              {s.evidence.intro}
+            </p>
+          </div>
+
+          <div className="space-y-8">
+            {s.evidence.rows.map((row, i) => (
+              <div
+                key={i}
+                className="reveal-item rounded-2xl border border-gold/20 bg-white/50 backdrop-blur-sm p-7 md:p-9"
+              >
+                <div className="saint-cite mb-4">
+                  <span className={`saint-tier saint-tier--${row.tier}`}>
+                    {TIER_LABEL[row.tier][lang]}
+                  </span>
+                </div>
+                <h3 className="font-serif text-2xl md:text-3xl text-navy mb-4 leading-tight">
+                  {row.heading}
+                </h3>
+                <p className="text-text-muted leading-relaxed">{row.body}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="reveal-item mt-12 text-center font-serif text-xl md:text-2xl italic text-navy leading-relaxed max-w-2xl mx-auto">
+            {s.evidence.closing}
+          </p>
         </div>
       </section>
 
@@ -188,7 +350,33 @@ export default function DeBrittoPage() {
         </div>
       </section>
 
-      {/* ── Sources + back link ─────────────────────── */}
+      {/* ── Arulanandar today ─────────────────────── */}
+      <section className="bg-cream section-padding relative overflow-hidden">
+        <div className="light-shaft pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[55%] h-[85%]" />
+        <div className="relative max-w-5xl mx-auto px-6">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <p className="reveal-item kicker justify-center mb-5">{s.today.label}</p>
+            <h2 className="reveal-item font-serif text-4xl md:text-5xl text-navy leading-[1.05] mb-6">
+              {s.today.title}
+            </h2>
+            <p className="reveal-item text-text-muted text-lg leading-relaxed">{s.today.intro}</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
+            {s.today.items.map((item, i) => (
+              <div key={i} className="reveal-item">
+                <div className="w-10 h-px bg-gold/50 mb-5" />
+                <h3 className="font-serif text-xl md:text-2xl text-navy mb-3 leading-tight">
+                  {item.heading}
+                </h3>
+                <p className="text-text-muted leading-relaxed">{item.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Sources, further reading, and the way back ─────────────────────── */}
       <section className="bg-cream pb-24 md:pb-32">
         <div className="max-w-3xl mx-auto px-6">
           <div className="reveal-item rounded-2xl border border-gold/20 bg-white/40 backdrop-blur-sm p-8 md:p-10">
@@ -198,6 +386,49 @@ export default function DeBrittoPage() {
             <p className="text-text-muted text-sm md:text-base leading-relaxed italic">
               {s.sources.body}
             </p>
+
+            {/* Every book behind the page, once, in the order of authority that
+                sources.ts declares — the Holy See first, our own books last. */}
+            <p className="mt-7 text-[10px] uppercase tracking-[0.3em] text-text-muted/70 mb-3">
+              {s.sources.chipsLabel}
+            </p>
+            <div className="saint-cite">
+              {DE_BRITTO_BIBLIOGRAPHY.map((id) => (
+                <Link key={id} href={`/sources#${id}`} className="saint-chip">
+                  {SOURCE_SHORT[id] ?? SOURCE_INDEX[id]?.title ?? id}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Where to go next. This page used to end in a single link back to a
+              section of the home page, which is a dead end for anyone it has
+              just interested. */}
+          <div className="mt-14 grid grid-cols-1 sm:grid-cols-3 gap-6">
+            {s.related.items.map((r, i) => (
+              <Link
+                key={i}
+                href={r.href}
+                className="reveal-item group block rounded-2xl border border-gold/20 bg-white/40 p-6 transition-colors duration-500 hover:border-gold/50 hover:bg-white/60"
+              >
+                <h3 className="font-serif text-lg text-navy leading-tight mb-2 transition-colors duration-500 group-hover:text-gold-dark">
+                  {r.title}
+                </h3>
+                <p className="text-text-muted text-sm leading-relaxed mb-4">{r.body}</p>
+                <span className="inline-flex items-center gap-1.5 font-display text-[0.6rem] uppercase tracking-[0.25em] text-gold-dark">
+                  {r.cta}
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path
+                      d="M5 12h14M13 6l6 6-6 6"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </span>
+              </Link>
+            ))}
           </div>
 
           <div className="reveal-item mt-12 text-center">
@@ -213,6 +444,11 @@ export default function DeBrittoPage() {
           </div>
         </div>
       </section>
+
+      {/* The tier badges, the chips, the footnote rule and the plate overscan
+          all live in globals.css under .saint-page, shared with the Devasahayam
+          page so the two can never drift into different conventions for one
+          thing. */}
     </div>
   );
 }

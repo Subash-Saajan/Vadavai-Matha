@@ -119,7 +119,50 @@ export function ThresholdBar() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 min-h-[46px] px-5 rounded-full border border-gold/30 text-navy/75 font-display text-[0.64rem] uppercase tracking-[0.2em] hover:border-gold hover:text-gold-dark transition-colors"
               >
-                <Navigation className="w-4 h-4" aria-hidden="true" />
+                {/* Gold-leaf stroke rather than a flat colour. Same 135° axis and
+                    the same gold tokens through the middle as
+                    .text-gradient-gold, so the arrow reads as the site's gilding
+                    and not a fourth gold.
+
+                    The gradient is defined INSIDE this icon: lucide renders
+                    `children` after its own paths, so the paint server sits in
+                    the same <svg> that uses it and there is no cross-element
+                    `url(#id)` reference to resolve. Two consequences to keep in
+                    mind — lucide stops adding `aria-hidden` on its own once a
+                    child is passed (hence the explicit one below), and it spreads
+                    children into an array, so the <defs> needs a `key` or React
+                    logs a missing-key warning.
+
+                    Coordinates are the 24×24 viewBox, not the rendered 16px. */}
+                <Navigation
+                  className="w-4 h-4"
+                  stroke="url(#threshold-gold-arrow)"
+                  aria-hidden="true"
+                >
+                  <defs key="gold">
+                    <linearGradient
+                      id="threshold-gold-arrow"
+                      gradientUnits="userSpaceOnUse"
+                      x1="3"
+                      y1="3"
+                      x2="21"
+                      y2="21"
+                    >
+                      {/* Four stops, not three: across a 1.3px stroke at 16px,
+                          gold-light → gold → gold-dark alone is too narrow a
+                          range to read as anything but flat. This opens on a
+                          champagne highlight and closes on the same deep tone
+                          .text-gradient-gold-deep ends on, so the arrow catches
+                          light along its upper edge and sinks at the tail.
+                          Tokens where tokens exist; the two extremes are the
+                          gold-leaf highlight and shadow, which have none. */}
+                      <stop offset="0%" stopColor="#f6e6b0" />
+                      <stop offset="28%" style={{ stopColor: "var(--gold-light)" }} />
+                      <stop offset="58%" style={{ stopColor: "var(--gold)" }} />
+                      <stop offset="100%" stopColor="#8a6c28" />
+                    </linearGradient>
+                  </defs>
+                </Navigation>
                 {t.contact.actions.directions}
               </a>
             </div>

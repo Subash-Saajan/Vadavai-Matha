@@ -43,6 +43,10 @@ export function Footer() {
           </p>
           <ul className="space-y-2.5 text-white/80 text-sm">
             <li><Link href="/history" className="hover:text-gold transition-colors">{t.nav.history}</Link></li>
+            {/* /priests was reachable from nowhere on this site until July 2026
+                — not the navbar, not here, not one link on one page. It has a
+                section on the home page now; this is its second way in. */}
+            <li><Link href="/priests" className="hover:text-gold transition-colors">{t.nav.priests}</Link></li>
             <li><Link href="/mass-timings#festivals" className="hover:text-gold transition-colors">{t.nav.festivals}</Link></li>
             <li><Link href="/architecture" className="hover:text-gold transition-colors">{t.nav.architecture}</Link></li>
             <li><Link href="/mass-timings" className="hover:text-gold transition-colors">{t.nav.mass}</Link></li>

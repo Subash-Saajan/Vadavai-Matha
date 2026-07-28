@@ -164,7 +164,7 @@ export const ROUTES: Record<RouteKey, RouteDef> = {
     title: "St John de Britto",
     fullTitle: "St John de Britto (Arulanandar) — founder of the parish, 1685",
     description:
-      "St John de Britto — the Tamil martyr Arulanandar — raised the first thatched chapel of the Holy Family at Vadakkankulam in 1685, founding the parish that became Little Rome. Born in Lisbon in 1647; martyred at Oriyur in 1693; canonised in 1947.",
+      "St John de Britto — Arulanandar — the Jesuit from whose coming in 1685 Vadakkankulam counts its founding. His life, his last letter from the prison of Oriyur, and an honest account of what the evidence for the founding actually is. Born Lisbon 1647; martyred 4 February 1693; canonised 1947.",
     crumb: "St John de Britto",
     priority: 0.8,
     changeFrequency: "yearly",

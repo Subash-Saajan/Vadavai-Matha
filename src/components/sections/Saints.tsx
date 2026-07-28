@@ -55,8 +55,10 @@ export function Saints() {
 
       <div className="relative max-w-4xl mx-auto">
         <div ref={headerRef} className="relative text-center max-w-2xl mx-auto mb-14">
+          {/* V, not III — the Chronicle and the Fathers now stand between this
+              section and the About. See the running order in the home page. */}
           <span className="section-numeral pointer-events-none absolute left-1/2 -translate-x-1/2 -top-24 text-[10rem] opacity-[0.06] select-none">
-            III
+            V
           </span>
           <p className="reveal-item kicker justify-center mb-5">{t.saints.label}</p>
           <h2 className="reveal-item font-serif text-4xl md:text-5xl text-navy leading-[1.05] mb-6">

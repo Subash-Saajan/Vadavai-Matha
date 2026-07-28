@@ -1644,7 +1644,7 @@
   ],
   "scan": "/refs/dessal_1902-p421.jpg"
  },
- "little-rome:0:souvenir_150yr": {
+ "little-rome:1:souvenir_150yr": {
   "source": "souvenir_150yr",
   "short": "150-Year Souvenir",
   "title": "ஆலய 150-வது ஆண்டுவிழா மலர் — the 150-Year Jubilee Souvenir",
@@ -1665,7 +1665,7 @@
   ],
   "scan": "/refs/souvenir_150yr-p19.jpg"
  },
- "little-rome:0:catholictamil_182": {
+ "little-rome:1:catholictamil_182": {
   "source": "catholictamil_182",
   "short": "CatholicTamil",
   "title": "பரிசுத்த திருக்குடும்ப தேவாலயம், வடக்கன்குளம்",
@@ -1677,7 +1677,7 @@
   "establishes": "The jackfruit, teak and neem, and the local sculptors. This is the same Tamil sentence the souvenir carries — one witness with two printings, never two.",
   "kind": "quote-only"
  },
- "little-rome:0:maalaimalar_2022": {
+ "little-rome:1:maalaimalar_2022": {
   "source": "maalaimalar_2022",
   "short": "Maalaimalar 2022",
   "title": "Maalaimalar — the Perunkoor chariot festival",
@@ -1689,7 +1689,7 @@
   "establishes": "The crowd — the one fact in this moment that is reported by somebody outside the parish. A major Tamil daily, with no reason to flatter us.",
   "kind": "quote-only"
  },
- "little-rome:2:arsi_tolosana_1914": {
+ "little-rome:3:arsi_tolosana_1914": {
   "source": "arsi_tolosana_1914",
   "short": "ARSI 1914",
   "title": "Catalogus Provinciae Tolosanae S.J., 1914",
@@ -1710,7 +1710,7 @@
   ],
   "scan": "/refs/arsi_tolosana_1914-p57.jpg"
  },
- "little-rome:2:la_mission_du_madure_periodical": {
+ "little-rome:3:la_mission_du_madure_periodical": {
   "source": "la_mission_du_madure_periodical",
   "short": "Mission du Maduré",
   "title": "La Mission du Maduré",
@@ -1731,7 +1731,7 @@
   ],
   "scan": "/refs/la_mission_du_madure_periodical-p32.jpg"
  },
- "little-rome:2:jemparc_book450": {
+ "little-rome:3:jemparc_book450": {
   "source": "jemparc_book450",
   "short": "The parish diary",
   "title": "JEMPARC Book 450 — Diary of Fr A. Caussanel, S.J., 1881–1923",
@@ -1743,7 +1743,7 @@
   "establishes": "Book 450 survives in the Jesuit archives at Shembaganur. We have not read it. Anyone who suspects a parish of inventing its own past may go and ask for the book — which is exactly why we name it, and exactly why we will not pretend to have opened it.",
   "kind": "unavailable"
  },
- "little-rome:3:arsi_madurensis_1921": {
+ "little-rome:4:arsi_madurensis_1921": {
   "source": "arsi_madurensis_1921",
   "short": "ARSI 1921",
   "title": "Catalogus Missionis Madurensis, 1921",
@@ -1764,7 +1764,7 @@
   ],
   "scan": "/refs/arsi_madurensis_1921-p13.jpg"
  },
- "little-rome:3:catholic_directory_1924": {
+ "little-rome:4:catholic_directory_1924": {
   "source": "catholic_directory_1924",
   "short": "Catholic Directory 1924",
   "title": "The Catholic Directory of India, 1924",
@@ -1785,7 +1785,7 @@
   ],
   "scan": "/refs/catholic_directory_1924-p174.jpg"
  },
- "little-rome:3:neill_1985": {
+ "little-rome:4:neill_1985": {
   "source": "neill_1985",
   "short": "Neill 1985",
   "title": "A History of Christianity in India: 1707–1858",
@@ -1805,7 +1805,7 @@
    2258
   ]
  },
- "little-rome:4:catholic_directory_1924": {
+ "little-rome:5:catholic_directory_1924": {
   "source": "catholic_directory_1924",
   "short": "Catholic Directory 1924",
   "title": "The Catholic Directory of India, 1924",
@@ -1826,7 +1826,7 @@
   ],
   "scan": "/refs/catholic_directory_1924-p173.jpg"
  },
- "little-rome:4:souvenir_150yr": {
+ "little-rome:5:souvenir_150yr": {
   "source": "souvenir_150yr",
   "short": "150-Year Souvenir",
   "title": "ஆலய 150-வது ஆண்டுவிழா மலர் — the 150-Year Jubilee Souvenir",
@@ -1847,7 +1847,7 @@
   ],
   "scan": "/refs/souvenir_150yr-p8.jpg"
  },
- "little-rome:4:diocese_thoothukudi_page": {
+ "little-rome:5:diocese_thoothukudi_page": {
   "source": "diocese_thoothukudi_page",
   "short": "Diocese page",
   "title": "Diocese of Thoothukudi — parish page",
@@ -1859,7 +1859,7 @@
   "establishes": "The diocese repeats the parish's account. Not an independent witness.",
   "kind": "quote-only"
  },
- "little-rome:4:parish_english_history": {
+ "little-rome:5:parish_english_history": {
   "source": "parish_english_history",
   "short": "Parish history (English)",
   "title": "The English history of the Holy Family Church",
@@ -1871,7 +1871,7 @@
   "establishes": "The parish's own history. Same witness family.",
   "kind": "quote-only"
  },
- "little-rome:5:la_mission_du_madure_periodical": {
+ "little-rome:6:la_mission_du_madure_periodical": {
   "source": "la_mission_du_madure_periodical",
   "short": "Mission du Maduré",
   "title": "La Mission du Maduré",
@@ -1892,7 +1892,7 @@
   ],
   "scan": "/refs/la_mission_du_madure_periodical-p9.jpg"
  },
- "little-rome:6:rosariancr_fatimagiri": {
+ "little-rome:7:rosariancr_fatimagiri": {
   "source": "rosariancr_fatimagiri",
   "short": "Rosarians (CR)",
   "title": "Fatimagiri Ashram, Vadakkankulam",
@@ -2666,6 +2666,173 @@
   "span": [
    948,
    1191
+  ]
+ },
+ "little-rome:0:the_month_1889": {
+  "source": "the_month_1889",
+  "short": "The Month 1889",
+  "title": "\"A Visit to the Pearl Fishery Coast\", Part IV, in The Month",
+  "imprint": "London, vol. LXVII no. 304, October 1889",
+  "lang": "en",
+  "rights": "pd",
+  "quote": "the wide facade of the church of Vadakenkoulam",
+  "translation": "",
+  "establishes": "The arrival, in the visitor's own words: four in the afternoon, the wide facade at the end of a long street decked with bunting, some two thousand people who received them with shouts of welcome. The same page goes on to the midnight Mass. ⚠ WINDOWED, and it must stay windowed: two sentences after the arrival the writer explains the two naves by the division and names the groups, which is the parish's excluded history.",
+  "page": 254,
+  "pdfPage": 102,
+  "match": "exact",
+  "kind": "leaf",
+  "windowed": true,
+  "pageText": "IT was about four o’clock in the afternoon when we descried the wide facade of the church of Vadakenkoulam, at the end of a long street, decked out with bunting, wherein some two thousand people, who received us with shouts of welcome, had congregated. ",
+  "span": [
+   0,
+   253
+  ]
+ },
+ "little-rome:0:etudes_1889": {
+  "source": "etudes_1889",
+  "short": "Études 1889",
+  "title": "\"Voyage à la Côte de Pêcherie\", in Études religieuses, vol. 46",
+  "imprint": "Paris, 1889",
+  "lang": "fr",
+  "rights": "pd",
+  "quote": "Lorsque j'entrai, un peu avant minuit, dans l'église de Vadakenkoulam",
+  "translation": "\"When I entered the church of Vadakenkoulam a little before midnight, the two naves were almost full. Our Indians love night feasts passionately. Usually it is by the light of resinous torches and Bengal fires, amid rockets and crackling sprays that set the air ablaze with coloured zigzags...\"",
+  "establishes": "The French original of the same eyewitness narrative -- ONE WITNESS, TWO PRINTINGS, never two. Re-anchored 26 Jul 2026: the first anchor was the sacristan sentence, which opens on a caste word and was RIGHTLY REFUSED by the guard. This one is the moment he walks in: \"Lorsque j'entrai, un peu avant minuit, dans l'église de Vadakenkoulam, les deux nefs étaient presque remplies.\" ⚠ The page still carries caste further down, so the leaf is windowed to the passage.",
+  "page": 620,
+  "pdfPage": 630,
+  "match": "exact",
+  "kind": "leaf",
+  "windowed": true,
+  "pageText": "630 VOYAGE A LA COTE DE LA PÊCHERIE mine, me dit un autre. C'est le iiella pamhou (le bon ser- pent), il est consacré à Siva. — Et de fait, les Hindous le ré- vèrent comme une divinité; on en nourrit un grand nombre dans les pagodes. Les femmes qui espèrent devenir mères viennent leur adresser des prières, et leur offrent des œufs, du laitage, des poulets. Je n'eus pas de peine à démontrer à mes élèves l'absurdité de leur croyance : ils n'insistèrent pas ; quelques-uns souri- rent; et je vis une fois de plus combien, malgré leur attache- ment extérieur à la religion de leurs pères, les brahmes ins- truits croient peu à ses dogmes avilissants. XV Lorsque j'entrai, un peu avant minuit, dans l'église de Vadakenkoulam, les deux nefs étaient presque remplies. Nos Indiens aiment passionnément les fêtes de nuit. D'ordinaire c'est à la lumière de torches résineuses et de feux de Ben- gale, au milieu de fusées et de gerbes crépitantes qui in- cendient l'air de zigzags colorés ou d'une pluie de flammes, que leurs troupes chantantes accompagnent les grands sa- prams dorés, sur lesquels des groupes de vingt à trente hommes portent les statues des saints. Mais cette nuit de Noël contrasta étrangement avec ces fctes bruyantes. Légers et silencieux comme des ombres, drapés dans leurs blanches toiles, les chrétiens entraient dans l'église, glissaient pieds nus sur les dalles, s'agenouillaient par terre ; et la lumière très pâle, tombée d'un grand lustre, laissait voir sur leurs figures luisantes un calme bien différent de leur animation ordinaire. Groupés autour d'un enfant Jésus de cire qui leur ouvrait ses bras, ils semblaient se recueillir pour mieux comprendre le divin silence de la crèche, et prêter l'oreille aux échos lointains du cantique chanté du haut du ciel dans la première nuit de Noël. ",
+  "span": [
+   651,
+   765
+  ]
+ },
+ "little-rome:6:the_month_1889": {
+  "source": "the_month_1889",
+  "short": "The Month 1889",
+  "title": "\"A Visit to the Pearl Fishery Coast\", Part IV, in The Month",
+  "imprint": "London, vol. LXVII no. 304, October 1889",
+  "lang": "en",
+  "rights": "pd",
+  "quote": "the office of sacristan has been hereditary for two centuries",
+  "translation": "",
+  "establishes": "⭐ The family behind the 1930 medal. The office held in one family for TWO CENTURIES, the ancestor converted by hearing a bell in a wood at night and made sacristan, who \"deemed it no small privilege to ring the bell which had been the means of his salvation\" -- and \"the descendants of these good pilgrims are many in number; I have known several of them who are exemplary priests\", which is why the man honoured in 1930 was brother to a vicar general and to a convent superior.",
+  "page": 255,
+  "pdfPage": 103,
+  "match": "exact",
+  "kind": "leaf",
+  "windowed": true,
+  "pageText": "When the Masses were over, the congregation poured out by the two doors on to the square in front, and dispersed in silence to their various quarters through the deserted streets. At Vadakenkoulam there is a man in whose family the office of sacristan has been hereditary for two centuries. The following is his account of the circumstances under which it was originally given to his ancestors. In the commencement of the eighteenth century, two heathens, a man and his wife, journeying to a place of pilgrimage in Southern India, lost their way in a wood infested by tigers. ",
+  "span": [
+   180,
+   291
+  ]
+ },
+ "little-rome:1:agur_1903": {
+  "source": "agur_1903",
+  "short": "Agur 1903",
+  "title": "Church History of Travancore",
+  "imprint": "Madras: SPS Press, 1903",
+  "lang": "en",
+  "rights": "pd",
+  "quote": "accustomed to go annually",
+  "translation": "",
+  "establishes": "⭐ The pilgrimage from the Malabar side to the Assumption feast AT THIS CHURCH, recorded by a non-Catholic historian: \"On the 5th of August Fr. Mey celebrated the Assumption Festival at Vadakkanculam church where several inhabitants of Malabar are accustomed to go annually.\" ⚠ The episode Agur is narrating is early-19th-century, so this attests the ANNUAL PILGRIMAGE as long-established -- it is NOT evidence about the 1891 chariot, and the dot must not be worded as though it were.",
+  "page": 317,
+  "pdfPage": 493,
+  "match": "exact",
+  "kind": "leaf",
+  "pageText": "4M excursion in company with the Collector in the woods of Vadakkanculam, 14 or 15 miles North of Cape Comorin. In every village, in Collector's presence, he is said to have enlisted great numbers ot Christians,and under that officer's patronage also got assurance that other Missionaries would not be admitted into their churches. 'The Collector however took care to give an order to Fr. Mey prohibiting his entrance into Streevikundam and Vadakkanculam churches but permitted the French Missio- nary to celebrate the Christian Festivals there that he might have the opportunity to win more adherents, or the majority of Christians. On the 5th of August Fr. Mey celebrated the Assump- tion Festival at Vadakkanculam church where several inhabi tants of Malabar are accustomed to go annually. Fr. Mey gained several others and carefully secured from them certificates calling him over to Tra- vancore. He further promised to come to Travancore, and expressed that his aim above all was the ancient church of Kottar. It seemed also probable that a sufficient number of partisans would enter the Church of Kottar by force to celebrate the Festival of St. Francisco Xavier, that year. But that great and learned prelate Bishop Manoel de Joaquim Neves the vigilant shepherd of Cochin, to whom at this time belonged Surrana, Surgany, Vadakkanculam, Kottar and other great Churches could not. brook to see his churches being thus invaded and disturbed by French Ecclesiastics, nor could he allow his powers and jurisdiction to be curtailed in any way. It is true he much feared the tresspasses of these French Missio- Fr. Mey's plans.",
+  "span": [
+   634,
+   793
+  ],
+  "scan": "/refs/agur_1903-p493.jpg"
+ },
+ "little-rome:2:molony_1926": {
+  "source": "molony_1926",
+  "short": "Molony 1926",
+  "title": "A Book of South India",
+  "imprint": "London: Methuen, 1926",
+  "lang": "en",
+  "rights": "in-copyright",
+  "quote": "he lived on milk and gruel",
+  "translation": "",
+  "establishes": "⭐⭐ THE EYEWITNESS FOR THE EIGHTEEN YEARS -- and the source that corrects the page. Molony, the district Collector, asked him: \"I have never seen a man so thin as Father Caussanel. For some eighteen years, he told me, he had not eaten solid food: he lived on milk and gruel. In this there was no idea of pious asceticism: only so could he vanquish the devil of dyspepsia which plagued him.\" So the EIGHTEEN YEARS is first-hand and safe; \"bananas\" comes from the French reproduction in La Mission du Maduré 1930 where the English says gruel; and \"ascetic\" is expressly DENIED by the only man who asked. Mismatch J14. ⚠ In copyright -- quoted, not reproduced.",
+  "page": 128,
+  "pdfPage": 187,
+  "match": "exact",
+  "kind": "leaf",
+  "pageText": "128 A BOOK OP SOUTH INDIA At VadakankElam I found my dragon, the object of my long struggle through the sands* I have never seen a man so thin as Father CaussaneL For some eighteen years, he told me, he had not eaten solid food : he lived on milk and gruel In this there was no idea of pious asceticism : only so could he vanquish the devil of dyspepsia which plagued him. He had called up memories of a past life, and had prepared a meal for me. He watched me eat with the anxious pride of an artist who has invited a critic to gaze upon his masterpiece. Our immediate business w^as soon transacted, and I had leisure to study the old French priest and his ways. Father Caussanel lived among his people as there live in the Old Testament Men of God and Healers of the Sick. He had picked up a working knowledge of drugs and simples, and, point most important in India, he inspired faith in those to whom he ministered. Yet at the time of my visit a furious war was raging between him and a large section of his parishioners. The Father did not seem to mind greatly; he persisted in serving to the best of his ability those who flouted his authority ; his affection for his wayward sheep seemed rmaffected by their wa3rward\"* ness. The cause of the quarrel was interesting. I shall describe it later, and in its logical place. From Vadakankulam I marched on to Idayangudi, the great Protestant missionary settlement founded by Caldwell There the village choir danced the story of Daniel in the Lions' Den for my edification. The Tamilian us a comedian born i it comes natural to him to express himself through the form of drama. So Daniel danced and sang in, the sand, wliile hungry lions prowled and howled about him* ' ^ From Idayangudi I reached Tissianvalai, and thence I took dram for Kulasekharapatnam. A tramway in a desert is a phenomenon which needs some explanation. ^ At Kulasekharapatnam on ' the ' seashore a Company had set up a factory for making' sugar, from the' juice^ of the^ palmyras. The raw' material was , abundant ; the problem was the method of, getting sufficient",
+  "span": [
+   0,
+   373
+  ]
+ },
+ "statue-and-the-saint:1:agur_1903": {
+  "source": "agur_1903",
+  "short": "Agur 1903",
+  "title": "Church History of Travancore",
+  "imprint": "Madras: SPS Press, 1903",
+  "lang": "en",
+  "rights": "pd",
+  "quote": "There is no cause for delay",
+  "translation": "",
+  "establishes": "⭐⭐ The saint's own words at his baptism in this church, from a NON-CATHOLIC pen. Fr Buttari hesitated to baptise him until he knew more, and Neelakanta Pillai answered: \"There is no cause for delay. This is no compulsary baptism. I came here to receive the sacraments not by force, but by my own free will and desire. I shall even give up my life to maintain the Truth of which I received the light and of which I am convinced.\" Agur spells the village several ways, which is why name-spelling sweeps kept missing him.",
+  "page": 281,
+  "pdfPage": 457,
+  "match": "exact",
+  "kind": "leaf",
+  "pageText": "281 He also narrated the history and trials of Job: In wrapt at- tention Neelacunda Pillay listened to the story, and his bur- dened mind felt great relief. This occurrence drew them into similar conversation day after day until Neelacunda Pillay was converted to the Christian faith, and expressed his desire to receive baptism and partake of Sacraments. Greatly pleased at this desire in his friend, De Lanoy 5 sent him with a note to the presiding priest at Vadakkankeon'! at Vadakkankulamain Tinnevelly Rev. Fr. R. Battari Italus S. J. who hesitated to baptize him until he received more particulars about the man. Observing the delay that Fr. Battari was making, Neelacunda Pillay said, ‘‘ There is no cause for delay. This is no com- pulsary baptism. I came here to receive the sacraments not by force, but by my own free will and desire. I shall even give up my life to maintain the Truth of which I received the light and of which I am convinced. ”’ At this firm. assertion of Neelacunda Pillay, the priest taught him the Creed, the Commandments Baptism. andsome pravers and baptised him changing his name into Devasagayam (God's help.) Though the Native Christians of Travancore and South India to the present day generally call him Devasagayam Pillay, his real baptismal name was Lazarus. From this time forward Devasagayam advanced in piety and grew to be an excellent Christian, endeavouring to preach the Gospel to others and to convert them. It gave him much pleasure that he was also enabled to bring his wife and some others of his family into the pale of Christianity. Now the matter became. public that Neelacunda Pillay had renounced the Hindu religion of his 36",
+  "span": [
+   619,
+   724
+  ],
+  "scan": "/refs/agur_1903-p457.jpg"
+ },
+ "shrine-and-the-saint:3:the_month_1889": {
+  "source": "the_month_1889",
+  "short": "The Month 1889",
+  "title": "\"A Visit to the Pearl Fishery Coast\", Part IV, in The Month",
+  "imprint": "London, vol. LXVII no. 304, October 1889",
+  "lang": "en",
+  "rights": "pd",
+  "quote": "the turban he wore, and the chains taken off at his death",
+  "translation": "",
+  "establishes": "⭐⭐ AN OUTSIDER WAS SHOWN THE RELICS AND INSPECTED THEM, at Christmas 1888: \"Vadakenkoulam possesses the turban he wore, and the chains taken off at his death; the reliquary containing them was opened for us, and we were allowed to inspect these precious relics.\" This PRECEDES by five years the 1894 Jesuit notice the dot used to rest on, and it is an inspection rather than a mention -- and it independently names the TURBAN, which the dot also carries. ⚠ The same page describes the martyrdom and calls him \"a man of high waste\" (OCR of high caste); windowed accordingly.",
+  "page": 256,
+  "pdfPage": 104,
+  "match": "exact",
+  "kind": "leaf",
+  "windowed": true,
+  "pageText": "256 A Visit to the Pearl Fishery Coast. which had been the means of his salvation. The descendants of these good pilgrims are many in number; I have known several of them who are exemplary priests. Foremost among my reminiscences of this Christmas Day is that of the Indian martyr, Deva Sagayen. Vadakenkoulam possesses the turban he wore, and the chains taken off at his death ; the reliquary containing them was opened for us, and we were allowed to inspect these precious relics. Deva Sagayen was a general in the army of Travancore about the middle of the last century. He was a man of high waste, and was converted by a French officer, receiving Baptism from the priest of this village. After his conversion he was the means of gaining several of his fellow-officers to the true faith ; his zeal enraged the Brahmins, who, by dint of intrigue and calumny, contrived to induce the King to sentence him to death. But upon ‘the gods being consulted, the augurs announced that his death would bring misfortunes on the kingdom, and the execution was consequently postponed for three years. These three years were a period of indescribable suffering to the ex- general. Sometimes he was placed upon a buffalo, his hands tied behind him, and thus paraded through the towns where he had formerly passed with the pomp of a conqueror. Every day he was scourged with thorny rods until his flesh was torn to pieces ; then on the raw and bleeding wounds a powder, con- sisting of mustard, pepper, and pimento, was sprinkled, and in this condition the unhappy victim was forced to march some distance, in a state of almost complete nudity, under a burning sun. ",
+  "span": [
+   296,
+   483
+  ]
+ },
+ "shrine-and-the-saint:3:etudes_1889": {
+  "source": "etudes_1889",
+  "short": "Études 1889",
+  "title": "\"Voyage à la Côte de Pêcherie\", in Études religieuses, vol. 46",
+  "imprint": "Paris, 1889",
+  "lang": "fr",
+  "rights": "pd",
+  "quote": "ouvrit pour nous la châsse qui contient ces reliques",
+  "translation": "\"But the most precious memory attaching for us to that Christmas Day is that of the Indian martyr Deva Sagayen, whose chains and turban Vadakenkoulam possesses. Fr Pouget opened for us the reliquary that contains these relics.\"",
+  "establishes": "⭐ THE FRENCH NAMES THE PRIEST THE ENGLISH LEAVES ANONYMOUS. The Month says only that \"the reliquary was opened for us\"; Études says WHO opened it: \"Le P. Pouget ouvrit pour nous la châsse qui contient ces reliques\" -- Fr Pouget, who is in this parish's own succession and in whose arms Fr Delpech died here in 1887 (great-two-nave-church:7). The same page has the relics as \"les chaînes et le turban\", and gives Devasahayam baptised \"par le P. Bouttari, swami de Vadakenkoulam\". ⚠ Windowed: the page names his caste.",
+  "page": 622,
+  "pdfPage": 632,
+  "match": "exact",
+  "kind": "leaf",
+  "windowed": true,
+  "pageText": "Le P. Pouget ouvrit pour nous la châsse qui contient ces reliques. ",
+  "span": [
+   0,
+   67
   ]
  }
 }

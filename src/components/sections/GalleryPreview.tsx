@@ -96,7 +96,7 @@ export function GalleryPreview() {
       <div className="relative max-w-7xl mx-auto">
         <div className="relative text-center mb-16">
           <span className="section-numeral pointer-events-none absolute left-1/2 -translate-x-1/2 -top-24 text-[10rem] opacity-[0.07] select-none">
-            VI
+            VII
           </span>
           <p className="kicker justify-center mb-5 text-gold!">{t.home.galleryLabel}</p>
           <h2 className="font-display uppercase tracking-[0.03em] text-4xl md:text-5xl lg:text-6xl text-white leading-tight">
@@ -126,10 +126,14 @@ export function GalleryPreview() {
           ))}
         </div>
 
+        {/* A quiet link, not a gold pill. This section is immediately followed
+            by the Visit CTA, which IS a gold pill — two identical filled buttons
+            one after the other made neither of them read as the primary action,
+            and the one that matters at the foot of the page is "come here". */}
         <div className="mt-16 text-center">
           <Link
             href="/architecture"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gold text-navy font-display text-xs uppercase tracking-[0.22em] hover:bg-white transition-all duration-500 group"
+            className="inline-flex items-center gap-2 border-b border-gold/40 pb-1.5 font-display text-xs uppercase tracking-[0.22em] text-gold transition-colors duration-500 hover:border-white hover:text-white group"
           >
             {t.home.galleryCta}
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

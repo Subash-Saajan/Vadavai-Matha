@@ -261,15 +261,37 @@ export const devasahayam: Person = {
   url: abs(ROUTES.devasahayam.path),
 };
 
+/**
+ * The founder.
+ *
+ * Dated to the day at both ends, because the days are documented: his own
+ * prison letter and a Latin martyrology printed at Antwerp in 1697 fix
+ * 4 February 1693, and the 1913 Catholic Encyclopedia's "11 February" is a slip
+ * this graph must not repeat.
+ *
+ * The description says "the parish counts its founding from" rather than
+ * asserting he built the chapel with his own hands. That is not timidity: no de
+ * Britto biography names this village, and Besse — the mission's own historian
+ * — writes only that the builder "is said to be" him. The page says as much in
+ * both languages, and the machine-readable summary of the page must not claim
+ * more than the page does.
+ */
 export const deBritto: Person = {
   "@type": "Person",
   "@id": DE_BRITTO_ID,
   name: "St John de Britto",
-  alternateName: "Arulanandar",
+  alternateName: ["Arulanandar", "João de Brito", "அருளானந்தர்"],
+  honorificPrefix: "Saint",
   description:
-    "Portuguese Jesuit missionary who raised the first thatched chapel of the Holy Family at Vadakkankulam in 1685. Martyred at Oriyur in 1693; canonised in 1947.",
-  birthDate: "1647",
-  deathDate: "1693",
+    "Portuguese Jesuit of the Madurai Mission, in charge of the mission from 1683 and its Superior in 1685–86. The parish of Vadakkankulam counts its founding from his coming in 1685, and venerates him in Tamil as Arulanandar. Martyred at Oriyur on 4 February 1693; beatified 1853, canonised 1947.",
+  birthDate: "1647-03-01",
+  birthPlace: { "@type": "Place", name: "Lisbon, Portugal" },
+  deathDate: "1693-02-04",
+  deathPlace: { "@type": "Place", name: "Oriyur, Ramanathapuram, Tamil Nadu" },
+  // One `sameAs`, and only one. A Wikidata Q-id and a ta.wikipedia title were
+  // drafted here and cut again: neither had been opened and verified, and a
+  // sameAs pointing at the wrong entity actively teaches a crawler something
+  // false. Add either only after loading the URL.
   sameAs: "https://en.wikipedia.org/wiki/John_de_Britto",
 };
 
