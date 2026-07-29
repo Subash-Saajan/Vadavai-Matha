@@ -6,7 +6,8 @@
     "dev": "next dev -p 4000",
     "build": "next build",
     "start": "next start -p 4000",
-    "lint": "eslint"
+    "lint": "eslint",
+    "build:verify": "node -e \"require('child_process').execSync('next build',{stdio:'inherit',env:{...process.env,NEXT_VERIFY_BUILD:'1'}})\""
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

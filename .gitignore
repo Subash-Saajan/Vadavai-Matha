@@ -16,6 +16,10 @@
 # next.js
 /.next/
 /out/
+# `npm run build:verify` builds here so a compile check cannot clobber the
+# running dev server's /.next (see the note in next.config.ts). It is build
+# output like /.next and must never be committed.
+/.next-verify/
 
 # production
 /build
