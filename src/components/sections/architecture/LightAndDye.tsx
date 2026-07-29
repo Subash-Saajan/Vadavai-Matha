@@ -13,7 +13,15 @@ const TILES = [
   { src: "/images/architecture/glass-4.jpg", span: "col-span-2 row-span-1", drift: -16 },
 ];
 
-/** VII — the glass, the plant dyes, and the gold that has never been allowed to fade. */
+/**
+ * IV — the first-impression "wow" on stepping inside: the glass, the plant
+ * dyes, and the gold that has never been allowed to fade. lightBody tells it
+ * as a story (plain glass + sealed windows for a century, then the 1972
+ * centenary gift), with sensory detail (diamond lattices, trefoil rosettes,
+ * the rose window) drawn from the church's own photographed interior — see
+ * KB file 12 §"Stained glass, nave, ceiling" — not from any documented
+ * symbolism, since none is recorded for the glass specifically.
+ */
 export function LightAndDye() {
   const ref = useRef<HTMLElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
@@ -52,7 +60,7 @@ export function LightAndDye() {
       className="relative section-padding bg-cream-dark parchment-swell overflow-hidden"
     >
       <span className="section-numeral pointer-events-none absolute -top-6 right-4 md:right-12 text-[7rem] md:text-[12rem] opacity-[0.06] select-none">
-        VI
+        IV
       </span>
 
       <div className="relative max-w-7xl mx-auto">

@@ -42,7 +42,14 @@ export const HISTORY_NOTES: Record<string, HistoryNote> = {
   /* ── I. A Clearing in the Forest ───────────────────────────────────────── */
 
   // The chapel and the two hundred baptisms: the parish's two witnesses disagree
-  // by a year, and neither is stronger than the other.
+  // by a year, and neither is stronger than the other. (Mismatch A4/A5 — three
+  // parish-side readings, and no outside source dates the chapel at all. The
+  // dot's own heading straddles 1685–86 rather than choosing; this says why.)
+  "clearing-in-the-forest:5": {
+    en: "The parish's own accounts disagree about the year. Its 2026 history and the jubilee souvenir place the chapel and this first harvest in 1685; the Bishop's jubilee message of 2022 gives 1686; the parish's older English history puts the first church later still, at 1695. The district gazetteer of 1917 — the only witness from outside the parish — dates no chapel at all, and gives no number of baptisms. The heading therefore holds the two earliest readings together rather than choosing between them.",
+    ta: "இந்த ஆண்டைக் குறித்து இப்பங்கின் சொந்தப் பதிவுகளே ஒன்றுபடவில்லை. இப்பங்கின் 2026-ஆம் ஆண்டு வரலாறும் நினைவு மலரும் சிற்றாலயத்தையும் இம்முதல் அறுவடையையும் 1685-ல் வைக்கின்றன; 2022-ஆம் ஆண்டு ஆயரின் நினைவுச் செய்தி 1686 என்கிறது; பங்கின் பழைய ஆங்கில வரலாறோ முதல் ஆலயத்தை அதற்கும் பிந்தைய 1695-ல் வைக்கிறது. பங்கிற்கு வெளியிலிருந்து சான்று பகரும் ஒரே ஆவணமான 1917-ஆம் ஆண்டு மாவட்டக் குறிப்பேடு, எந்தச் சிற்றாலயத்திற்கும் ஆண்டு தரவில்லை; திருமுழுக்குகளின் எண்ணிக்கையையும் தரவில்லை. எனவே இத்தலைப்பு, மிகப் பழைய இரு கூற்றுகளுள் ஒன்றைத் தேர்ந்தெடுக்காமல், இரண்டையும் சேர்த்தே தாங்கி நிற்கிறது.",
+  },
+
   /* ── IV. The Weeping Madonna ───────────────────────────────────────────── */
 
   // The event date and the feast date differ; the page gives the event date and

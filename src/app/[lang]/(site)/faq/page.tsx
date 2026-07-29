@@ -18,10 +18,37 @@ import { localePath } from "@/lib/locale";
  * so the answer a crawler reads and the answer a pilgrim reads are by
  * construction the same text. The most common way sites get FAQ markup wrong is
  * emitting one answer to Google and showing another to the reader.
+ *
+ * THAT GUARANTEE NOW HOLDS IN BOTH LANGUAGES. `faqPage()` and `trailTo()` take a
+ * `lang` and localise their `@id`, `url`, `name` and `inLanguage`, so the graph is
+ * built per-locale INSIDE the component rather than once at import time — when no
+ * locale exists yet. /ta therefore emits the Tamil answers at the Tamil URL, and
+ * the breadcrumb points at Tamil URLs rather than English ones.
  */
 export const generateMetadata = localizedMetadata("faq");
 
-const jsonLd = graph(faqPage(FAQS), trailTo("faq"));
+/**
+ * The page's own chrome — everything not in faq.ts. Same shape as the COPY
+ * blocks in src/lib/acknowledgements.ts.
+ */
+const COPY = {
+  en: {
+    eyebrow: "Little Rome",
+    title: "Questions & Answers",
+    intro:
+      "The things pilgrims write and telephone to ask — the feast, the Mass timings, the road from Nagercoil, the saint who was baptised here. Answered plainly, and with the sources named.",
+    sourcesNote:
+      "Every historical claim above rests on a document, and we say which — including where the evidence is thin.",
+    sourcesCta: "See our sources and further reading",
+  },
+  ta: {
+    eyebrow: `சின்ன ரோமாபுரி`,
+    title: `கேள்விகளும் பதில்களும்`,
+    intro: `திருப்பயணிகள் கடிதம் எழுதியும் தொலைபேசியிலும் கேட்கும் கேள்விகள் — திருவிழா, திருப்பலி நேரங்கள், நாகர்கோவிலிலிருந்து வரும் வழி, இங்கே திருமுழுக்குப் பெற்ற புனிதர். ஆதாரங்களைக் குறிப்பிட்டு, தெளிவாகப் பதிலளிக்கப்பட்டுள்ளன.`,
+    sourcesNote: `மேலே உள்ள ஒவ்வொரு வரலாற்றுச் செய்திக்கும் ஓர் ஆவணம் அடிப்படையாக உள்ளது; அது எது என்பதையும் நாங்கள் சொல்கிறோம் — ஆதாரம் மெலிதாக உள்ள இடங்களையும் சேர்த்தே.`,
+    sourcesCta: `எங்கள் ஆதாரங்களையும் மேலும் வாசிக்க வேண்டியவற்றையும் காணுங்கள்`,
+  },
+} as const;
 
 export default async function FaqRoute({
   params,
@@ -31,6 +58,17 @@ export default async function FaqRoute({
   const { lang: raw } = await params;
   const lang = raw === "ta" ? "ta" : "en";
   const L = (p: string) => localePath(lang, p);
+  const t = COPY[lang];
+  /* Tamil where we have it, English where we do not — never an empty line. */
+  const ta = lang === "ta";
+
+  /* The exact strings rendered below, so the crawler and the pilgrim read the
+     same text in whichever language this route is. */
+  const localized = FAQS.map((f) => ({
+    q: ta && f.qTa ? f.qTa : f.q,
+    a: ta && f.aTa ? f.aTa : f.a,
+  }));
+  const jsonLd = graph(faqPage(localized, lang), trailTo("faq", lang));
 
   return (
     <>
@@ -39,30 +77,28 @@ export default async function FaqRoute({
       <section className="bg-cream text-navy">
         <div className="max-w-3xl mx-auto px-6 pt-32 pb-20 md:pt-40 md:pb-28">
           <p className="font-display tracking-[0.28em] text-xs md:text-sm uppercase text-gold-dark">
-            Little Rome
+            {t.eyebrow}
           </p>
           <h1 className="mt-5 font-display text-4xl md:text-6xl leading-[1.05]">
-            Questions &amp; Answers
+            {t.title}
           </h1>
           <div className="leaf-rule my-8" />
           <p className="font-serif text-xl md:text-2xl leading-relaxed text-navy/75">
-            The things pilgrims write and telephone to ask — the feast, the Mass
-            timings, the road from Nagercoil, the saint who was baptised here.
-            Answered plainly, and with the sources named.
+            {t.intro}
           </p>
 
           <dl className="mt-16 space-y-12">
             {FAQS.map((f) => (
               <div key={f.q}>
                 <dt className="font-display text-xl md:text-2xl leading-snug text-navy">
-                  {f.q}
+                  {ta && f.qTa ? f.qTa : f.q}
                 </dt>
                 <dd className="mt-4 font-serif text-lg md:text-xl leading-relaxed text-navy/80">
-                  {f.a}
+                  {ta && f.aTa ? f.aTa : f.a}
                 </dd>
                 {f.source ? (
                   <p className="mt-3 text-xs md:text-sm tracking-wide text-navy/45">
-                    {f.source}
+                    {ta && f.sourceTa ? f.sourceTa : f.source}
                   </p>
                 ) : null}
               </div>
@@ -72,13 +108,12 @@ export default async function FaqRoute({
           <div className="leaf-rule my-14" />
 
           <p className="font-serif text-lg leading-relaxed text-navy/70">
-            Every historical claim above rests on a document, and we say which —
-            including where the evidence is thin.{" "}
+            {t.sourcesNote}{" "}
             <Link
               href={L("/sources")}
               className="text-gold-dark underline underline-offset-4 decoration-gold/50 hover:decoration-gold-dark transition-colors"
             >
-              See our sources and further reading
+              {t.sourcesCta}
             </Link>
             .
           </p>

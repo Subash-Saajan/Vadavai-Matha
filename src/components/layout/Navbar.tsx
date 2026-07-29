@@ -101,7 +101,10 @@ export function Navbar() {
             <Link
               key={l.href}
               href={l.href}
-              className={`group relative px-4 py-2 font-display text-[0.72rem] tracking-[0.24em] uppercase transition-colors ${
+              // Tamil needs the size back and the tracking gone: 0.72rem through
+              // the 66% cut is ~7px, and 0.24em pulls connected Tamil syllables
+              // apart into something that reads as broken rather than spaced.
+              className={`group relative px-4 py-2 font-display text-[0.72rem] tracking-[0.24em] uppercase ta:text-[0.98rem] ta:tracking-[0.04em] ta:normal-case transition-colors ${
                 scrolled
                   ? "text-navy/70 hover:text-navy"
                   : "text-white/80 hover:text-white"
@@ -152,7 +155,7 @@ export function Navbar() {
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="py-3.5 px-2 text-navy/80 hover:text-gold-dark border-b border-gold/10 last:border-0 font-display text-sm tracking-[0.18em] uppercase transition-colors"
+              className="py-3.5 px-2 text-navy/80 hover:text-gold-dark border-b border-gold/10 last:border-0 font-display text-sm tracking-[0.18em] uppercase ta:text-[1.05rem] ta:tracking-[0.04em] ta:normal-case transition-colors"
             >
               {l.label}
             </Link>

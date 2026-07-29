@@ -63,7 +63,7 @@ export function ParishRhythm() {
     },
     {
       icon: MoonStar,
-      title: lang === "en" ? "Adoration & Novena" : "ஆராதனை மற்றும் நவநாள்",
+      title: lang === "en" ? "Adoration & Novena" : "ஆராதனையும் நவநாளும்",
       times:
         lang === "en"
           ? ["Wednesday · 5:00 PM", "Friday · 6:00 PM", "First Saturday · 4:00 PM"]

@@ -4,8 +4,8 @@ import { JsonLd } from "@/components/JsonLd";
 import {
   bergenthal,
   buttari,
-  deBritto,
-  devasahayam,
+  deBrittoFor,
+  devasahayamFor,
   gregoire,
   graph,
   pageNode,
@@ -37,18 +37,31 @@ export const generateMetadata = localizedMetadata("history");
 // resolved by the parish's Knowledge Base from the Jesuit archives in Rome —
 // appears on no website anywhere. Publishing him is original, and original is
 // what gets cited.
-const jsonLd = graph(
-  pageNode("history", "AboutPage"),
-  deBritto,
-  devasahayam,
-  santhaayi,
-  buttari,
-  gregoire,
-  bergenthal,
-  trailTo("history"),
-);
+//
+// Built inside the component rather than at module scope: a module-level graph
+// is evaluated once at import, before any locale exists, so /ta emitted the
+// English page node and English breadcrumbs. The two saints localise; the four
+// lesser-known figures stay English, their prose coming from PEOPLE in
+// history.ts, which carries no Tamil yet.
+export default async function HistoryRoute({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang: raw } = await params;
+  const lang = raw === "ta" ? "ta" : "en";
 
-export default function HistoryRoute() {
+  const jsonLd = graph(
+    pageNode("history", "AboutPage", lang),
+    deBrittoFor(lang),
+    devasahayamFor(lang),
+    santhaayi,
+    buttari,
+    gregoire,
+    bergenthal,
+    trailTo("history", lang),
+  );
+
   return (
     <>
       <JsonLd data={jsonLd} />

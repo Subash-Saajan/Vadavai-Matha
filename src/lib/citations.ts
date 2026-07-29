@@ -636,7 +636,7 @@ export const NO_SOURCE_LABEL: Record<"en" | "ta", string> = {
 
 /** How each tier is named to a reader. Shown beside the year. */
 export const TIER_LABEL: Record<Tier, { en: string; ta: string }> = {
-  documented: { en: "Documented", ta: "ஆவணப்படுத்தப்பட்டது" },
+  documented: { en: "Documented", ta: "ஆவணச் சான்று" },
   tradition: { en: "Parish tradition", ta: "பங்கு மரபு" },
   devotion: { en: "Devotion", ta: "பக்தி மரபு" },
 };

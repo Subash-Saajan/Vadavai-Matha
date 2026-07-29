@@ -6,7 +6,12 @@ import { useLang } from "@/components/layout/LanguageProvider";
 import { PhotoOrnaments } from "@/components/ornaments/CornerOrnament";
 import { useReveal } from "./useReveal";
 
-/** I — the two churches this one replaced, as three beats down a gold hairline. */
+/**
+ * VII — history, deliberately last of the numbered sections: the two
+ * churches this one replaced, as three beats down a gold hairline. Backstory
+ * lands better once a visitor is already hooked by towers, bells, light and
+ * meaning than it does as a gate up front.
+ */
 export function ThreeChurches() {
   const ref = useRef<HTMLElement>(null);
   const { t, lang } = useLang();
@@ -19,7 +24,7 @@ export function ThreeChurches() {
       className="relative section-padding bg-cream-dark parchment-swell overflow-hidden"
     >
       <span className="section-numeral pointer-events-none absolute -top-6 left-4 md:left-12 text-[7rem] md:text-[12rem] opacity-[0.06] select-none">
-        I
+        VII
       </span>
 
       <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">

@@ -30,22 +30,26 @@
  *   · the FIVE DOORS, numbered as the source numbers them — 3 at the centre for the
  *     priests, the other four to the two naves;
  *   · the three arrows: the three directions in — the two naves and the central
- *     corridor — each turned toward the one altar.
+ *     corridor — each turned toward the one altar;
+ *   · two further, smaller arrows carrying the centre path on up the corridor
+ *     toward the cross. These are NOT in the source; they were added in July
+ *     2026 to carry the parish's fourteen. See THE CENTRE PATH below.
  *
  * The compass mark is reproduced as drawn in the source. Do not add compass claims
  * to the annotations from it — the book's north arrow and the parish history's
  * "east-facing altar" cannot both be right, and this project has not resolved which.
  *
  * INTERACTIVE REGIONS (added for the Creed section). The drawing is grouped into
- * four readable regions — `doors`, `piers`, `arrows`, `altar` — plus the neutral
- * `base` (nave walls, porch, low walls, steps, compass). A line of the creed beside
- * the plan, or a region itself, lifts that region and dims the rest. Geometry is
- * untouched; only the JSX is reorganised into region groups. The `.plan-line/.plan-dot/
- * .plan-mark` classes are kept as inert markers in case the scroll-draw ever returns.
+ * five readable regions — `doors`, `piers`, `arrows`, `stations`, `altar` — plus the
+ * neutral base (outer walls, porch, the priests' jambs, steps, compass). A line of the
+ * creed beside the plan, or a region itself, lifts that region and dims EVERYTHING
+ * else, the base included. Geometry is untouched; only the JSX is reorganised into
+ * region groups. The `.plan-line/.plan-dot/.plan-mark` classes are kept as inert
+ * markers in case the scroll-draw ever returns.
  */
 
-/** The four regions the creed can point at. */
-export type PlanRegion = "doors" | "piers" | "arrows" | "altar";
+/** The five regions the creed can point at. */
+export type PlanRegion = "doors" | "piers" | "arrows" | "stations" | "altar";
 
 /**
  * THE TWELVE PIERS — a polar grid, not a scatter.
@@ -195,18 +199,51 @@ const DOOR_NUMERALS: [number, number, string][] = [
  * An entry arrow — the direction of approach, turned toward the altar. Drawn
  * once around the origin, then set in place by (x, y) and tilted by `angle`
  * (degrees, +ve = tip swung toward the right nave) so the two flanking naves
- * can lean their arrows in toward the cross.
+ * can lean their arrows in toward the cross. `scale` shrinks it for the two
+ * marks that continue up the centre corridor — see THE CENTRE PATH below.
  */
-function Arrow({ x = 0, y, angle = 0 }: { x?: number; y: number; angle?: number }) {
+function Arrow({
+  x = 0,
+  y,
+  angle = 0,
+  scale = 1,
+}: {
+  x?: number;
+  y: number;
+  angle?: number;
+  scale?: number;
+}) {
   return (
     <path
       className="plan-mark"
       d="M -7,34 L -7,-8 L -18,-8 L 0,-34 L 18,-8 L 7,-8 L 7,34 Z"
       fill="currentColor"
-      transform={`translate(${x} ${y}) rotate(${angle})`}
+      transform={`translate(${x} ${y}) rotate(${angle}) scale(${scale})`}
     />
   );
 }
+
+/**
+ * THE CENTRE PATH — the walk from the central door to the cross.
+ *
+ * Two further arrows, set on the axis above the central entry arrow, so the
+ * corridor between the low walls reads as a path travelled and not merely as a
+ * doorway faced. They carry the parish's fourteen — the Stations — which is a
+ * reading of that walk, so they are their own region and NOT part of `arrows`:
+ * the three nails must stay three when a visitor lights them up.
+ *
+ * The region is the arrows AND the two low walls that make the corridor — the
+ * path, not just the marks along it. The low walls stay where they are in the
+ * document (see the group itself for why) and simply carry the region class.
+ *
+ * Kept deliberately smaller and fainter than the three entry arrows. At full
+ * size and full strength, five arrows all alike would be counted as five ways
+ * in; at this weight they read as the tread of one path instead. The stations
+ * y-values run at the same 160-unit interval as the gap up from the entry
+ * arrow at y=1030, and both clear the corridor: the low walls' inner faces are
+ * some 79 and 62 units off the axis at these heights, against the arrow's 14.
+ */
+const STATION_ARROWS = [870, 710];
 
 export function PlanDrawing({
   title,
@@ -223,6 +260,15 @@ export function PlanDrawing({
     if (!active) return base;
     return active === region ? `${base} plan-region--on` : `${base} plan-region--off`;
   };
+  /**
+   * The neutral base — outer walls, porch, steps, compass. It is never the
+   * thing being lit, but it has to FALL BACK with everything else when some
+   * region is: left at full strength while the other regions dropped to 0.2 it
+   * simply read as highlighted itself, which is exactly the wrong answer to
+   * "which part of the church is this number?". Dimmed to the same 0.2, the
+   * plan still holds its silhouette and only the lit region carries weight.
+   */
+  const bcls = "plan-region" + (active ? " plan-region--off" : "");
   /** Click-to-select on the region itself (a bonus affordance; the list drives it).
       It only reports the clicked region — the parent owns the toggle/hover state. */
   const pick = (region: PlanRegion) =>
@@ -237,8 +283,12 @@ export function PlanDrawing({
     >
       <title>{title}</title>
 
-      {/* ── BASE STRUCTURE — nave walls, porch, low walls, steps, compass ──── */}
-      <g className="plan-region">
+      {/* ── BASE STRUCTURE — nave walls, porch, the priests' jambs ──────────
+          The base is split in two around the low walls (which belong to the
+          centre path, not to the base) so that nothing here ever nests inside
+          a lit or dimmed group: SVG group opacities multiply, so a lit region
+          inside a dimmed base would come out dimmed. */}
+      <g className={bcls}>
         {/* The nave outer walls (broken by the doors) and the west porch */}
         <g
           className="text-gold/75"
@@ -291,26 +341,38 @@ export function PlanDrawing({
           <path className="plan-line" d={`M ${MOUTH_X},${MOUTH_Y} L -60,${JAMB_Y}`} />
           <path className="plan-line" d={`M ${-MOUTH_X},${MOUTH_Y} L 60,${JAMB_Y}`} />
         </g>
+      </g>
 
-        {/* ── THE TWO LOW WALLS (the "double balustrade", demolished c.1910) ──
-            Drawn hollow, as the source draws them: two thin parallel lines. */}
-        <g
-          className="text-gold/55"
-          stroke="currentColor"
-          fill="none"
-          strokeWidth={4}
-          strokeLinejoin="round"
-        >
-          <path
-            className="plan-line"
-            d={`M -48,352 L ${WALL_FOOT_OUTER},${WALL_FOOT_Y} L ${WALL_FOOT_INNER},${WALL_FOOT_Y} L -23,352 Z`}
-          />
-          <path
-            className="plan-line"
-            d={`M 48,352 L ${-WALL_FOOT_OUTER},${WALL_FOOT_Y} L ${-WALL_FOOT_INNER},${WALL_FOOT_Y} L 23,352 Z`}
-          />
-        </g>
+      {/* ── THE TWO LOW WALLS (the "double balustrade", demolished c.1910) ──
+          Drawn hollow, as the source draws them: two thin parallel lines.
 
+          They are the centre path — the priest's corridor from the central
+          door up to the altar — so they belong to `stations` and light with
+          its arrows rather than sitting in the neutral base. Left at this
+          point in the document on purpose: the piers are painted after them,
+          and P9–P12 straddle these walls, so moving the group down beside the
+          arrows would draw the wall lines across the four piers. */}
+      <g
+        className={`${rcls("stations")} text-gold/55`}
+        data-region="stations"
+        {...pick("stations")}
+        stroke="currentColor"
+        fill="none"
+        strokeWidth={4}
+        strokeLinejoin="round"
+      >
+        <path
+          className="plan-line"
+          d={`M -48,352 L ${WALL_FOOT_OUTER},${WALL_FOOT_Y} L ${WALL_FOOT_INNER},${WALL_FOOT_Y} L -23,352 Z`}
+        />
+        <path
+          className="plan-line"
+          d={`M 48,352 L ${-WALL_FOOT_OUTER},${WALL_FOOT_Y} L ${-WALL_FOOT_INNER},${WALL_FOOT_Y} L 23,352 Z`}
+        />
+      </g>
+
+      {/* ── BASE, continued — the entrance steps and the compass ──────────── */}
+      <g className={bcls}>
         {/* ── THE ENTRANCE STEPS, below the porch ─────────────────────────── */}
         <g
           className="text-gold/60"
@@ -495,6 +557,19 @@ export function PlanDrawing({
         <Arrow x={-232} y={1030} angle={13} />
         <Arrow x={0} y={1030} angle={0} />
         <Arrow x={232} y={1030} angle={-13} />
+      </g>
+
+      {/* ── THE CENTRE PATH — the fourteen: the walk from the central door up
+          the corridor to the cross. Its own region, so lighting the three
+          nails still lights exactly three. See THE CENTRE PATH above. */}
+      <g
+        className={`${rcls("stations")} text-gold/45`}
+        data-region="stations"
+        {...pick("stations")}
+      >
+        {STATION_ARROWS.map((y) => (
+          <Arrow key={y} y={y} scale={0.8} />
+        ))}
       </g>
     </svg>
   );

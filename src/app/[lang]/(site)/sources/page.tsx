@@ -16,7 +16,30 @@ import { SOURCE_GROUPS, WEIGHING_NOTE } from "@/lib/sources";
  */
 export const generateMetadata = localizedMetadata("sources");
 
-const jsonLd = graph(pageNode("sources"), trailTo("sources"));
+/**
+ * The page's own chrome. The bibliography itself lives in src/lib/sources.ts,
+ * where each entry carries its Tamil beside its English; these are the words
+ * that belong to the page rather than to any source.
+ */
+const COPY = {
+  en: {
+    eyebrow: "Little Rome",
+    title: "Sources & Further Reading",
+    intro:
+      "Everything on this website that makes a historical claim rests on a document. These are the documents — the Jesuit archives in Rome, the printed mission histories, the colonial gazetteers, the Vatican's own record of the baptism that took place here. Where a source can be read online, we link it. Where it exists only on a shelf, we say so.",
+    archiveOnly: " · archive only",
+    online: " · free to read online",
+    openLeaf: "Open the page ❧",
+  },
+  ta: {
+    eyebrow: `சின்ன ரோமாபுரி`,
+    title: `மூலங்களும் மேலதிக வாசிப்பும்`,
+    intro: `இவ்விணையதளத்தில் ஒரு வரலாற்றுச் செய்தியைச் சொல்லும் ஒவ்வொன்றும் ஓர் ஆவணத்தின்மேல் நிற்கிறது. அந்த ஆவணங்கள் இவைதான் — உரோமையில் உள்ள இயேசு சபை ஆவணக்காப்பகங்கள், அச்சிடப்பட்ட பணிக்கள வரலாறுகள், காலனிய காலத்து மாவட்டக் கையேடுகள், இங்கே நிகழ்ந்த திருமுழுக்கைப் பற்றிய வத்திக்கானின் சொந்தப் பதிவு. ஒரு மூலத்தை இணையத்தில் வாசிக்க முடியுமானால், அதற்கான இணைப்பைத் தருகிறோம். அது ஒரு நூலகத்தின் அலமாரியில் மட்டுமே இருந்தால், அதையும் சொல்லிவிடுகிறோம்.`,
+    archiveOnly: ` · ஆவணக்காப்பகத்தில் மட்டும்`,
+    online: ` · இணையத்தில் இலவசமாக வாசிக்கலாம்`,
+    openLeaf: `அப்பக்கத்தைத் திறக்க ❧`,
+  },
+} as const;
 
 export default async function SourcesRoute({
   params,
@@ -26,6 +49,15 @@ export default async function SourcesRoute({
   const { lang: raw } = await params;
   const lang = raw === "ta" ? "ta" : "en";
   const L = (p: string) => localePath(lang, p);
+  const c = COPY[lang];
+
+  /* Built per-locale here: a module-level graph is evaluated once at import,
+     before any locale exists, so /ta emitted the English node. */
+  const jsonLd = graph(pageNode("sources", "WebPage", lang), trailTo("sources", lang));
+  // Tamil where we have it, English where we do not — a half-translated
+  // bibliography still renders whole, and never renders blank.
+  const t = (ta: string | undefined, en: string) =>
+    lang === "ta" && ta ? ta : en;
 
   return (
     <>
@@ -34,28 +66,24 @@ export default async function SourcesRoute({
       <section className="bg-cream text-navy">
         <div className="max-w-3xl mx-auto px-6 pt-32 pb-20 md:pt-40 md:pb-28">
           <p className="font-display tracking-[0.28em] text-xs md:text-sm uppercase text-gold-dark">
-            Little Rome
+            {c.eyebrow}
           </p>
           <h1 className="mt-5 font-display text-4xl md:text-6xl leading-[1.05]">
-            Sources &amp; Further Reading
+            {c.title}
           </h1>
           <div className="leaf-rule my-8" />
           <p className="font-serif text-xl md:text-2xl leading-relaxed text-navy/75">
-            Everything on this website that makes a historical claim rests on a
-            document. These are the documents — the Jesuit archives in Rome, the
-            printed mission histories, the colonial gazetteers, the Vatican&apos;s
-            own record of the baptism that took place here. Where a source can be
-            read online, we link it. Where it exists only on a shelf, we say so.
+            {c.intro}
           </p>
 
           {SOURCE_GROUPS.map((group) => (
             <div key={group.heading} className="mt-16">
               <h2 className="font-display text-2xl md:text-3xl leading-snug">
-                {group.heading}
+                {t(group.headingTa, group.heading)}
               </h2>
               {group.blurb ? (
                 <p className="mt-4 font-serif text-lg leading-relaxed text-navy/70">
-                  {group.blurb}
+                  {t(group.blurbTa, group.blurb)}
                 </p>
               ) : null}
 
@@ -86,12 +114,15 @@ export default async function SourcesRoute({
                         s.title
                       )}
                     </p>
+                    {/* Title, author and detail stay in the original on every
+                        locale: they name real books a reader has to be able to
+                        find in a catalogue. Only the note is translated. */}
                     <p className="mt-1 text-sm tracking-wide text-navy/50">
                       {s.detail}
-                      {s.archiveOnly ? " · archive only" : s.url ? " · free to read online" : ""}
+                      {s.archiveOnly ? c.archiveOnly : s.url ? c.online : ""}
                     </p>
                     <p className="mt-3 font-serif text-lg leading-relaxed text-navy/80">
-                      {s.note}
+                      {t(s.noteTa, s.note)}
                     </p>
                     {/* A bibliography that only names its books asks to be taken on
                         trust. Where we actually hold the book, this opens it — to the
@@ -105,7 +136,7 @@ export default async function SourcesRoute({
                           href={L(`/reference/${leaf.era}/${leaf.dot}/${leaf.source}`)}
                           className="mt-3 inline-flex items-center gap-2 font-display text-[0.62rem] tracking-[0.2em] uppercase text-gold-dark hover:text-navy transition-colors"
                         >
-                          Open the page ❧
+                          {c.openLeaf}
                         </Link>
                       );
                     })()}
@@ -118,20 +149,20 @@ export default async function SourcesRoute({
           {/* The part that actually earns the trust. */}
           <div className="mt-20 border-t border-gold/30 pt-12">
             <h2 className="font-display text-2xl md:text-3xl">
-              {WEIGHING_NOTE.heading}
+              {t(WEIGHING_NOTE.headingTa, WEIGHING_NOTE.heading)}
             </h2>
             <p className="mt-4 font-serif text-lg leading-relaxed text-navy/75">
-              {WEIGHING_NOTE.intro}
+              {t(WEIGHING_NOTE.introTa, WEIGHING_NOTE.intro)}
             </p>
 
             <dl className="mt-10 space-y-8">
-              {WEIGHING_NOTE.tiers.map((t) => (
-                <div key={t.label}>
+              {WEIGHING_NOTE.tiers.map((tier) => (
+                <div key={tier.label}>
                   <dt className="font-display tracking-wide text-sm uppercase text-gold-dark">
-                    {t.label}
+                    {t(tier.labelTa, tier.label)}
                   </dt>
                   <dd className="mt-3 font-serif text-lg leading-relaxed text-navy/80">
-                    {t.body}
+                    {t(tier.bodyTa, tier.body)}
                   </dd>
                 </div>
               ))}
@@ -140,7 +171,7 @@ export default async function SourcesRoute({
             <div className="leaf-rule my-12" />
 
             <p className="font-serif text-lg italic leading-relaxed text-navy/65">
-              {WEIGHING_NOTE.closing}
+              {t(WEIGHING_NOTE.closingTa, WEIGHING_NOTE.closing)}
             </p>
           </div>
         </div>

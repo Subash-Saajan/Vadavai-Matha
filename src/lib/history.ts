@@ -172,6 +172,12 @@ export const CHURCH = {
   flagstaffFeet: 50,
   /** Lime and palm-toddy mortar, without iron. (parish English history) */
   materials: "lime and palm-toddy mortar, built without iron",
+  /**
+   * The Tamil twin, so a Tamil page never interpolates an English clause into
+   * the middle of a Tamil sentence. Wording matches the architecture block in
+   * i18n.ts, which already describes the mortar this way.
+   */
+  materialsTa: "சுண்ணாம்பும் பனைக்கள்ளும் கலந்த சாந்தில், இரும்பே இல்லாமல்",
 } as const;
 
 /* ── The four churches ─────────────────────────────────────────────────────*/
@@ -201,9 +207,17 @@ export const APPARITION = {
   tier: "devotion" as Tier,
   /** Commemorated each year on 22–23 October. */
   feastDays: "22–23 October",
+  /** Tamil month name, per the style guide — never a Latin month in Tamil prose. */
+  feastDaysTa: "அக்டோபர் 22–23",
   /** The sentence the website should use when it must be exact. */
   honestStatement:
     "The parish has commemorated the weeping of Our Lady on 23 October 1803 ever since. It is a local and diocesan tradition, recorded by the Jesuit historian Léon Besse, and has never been the subject of a Vatican investigation.",
+  /**
+   * The Tamil twin. Hedged to exactly the same strength as the English — a
+   * local and diocesan tradition, never examined by Rome. Do not strengthen it.
+   */
+  honestStatementTa:
+    "1803 அக்டோபர் 23-ஆம் நாள் அன்னை கண்ணீர் சிந்தியதை அன்று முதல் இப்பங்கு நினைவுகூர்ந்து வருகிறது. இது இப்பகுதிக்கும் மறைமாவட்டத்திற்கும் உரிய ஒரு மரபு; இயேசு சபை வரலாற்றாசிரியர் லெயோன் பெஸ் இதைப் பதிவு செய்துள்ளார்; இது ஒருபோதும் வத்திக்கானின் விசாரணைக்கு உட்படுத்தப்பட்டதில்லை.",
 } as const;
 
 /** St Francis Xavier never came here — he died in 1552, well over a century

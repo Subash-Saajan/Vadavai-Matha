@@ -12,8 +12,9 @@ const FIGURE_IMAGES = [
 ];
 
 /**
- * VIII — the two images the building holds: the Two Trinities relief over the
- * door you come in by, and the six statues above the altar you come to.
+ * VI — after the creed's climax, a quieter devotional beat: the two images
+ * the building holds, the Two Trinities relief over the door you come in by,
+ * and the six statues above the altar you come to.
  *
  * The relief's repaint caveat (2016–2022) is carried in the copy and must stay:
  * the figures are original, the gilding is not, and no source dates the relief.
@@ -30,8 +31,8 @@ export function ImagesItCarries() {
       className="relative section-padding bg-cream parchment-sheen overflow-hidden"
     >
       <div className="light-shaft absolute -top-20 -right-10 w-[45%] h-[120%] -rotate-6" />
-      <span className="section-numeral pointer-events-none absolute -top-6 left-4 md:left-12 text-[7rem] md:text-[12rem] opacity-[0.06] select-none">
-        VII
+      <span className="section-numeral pointer-events-none absolute -top-6 right-4 md:right-12 text-[7rem] md:text-[12rem] opacity-[0.06] select-none">
+        VI
       </span>
 
       <div className="relative max-w-7xl mx-auto">

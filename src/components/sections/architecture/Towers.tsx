@@ -6,7 +6,14 @@ import { useLang } from "@/components/layout/LanguageProvider";
 import { PhotoOrnaments } from "@/components/ornaments/CornerOrnament";
 import { useReveal } from "./useReveal";
 
-/** VI — the towers, the bells inside them, and the name the village got for them. */
+/**
+ * I — the first thing a visitor sees approaching: the twin towers, and the
+ * name the village got for them. towersBody deliberately leads with the
+ * design-language reason (the parish's own comparison to the great basilica
+ * of Rome), not a height statistic — the old "92 ft / 16 pinnacles / 1861 /
+ * 50 ft / 1890" stat strip was removed entirely at the user's request; do
+ * not reintroduce a numbers list here.
+ */
 export function Towers() {
   const ref = useRef<HTMLElement>(null);
   const { t, lang } = useLang();
@@ -16,11 +23,10 @@ export function Towers() {
   return (
     <section
       ref={ref}
-      className="relative section-padding bg-cream parchment-sheen overflow-hidden"
+      className="relative section-padding bg-cream-dark parchment-swell overflow-hidden"
     >
-      <div className="light-shaft absolute -top-24 -left-10 w-[48%] h-[130%] rotate-6" />
-      <span className="section-numeral pointer-events-none absolute -top-6 right-4 md:right-12 text-[7rem] md:text-[12rem] opacity-[0.06] select-none">
-        IV
+      <span className="section-numeral pointer-events-none absolute -top-6 left-4 md:left-12 text-[7rem] md:text-[12rem] opacity-[0.06] select-none">
+        I
       </span>
 
       <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
@@ -33,20 +39,6 @@ export function Towers() {
           <p className="reveal-item text-text-muted text-lg leading-relaxed mt-6">
             {a.towersBody}
           </p>
-
-          <dl className="mt-10 space-y-6">
-            {a.towerStats.map((s, i) => (
-              <div
-                key={i}
-                className="reveal-item flex items-baseline gap-6 pl-6 border-l-2 border-gold/40"
-              >
-                <dt className="font-display text-2xl md:text-3xl tabular-nums text-gradient-gold-deep shrink-0 min-w-28">
-                  {s.v}
-                </dt>
-                <dd className="text-text-muted leading-relaxed">{s.k}</dd>
-              </div>
-            ))}
-          </dl>
         </div>
 
         {/* The towers */}

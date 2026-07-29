@@ -7,15 +7,17 @@ import { PhotoOrnaments } from "@/components/ornaments/CornerOrnament";
 import { useReveal } from "./useReveal";
 
 /**
- * V — the twin bells the towers were raised to carry.
+ * III — what you'd hear approaching the church: the twin bells the towers
+ * were raised to carry.
  *
  * The 1861 French bells, their long carriage by sea, and the older bell of the
  * 1752 chapel that was rung at the 1803 apparition. The photograph is primary
  * evidence: the bell's crown is cast "Vve Grégoire de Valence (Drôme) —
  * Donateur Casimir Grégoire", which corrects the single-web-source "Burdin of
  * Lyon" account (KB file 04, open question 16 — inscriptions never inspected
- * until this photo). The footnote states the divergence plainly — do not drop
- * that caveat, and do not reintroduce Lyon as fact.
+ * until this photo). That correction now lives inline in the "Cast in France"
+ * beat, stated plainly once — do not drop it, and do not reintroduce Lyon as
+ * fact.
  */
 export function Bells() {
   const ref = useRef<HTMLElement>(null);
@@ -30,7 +32,7 @@ export function Bells() {
     >
       <div className="light-shaft absolute -top-10 right-[8%] w-[40%] h-[120%] rotate-12" />
       <span className="section-numeral pointer-events-none absolute -top-6 left-4 md:left-12 text-[7rem] md:text-[12rem] opacity-[0.07] select-none">
-        V
+        III
       </span>
 
       <div className="relative max-w-6xl mx-auto">
@@ -92,10 +94,6 @@ export function Bells() {
             {a.bellsOlder}
           </p>
         </div>
-
-        <p className="reveal-item mt-16 pt-6 border-t border-white/10 max-w-3xl mx-auto text-center text-xs text-white/40 leading-relaxed">
-          {a.bellsFootnote}
-        </p>
       </div>
     </section>
   );

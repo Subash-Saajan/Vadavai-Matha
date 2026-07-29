@@ -26,9 +26,21 @@ export const viewport: Viewport = {
   themeColor: "#0a1322",
 };
 
-const jsonLd = graph(pageNode("contact", "ContactPage"), trailTo("contact"));
+export default async function ContactRoute({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang: raw } = await params;
+  const lang = raw === "ta" ? "ta" : "en";
 
-export default function ContactRoute() {
+  /* Built here, not at module scope: a module-level graph is evaluated once at
+     import, before any locale exists, so /ta emitted the English node. */
+  const jsonLd = graph(
+    pageNode("contact", "ContactPage", lang),
+    trailTo("contact", lang),
+  );
+
   return (
     <>
       <JsonLd data={jsonLd} />

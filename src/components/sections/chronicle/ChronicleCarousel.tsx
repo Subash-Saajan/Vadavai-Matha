@@ -104,6 +104,26 @@ const CURVE = {
 const HOLD = 0.25;
 
 /**
+ * The beat of stillness at the START, in the same units as HOLD.
+ *
+ * A pin is, by nature, an abrupt event: one frame the page is moving, the next
+ * it is not. What softens it is what the reader sees at that instant. With no
+ * lead-in the strip left the rail at full speed on the very frame the lock
+ * engaged, so the section both stopped AND lurched sideways at once, and the
+ * two together read as a pop.
+ *
+ * With a lead-in the lock lands on a still picture and the strip gathers itself
+ * a moment later — the section catches the reader rather than snatching them.
+ * Because the timeline is scrubbed, the same beat is there coming back UP the
+ * page: the strip arrives home at the rail and rests before the pin lets go, so
+ * the release is as quiet as the catch.
+ *
+ * Small on purpose. Much past 0.15 and it stops reading as a settle and starts
+ * reading as a section that has stopped responding to the wheel.
+ */
+const LEAD = 0.1;
+
+/**
  * The corner arrow, stroked in gold leaf rather than a flat colour.
  *
  * WHY IT IS NOT THE LUCIDE ICON. A CSS gradient cannot fill an SVG stroke —
@@ -224,11 +244,16 @@ function CarouselCard({ frame, meta }: { frame: ChronicleFrame; meta: ChronicleF
       </div>
 
       <div className="absolute inset-x-0 bottom-0 p-7 short:p-5">
-        <h3 className="font-serif text-[1.55rem] leading-tight text-white short:text-[1.3rem]">
+        {/* The Tamil sizes are not a font correction — they are a copy-length
+            one. The same frame runs 40–70% longer in Tamil, which pushed the
+            text block up over the painting until the art was barely visible.
+            At 1.34rem every title returns to a single line as in English, and
+            the smaller body buys back two lines of artwork. */}
+        <h3 className="font-serif text-[1.55rem] leading-tight text-white ta:text-[1.34rem] short:text-[1.3rem]">
           {frame.title}
         </h3>
         <div className="my-4 h-px w-12 bg-gold/45 short:my-3" />
-        <p className="font-serif text-[0.95rem] leading-relaxed text-white/75 short:text-[0.85rem]">
+        <p className="font-serif text-[0.95rem] leading-relaxed text-white/75 ta:text-[0.82rem] ta:leading-normal short:text-[0.85rem]">
           {frame.line}
         </p>
       </div>
@@ -451,27 +476,48 @@ export function ChronicleCarousel() {
          durations are RATIOS, not pixels, so they stay true when `span` is
          re-measured on a resize.                                              */
       const tl = gsap.timeline({
+        /* ⚠ THE ARC IS REPAINTED FROM THE TIMELINE, NOT FROM THE SCROLLTRIGGER.
+           It used to hang off `scrollTrigger.onUpdate`, which fires when the
+           SCROLL moves — and `scrub: 0.6` means the strip carries on gliding for
+           about half a second AFTER the scroll has stopped. So through the whole
+           of that glide — the most visible part of the movement, the part that
+           reads as weight — nothing repainted: the cards held whatever scale and
+           drop they had when the wheel stopped, and the progress rail froze,
+           while the strip slid on underneath them. Then the next flick of the
+           wheel fired one update and the arc snapped to where it should have
+           been. That snap is the other half of the "pop".
+
+           A timeline's own `onUpdate` fires on every frame its playhead moves,
+           and the scrub IS a tween on that playhead — so the arc now tracks the
+           glide the whole way down to rest, and the strip decelerates as one
+           object instead of a track and a set of cards that disagree. */
+        onUpdate: () => paint(-((gsap.getProperty(track, "x") as number) ?? 0)),
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: () => `+=${Math.max(1, spanRef.current * (1 + HOLD))}`,
+          end: () => `+=${Math.max(1, spanRef.current * (LEAD + 1 + HOLD))}`,
           pin: true,
           scrub: 0.6,
-          anticipatePin: 1,
+          /* ⚠ NO `anticipatePin`. It exists for pages on the browser's raw
+             scroll, where a fast wheel can outrun ScrollTrigger and the pin
+             lands a frame late; it buys that back by applying the pin slightly
+             BEFORE the trigger reaches its start — i.e. by jumping the section
+             into place early, on purpose. This page is on Lenis, whose whole job
+             is that the scroll never arrives in one unsmoothed lump, so there is
+             no lag here to compensate for. All the option was doing was the
+             jump. */
           invalidateOnRefresh: true,
           onRefresh: () => {
             measure();
             paint(-((gsap.getProperty(track, "x") as number) ?? 0));
           },
-          onUpdate: () => {
-            paint(-((gsap.getProperty(track, "x") as number) ?? 0));
-          },
         },
       });
 
-      tl.to(track, { x: () => -spanRef.current, ease: "none", duration: 1 })
-        // The beat of stillness. An empty tween on a throwaway object is the
-        // documented way to hold a scrubbed timeline in place.
+      // The beat of stillness at each end. An empty tween on a throwaway object
+      // is the documented way to hold a scrubbed timeline in place.
+      tl.to({}, { duration: LEAD })
+        .to(track, { x: () => -spanRef.current, ease: "none", duration: 1 })
         .to({}, { duration: HOLD });
 
       paint(0);

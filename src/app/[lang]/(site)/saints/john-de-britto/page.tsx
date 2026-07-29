@@ -1,7 +1,5 @@
-import type { Metadata } from "next";
-
 import { JsonLd } from "@/components/JsonLd";
-import { DE_BRITTO_ID, deBritto, graph, pageNode, trailTo } from "@/lib/schema";
+import { DE_BRITTO_ID, deBrittoFor, graph, pageNode, trailTo } from "@/lib/schema";
 import { localizedMetadata } from "@/lib/seo";
 
 import DeBrittoExperience from "./DeBrittoExperience";
@@ -19,16 +17,26 @@ import DeBrittoExperience from "./DeBrittoExperience";
  */
 export const generateMetadata = localizedMetadata("deBritto");
 
-const jsonLd = graph(
-  {
-    ...pageNode("deBritto"),
-    mainEntity: { "@id": DE_BRITTO_ID },
-  },
-  deBritto,
-  trailTo("deBritto"),
-);
+export default async function DeBrittoRoute({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang: raw } = await params;
+  const lang = raw === "ta" ? "ta" : "en";
 
-export default function DeBrittoRoute() {
+  /* Built here, not at module scope: a module-level graph is evaluated once at
+     import, before any locale exists, so /ta described the founder in English.
+     The `@id` is stable across languages by design — one saint, two documents. */
+  const jsonLd = graph(
+    {
+      ...pageNode("deBritto", "WebPage", lang),
+      mainEntity: { "@id": DE_BRITTO_ID },
+    },
+    deBrittoFor(lang),
+    trailTo("deBritto", lang),
+  );
+
   return (
     <>
       <JsonLd data={jsonLd} />

@@ -33,7 +33,7 @@ export async function generateMetadata({
     title: {
       absolute:
         l === "ta"
-          ? "சின்ன ரோமாபுரி — வடக்கன்குளம் திருக்குடும்ப திருத்தலம் (வடவை மாதா)"
+          ? "சின்ன ரோமாபுரி — வடக்கன்குளம் திருக்குடும்பத் திருத்தலம் (வடவை மாதா)"
           : "Little Rome — Holy Family Shrine, Vadakkankulam (Vadavai Matha)",
     },
   });
@@ -42,12 +42,17 @@ export async function generateMetadata({
 // Both dated observances ride on the home page: they are the facts most people
 // arrive wanting, and the home page is the URL most likely to be cited. The
 // October commemoration has never been published on this site at all.
-const jsonLd = graph(
-  pageNode("home"),
-  feast(),
-  apparitionFeast(),
-  trailTo("home"),
-);
+//
+// Built inside the component: a module-level graph is evaluated once at import,
+// before any locale exists, so /ta used to emit English event names.
+function homeGraph(lang: "en" | "ta") {
+  return graph(
+    pageNode("home", "WebPage", lang),
+    feast(undefined, lang),
+    apparitionFeast(undefined, lang),
+    trailTo("home", lang),
+  );
+}
 
 /**
  * THE RUNNING ORDER, AND WHY IT IS THIS ONE.
@@ -80,10 +85,17 @@ const jsonLd = graph(
  *
  * Hero, Patroness and About are untouched. They were working.
  */
-export default function Home() {
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang: raw } = await params;
+  const lang = raw === "ta" ? "ta" : "en";
+
   return (
     <>
-      <JsonLd data={jsonLd} />
+      <JsonLd data={homeGraph(lang)} />
       <Hero />
       <Patroness />
       <About />

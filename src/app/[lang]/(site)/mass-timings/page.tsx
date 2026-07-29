@@ -18,14 +18,23 @@ export const generateMetadata = localizedMetadata("massTimings");
  * dropped by Google, so a literal "2026-08-06" would quietly stop working on
  * 16 August and nobody would notice until the following year.
  */
-const jsonLd = graph(
-  pageNode("massTimings"),
-  feast(),
-  apparitionFeast(),
-  trailTo("massTimings"),
-);
+export default async function MassTimingsRoute({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang: raw } = await params;
+  const lang = raw === "ta" ? "ta" : "en";
 
-export default function MassTimingsRoute() {
+  /* Built here, not at module scope, so /ta gets the Tamil page node, Tamil
+     event names and Tamil breadcrumbs. `feast()` still computes the year. */
+  const jsonLd = graph(
+    pageNode("massTimings", "WebPage", lang),
+    feast(undefined, lang),
+    apparitionFeast(undefined, lang),
+    trailTo("massTimings", lang),
+  );
+
   return (
     <>
       <JsonLd data={jsonLd} />

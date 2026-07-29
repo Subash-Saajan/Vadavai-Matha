@@ -1,7 +1,5 @@
-import type { Metadata } from "next";
-
 import { JsonLd } from "@/components/JsonLd";
-import { DEVASAHAYAM_ID, devasahayam, graph, pageNode, trailTo } from "@/lib/schema";
+import { DEVASAHAYAM_ID, devasahayamFor, graph, pageNode, trailTo } from "@/lib/schema";
 import { localizedMetadata } from "@/lib/seo";
 
 import DevasahayamExperience from "./DevasahayamExperience";
@@ -18,16 +16,26 @@ export const generateMetadata = localizedMetadata("devasahayam");
  * page and `sameAs` his Wikipedia article, is what lets Google and the AI
  * crawlers attach a globally-searched entity to this shrine.
  */
-const jsonLd = graph(
-  {
-    ...pageNode("devasahayam"),
-    mainEntity: { "@id": DEVASAHAYAM_ID },
-  },
-  devasahayam,
-  trailTo("devasahayam"),
-);
+export default async function DevasahayamRoute({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang: raw } = await params;
+  const lang = raw === "ta" ? "ta" : "en";
 
-export default function DevasahayamRoute() {
+  /* Built here, not at module scope: a module-level graph is evaluated once at
+     import, before any locale exists, so /ta described this saint in English.
+     The `@id` is stable across languages by design — one saint, two documents. */
+  const jsonLd = graph(
+    {
+      ...pageNode("devasahayam", "WebPage", lang),
+      mainEntity: { "@id": DEVASAHAYAM_ID },
+    },
+    devasahayamFor(lang),
+    trailTo("devasahayam", lang),
+  );
+
   return (
     <>
       <JsonLd data={jsonLd} />

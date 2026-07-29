@@ -7,9 +7,11 @@ import { PhotoOrnaments } from "@/components/ornaments/CornerOrnament";
 import { useReveal } from "./useReveal";
 
 /**
- * IV — how a roof with no iron in it stays up. The three negatives (no cement,
- * no iron, no timber) and then the four things that ARE in the mortar, set as
- * plaques in the MassTimes idiom.
+ * II — looking up once inside, right after the towers: how a roof with no
+ * iron in it stays up. Sits here (not after Bells/Light) so it follows
+ * directly from Overture's architect/engineer paragraph while that's still
+ * fresh. The three negatives (no cement, no iron, no timber) and then the
+ * four things that ARE in the mortar, set as plaques in the MassTimes idiom.
  */
 export function HowItStands() {
   const ref = useRef<HTMLElement>(null);
@@ -20,10 +22,11 @@ export function HowItStands() {
   return (
     <section
       ref={ref}
-      className="relative section-padding bg-cream-dark parchment-swell overflow-hidden"
+      className="relative section-padding bg-cream parchment-sheen overflow-hidden"
     >
-      <span className="section-numeral pointer-events-none absolute -top-6 left-4 md:left-12 text-[7rem] md:text-[12rem] opacity-[0.06] select-none">
-        III
+      <div className="light-shaft absolute -top-24 -right-10 w-[46%] h-[130%] -rotate-6" />
+      <span className="section-numeral pointer-events-none absolute -top-6 right-4 md:right-12 text-[7rem] md:text-[12rem] opacity-[0.06] select-none">
+        II
       </span>
 
       <div className="relative max-w-7xl mx-auto">
