@@ -199,19 +199,40 @@ export function Hero() {
             </span>
           </div>
 
-          {/* Monumental title — line-by-line stone reveal */}
+          {/* Monumental title — line-by-line stone reveal.
+           *
+           * The visible lines read "OUR LADY / of Assumption", which is what the
+           * hero should say and what the design was built around. But that is
+           * also the entire <h1> a crawler saw: it named neither the shrine, nor
+           * the village, nor "Little Rome". The contact page's heading did name
+           * them, so for a query on this parish's own name Google preferred
+           * /contact over the home page — the markup told it to.
+           *
+           * So the h1 keeps its two carved lines and gains a fuller reading
+           * beside them, the same `aria-hidden` + `sr-only` pairing the contact
+           * page's DedicationTablet already uses. A screen reader hears the whole
+           * name of the place; the page renders pixel-for-pixel as before.
+           *
+           * `.title-line` stays only on the visible spans, so the GSAP entrance
+           * (which queries for it inside `headingRef`) is untouched. */}
           <h1
             ref={headingRef}
             className="font-display font-semibold text-white uppercase tracking-[0.04em] leading-[0.92]"
           >
-            <span className="block overflow-hidden">
-              <span className="title-line block text-5xl md:text-7xl lg:text-[7.5rem]">
-                Our Lady
-              </span>
+            <span className="sr-only">
+              Our Lady of Assumption — the Holy Family Shrine, Vadakkankulam,
+              called Little Rome
             </span>
-            <span className="block overflow-hidden mt-1 md:mt-2">
-              <span className="title-line block text-[2.75rem] md:text-6xl lg:text-[6rem] text-gradient-gold">
-                of Assumption
+            <span aria-hidden="true" className="block">
+              <span className="block overflow-hidden">
+                <span className="title-line block text-5xl md:text-7xl lg:text-[7.5rem]">
+                  Our Lady
+                </span>
+              </span>
+              <span className="block overflow-hidden mt-1 md:mt-2">
+                <span className="title-line block text-[2.75rem] md:text-6xl lg:text-[6rem] text-gradient-gold">
+                  of Assumption
+                </span>
               </span>
             </span>
           </h1>
