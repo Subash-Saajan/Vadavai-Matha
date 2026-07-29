@@ -13,6 +13,9 @@ export const dict = {
       contact: "Contact",
       faq: "Questions & Answers",
       sources: "Sources",
+      britto: "St. John de Britto",
+      devasahayam: "St. Devasahayam Pillai",
+      acknowledgements: "Acknowledgements",
     },
     hero: {
       visit: "Plan Your Visit",
@@ -1102,7 +1105,7 @@ export const dict = {
       label: "The Building",
       title: "The Architecture of Little Rome",
       intro:
-        "Two naves that open like a pair of compasses and meet at a single altar. Twenty-four arches turned in lime and palm sap, holding a roof that has no iron in it. Twin towers of ninety-two feet — and a village that took its name from them.",
+        "Two naves open like a pair of compasses and meet at a single altar. Twenty-four arches turn in lime and palm sap, holding up a roof with no iron in it at all. Twin towers rise ninety-two feet into the sky, and gave the whole village a new name.",
       heroAlt:
         "The white Gothic façade of the Holy Family Church, Vadakkankulam, with its twin octagonal towers and pinnacled roofline against a clear sky",
 
@@ -1150,13 +1153,16 @@ export const dict = {
         ],
       },
 
-      overtureLabel: "The Idea",
+      overtureLabel: "Before You Look Up",
       overtureLead:
-        "It is a church you can read like a creed — a building where every number in the stone is set down to stand for a truth of the faith.",
+        "Long before the parish ever said so itself, a stranger did. In 1894, a French Jesuit chronicler looked at this church and wrote that it was “probably without equal in the world.”",
       overtureP1:
-        "When the Jesuits set out to raise the third and greatest church at Vadakkankulam, Fr Joseph Grégoire gave it a form found almost nowhere else: a single building shaped like an open pair of compasses — two naves splayed wide at the doors, drawing together as they run east, until they meet at one shared altar.",
+        "Others agreed, each in their own words. A German Catholic monthly praised it in 1885 as “a masterpiece of architecture,” and gave the credit to the man who built it: Brother Bergenthal. Even the British gazetteer of the district, with nothing to gain by flattering a mission church, called it simply “the handsome church.”",
       overtureP2:
-        "Seventeen years went into the building of it, and what rose was strange enough that a Jesuit chronicler called the plan “probably without equal in the world.” The village has been called Little Rome ever since.",
+        "Behind that praise stood two men. Fr Joseph Grégoire spent seventeen years as the building priest, and the plan was his: two naves opening wide at the doors, drawing together as they run east, until they meet at one shared altar. Brother Joseph Bergenthal made it real. Once a soldier in Westphalia, later a Jesuit brother who had studied architecture and walked the great cathedrals of Germany and France, he drew the plans and stood over the builders himself. Between 1855 and 1872 they raised the whole church on lime mortar alone. No iron. No cement. Not one wooden beam holds up the arches overhead.",
+      overtureP3:
+        "What follows is not a list of those seventeen years. It is the church itself, met the way you would actually meet it: what you would see first, what you would hear, what catches the light once you step inside, and only at the end, what it all means.",
+      numbersKicker: "The building, in brief",
       numbers: [
         { v: "17", k: "years building" },
         { v: "24", k: "arches" },
@@ -1169,22 +1175,22 @@ export const dict = {
       churchesLabel: "Before This One",
       churchesTitle: "Three Churches, One Ground",
       churchesBody:
-        "The great church of 1872 is the third to stand on this ground. Each of the first two was outgrown by the congregation that raised it.",
+        "The great church of 1872 is the third to rise on this ground. Both of the churches before it were loved, and both were outgrown.",
       churches: [
         {
           year: "1685",
           title: "A chapel of palm thatch",
-          body: "Beside Santhaayi’s wayside cross, St John de Britto blesses a small thatched chapel; some two hundred people are baptised.",
+          body: "Beside Santhaayi’s wayside cross, St John de Britto blesses a small thatched chapel. Some two hundred people are baptised.",
         },
         {
           year: "1752",
           title: "The church of stone",
-          body: "Fr Buttari’s cross-shaped stone church, finished by Fr Tomassini in broad brick from Perungudi. Its statue would weep in 1803, and its bell would call the village to come and see.",
+          body: "Fr Buttari’s cross-shaped stone church, finished by Fr Tomassini in broad brick from Perungudi. Above its altar the Marian statue stood in a recess with doors that could open or shut. They were open on that October morning in 1803, when the statue began to weep and the bell called the whole village to come and see.",
         },
         {
           year: "1872",
           title: "The great church",
-          body: "Bishop Canoz blesses the foundation stone in 1855. Seventeen years later he returns to sing the Mass that dedicates the building standing today.",
+          body: "Bishop Canoz blesses the foundation stone in 1855, under the parish priest Fr Joseph Grégoire, whom his own mission called “the apostle of Vadakkankulam.” Seventeen years later, Canoz returns: a benediction on 27 June 1872, then the solemn dedication Mass two days after. Grégoire dies not long after, at sea, sailing home for his health.",
         },
       ],
       churchesCaption: "The church in an early parish photograph",
@@ -1192,16 +1198,16 @@ export const dict = {
       planDrawTitle:
         "The floor plan of the Holy Family Church: one sanctuary, two naves converging, five doors",
       planNote:
-        "Redrawn from வரைபடம் 5 in A. Sivasubramanian, Kiristhavamum Sathiyum (2001) — the only measured plan of this church in print.",
+        "Redrawn from வரைபடம் 5 in A. Sivasubramanian, Kiristhavamum Sathiyum (2001), the only measured plan of this church ever printed.",
       motto: "TEMPLVM SIT DVPLEX, ARA SED VNA;\nFIDES VNA SIT, VNAQVE MENS.",
       mottoTr:
         "Let the temple be twofold, but the altar one; may they be of one faith, and of one mind.",
-      mottoCaption: "Cut into the foundation stone, blessed 9 August 1855",
+      mottoCaption: "Set at the altar of the church blessed in 1872",
 
       craftLabel: "The Structure",
       craftTitle: "Not a Nail of Iron",
       craftBody:
-        "Twenty-four arches span the interior, twelve of them joined in a single crown over the altar. Not one is carried by cement, by iron, or by a wooden beam: they were turned in lime mortar and have stood self-supporting for a century and a half. The engineering was the work of Brother Joseph Bergenthal — a Jesuit lay brother whom almost no account of this church troubles to name.",
+        "Twenty-four arches span the interior. Twelve of them meet in a single crown over the altar, and not one is carried by cement, iron or a wooden beam. They were turned in lime mortar alone, and they have stood on their own weight for a century and a half. The man behind them was Brother Joseph Bergenthal, a Jesuit lay brother almost no account of this church bothers to name. He had once been a soldier in Westphalia. Asked, later, if he could draw the plan of a building, he simply said he had studied architecture and walked the great monuments of Germany and France. Eleven months after the church was blessed, he died.",
       craftNegatives: [
         { t: "No cement", d: "lime mortar throughout" },
         { t: "No iron", d: "not a rod in the vaults" },
@@ -1219,13 +1225,13 @@ export const dict = {
           ta: "சுண்ணாம்பு",
           tr: "chunnambu",
           gloss: "Lime",
-          d: "burnt shell and limestone — the binder",
+          d: "burnt shell and limestone, the binder",
         },
         {
           ta: "கடுக்காய்",
           tr: "kadukkai",
           gloss: "Myrobalan",
-          d: "Terminalia chebula — the tannin that hardens it",
+          d: "Terminalia chebula, the tannin that hardens it",
         },
         {
           ta: "முட்டை",
@@ -1235,127 +1241,142 @@ export const dict = {
         },
       ],
       recipeNote:
-        "The recipe as the parish itself gives it. The English parish history says toddy — fermented sap — where the Tamil sources say padaneer; on lime, kadukkai and egg, every source agrees.",
+        "This is the recipe the parish itself hands down. The English parish history calls the sap toddy, already fermented; the Tamil sources call it padaneer, fresh from the tree. On the lime, the kadukkai and the egg, every source agrees.",
       craftCaption:
-        "The vault above the sanctuary — arches turned without iron, beam or centring",
+        "The vault above the sanctuary, arches turned without iron, beam or centring",
 
       creedLabel: "The Meaning",
       creedTitle: "The Church as a Creed",
       creedBody:
-        "The parish reads its own building as a set of numbers. Nothing here is merely structural: every count is a doctrine. Read the plan itself as a creed — tap a line and it lights on the drawing — then read the rest in the parish's own hand, the numbers that wait up at the altar.",
+        "The parish reads its own building as a set of numbers. It is a tradition kept alive by word of mouth and by a handwritten sheet in the parish's own hand, not by anything the builders of 1855 ever wrote down. Nothing here is merely structural. Every count is a doctrine. Tap a line below and watch it light up on the plan, then read the rest the same way, in the numbers waiting up at the altar.",
       creedReadTitle: "The plan, read as a creed",
       creedReadHint: "Tap a reading to light it on the plan.",
+      // `means` is the title of the reading, `what` the feature of the fabric it
+      // counts, `note` one sentence of gloss. Titles are capitalised as titles —
+      // two of the nine are proper names (the Evangelists, the Trinity), and a
+      // list that capitalised only those read as an accident.
       creedReadings: [
         {
           n: "5",
           anchor: "doors",
-          means: "the five wounds",
+          means: "The Five Wounds",
           what: "the five doors of the plan",
+          note: "The two hands, the two feet, and the side opened by the lance.",
         },
         {
           n: "12",
           anchor: "piers",
-          means: "the twelve apostles",
-          what: "the twelve piers down the two naves",
+          means: "The Twelve Piers",
+          what: "four down each nave, set on the measured plan",
+          note: "Twelve to carry the roof, as twelve men were sent to carry the Church.",
         },
         {
           n: "3",
           anchor: "arrows",
-          means: "the three nails",
-          what: "the three directions in — each turned toward the cross",
+          means: "The Three Nails",
+          what: "three directions in, each one turned toward the cross",
+          note: "Three ways into one church, as three nails held one body.",
+        },
+        // The fourteen moved here from the altar list in July 2026: the parish
+        // reads it as the walk itself — the central door up to the cross — so
+        // it belongs on the plan, where two arrows now carry it up the corridor.
+        {
+          n: "14",
+          anchor: "stations",
+          means: "The Fourteen Stations",
+          what: "the walk in, from the central door to the cross",
+          note: "The Way of the Cross, walked in fourteen halts from the sentence to the tomb.",
         },
         {
           n: "1",
           anchor: "altar",
-          means: "one Lord",
+          means: "One Lord",
           what: "the single altar every nave meets at",
+          note: "However many ways in, there is one table at the end of them.",
         },
       ],
       creedAltarTitle: "And what waits at the altar",
-      creedAltarHint: "Tap a reading to light it on the altarpiece.",
-      altarpieceTitle: "A symbolic elevation of the altarpiece",
-      altarpieceNote: "A symbolic reading — not a measured drawing",
+      creedAltarHint: "Tap a reading to find it on the altar.",
+      altarPhotoAlt:
+        "The carved screen behind the high altar: five arched niches with their statues, the crucifix at the centre, and the dove above it",
+      altarPhotoNote: "The high altar, where the rest of the reading waits",
+      // Honesty note under the altar list. Two of these four have never been
+      // counted on site (KB 02 §4.7c), so they are given without a hotspot;
+      // keep this line as long as that is true, and delete it when it isn't.
+      creedAltarUncounted:
+        "The nine carvings and the arches of the lower row have not yet been counted on the altar itself. They are set down here as the parish's note gives them.",
       creed: [
-        {
-          n: "14",
-          anchor: "steps",
-          what: "the steps up to the cross",
-          means: "the fourteen Stations",
-        },
+        // The fourteen used to open this list; it now lives in creedReadings,
+        // on the plan, where it can be lit on the centre path.
         {
           n: "5",
           anchor: "upperArches",
           what: "the arches in the upper row of the altarpiece",
-          means: "the five wounds, told again",
+          means: "The Five Wounds, Told Again",
+          note: "The same five, counted a second time in carved stone above the altar.",
         },
         {
           n: "9",
           anchor: "flowers",
           what: "the flower-cluster carvings",
-          means: "the nine choirs of angels",
+          means: "The Nine Choirs of Angels",
+          note: "Angels, Archangels, Principalities, Powers, Virtues, Dominions, Thrones, Cherubim, Seraphim.",
         },
         {
           n: "4",
           anchor: "lowerArches",
           what: "the arches in the lower row",
           means: "Matthew, Mark, Luke and John",
+          note: "The four Evangelists, an arch apiece, set under everything else the altar carries.",
         },
         {
           n: "3",
           anchor: "trinity",
           what: "at the centre of it all",
           means: "Father, Son and Holy Spirit",
+          note: "The dove above, the crucified Son below, on the altar's own axis.",
         },
       ],
       creedNoteCaption:
-        "The parish’s own note — திருக்குடும்ப ஆலயம்: கட்டிடத்தின் தத்துவம், “the philosophy of the building”",
-      creedFootnote:
-        "The sheet is unsigned and undated. It records how the parish reads its church — not what the builders of 1855 are documented to have intended.",
+        "The parish’s own note, திருக்குடும்ப ஆலயம்: கட்டிடத்தின் தத்துவம், “the philosophy of the building”",
 
       towersLabel: "The Skyline",
       towersTitle: "Why They Call It Little Rome",
       towersBody:
-        "Two white towers stand ninety-two feet above the façade, octagonal from the ground to the spire, with sixteen smaller pinnacles ringing the roofline. In each tower hangs one of the twin bells cast in France in 1861 and carried here by sea. It is chiefly for these towers that, in 1926, the first Bishop of Tuticorin gave the village the name it still answers to — Chinna Romapuri, Little Rome.",
-      towerStats: [
-        { v: "92 ft", k: "twin octagonal towers" },
-        { v: "16", k: "pinnacle turrets" },
-        { v: "1861", k: "French bells, one to a tower" },
-      ],
+        "The name was never really about how tall the towers are. The parish tells it with one simple comparison: the church was built, it says, “like the world-famous great basilica of Rome,” a design found nowhere else in the world except Rome itself. Nothing in the district looked like this before. Soaring twin towers, octagonal from base to spire. A ring of smaller pinnacles crowning them. All raised in a grand Western style no church for miles around had ever attempted. A small Tamil village had taken on the silhouette of a Roman basilica, and in 1926, that was reason enough for the first Bishop of Tuticorin to give Vadakkankulam the name it still answers to: Chinna Romapuri, Little Rome.",
       towersCaption: "The twin towers and the pinnacled roofline",
 
       bellsLabel: "The Bells",
       bellsTitle: "The Twin Bells from France",
       bellsBody:
-        "High in each of the two towers hangs a bronze bell, cast in France in 1861 and carried to Vadakkankulam by sea. They have called the parish to prayer for more than a century and a half.",
+        "High in each tower hangs a bronze bell, cast in France in 1861 and carried here by sea. For more than a century and a half, they have called the parish to prayer.",
       bellsBeats: [
         {
           year: "1861",
           title: "Cast in France",
-          body: "The bells are given to the church by Casimir Grégoire, a French benefactor — by every account a kinsman of the parish priest, Fr Joseph Grégoire — and the bell in the tower still carries his name in its bronze: “Donateur Casimir Grégoire”.",
+          body: "Casimir Grégoire, a French benefactor, gave the bells to the church. By every account he was kin to the parish priest, Fr Joseph Grégoire, and the bell in the tower still carries his name cast into its bronze: “Donateur Casimir Grégoire.” Beside the lettering sits a cross and an image of the Mother of God bearing the Child Jesus, cast into the same metal. Published accounts have credited the Burdin foundry of Lyon. The bronze itself says otherwise: “Vve Grégoire de Valence (Drôme).” Where the two disagree, the bell gets the last word.",
         },
         {
           year: "By sea",
           title: "The long carriage",
-          body: "Packed in wooden crates, the bells come by ship, land at the port of Madras, and pass through the Collector's office at Tirunelveli on their way south to the church.",
+          body: "Packed in wooden crates, the bells cross the sea by ship, land at the port of Madras, and pass through the Collector's office at Tirunelveli before reaching the church.",
         },
         {
           year: "1872",
           title: "Raised into the towers",
-          body: "They are hung the year the church is consecrated — one bell to each of the twin towers — and are rung still, at prayers and at every festival.",
+          body: "They are hung the very year the church is consecrated, one bell to each tower, and they still ring today, at prayers and at every festival.",
         },
       ],
       bellsOlderLead: "These were not the first bells to sound here.",
       bellsOlder:
-        "An older bell hung in the stone church of 1752 — the bell that was rung one October morning in 1803 to call the whole village to come and see the Mother whose statue had begun to weep.",
-      bellsFootnote:
-        "The bells' story is the parish's own record. Published accounts have named the Burdin foundry of Lyon; the bell itself is cast “Vve Grégoire de Valence (Drôme)” — and where the record and the bronze differ, the bronze has the last word.",
+        "An older bell once hung in the stone church of 1752. It was that bell that rang out one October morning in 1803, calling the whole village to come and see the Mother whose statue had begun to weep.",
       bellsCaption:
-        "The bell in its tower, cast “Vve Grégoire de Valence (Drôme) — Donateur Casimir Grégoire”",
+        "The bell in its tower, cast “Vve Grégoire de Valence (Drôme)” and “Donateur Casimir Grégoire”",
 
       lightLabel: "Light & Colour",
       lightTitle: "Glass, Dye and Gold",
       lightBody:
-        "Twenty-three traceries carry coloured glass — plain at first, replaced with jewelled panes at the centenary of 1972. Sixteen windows along the side walls were kept sealed shut through the whole Jesuit administration, “for reasons of cold,” and were opened only afterwards. Within, the vaults, arches and pillars are painted in flowers and scenery made not from paint or chemical but from the dyes of plants and trees — unfaded, and never once repainted.",
+        "For its first hundred years, the church told a plainer story in glass. The twenty-three traceries around it held ordinary, unmatched panes, and sixteen more windows along the side walls stayed sealed completely shut. They were kept airtight through the whole of the Jesuit years, for a reason the parish still gives simply as “the cold.” Then came 1972, the church's centenary, and the parish filled every tracery with coloured glass at last, and finally let the sealed windows open. What you see today is that gift, a hundred years late: diamond lattices of red, blue and yellow glass caught inside pointed Gothic arches, trefoil rosettes catching the light at their centres, and high over the nave, a rose window sits in the painted vault like a wheel cut from jewels. Inside, the vaults, arches and pillars are painted with flowers and scenery, made not from paint or chemical but from the dyes of plants and trees. Nothing has faded. Nothing has ever been repainted.",
       glassCaptions: [
         "A rose window of jewelled glass set in painted vaulting",
         "Lancet traceries, coloured at the 1972 centenary",
@@ -1366,22 +1387,22 @@ export const dict = {
       imagesLabel: "What It Carries",
       imagesTitle: "The Two Images the Building Holds",
       imagesBody:
-        "Two images say what the church is for: one over the door you come in by, one above the altar you come to.",
+        "Two images say what this church is for. One waits over the door you enter by. One waits above the altar you come to.",
       figures: [
         {
           title: "Over the door",
-          body: "Above the head-door, inside the porch, is a polychrome relief of the Holy Family beneath a dove in a golden gloria and, at the apex, an eye set in a triangle. It is the old Counter-Reformation figure of the Two Trinities — the heavenly and the earthly — crossing at the Child. The figures are original; the gilding and the blue sky behind them are not. That ground was repainted between 2016 and 2022.",
+          body: "Above the head-door, inside the porch, stands a polychrome relief of the Holy Family. A dove rests above them in a golden halo, and at the very top, an eye is set inside a triangle, an old Christian symbol for God the Father, in church use a century before Freemasonry ever borrowed it. This is the Counter-Reformation figure of the Two Trinities, heaven and earth crossing together at the Child. It was fixed as a devotional print in Antwerp around 1600, and Jesuit churches have carried it ever since. The figures themselves are original. The gilding and the blue sky behind them are not; that ground was repainted between 2016 and 2022. The parish has its own words for what the relief says: the Holy Family at the head-door invites you in with a gracious face. “Beloved people, come inside and give us your heart!”",
           caption: "The Two Trinities relief over the central door",
         },
         {
           title: "Above the altar",
-          body: "Six statues stand at the high altar beneath its dome, its glass tower and its minaret: the crucified Christ at the centre, Our Lady and St Joseph beside him, and above them St Sebastian, St Antony and St Francis Xavier. The floor is mosaic. The woodwork carries gold leaf — பொன் முலாம் — which the parish has never let fade.",
+          body: "Six statues stand at the high altar, beneath its dome, its glass tower and its minaret. The crucified Christ is at the centre, with Our Lady and St Joseph beside him, and above them, St Sebastian, St Antony and St Francis Xavier. The floor is laid in mosaic. The woodwork carries gold leaf, பொன் முலாம், and the parish has never once let it fade.",
           caption: "The high altar, gilded and unfaded",
         },
       ],
       inscription: "மரியே வாழ்க",
       inscriptionGloss:
-        "“Hail Mary” — raised in Tamil letters across the gable of the porch. The first words the building says to anyone walking up to it.",
+        "“Hail Mary,” raised in Tamil letters across the gable of the porch. It is the first thing the building says to anyone walking up to it.",
 
       colophonLabel: "Colophon",
       colophonTitle: "Builders, Bells & Sources",
@@ -1703,10 +1724,14 @@ export const dict = {
     },
     footer: {
       tagline: "A sanctuary of faith, prayer and community.",
-      explore: "Explore",
+      // Three columns, because the footer is the only way in to most of this
+      // site — the navbar carries five links and there are a dozen pages.
+      // Story · practical · provenance.
+      shrine: "The Shrine",
       visit: "Visit",
-      connect: "Connect",
+      record: "The Record",
       rights: "All rights reserved.",
+      builtBy: "Website by",
     },
   },
   ta: {
@@ -1721,6 +1746,9 @@ export const dict = {
       contact: `தொடர்பு`,
       faq: `வினா & விடை`,
       sources: `ஆதாரங்கள்`,
+      britto: `புனித ஜான் தெ பிரிட்டோ`,
+      devasahayam: `புனித தேவசகாயம் பிள்ளை`,
+      acknowledgements: `நன்றி`,
     },
     hero: {
       visit: `உங்கள் வருகையைத் திட்டமிடுங்கள்`,
@@ -1772,13 +1800,13 @@ export const dict = {
       chronicleFrames: [
         {
           year: `கி.பி. 1680 வாக்கில்`,
-          chapter: `காட்டுக்குள் ஒரு வெளி`,
+          chapter: `காட்டிடையே ஒரு வெளி`,
           title: `ஒரு பெண்மணியில் தொடங்கியது`,
           line: `புதரும் மரங்களும் ஒரு குளமும் மட்டுமே இருந்த இடத்தில் சாந்தாயி அம்மையார் தங்கி, வீடு கட்டி, தன் வாசலுக்கு எதிரே வெட்டவெளியில் ஒரு குருசடியை எழுப்பினார். இங்குள்ள அனைத்தும் அதைச் சுற்றியே வளர்ந்தன.`,
         },
         {
           year: `1685`,
-          chapter: `காட்டுக்குள் ஒரு வெளி`,
+          chapter: `காட்டிடையே ஒரு வெளி`,
           title: `காட்டுப் பாதையில் வந்த அருட்தந்தை`,
           line: `பருத்தி பறித்துக்கொண்டிருந்தபோது ஓர் அருட்தந்தை குதிரையில் கடந்து சென்றார். ஓடிச் சென்று தன் குருசடியை ஆசீர்வதிக்கும்படி கேட்டார்; அவரும் குதிரையை நிறுத்தி ஆசீர்வதித்தார். அவர்தான் புனித அருளானந்தர். தெற்கே இவ்வூர் வரை வந்தார், அதற்கு மேல் செல்லவில்லை.`,
         },
@@ -1851,7 +1879,7 @@ export const dict = {
         {
           id: `clearing-in-the-forest`,
           span: `1542–1693`,
-          heading: `காட்டுக்குள் ஒரு வெளி`,
+          heading: `காட்டிடையே ஒரு வெளி`,
           blurb: `பங்கு உருவாவதற்கு முன் இருந்தவை மூன்றே: ஒரு கடற்கரை, காட்டைக் கிழித்துச் சென்ற ஒரு பாதை, தம் வீட்டு வாசலுக்கு வெளியே ஒரு சிலுவையை நட்டு வைத்த ஒரு பெண்மணி.`,
           dots: [
             {
@@ -1886,7 +1914,7 @@ export const dict = {
             },
             {
               year: `1693`,
-              title: `எழுதுகோலாய் ஒரு வைக்கோல்`,
+              title: `வைக்கோலே எழுதுகோலாய்`,
               body: `வடக்கன்குளத்தில் ஓலைக் கூரை எழுந்த எட்டு ஆண்டுகளுக்குப் பின், அவர் விலங்கிடப்பட்டிருந்தார். மரணத்தின் முதல்நாள், ஓரியூர்ச் சிறையிலிருந்து தம் சபைச் சகோதரர்களுக்கு எழுதினார். எழுதுகோலாக அவருக்கு உதவியது ஒரு வைக்கோல்; மையோ, தம் எச்சிலில் குழைத்த கரி. “இயேசு கிறிஸ்துவின் திருச்சட்டத்தைக் கற்பித்தேன் என்பது ஒன்றே எனக்கு எதிராகச் சுமத்தப்பட்டுள்ள குற்றம்… இக்குற்றமே ஒரு புண்ணியமாய் இருப்பதால், இதற்குரிய தண்டனை எனக்கு மாண்பாகவே அன்றி வேறாக இருக்க இயலாது.” மறுநாள் காலை, நாற்பத்தைந்து வயதில், அவர் தலை துண்டிக்கப்பட்டார்; இரண்டரை நூற்றாண்டுகளுக்குப் பின் உரோமை அவரைப் புனிதர் என அறிவித்தது. பரந்த திருச்சபைக்கு அவர் தென்கோடியின் இரத்தசாட்சி. வடக்கன்குளத்திற்கோ அவர் என்றென்றும் அருளானந்தர்தான் — தன் நிறுவனராக இவ்வூர் நினைவுகூரும் அருட்தந்தை, ஒவ்வொரு பிப்ரவரியிலும் இவ்வூர் திருவிழா கொண்டாடும் புனிதர்.`,
             },
           ],
@@ -1919,8 +1947,8 @@ export const dict = {
             },
             {
               year: `1714`,
-              title: `ஒரு தந்தை வாழ்ந்த இல்லம்`,
-              body: `1714-ஆம் ஆண்டளவில், இயேசு சபை வடக்கன்குளத்தைத் தனக்கே உரிய ஒரு நிலையமாக்கியிருந்தது; இனி அது சுற்றுப் பயணத்தில் வந்து போகும் ஒரு கிராமம் அல்ல, ஒரு தந்தை வாழ்ந்த இல்லம். அந்த ஆண்டுகளைப் பற்றிய பணிக்களத்தின் சொந்தப் பதிவில், மறைப்பணியாளர் ஒருவர் தன்னைப் பற்றியே எழுதுகிறார்: போலிக் குரு ஒருவன் “அப்போது நான் இருந்த வடக்கன்குளம் ஆலயத்திற்குள்” நுழைந்தான்; அவருடன் உடன் நடந்துவந்த மறைக்கல்வியாளரால் அவன் அம்பலப்படுத்தப்பட்டான். இங்கேயே தங்கியிருக்கும் ஒரு குரு, இயங்கிக்கொண்டிருக்கும் ஓர் ஆலயம், அவருக்குப் பக்கத்தில் ஒரு மறைக்கல்வியாளர் — ஓலைக் கூரை எழுந்த முப்பது ஆண்டுகளுக்குள், பங்கு வந்து சேர்ந்துவிட்டது.`,
+              title: `அருட்தந்தை ஒருவர் வாழ்ந்த இல்லம்`,
+              body: `1714-ஆம் ஆண்டளவில், இயேசு சபை வடக்கன்குளத்தைத் தனக்கே உரிய ஒரு நிலையமாக்கியிருந்தது; இனி அது சுற்றுப் பயணத்தில் வந்து போகும் ஒரு கிராமம் அல்ல, அருட்தந்தை ஒருவர் வாழ்ந்த இல்லம். அந்த ஆண்டுகளைப் பற்றிய பணிக்களத்தின் சொந்தப் பதிவில், மறைப்பணியாளர் ஒருவர் தன்னைப் பற்றியே எழுதுகிறார்: போலிக் குரு ஒருவன் “அப்போது நான் இருந்த வடக்கன்குளம் ஆலயத்திற்குள்” நுழைந்தான்; அவருடன் உடன் நடந்துவந்த மறைக்கல்வியாளரால் அவன் அம்பலப்படுத்தப்பட்டான். இங்கேயே தங்கியிருக்கும் ஒரு குரு, இயங்கிக்கொண்டிருக்கும் ஓர் ஆலயம், அவருக்குப் பக்கத்தில் ஒரு மறைக்கல்வியாளர் — ஓலைக் கூரை எழுந்த முப்பது ஆண்டுகளுக்குள், பங்கு வந்து சேர்ந்துவிட்டது.`,
             },
           ],
         },
@@ -1932,7 +1960,7 @@ export const dict = {
           dots: [
             {
               year: `1742`,
-              title: `கடலிலிருந்து வந்த ஒரு பெட்டி`,
+              title: `கடல் கொணர்ந்த ஒரு பெட்டி`,
               body: `1742-ஆம் ஆண்டில், ஊருக்குக் கீழேயுள்ள கடற்கரையில், கூட்டப்புளியில், கடல் ஒரு மரப்பெட்டியைக் கரையில் ஒதுக்கிச் சென்றது. அதன் மேல் “வடக்கன்குளத்திற்கு, போர்த்துகலிலிருந்து” என்று எழுதப்பட்டிருந்தது; உள்ளே, செதுக்கப்பட்ட அன்னையின் திருவுருவங்கள். மீனவர்கள் அதைத் தூக்கிக்கொண்டு பங்குத் தந்தை ஜான் பாப்டிஸ்ட் புத்தாரி அவர்களிடம் வந்தார்கள். அவர் ஒரு திருவுருவத்தைத் தம் ஆலயத்திற்கென வைத்துக்கொண்டு, இரண்டாவதைக் காமநாயக்கன்பட்டிக்கு அனுப்பி, மூன்றாவதை ஆயரின் பொறுப்பில் ஒப்படைத்தார். இங்கேயே தங்கிவிட்ட அந்தத் திருவுருவமே விண்ணேற்பு மாதா — இந்தப் பீடத்தின் மேல் இன்று நிற்கும் திருவுருவம்; ஒரு நாள் கண்ணீர் சிந்தப்போகும் அதே திருவுருவம்.`,
             },
             {
@@ -1962,8 +1990,8 @@ export const dict = {
             },
             {
               year: `1773–1775`,
-              title: `பழைய தந்தையருள் கடைசியானவர்`,
-              body: `1773-ஆம் ஆண்டில், திருத்தந்தை பதினான்காம் கிளமெண்ட் உலகின் ஒவ்வொரு நாட்டிலும் இயேசு சபையை ஒடுக்கினார். திருநெல்வேலியில் எஞ்சியிருந்த இயேசு சபையினர் — இங்கும், தளையிலும், மணப்பாட்டிலும் — ஒருவர் பின் ஒருவராக இறந்தனர்; அவர்களது இடங்களைக் கோவாவிலிருந்து வந்த அருட்தந்தையர் நிரப்பினர். இங்கிருந்த பழைய தந்தையருள் கடைசியானவர் கிளமெண்ட் தோமஸினி. தம் முடிவு நெருங்குவதை உணர்ந்த அவர், “தளையில் இருந்த அருட்தந்தை அந்தோணி துவார்த்தேயிடம் தம்மைத் தூக்கிச் செல்லச் செய்தார்”; எழுபத்தைந்து வயதில், 1775-ஆம் ஆண்டில் அங்கேயே இறந்தார். அவருடன், வடக்கன்குளத்தின் முதல் இயேசு சபை நூற்றாண்டு முடிவுக்கு வந்தது.`,
+              title: `பழைய அருட்தந்தையருள் கடைசியானவர்`,
+              body: `1773-ஆம் ஆண்டில், திருத்தந்தை பதினான்காம் கிளமெண்ட் உலகின் ஒவ்வொரு நாட்டிலும் இயேசு சபையை ஒடுக்கினார். திருநெல்வேலியில் எஞ்சியிருந்த இயேசு சபையினர் — இங்கும், தளையிலும், மணப்பாட்டிலும் — ஒருவர் பின் ஒருவராக இறந்தனர்; அவர்களது இடங்களைக் கோவாவிலிருந்து வந்த அருட்தந்தையர் நிரப்பினர். இங்கிருந்த பழைய அருட்தந்தையருள் கடைசியானவர் கிளமெண்ட் தோமஸினி. தம் முடிவு நெருங்குவதை உணர்ந்த அவர், “தளையில் இருந்த அருட்தந்தை அந்தோணி துவார்த்தேயிடம் தம்மைத் தூக்கிச் செல்லச் செய்தார்”; எழுபத்தைந்து வயதில், 1775-ஆம் ஆண்டில் அங்கேயே இறந்தார். அவருடன், வடக்கன்குளத்தின் முதல் இயேசு சபை நூற்றாண்டு முடிவுக்கு வந்தது.`,
             },
           ],
         },
@@ -1980,12 +2008,12 @@ export const dict = {
             },
             {
               year: `1775-க்குப் பின்`,
-              title: `அவர்கள் விட்டுவிடாத தந்தை`,
+              title: `ஊரார் விட்டுவிடாத அருட்தந்தை`,
               body: `தோமஸினியை அவர்கள் ஒருபோதும் விட்டுவிடவில்லை. தம் வாழ்நாளில் அவர் தம் மென்மையால் அவர்களை வென்றிருந்தார், அவர்களுடைய ஆலயத்தை நிறைவுசெய்திருந்தார்; அறுபத்து மூன்று ஆண்டுகளுக்கு அவர்களுக்குக் கிடைக்கவிருந்த கடைசி இயேசு சபைத் தந்தையும் அவரே. அவர் ஊரைவிட்டு வெளியே இறந்தார், வேறோர் இடத்தில் அடக்கமும் செய்யப்பட்டார்; ஆயினும் அவருடைய மக்கள் “தங்கள் நடுவே ஒரு நினைவுச் சின்னத்தை எழுப்பி,” அவரது நினைவை ஒரு புனிதரின் நினைவாகவே காத்தார்கள். அவர் இறந்து தொண்ணூறு ஆண்டுகள் கழித்தும், இப்பகுதியைப் பற்றி எழுதிய ஓர் இயேசு சபை அருட்தந்தை நிகழ்காலத்தையே பயன்படுத்தினார்: “கிறிஸ்தவர்கள் அவரைப் புனிதராகப் போற்றுகிறார்கள், தம் பிள்ளைகளுக்கு அவரது பெயரைச் சூட்டுகிறார்கள், மிகுந்த பக்தியுடன் அவரது கல்லறையைத் தரிசிக்கிறார்கள்.” கிறிஸ்தவர் அல்லாதவர்களும்கூடத் தம் துன்பங்களில் அவரையே அழைத்தார்கள்; அவரது பரிந்துரையால்தான் தம் பயிர்களின் மேல் மழை பொழிகிறது என்று அவர்கள் நம்பினார்கள் என்றும் அவர் சேர்த்து எழுதுகிறார்.`,
             },
             {
               year: `1803`,
-              title: `ஐப்பசி மாத வெள்ளிக்கிழமை ஒரு முற்பகல்`,
+              title: `ஐப்பசியில் ஒரு வெள்ளிக்கிழமை முற்பகல்`,
               body: `1803-ஆம் ஆண்டு அக்டோபர் 21, வெள்ளிக்கிழமை முற்பகலில் — தமிழ் ஆண்டு 979, ஐப்பசி மாதம் — இவ்வூரில் குடியேறியிருந்த ஐரோப்பியரான திரு. பில்டர்பெக்கைச் சந்திக்கத் திருநெல்வேலியிலிருந்து வந்திருந்த சவரிமுத்து பிள்ளை என்பவர், செபிப்பதற்காக ஆலயத்திற்குள் நுழைந்தார். பீடத்திற்கு மேலே, இரட்டைக் கதவு கொண்ட ஒரு மாடத்தில் விண்ணேற்பு மாதாவின் திருவுருவம் நின்றது; அன்று காலை அதன் இரு கதவுகளுமே திறந்திருந்தன. அவர் முழந்தாளிட்டிருக்கையில், மெல்லிய ஒளி ஊடுருவும் மேகம் ஒன்று அன்னைக்குப் பின்னால் திரண்டு அவரைச் சுற்றிப் போர்த்தியது. அவருடைய கண்கள் விண்ணை நோக்கி உயர்ந்து நிறைந்தன, கன்னங்களில் கண்ணீர் வழிந்தோடியது; முகம் துயரம் கொண்டது; கூப்பியிருந்த கைகள் பிரிந்து, மாடத்தின் சுவர்களைத் தொடும் அளவுக்கு வெளிநோக்கி நீண்டன. பீடத்தில் இருந்த மற்ற ஒவ்வொரு திருவுருவமும் “இரக்கத்தையும் துயரத்தையும் வெளிப்படுத்தின” என்று பதிவு சொல்கிறது. “நான் ஒரு மயக்கத்திற்கு ஆளாகிவிட்டேன்” என்று அவர் நினைத்தார். மீண்டும், இன்னும் கூர்ந்து பார்த்தார் — அது நின்றுவிடவில்லை.`,
             },
             {
@@ -1995,7 +2023,7 @@ export const dict = {
             },
             {
               year: `1803`,
-              title: `விண்மீன்களைப் போன்ற அவரது கண்கள்`,
+              title: `விண்மீன்கள் போன்ற திருவிழிகள்`,
               body: `அதை உறுதிப்படுத்திக்கொள்ள, சவரிமுத்து மறைக்கல்வியாளர் யாகப்பர் பிள்ளையை அழைத்துவரச் சென்றார். ஆலயத்திற்குள் வந்த அந்த மறைக்கல்வியாளர், புகையும் இருளும் சூழ நின்ற இறைவனின் அன்னையைக் கண்டார் — முகம் வெறுமையும் துயரமும் கொண்டிருந்தது, கரங்கள் விரிந்திருந்தன, கண்கள் விண்ணை நோக்கி உயர்ந்து கண்ணீர் சொரிந்துகொண்டிருந்தன. உடனே திரு. பில்டர்பெக்கின் மகள் ஹென்ரியட்டை விரைந்து அழைத்துவரச் சொல்லி ஆள் அனுப்பினார்கள்; அப்பெண் ஆலயத்திற்கு ஓடிவந்து தன் முறையில் அதைக் கண்டாள். அன்னையின் முகத்தை உற்றுநோக்கியபோது, அவரது கண்கள் “விண்மீன்களைப் போல” இருந்ததையும், அவற்றிலிருந்து உடைந்து வழிந்த கண்ணீர் “தரையில் விழுந்து அதை நனைக்கும்” அளவுக்கு மிகுதியாய் இருந்ததையும், புனிதர்களின் திருவுருவங்கள் அனைத்தும் ஒருசேரத் துயரத்தில் தலை தாழ்த்தி நின்றதையும் அவள் கண்டாள்.`,
             },
             {
@@ -2010,18 +2038,18 @@ export const dict = {
             },
             {
               year: `1838`,
-              title: `இன்னும் கேட்டறியக் கிடைத்தவர்கள்`,
+              title: `அப்போதும் கேட்கக் கிடைத்தவர்கள்`,
               body: `1838-ல் இயேசு சபையினர் திரும்பி வந்தபோது, அந்தக் காலைப் பொழுது இன்னும் உயிருள்ள நினைவுக்குள்ளேயே இருந்தது. வந்து சேர்ந்த தந்தையருக்கும் அந்நாளுக்கும் இடையே முப்பத்தைந்து ஆண்டுகளே இருந்தன; அன்று ஆலயத்தில் இருந்த பலர் கேட்டறியப்படுவதற்கு அப்போதும் உயிரோடு இருந்தார்கள். வடக்கன்குளத்தை முதலில் வந்தடைந்தவர்கள், இப்பணிக்களத்தின் ஓர் இயேசு சபை அருட்தந்தை பின்னாளில் எழுதியதுபோல, “அம்மரபின் வலிமைமிக்க சூழலால் போர்த்தப்பட்டு, அதில் ஊறியவர்கள் போல” தங்களைக் கண்டார்கள்; ஊர் மனமுவந்து சொன்னதைக் கேட்டால் மட்டுமே அனைத்தையும் அறிய முடிந்தது, அவர்களும் தம் முறையில் அதன் சாட்சிகளாயினர். இக்கதையைச் சொன்ன ஒருவர்கூட விட்டுவிடாத, ஊர் எப்போதும் சேர்த்துச் சொன்ன ஒரு செய்தி உண்டு: ஆலயம் நிறைந்திருந்தது, பீடத்தின் ஏராளமான மெழுகுதிரிகள் ஏற்றப்பட்டிருந்தன, அனைவரும் முழந்தாளிட்டிருந்தார்கள்; ஒருவர் ஏறிச் சென்று கண்ணீரைத் துடைத்தார் — அதை நிறுத்தவும் முடியவில்லை, குறைக்கவும் முடியவில்லை. அந்த இயலாத இரக்கமே மக்களை உடைத்தது. மார்பில் அறைந்துகொண்டார்கள், “ஆண்டவரே, எங்கள்மேல் இரக்கமாயிரும்” என்றார்கள், “சல்வே ரெஜீனா” பாடலைப் பாடினார்கள்.`,
             },
             {
               year: `1905`,
-              title: `அவரது கைகளை அசைக்க முயன்றார்`,
+              title: `அன்னையின் திருக்கரங்களை அசைத்துப் பார்த்தார்`,
               body: `அந்தக் காலைப் பொழுதுக்கு நூறு ஆண்டுகளுக்குப் பின், இப்பணிக்களத்தின் ஓர் இயேசு சபை அருட்தந்தை தாமே பார்த்தறிய வந்தார். ஊரார் அத்திருவுருவத்தின் இயங்கும் ஒரு நகலைச் செய்து வைத்திருந்தார்கள்: உள்ளே குழிவான போலி உருவம், அதற்குள் கம்பிகளும் கோல்களும்; ஒரு முறை இழுத்தால் தலை உயரும், கண்கள் விண்ணை நோக்கும், கைகள் பிரியும், கரங்கள் விரியும்; இரண்டாம் முறை இழுத்தால் அனைத்தும் பழையபடி அமையும். “எங்களுக்காக அப்புதுமையை மீண்டும் செய்துகாட்ட அவர்கள் அன்புடன் இசைந்தார்கள்” என்று அவர் எழுதினார். அது சுமுகமாக நடக்கவில்லை; இயக்கியவர் தம் சரடுகளை ஒன்றுக்கு மேற்பட்ட முறை குழப்பிக்கொண்டார். பின்னர் அவர் திருவுருவத்தையே நோக்கிச் சென்றார் — நற்கருணைப் பேழைக்கு மேலே தன் மாண்புமிக்க இடத்தில் தனித்து நின்ற அத்திருவுருவத்தின் மேல் தம் சொந்தக் கைகளை வைத்தார். தலையை நேராக்கவும், இமைகளை உயர்த்தவும், கண்களை உருட்டவும், எல்லாவற்றுக்கும் மேலாக ஒரே மரத்துண்டில் செதுக்கப்பட்ட அந்த இரு கைகளைப் பிரிக்கவும், விறைத்த கரங்களை விரிக்கவும் முயன்றார். வீண் உழைப்பு. அது மூலப்பொருளின் — காய்ந்த மரக்கட்டையின் — உயிரற்ற எதிர்ப்பு. விசுவாசத்தின் விசாரணையாளர் என்று தாமே அபகரித்துக்கொண்ட அந்தப் பொறுப்பை அவர் கைவிட்டார்; மகிழ்ச்சியோடு கைவிட்டு, முழந்தாளிட்டார்.`,
             },
             {
               year: `1914`,
-              title: `மூன்று சாட்சிகள், மூன்று வெவ்வேறு கைகள்`,
-              body: `அந்தக் காலைப் பொழுது முழுவதும் ஒரே ஒரு வழியில்தான் நம்மை வந்தடைந்தது என்று நெடுங்காலம் கருதப்பட்டது: லெயோன் பெஸ்ஸின் “லா மிஸியோன் து மதுரே”, 1914-ல் திருச்சிராப்பள்ளியில் அச்சிடப்பட்டது; மதுரைப் பணிக்களத்தின் ஆவணங்களைத் திரட்டி, 1803-ஆம் ஆண்டைப் பற்றிய இப்பங்கின் பதிவை அச்சில் ஏற்றியது அந்நூலே. ஆனால் அப்படியல்ல. பெஸ்ஸுக்கு ஒன்பது ஆண்டுகளுக்கு முன்பே, இப்பணிக்களத்தின் ஓர் இயேசு சபை அருட்தந்தையான தெசால், அப்பதிவை முழுமையாக அச்சிட்டிருந்தார்; 1930-ல், மலையாளத்தில், முற்றிலும் வேறொரு மரபில் எழுதப்பட்ட தேவசகாயத்தின் வாழ்க்கை வரலாறு ஒன்று, அதே ஐரோப்பியப் பெண்மணி அதே மூன்று அடையாளங்களை ஆராய்ந்ததைப் பதிவு செய்தது. மூன்று சாட்சிகள், மூன்று வெவ்வேறு கைகள்; ஒருவர் இன்னொருவரை நகலெடுக்கவில்லை. இது ஒருபோதும் உரோமைக்குக் கொண்டு செல்லப்படவில்லை; எந்த ஆய்வுக்குழுவும் இதை எடைபோட்டதில்லை. ஆயினும் இவ்வூர் எப்போதும் இதைச் சுமந்து வந்த வழியிலேயே இது நம்மை வந்தடைகிறது: நாள் குறிக்கப்பட்ட ஒரு காலைப் பொழுது, பெயர் சொல்லப்பட்ட சாட்சிகள், இருநூற்று இருபது ஆண்டுகளாக விடாமல் கொண்டாடப்படும் ஒரு திருவிழா.`,
+              title: `மூன்று சாட்சிகள், மூன்று வெவ்வேறு கைகளில்`,
+              body: `அந்தக் காலைப் பொழுது முழுவதும் ஒரே ஒரு வழியில்தான் நம்மை வந்தடைந்தது என்று நெடுங்காலம் கருதப்பட்டது: லெயோன் பெஸ்ஸின் “லா மிஸியோன் து மதுரே”, 1914-ல் திருச்சிராப்பள்ளியில் அச்சிடப்பட்டது; மதுரைப் பணிக்களத்தின் ஆவணங்களைத் திரட்டி, 1803-ஆம் ஆண்டைப் பற்றிய இப்பங்கின் பதிவை அச்சில் ஏற்றியது அந்நூலே. ஆனால் அப்படியல்ல. பெஸ்ஸுக்கு ஒன்பது ஆண்டுகளுக்கு முன்பே, இப்பணிக்களத்தின் ஓர் இயேசு சபை அருட்தந்தையான தெசால், அப்பதிவை முழுமையாக அச்சிட்டிருந்தார்; 1930-ல், மலையாளத்தில், முற்றிலும் வேறொரு மரபில் எழுதப்பட்ட தேவசகாயத்தின் வாழ்க்கை வரலாறு ஒன்று, அதே ஐரோப்பியப் பெண்மணி அதே மூன்று அடையாளங்களை ஆராய்ந்ததைப் பதிவு செய்தது. மூன்று சாட்சிகள், மூன்று வெவ்வேறு கைகளில்; ஒருவர் இன்னொருவரை நகலெடுக்கவில்லை. இது ஒருபோதும் உரோமைக்குக் கொண்டு செல்லப்படவில்லை; எந்த ஆய்வுக்குழுவும் இதை எடைபோட்டதில்லை. ஆயினும் இவ்வூர் எப்போதும் இதைச் சுமந்து வந்த வழியிலேயே இது நம்மை வந்தடைகிறது: நாள் குறிக்கப்பட்ட ஒரு காலைப் பொழுது, பெயர் சொல்லப்பட்ட சாட்சிகள், இருநூற்று இருபது ஆண்டுகளாக விடாமல் கொண்டாடப்படும் ஒரு திருவிழா.`,
             },
           ],
         },
@@ -2034,7 +2062,7 @@ export const dict = {
             {
               year: `1838`,
               title: `மனதைத் தொடும் ஒரு மகிழ்ச்சிப் பெருக்கு`,
-              body: `1838-ஆம் ஆண்டில், மீண்டும் நிலைநாட்டப்பட்ட இயேசு சபை தென்னகப் பணிக்களத்திற்குத் திரும்பி வந்தது; வந்தவர்கள் இரு பிரெஞ்சு அருட்தந்தையர் — மார்த்தினும் து ரான்கேயும். ஜூன் மாதம் அருட்தந்தை மார்த்தின் தெற்கே வடக்கன்குளத்திற்கு வந்தார் — “மக்கள்தொகையாலும் குடிமக்களின் மாண்பாலும் குறிப்பிடத்தக்க ஒரு கிறிஸ்தவ சமூகம்; மனதைத் தொடும் ஒரு மகிழ்ச்சிப் பெருக்கோடு அவர்கள் எங்களை வரவேற்றார்கள்.” மறுநாள், சுற்றியிருந்த எல்லா ஊர்களிலிருந்தும் தூதுக்குழுக்கள் காணிக்கைகளுடன் ஓடிவந்து, “நெடுங்காலமாய்த் தம் மேய்ப்பரை இழந்திருந்த” தங்கள் ஆலயங்களுக்கும் வருமாறு அவரை மன்றாடின. அன்று பிற்பகல் நாற்பத்தைந்து குழந்தைகள் திருமுழுக்குப் பெற்றார்கள். அறுபத்து மூன்று ஆண்டுகளுக்குப் பின், 1752-ஆம் ஆண்டின் செங்கல் ஆலயத்தில் மீண்டும் ஓர் இயேசு சபைத் தந்தை; அவர் முன்னால், வளர்ந்துகொண்டே இருந்த ஒரு சபை.`,
+              body: `1838-ஆம் ஆண்டில், மீண்டும் நிலைநாட்டப்பட்ட இயேசு சபை தென்னகப் பணிக்களத்திற்குத் திரும்பி வந்தது; வந்தவர்கள் இரு பிரெஞ்சு அருட்தந்தையர் — மார்ட்டினும் து ரான்கேயும். ஜூன் மாதம் அருட்தந்தை மார்ட்டின் தெற்கே வடக்கன்குளத்திற்கு வந்தார் — “மக்கள்தொகையாலும் குடிமக்களின் மாண்பாலும் குறிப்பிடத்தக்க ஒரு கிறிஸ்தவ சமூகம்; மனதைத் தொடும் ஒரு மகிழ்ச்சிப் பெருக்கோடு அவர்கள் எங்களை வரவேற்றார்கள்.” மறுநாள், சுற்றியிருந்த எல்லா ஊர்களிலிருந்தும் தூதுக்குழுக்கள் காணிக்கைகளுடன் ஓடிவந்து, “நெடுங்காலமாய்த் தம் மேய்ப்பரை இழந்திருந்த” தங்கள் ஆலயங்களுக்கும் வருமாறு அவரை மன்றாடின. அன்று பிற்பகல் நாற்பத்தைந்து குழந்தைகள் திருமுழுக்குப் பெற்றார்கள். அறுபத்து மூன்று ஆண்டுகளுக்குப் பின், 1752-ஆம் ஆண்டின் செங்கல் ஆலயத்தில் மீண்டும் ஓர் இயேசு சபைத் தந்தை; அவர் முன்னால், வளர்ந்துகொண்டே இருந்த ஒரு சபை.`,
             },
             {
               year: `1839`,
@@ -2068,12 +2096,12 @@ export const dict = {
             },
             {
               year: `1863`,
-              title: `அது கேட்ட விலை, கல்லில் எழுதப்பட்டது`,
+              title: `கல்லில் எழுதப்பட்ட விலை`,
               body: `அந்தப் பதினேழு ஆண்டுகள் என்ன விலை கேட்டன என்பது ஆலயத்தின் அருகிலேயே எழுதப்பட்டுள்ளது. “வடக்கன்குளத்துக் கிறிஸ்தவர்களின் பக்தி, தங்கள் ஆலயத்தின் அருகே, 1863 ஜனவரி 25-ல் இறந்த அருட்தந்தை ஊஜென் ரொசினியோலுக்கு ஓர் எளிய கல்லறையை எழுப்பியது.” கள்ளிகுளத்துக் கிறிஸ்தவர்களைக் காலரா நோயில் பணிவிடை செய்யும்போதே அந்நோய் அவரையும் பிடித்தது. அங்கே அடக்கம் செய்யப்பட்ட கடைசி மனிதர் அவர் அல்ல. அருட்தந்தை விக்தோர் தெல்பெஷ் இறுதிக் காலத்தில் மீண்டும் இவ்வூருக்கே வந்தார்; காய்ச்சல் அவரைக் கொண்டு சென்றது; அருட்தந்தை பூஜே அவர்களின் கைகளிலேயே அவர் இறந்தார். அவரது கல் அந்த நாளையும் தருகிறது — 1887 ஜனவரி 16 — அவர் பிறந்த ஆண்டையும்: 1835. அவருக்குப் பின், 1899-ஆம் ஆண்டில், எழுபத்தெட்டு வயதில், அருட்தந்தை ரெமீஜியுஸ் பெர்னாண்டஸ். அக்கற்கள் இன்றும் படிக்கும்படியே உள்ளன; தெல்பெஷின் கல்லின் அடியில் உள்ள இலத்தீன் வரி, அவற்றை அங்கே நிறுவியவர் யார் என்பதைச் சொல்கிறது: அவரது சபைச் சகோதரர்களே இக்கல்லறையையும் அதைச் சுற்றியுள்ளவற்றையும் எழுப்பினார்கள்.`,
             },
             {
               year: `சுமார் 1864`,
-              title: `ஓர் அரசு எழுத்தர் அவர்களை நினைவில் வைத்தார்`,
+              title: `ஓர் அரசு எழுத்தர் அவர்களைக் குறித்து வைத்தார்`,
               body: `சுமார் 1864-ஆம் ஆண்டைய பணிக்கள விவரங்களில், திருநெல்வேலி இயேசு சபைப் பணிக்களம் முழுவதிலும் மூன்று மடங்களை ஒரு பிரிட்டிஷ் மாவட்டக் கையேடு கணக்கிடுகிறது: ஒன்று தூத்துக்குடியில், ஒன்று அடைக்கலபுரத்தில், மற்றொன்று “வடக்கன்குளத்தில் நாட்டு அருட்சகோதரிகளுக்கான ஒரு மடம்.” முத்துக்குளிக் கடற்கரையிலிருந்து விலகி நின்ற ஒரே மடம் அதுவே. பணிக்களம் முழுவதிலும் இந்திய அருட்சகோதரிகள் பதினேழு பேர், ஐரோப்பிய அருட்சகோதரிகள் பன்னிரண்டு பேர்; மாபெரும் ஆலயம் இன்னும் கட்டுமானத் தளமாகவே இருந்தபோது, அவ்விந்திய அருட்சகோதரிகளின் இல்லம் ஒன்று இங்கே, உள்நாட்டில், நின்றது. அப்போது அவர்கள் இன்னும் ஒரு சபையாகவே ஆக்கப்படவில்லை: 1859 முதல் இந்தியப் பெண்களைத் துறவற வாழ்வில் இணைத்து வந்த பணிக்களம், 1876-ஆம் ஆண்டுதான் அவர்களை ஒரு சபையாக நிலைநாட்டியது; எனவே இவ்வூரில் இருந்த அச்சகோதரிகள், அறிக்கையிட ஒரு விதிமுறையே உருவாகும் முன்பிருந்த அந்தப் பொறுமையான ஆண்டுகளைச் சேர்ந்தவர்கள். எந்தப் பங்கு ஆவணமும் அவர்களை நினைவில் வைக்கவில்லை. ஓர் அரசு எழுத்தர் வைத்திருந்தார்.`,
             },
             {
@@ -2097,11 +2125,11 @@ export const dict = {
           id: `little-rome`,
           span: `1889–1944`,
           heading: `சின்ன ரோமாபுரி`,
-          blurb: `நள்ளிரவுத் திருப்பலியில் ஒரு அன்னியர்; ஒரு திருவிழாத் தேர்; இடித்து அகற்றப்பட்ட ஒரு சுவர்; ஒரு புதிய மறைமாவட்டம் — பின், 1926-ல் ஓர் ஆயர் சொன்ன இரண்டே சொற்கள், இவ்வூரின் இரண்டாம் பெயராகவே ஆயின.`,
+          blurb: `நள்ளிரவுத் திருப்பலியில் ஒரு புதியவர்; ஒரு திருவிழாத் தேர்; இடித்து அகற்றப்பட்ட ஒரு சுவர்; ஒரு புதிய மறைமாவட்டம் — பின், 1926-ல் ஓர் ஆயர் சொன்ன இரண்டே சொற்கள், இவ்வூரின் இரண்டாம் பெயராகவே ஆயின.`,
           dots: [
             {
               year: `1889`,
-              title: `நள்ளிரவுத் திருப்பலியில் ஒரு அன்னியர்`,
+              title: `நள்ளிரவுத் திருப்பலியில் ஒரு புதியவர்`,
               body: `ஒரு கிறிஸ்துமஸ் முன்னிரவில் இவ்வழியே வந்த ஒரு பயணி, தான் கண்டதை எழுதி வைத்தார்: பிற்பகல் நான்கு மணி, தோரணங்கள் கட்டப்பட்ட நீண்ட தெருவின் முடிவில் ஆலயம், ஆரவாரத்துடன் அவரை வரவேற்க இரண்டாயிரம் பேர் காத்திருந்தார்கள். நள்ளிரவுக்கு முன் அவர் மீண்டும் வந்தபோது இரு மண்டபங்களும் கிட்டத்தட்ட நிரம்பியிருந்தன; அவர் எதிர்பார்த்திருந்த ஆரவாரமோ எங்கும் இல்லை. “ஆவிகளைப் போல அமைதியாகவும் மெல்லவும், நீண்ட வெண்ணிற ஆடைகளைப் போர்த்திய கிறிஸ்தவர்கள் ஆலயத்திற்குள் நுழைந்தார்கள்; வெறுங்காலுடன் கற்தளத்தின் மேல் நழுவி நடந்து, தரையில் முழந்தாளிட்டார்கள்; ஒரு பெரிய தீபத்தொங்கலின் மங்கிய ஒளி அவர்களின் ஒளிரும் முகங்களில் விழுந்தது.” கைகளை அவர்களை நோக்கி நீட்டியபடி நின்ற குழந்தை இயேசுவின் மெழுகு உருவத்தைச் சுற்றி அவர்கள் முழந்தாளிட்டார்கள்; இரு மண்டபங்களும் மாறி மாறிப் பாடின, ஒவ்வொன்றையும் அதனதன் மறைக்கல்வியாளர் வழிநடத்தினார். பின் நற்கருணை; அனைவரும் எழுந்தார்கள்: “அந்தத் திரு விருந்து மேசையின் முன் எல்லா வேறுபாடுகளும் மறைந்துபோயின; அவர்கள் அனைவரும் கடவுளின் பிள்ளைகளாக, ஒரே இதயமாக, ஒரே ஆன்மாவாக இருந்தார்கள்.” அனைவருக்கும் ஒரே பீடம் — 1855-ஆம் ஆண்டின் அடிக்கல் வாக்களித்திருந்ததை, ஓர் அன்னியர் பீடத்தடியில் நிகழக் கண்டார்.`,
             },
             {
@@ -2144,17 +2172,17 @@ export const dict = {
         {
           id: `town-of-learning`,
           span: `1892–1970`,
-          heading: `கல்வி நகரம்`,
+          heading: `கல்வி தழைத்த ஊர்`,
           blurb: `ஊர்ச் சிறுமிகளுக்கு எழுத்துக் கற்பித்த அருட்சகோதரிகள், லேஸுக்கும் ஊசிக்கும் ஒரு பள்ளி, இறுதியில் நாற்பது படுக்கைகள் கொண்ட ஒரு மருத்துவமனை — ஏழ்மையான ஒரு பங்கு தனக்குத் தானே கட்டிக்கொண்ட ஏணி.`,
           dots: [
             {
               year: `1892`,
-              title: `சிறுமிகளுக்கு எழுத்துக் கற்பிக்கப்பட்டது`,
+              title: `சிறுமியர் எழுத்துப் பயின்ற நாள்`,
               body: `அருட்சகோதரிகள் வருவதற்கு நெடுங்காலம் முன்பே இவ்வூரில் ஒரு பெண்கள் பள்ளி இருந்ததாகச் சொல்லப்படுகிறது: சர்ச் மிஷனரி சொசைட்டியைச் சேர்ந்த ரேனியுஸ், ஸ்மிட் ஆகியோர் 1821-ஆம் ஆண்டில் இங்கே ஒன்றைத் தொடங்கி, எழுத்தோடு சேர்த்து ஊசிவேலையையும் லேஸ் பின்னலையும் கற்பித்ததாக நினைவுகூரப்படுகிறது. ஏழு வியாகுல அன்னையின் அருட்சகோதரிகள் இந்தியத் துறவறப் பெண்கள்; 1876-ஆம் ஆண்டு திருச்சிராப்பள்ளியில் உருவானவர்கள். 1892-ஆம் ஆண்டளவில் அவர்கள் அறுபத்தைந்து பேர்; அந்நகருக்கு அப்பால் அவர்கள் நடத்திய நான்கு இல்லங்களுள் ஒன்று இங்கே இருந்தது. சிறுமியருக்குக் கல்வி அளிப்பதே அவர்களின் தனிச்சிறப்புப் பணி; “எங்கும் அவர்கள் செழித்தோங்கும் பள்ளிகளை நடத்துகிறார்கள்” என்று அவர்களைப் பற்றி எழுதப்பட்டது. இயேசு சபையின் உரோமைப் பதிவேடு, வடக்கன்குளத்தின் அருட்தந்தையை அம்மடத்தின் ஆன்மிகக் குருவாகவும் அதன் பள்ளியின் இயக்குநராகவும் குறித்து வைக்கிறது — 1900-ஆம் ஆண்டிலும், மீண்டும் 1914-ஆம் ஆண்டு அருட்தந்தை கௌசானல் அவர்கள் காலத்திலும். பெரும்பாலான பெண்களுக்கு வாசிக்கவே கற்பிக்கப்படாத ஒரு நாட்டில், இவ்வூர்ச் சிறுமிகளுக்கு வாசிக்கக் கற்பிக்கப்பட்டது.`,
             },
             {
               year: `சுமார் 1922`,
-              title: `லேஸ், நூல், ஊசி`,
+              title: `லேஸும் நூலும் ஊசியும்`,
               body: `1921-ஆம் ஆண்டில் அருட்சகோதரிகளின் ஊசிவேலைப் பள்ளிக்கு ஓர் ஆய்வாளர் வந்து பார்வையிட்டார். 1922 முதல் அவர்கள் ஊசிவேலை, சித்திரத் தையல், லேஸ், பின்னல், ஆடை தைத்தல் ஆகியவற்றைக் கற்பித்து வந்தார்கள்; 1966-ஆம் ஆண்டில் தையல் பள்ளியின் முழுப் பொறுப்பும் அவர்கள் கைக்கே வந்தது. ஆர்.சி. லேஸ் தொழிற்பள்ளியும் ஒசானம் தையல் நிலையமும் இன்றுவரை இப்பங்கின் பணிகளுள் ஒன்றாக எண்ணப்படுகின்றன. இவ்வூர் தன் மகள்களுக்காகக் கட்டிய அந்த ஏணியின் இரண்டாவது படி இவையே: முதலில் எழுத்து, பின் விரல்களில் ஒரு தொழில், பின் மழையை நம்பியிராத ஓர் ஊதியம்.`,
             },
             {
@@ -2768,8 +2796,8 @@ export const dict = {
     architecture: {
       label: `ஆலயம்`,
       title: `சின்ன ரோமின் கட்டிடக்கலை`,
-      intro: `கவராயம் திறந்தாற்போல் விரிந்து, ஒரே பலிபீடத்தில் சந்திக்கும் இரு நடைகள். சுண்ணாம்பிலும் பதனீரிலும் எழுப்பப்பட்ட இருபத்து நான்கு வளைவுகள் — இரும்பே இல்லாத ஒரு கூரையைத் தாங்கி நிற்கின்றன. தொண்ணூற்றிரண்டு அடி உயரமான இரட்டைக் கோபுரங்கள் — அவற்றால்தான் இவ்வூருக்கே ஒரு புதிய பெயர் கிடைத்தது.`,
-      heroAlt: `தெளிந்த வானின் பின்னணியில், வடக்கன்குளம் திருக்குடும்ப ஆலயத்தின் வெண்ணிறக் கோத்திக் முகப்பு — இரட்டை எண்கோணக் கோபுரங்களும் சிகரங்கள் நிறைந்த கூரையோரமும்`,
+      intro: `கவராயம் திறந்தாற்போல் விரிந்து, ஒரே பலிபீடத்தில் சந்திக்கும் இரு நடைகள். சுண்ணாம்பிலும் பதனீரிலும் திரும்பும் இருபத்து நான்கு வளைவுகள், இரும்பே இல்லாத ஒரு கூரையைத் தாங்கி நிற்கின்றன. தொண்ணூற்றிரண்டு அடி வானளாவி உயரும் இரட்டைக் கோபுரங்கள், இவ்வூருக்கே ஒரு புதிய பெயரைத் தந்தன.`,
+      heroAlt: `தெளிந்த வானின் பின்னணியில், வடக்கன்குளம் திருக்குடும்ப ஆலயத்தின் வெண்ணிறக் கோத்திக் முகப்பு, இரட்டை எண்கோணக் கோபுரங்களும் சிகரங்கள் நிறைந்த கூரையோரமும்`,
       peel: {
         label: `ஆலயத்தின் காட்சிப்படம்`,
         title: `சின்ன ரோமாபுரி எழுகிறது`,
@@ -2813,10 +2841,12 @@ export const dict = {
           },
         ],
       },
-      overtureLabel: `எண்ணம்`,
-      overtureLead: `விசுவாசப் பிரமாணத்தைப் போலப் படிக்கக்கூடிய ஆலயம் இது — கல்லில் அமைந்த ஒவ்வொரு எண்ணும் விசுவாசத்தின் ஒரு உண்மையைச் சுட்டி நிற்கும் கட்டிடம்.`,
-      overtureP1: `வடக்கன்குளத்தின் மூன்றாவதும் மிகப் பெரியதுமான ஆலயத்தை எழுப்ப இயேசு சபையினர் புறப்பட்டபோது, அருட்தந்தை ஜோசப் கிரகோயர் அதற்கு வேறெங்கும் அரிதாகவே காணக் கிடைக்கும் ஒரு வடிவம் தந்தார்: திறந்த கவராயம் போன்ற ஒரே கட்டிடம் — வாசல்களில் அகன்று விரிந்து, கிழக்கு நோக்கிச் செல்லச் செல்ல நெருங்கி, ஒரே பலிபீடத்தில் சந்திக்கும் இரு நடைகள்.`,
-      overtureP2: `இதைக் கட்டி முடிக்கப் பதினேழு ஆண்டுகள் சென்றன. எழுந்த கட்டிடம் எந்த அளவுக்கு வழக்கத்திற்கு மாறானது என்றால், “ஒருவேளை உலகிலேயே இணையற்றது” என்று ஓர் இயேசு சபை வரலாற்றாசிரியர் அத்திட்டத்தைக் குறிப்பிட்டார். அன்று முதல் இவ்வூர் சின்ன ரோமாபுரி.`,
+      overtureLabel: `மேலே பார்ப்பதற்கு முன்`,
+      overtureLead: `பங்கு தானே அதைச் சொல்வதற்கு முன்பே, ஓர் அந்நியர் அதைச் சொன்னார். 1894-இல் ஓர் இயேசு சபை பிரெஞ்சு வரலாற்றாசிரியர் இவ்வாலயத்தைப் பார்த்து, “ஒருவேளை உலகிலேயே இணையற்றது” என்று எழுதினார்.`,
+      overtureP1: `மற்றவர்களும் அதையே, தத்தம் வார்த்தைகளில் சொன்னார்கள். 1885-இல் ஒரு ஜெர்மன் கத்தோலிக்க மாத இதழ் இதை “கட்டிடக்கலையின் ஒரு தலைசிறந்த படைப்பு” என்று புகழ்ந்தது, இதைக் கட்டிய மனிதருக்கே அப்புகழைச் சேர்த்தது: சகோதரர் பெர்கந்தால். மறைமாவட்டத்தைப் புகழவேண்டிய அவசியமே இல்லாத பிரிட்டிஷ் மாவட்ட புவியியல் குறிப்பேடு கூட, இதை வெறுமனே “அழகிய ஆலயம்” என்று அழைத்தது.`,
+      overtureP2: `அந்தப் புகழுக்குப் பின்னால் இரண்டு பேர் நின்றனர். பங்குத் தந்தை ஜோசப் கிரகோயர் பதினேழு ஆண்டுகள் கட்டிடம் எழுப்பும் பணியில் இருந்தார்; திட்டம் அவருடையதே: வாசல்களில் அகன்று விரிந்து, கிழக்கு நோக்கிச் செல்லச் செல்ல நெருங்கி, ஒரே பலிபீடத்தில் சந்திக்கும் இரு நடைகள். சகோதரர் ஜோசப் பெர்கந்தால் அதை நிஜமாக்கினார். முன்பு மேற்கு ஜெர்மனியில் ஒரு படைவீரர், பின்னர் இயேசு சபையின் துணைச் சகோதரர், தான் கட்டிடக்கலை பயின்று ஜெர்மனியிலும் பிரான்சிலும் உள்ள பெரும் ஆலயங்களைச் சுற்றிப் பார்த்திருப்பதாகச் சொன்னவர், அவரே திட்டங்களை வரைந்து பணியாளர்களுக்கு நேரடியாகத் தலைமை தாங்கினார். 1855-க்கும் 1872-க்கும் இடையில் அவர்கள் முழு ஆலயத்தையும் சுண்ணாம்புச் சாந்தின் மேல் மட்டுமே எழுப்பினார்கள். இரும்பு இல்லை. சிமெண்ட் இல்லை. தலைக்கு மேல் வளைவுகளில் ஒரு மர உத்திரம் கூட இல்லை.`,
+      overtureP3: `இனி வருவது அந்தப் பதினேழு ஆண்டுகளின் பட்டியல் அல்ல. இது நீங்கள் உண்மையில் சந்திக்கும் வரிசையிலேயே அறிமுகமாகும் ஆலயமே: முதலில் கண்ணில் படுவது, பின் காதில் விழுவது, பின் உள்ளே நுழையும்போது ஒளியில் மின்னுவது, இறுதியில்தான் அனைத்தும் என்ன பொருள்படுகிறது என்பது.`,
+      numbersKicker: `ஆலயம், சுருக்கமாக`,
       numbers: [
         {
           v: `17`,
@@ -2855,24 +2885,24 @@ export const dict = {
         {
           year: `1752`,
           title: `கல் ஆலயம்`,
-          body: `அருட்தந்தை புத்தாரி தொடங்கி, அருட்தந்தை தோமஸினி பெருங்குடியின் அகன்ற செங்கற்களால் முடித்த சிலுவை வடிவக் கல் ஆலயம். 1803-இல் கண்ணீர் சிந்திய திருவுருவமும், வந்து காணுமாறு ஊரை அழைத்த மணியும் இந்த ஆலயத்தினுடையவையே.`,
+          body: `அருட்தந்தை புத்தாரி தொடங்கி, அருட்தந்தை தோமஸினி பெருங்குடியின் அகன்ற செங்கற்களால் முடித்த சிலுவை வடிவக் கல் ஆலயம். பீடத்திற்கு மேல், தாய் மரியாளின் திருவுருவம் திறந்தும் மூடியும் வைக்கக்கூடிய கதவுகளுடன் கூடிய ஒரு மாடத்தில் நின்றது. 1803 அக்டோபர் அன்று அது திறந்திருந்த போதே, திருவுருவம் கண்ணீர் சிந்தத் தொடங்கியது, மணியும் வந்து காணுமாறு ஊரை அழைத்தது.`,
         },
         {
           year: `1872`,
           title: `மாபெரும் ஆலயம்`,
-          body: `1855-இல் ஆயர் கனோஸ் அடிக்கல்லை ஆசீர்வதிக்கிறார். பதினேழு ஆண்டுகளுக்குப் பின் அவரே மீண்டும் வந்து, இன்று நிற்கும் இக்கட்டிடத்தை அர்ப்பணிக்கும் திருப்பலியை நிறைவேற்றுகிறார்.`,
+          body: `1855-இல், “வடக்கன்குளத்தின் அப்போஸ்தலர்” என்று தன் மறைமாவட்டமே அழைத்த பங்குத் தந்தை ஜோசப் கிரகியின் காலத்தில், ஆயர் கனோஸ் அடிக்கல்லை ஆசீர்வதிக்கிறார். பதினேழு ஆண்டுகளுக்குப் பின், 1872 ஜூன் 27-இல் ஆசீர்வாதமும், இரு நாட்கள் கழித்து இன்று நிற்கும் இக்கட்டிடத்தை அர்ப்பணிக்கும் திருப்பலியும் நிறைவேறுகின்றன. கிரகி பின்னாளில், உடல்நலம் தேடிப் பிரான்சு திரும்பும் கடல் பயணத்திலேயே காலமானார்.`,
         },
       ],
       churchesCaption: `பங்கின் பழைய புகைப்படம் ஒன்றில் ஆலயம்`,
       planDrawTitle: `திருக்குடும்ப ஆலயத்தின் தரை வரைபடம்: ஒரே பீடப்பகுதி, ஒன்றை நோக்கி நெருங்கும் இரு நடைகள், ஐந்து வாசல்கள்`,
-      planNote: `அ. சிவசுப்பிரமணியன், “கிறித்தவமும் சாதியும்” (2001) நூலின் வரைபடம் 5-இலிருந்து மீள்வரையப்பட்டது — அச்சில் உள்ள இவ்வாலயத்தின் ஒரே அளவீட்டு வரைபடம்.`,
+      planNote: `அ. சிவசுப்பிரமணியன், “கிறித்தவமும் சாதியும்” (2001) நூலின் வரைபடம் 5-இலிருந்து மீள்வரையப்பட்டது, அச்சில் உள்ள இவ்வாலயத்தின் ஒரே அளவீட்டு வரைபடம்.`,
       motto: `TEMPLVM SIT DVPLEX, ARA SED VNA;
 FIDES VNA SIT, VNAQVE MENS.`,
       mottoTr: `ஆலயம் இரட்டையாக இருக்கட்டும், ஆனால் பலிபீடம் ஒன்றே; விசுவாசம் ஒன்றாக, மனமும் ஒன்றாக இருக்கட்டும்.`,
-      mottoCaption: `1855 ஆகஸ்ட் 9-இல் ஆசீர்வதிக்கப்பட்ட அடிக்கல்லில் பொறிக்கப்பட்டது`,
+      mottoCaption: `1872-இல் ஆசீர்வதிக்கப்பட்ட ஆலயத்தின் பலிபீடத்தில் இடம்பெற்றுள்ள வாசகம்`,
       craftLabel: `கட்டமைப்பு`,
       craftTitle: `இரும்பு ஆணி ஒன்று கூட இல்லை`,
-      craftBody: `உட்புறத்தில் இருபத்து நான்கு வளைவுகள்; அவற்றுள் பன்னிரண்டு பலிபீடத்திற்கு மேல் ஒரே மகுடமாய்ச் சேர்கின்றன. ஒன்றைக்கூடச் சிமெண்டோ, இரும்போ, மர உத்திரமோ தாங்கவில்லை — சுண்ணாம்புச் சாந்தில் எழுப்பப்பட்டு, நூற்றைம்பது ஆண்டுகளாகத் தாமே தாங்கி நிற்கின்றன. இந்தப் பொறியியல் நுட்பம், இயேசு சபையின் துணைச் சகோதரரான ஜோசப் பெர்கந்தால் அவர்களுடையது — இவ்வாலயம் பற்றிய குறிப்புகள் எவையும் அவர் பெயரைச் சொல்வதே இல்லை எனலாம்.`,
+      craftBody: `உட்புறத்தில் இருபத்து நான்கு வளைவுகள். அவற்றுள் பன்னிரண்டு பலிபீடத்திற்கு மேல் ஒரே மகுடமாய்ச் சேர்கின்றன, ஒன்றைக்கூடச் சிமெண்டோ, இரும்போ, மர உத்திரமோ தாங்கவில்லை. சுண்ணாம்புச் சாந்தில் மட்டுமே எழுப்பப்பட்டு, நூற்றைம்பது ஆண்டுகளாகத் தாமே தாங்கி நிற்கின்றன. இதன் பின்னால் நின்றவர் இயேசு சபையின் துணைச் சகோதரர் ஜோசப் பெர்கந்தால், இவ்வாலயம் பற்றிய குறிப்புகள் எவையும் பெரும்பாலும் பெயர் சொல்லாத ஒருவர். ஒரு காலத்தில் அவர் மேற்கு ஜெர்மனியில் ஒரு படைவீரராக இருந்தார். ஒரு கட்டிடத்தின் வரைபடம் வரையும் திறன் உண்டா எனக் கேட்கப்பட்டபோது, தான் கட்டிடக்கலை பயின்று ஜெர்மனியிலும் பிரான்சிலும் உள்ள பெரும் கட்டிடங்களைச் சுற்றிப் பார்த்திருப்பதாக மட்டும் பதிலளித்தார். இவ்வாலயம் ஆசீர்வதிக்கப்பட்டு பதினொரு மாதங்களில், அவர் காலமானார்.`,
       craftNegatives: [
         {
           t: `சிமெண்ட் இல்லை`,
@@ -2899,13 +2929,13 @@ FIDES VNA SIT, VNAQVE MENS.`,
           ta: `சுண்ணாம்பு`,
           tr: `chunnambu`,
           gloss: `சுண்ணாம்பு`,
-          d: `சுட்ட சங்கும் சுண்ணாம்புக் கல்லும் — பிணைப்பான்`,
+          d: `சுட்ட சங்கும் சுண்ணாம்புக் கல்லும், பிணைப்பான்`,
         },
         {
           ta: `கடுக்காய்`,
           tr: `kadukkai`,
           gloss: `கடுக்காய்`,
-          d: `Terminalia chebula — சாந்தை இறுகச் செய்யும் டானின் சத்து`,
+          d: `Terminalia chebula, சாந்தை இறுகச் செய்யும் டானின் சத்து`,
         },
         {
           ta: `முட்டை`,
@@ -2914,11 +2944,11 @@ FIDES VNA SIT, VNAQVE MENS.`,
           d: `கல் போல் இறுகும் சாந்துக்காகக் கலக்கப்பட்டது`,
         },
       ],
-      recipeNote: `பங்கு தானே தரும் செய்முறை இது. ஆங்கிலப் பங்கு வரலாறு “கள்” (புளித்த சாறு) என்கிறது; தமிழ் ஆதாரங்கள் “பதனீர்” என்கின்றன. சுண்ணாம்பு, கடுக்காய், முட்டை — இவற்றில் அனைத்து ஆதாரங்களும் ஒன்றுபடுகின்றன.`,
-      craftCaption: `பீடப்பகுதிக்கு மேலுள்ள வளைவு — இரும்போ, உத்திரமோ, சட்டமோ இன்றி எழுப்பப்பட்டது`,
+      recipeNote: `பங்கு தானே தரும் செய்முறை இது. ஆங்கிலப் பங்கு வரலாறு “கள்” (புளித்த சாறு) என்கிறது; தமிழ் ஆதாரங்கள் “பதனீர்” என்கின்றன. சுண்ணாம்பு, கடுக்காய், முட்டை ஆகியவற்றில் அனைத்து ஆதாரங்களும் ஒன்றுபடுகின்றன.`,
+      craftCaption: `பீடப்பகுதிக்கு மேலுள்ள வளைவு, இரும்போ, உத்திரமோ, சட்டமோ இன்றி எழுப்பப்பட்டது`,
       creedLabel: `பொருள்`,
       creedTitle: `விசுவாசப் பிரமாணமாய் நிற்கும் ஆலயம்`,
-      creedBody: `தன் கட்டிடத்தையே எண்களாகப் படிக்கிறது இப்பங்கு. இங்கு எதுவும் வெறும் கட்டமைப்பு அல்ல — ஒவ்வொரு எண்ணும் ஒரு மறையுண்மை. வரைபடத்தையே ஒரு விசுவாசப் பிரமாணமாய்ப் படியுங்கள் — ஒரு வரியைத் தொட்டால் அது வரைபடத்தில் ஒளிரும் — பின், பலிபீடத்தில் காத்திருக்கும் எண்களைப் பங்கின் சொந்தக் கையெழுத்திலேயே படியுங்கள்.`,
+      creedBody: `தன் கட்டிடத்தையே எண்களாகப் படிக்கிறது இப்பங்கு. பங்கின் சொந்தக் கையெழுத்துக் குறிப்பாலும் வாய்மொழியாலும் தலைமுறை தலைமுறையாகக் காக்கப்பட்ட மரபு இது, 1855-இல் கட்டியவர்களே எழுதி வைத்தது அல்ல. இங்கு எதுவும் வெறும் கட்டமைப்பு அல்ல. ஒவ்வொரு எண்ணும் ஒரு மறையுண்மை. கீழே ஒரு வரியைத் தொடுங்கள், அது வரைபடத்தில் ஒளிரும். பின், பலிபீடத்தில் காத்திருக்கும் எண்களையும் அதே வழியில் படியுங்கள்.`,
       creedReadTitle: `வரைபடம், ஒரு விசுவாசப் பிரமாணமாய்`,
       creedReadHint: `ஒரு வரியைத் தொட்டு வரைபடத்தில் ஒளியேற்றுங்கள்.`,
       creedReadings: [
@@ -2927,90 +2957,85 @@ FIDES VNA SIT, VNAQVE MENS.`,
           anchor: `doors`,
           means: `ஐந்து காயங்கள்`,
           what: `வரைபடத்தின் ஐந்து வாசல்கள்`,
+          note: `இரு கைகள், இரு பாதங்கள், ஈட்டியால் திறக்கப்பட்ட விலா.`,
         },
         {
           n: `12`,
           anchor: `piers`,
-          means: `பன்னிரு சீடர்கள்`,
-          what: `இரு நடைகளிலும் நிற்கும் பன்னிரு தூண்கள்`,
+          means: `பன்னிரு தூண்கள்`,
+          what: `ஒவ்வொரு நடையிலும் நான்கு வீதம், அளவெடுத்த வரைபடத்தில் குறிக்கப்பட்டவை`,
+          note: `கூரையைத் தாங்க பன்னிரண்டு; திருச்சபையைத் தாங்க அனுப்பப்பட்டவர்களும் பன்னிரண்டு.`,
         },
         {
           n: `3`,
           anchor: `arrows`,
           means: `மூன்று ஆணிகள்`,
-          what: `மூன்று நுழைவுத் திசைகள் — ஒவ்வொன்றும் சிலுவையை நோக்கி`,
+          what: `மூன்று நுழைவுத் திசைகள், ஒவ்வொன்றும் சிலுவையை நோக்கியவை`,
+          note: `ஒரே ஆலயத்திற்கு மூன்று வழிகள்; ஒரே திருவுடலைப் பற்றியிருந்தவை மூன்று ஆணிகள்.`,
+        },
+        {
+          n: `14`,
+          anchor: `stations`,
+          means: `பதினான்கு ஸ்தலங்கள்`,
+          what: `நடு வாசலிலிருந்து சிலுவை வரை செல்லும் நடை`,
+          note: `சிலுவைப் பாதை — தீர்ப்பு முதல் கல்லறை வரை பதினான்கு நிலைகளில் நடக்கப்படுவது.`,
         },
         {
           n: `1`,
           anchor: `altar`,
           means: `ஒரே ஆண்டவர்`,
           what: `இரு நடைகளும் சந்திக்கும் ஒரே பலிபீடம்`,
+          note: `உள்ளே வர எத்தனை வழிகள் இருந்தாலும், முடிவில் இருப்பது ஒரே பீடம்.`,
         },
       ],
       creedAltarTitle: `பீடத்தில் காத்திருப்பவை`,
-      creedAltarHint: `ஒரு வரியைத் தொட்டு பீடத்தில் ஒளியேற்றுங்கள்.`,
-      altarpieceTitle: `பீடத்தின் அடையாள வரைவு`,
-      altarpieceNote: `அடையாள விளக்கம் — அளவெடுத்து வரைந்த படம் அல்ல`,
+      creedAltarHint: `ஒரு வரியைத் தொட்டு பீடத்தில் கண்டுகொள்ளுங்கள்.`,
+      altarPhotoAlt: `பெரும் பீடத்தின் பின்னால் நிற்கும் செதுக்கு அமைப்பு: சிலைகளுடன் ஐந்து வளைவு மாடங்கள், நடுவே சிலுவை, அதற்கு மேலே புறா`,
+      altarPhotoNote: `பெரும் பீடம், மீதிப் படிப்பு காத்திருக்கும் இடம்`,
+      creedAltarUncounted: `ஒன்பது சிலைகளும் அடிவரிசை வளைவுகளும் பீடத்தில் இன்னும் எண்ணிப் பார்க்கப்படவில்லை. பங்கின் குறிப்பு தரும் வண்ணமே அவை இங்கே பதிவு செய்யப்பட்டுள்ளன.`,
       creed: [
-        {
-          n: `14`,
-          anchor: `steps`,
-          what: `சிலுவைக்கு ஏறும் படிகள்`,
-          means: `பதினான்கு ஸ்தலங்கள்`,
-        },
         {
           n: `5`,
           anchor: `upperArches`,
           what: `பீடத்தின் மேல் வரிசை வளைவுகள்`,
           means: `ஐந்து காயங்கள், மீண்டும் ஒருமுறை`,
+          note: `அதே ஐந்து, பீடத்திற்கு மேலே கல்லில் இரண்டாம் முறை எண்ணப்பட்டவை.`,
         },
         {
           n: `9`,
           anchor: `flowers`,
           what: `பூங்கொத்துச் சிலைகள்`,
           means: `ஒன்பது கூட்டச் சம்மனசுகள்`,
+          note: `சம்மனசுகள், அதிதூதர்கள், தலைமையாட்சியர், வல்லமையர், வல்லாண்மையர், ஆட்சியாளர், சிம்மாசனத்தார், கெருபீன்கள், செராபீன்கள்.`,
         },
         {
           n: `4`,
           anchor: `lowerArches`,
           what: `கீழ் வரிசை வளைவுகள்`,
           means: `மத்தேயு, மாற்கு, லூக்கா, யோவான்`,
+          note: `நான்கு நற்செய்தியாளர்கள், ஆளுக்கு ஒரு வளைவு, பீடம் தாங்கும் அனைத்திற்கும் அடியில்.`,
         },
         {
           n: `3`,
           anchor: `trinity`,
           what: `எல்லாவற்றின் நடுவில்`,
           means: `தந்தை, மகன், தூய ஆவி`,
+          note: `மேலே புறா, கீழே சிலுவையில் மகன் — பீடத்தின் சொந்த அச்சில்.`,
         },
       ],
-      creedNoteCaption: `பங்கின் சொந்தக் குறிப்பு — “திருக்குடும்ப ஆலயம்: கட்டிடத்தின் தத்துவம்”`,
-      creedFootnote: `இக்குறிப்பில் கையொப்பமும் இல்லை, தேதியும் இல்லை. பங்கு தன் ஆலயத்தை எப்படிப் படிக்கிறது என்பதை இது சொல்கிறது — 1855-இல் கட்டியவர்களின் நோக்கம் இதுவே என்பதற்கு ஆவணம் அல்ல.`,
+      creedNoteCaption: `பங்கின் சொந்தக் குறிப்பு, “திருக்குடும்ப ஆலயம்: கட்டிடத்தின் தத்துவம்”`,
       towersLabel: `ஊரின் வான்கோடு`,
       towersTitle: `சின்ன ரோமாபுரி என்று ஏன் அழைக்கிறார்கள்`,
-      towersBody: `முகப்பிற்கு மேல் 92 அடி உயரத்தில் இரு வெண்கோபுரங்கள் — அடி முதல் சிகரம் வரை எண்கோண வடிவம்; கூரையைச் சுற்றி 16 சிறு கோபுரங்கள். ஒவ்வொரு கோபுரத்திலும், 1861-இல் பிரான்சில் வார்க்கப்பட்டுக் கடல் கடந்து வந்த இரட்டை மணிகளில் ஒன்று தொங்குகிறது. இக்கோபுரங்களை முன்னிட்டே, 1926-இல், தூத்துக்குடியின் முதல் ஆயர் இவ்வூருக்குச் சின்ன ரோமாபுரி எனப் பெயரிட்டார்கள் — இன்றும் இவ்வூர் அப்பெயராலேயே அழைக்கப்படுகிறது.`,
-      towerStats: [
-        {
-          v: `92 அடி`,
-          k: `இரட்டை எண்கோணக் கோபுரங்கள்`,
-        },
-        {
-          v: `16`,
-          k: `சிறு கோபுரங்கள்`,
-        },
-        {
-          v: `1861`,
-          k: `பிரெஞ்சு மணிகள் — கோபுரத்திற்கு ஒன்று`,
-        },
-      ],
+      towersBody: `இப்பெயர் உண்மையில் கோபுரங்களின் உயரத்தைப் பற்றியது அல்ல. பங்கு இதை ஒரே ஒரு எளிய ஒப்பீட்டில் சொல்கிறது: இவ்வாலயம், அது சொல்வதுபோல், “உலகப் பிரசித்தி பெற்ற ரோமாபுரி பேராலயம் போன்று” கட்டப்பட்டது, ரோமாபுரியைத் தவிர உலகில் வேறெங்கும் இல்லாத ஒரு வடிவமைப்பு. இதற்கு முன் இம்மாவட்டத்தில் வேறெதுவும் இதைப் போல் இருந்ததில்லை. அடி முதல் சிகரம் வரை எண்கோண வடிவில் உயரும் இரட்டைக் கோபுரங்கள். அவற்றைச் சுற்றி சிறு கோபுரங்களின் ஒரு வளையம். சுற்றுவட்டாரத்தில் எந்த ஆலயமும் இதுவரை முயற்சிக்காத ஒரு கம்பீரமான மேற்கத்திய பாணியில் எழுப்பப்பட்டவை. ஒரு சிற்றூர் ரோமாபுரி பேராலயத்தின் தோற்றத்தை அணிந்திருந்தது, 1926-இல் அதுவே தூத்துக்குடியின் முதல் ஆயருக்கு, வடக்கன்குளத்திற்கு இன்றும் அது பதிலளிக்கும் பெயரைத் தர போதுமான காரணமாயிற்று: சின்ன ரோமாபுரி.`,
       towersCaption: `இரட்டைக் கோபுரங்களும், சிகரங்கள் சூழ்ந்த கூரையும்`,
       bellsLabel: `ஆலய மணிகள்`,
       bellsTitle: `பிரான்சின் இரட்டை மணிகள்`,
-      bellsBody: `இரு கோபுரங்களில் ஒவ்வொன்றிலும் உயரத்தில் ஒரு வெண்கல மணி தொங்குகிறது — 1861-இல் பிரான்சில் வார்க்கப்பட்டுக் கடல் கடந்து வடக்கன்குளம் வந்தவை. நூற்றைம்பது ஆண்டுகளுக்கும் மேலாக அவை பங்கு மக்களைச் செபத்திற்கு அழைத்து வருகின்றன.`,
+      bellsBody: `இரு கோபுரங்களில் ஒவ்வொன்றிலும் உயரத்தில் ஒரு வெண்கல மணி தொங்குகிறது, 1861-இல் பிரான்சில் வார்க்கப்பட்டுக் கடல் கடந்து வடக்கன்குளம் வந்தது. நூற்றைம்பது ஆண்டுகளுக்கும் மேலாக அவை பங்கு மக்களைச் செபத்திற்கு அழைத்து வருகின்றன.`,
       bellsBeats: [
         {
           year: `1861`,
           title: `பிரான்சில் வார்ப்பு`,
-          body: `காசிமிர் கிரகோயர் என்னும் பிரெஞ்சு அறக்கொடையாளரே இம்மணிகளை ஆலயத்திற்கு அளித்தார் — எல்லாக் குறிப்புகளின்படியும் அவர் பங்குத் தந்தை ஜோசப் கிரகோயர் அவர்களின் உறவினர். கோபுர மணியின் வெண்கலத்தில் இன்றும் அவரது பெயர் பொறிக்கப்பட்டுள்ளது: “Donateur Casimir Grégoire”.`,
+          body: `காசிமிர் கிரகோயர் என்னும் பிரெஞ்சு அறக்கொடையாளர் இம்மணிகளை ஆலயத்திற்கு அளித்தார். எல்லாக் குறிப்புகளின்படியும் அவர் பங்குத் தந்தை ஜோசப் கிரகோயர் அவர்களின் உறவினர், கோபுர மணியின் வெண்கலத்தில் இன்றும் அவரது பெயர் பொறிக்கப்பட்டுள்ளது: “Donateur Casimir Grégoire”. இந்த எழுத்துகளுடன், வெண்கலத்திலேயே ஒரு சிலுவையும், குழந்தை இயேசுவைச் சுமந்த அன்னை மரியாளின் உருவமும் வார்க்கப்பட்டுள்ளன. வெளியான குறிப்புகள் லியோன் நகரின் பர்டின் வார்ப்பகத்தைக் குறிப்பிட்டு வந்தன. மணியின் வெண்கலம் வேறு சொல்கிறது: “Vve Grégoire de Valence (Drôme)”. பதிவும் வெண்கலமும் வேறுபடும் இடத்தில், வெண்கலத்தின் சொல்லே இறுதி.`,
         },
         {
           year: `கடல் வழி`,
@@ -3020,16 +3045,15 @@ FIDES VNA SIT, VNAQVE MENS.`,
         {
           year: `1872`,
           title: `கோபுரங்களில் ஏற்றம்`,
-          body: `ஆலயம் அர்ப்பணிக்கப்பட்ட அதே ஆண்டில், இரட்டைக் கோபுரங்களில் ஒவ்வொன்றுக்கும் ஒரு மணி என ஏற்றப்பட்டன — செப வேளைகளிலும் ஒவ்வொரு திருவிழாவிலும் இன்றும் அவை ஒலிக்கின்றன.`,
+          body: `ஆலயம் அர்ப்பணிக்கப்பட்ட அதே ஆண்டில், இரட்டைக் கோபுரங்களில் ஒவ்வொன்றுக்கும் ஒரு மணி என ஏற்றப்பட்டன. செப வேளைகளிலும் ஒவ்வொரு திருவிழாவிலும் இன்றும் அவை ஒலிக்கின்றன.`,
         },
       ],
       bellsOlderLead: `இங்கு ஒலித்த முதல் மணிகள் இவை அல்ல.`,
-      bellsOlder: `1752-இல் கட்டி முடிக்கப்பட்ட கல் ஆலயத்தில் ஒரு பழைய மணி தொங்கியது — 1803 அக்டோபர் மாதத்து ஒரு காலைப் பொழுதில், கண்ணீர் சிந்தத் தொடங்கிய அன்னையின் சொரூபத்தை வந்து காண ஊர் முழுவதையும் அழைத்தது அம்மணியே.`,
-      bellsFootnote: `மணிகளின் வரலாறு பங்கின் சொந்தப் பதிவு. வெளியான குறிப்புகள் லியோன் நகரின் பர்டின் வார்ப்பகத்தைக் குறிப்பிட்டு வந்தன; ஆனால் மணியின் வெண்கலத்தில் “Vve Grégoire de Valence (Drôme)” என்றே வார்க்கப்பட்டுள்ளது — பதிவும் வெண்கலமும் வேறுபடும் இடத்தில், வெண்கலத்தின் சொல்லே இறுதி.`,
-      bellsCaption: `கோபுரத்தில் தொங்கும் மணி — “Vve Grégoire de Valence (Drôme) — Donateur Casimir Grégoire” என வார்க்கப்பட்டது`,
+      bellsOlder: `1752-இல் கட்டி முடிக்கப்பட்ட கல் ஆலயத்தில் ஒரு பழைய மணி ஒரு காலத்தில் தொங்கியது. 1803 அக்டோபர் மாதத்து ஒரு காலைப் பொழுதில், கண்ணீர் சிந்தத் தொடங்கிய அன்னையின் சொரூபத்தை வந்து காண ஊர் முழுவதையும் அழைத்தது அம்மணியே.`,
+      bellsCaption: `கோபுரத்தில் தொங்கும் மணி, “Vve Grégoire de Valence (Drôme)” மற்றும் “Donateur Casimir Grégoire” என வார்க்கப்பட்டது`,
       lightLabel: `ஒளியும் நிறமும்`,
       lightTitle: `கண்ணாடி, சாயம், பொன்`,
-      lightBody: `ஆலயத்தின் 23 சாளர வேலைப்பாடுகளிலும் வண்ணக் கண்ணாடி பதிக்கப்பட்டுள்ளது — தொடக்கத்தில் சாதாரணக் கண்ணாடியே; 1972 நூற்றாண்டு விழாவின்போது ரத்தினம் போன்ற வண்ணக் கண்ணாடித் தகடுகளால் மாற்றப்பட்டது. பக்கச் சுவர்களிலுள்ள 16 சாளரங்கள், இயேசு சபையின் நிர்வாகக் காலம் முழுவதும் “குளிர் காரணமாக” அடைக்கப்பட்டே இருந்தன; பின்னரே திறக்கப்பட்டன. உள்ளே, கூரை வளைவுகள், வில்வளைவுகள், தூண்கள் என எங்கும் பூக்களும் இயற்கைக் காட்சிகளும் தீட்டப்பட்டுள்ளன — வண்ணப் பூச்சாலோ ரசாயனத்தாலோ அல்ல, மரம், செடிகளிலிருந்து எடுத்த இயற்கைச் சாயங்களால். இன்று வரை மங்காமல், ஒருமுறை கூட மீண்டும் பூசப்படாமல் நிற்கின்றன.`,
+      lightBody: `முதல் நூறு ஆண்டுகளில், ஆலயம் கண்ணாடியில் சொன்னது வேறொரு எளிமையான கதை. ஆலயத்தைச் சுற்றியுள்ள 23 சாளர வேலைப்பாடுகளிலும் சாதாரண, பொருந்தாத கண்ணாடியே இருந்தது. பக்கச் சுவர்களிலுள்ள மேலும் 16 சாளரங்கள் முற்றிலும் மூடப்பட்டே இருந்தன, இயேசு சபையின் நிர்வாகக் காலம் முழுவதும் காற்றுப் புகாதபடி அடைக்கப்பட்டிருந்தன, பங்கு இன்றும் சொல்லும் காரணம் வெறுமனே “குளிர்.” பின்னர் 1972 வந்தது, ஆலயத்தின் நூற்றாண்டு விழா, பங்கு ஒவ்வொரு சாளரத்தையும் இறுதியாக வண்ணக் கண்ணாடியால் நிரப்பியது, அடைக்கப்பட்டிருந்த சாளரங்களையும் திறந்தது. இன்று நீங்கள் காண்பது நூறு ஆண்டுகள் தாமதமாக வந்த அந்த அன்பளிப்பே: சிவப்பு, நீலம், மஞ்சள் நிற வைர வடிவக் கண்ணாடிகள் கூர்முனை கோத்திக் வளைவுகளுக்குள் பதிந்திருக்கின்றன, மும்மடல் ரோஜா வடிவங்கள் தம் மையத்தில் ஒளியைப் பிடிக்கின்றன, நடையின் மேல் உயரே, வண்ணம் தீட்டிய கூரை வளைவுக்குள் ஒரு ரோஜா சாளரம் ரத்தினத்தால் செதுக்கப்பட்ட சக்கரம் போல் அமர்ந்திருக்கிறது. உள்ளே, கூரை வளைவுகள், வில்வளைவுகள், தூண்கள் என எங்கும் பூக்களும் இயற்கைக் காட்சிகளும் தீட்டப்பட்டுள்ளன, வண்ணப் பூச்சாலோ ரசாயனத்தாலோ அல்ல, மரம் செடிகளிலிருந்து எடுத்த இயற்கைச் சாயங்களால். எதுவும் மங்கவில்லை. எதுவும் ஒருபோதும் மீண்டும் பூசப்படவில்லை.`,
       glassCaptions: [
         `வர்ணக் கண்ணாடி இதழ்ச் சாளரம், வண்ணம் தீட்டிய வளைவில்`,
         `1972 நூற்றாண்டு விழாவில் வண்ணமேற்றப்பட்ட நீள் சாளரங்கள்`,
@@ -3038,21 +3062,21 @@ FIDES VNA SIT, VNAQVE MENS.`,
       ],
       imagesLabel: `ஆலயம் சுமப்பவை`,
       imagesTitle: `கட்டிடம் தாங்கும் இரு சொரூபங்கள்`,
-      imagesBody: `ஆலயம் எதற்காக என்பதை இரு சொரூபங்கள் சொல்கின்றன: நீங்கள் நுழையும் வாசலுக்கு மேல் ஒன்று; நீங்கள் சென்றடையும் பீடத்திற்கு மேல் ஒன்று.`,
+      imagesBody: `ஆலயம் எதற்காக என்பதை இரு சொரூபங்கள் சொல்கின்றன. ஒன்று நீங்கள் நுழையும் வாசலுக்கு மேல் காத்திருக்கிறது. மற்றொன்று நீங்கள் சென்றடையும் பீடத்திற்கு மேல் காத்திருக்கிறது.`,
       figures: [
         {
           title: `வாசலுக்கு மேல்`,
-          body: `தலை வாயிலுக்கு மேல், முகப்பு மண்டபத்துக்குள், திருக்குடும்பத்தின் வண்ணப் புடைப்புச் சிற்பம்: மேலே பொன் ஒளிவட்டத்தில் ஒரு புறா, உச்சியில் முக்கோணத்துள் ஒரு கண். இது எதிர்ச் சீர்திருத்தக் காலத்தில் தோன்றிய “இரு திரித்துவங்கள்” எனும் பழைய உருவகம் — விண்ணகத் திரித்துவமும் மண்ணகத் திரித்துவமும் குழந்தை இயேசுவில் சந்திக்கின்றன. உருவங்கள் மட்டும் பழையவை; அவற்றைச் சூழ்ந்த பொன் முலாமும் பின்னணி நீல வானமும் புதியவை — அப்பகுதி 2016-க்கும் 2022-க்கும் இடையில் மீண்டும் வண்ணம் தீட்டப்பட்டது.`,
+          body: `தலை வாயிலுக்கு மேல், முகப்பு மண்டபத்துக்குள், திருக்குடும்பத்தின் வண்ணப் புடைப்புச் சிற்பம் ஒன்று நிற்கிறது. மேலே பொன் ஒளிவட்டத்தில் ஒரு புறா இளைப்பாறுகிறது, உச்சியில் முக்கோணத்துள் ஒரு கண் பதிக்கப்பட்டுள்ளது, பிற்கால “பிரீமேசன்” அமைப்புகள் அதைத் தழுவிக்கொள்வதற்கு நூறாண்டுகளுக்கும் முன்பே தேவனாகிய தந்தையைக் குறிக்கக் கிறிஸ்தவ ஆலயங்களில் பயன்பாட்டில் இருந்த பழைய அடையாளம். இது எதிர்ச் சீர்திருத்தக் காலத்தில் தோன்றிய “இரு திரித்துவங்கள்” எனும் உருவகம், விண்ணகத் திரித்துவமும் மண்ணகத் திரித்துவமும் குழந்தை இயேசுவில் ஒன்றாய்ச் சந்திக்கின்றன. சுமார் 1600-இல் ஆண்ட்வெர்ப்பில் ஒரு பக்தி அச்சுப் படமாக இது உருவானது, அன்று முதல் இயேசு சபை ஆலயங்கள் இதைத் தொடர்ந்து சுமந்து வந்துள்ளன. உருவங்கள் மட்டும் பழையவை. அவற்றைச் சூழ்ந்த பொன் முலாமும் பின்னணி நீல வானமும் புதியவை; அப்பகுதி 2016-க்கும் 2022-க்கும் இடையில் மீண்டும் வண்ணம் தீட்டப்பட்டது. இச்சிற்பம் என்ன சொல்கிறது என்பதற்குப் பங்கிடமே சொந்த வார்த்தைகள் உண்டு: தலை வாயிலில் நிலைத்திருக்கும் திருக்குடும்பம் எழில் முகத்துடன் உங்களை உள்ளே அழைக்கிறது. “அன்பு மக்களே, உங்களது இதயத்தை எமக்குத் தந்திட உள்ளே வாருங்கள்!”`,
           caption: `நடு வாசலுக்கு மேலுள்ள “இரு திரித்துவங்கள்” சிற்பம்`,
         },
         {
           title: `பீடத்திற்கு மேல்`,
-          body: `பெரும் பீடத்தில், குவிமாடம், கண்ணாடிக் கோபுரம், சிகரம் ஆகியவற்றின் கீழ் ஆறு சொரூபங்கள்: நடுவே சிலுவையில் அறையப்பட்ட கிறிஸ்து, அவருக்கு அருகில் அன்னை மரியாளும் புனித சூசையப்பரும், அவர்களுக்கு மேலே புனித செபஸ்தியார், புனித அந்தோணியார், புனித சவேரியார். தரை மொசைக் கற்களால் பதிக்கப்பட்டது. மரவேலைப்பாடு முழுவதும் பொன் முலாம் — பங்கு இன்று வரை மங்க விடாமல் காத்து வரும் பொன்.`,
+          body: `பெரும் பீடத்தில், குவிமாடம், கண்ணாடிக் கோபுரம், சிகரம் ஆகியவற்றின் கீழ் ஆறு சொரூபங்கள்: நடுவே சிலுவையில் அறையப்பட்ட கிறிஸ்து, அவருக்கு அருகில் அன்னை மரியாளும் புனித சூசையப்பரும், அவர்களுக்கு மேலே புனித செபஸ்தியார், புனித அந்தோணியார், புனித சவேரியார். தரை மொசைக் கற்களால் பதிக்கப்பட்டது. மரவேலைப்பாடு முழுவதும் பொன் முலாம், பங்கு இன்று வரை ஒருபோதும் மங்க விடாமல் காத்து வரும் பொன்.`,
           caption: `பொன் முலாம் பூசிய, மங்காத பெரும் பீடம்`,
         },
       ],
       inscription: `மரியே வாழ்க`,
-      inscriptionGloss: `முகப்பு மண்டபத்தின் முகட்டில், தமிழ் எழுத்துகளில் புடைத்து நிற்கும் வாசகம் — ஆலயத்தை நோக்கி வருபவரிடம் அது சொல்லும் முதல் சொல்.`,
+      inscriptionGloss: `முகப்பு மண்டபத்தின் முகட்டில், தமிழ் எழுத்துகளில் புடைத்து நிற்கும் வாசகம். ஆலயத்தை நோக்கி வருபவரிடம் அது சொல்லும் முதல் சொல்.`,
       colophonLabel: `ஆவணக் குறிப்பு`,
       colophonTitle: `கட்டியவர்கள், மணிகள், ஆதாரங்கள்`,
       builders: [
@@ -3077,7 +3101,7 @@ FIDES VNA SIT, VNAQVE MENS.`,
           name: `காசிமிர் கிரகோயர்`,
         },
       ],
-      sourcesNote: `திருக்குடும்ப ஆலயத்தின் பங்கு வரலாறு; அ. சிவசுப்பிரமணியன், “கிறித்தவமும் சாதியும்” (2001); அகுஸ்த் ஜான், “Le Maduré” (1894); எச். ஆர். பேட், “Madras District Gazetteer: Tinnevelly” (1917); பங்கில் பாதுகாக்கப்படும் ஒரு கையெழுத்துக் குறிப்பு — இவற்றிலிருந்து கட்டிடக்கலை விவரங்கள்.`,
+      sourcesNote: `திருக்குடும்ப ஆலயத்தின் பங்கு வரலாறு; அ. சிவசுப்பிரமணியன், “கிறித்தவமும் சாதியும்” (2001); அகுஸ்த் ஜான், “Le Maduré” (1894); எச். ஆர். பேட், “Madras District Gazetteer: Tinnevelly” (1917); பங்கில் பாதுகாக்கப்படும் ஒரு கையெழுத்துக் குறிப்பு ஆகியவற்றிலிருந்து கட்டிடக்கலை விவரங்கள்.`,
       sourcesCta: `இப்பக்கத்தின் ஆதாரங்கள்`,
     },
     mass: {
@@ -3366,10 +3390,11 @@ FIDES VNA SIT, VNAQVE MENS.`,
     },
     footer: {
       tagline: `விசுவாசம், செபம், சமூகம் ஆகியவற்றின் புகலிடம்.`,
-      explore: `மேலும் அறிய`,
+      shrine: `திருத்தலம்`,
       visit: `வருகை`,
-      connect: `தொடர்பு`,
+      record: `ஆவணங்கள்`,
       rights: `அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டுள்ளன.`,
+      builtBy: `இணையதளம் உருவாக்கியவர்`,
     },
   },
 } as const;

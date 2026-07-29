@@ -59,7 +59,8 @@ export type RouteKey =
   | "deBritto"
   | "faq"
   | "priests"
-  | "sources";
+  | "sources"
+  | "acknowledgements";
 
 export type RouteDef = {
   /** Site-relative. The home's path is the launch-dependent HOME_PATH. */
@@ -152,7 +153,7 @@ export const ROUTES: Record<RouteKey, RouteDef> = {
     title: "St Devasahayam Pillai",
     fullTitle: "St Devasahayam Pillai — baptised at this parish, 1745",
     description:
-      "Neelakanta Pillai was baptised at Vadakkankulam in 1745, taking the name Devasahayam. Canonised on 15 May 2022, he is the first Indian layman to be declared a saint — and this is the parish of his baptism.",
+      "St Devasahayam Pillai was baptised at this church on 14 May 1745 — the place the Holy See's own record of his cause names. His life, the errand for timber that destroyed him, his wife's grave in this parish, and what the evidence for each of it is. Canonised 15 May 2022, the first layperson of Indian birth raised to the altars.",
     crumb: "St Devasahayam Pillai",
     priority: 0.8,
     changeFrequency: "yearly",
@@ -213,6 +214,22 @@ export const ROUTES: Record<RouteKey, RouteDef> = {
     image: "/images/architecture/archival.jpg",
     ogImage: "/og/sources.jpg",
   },
+  // Deliberately absent from INDEXABLE while the page is a draft (see DRAFT in
+  // src/lib/acknowledgements.ts). It still needs an entry here, because the
+  // canonical, the hreflang pair and the breadcrumb all read this table.
+  // The share card is borrowed from /sources until a card of its own is cut.
+  acknowledgements: {
+    path: "/acknowledgements",
+    title: "Acknowledgements",
+    fullTitle: "Acknowledgements — the people who made this site possible",
+    description:
+      "The photographs, the books, the memories and the corrections behind this website, and the people of Vadakkankulam and beyond who gave them. Listed alphabetically, by the kind of help given.",
+    crumb: "Acknowledgements",
+    priority: 0.4,
+    changeFrequency: "yearly",
+    image: "/images/architecture/archival.jpg",
+    ogImage: "/og/sources.jpg",
+  },
 };
 
 /** Sitemap/crawl order. The coming-soon "/" is deliberately absent: it is
@@ -255,7 +272,7 @@ export function siteTitle(lang: Locale): { template: string; default: string } {
   return lang === "ta"
     ? {
         template: "%s · சின்ன ரோமாபுரி",
-        default: "திருக்குடும்ப திருத்தலம், வடக்கன்குளம் — சின்ன ரோமாபுரி",
+        default: "திருக்குடும்பத் திருத்தலம், வடக்கன்குளம் — சின்ன ரோமாபுரி",
       }
     : {
         template: "%s · Little Rome",

@@ -11,6 +11,15 @@
    window is not. */
 @custom-variant short (@media (max-height: 820px));
 
+/* A TAMIL VARIANT. `ta:text-[0.82rem]` applies only on /ta.
+   Tamil translations of the same sentence run 40–70% longer than the English —
+   not a font problem, a language one — so any layout tuned to English copy
+   (cards with fixed art behind the text, anything with a line budget) needs its
+   own Tamil numbers. This gives every utility a Tamil form instead of scattering
+   `html[lang|="ta"]` overrides through globals.css.
+   Note `|=`, not `=`: the document renders as lang="ta-IN". */
+@custom-variant ta (&:where(html[lang|="ta"] *));
+
 /* ======================================================================
    "LITTLE ROME" — design system for Vadakankulam Matha
    ----------------------------------------------------------------------
@@ -49,6 +58,13 @@
   /* hairline tones */
   --line-gold: rgba(196, 160, 73, 0.28);
   --line-ink: rgba(28, 26, 21, 0.12);
+
+  /* Tamil faces — self-hosted, see the @font-face block below. These were
+     previously injected by next/font; they are named here instead so the
+     size-adjust'ed @font-face declarations are the only definition. */
+  --font-tamil: "Kumudam Tamil";
+  --font-tamil-display: "Kumudam Tamil";
+  --font-tamil-text: "Tiro Tamil Web";
 }
 
 @theme inline {
@@ -69,6 +85,77 @@
   --font-serif: var(--font-serif);
   --font-display: var(--font-display);
   --font-tamil: var(--font-tamil);
+  --font-tamil-display: var(--font-tamil-display);
+}
+
+/* ======================================================================
+   TAMIL — two voices, mirroring the Latin pair.
+   ----------------------------------------------------------------------
+   Both are declared by hand rather than through next/font, for one
+   reason: `size-adjust`. Tamil has no ascender/descender rhythm to
+   absorb the em, so a Tamil glyph set at the same font-size as Latin
+   renders visibly larger and heavier — which is why /ta read as
+   oversized against the English. next/font gives no way to correct
+   that; a hand-written @font-face does, and it corrects EVERY size on
+   the site at once without touching a single Tailwind text-* class or
+   any layout value.
+
+     · --font-tamil-display (Kumudam) → the voice of STONE in Tamil.
+        Calligraphic, thick-to-hairline contrast, slight forward lean.
+        The Tamil answer to Cinzel/Cormorant. Display only — one weight,
+        no bold. size-adjust 66% because Kumudam draws 1.42x larger than
+        Tiro at the same size.
+     · --font-tamil (Tiro Tamil) → the voice of PRAYER in Tamil. Upright,
+        even, classical (the Murty Classical Library face). Body copy.
+        size-adjust 88% to sit level with Cormorant.
+
+   To retune, change the two size-adjust numbers — nothing else.
+   To revert entirely, delete both @font-face blocks and restore the
+   next/font Tiro_Tamil import in [lang]/layout.tsx.
+   ====================================================================== */
+/* Two declarations, ONE file — the browser fetches kumudam-tamil.woff2 once and
+   serves both families from cache, so this costs nothing.
+
+   They exist because a single size-adjust cannot serve both ends of the scale.
+   Tamil headings need a hard reduction (the script is much wider than Latin, so
+   a 72px heading that sets on two lines in English ran to three in Tamil and ate
+   50% more vertical space). But the kickers and nav links are only 11px, and
+   shrinking THOSE by the same amount would make them unreadable — small Tamil
+   needs more size, not less.
+
+   Display 58%: the point where the long home-page heading snaps back from three
+   lines to two and lands just under its English counterpart (132px vs 150px).
+   Below ~54% the headings start reading smaller than the English rather than
+   matched. */
+@font-face {
+  font-family: "Kumudam Display";
+  src: url("/fonts/kumudam-tamil.480cac5d.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  size-adjust: 58%;
+  unicode-range: U+0B80-0BFF, U+200C-200D, U+25CC;
+}
+
+/* Small display type — kickers, numerals, nav, inscriptions. Stays larger. */
+@font-face {
+  font-family: "Kumudam Tamil";
+  src: url("/fonts/kumudam-tamil.480cac5d.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  size-adjust: 66%;
+  unicode-range: U+0B80-0BFF, U+200C-200D, U+25CC;
+}
+
+@font-face {
+  font-family: "Tiro Tamil Web";
+  src: url("/fonts/tiro-tamil.b76615f3.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  size-adjust: 88%;
+  unicode-range: U+0B80-0BFF, U+200C-200D, U+25CC;
 }
 
 /* ── Display / monument voice ── */
@@ -76,12 +163,53 @@
   font-family: var(--font-display), var(--font-serif), Georgia, serif;
 }
 
-/* Tamil falls back to the Tamil serif everywhere a serif is used */
-html[lang="ta"] body,
-html[lang="ta"] .font-serif,
-html[lang="ta"] .font-display {
-  font-family: var(--font-tamil), var(--font-serif), system-ui, serif;
+/* Tamil body copy. `.font-serif` is wrapped in :where() so it contributes
+   nothing to specificity — otherwise this rule (a class) would outrank the
+   heading rule below (a tag), and every h2.font-serif on /ta would end up
+   with the text face instead of the calligraphic one. */
+html[lang|="ta"] body,
+html[lang|="ta"] :where(.font-serif) {
+  font-family: "Tiro Tamil Web", var(--font-serif), system-ui, serif;
 }
+
+/* Headings, eyebrows, numerals and the saint-page furniture take the
+   calligraphic voice. Everything listed here is set in Cinzel on the
+   English side — and Cinzel has no Tamil glyphs at all, so without this
+   rule each of these fell through to whatever Tamil font the reader's OS
+   happened to ship. Keep this list in step with the selectors that use
+   var(--font-display). */
+/* Big type — the reduced 58% cut. */
+html[lang|="ta"] h1,
+html[lang|="ta"] h2,
+html[lang|="ta"] h3,
+html[lang|="ta"] .font-display {
+  font-family: "Kumudam Display", var(--font-display), var(--font-serif), serif;
+}
+
+/* The nav and footer are chrome, not headings — they must NOT inherit the 58%
+   display cut, which exists to shrink 72px titles and turns 11px nav links into
+   6.7px specks. The extra `nav`/`footer` type selector outranks the block above
+   (0,2,2 vs 0,2,1) without needing !important. */
+html[lang|="ta"] nav .font-display,
+html[lang|="ta"] header .font-display,
+html[lang|="ta"] footer .font-display {
+  font-family: "Kumudam Tamil", var(--font-display), var(--font-serif), serif;
+}
+
+/* Small type — the 66% cut, so eyebrows and nav stay legible. Listed after the
+   block above so that a .kicker which is also an h3 keeps the larger cut. */
+html[lang|="ta"] .kicker,
+html[lang|="ta"] .section-numeral,
+html[lang|="ta"] .saint-note-label,
+html[lang|="ta"] .saint-tier,
+html[lang|="ta"] .saint-chip {
+  font-family: "Kumudam Tamil", var(--font-display), var(--font-serif), serif;
+}
+
+/* `.font-tamil` is used directly in a few components (the Tamil
+   inscriptions on /architecture, the priest name-plates) where the point
+   IS the Tamil lettering. Those resolve through --font-tamil, set above,
+   so they get the calligraphic face on the English pages too. */
 
 /* ── Smooth scroll - Lenis ── */
 html.lenis,
@@ -160,6 +288,19 @@ body::after {
   width: 2.25rem;
   height: 1px;
   background: linear-gradient(to right, transparent, var(--gold));
+}
+
+/* The kicker is Cinzel CAPS at 0.7rem with 0.42em tracking — proportions that
+   suit Latin small-caps and nothing else. In Tamil the same numbers give ~7px
+   glyphs flung apart by half their own width.
+   · size up, because 0.7rem x the 66% cut is unreadably small
+   · tracking down hard: Tamil syllables are single connected units, and pulling
+     them apart reads as broken text rather than as elegance
+   · uppercase is a no-op in Tamil (no letter case), dropped for clarity */
+html[lang|="ta"] .kicker {
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  text-transform: none;
 }
 
 /* Liturgical cross divider (rule — cross — rule) */
@@ -621,8 +762,8 @@ body::after {
 .prose-term {
   font-style: italic;
 }
-html[lang="ta"] .prose-quote,
-html[lang="ta"] .prose-term {
+html[lang|="ta"] .prose-quote,
+html[lang|="ta"] .prose-term {
   font-style: normal;
 }
 
