@@ -130,7 +130,7 @@ const TA = {
   feastName: "விண்ணேற்பு மாதா திருவிழா",
   feastAlias: "வடக்கன்குளம் தேர்த் திருவிழா",
   feastDescription:
-    "ஆகஸ்ட் 6 அன்று கொடியேற்றத்துடன் தொடங்கி, ஆகஸ்ட் 15 அன்று சுமார் ஒரு லட்சம் யாத்திரிகர்களை ஈர்க்கும் தேர் ஊர்வலத்துடன் நிறைவடையும் பத்து நாள் ஆண்டுத் திருவிழா.",
+    "ஆகஸ்ட் 6 அன்று கொடியேற்றத்துடன் தொடங்கும் பத்து நாள் ஆண்டுத் திருவிழா. ஆகஸ்ட் 14 இரவு 11:00 மணிக்குத் தேர் புறப்பட்டு, இரவு முழுவதும் ஊரை வலம் வரும்; சுமார் ஒரு லட்சம் யாத்திரிகர்கள் கூடுவர். ஆகஸ்ட் 15 திருவிழா நாள்; தேர் ஆகஸ்ட் 15, 16 ஆகிய நாட்களில் பொதுமக்கள் பார்வைக்கு நிற்கும்.",
   apparitionName: "மாதா காட்சிப் பெருவிழா",
   apparitionDescription:
     "1803 அக்டோபர் 23 அன்று ஊர் முன்னிலையில் அன்னை கண்ணீர் சிந்தியதாகச் சொல்லப்படும் நிகழ்வை, ஆண்டுதோறும் அக்டோபர் 22–23 அன்று பங்கு நினைவுகூர்ந்து வருகிறது. இது ஊரிலும் மறைமாவட்டத்திலும் நிலவும் ஒரு பக்தி மரபு; இது வத்திக்கானின் விசாரணைக்கு உட்பட்டது அல்ல.",
@@ -285,7 +285,12 @@ export function feast(now?: Date, lang: Locale = "en"): Event {
     alternateName: isTa(lang) ? TA.feastAlias : "Vadakkankulam Car Festival",
     description: isTa(lang)
       ? TA.feastDescription
-      : "The ten-day annual feast, opening with the hoisting of the flag (kodiyetram) on 6 August and closing on 15 August with the chariot procession, which draws around 100,000 pilgrims.",
+      // Corrected 30 July 2026 on the parish's own statement. This previously
+      // read "closing on 15 August with the chariot procession" — but the
+      // chariot leaves at 11:00 PM on the 14th and goes round the village
+      // through the night. A pilgrim who read the old wording and travelled
+      // "for the chariot on the 15th" arrived the morning after it had passed.
+      : "The ten-day annual feast, opening with the hoisting of the flag (kodiyetram) on 6 August. The chariot leaves at 11:00 PM on 14 August and is drawn around the village through the night, before a crowd of around 100,000 pilgrims. 15 August is the feast day, and the chariot then stands for people to see on 15 and 16 August.",
     startDate: `${y}-${pad(FEAST.startMonth)}-${pad(FEAST.startDay)}`,
     endDate: `${y}-${pad(FEAST.endMonth)}-${pad(FEAST.endDay)}`,
     eventStatus: "https://schema.org/EventScheduled",

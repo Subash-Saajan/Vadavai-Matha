@@ -138,7 +138,7 @@ export const ROUTES: Record<RouteKey, RouteDef> = {
     title: "Mass Timings & Feasts, Vadakkankulam",
     fullTitle: "Mass Timings & the Feasts of the Year",
     description:
-      "Daily and Sunday Mass at the Holy Family Shrine, Vadakkankulam, with the feasts of the liturgical year — including the ten-day annual feast of Our Lady of the Assumption, 6–15 August, and the chariot procession on 15 August.",
+      "Daily and Sunday Mass at the Holy Family Shrine, Vadakkankulam, with the feasts of the liturgical year — including the ten-day annual feast of Our Lady of the Assumption, 6–15 August, and the chariot, which leaves at 11:00 PM on 14 August and is drawn around the village through the night.",
     crumb: "Mass & Feasts",
     priority: 0.9,
     changeFrequency: "monthly",

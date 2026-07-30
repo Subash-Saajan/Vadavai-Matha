@@ -160,13 +160,33 @@ export const dict = {
          never quietly promote it. `weepingHonest` is close to the sentence
          history.ts calls `APPARITION.honestStatement`; do not soften it into
          an assertion, and do not delete it to make the section read stronger.
-         It reads stronger because it is there. */
+         It reads stronger because it is there.
+
+         THE PROSE MAY BE DEVOTIONAL; THE CLAIM MAY NOT. Everything about the
+         tears is reported speech — "what he said afterwards is", "they said
+         they saw it too", "they say" — and every such hedge is load-bearing.
+         Enrich the imagery freely, but the moment a sentence states as fact
+         that the statue wept, this section is making a claim the parish itself
+         does not make.
+
+         IT IS A STORY, IN THREE BEATS, AND IT MUST KEEP ITS SHAPE. body1 sets
+         the morning and puts one named man on his knees; body2 is what he said
+         he saw, his own disbelief, and the two people he fetched to check him;
+         body3 is the bell, the village running in from the fields, the chant,
+         and the face going ordinary again. An earlier draft opened with the
+         bell and never described the miracle at all — it read as a summary of
+         a story rather than the story, and the owner said so. Do not compress
+         it back into two paragraphs of gist. The narrative facts here are the
+         /history page's (i18n `the-weeping-madonna` dots) and Besse via the
+         Moumas typescript p.842; keep them consistent with that page. */
       weepingLabel: "23 October 1803",
-      weepingTitle: "They said her face was wet",
+      weepingTitle: "They said the Mother was weeping",
       weepingBody1:
-        "It was a Friday forenoon in the Tamil month of Aippasi, in a village that had been without a Jesuit for a generation. The bell rang at the wrong hour and the people came in from the fields to find out why.",
+        "It was a Friday forenoon in the Tamil month of Aippasi, in a village that had gone a generation without a Jesuit. A man from Tirunelveli, Savarimuthu Pillai, had come over to see the European family settled here, and stopped in the church first to pray. Our Lady stood above the altar in a recess closed by a double door, and that morning both leaves were open. He knelt down.",
       weepingBody2:
-        "What they told afterwards, and have gone on telling for two hundred and twenty-three years, is that the statue Fr Buttari had taken out of a box from the sea was weeping.",
+        "What he said afterwards is that a thin cloud gathered behind her and wrapped her round; that her eyes lifted and filled, and the tears ran down her face; and that her folded hands parted and reached out until they touched the walls of the niche. Certain his own eyes were deceiving him, he went out and brought back the catechist Yagappar Pillai, and Henriette, the daughter of the house. They said they saw it too. A catechist climbed up to the altar and wiped her face, and the tears came again, and would not stop.",
+      weepingBody3:
+        "Then they rang the bell. It was not an hour at which the bell was ever rung, and the whole village put down its work and came in from the fields to find out why. They filled the church, lit the candles, knelt, and sang what a frightened people sings — Parce Domine, parce populo tuo, spare, O Lord, spare your people. And while they were praying, the face above the altar became an ordinary carved face again. Not a sign given to a bishop or a scholar, they say, but to farmers with the field still on them — and the village has come back to it every October for the two hundred and twenty-three years since.",
       weepingHonest:
         "This is a local and diocesan devotional tradition, recorded by the Jesuit historian Léon Besse. It has never been the subject of a Vatican investigation. The parish has commemorated it on 22–23 October ever since — and the date is settled at 1803, not 1805.",
       weepingCta: "Read the three accounts",
@@ -175,19 +195,26 @@ export const dict = {
          The door into /priests, which until now was reachable from nowhere on
          this site — not the navbar, not the footer, not one page.
 
-         The hook is the asymmetry, not the number. Eleven faces survive out of
-         sixty-nine men; the honest sentence about the other fifty-four is what
-         makes this section worth stopping for, and it is the same sentence the
-         register page opens with. Keep it. */
-      fathersLabel: "The Parish Register",
-      fathersTitle: "Sixty-nine priests. Not one year without one.",
+         THE HOOK IS THE UNBROKEN LINE, NOT THE ARCHIVE. This copy is about
+         apostolic succession as the Church understands it — a handing-on, one
+         pair of hands to the next — and about an altar that has never once
+         gone a year unserved. Keep the register language ("the register is
+         still open"); it is the reason to click.
+
+         DO NOT REINTRODUCE THE PHOTOGRAPH COUNT. An earlier draft led with
+         "eleven faces survive, fifty-four are only a name" — an archivist's
+         apology dressed as a hook. The parish is not advertising the gaps in
+         its picture collection. The row of portraits below carries itself; the
+         copy never counts it. */
+      fathersLabel: "The Succession",
+      fathersTitle: "The altar has not gone cold since 1697.",
       fathersBody:
-        "This parish has numbered its priests since 1697 and has kept the name of every single one. For about fifteen of them the Jesuit archives in Rome, the French mission histories and the parish's own diaries preserve a life — what he built, what he refused, how he died.",
+        "Sixty-nine priests have stood at this stone — Jesuits sent out from Rome and from France, and then the sons of this village itself. Fever took some of them young. Others were recalled, or buried here, or watched their Society suppressed under them and lived long enough to see it rise again. Not one of the three hundred and twenty-nine years since has passed without a man at this altar to say the five words over bread.",
       fathersBody2:
-        "Eleven faces survive. Fifty-four of these men are a name and a span of years, and that is the honest shape of a three-hundred-year record, not a hole in it.",
+        "This is what the Church means by succession: not a monument, but a handing-on. Each of them received what he had not earned, spent a life giving it away, and laid it down for the next man to take up. Their names stand in the parish register in the order they came — and the register is still open.",
       fathersStat1: "pastorates",
       fathersStat2: "since",
-      fathersStat3: "faces that survive",
+      fathersStat3: "years unbroken",
       fathersCta: "Open the register",
 
       /* ── VI · The parish year & the parish week ─────────────────────────
@@ -586,7 +613,13 @@ export const dict = {
           { when: "August 6 · Day 1", detail: "Flag Hoisting — 6:00 PM" },
           { when: "August 6 – 14 · Days 1–9", detail: "Tamil Masses — 5:00 AM, 6:15 AM & 7:15 AM" },
           { when: "August 14 · Day 9", detail: "Malayalam Mass — 4:00 PM" },
+          // The chariot is the largest thing in the feast and the site had never
+          // said when it moves. It leaves on the NIGHT OF THE 14th, not on the
+          // 15th — so a pilgrim who comes "for the chariot on the 15th" arrives
+          // the morning after it has passed. Stated by the parish.
+          { when: "August 14 · Night", detail: "Chariot leaves at 11:00 PM — through the night, around the village" },
           { when: "August 15 · Feast Day", detail: "Bishop's Mass — 5:00 AM · English Mass" },
+          { when: "August 15 – 16", detail: "The chariot stands for people to see" },
         ],
       },
       yearLabel: "Feasts Through the Year",
@@ -658,7 +691,9 @@ export const dict = {
           feast: "Feast — January 14",
           epithet: "First Indian Layman Saint",
           body: "Baptised at this very church in 1745 and martyred for his faith in 1752, he was canonised in 2022 — the first Indian-born Catholic layman raised to the altars.",
-          image: "/images/saints/devasahayam-pillai.jpg",
+          // The parish's own devotional image of the martyr in chains, from the
+          // 150-year souvenir book (p. 20, the sub-station patrons plate).
+          image: "/images/saints/devasahayam-pillai-chains.jpg",
           href: "/saints/devasahayam-pillai",
         },
         {
@@ -666,7 +701,10 @@ export const dict = {
           feast: "Feast — February 4",
           epithet: "Arulanandar, Our Founder",
           body: "Known in Tamil as Arulanandar, the Jesuit who raised our first thatched chapel here in 1685 and dedicated it to the Holy Family, before his martyrdom in 1693.",
-          image: "/images/de-britto-grotto.jpg",
+          // Arulanandar as the parish itself pictures him — white cloak, red
+          // cap, crucifix and the martyr's palm — from the same souvenir plate.
+          // The grotto photograph stays as the hero of his own page.
+          image: "/images/saints/john-de-britto.jpg",
           // His own page, not /history. The card says "Read more" and used to
           // land the reader on the timeline, where he is one moment among
           // fifty-six.
@@ -1263,13 +1301,9 @@ export const dict = {
           what: "the five doors of the plan",
           note: "The two hands, the two feet, and the side opened by the lance.",
         },
-        {
-          n: "12",
-          anchor: "piers",
-          means: "The Twelve Piers",
-          what: "four down each nave, set on the measured plan",
-          note: "Twelve to carry the roof, as twelve men were sent to carry the Church.",
-        },
+        // The twelve used to sit here, attached to the nave piers. It moved to
+        // the altar list in July 2026: the parish note gives its twelve to the
+        // flanks of the tabernacle, and a photograph now shows them.
         {
           n: "3",
           anchor: "arrows",
@@ -1298,16 +1332,25 @@ export const dict = {
       creedAltarTitle: "And what waits at the altar",
       creedAltarHint: "Tap a reading to find it on the altar.",
       altarPhotoAlt:
-        "The carved screen behind the high altar: five arched niches with their statues, the crucifix at the centre, and the dove above it",
+        "The high altar: a five-bay carved screen rising to gilded spires under the painted vault, the crucifix on its centre axis, and twelve small statues in a gold arcade either side of the tabernacle",
       altarPhotoNote: "The high altar, where the rest of the reading waits",
-      // Honesty note under the altar list. Two of these four have never been
+      // Honesty note under the altar list. Two of these five have never been
       // counted on site (KB 02 §4.7c), so they are given without a hotspot;
       // keep this line as long as that is true, and delete it when it isn't.
       creedAltarUncounted:
         "The nine carvings and the arches of the lower row have not yet been counted on the altar itself. They are set down here as the parish's note gives them.",
       creed: [
         // The fourteen used to open this list; it now lives in creedReadings,
-        // on the plan, where it can be lit on the centre path.
+        // on the plan, where it can be lit on the centre path. The twelve came
+        // the other way, off the plan's piers and onto the tabernacle, in the
+        // note's own order — it is the line before the five upper arches.
+        {
+          n: "12",
+          anchor: "apostles",
+          what: "six either side of the tabernacle",
+          means: "The Twelve Apostles",
+          note: "A gold arcade flanking the tabernacle, and the parish's note names the supper they sat at.",
+        },
         {
           n: "5",
           anchor: "upperArches",
@@ -1334,9 +1377,15 @@ export const dict = {
           anchor: "trinity",
           what: "at the centre of it all",
           means: "Father, Son and Holy Spirit",
-          note: "The dove above, the crucified Son below, on the altar's own axis.",
+          // Was "The dove above, the crucified Son below" — true of the OLDER
+          // altar photograph, not of the one now on the page. See AltarPhoto.tsx.
+          note: "The parish reads the centre as the Trinity; what stands on that axis is the crucified Son.",
         },
       ],
+      // Unused since the parish-sheet photograph was dropped from Creed.tsx in
+      // July 2026. Kept rather than deleted: this repo has no version control,
+      // and it is the only place in the app carrying the sheet's own title. Put
+      // it straight back to use if the figure is ever restored.
       creedNoteCaption:
         "The parish’s own note, திருக்குடும்ப ஆலயம்: கட்டிடத்தின் தத்துவம், “the philosophy of the building”",
 
@@ -1842,18 +1891,19 @@ export const dict = {
         },
       ],
       weepingLabel: `1803 ஐப்பசி 7 · அக்டோபர் 23`,
-      weepingTitle: `அன்னையின் திருமுகம் நனைந்திருந்தது என்றார்கள்`,
-      weepingBody1: `ஒரு தலைமுறைக் காலமாக இயேசு சபை அருட்தந்தை எவரும் இல்லாதிருந்த ஊரில், ஐப்பசி மாதத்து ஒரு வெள்ளிக்கிழமை முற்பகல். நேரம் அல்லாத நேரத்தில் மணி அடிக்க, ஏன் என்று அறிய மக்கள் வயல்களிலிருந்து ஓடிவந்தனர்.`,
-      weepingBody2: `கடலிலிருந்து வந்த பெட்டியிலிருந்து அருட்தந்தை புத்தாரி எடுத்து வைத்த அந்தத் திருவுருவம் கண்ணீர் சிந்திக்கொண்டிருந்தது என்பதே அன்று அவர்கள் சொன்னது; இருநூற்று இருபத்து மூன்று ஆண்டுகளாகச் சொல்லிக்கொண்டே வருவதும் அதுவே.`,
+      weepingTitle: `அன்னை கண்ணீர் சிந்தினாள் என்றார்கள்`,
+      weepingBody1: `ஐப்பசி மாதத்து ஒரு வெள்ளிக்கிழமை முற்பகல்; ஒரு தலைமுறைக் காலமாக இயேசு சபை அருட்தந்தை எவரும் இல்லாதிருந்த ஊர். இங்கே குடியேறியிருந்த ஐரோப்பியக் குடும்பத்தைச் சந்திக்கத் திருநெல்வேலியிலிருந்து வந்திருந்த சவரிமுத்து பிள்ளை என்பவர், முதலில் செபிப்பதற்காக ஆலயத்திற்குள் நுழைந்தார். பீடத்திற்கு மேலே, இரட்டைக் கதவு கொண்ட ஒரு மாடத்தில் அன்னை நின்றார்; அன்று காலை அதன் இரு கதவுகளுமே திறந்திருந்தன. அவர் முழந்தாளிட்டார்.`,
+      weepingBody2: `பின்னர் அவர் சொன்னது இதுவே: மெல்லிய ஒளி ஊடுருவும் மேகம் ஒன்று அன்னைக்குப் பின்னால் திரண்டு அவரைச் சுற்றிப் போர்த்தியது; அவருடைய கண்கள் உயர்ந்து நிறைந்தன, கன்னங்களில் கண்ணீர் வழிந்தோடியது; கூப்பியிருந்த கைகள் பிரிந்து, மாடத்தின் சுவர்களைத் தொடும் அளவுக்கு நீண்டன. தன் கண்களே தன்னை ஏமாற்றுகின்றன என்று எண்ணிய அவர், வெளியே சென்று மறைக்கல்வியாளர் யாகப்பர் பிள்ளையையும், அவ்வீட்டு மகள் ஹென்ரியட்டையும் அழைத்துவந்தார். தாங்களும் அதைக் கண்டதாக அவர்கள் சொன்னார்கள். ஒரு மறைக்கல்வியாளர் பீடத்தில் ஏறி அன்னையின் முகத்தைத் துடைத்தார்; கண்ணீர் மீண்டும் வந்தது, நிற்கவே இல்லை.`,
+      weepingBody3: `பின்னர் அவர்கள் மணியை அடித்தார்கள். அது ஒருபோதும் மணி அடிக்கப்படும் நேரமே அல்ல; செய்துகொண்டிருந்த வேலையைக் கீழே வைத்துவிட்டு, ஏன் என்று அறிய ஊரே வயல்களிலிருந்து ஓடிவந்தது. ஆலயம் நிறைந்தது, மெழுகுதிரிகள் ஏற்றப்பட்டன, அனைவரும் முழந்தாளிட்டார்கள்; அஞ்சி நடுங்கும் ஒரு மக்கள் கூட்டம் பாடுவதையே பாடினார்கள் — “Parce Domine, parce populo tuo”; ஆண்டவரே, பொறுத்தருளும்; உம் மக்களைப் பொறுத்தருளும். அவர்கள் மன்றாடிக்கொண்டிருக்கும்போதே, பீடத்திற்கு மேலிருந்த அந்த முகம் மீண்டும் ஒரு சாதாரணச் செதுக்கு முகமாயிற்று. ஆயருக்கோ அறிஞருக்கோ அல்ல, உடலில் வயலின் புழுதியோடு நின்ற உழவர்களுக்கே அந்த அடையாளம் தரப்பட்டது என்கிறார்கள் — அன்று முதல் இருநூற்று இருபத்து மூன்று ஆண்டுகளாக ஒவ்வோர் ஐப்பசியிலும் ஊர் அதற்குத் திரும்பிவருகிறது.`,
       weepingHonest: `இது ஊரிலும் மறைமாவட்டத்திலும் நிலவும் ஒரு பக்தி மரபு; இயேசு சபை வரலாற்றாசிரியர் லெயோன் பெஸ் இதைப் பதிவுசெய்துள்ளார். இது வத்திக்கானின் விசாரணைக்கு உட்பட்டது அல்ல. அன்று முதல் ஒவ்வோர் ஆண்டும் அக்டோபர் 22–23 அன்று பங்கு இதனை நினைவுகூர்ந்து வருகிறது — ஆண்டு 1803, 1805 அல்ல.`,
       weepingCta: `மூன்று பதிவுகளையும் படிக்க`,
-      fathersLabel: `பங்கு அருட்தந்தையர் பட்டியல்`,
-      fathersTitle: `அறுபத்தொன்பது அருட்தந்தையர். அருட்தந்தை இல்லாத ஓராண்டும் இல்லை.`,
-      fathersBody: `1697 முதல் இந்தப் பங்கு தன் அருட்தந்தையரை எண்ணிட்டு வருகிறது; ஒவ்வொருவரின் பெயரையும் காத்து வைத்திருக்கிறது. அவர்களுள் சுமார் பதினைந்து பேரின் வாழ்க்கையை — அவர் கட்டியது, அவர் மறுத்தது, அவர் இறந்த விதம் — ரோமிலுள்ள இயேசு சபைச் சுவடிக் கிடங்கும், பிரெஞ்சு மறைப்பணி வரலாறுகளும், பங்கின் சொந்த நாட்குறிப்புகளும் காத்து வைத்துள்ளன.`,
-      fathersBody2: `பதினொரு முகங்கள் மட்டுமே எஞ்சியுள்ளன. மீதி ஐம்பத்து நான்கு பேர் ஒரு பெயரும், அவர் பணியாற்றிய ஆண்டுகளும் மட்டுமே. முந்நூறு ஆண்டு ஆவணத்தின் நேர்மையான வடிவம் இதுதான் — இது ஒரு குறையல்ல.`,
+      fathersLabel: `அருட்பணித் தொடர்ச்சி`,
+      fathersTitle: `1697 முதல் இந்தப் பீடம் ஒருபோதும் தணிந்ததில்லை.`,
+      fathersBody: `இந்தக் கல்பீடத்தின் முன் அறுபத்தொன்பது அருட்தந்தையர் நின்றிருக்கிறார்கள் — ரோமிலிருந்தும் பிரான்சிலிருந்தும் அனுப்பப்பட்ட இயேசு சபையினர், பின்னர் இவ்வூரின் சொந்தப் பிள்ளைகள். சிலரை இளவயதிலேயே காய்ச்சல் கொண்டுசென்றது. சிலர் திரும்ப அழைக்கப்பட்டனர்; சிலர் இங்கேயே அடக்கம் செய்யப்பட்டனர்; தாம் சார்ந்திருந்த சபையே ஒழிக்கப்படுவதைக் கண்டு, அது மீண்டும் எழுவதையும் கண்ட சிலரும் உண்டு. அன்று முதல் இன்றுவரை உள்ள முந்நூற்று இருபத்தொன்பது ஆண்டுகளில், அப்பத்தின் மேல் அந்த வார்த்தைகளைச் சொல்ல ஓர் அருட்தந்தை இப்பீடத்தில் இல்லாத ஒரு வருடம்கூட இல்லை.`,
+      fathersBody2: `திருச்சபை "தொடர்ச்சி" என்று சொல்வதன் பொருள் இதுவே: இது ஒரு நினைவுச்சின்னம் அல்ல, கைமாற்றுதல். தான் ஈட்டாத ஒன்றை ஒவ்வொருவரும் பெற்றுக்கொண்டார்; வாழ்நாள் முழுவதும் அதைக் கொடுத்துத் தீர்த்தார்; அடுத்தவர் ஏந்திக்கொள்ளும்படி அதைக் கீழே வைத்தார். அவர்கள் வந்த வரிசையிலேயே அவர்களின் பெயர்கள் பங்குப் பதிவேட்டில் நிற்கின்றன — அந்தப் பதிவேடு இன்னும் மூடப்படவில்லை.`,
       fathersStat1: `பணிக்காலங்கள்`,
       fathersStat2: `முதல்`,
-      fathersStat3: `எஞ்சிய முகங்கள்`,
+      fathersStat3: `தொடர்ந்த ஆண்டுகள்`,
       fathersCta: `பட்டியலைத் திறக்க`,
       rhythmLabel: `பங்கின் தாளலயம்`,
       rhythmTitle: `நாங்கள் ஒன்றுகூடும் நேரங்கள்`,
@@ -2255,8 +2305,16 @@ export const dict = {
             detail: `மலையாளத் திருப்பலி — மாலை 4:00`,
           },
           {
+            when: `ஆகஸ்ட் 14 · இரவு`,
+            detail: `தேர் ஊர்வலம் — இரவு 11:00 மணிக்குப் புறப்பட்டு, இரவு முழுவதும் ஊர் வலம்`,
+          },
+          {
             when: `ஆகஸ்ட் 15 · திருவிழா நாள்`,
             detail: `ஆயரின் திருப்பலி — காலை 5:00 · ஆங்கிலத் திருப்பலி`,
+          },
+          {
+            when: `ஆகஸ்ட் 15 – 16`,
+            detail: `தேர் பொதுமக்கள் பார்வைக்கு நிற்கும்`,
           },
         ],
       },
@@ -2328,7 +2386,7 @@ export const dict = {
           feast: `திருவிழா — ஜனவரி 14`,
           epithet: `இந்தியாவின் முதல் பொதுநிலைப் புனிதர்`,
           body: `1745-ல் இந்த ஆலயத்திலேயே திருமுழுக்குப் பெற்று, 1752-ல் தம் விசுவாசத்திற்காக இரத்தசாட்சியான இவர், 2022-ல் புனிதராக அறிவிக்கப்பட்டார் — இந்தியாவில் பிறந்து பீடத்திற்கு உயர்த்தப்பட்ட முதல் பொதுநிலைக் கத்தோலிக்கர் இவரே.`,
-          image: `/images/saints/devasahayam-pillai.jpg`,
+          image: `/images/saints/devasahayam-pillai-chains.jpg`,
           href: `/saints/devasahayam-pillai`,
         },
         {
@@ -2336,7 +2394,7 @@ export const dict = {
           feast: `திருவிழா — பிப்ரவரி 4`,
           epithet: `அருளானந்தர் — எங்கள் சிற்றாலயத்தை நிறுவியவர்`,
           body: `தமிழில் அருளானந்தர் என அறியப்படும் இயேசு சபை அருட்தந்தை, 1685-ல் இங்கு எங்கள் முதல் ஓலைச் சிற்றாலயத்தை எழுப்பி, அதைத் திருக்குடும்பத்திற்கு அர்ப்பணித்தார்; 1693-ல் இரத்தசாட்சியாக உயிர்நீத்தார்.`,
-          image: `/images/de-britto-grotto.jpg`,
+          image: `/images/saints/john-de-britto.jpg`,
           href: `/saints/john-de-britto`,
         },
       ],
@@ -2960,13 +3018,6 @@ FIDES VNA SIT, VNAQVE MENS.`,
           note: `இரு கைகள், இரு பாதங்கள், ஈட்டியால் திறக்கப்பட்ட விலா.`,
         },
         {
-          n: `12`,
-          anchor: `piers`,
-          means: `பன்னிரு தூண்கள்`,
-          what: `ஒவ்வொரு நடையிலும் நான்கு வீதம், அளவெடுத்த வரைபடத்தில் குறிக்கப்பட்டவை`,
-          note: `கூரையைத் தாங்க பன்னிரண்டு; திருச்சபையைத் தாங்க அனுப்பப்பட்டவர்களும் பன்னிரண்டு.`,
-        },
-        {
           n: `3`,
           anchor: `arrows`,
           means: `மூன்று ஆணிகள்`,
@@ -2990,10 +3041,17 @@ FIDES VNA SIT, VNAQVE MENS.`,
       ],
       creedAltarTitle: `பீடத்தில் காத்திருப்பவை`,
       creedAltarHint: `ஒரு வரியைத் தொட்டு பீடத்தில் கண்டுகொள்ளுங்கள்.`,
-      altarPhotoAlt: `பெரும் பீடத்தின் பின்னால் நிற்கும் செதுக்கு அமைப்பு: சிலைகளுடன் ஐந்து வளைவு மாடங்கள், நடுவே சிலுவை, அதற்கு மேலே புறா`,
+      altarPhotoAlt: `பெரும் பீடம்: வரையப்பட்ட வளைவுக் கூரையின் கீழ் பொன் சிகரங்கள் வரை உயரும் ஐந்து பகுதிச் செதுக்கு அமைப்பு, நடு அச்சில் சிலுவை, நல்கருணைப் பேழையின் இருபுறமும் பொன் வளைவுகளில் பன்னிரு சிறு சிலைகள்`,
       altarPhotoNote: `பெரும் பீடம், மீதிப் படிப்பு காத்திருக்கும் இடம்`,
       creedAltarUncounted: `ஒன்பது சிலைகளும் அடிவரிசை வளைவுகளும் பீடத்தில் இன்னும் எண்ணிப் பார்க்கப்படவில்லை. பங்கின் குறிப்பு தரும் வண்ணமே அவை இங்கே பதிவு செய்யப்பட்டுள்ளன.`,
       creed: [
+        {
+          n: `12`,
+          anchor: `apostles`,
+          what: `நல்கருணைப் பேழையின் இருபுறமும் ஆறு வீதம்`,
+          means: `பன்னிரு அப்போஸ்தலர்கள்`,
+          note: `நல்கருணைப் பேழையைச் சூழும் பொன் வளைவுகள்; அவர்கள் அமர்ந்த இறுதி இராவுணவை பங்கின் குறிப்பு பெயரிட்டுச் சொல்கிறது.`,
+        },
         {
           n: `5`,
           anchor: `upperArches`,
@@ -3020,7 +3078,7 @@ FIDES VNA SIT, VNAQVE MENS.`,
           anchor: `trinity`,
           what: `எல்லாவற்றின் நடுவில்`,
           means: `தந்தை, மகன், தூய ஆவி`,
-          note: `மேலே புறா, கீழே சிலுவையில் மகன் — பீடத்தின் சொந்த அச்சில்.`,
+          note: `நடுவைத் திரித்துவமாகப் படிக்கிறது பங்கு; அந்த அச்சில் நிற்பவர் சிலுவையில் அறையப்பட்ட மகன்.`,
         },
       ],
       creedNoteCaption: `பங்கின் சொந்தக் குறிப்பு, “திருக்குடும்ப ஆலயம்: கட்டிடத்தின் தத்துவம்”`,
