@@ -105,7 +105,7 @@ const tiles: Tile[] = [
         alt: "The painted rib vault, chandelier and coloured-glass window inside Holy Family Church, Vadakkankulam",
       },
       {
-        img: "/images/de-britto-grotto.jpg", // 0.75
+        img: "/images/de-britto-grotto.jpg", // 0.56
         alt: "The grotto shrine of St John de Britto — Arulanandar — in the grounds of the parish he founded in 1685",
       },
       {

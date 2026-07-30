@@ -23,7 +23,7 @@ export default function DeBrittoPage() {
       citeFor={deBrittoCiteFor}
       bibliography={DE_BRITTO_BIBLIOGRAPHY}
       heroImage="/images/de-britto-grotto.jpg"
-      heroAlt="The John de Britto grotto in the grounds of the Holy Family Shrine, Vadakkankulam — a wooden Gothic shrine holding a statue of St John de Britto (Arulanandar), flanked by St Michael and St Raphael, beneath a neem tree"
+      heroAlt="The John de Britto grotto in the grounds of the Holy Family Shrine, Vadakkankulam — a wooden Gothic shrine holding a statue of St John de Britto (Arulanandar), flanked by St Michael and St Raphael, raised on a curved stone platform against the blue church wall"
       heroPosition="object-[center_42%]"
       // The cast is the one place the alts object has to be read by key rather
       // than by field. Keys match the chapter slugs; the fallback to the heading
