@@ -102,7 +102,12 @@ export const ROUTES: Record<RouteKey, RouteDef> = {
   },
   history: {
     path: "/history",
-    title: "History of Vadavai Matha",
+    // "vadakkankulam church history in tamil" is a real measured query (GSC,
+    // July 2026), so the village name belongs in the <title>, not only in the
+    // description. The `title` field is what goes through the `%s · Little Rome`
+    // template; `fullTitle` only ever reaches a share card, so detail parked
+    // there was invisible to search.
+    title: "History of Vadavai Matha, Vadakkankulam",
     fullTitle: "History of the Holy Family Shrine (Vadavai Matha), 1685 to today",
     description:
       "Four centuries of Vadavai Matha, the Holy Family Shrine of Our Lady of the Assumption at Vadakkankulam: St John de Britto's thatched chapel of 1685, the baptism of St Devasahayam Pillai in 1745, the coming of the statue and the weeping of 1803, the great two-nave church of 1855–1872, and the shrine declared in 1993.",
@@ -114,7 +119,11 @@ export const ROUTES: Record<RouteKey, RouteDef> = {
   },
   architecture: {
     path: "/architecture",
-    title: "Architecture",
+    // "Architecture" alone was a 12-character title that named neither the
+    // building nor the village. The two converging naves are the one thing about
+    // this church believed to exist nowhere else in India — it should be the
+    // first thing the <title> says.
+    title: "The Two-Nave Church, Vadakkankulam",
     fullTitle: "The Two-Nave Church — architecture of Little Rome",
     description:
       "The 'open-compass' church of Vadakkankulam: two converging naves meeting at a single altar, a plan believed unique in India. Foundation stone laid 1855, blessed 1872 — its towers, bells, vaults and glass.",
@@ -126,7 +135,7 @@ export const ROUTES: Record<RouteKey, RouteDef> = {
   },
   massTimings: {
     path: "/mass-timings",
-    title: "Mass Timings & Feasts",
+    title: "Mass Timings & Feasts, Vadakkankulam",
     fullTitle: "Mass Timings & the Feasts of the Year",
     description:
       "Daily and Sunday Mass at the Holy Family Shrine, Vadakkankulam, with the feasts of the liturgical year — including the ten-day annual feast of Our Lady of the Assumption, 6–15 August, and the chariot procession on 15 August.",
@@ -150,7 +159,12 @@ export const ROUTES: Record<RouteKey, RouteDef> = {
   },
   devasahayam: {
     path: "/saints/devasahayam-pillai",
-    title: "St Devasahayam Pillai",
+    // Google has never discovered this URL (URL Inspection, 30 Jul 2026) even
+    // though it has sat in the sitemap since 12 July and carries 11 inbound
+    // internal links. It is also the site's highest-volume subject — the first
+    // Indian layman canonised. The year is what distinguishes this page from the
+    // hundreds of others about him: this is where the baptism happened.
+    title: "St Devasahayam Pillai, baptised here 1745",
     fullTitle: "St Devasahayam Pillai — baptised at this parish, 1745",
     description:
       "St Devasahayam Pillai was baptised at this church on 14 May 1745 — the place the Holy See's own record of his cause names. His life, the errand for timber that destroyed him, his wife's grave in this parish, and what the evidence for each of it is. Canonised 15 May 2022, the first layperson of Indian birth raised to the altars.",
@@ -162,7 +176,9 @@ export const ROUTES: Record<RouteKey, RouteDef> = {
   },
   deBritto: {
     path: "/saints/john-de-britto",
-    title: "St John de Britto",
+    // Tamil Catholics search "Arulanandar", not "de Britto". Leaving his Tamil
+    // name out of the <title> forfeited the more common of the two queries.
+    title: "St John de Britto (Arulanandar)",
     fullTitle: "St John de Britto (Arulanandar) — founder of the parish, 1685",
     description:
       "St John de Britto — Arulanandar — the Jesuit from whose coming in 1685 Vadakkankulam counts its founding. His life, his last letter from the prison of Oriyur, and an honest account of what the evidence for the founding actually is. Born Lisbon 1647; martyred 4 February 1693; canonised 1947.",
@@ -174,7 +190,7 @@ export const ROUTES: Record<RouteKey, RouteDef> = {
   },
   faq: {
     path: "/faq",
-    title: "Questions & Answers",
+    title: "Questions & Answers about the Shrine",
     fullTitle: "Questions & Answers about the Shrine",
     description:
       "When is the feast? What are the Mass timings? Who was St Devasahayam Pillai? Why is Vadakkankulam called Little Rome? Is this the same as Velankanni? Plain answers about the Holy Family Shrine, Vadakkankulam.",
