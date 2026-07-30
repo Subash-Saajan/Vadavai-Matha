@@ -303,6 +303,12 @@ export function apparitionFeast(now?: Date, lang: Locale = "en"): Event {
     organizer: { "@id": PARISH_ID },
     isAccessibleForFree: true,
     offers: FREE_ADMISSION,
+    // The feast carried an image and this observance did not, so Search Console
+    // reported a third missing field against it. An Event without an image is
+    // also the one Google is least likely to show as a rich result. This is the
+    // painting the /history page already uses for the 1803 weeping — the subject
+    // of the commemoration itself, not a generic church photograph.
+    image: abs("/images/history/the-weeping-madonna-4.jpg"),
   };
 }
 
