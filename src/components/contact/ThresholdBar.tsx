@@ -59,7 +59,25 @@ export function ThresholdBar() {
                 <span className={`relative inline-flex rounded-full h-2.5 w-2.5 ${dotColour}`} />
               </span>
 
-              <div className="min-w-0">
+              {/* `data-nosnippet` keeps this block out of Google's search
+                  snippets. It is here because it was actively producing a bad
+                  one: the live result for "little rome" read
+
+                    "Parish office 04637 230134, open since 1685. 7:00 AM in
+                     1h 30m. Open daily, 9:00 AM – 8:00 10 AM, …"
+
+                  Google had stitched the countdown into the description, frozen
+                  at whatever minute Googlebot happened to crawl. "in 1h 30m" is
+                  meaningless to someone reading a search result tomorrow, and it
+                  made the parish look like broken data on the one query that
+                  brings half this site's traffic.
+
+                  The status itself stays exactly as it is — it is genuinely
+                  useful to a visitor standing at a bus stop. It is only withheld
+                  from snippets, which is what `data-nosnippet` is for. Google
+                  honours it on div/span/section; it does not affect indexing or
+                  ranking, only the text Google is permitted to quote. */}
+              <div className="min-w-0" data-nosnippet>
                 <p className="font-display text-[0.66rem] uppercase tracking-[0.28em] text-navy">
                   {/* Before hydration — and permanently, for a visitor without
                       JavaScript — this states something true at any hour. It
