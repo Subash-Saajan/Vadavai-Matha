@@ -62,6 +62,22 @@ export const ALIASES = [
   "Chinna Romapuri",
   "Little Rome",
   "Holy Family Church",
+  /* The compound "<alias> Church" forms. These are not decoration: Search
+     Console records "vadavai matha church" and "vadakkankulam matha church" as
+     real queries reaching this site (the latter at position 1, the former at 5),
+     and the alias table declared neither — it had "Vadavai Matha" and "Holy
+     Family Church" as separate entries and never the join, which is what people
+     actually type.
+
+     Still the same rule as the rest of this file: no invented names. Each of
+     these is this church called by a name it is genuinely called by, with the
+     word "church" attached, not a keyword built to catch traffic. Tamil-script
+     equivalents are deliberately NOT added here — that is a tamil-localize job
+     against the canonical glossary, not something to improvise in an English
+     source file. */
+  "Vadavai Matha Church",
+  "Vadakkankulam Matha Church",
+  "Paraloga Matha Church",
 ] as const;
 
 export const SITE_URL = process.env.SITE_URL ?? "https://littlerome.net";
