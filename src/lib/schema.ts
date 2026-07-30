@@ -114,16 +114,12 @@ const TA = {
     "விண்ணேற்பு மாதா திருத்தலம்",
     "வடக்கன்குளம் திருக்குடும்ப ஆலயம்",
     "வடக்கன்குளம் மாதா ஆலயம்",
-    /* The vernacular by-name, and it is not a curiosity: வடக்கன்குளம் டவுசர்
-       சர்ச் and டவுசர் சர்ச் are BOTH live Search Console queries reaching this
-       site (positions 3.0 and 1.0) that the site answered under no name of its
-       own. Attested in Sivasubramanian, *Kiristhavamum Sathiyum* (2001) p.55,
-       which captions the façade திருக்குடும்ப ஆலயம் (காற்சட்டை ஆலயம்) — the two
-       splayed naves read as a pair of trousers. Recorded here as a name only;
-       the caste history that book frames it with is deliberately kept off the
-       site's pages. */
-    "காற்சட்டை ஆலயம்",
-    "காற்சட்டை கோவில்",
+    /* The bare category form, the Tamil twin of "Matha Church" in ALIASES.
+       It will not rank this parish first on its own — every Marian church in
+       Tamil Nadu answers to மாதா ஆலயம் — but it is a true name for this place
+       and declaring it is what makes the qualified forms above resolvable to
+       this entity. */
+    "மாதா ஆலயம்",
   ],
   shrineDescription:
     "திருக்குடும்பத்திற்கு அர்ப்பணிக்கப்பட்ட, விண்ணேற்பு மாதாவின் பெயரால் வணங்கப்படும் மாதா யாத்திரைத் தலம் — ஊரார் இதனை வடவை மாதா, பரலோக மாதா, விண்ணேற்பு மாதா என்று அழைக்கிறார்கள். 1685-ல் புனித அருளானந்தரால் (ஜான் தெ பிரிட்டோ) தொடங்கப்பட்டது. ஒரே பலிபீடத்தில் சந்திக்கும் இரு மண்டபங்களைக் கொண்ட இன்றைய ஆலயம், அருட்தந்தை கிரகோயர் அவர்களின் வழிநடத்தலில், சகோதரர் பெர்கந்தால் அவர்களைக் கட்டிடக் கலைஞராகக் கொண்டு, 1855 முதல் 1872 வரை கட்டப்பட்டது. புனித தேவசகாயம் பிள்ளை — 2022-ல் இந்தியாவின் முதல் பொதுநிலைப் புனிதராக அறிவிக்கப்பட்டவர் — 1745 மே 14 அன்று இங்கே திருமுழுக்குப் பெற்றார். 1926 முதல் இவ்வூர் சின்ன ரோமாபுரி என்று அழைக்கப்படுகிறது.",

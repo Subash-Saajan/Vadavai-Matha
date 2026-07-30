@@ -78,17 +78,22 @@ export const ALIASES = [
   "Vadavai Matha Church",
   "Vadakkankulam Matha Church",
   "Paraloga Matha Church",
-  /* The vernacular by-name. Search Console records "வடக்கன்குளம் டவுசர் சர்ச்"
-     and "டவுசர் சர்ச்" as real queries reaching this site — டவுசர் = trouser —
-     and the site claimed the name nowhere. Attested in Sivasubramanian,
-     *Kiristhavamum Sathiyum* (2001) p.55, whose façade caption reads
-     திருக்குடும்ப ஆலயம் (காற்சட்டை ஆலயம்): the two splayed naves read as a pair
-     of trousers. A name, nothing more — the caste history that book frames it
-     with stays off the site's pages. */
-  "Trousers Church",
   /* Used by the parish's OWN 2026 livestream titles, so it is a name people
      search having seen it on the parish's channel. */
   "St Mary's Shrine",
+  /* The plain category form. "Matha Church" alone will never rank this parish
+     first — it is a generic Tamil-English term ("Mother's church") that every
+     Marian church in the state answers to, and Google localises it to whoever
+     is nearest the searcher. It is claimed here because it is nonetheless a
+     true name for this place, not to contest the bare phrase: the Knowledge
+     Base records "Matha Church" for the adjacent building that houses the
+     statue (03_Madha_Statue_and_1803_Apparition), and the parish's own Facebook
+     page is styled "Vadakkankulam Matha Church". Declaring it costs nothing and
+     makes this church eligible for the qualified forms, which is where it can
+     actually place. Both spellings, because the souvenir uses "Madha". */
+  "Matha Church",
+  "Madha Church",
+  "Vadavai Madha",
 ] as const;
 
 export const SITE_URL = process.env.SITE_URL ?? "https://littlerome.net";
