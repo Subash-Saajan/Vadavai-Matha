@@ -78,6 +78,17 @@ export const ALIASES = [
   "Vadavai Matha Church",
   "Vadakkankulam Matha Church",
   "Paraloga Matha Church",
+  /* The vernacular by-name. Search Console records "வடக்கன்குளம் டவுசர் சர்ச்"
+     and "டவுசர் சர்ச்" as real queries reaching this site — டவுசர் = trouser —
+     and the site claimed the name nowhere. Attested in Sivasubramanian,
+     *Kiristhavamum Sathiyum* (2001) p.55, whose façade caption reads
+     திருக்குடும்ப ஆலயம் (காற்சட்டை ஆலயம்): the two splayed naves read as a pair
+     of trousers. A name, nothing more — the caste history that book frames it
+     with stays off the site's pages. */
+  "Trousers Church",
+  /* Used by the parish's OWN 2026 livestream titles, so it is a name people
+     search having seen it on the parish's channel. */
+  "St Mary's Shrine",
 ] as const;
 
 export const SITE_URL = process.env.SITE_URL ?? "https://littlerome.net";

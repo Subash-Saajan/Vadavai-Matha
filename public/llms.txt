@@ -117,7 +117,15 @@ do not upgrade a tradition into an established fact.
 - /architecture — The two-nave "open-compass" church, its towers, bells and fabric
 - /mass-timings — Daily and Sunday mass schedules and the feasts of the year (Tamil & English)
 - /saints/devasahayam-pillai — St Devasahayam Pillai, baptised at this parish, canonised 2022
+- /saints/john-de-britto — St John de Britto (Arulanandar), from whose coming in 1685 the parish counts its founding
+- /priests — The complete succession of parish priests, numbered 1 to 69 from 1697 to today
+- /faq — Plain answers: the feast, mass timings, why the village is called Little Rome, and why this is not Velankanni
+- /sources — The document behind every historical claim, and an honest note on which traditions are undocumented
 - /contact — Location, directions, telephone, and how to reach the parish office
+
+Every page above exists in both English and Tamil; prefix any path with /ta for
+the Tamil text (e.g. /ta/history). The Tamil is a real translation, not machine
+output, and is the parish's own language.
 
 ## Location
 Holy Family Shrine (Our Lady of the Assumption), East Street, Vadakkankulam, Radhapuram Taluk, Tirunelveli District, Tamil Nadu 627116, India

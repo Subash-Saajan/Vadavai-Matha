@@ -101,6 +101,29 @@ const TA = {
     "வடக்கன்குளத்து அன்னை",
     "சின்ன ரோமாபுரி",
     "திருக்குடும்ப ஆலயம்",
+    /* The Tamil twins of the "<alias> Church" compounds in contact.ts ALIASES.
+       Those were added because Search Console records the Latin forms as real
+       queries; the Tamil side held the bare Marian titles and never joined them
+       to a church head-noun, so a Tamil searcher typing the natural compound
+       matched nothing. Each is built from glossary-sanctioned parts only:
+       Church (bldg) = ஆலயம், Shrine = திருத்தலம், village = வடக்கன்குளம்.
+       கோவில் and தேவாலயம் are deliberately absent — the glossary is silent on
+       both, and improvising unsanctioned Tamil is not ours to do. */
+    "வடவை மாதா ஆலயம்",
+    "பரலோக மாதா ஆலயம்",
+    "விண்ணேற்பு மாதா திருத்தலம்",
+    "வடக்கன்குளம் திருக்குடும்ப ஆலயம்",
+    "வடக்கன்குளம் மாதா ஆலயம்",
+    /* The vernacular by-name, and it is not a curiosity: வடக்கன்குளம் டவுசர்
+       சர்ச் and டவுசர் சர்ச் are BOTH live Search Console queries reaching this
+       site (positions 3.0 and 1.0) that the site answered under no name of its
+       own. Attested in Sivasubramanian, *Kiristhavamum Sathiyum* (2001) p.55,
+       which captions the façade திருக்குடும்ப ஆலயம் (காற்சட்டை ஆலயம்) — the two
+       splayed naves read as a pair of trousers. Recorded here as a name only;
+       the caste history that book frames it with is deliberately kept off the
+       site's pages. */
+    "காற்சட்டை ஆலயம்",
+    "காற்சட்டை கோவில்",
   ],
   shrineDescription:
     "திருக்குடும்பத்திற்கு அர்ப்பணிக்கப்பட்ட, விண்ணேற்பு மாதாவின் பெயரால் வணங்கப்படும் மாதா யாத்திரைத் தலம் — ஊரார் இதனை வடவை மாதா, பரலோக மாதா, விண்ணேற்பு மாதா என்று அழைக்கிறார்கள். 1685-ல் புனித அருளானந்தரால் (ஜான் தெ பிரிட்டோ) தொடங்கப்பட்டது. ஒரே பலிபீடத்தில் சந்திக்கும் இரு மண்டபங்களைக் கொண்ட இன்றைய ஆலயம், அருட்தந்தை கிரகோயர் அவர்களின் வழிநடத்தலில், சகோதரர் பெர்கந்தால் அவர்களைக் கட்டிடக் கலைஞராகக் கொண்டு, 1855 முதல் 1872 வரை கட்டப்பட்டது. புனித தேவசகாயம் பிள்ளை — 2022-ல் இந்தியாவின் முதல் பொதுநிலைப் புனிதராக அறிவிக்கப்பட்டவர் — 1745 மே 14 அன்று இங்கே திருமுழுக்குப் பெற்றார். 1926 முதல் இவ்வூர் சின்ன ரோமாபுரி என்று அழைக்கப்படுகிறது.",
@@ -550,15 +573,16 @@ export function graph(...nodes: Thing[]): WithContext<Thing> {
 /**
  * The nodes every page should carry, so the entity is asserted site-wide.
  *
- * NOT YET WIRED FOR TAMIL. `app/[lang]/layout.tsx` calls this as `baseNodes()`
- * and has `lang` in scope, so the whole of the Tamil root graph is one argument
- * away — `graph(...baseNodes(lang))`. Every per-page graph is the same story:
- * each route builds its `jsonLd` as a MODULE-LEVEL const (`const jsonLd =
- * graph(pageNode("faq"), trailTo("faq"))`), evaluated once at import time, when
- * no locale exists. Passing `lang` there means moving that expression inside
- * the page component, where `params` is awaited — ten files, and a change to
- * how each page renders rather than to what this file says. That is the piece
- * deliberately left undone here.
+ * WIRED FOR TAMIL. `app/[lang]/layout.tsx` calls `graph(...baseNodes(lang))`,
+ * so /ta routes assert the Tamil shrine and parish nodes — verified live: the
+ * shrine node on /ta/history emits `திருக்குடும்பத் திருத்தலம், வடக்கன்குளம்`.
+ *
+ * This comment previously said the opposite, describing the pre-wiring state
+ * long after it had been wired. It is corrected rather than deleted because a
+ * stale "NOT YET DONE" note is worse than none: it was read as current and
+ * reported as a live bug during the 2026-07-30 audit, and cost real time.
+ * Per-page graphs localise too — each route's `jsonLd` is built inside the
+ * component from awaited `params`, not at module level.
  */
 export function baseNodes(lang: Locale = "en"): Thing[] {
   return [
