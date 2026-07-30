@@ -53,6 +53,27 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      // The hero's mobile scrub frames. useScrubMedia deliberately does NOT
+      // hold the whole sequence in memory — it keeps a window around the
+      // playhead and drops the rest, because holding 150 decoded frames is
+      // what kills the page on an iPhone. That trade only works if a dropped
+      // frame comes back from the disk cache instead of the network, and
+      // Next's default for /public (`max-age=0, must-revalidate`) costs a
+      // round trip per frame every time the reader scrolls back up to the top.
+      //
+      // A day, not a year, and no `immutable`: these filenames are stable
+      // (f001.webp…), so re-running scripts/gen-scrub-frames.mjs changes the
+      // bytes at an unchanged URL. A day means a re-cut film reaches everyone
+      // by tomorrow; `immutable` would mean a year of the old one.
+      {
+        source: "/hero-frames/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=86400",
+          },
+        ],
+      },
     ];
   },
   async redirects() {

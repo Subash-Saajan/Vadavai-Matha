@@ -2,6 +2,55 @@
 
 import { useEffect, useRef, useState, type RefObject } from "react";
 
+/* ── THE PHONE MEMORY BUDGET, AND WHY THIS IS NOT A PLAIN PRELOAD ──────────
+   iOS Safari does not run a page out of memory the way a desktop browser
+   does. It kills it: the WebContent process is jetsammed and the reader gets
+   "This page couldn't load — Reload to try again", with no console, no error
+   and no clue as to which page element was to blame. Chrome on Android and
+   every desktop browser survive the same page, so it is invisible unless you
+   are holding an iPhone.
+
+   The hero is exactly the shape that trips it. This loader used to fetch all
+   150 frames up front and hold every Image alive for the life of the page.
+   Encoded that is a harmless ~16 MB — but WebKit caches the DECODED bitmap of
+   each frame it draws, and a decoded 864×1080 frame is 3.6 MB. Scrub through
+   the whole film and the tab is asked to hold something like 540 MB of
+   bitmaps, on top of the canvas backing store and the rest of the page. Its
+   decoded-image cache does purge under pressure, but not at the rate a fast
+   scrub fills it, and the tab dies mid-scroll. Add the ten or fifty other
+   tabs a real reader keeps open and the ceiling is lower still.
+
+   Three rules keep it bounded, and none of them changes a pixel of what is
+   actually drawn:
+
+   1. PHONES DRAW EVERY STEP-th FRAME. The scrub maps ~120vh of scroll onto
+      the film, so at 150 frames the film advances more than a frame per 7px
+      of scroll — far finer than a thumb can resolve. Every third frame is
+      one image per ~20px, still smooth, and a third of the memory. The
+      caller's frame mapping is untouched: it keeps asking for frame 97, and
+      `draw` renders the nearest one that is resident.
+   2. ONLY A WINDOW AROUND THE PLAYHEAD IS RESIDENT. Frames further than KEEP
+      away are dropped for the collector, so the ceiling is the window, not
+      the film. On a hard flick the scrub can outrun the window; that is what
+      the nearest-resident search in `draw` is for — it shows the closest
+      frame it has and self-heals as the next ones land.
+   3. NOTHING IS HELD WHILE THE HERO IS OFF SCREEN OR THE TAB IS HIDDEN. Once
+      the reader is past the hero — i.e. for the whole rest of the home page —
+      the sequence costs nothing. The canvas keeps its last bitmap, so coming
+      back shows the frame you left on while the window refills behind it.
+
+   Re-fetching an evicted frame is a disk-cache hit, not a network round trip:
+   /hero-frames is served with a day of max-age (see next.config.ts), which is
+   what makes eviction cheap enough to be this aggressive. */
+const STEP = 3;
+/** Raw-index reach of the resident window, ahead of and behind the playhead. */
+const AHEAD = 14 * STEP;
+const BEHIND = 4 * STEP;
+/** Beyond this the Image is dropped: ±16 frames ≈ 33 live ≈ 120 MB decoded. */
+const KEEP = 16 * STEP;
+/** Concurrent fetches — enough to stay ahead of a scroll, polite to the page. */
+const IN_FLIGHT = 6;
+
 /**
  * Picks how a scroll-scrubbed film renders and wires the mobile path.
  *
@@ -45,7 +94,6 @@ export function useScrubMedia({
   const [mode, setMode] = useState<"video" | "canvas" | null>(null);
   const [mediaReady, setMediaReady] = useState(false);
 
-  const framesRef = useRef<(HTMLImageElement | null)[]>([]);
   const frameTargetRef = useRef(0);
   const drawRef = useRef<(() => void) | null>(null);
 
@@ -72,19 +120,35 @@ export function useScrubMedia({
     const ctx = canvas?.getContext("2d");
     if (!canvas || !ctx) return;
 
-    framesRef.current = new Array(frameCount).fill(null);
+    // Lives for exactly as long as this effect — a ref would outlive the
+    // canvas it belongs to and keep its frames alive with it.
+    const frames: (HTMLImageElement | null)[] = new Array(frameCount).fill(null);
+    const pending = new Set<number>();
+    let inFlight = 0;
     let drawn = -1;
     let cancelled = false;
+    /* Is the hero on screen and the tab in front? While it is not, the film
+       holds nothing — see rule 3 above. */
+    let resident = true;
+
+    /* A scroll-scrubbed film is motion like any other, so a reader who has
+       asked for less of it gets the opening frame and nothing after it — which
+       is the poster already underneath the canvas, so nothing shifts and they
+       carry none of this memory. Read once: `mediaReady` still fires below or
+       the hero's copy would never be revealed. */
+    const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const want = () =>
+      Math.max(0, Math.min(frameCount - 1, Math.round(frameTargetRef.current)));
 
     const draw = () => {
-      const frames = framesRef.current;
-      const want = Math.round(frameTargetRef.current);
+      const want0 = want();
       // Nearest loaded frame, so scrubbing ahead of the network shows the
       // closest image instead of freezing (and self-heals as frames arrive).
       let idx = -1;
       for (let d = 0; d < frameCount && idx < 0; d++) {
-        if (want - d >= 0 && frames[want - d]) idx = want - d;
-        else if (want + d < frameCount && frames[want + d]) idx = want + d;
+        if (want0 - d >= 0 && frames[want0 - d]) idx = want0 - d;
+        else if (want0 + d < frameCount && frames[want0 + d]) idx = want0 + d;
       }
       if (idx < 0 || idx === drawn) return;
       const img = frames[idx] as HTMLImageElement;
@@ -99,7 +163,6 @@ export function useScrubMedia({
       ctx.drawImage(img, dx, (ch - dh) / 2, dw, dh);
       drawn = idx;
     };
-    drawRef.current = draw;
 
     const size = () => {
       // Render at native density (capped at 3×) — capping lower makes the
@@ -118,40 +181,123 @@ export function useScrubMedia({
     size();
     window.addEventListener("resize", size);
 
-    // Plain Image objects + one canvas (never ImageBitmaps): the browser
-    // keeps them compressed (a few MB total) and decodes on draw, which
-    // stays far below iOS Safari's canvas/bitmap memory ceilings.
-    const load = (i: number) =>
-      new Promise<void>((done) => {
-        const img = new window.Image();
-        img.onload = () => {
-          if (!cancelled) {
-            framesRef.current[i] = img;
-            draw();
-          }
-          done();
-        };
-        img.onerror = () => done();
-        img.src = frameSrc(i);
-      });
+    // Plain Image objects + one canvas, never ImageBitmaps: an ImageBitmap is
+    // decoded the moment it exists and stays that way until it is closed, so a
+    // sequence of them is the very pile of bitmaps this loader exists to
+    // avoid. A frame that lands after the playhead has already moved past its
+    // window is dropped on arrival rather than stored and evicted later.
+    const load = (i: number) => {
+      pending.add(i);
+      inFlight++;
+      const img = new window.Image();
+      img.decoding = "async";
+      const settle = () => {
+        pending.delete(i);
+        inFlight--;
+        pump();
+      };
+      img.onload = () => {
+        if (!cancelled && resident && Math.abs(i - want()) <= KEEP) {
+          frames[i] = img;
+          draw();
+        }
+        settle();
+      };
+      img.onerror = settle;
+      img.src = frameSrc(i);
+    };
 
-    (async () => {
-      await load(0); // entrance animations gate on this one
+    const request = (i: number) => {
+      if (i < 0 || i >= frameCount || frames[i] || pending.has(i)) return;
+      load(i);
+    };
+
+    /* Runs after every scrub tick and every time a frame lands: drop what the
+       playhead has left behind, then fetch what it is about to want, nearest
+       first. Requests are snapped to a FIXED grid of multiples of STEP — if the
+       grid moved with the playhead, a slow scroll would fetch 30, then 31, then
+       32 and hold three near-identical images where one was intended. */
+    const pump = () => {
+      if (cancelled || still) return;
+      const at = want();
+      for (let i = 0; i < frameCount; i++) {
+        if (frames[i] && (!resident || Math.abs(i - at) > KEEP)) frames[i] = null;
+      }
+      if (!resident) return;
+
+      const lastOnGrid = Math.floor((frameCount - 1) / STEP) * STEP;
+      const base = Math.min(Math.round(at / STEP) * STEP, lastOnGrid);
+      for (let d = 0; d <= AHEAD && inFlight < IN_FLIGHT; d += STEP) {
+        request(base + d);
+        if (d > 0 && d <= BEHIND) request(base - d);
+      }
+      // The grid stops short of the final frame; pin it so the film's last
+      // composition is the one that actually lands at the end of the scrub.
+      if (at > lastOnGrid) request(frameCount - 1);
+    };
+
+    // The consumer's every scrub tick: draw with what is here, then move the
+    // window. Internal callers (a frame landing, a resize) only draw — pumping
+    // from there would recurse.
+    drawRef.current = () => {
+      draw();
+      pump();
+    };
+
+    /* Frame 0 gates the hero's entrance animations, so it is fetched on its own
+       before the window opens — and setMediaReady runs even if it 404s, because
+       a missing file must not leave the hero's copy invisible forever. */
+    const first = new window.Image();
+    first.decoding = "async";
+    first.onload = () => {
+      if (cancelled) return;
+      frames[0] = first;
+      setMediaReady(true);
+      draw();
+      pump();
+    };
+    first.onerror = () => {
       if (cancelled) return;
       setMediaReady(true);
-      let next = 1;
-      const pump = async () => {
-        while (!cancelled && next < frameCount) await load(next++);
-      };
-      // Modest parallelism: fast enough to beat the first scroll, polite
-      // enough not to starve the rest of the page.
-      for (let k = 0; k < 6; k++) pump();
-    })();
+      pump();
+    };
+    first.src = frameSrc(0);
+
+    /* Residency: on screen AND in front. A viewport of slack either side of the
+       hero keeps a reader lingering at the boundary from thrashing the cache;
+       the visibility half matters because backgrounding a tab is exactly when
+       iOS goes looking for memory to reclaim, and the tab holding less is the
+       tab it is less likely to discard. */
+    let onScreen = true;
+    let visible = true;
+    const settleResidency = () => {
+      resident = onScreen && visible;
+      pump();
+    };
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        onScreen = entry.isIntersecting;
+        settleResidency();
+      },
+      { rootMargin: "100% 0px" }
+    );
+    io.observe(canvas);
+
+    const onVisibility = () => {
+      visible = document.visibilityState === "visible";
+      settleResidency();
+    };
+    document.addEventListener("visibilitychange", onVisibility);
 
     return () => {
       cancelled = true;
       drawRef.current = null;
       window.removeEventListener("resize", size);
+      io.disconnect();
+      document.removeEventListener("visibilitychange", onVisibility);
+      // Leaving the page must not leave 33 decoded frames behind it.
+      frames.fill(null);
     };
   }, [mode, frameCount, frameSrc, canvasRef, focusX]);
 
