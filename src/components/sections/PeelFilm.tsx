@@ -12,6 +12,30 @@ import { useLang } from "@/components/layout/LanguageProvider";
  * scroll exactly like the home Hero: desktop seeks the video, phones draw
  * the pre-extracted frame sequence onto a canvas (useScrubMedia).
  *
+ * ─────────────────────────────────────────────────────────────────────────
+ * NOT RENDERED, AND ITS ASSETS ARE GONE. Nothing imports this component; the
+ * real AI film was never funded, so /architecture ships without it. On
+ * 2026-07-30 the stand-in assets were deleted — 33 MB in a repo that served
+ * them to nobody:
+ *
+ *   public/peel-frames/   14 MB, 151 files — regenerate, don't hand-make
+ *   public/peel-film.mp4  19 MB — it was a BYTE-FOR-BYTE COPY of
+ *                         public/hero-video.mp4, a placeholder standing in
+ *                         for the real film
+ *
+ * The component and scripts/gen-scrub-frames.mjs both survive, so this is
+ * reversible in two commands. TO REVIVE:
+ *   1. put the real film at public/peel-film.mp4
+ *      (or `cp public/hero-video.mp4 public/peel-film.mp4` for the old stand-in)
+ *   2. node scripts/gen-scrub-frames.mjs peel
+ *   3. import and render <PeelFilm /> in ArchitectureExperience.tsx
+ *
+ * Do NOT delete scripts/gen-scrub-frames.mjs — it also generates the home
+ * hero's frames, which ARE live.
+ *
+ * Everything before this line describes how it works when it is running:
+ * ─────────────────────────────────────────────────────────────────────────
+ *
  * Film: /peel-film.mp4 (stitched by scripts/gen-peel-video.mjs --stitch)
  * Frames + poster: /peel-frames/ (scripts/gen-scrub-frames.mjs peel —
  * re-run it whenever the film itself is replaced)
