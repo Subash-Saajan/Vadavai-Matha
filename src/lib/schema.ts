@@ -237,6 +237,25 @@ export const website: WebSite = {
   about: { "@id": SHRINE_ID },
 };
 
+/* ── Free admission ────────────────────────────────────────────────────────
+   `isAccessibleForFree: true` is the honest statement and it stays, but Google
+   does not read the "Free" label off it — it reads an Offer priced at zero, and
+   without one it reports `Missing field "offers"` against both events in Search
+   Console (non-critical, but it forfeits the label).
+
+   Nothing is invented here: admission to a patronal feast is free, which the
+   events already assert. `performer` is the other field Google flags and it is
+   deliberately NOT supplied — that property is for concerts and shows. A
+   patronal feast has no performer, and filling it would mean making something
+   up to satisfy a validator. */
+const FREE_ADMISSION = {
+  "@type": "Offer",
+  price: "0",
+  priceCurrency: "INR",
+  availability: "https://schema.org/InStock",
+  url: abs(ROUTES.massTimings.path),
+} as const;
+
 /* ── The annual feast ──────────────────────────────────────────────────────*/
 export function feast(now?: Date, lang: Locale = "en"): Event {
   const y = feastYear(now);
@@ -255,6 +274,7 @@ export function feast(now?: Date, lang: Locale = "en"): Event {
     location: { "@id": SHRINE_ID },
     organizer: { "@id": PARISH_ID },
     isAccessibleForFree: true,
+    offers: FREE_ADMISSION,
     image: abs(ROUTES.massTimings.image),
   };
 }
@@ -282,6 +302,7 @@ export function apparitionFeast(now?: Date, lang: Locale = "en"): Event {
     location: { "@id": SHRINE_ID },
     organizer: { "@id": PARISH_ID },
     isAccessibleForFree: true,
+    offers: FREE_ADMISSION,
   };
 }
 
