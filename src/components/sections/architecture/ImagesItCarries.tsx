@@ -38,15 +38,16 @@ export function ImagesItCarries() {
       <div className="relative max-w-7xl mx-auto">
         <div className="max-w-2xl">
           <p className="reveal-item kicker mb-6">{a.imagesLabel}</p>
-          <h2 className="reveal-item font-serif text-4xl md:text-5xl lg:text-6xl text-navy leading-[1.06]">
+          {/* See the heading note in Towers.tsx. */}
+          <h2 className="reveal-item font-serif text-[clamp(1.95rem,7.8vw,2.25rem)] md:text-5xl lg:text-6xl text-navy leading-[1.06]">
             {a.imagesTitle}
           </h2>
-          <p className="reveal-item text-text-muted text-lg leading-relaxed mt-6">
+          <p className="reveal-item text-text-muted text-[0.98rem] md:text-lg leading-relaxed mt-6">
             {a.imagesBody}
           </p>
         </div>
 
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
+        <div className="mt-12 md:mt-16 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
           {a.figures.map((f, i) => (
             <figure key={i} className="reveal-item">
               <div className="relative w-full aspect-4/5">
@@ -66,7 +67,8 @@ export function ImagesItCarries() {
               <figcaption className="mt-7">
                 <h3 className="font-serif text-2xl md:text-3xl text-navy">{f.title}</h3>
                 <p className="mt-3 text-text-muted leading-relaxed">{f.body}</p>
-                <p className="mt-4 pt-4 border-t border-gold/25 font-display text-[0.62rem] uppercase tracking-[0.24em] text-text-muted">
+                {/* Same 9.9px caption correction as Towers — the note there. */}
+                <p className="mt-4 pt-4 border-t border-gold/25 font-display text-[0.7rem] tracking-[0.15em] md:text-[0.62rem] md:tracking-[0.24em] uppercase text-text-muted">
                   {f.caption}
                 </p>
               </figcaption>
@@ -75,14 +77,18 @@ export function ImagesItCarries() {
         </div>
 
         {/* The words over the porch */}
-        <div className="reveal-item mt-20 max-w-2xl mx-auto text-center">
+        <div className="reveal-item mt-14 md:mt-20 max-w-2xl mx-auto text-center">
           <div className="cross-rule max-w-xs mx-auto mb-8">
             <span className="text-gold text-lg">✦</span>
           </div>
+          {/* The Tamil keeps its size on a phone deliberately: this is the
+              lettering cut over the porch, shown as lettering, and Tamil
+              carries far more stroke detail per glyph than Latin does — it is
+              the one line here that would lose meaning by shrinking. */}
           <p className="font-tamil text-4xl md:text-5xl text-gradient-gold-deep leading-snug">
             {a.inscription}
           </p>
-          <p className="mt-6 font-serif italic text-navy/75 text-lg leading-relaxed">
+          <p className="mt-6 font-serif italic text-navy/75 text-[1.08rem] md:text-lg leading-relaxed">
             {a.inscriptionGloss}
           </p>
         </div>

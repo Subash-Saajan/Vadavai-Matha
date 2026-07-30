@@ -75,29 +75,47 @@ export default async function FaqRoute({
       <JsonLd data={jsonLd} />
 
       <section className="bg-cream text-navy">
-        <div className="max-w-3xl mx-auto px-6 pt-32 pb-20 md:pt-40 md:pb-28">
-          <p className="font-display tracking-[0.28em] text-xs md:text-sm uppercase text-gold-dark">
+        {/* `pt-32` was the phone value too: 128px of nothing under a navbar
+            that is only 64px tall on a phone, so the eyebrow started a fifth of
+            the way down the screen. 112px still clears the bar by 48px. */}
+        <div className="max-w-3xl mx-auto px-6 pt-28 pb-16 md:pt-40 md:pb-28">
+          <p className="font-display tracking-[0.18em] md:tracking-[0.28em] text-xs md:text-sm uppercase text-gold-dark">
             {t.eyebrow}
           </p>
-          <h1 className="mt-5 font-display text-4xl md:text-6xl leading-[1.05]">
+          {/* 36px of Cinzel caps was the phone size as well, which sets
+              "Questions & Answers" as three stacked words in a 312px column.
+              Same clamp as PageHero, so every masthead on the site — hero or
+              plain page — opens at one size on a phone. */}
+          <h1 className="mt-5 font-display text-[clamp(1.85rem,7.4vw,2.25rem)] md:text-6xl leading-[1.05]">
             {t.title}
           </h1>
-          <div className="leaf-rule my-8" />
-          <p className="font-serif text-xl md:text-2xl leading-relaxed text-navy/75">
+          <div className="leaf-rule my-6 md:my-8" />
+          <p className="font-serif text-[1.12rem] md:text-2xl leading-relaxed text-navy/75">
             {t.intro}
           </p>
 
-          <dl className="mt-16 space-y-12">
+          {/* ── THE ANSWERS ──
+              Note that nothing here is a disclosure: every answer is open, so
+              there is no accordion row to size to 44px and no tap target that
+              only reveals itself. That is deliberate (see the note above — the
+              page exists to be read, quoted and lifted), and it is also the
+              reason this page needs no touch work at all beyond type.
+
+              The type moves as it does everywhere: display question and serif
+              answer both come down, and the answer stays LARGER than a sans
+              paragraph would be at the same rank, because Cormorant's small
+              x-height renders a given number visibly smaller. */}
+          <dl className="mt-12 space-y-10 md:mt-16 md:space-y-12">
             {FAQS.map((f) => (
               <div key={f.q}>
-                <dt className="font-display text-xl md:text-2xl leading-snug text-navy">
+                <dt className="font-display text-[1.15rem] md:text-2xl leading-snug text-navy">
                   {ta && f.qTa ? f.qTa : f.q}
                 </dt>
-                <dd className="mt-4 font-serif text-lg md:text-xl leading-relaxed text-navy/80">
+                <dd className="mt-3 md:mt-4 font-serif text-[1.05rem] md:text-xl leading-relaxed text-navy/80">
                   {ta && f.aTa ? f.aTa : f.a}
                 </dd>
                 {f.source ? (
-                  <p className="mt-3 text-xs md:text-sm tracking-wide text-navy/45">
+                  <p className="mt-3 text-[0.88rem] md:text-sm tracking-wide text-navy/45">
                     {ta && f.sourceTa ? f.sourceTa : f.source}
                   </p>
                 ) : null}
@@ -105,13 +123,18 @@ export default async function FaqRoute({
             ))}
           </dl>
 
-          <div className="leaf-rule my-14" />
+          <div className="leaf-rule my-10 md:my-14" />
 
-          <p className="font-serif text-lg leading-relaxed text-navy/70">
+          <p className="font-serif text-[1.05rem] md:text-lg leading-relaxed text-navy/70">
             {t.sourcesNote}{" "}
+            {/* `py-2` on an INLINE anchor grows the hit region without
+                touching the line box — vertical padding does not affect an
+                inline element's layout, only what it paints and what it
+                catches. So the link is a ~48px target on a phone and the
+                paragraph is set exactly as before. */}
             <Link
               href={L("/sources")}
-              className="text-gold-dark underline underline-offset-4 decoration-gold/50 hover:decoration-gold-dark transition-colors"
+              className="py-2 md:py-0 text-gold-dark underline underline-offset-4 decoration-gold/50 hover:decoration-gold-dark transition-colors"
             >
               {t.sourcesCta}
             </Link>

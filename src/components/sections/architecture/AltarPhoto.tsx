@@ -14,51 +14,140 @@ import Image from "next/image";
  * them once and cut in July 2026 for inventing what it could not measure. The
  * photograph invents nothing.
  *
- * WHAT IS MAPPED, AND WHAT IS NOT. Only two of the four are placed here, because
- * only two can be honestly read off the one altar photograph the archive holds:
+ * WHAT IS MAPPED, AND WHAT IS NOT. Three of the five readings are placed here:
  *
- *   · `trinity` — the dove in the starred oval at the top of the centre bay, and
- *     the crucified Christ directly below it on the same axis. This is the same
- *     "Two Trinities" logic that governs the façade relief (KB file 19).
- *   · `arches`  — the five arched niches of the main tier. ⚠ The note says "the
- *     upper row"; the reredos also has a HIGHER tier with arches at its outer
- *     ends, cropped away here. Which row the note meant is not settled.
+ *   · `apostles` — the two gold arcades flanking the tabernacle, six small
+ *     standing statues in each. See THE TWELVE, FOUND below.
+ *   · `arches`  — the five arched niches of the main tier: the saint in the black
+ *     cassock, the crowned Madonna, the centre bay, St Joseph, the small nun.
+ *     ⚠ The note says "the upper row"; the reredos also has a HIGHER tier with
+ *     statues at its outer ends. Which row the note meant is not settled.
+ *   · `trinity` — the centre axis: the crucifix, and the shrine niche below it.
+ *     ⚠ READ THIS BEFORE EDITING THE COPY. The note reads the centre as Father,
+ *     Son and Holy Spirit, and an EARLIER photograph of this altar (altar.jpg,
+ *     still used in ImagesItCarries) shows a dove in a starred oval above the
+ *     crucifix — so the old crop marked dove + crucifix as two persons of the
+ *     three. THIS photograph does not: that field now carries gold foliate
+ *     tracery on lilac, checked at 6× magnification. The altar was redecorated
+ *     between the two (the earlier one also has LED tube outlines this one has
+ *     no trace of). So the mark here is the axis, not the Trinity itemised, and
+ *     the gloss must not claim a dove this picture does not show.
  *
- * The nine flower-clusters and the four lower-row arches are NOT mapped. The
- * gold bouquet-bosses are all over the gables but cannot be counted at this
- * resolution, and the register below the altar shelf cannot be resolved at all.
- * KB 02 §4.7c lists both as on-site camera work. Do not guess coordinates for
- * them — leave them as plain list entries until someone counts them.
+ * The nine flower-clusters and the four lower-row arches are still NOT mapped.
+ * On the nine: the gold bouquet finials crowning the spires do come to about
+ * nine, but each tall spire's crown is itself a cluster of several bouquets and
+ * the same form runs as small crockets up every gable, so the count depends
+ * entirely on what you agree to count — not good enough to publish. On the four:
+ * this photograph shows the register below the statues clearly and it holds
+ * TWELVE arches, not four (see below), so the note's "four arches in the base
+ * row" is somewhere else again. Both stay on KB 02 §4.7c. Do not guess
+ * coordinates for them.
  *
- * COORDINATES. `/images/architecture/altar-reredos.jpg` is a crop of
- * altar.original.jpg — box (257,77)–(3080,1796) on that 3285×2176 original,
- * exported at 1760×1072. It is a separate crop rather than altar.jpg itself
- * because altar.jpg already appears further down the page in ImagesItCarries,
- * and the same photograph twice in two sections reads as a mistake. The viewBox
- * below is the crop's own space at 2200×1340 (the export is that × 0.8, exactly),
- * so the overlay lands without distortion. Re-cropping the image means
- * re-measuring every ellipse: scripts are in the session scratchpad, and the
- * method was to draw the candidates onto the JPEG and look at them.
+ * 🆕 THE TWELVE, FOUND. This photograph settles a question the KB had open (02
+ * §4.7c item 4): the note's "both flanks of the tabernacle call to mind the
+ * twelve disciples" is a gold arcade either side of the tabernacle holding SIX
+ * small standing statues each — twelve, counted twice at magnification. That is
+ * the parish's twelve, and the reading was moved here from the floor plan in
+ * July 2026, where it had been attached to the twelve nave piers instead — a
+ * pairing that appears nowhere on the parish sheet. The piers are still drawn;
+ * they are simply piers again.
+ *
+ * COORDINATES. `/images/architecture/altar-reredos.jpg` is cut from the owner's
+ * July 2026 photograph (`1000206865.jpg.jpeg`, 4000×2252 with EXIF orientation 6
+ * — the turn is BAKED IN, not left to the tag, since Next's image pipeline
+ * cannot be trusted to carry it). Upright that is 2252×4000; the crop is box
+ * (60,760)–(2200,2600) = 2140×1840, exported at ×0.8 = 1712×1472, so the viewBox
+ * below lands on the pixels without distortion. Re-cropping means re-measuring
+ * every shape: the scripts are in the session scratchpad, and the method was to
+ * draw the candidates onto the JPEG and look at them.
  */
 
-export type AltarSpot = "arches" | "trinity";
+export type AltarSpot = "apostles" | "arches" | "trinity";
 
-/** cx, cy, rx, ry — in the crop's own 2200×1340 space. */
-const SPOTS: Record<AltarSpot, [number, number, number, number][]> = {
+/** An ellipse (cx, cy, rx, ry) or a rect (x, y, w, h), in the crop's 2140×1840 space. */
+type Shape =
+  | { e: [number, number, number, number] }
+  | { r: [number, number, number, number] };
+
+const SPOTS: Record<AltarSpot, Shape[]> = {
+  /* The two arcades flanking the tabernacle, six statues in each. Rects, because
+     an ellipse over a horizontal arcade leaves its end bays outside the light. */
+  apostles: [
+    { r: [730, 1477, 295, 103] },
+    { r: [1165, 1477, 275, 103] },
+  ],
   arches: [
-    [245, 810, 106, 244],
-    [536, 759, 134, 243],
-    [1093, 775, 218, 440], // the centre bay, taller than its four neighbours
-    [1698, 759, 109, 243],
-    [1963, 785, 89, 218],
+    { e: [425, 1080, 75, 210] },
+    { e: [660, 1060, 92, 225] },
+    { e: [1100, 1090, 120, 350] }, // the centre bay, taller than its four neighbours
+    { e: [1570, 1060, 85, 220] },
+    { e: [1790, 1065, 72, 180] },
   ],
   trinity: [
-    [1093, 260, 110, 80], // the dove
-    [1099, 554, 165, 215], // the crucifix below it
+    { e: [1100, 860, 140, 170] }, // the crucifix
+    { e: [1100, 1250, 110, 170] }, // the shrine niche beneath it
   ],
 };
 
 const REGIONS = Object.keys(SPOTS) as AltarSpot[];
+
+/**
+ * HOW MUCH EACH REGION'S INVISIBLE HIT SHAPE IS GROWN BEYOND ITS VISIBLE ONE,
+ * in crop units, applied as a transparent stroke (a transparent paint is still
+ * a painted, hit-testable one, where `none` is not).
+ *
+ * ⚠ THE TWO ARCADES WERE A 16px-TALL TAP TARGET. On a phone this photograph is
+ * about 342px wide against a 2140-unit crop — a scale of 0.16 — so the two
+ * `apostles` rectangles, 103 units deep, came out sixteen screen pixels tall.
+ * That is a fifth of a fingertip, and they are the region carrying the one
+ * thing this photograph settled: the parish's twelve, found as six statues in
+ * each arcade. Grown by 90 units on every side they are 45px deep, which is a
+ * thumb. The visible ring and the spotlight are untouched — this is the hit
+ * shape only, so nothing about the drawing changes on any screen.
+ *
+ * The other two are already big enough (the smallest arch is 24×67px, the
+ * crucifix 45×54px) and are deliberately NOT grown: `arches` and `trinity`
+ * overlap each other on the centre axis as it is — the crucifix sits inside the
+ * tall centre bay — and padding them would hand a whole column of the reredos
+ * to whichever of the two happens to be painted last.
+ */
+const HIT_GROW: Record<AltarSpot, number> = {
+  apostles: 180, // a 180-unit stroke straddles the edge: 90 units out, 90 in
+  arches: 0,
+  trinity: 0,
+};
+
+const W = 2140;
+const H = 1840;
+
+/** One shape, drawn either as the hole in the dim or as the ring around it.
+    The presentation props are listed rather than spread from SVGProps: ellipse
+    and rect disagree on the type of `ref`, so a shared SVGProps<…> union will
+    not typecheck. Nothing here needs a ref. */
+type MarkProps = {
+  shape: Shape;
+  fill?: string;
+  stroke?: string;
+  strokeWidth?: number;
+  vectorEffect?: "non-scaling-stroke";
+};
+
+function Mark({ shape, ...rest }: MarkProps) {
+  return "e" in shape ? (
+    <ellipse cx={shape.e[0]} cy={shape.e[1]} rx={shape.e[2]} ry={shape.e[3]} {...rest} />
+  ) : (
+    <rect
+      x={shape.r[0]}
+      y={shape.r[1]}
+      width={shape.r[2]}
+      height={shape.r[3]}
+      rx={14}
+      {...rest}
+    />
+  );
+}
+
+const keyOf = (s: Shape) => ("e" in s ? `e${s.e.join()}` : `r${s.r.join()}`);
 
 export function AltarPhoto({
   alt,
@@ -75,7 +164,7 @@ export function AltarPhoto({
        underneath, and Image `fill` has no height without it. */
     <div
       className="relative rounded-2xl overflow-hidden ring-1 ring-gold/20 shadow-2xl"
-      style={{ aspectRatio: "2200 / 1340" }}
+      style={{ aspectRatio: `${W} / ${H}` }}
     >
       <Image
         src="/images/architecture/altar-reredos.jpg"
@@ -86,18 +175,18 @@ export function AltarPhoto({
       />
 
       <svg
-        viewBox="0 0 2200 1340"
+        viewBox={`0 0 ${W} ${H}`}
         className="absolute inset-0 w-full h-full pointer-events-none"
         aria-hidden="true"
       >
         <defs>
           {REGIONS.map((region) => (
-            /* White lets the dimming rect through; the black ellipses punch the
+            /* White lets the dimming rect through; the black shapes punch the
                spotlights out of it. */
             <mask key={region} id={`altar-spot-${region}`}>
-              <rect width="2200" height="1340" fill="white" />
-              {SPOTS[region].map(([cx, cy, rx, ry]) => (
-                <ellipse key={`${cx}-${cy}`} cx={cx} cy={cy} rx={rx} ry={ry} fill="black" />
+              <rect width={W} height={H} fill="white" />
+              {SPOTS[region].map((s) => (
+                <Mark key={keyOf(s)} shape={s} fill="black" />
               ))}
             </mask>
           ))}
@@ -115,20 +204,17 @@ export function AltarPhoto({
               style={{ opacity: on ? 1 : 0 }}
             >
               <rect
-                width="2200"
-                height="1340"
+                width={W}
+                height={H}
                 fill="#0a1428"
                 opacity={0.72}
                 mask={`url(#altar-spot-${region})`}
               />
               <g className={on ? "plan-region--on" : undefined}>
-                {SPOTS[region].map(([cx, cy, rx, ry]) => (
-                  <ellipse
-                    key={`${cx}-${cy}`}
-                    cx={cx}
-                    cy={cy}
-                    rx={rx}
-                    ry={ry}
+                {SPOTS[region].map((s) => (
+                  <Mark
+                    key={keyOf(s)}
+                    shape={s}
                     fill="none"
                     stroke="#ecd28a"
                     strokeWidth={3}
@@ -149,14 +235,13 @@ export function AltarPhoto({
               className="pointer-events-auto cursor-pointer"
               onClick={() => onSelect(region)}
             >
-              {SPOTS[region].map(([cx, cy, rx, ry]) => (
-                <ellipse
-                  key={`${cx}-${cy}`}
-                  cx={cx}
-                  cy={cy}
-                  rx={rx}
-                  ry={ry}
+              {SPOTS[region].map((s) => (
+                <Mark
+                  key={keyOf(s)}
+                  shape={s}
                   fill="transparent"
+                  stroke="transparent"
+                  strokeWidth={HIT_GROW[region]}
                 />
               ))}
             </g>

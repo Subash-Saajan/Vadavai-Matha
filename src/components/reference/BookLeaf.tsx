@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import type { Leaf } from "@/lib/referenceIndex";
 import { RIGHTS_NOTE } from "@/lib/referenceIndex";
@@ -31,6 +31,12 @@ export function BookLeaf({ leaf, url }: { leaf: Leaf; url?: string }) {
   const [pageIdx, setPageIdx] = useState(anchorIdx);
   const [plain, setPlain] = useState(false);   // context un-faded
   const [scan, setScan] = useState(false);     // the real photographed page
+  const [zoom, setZoom] = useState(false);     // …that page, opened full-screen
+  const [big, setBig] = useState(false);       // …and magnified past the fit
+
+  const zoomRef = useRef<HTMLDialogElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const openerRef = useRef<HTMLButtonElement>(null);
 
   // The page currently on the desk — one of the neighbours, or the single leaf.
   const cur = pages
@@ -46,7 +52,81 @@ export function BookLeaf({ leaf, url }: { leaf: Leaf; url?: string }) {
     setPageIdx((i) => Math.min(pages.length - 1, Math.max(0, i + delta)));
     setScan(false);   // a turned page lands on its reading text, not its facsimile
     setPlain(false);
+    setZoom(false);   // and never on the previous page's facsimile, enlarged
+    setBig(false);
   };
+
+  /* ── OPENING AND CLOSING THE ENLARGED FACSIMILE ──────────────────────────
+     The overlay is a real <dialog> driven with showModal(), and it is a
+     <dialog> precisely so that the accessibility is the platform's rather than
+     ours: the browser puts it in the top layer (so no ancestor's overflow,
+     transform or z-index can clip it), marks everything behind it inert, gives
+     it an implicit role="dialog" + aria-modal, closes it on Escape, and keeps
+     Tab inside it. Hand-rolling that list is how lightboxes end up unusable
+     with a keyboard, and it is the reason this component gains no dependency.
+
+     Two things the platform does NOT give us, and both are done here:
+
+       · THE PAGE BEHIND STILL SCROLLS. A modal dialog stops pointer events
+         reaching the document but not wheel or touch scrolling, so without
+         this the reader pans the facsimile, hits its edge, and the history
+         page underneath starts moving. `overflow: hidden` goes on BOTH the
+         root and the body because this site's viewport scrollbox is
+         ambiguous: globals.css sets `overflow-x: hidden` on <body>, which is
+         enough to make the body the propagating element on some passes, so
+         locking only one of the two is a coin toss. The padding compensates
+         for the scrollbar the lock removes — without it the whole document
+         jumps ~15px sideways at the moment the overlay opens, and again when
+         it closes.
+
+       · LENIS DOES NOT KNOW THE DIALOG EXISTS. The smooth-scroll instance
+         (desktop only, see hooks/useLenis) drives window.scrollTo off its own
+         rAF loop and would happily keep scrolling the locked document. It is
+         stopped for as long as the overlay is up and started again after.
+         `.stop()` is idempotent and the instance is simply absent on touch,
+         where useLenis never runs — hence the optional call.
+
+     Focus goes to Close, not to the image: it is the one control every reader
+     needs and the one screen readers should announce after the dialog's own
+     name. On close we hand focus back to the thumbnail that opened it, so a
+     keyboard reader lands where they left rather than at the top of the page.
+     Browsers largely do this restoration themselves; doing it explicitly costs
+     one line and removes the "largely". */
+  useEffect(() => {
+    const dlg = zoomRef.current;
+    if (!dlg) return;
+
+    if (!zoom) {
+      if (dlg.open) dlg.close();
+      return;
+    }
+
+    if (!dlg.open) dlg.showModal();
+    closeRef.current?.focus();
+
+    const root = document.documentElement;
+    const body = document.body;
+    const prevRootOverflow = root.style.overflow;
+    const prevBodyOverflow = body.style.overflow;
+    const prevBodyPad = body.style.paddingRight;
+    const gutter = window.innerWidth - root.clientWidth;
+
+    root.style.overflow = "hidden";
+    body.style.overflow = "hidden";
+    if (gutter > 0) body.style.paddingRight = `${gutter}px`;
+
+    const lenis = (window as unknown as {
+      __lenis?: { start(): void; stop(): void };
+    }).__lenis;
+    lenis?.stop();
+
+    return () => {
+      root.style.overflow = prevRootOverflow;
+      body.style.overflow = prevBodyOverflow;
+      body.style.paddingRight = prevBodyPad;
+      lenis?.start();
+    };
+  }, [zoom]);
 
   // Where the book lives, named by its host — "archive.org", not a raw URL. A
   // reader deciding whether to follow a link deserves to know where it goes.
@@ -73,15 +153,42 @@ export function BookLeaf({ leaf, url }: { leaf: Leaf; url?: string }) {
         </header>
 
         {scan && curScan ? (
+          /* ── THE FACSIMILE, AND THE WAY INTO IT ──────────────────────────
+             The scan is about 1300×2000 and lands here roughly 325px wide on a
+             phone. It scales correctly — the sheet never pushes the document
+             sideways — but at that size the printed text is a texture, not
+             words, and this is the one page on the site whose entire argument
+             is "here is the actual leaf, check us". A facsimile nobody can read
+             makes the argument in form and refuses it in substance.
+
+             So the photograph is itself the control: the whole image is one
+             large button that opens the full-screen reader below. A button and
+             not a div with a click handler, because that is what makes it
+             reachable by Tab, operable by Enter and Space, and announced as
+             something you can do rather than something you can look at. */
           <div className="leaf-scan">
-            <Image
-              src={curScan}
-              alt={`The printed page ${cur.n} of ${leaf.title}, photographed from the book`}
-              width={1300}
-              height={2000}
-              className="w-full h-auto"
-              sizes="(max-width: 768px) 100vw, 44rem"
-            />
+            <button
+              ref={openerRef}
+              type="button"
+              className="leaf-scan-open"
+              onClick={() => setZoom(true)}
+              aria-label={`Enlarge the photographed page${cur.n ? ` ${cur.n}` : ""} of ${leaf.title} — opens a full-screen view you can magnify and pan`}
+            >
+              <Image
+                src={curScan}
+                alt={`The printed page ${cur.n} of ${leaf.title}, photographed from the book`}
+                width={1300}
+                height={2000}
+                className="w-full h-auto"
+                sizes="(max-width: 768px) 100vw, 44rem"
+              />
+              {/* The cue is inside the button so it can never drift away from
+                  the thing it describes, and aria-hidden because the button's
+                  own label already says all of this at greater length. */}
+              <span className="leaf-scan-cue" aria-hidden>
+                Enlarge <span className="leaf-scan-cue-mark">⤢</span>
+              </span>
+            </button>
           </div>
         ) : hasPage && cited ? (
           // The cited page, with the passage found inside it and the rest dimmed.
@@ -239,6 +346,104 @@ export function BookLeaf({ leaf, url }: { leaf: Leaf; url?: string }) {
         <p className={`leaf-rights leaf-rights--${leaf.rights}`}>{RIGHTS_NOTE[leaf.rights]}</p>
       </footer>
 
+      {/* ── THE FACSIMILE, FULL SCREEN ──────────────────────────────────────
+          Mounted whenever this page HAS a scan, not only while the scan is on
+          the sheet, so that turning back and forth never remounts it. A
+          <dialog> that has not been shown is `display: none` under the UA
+          stylesheet, which is also the whole of the no-JavaScript story: with
+          scripting off nothing here renders, the sheet above is byte-for-byte
+          what it always was, and the reader loses only a control that could
+          never have worked anyway.
+
+          ⚠ The base .leaf-zoom rule below must therefore NEVER set `display`.
+          An author rule beats the UA rule, so a bare `display: flex` on the
+          element would pin the overlay open over every reference page on the
+          site. The layout lives on `.leaf-zoom[open]`. */}
+      {curScan && (
+        <dialog
+          ref={zoomRef}
+          className="leaf-zoom"
+          aria-label={`The photographed page${cur.n ? ` ${cur.n}` : ""} of ${leaf.title}, enlarged`}
+          onClose={() => {
+            setZoom(false);
+            setBig(false);
+            openerRef.current?.focus();
+          }}
+        >
+          <div className="leaf-zoom-bar">
+            <div className="leaf-zoom-said">
+              <p className="leaf-zoom-title">
+                {leaf.short}
+                {cur.n ? ` · p. ${cur.n}` : ""}
+              </p>
+              {/* Hidden below 640px, where it would take a third of the bar to
+                  say two things a phone reader cannot use: there is no Escape
+                  key, and dragging is what a finger does anyway. What replaces
+                  it on a phone is the Magnify button, which is the only part of
+                  this line that carries information a gesture does not. */}
+              <p className="leaf-zoom-hint">Drag or scroll to explore · Esc to close</p>
+            </div>
+            <div className="leaf-zoom-acts">
+              {/* Pinch-zoom is the obvious gesture and it works — this app sets
+                  no `user-scalable=no`, and the stage permits pinch through
+                  touch-action. But a gesture is not an interface: it is
+                  invisible, it is unavailable to anyone driving the page from a
+                  keyboard, and it is unavailable to a mouse. This button is the
+                  same capability said out loud, and it is what makes the
+                  enlargement accessible rather than merely possible. */}
+              <button
+                type="button"
+                className="leaf-zoom-btn"
+                aria-pressed={big}
+                onClick={() => setBig((v) => !v)}
+              >
+                {big ? "Fit the page" : "Magnify"}
+              </button>
+              <button
+                ref={closeRef}
+                type="button"
+                className="leaf-zoom-btn leaf-zoom-btn--close"
+                onClick={() => setZoom(false)}
+              >
+                Close<span aria-hidden> ✕</span>
+              </button>
+            </div>
+          </div>
+
+          {/* The scroll container, and the ONLY thing in the overlay that
+              scrolls. Panning a magnified page happens strictly inside this
+              box: `overscroll-behavior: contain` stops the gesture chaining out
+              to the document when it reaches an edge, and the document is
+              locked besides. tabIndex + role/label because a scrollable region
+              that cannot be focused cannot be scrolled with the arrow keys —
+              the keyboard equivalent of dragging. */}
+          <div
+            className={`leaf-zoom-stage ${big ? "is-big" : ""}`}
+            data-lenis-prevent
+            tabIndex={0}
+            role="region"
+            aria-label="The photographed page — scroll or pinch to read it closely"
+          >
+            {/* `sizes` is deliberately a flat 1300px rather than a viewport
+                share. This is the one place on the site where we WANT the
+                largest rendition the source can give: told "100vw", a 360px
+                phone picks a 640w or 1080w candidate and the reader magnifies
+                straight into the resampling. Told 1300px, it fetches the scan
+                at the resolution it was photographed. next/image is still lazy
+                by default, so the fetch happens when the dialog first opens and
+                not on page load. */}
+            <Image
+              src={curScan}
+              alt={`The printed page ${cur.n} of ${leaf.title}, photographed from the book`}
+              width={1300}
+              height={2000}
+              className="leaf-zoom-img"
+              sizes="1300px"
+            />
+          </div>
+        </dialog>
+      )}
+
       <style>{`
         .leaf-wrap { --ink: #1c1a15; --paper: #faf6ea; }
 
@@ -305,6 +510,18 @@ export function BookLeaf({ leaf, url }: { leaf: Leaf; url?: string }) {
           text-align: justify;
           hyphens: auto;
           -webkit-hyphens: auto;
+          /* THE ONE PLACE ON THIS SITE WHERE AN UNBREAKABLE WORD IS LIKELY.
+             This is not our prose — it is transcribed page text out of French,
+             Latin, Portuguese and Tamil books, including compound place-names,
+             archival shelfmarks and OCR that occasionally welds two words
+             together. Auto-hyphenation is turned OFF below 640px (see the
+             media query at the foot of this sheet, where justification goes
+             with it), which removes the only thing breaking long tokens on the
+             narrowest measure we set. The .leaf sheet clips rather than scrolls, so the
+             failure mode was silently losing the end of a line rather than a
+             visible overflow — worse, on a page whose entire argument is that
+             you can see the passage in full. */
+          overflow-wrap: break-word;
         }
         .leaf-body--bare { text-align: left; hyphens: manual; }
 
@@ -339,6 +556,7 @@ export function BookLeaf({ leaf, url }: { leaf: Leaf; url?: string }) {
           font-weight: 600;
           border-left: 2px solid var(--gold);
           padding-left: 1.1rem;
+          overflow-wrap: break-word;
         }
         .leaf-absent {
           font-family: var(--font-serif), Georgia, serif;
@@ -412,10 +630,79 @@ export function BookLeaf({ leaf, url }: { leaf: Leaf; url?: string }) {
         }
 
         .leaf-scan { margin: -0.4rem 0 0.6rem; }
-        .leaf-scan :global(img) {
-          border: 1px solid rgba(28,26,21,.1);
+
+        /* ── FRAMING THE FACSIMILE — AND A RULE THAT NEVER ONCE APPLIED ──────
+           ⚠ This was written as ".leaf-scan :global(img)" and stayed that way
+           from the day the reference reader was built until 30 July 2026.
+           :global() is CSS-Modules / styled-jsx syntax. This component ships a
+           PLAIN <style> element, so the browser parses its contents as ordinary
+           CSS, does not recognise :global as a selector, and — per the CSS
+           error-handling rules — discards the ENTIRE rule, declarations and all.
+           The facsimile has therefore been an unframed photograph lying on the
+           parchment for the whole life of the page, with the CSS that should
+           have framed it sitting in the file looking correct.
+
+           Nothing in this <style> block ever needed :global. The block is not
+           scoped by anything; every selector in it is already global. Do not
+           put it back, in any form, anywhere in this file.
+
+           The declarations the invalid selector was swallowing specified a
+           neutral 10%-ink hairline. That was drawn before this sheet settled on
+           gold rules, and it is now the only grey line anywhere on it — the
+           running head, the gloss, the translation panel, the pager and the
+           buttons are all rgba(196,160,73,·). Since the rule is being brought to
+           life for the first time, it is brought to life in the hand the sheet
+           actually uses, so the change desktop readers see is a gold hairline
+           seating the photograph on the paper rather than a grey box appearing
+           around it. The added display:block closes the inline-image gap that
+           was quietly padding the space beneath the scan. */
+        .leaf-scan img {
+          display: block;
+          border: 1px solid rgba(196,160,73,.38);
           border-radius: 1px;
         }
+
+        /* The photograph is the button. Everything a <button> brings by default
+           — its own font, background, border, padding, centring — has to come
+           off, or the frame above sits inside a second, browser-drawn one. */
+        .leaf-scan-open {
+          display: block;
+          position: relative;
+          width: 100%;
+          margin: 0;
+          padding: 0;
+          border: 0;
+          background: none;
+          font: inherit;
+          color: inherit;
+          text-align: left;
+          cursor: zoom-in;
+        }
+        .leaf-scan-open:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+        .leaf-scan-open:hover .leaf-scan-cue { background: rgba(250,246,234,.98); color: #6f5620; }
+
+        /* Set as a printer's mark on the corner of the plate rather than a
+           floating web badge: engraved caps, gold, on the sheet's own paper. */
+        .leaf-scan-cue {
+          position: absolute;
+          right: .5rem;
+          bottom: .5rem;
+          display: inline-flex;
+          align-items: center;
+          gap: .4rem;
+          padding: .42rem .7rem .36rem;
+          background: rgba(250,246,234,.92);
+          border: 1px solid rgba(196,160,73,.5);
+          border-radius: 9999px;
+          font-family: var(--font-display), serif;
+          font-size: .58rem;
+          letter-spacing: .2em;
+          text-transform: uppercase;
+          color: var(--gold-dark);
+          box-shadow: 0 2px 8px -4px rgba(28,26,21,.4);
+          transition: background .3s ease, color .3s ease;
+        }
+        .leaf-scan-cue-mark { font-size: .9rem; line-height: 1; letter-spacing: 0; }
 
         /* Folio at the foot, flanked by rules — the way the book has it. */
         .leaf-folio {
@@ -549,14 +836,262 @@ export function BookLeaf({ leaf, url }: { leaf: Leaf; url?: string }) {
         .leaf-rights--in-copyright,
         .leaf-rights--none { color: #8a6a2c; }
 
+        /* ══ THE ENLARGED FACSIMILE ═══════════════════════════════════════════
+           A reading room, not a lightbox. The chrome is the sheet's own paper
+           with the sheet's own gold hairline under it; only the surround behind
+           the plate is dark, and it is a warm ink-brown mixed from --ink rather
+           than a generic black scrim, so opening this does not feel like leaving
+           the site. */
+        .leaf-zoom {
+          /* ⚠ NO display DECLARATION HERE — see the note beside the markup. The
+             UA rule "dialog:not([open]) { display: none }" is all that keeps
+             this overlay shut, and any author display declaration outranks it. */
+          position: fixed;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          /* The UA stylesheet letterboxes dialogs: max-width/max-height of
+             calc(100% - 6px - 2em) plus auto margins. All four are overridden
+             because the whole point of this overlay is the largest reading area
+             the device has. */
+          max-width: 100%;
+          max-height: 100%;
+          margin: 0;
+          padding: 0;
+          border: 0;
+          background: transparent;
+          color: var(--ink);
+          overflow: hidden;
+        }
+        .leaf-zoom[open] { display: flex; flex-direction: column; }
+        .leaf-zoom::backdrop { background: rgba(24,20,12,.88); }
+
+        .leaf-zoom-bar {
+          flex: 0 0 auto;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: .8rem;
+          padding: .5rem .75rem;
+          background: var(--paper);
+          border-bottom: 1px solid rgba(196,160,73,.45);
+          box-shadow: 0 4px 18px -10px rgba(28,26,21,.7);
+        }
+        /* min-width: 0 is what lets a long book title wrap instead of forcing
+           the bar wider than the dialog. The dialog clips rather than scrolls,
+           so a failure here would hide the controls, not reveal them. */
+        .leaf-zoom-said { min-width: 0; }
+        .leaf-zoom-title {
+          font-family: var(--font-display), serif;
+          font-size: .62rem;
+          letter-spacing: .2em;
+          text-transform: uppercase;
+          color: var(--gold-dark);
+          overflow-wrap: break-word;
+        }
+        .leaf-zoom-hint {
+          margin-top: .18rem;
+          font-family: var(--font-serif), Georgia, serif;
+          font-size: .82rem;
+          font-style: italic;
+          color: var(--text-muted);
+          overflow-wrap: break-word;
+        }
+        .leaf-zoom-acts { flex: 0 0 auto; display: flex; align-items: center; gap: .4rem; }
+
+        /* The same pill as .leaf-btn, but born at the touch size instead of
+           growing into it in the media query: this control set only ever exists
+           on top of a photograph the reader is trying to hold still, and a
+           28px target there is a mis-tap that closes the page they opened. */
+        .leaf-zoom-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 44px;
+          min-width: 44px;
+          padding: .35rem .95rem;
+          font-family: var(--font-display), serif;
+          font-size: .66rem;
+          letter-spacing: .14em;
+          text-transform: uppercase;
+          color: var(--gold-dark);
+          background: transparent;
+          border: 1px solid rgba(196,160,73,.42);
+          border-radius: 9999px;
+          cursor: pointer;
+          white-space: nowrap;
+          transition: background .3s ease, color .3s ease, border-color .3s ease;
+        }
+        .leaf-zoom-btn:hover { background: rgba(196,160,73,.1); border-color: var(--gold); }
+        .leaf-zoom-btn[aria-pressed="true"] {
+          background: rgba(196,160,73,.16);
+          border-color: var(--gold);
+          color: #6f5620;
+        }
+        .leaf-zoom-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+        .leaf-zoom-btn--close { border-color: rgba(196,160,73,.6); }
+
+        /* ── The stage: the only scrolling box in the overlay ──
+           The min-height of 0 is load-bearing. A flex item's default min-height is
+           auto, i.e. "never smaller than my content" — the 2000px-tall image —
+           so without it the stage grows past the dialog, the dialog clips it,
+           and the bottom of the page becomes unreachable while the box that was
+           supposed to scroll never does.
+
+           touch-action names pinch-zoom explicitly. The app sets no
+           user-scalable=no (the viewport export in [lang]/layout.tsx carries
+           only themeColor), so the browser's own two-finger zoom is available
+           here and this simply declines to swallow it. */
+        .leaf-zoom-stage {
+          flex: 1 1 auto;
+          min-height: 0;
+          display: flex;
+          overflow: auto;
+          overscroll-behavior: contain;
+          -webkit-overflow-scrolling: touch;
+          touch-action: pan-x pan-y pinch-zoom;
+          padding: .55rem;
+          background:
+            radial-gradient(ellipse 80% 50% at 50% 0%, rgba(196,160,73,.1), transparent 70%),
+            linear-gradient(180deg, #2a2418 0%, #1b1710 100%);
+        }
+        .leaf-zoom-stage:focus-visible { outline: 2px solid var(--gold); outline-offset: -4px; }
+
+        /* The auto margin — NOT justify/align-content — is what centres the
+           plate. Centring a flex item that overflows its container with
+           justify-content makes the overflow unreachable on the leading side:
+           the reader can scroll right to the edge of the page but never left to
+           the margin, which on a scanned book page is where the folio and the
+           binding are. Auto margins collapse to zero the moment the item stops
+           fitting, so the same declaration centres a small plate and lets a
+           large one scroll in both directions. */
+        .leaf-zoom-img {
+          margin: auto;
+          width: auto;
+          height: auto;
+          max-width: 100%;
+          max-height: 100%;
+          background: #fff;
+          border: 1px solid rgba(196,160,73,.38);
+          box-shadow: 0 18px 50px -26px rgba(0,0,0,.9);
+        }
+        /* Magnified: every constraint off, so the plate renders at the size it
+           was photographed (about 1300px across — three and a half times what a
+           360px phone was showing) and the stage scrolls to it. min-width keeps
+           a wide desktop from leaving the plate stranded in the middle at less
+           than the width already available. */
+        .leaf-zoom-stage.is-big { padding: 0; }
+        .leaf-zoom-stage.is-big .leaf-zoom-img {
+          max-width: none;
+          max-height: none;
+          min-width: 100%;
+          border: 0;
+          box-shadow: none;
+        }
+
         @media (max-width: 640px) {
           /* Justified text needs width to avoid rivers; a phone hasn't got it. */
           .leaf-body { text-align: left; hyphens: manual; }
-          .leaf-folio { bottom: .8rem; }
+          .leaf-folio { bottom: .8rem; font-size: .74rem; }
+
+          /* ── The printer's marks ──
+             Running head, folio, imprint, and the three section labels: every
+             one of them was set between 0.56rem and 0.64rem, i.e. 9.0px to
+             10.2px, and every one of them keeps its width here because the
+             tracking comes off by roughly as much as the size goes on. The
+             running head in particular is the only thing on the sheet that
+             says WHICH BOOK you are looking at. */
+          .leaf-head-title { font-size: .7rem; letter-spacing: .16em; }
+          .leaf-head-folio { font-size: .7rem; letter-spacing: .1em; }
+          .leaf-gloss-label { font-size: .66rem; letter-spacing: .16em; }
+          .leaf-trans-label { font-size: .66rem; letter-spacing: .16em; }
+          .leaf-cite-imprint { font-size: .72rem; letter-spacing: .08em; }
+
+          /* Serif secondary prose, brought onto the site's mobile serif step.
+             Cormorant's small x-height is why these sit above where the sans
+             equivalents would — see the note in Patroness. */
+          .leaf-onward { font-size: 1.02rem; }
+          .leaf-partial { font-size: .95rem; }
+          .leaf-rights { font-size: .98rem; }
+
+          /* ── THE TWO CONTROLS THAT ARE THE POINT OF THE COMPONENT ──
+             "Read the whole page" and "See the actual page" are not chrome:
+             the first is the escape hatch out of the dimmed context (and the
+             accessibility escape hatch out of blurred low-contrast text), the
+             second is the facsimile. They were 9.6px caps in a pill about 31px
+             tall — two thirds of a legible size and two thirds of a usable
+             target. 44px minimum, and the padding becomes horizontal only so
+             the height comes from the box rather than from guesswork.
+             A max-width of 100% so a long label wraps inside the pill instead
+             of widening it past the sheet. */
+          .leaf-btn {
+            display: inline-flex;
+            align-items: center;
+            min-height: 44px;
+            max-width: 100%;
+            font-size: .72rem;
+            letter-spacing: .12em;
+            padding: .35rem 1.05rem;
+          }
+
+          /* ── THE PAGER, WHICH IS WHERE THIS PAGE COULD SCROLL SIDEWAYS ──
+             Two nowrap buttons and a centred caption in one space-between row.
+             At the desktop sizes that row measures about 250px and just fits a
+             360px phone; enlarge the buttons to a legible size and it does not,
+             and because neither the pager nor .ref-inner clips, the overflow
+             would have gone to the DOCUMENT — the whole page scrolling
+             sideways, which is the worst defect a phone layout has.
+
+             Three things stop it, and all three are needed:
+               · the caption is given order 3 and a 100% basis, so it drops onto
+                 its own line and the two buttons share the first;
+               · white-space returns to normal, so a long label wraps inside its
+                 own button rather than pushing the row wider;
+               · max-width 48% is the hard guarantee — two buttons plus a gap
+                 can never exceed the container whatever the label says or
+                 whatever font actually loads. */
+          .leaf-pager { flex-wrap: wrap; gap: .1rem .6rem; }
+          .leaf-pager-at {
+            order: 3;
+            flex: 1 0 100%;
+            font-size: .66rem;
+            letter-spacing: .1em;
+          }
+          .leaf-page-btn {
+            display: inline-flex;
+            align-items: center;
+            min-height: 44px;
+            max-width: 48%;
+            white-space: normal;
+            font-size: .68rem;
+            letter-spacing: .08em;
+            padding: .4rem .1rem;
+          }
+
+          /* ── The way into the enlarged facsimile, and the room itself ──
+             Same rule as everything else on this sheet: size up, tracking down,
+             so nothing gets wider than what it replaces. The cue was 9.3px caps
+             sitting on a photograph — the least legible place on the page to put
+             the smallest type on it. */
+          .leaf-scan-cue {
+            font-size: .7rem;
+            letter-spacing: .12em;
+            padding: .46rem .8rem .4rem;
+          }
+          .leaf-zoom-title { font-size: .7rem; letter-spacing: .1em; }
+          .leaf-zoom-hint { display: none; }
+          .leaf-zoom-bar { gap: .5rem; padding: .45rem .55rem; }
+          .leaf-zoom-acts { gap: .35rem; }
+          .leaf-zoom-btn {
+            font-size: .72rem;
+            letter-spacing: .09em;
+            padding: .35rem .75rem;
+          }
+          .leaf-zoom-stage { padding: .35rem; }
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .ctx, .leaf-btn { transition: none; }
+          .ctx, .leaf-btn, .leaf-scan-cue, .leaf-zoom-btn { transition: none; }
         }
       `}</style>
     </div>

@@ -4,7 +4,7 @@ import { useRef, useEffect } from "react";
 import Image from "next/image";
 import { Link } from "@/components/LocaleLink";
 import { ArrowUpRight } from "lucide-react";
-import { gsap } from "@/lib/gsap";
+import { gsap, DESKTOP, revealY } from "@/lib/gsap";
 import { useLang } from "@/components/layout/LanguageProvider";
 
 /**
@@ -44,28 +44,36 @@ export function Weeping() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // A slow drift on the backdrop. Deliberately slighter than the Verse
-      // section's — this one is meant to feel held, not swept.
-      gsap.fromTo(
-        bgRef.current,
-        { yPercent: -6, scale: 1.12 },
-        {
-          yPercent: 6,
-          scale: 1.04,
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 1.4,
+      /* ── Desktop only: the slow drift on the backdrop ──────────────────
+         A full-bleed photograph being translated AND scaled every scrolled
+         frame is the single most expensive shape of parallax there is: the
+         scale forces the compositor to resample the whole image rather than
+         just move a cached layer. On a phone the section keeps the still
+         frame, which is the picture it was chosen for. See lib/gsap.ts. */
+      const mm = gsap.matchMedia();
+      mm.add(DESKTOP, () => {
+        gsap.fromTo(
+          bgRef.current,
+          { yPercent: -6, scale: 1.12 },
+          {
+            yPercent: 6,
+            scale: 1.04,
+            ease: "none",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 1.4,
+            },
           },
-        },
-      );
+        );
+      });
 
+      const from = revealY();
       contentRef.current?.querySelectorAll(".reveal-item").forEach((el, i) => {
         gsap.fromTo(
           el,
-          { y: 44, opacity: 0 },
+          { y: from, opacity: 0 },
           {
             y: 0,
             opacity: 1,
@@ -76,6 +84,8 @@ export function Weeping() {
           },
         );
       });
+
+      return () => mm.revert();
     }, sectionRef);
     return () => ctx.revert();
   }, [lang]);
@@ -83,9 +93,9 @@ export function Weeping() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-night-deep py-24 md:py-32"
+      className="relative overflow-hidden bg-night-deep py-16 md:py-32"
     >
-      <div ref={bgRef} className="absolute inset-0 will-change-transform">
+      <div ref={bgRef} className="absolute inset-0 md:will-change-transform">
         <Image
           src="/images/history/the-weeping-madonna-4.jpg"
           alt=""
@@ -119,29 +129,46 @@ export function Weeping() {
         <div className="lg:col-span-7">
           <p className="reveal-item kicker mb-6 text-gold!">{t.home.weepingLabel}</p>
 
-          <h2 className="reveal-item font-serif text-4xl leading-[1.06] text-white md:text-5xl lg:text-6xl">
+          <h2 className="reveal-item font-serif text-[clamp(1.95rem,7.8vw,2.25rem)] leading-[1.06] text-white md:text-5xl lg:text-6xl">
             {t.home.weepingTitle}
           </h2>
 
+          {/* Cormorant on a dark ground at 18px is the least legible
+              combination on the whole page — the small x-height and the thin
+              strokes both work against a white-on-navy reversal. Up to
+              1.05rem on a phone — still a step above the sans beside it, which is
+              the correction Cormorant needs; back to the designed sizes at `md`. */}
           <div className="reveal-item mt-8 space-y-5">
-            <p className="font-serif text-lg leading-relaxed text-white/80 md:text-xl">
+            <p className="font-serif text-[1.05rem] leading-relaxed text-white/80 md:text-xl">
               {t.home.weepingBody1}
             </p>
-            <p className="font-serif text-lg leading-relaxed text-white/80 md:text-xl">
+            <p className="font-serif text-[1.05rem] leading-relaxed text-white/80 md:text-xl">
               {t.home.weepingBody2}
+            </p>
+            <p className="font-serif text-[1.05rem] leading-relaxed text-white/80 md:text-xl">
+              {t.home.weepingBody3}
             </p>
           </div>
 
           {/* Below the line, in smaller type — where a book keeps its doubt.
-              See the head of this file before touching it. */}
-          <p className="reveal-item mt-9 border-t border-gold/25 pt-6 text-sm leading-relaxed text-white/50">
+              See the head of this file before touching it.
+
+              ⚠ IT MUST STAY READABLE. 14px at 50% white on near-black is under
+              3:1 and is the sentence that keeps this section honest — a note
+              nobody can read is a note that is not there. It goes up to 15.2px
+              and 60% on a phone, and it is still visibly smaller and quieter
+              than the prose above it, which is the whole point of it. */}
+          <p className="reveal-item mt-9 border-t border-gold/25 pt-6 text-[0.88rem] leading-relaxed text-white/60 md:text-sm md:text-white/50">
             {t.home.weepingHonest}
           </p>
 
           <div className="reveal-item mt-9">
+            {/* `py-2 -my-2` gives the inline link a 44px tap target without
+                moving a pixel of it — the text is 18px tall on its own, which
+                is a third of what a thumb needs. */}
             <Link
               href="/history#the-weeping-madonna"
-              className="group inline-flex items-center gap-2 font-display text-[0.7rem] uppercase tracking-[0.22em] text-gold transition-colors hover:text-white"
+              className="ui-label group -my-2 inline-flex items-center gap-2 py-2 text-gold transition-colors hover:text-white"
             >
               {t.home.weepingCta}
               <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

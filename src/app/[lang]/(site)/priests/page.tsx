@@ -84,11 +84,17 @@ export default async function PriestsRoute({
       />
 
       <section className="bg-cream text-navy">
-        <div className="mx-auto max-w-3xl px-6 pt-16 pb-24 md:pt-20 md:pb-28">
+        <div className="mx-auto max-w-3xl px-6 pt-12 pb-16 md:pt-20 md:pb-28">
           {/* The paragraph that removes the confusion. A reader who understands
               this sentence will not wonder why one row carries a portrait and a
-              paragraph and the next carries a name. */}
-          <p className={`${ta ? "font-tamil" : "font-serif"} text-xl leading-relaxed text-navy/80 md:text-2xl`}>
+              paragraph and the next carries a name.
+
+              It stays the largest body type on the page — a lead, deliberately
+              above the register's own prose — but `text-xl` was a monitor's
+              lead: 20px of Cormorant for a hundred-word paragraph is fifteen
+              lines on a phone before the reader has reached anything he came
+              for. 18.4px keeps it clearly a lead and gives back three lines. */}
+          <p className={`${ta ? "font-tamil" : "font-serif"} text-[1.15rem] leading-relaxed text-navy/80 md:text-2xl`}>
             {ta ? (
               CHROME_TA.intro1
             ) : (
@@ -104,9 +110,9 @@ export default async function PriestsRoute({
             )}
           </p>
 
-          <div className="leaf-rule my-10" />
+          <div className="leaf-rule my-8 md:my-10" />
 
-          <p className={`${ta ? "font-tamil" : "font-serif"} text-lg leading-relaxed text-navy/70`}>
+          <p className={`${ta ? "font-tamil" : "font-serif"} text-[1.05rem] leading-relaxed text-navy/70 md:text-lg`}>
             {ta ? (
               <>
                 {CHROME_TA.intro2a}{" "}
@@ -132,14 +138,27 @@ export default async function PriestsRoute({
           {/* Wayfinding for a long page. Real anchors, no JavaScript — a
               contents block, not a row of inline links: each entry gets its
               own full-width line so it reads as a section, not a phrase. */}
+          {/* ⚠ EVERY ROW OF THIS CONTENTS BLOCK WAS AN UNDERSIZED TAP TARGET.
+              `py-3` around a 14.4px line gives a 45px box on paper — but the
+              line is `items-baseline` inside a flex row, so what the finger
+              actually gets is the 22px line box plus the padding, and six
+              consecutive links of that height with a hairline between them is
+              the classic phone mis-tap: the reader lands on Period IV and is
+              taken to Period III.
+
+              `py-3.5` below `md` clears 44px comfortably, and the block's own
+              height grows by 6px over six rows — nothing, on a page this long.
+              The title also comes up half a step, because on a page whose only
+              navigation this is, "The Jesuits Return" should not be set smaller
+              than the footnotes further down. */}
           <nav
             aria-label={ta ? CHROME_TA.jumpAria : "Jump to a period"}
-            className="mt-12 border-y border-gold/20"
+            className="mt-10 border-y border-gold/20 md:mt-12"
           >
             <p
               className={`pt-6 ${
-                ta ? "font-tamil" : "font-display uppercase tracking-[0.3em]"
-              } text-[0.6rem] text-gold-dark`}
+                ta ? "font-tamil" : "font-display uppercase tracking-[0.16em] md:tracking-[0.3em]"
+              } text-[0.68rem] text-gold-dark md:text-[0.6rem]`}
             >
               {ta ? CHROME_TA.contents : "Contents"}
             </p>
@@ -148,7 +167,7 @@ export default async function PriestsRoute({
                 <li key={p.numeral}>
                   <a
                     href={`#period-${p.numeral.toLowerCase()}`}
-                    className="group flex items-baseline justify-between gap-4 py-3 transition-colors hover:bg-gold/5"
+                    className="group flex items-baseline justify-between gap-4 py-3.5 transition-colors hover:bg-gold/5 md:py-3"
                   >
                     <span className="flex items-baseline gap-3">
                       <span className="w-6 shrink-0 font-display text-[0.72rem] tabular-nums text-gold-dark/70">
@@ -157,12 +176,12 @@ export default async function PriestsRoute({
                       <span
                         className={`${
                           ta ? "font-tamil" : "font-display"
-                        } text-[0.9rem] text-navy/75 underline decoration-gold/0 underline-offset-4 transition-colors group-hover:text-navy group-hover:decoration-gold-dark sm:text-base`}
+                        } text-[0.95rem] text-navy/75 underline decoration-gold/0 underline-offset-4 transition-colors group-hover:text-navy group-hover:decoration-gold-dark sm:text-base`}
                       >
                         {ta && p.titleTa ? p.titleTa : p.title}
                       </span>
                     </span>
-                    <span className="shrink-0 whitespace-nowrap font-display text-[0.7rem] tabular-nums text-navy/45">
+                    <span className="shrink-0 whitespace-nowrap font-display text-[0.76rem] tabular-nums text-navy/45 md:text-[0.7rem]">
                       {p.years}
                     </span>
                   </a>
@@ -171,14 +190,14 @@ export default async function PriestsRoute({
               <li>
                 <a
                   href="#tombs"
-                  className="group flex items-baseline justify-between gap-4 py-3 transition-colors hover:bg-gold/5"
+                  className="group flex items-baseline justify-between gap-4 py-3.5 transition-colors hover:bg-gold/5 md:py-3"
                 >
                   <span className="flex items-baseline gap-3">
                     <span className="w-6 shrink-0" aria-hidden="true" />
                     <span
                       className={`${
                         ta ? "font-tamil" : "font-display"
-                      } text-[0.9rem] text-navy/75 underline decoration-gold/0 underline-offset-4 transition-colors group-hover:text-navy group-hover:decoration-gold-dark sm:text-base`}
+                      } text-[0.95rem] text-navy/75 underline decoration-gold/0 underline-offset-4 transition-colors group-hover:text-navy group-hover:decoration-gold-dark sm:text-base`}
                     >
                       {ta ? CHROME_TA.tombsTitle : "They are buried here"}
                     </span>
@@ -188,7 +207,7 @@ export default async function PriestsRoute({
             </ul>
           </nav>
 
-          <div className="mt-16">
+          <div className="mt-12 md:mt-16">
             <PriestRegister lang={lang} />
           </div>
 
@@ -196,11 +215,11 @@ export default async function PriestsRoute({
               The same candour /sources trades on, and here it is also a request:
               the two blank roundels and the unreadable roster are things the
               village itself can fix, and nobody else can. */}
-          <div className="mt-20 border-t border-gold/30 pt-14">
+          <div className="mt-14 border-t border-gold/30 pt-10 md:mt-20 md:pt-14">
             <h2 className={`${ta ? "font-tamil" : "font-display"} text-2xl leading-snug text-navy sm:text-3xl`}>
               {ta ? CHROME_TA.missingTitle : "What is still missing"}
             </h2>
-            <p className={`mt-4 ${ta ? "font-tamil" : "font-serif"} text-lg leading-relaxed text-navy/75`}>
+            <p className={`mt-4 ${ta ? "font-tamil" : "font-serif"} text-[1.05rem] leading-relaxed text-navy/75 md:text-lg`}>
               {ta ? (
                 CHROME_TA.missingIntro
               ) : (
@@ -211,11 +230,11 @@ export default async function PriestsRoute({
               )}
             </p>
             <ul
-              className={`mt-8 space-y-5 ${
+              className={`mt-7 space-y-5 ${
                 ta ? "font-tamil" : "font-serif"
-              } text-lg leading-relaxed text-navy/75`}
+              } text-[1.05rem] leading-relaxed text-navy/75 md:mt-8 md:text-lg`}
             >
-              <li className="border-l border-gold/30 pl-5">
+              <li className="border-l border-gold/30 pl-4 sm:pl-5">
                 <span className="text-navy">
                   {ta ? CHROME_TA.missingFacesLead : "Two faces."}
                 </span>{" "}
@@ -233,7 +252,7 @@ export default async function PriestsRoute({
                   </>
                 )}
               </li>
-              <li className="border-l border-gold/30 pl-5">
+              <li className="border-l border-gold/30 pl-4 sm:pl-5">
                 <span className="text-navy">
                   {ta ? CHROME_TA.missingAssistantsLead : "About a hundred assistant priests."}
                 </span>{" "}
@@ -249,7 +268,7 @@ export default async function PriestsRoute({
                   </>
                 )}
               </li>
-              <li className="border-l border-gold/30 pl-5">
+              <li className="border-l border-gold/30 pl-4 sm:pl-5">
                 <span className="text-navy">
                   {ta
                     ? CHROME_TA.missingVocationsLead
@@ -266,16 +285,22 @@ export default async function PriestsRoute({
                 )}
               </li>
             </ul>
-            <p className={`mt-8 ${ta ? "font-tamil" : "font-serif"} text-lg leading-relaxed text-navy/75`}>
+            <p className={`mt-8 ${ta ? "font-tamil" : "font-serif"} text-[1.05rem] leading-relaxed text-navy/75 md:text-lg`}>
               {ta ? CHROME_TA.missingAskA : (
                 <>
                   If you can supply a photograph, correct a name or a date, or read one
                   of those pages,
                 </>
               )}{" "}
+              {/* `py-2 -my-2`: the page's one call to action, and it is a
+                  phrase inside a running paragraph, so its hit area was the
+                  17px line box. Vertical padding on an inline box overflows the
+                  line rather than growing it, which is exactly what is wanted
+                  here — the target reaches 44px and the paragraph's leading is
+                  untouched. */}
               <Link
                 href={L("/contact")}
-                className="text-gold-dark underline decoration-gold/40 underline-offset-4 transition-colors hover:decoration-gold-dark"
+                className="py-2 -my-2 text-gold-dark underline decoration-gold/40 underline-offset-4 transition-colors hover:decoration-gold-dark"
               >
                 {ta ? CHROME_TA.missingAskLink : "please write to the parish"}
               </Link>
@@ -283,11 +308,11 @@ export default async function PriestsRoute({
             </p>
           </div>
 
-          <div className="leaf-rule my-12" />
+          <div className="leaf-rule my-10 md:my-12" />
 
           {/* No italic in Tamil — the face has no true italic and the browser
               would synthesise a slant, which reads as a rendering fault. */}
-          <p className={`${ta ? "font-tamil" : "font-serif italic"} text-lg leading-relaxed text-navy/65`}>
+          <p className={`${ta ? "font-tamil" : "font-serif italic"} text-[1.05rem] leading-relaxed text-navy/65 md:text-lg`}>
             {ta ? (
               CHROME_TA.closing(TERM_COUNT, PERIODS.length)
             ) : (

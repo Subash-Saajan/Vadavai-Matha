@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Phone, MessageCircle } from "lucide-react";
-import { gsap } from "@/lib/gsap";
+import { gsap, revealY } from "@/lib/gsap";
 import { PageHero } from "@/components/sections/PageHero";
 import { useLang } from "@/components/layout/LanguageProvider";
 import {
@@ -44,15 +44,29 @@ export function ContactExperience() {
   // The same reveal idiom as every other page. GSAP sets the hidden state
   // inline, so with JavaScript disabled the content simply renders — unlike
   // the CSS .reveal-up class, which would leave it invisible forever.
+  //
+  // ⚠ This page builds NO scrubbed motion at all — no parallax, no drifting
+  // backdrop, no infinite yoyo — so there is nothing here to gate behind
+  // `DESKTOP`. It is a switchboard: the only animation a pilgrim should ever
+  // notice is a block of telephone numbers arriving. That is deliberate and it
+  // is why this file imports `revealY` and not `matchMedia`.
   useEffect(() => {
     const ctx = gsap.context(() => {
       const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       if (reduced) return;
 
+      // 44px was written for a monitor. On a 390px phone that is more than a
+      // tenth of the screen, so every card on this page — the brass plate, the
+      // map, the form — visibly slid into position instead of settling, and on
+      // a fast flick a reader met the parish's telephone number still in
+      // motion. `revealY()` reads the same breakpoint the rest of the site
+      // does and shortens the travel to 20px on touch.
+      const from = revealY();
+
       gsap.utils.toArray<HTMLElement>(".reveal").forEach((el) => {
         gsap.fromTo(
           el,
-          { y: 44, opacity: 0 },
+          { y: from, opacity: 0 },
           {
             y: 0,
             opacity: 1,
@@ -121,9 +135,12 @@ export function ContactExperience() {
         <div className="relative max-w-6xl mx-auto">
           <header className="reveal text-center mb-10 md:mb-12">
             <p className="kicker justify-center mb-5">{t.contact.purpose.kicker}</p>
+            {/* The site's mobile heading scale: a share of the screen rather
+                than a fixed 36px, topping out at the size this was drawn at
+                exactly as `md` takes over, so desktop is untouched. */}
             <h2
               id="purpose-heading"
-              className="font-serif text-4xl md:text-5xl lg:text-6xl text-navy leading-[1.04]"
+              className="font-serif text-[clamp(1.95rem,7.8vw,2.25rem)] md:text-5xl lg:text-6xl text-navy leading-[1.04]"
             >
               {t.contact.purpose.heading}
             </h2>
@@ -133,27 +150,36 @@ export function ContactExperience() {
 
           {/* Never let the form be the only way through. */}
           {!urgent && (
-            <div className="reveal mt-12 mb-8 flex flex-col sm:flex-row sm:items-center justify-center gap-4 sm:gap-6">
-              <p className="text-sm text-text-muted text-center sm:text-left">
+            <div className="reveal mt-10 md:mt-12 mb-8 flex flex-col sm:flex-row sm:items-center justify-center gap-4 sm:gap-6">
+              <p className="text-[0.88rem] md:text-sm text-text-muted text-center sm:text-left">
                 <span className="text-navy font-medium">{t.contact.express.heading}</span>{" "}
                 {t.contact.express.body}
               </p>
+              {/* Two pills, side by side, in whatever is left of a 390px screen
+                  after the section gutters. `px-4` on mobile is what keeps them
+                  on one line now that the number inside is 16px — see below. */}
               <div className="flex justify-center gap-2.5">
                 <a
                   href={`tel:${PHONE.e164}`}
-                  className="inline-flex items-center gap-2 min-h-11 px-5 rounded-full border border-gold/30 text-navy/75 text-sm hover:border-gold hover:text-gold-dark transition-colors"
+                  className="inline-flex items-center gap-2 min-h-11 px-4 md:px-5 rounded-full border border-gold/30 text-navy/75 text-[0.9rem] md:text-sm hover:border-gold hover:text-gold-dark transition-colors"
                 >
-                  <Phone className="w-3.5 h-3.5" aria-hidden="true" />
-                  <span className="tabular-nums">{PHONE.display}</span>
+                  <Phone className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+                  {/* ⚠ A TELEPHONE NUMBER NEVER GOES BELOW 16px ON A PHONE.
+                      `text-sm` is 14px, and this is a string of eleven digits
+                      that somebody may be reading off a screen in daylight
+                      while standing at a bus stop, or copying by hand. It is
+                      the one piece of text on this page that has to survive
+                      bad conditions, so it is the one that does not shrink. */}
+                  <span className="tabular-nums text-base md:text-sm">{PHONE.display}</span>
                 </a>
                 {hasWhatsApp && (
                   <a
                     href={whatsAppLink()}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 min-h-11 px-5 rounded-full border border-gold/30 text-navy/75 text-sm hover:border-gold hover:text-gold-dark transition-colors"
+                    className="inline-flex items-center gap-2 min-h-11 px-4 md:px-5 rounded-full border border-gold/30 text-navy/75 text-[0.9rem] md:text-sm hover:border-gold hover:text-gold-dark transition-colors"
                   >
-                    <MessageCircle className="w-3.5 h-3.5" aria-hidden="true" />
+                    <MessageCircle className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
                     {t.contact.actions.whatsapp}
                   </a>
                 )}
@@ -165,7 +191,7 @@ export function ContactExperience() {
               telephone, large; everything else gets the form, already open.
               Remounting on purpose change resets every field cleanly instead
               of carrying a stale value over from another fieldset. */}
-          <div className={urgent ? "reveal mt-12" : ""}>
+          <div className={urgent ? "reveal mt-10 md:mt-12" : ""}>
             {urgent ? <SickCallPanel /> : <RoutedContactForm key={purpose} purpose={purpose} />}
           </div>
         </div>

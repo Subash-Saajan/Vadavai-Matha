@@ -59,10 +59,10 @@ export function ChronicleHeader({ className = "" }: { className?: string }) {
         III
       </span>
       <p className="reveal-item kicker mb-5">{t.home.chronicleLabel}</p>
-      <h2 className="reveal-item max-w-3xl font-serif text-4xl leading-[1.05] text-navy md:text-5xl lg:text-6xl">
+      <h2 className="reveal-item max-w-3xl font-serif text-[clamp(1.95rem,7.8vw,2.25rem)] leading-[1.05] text-navy md:text-5xl lg:text-6xl">
         {t.home.chronicleTitle}
       </h2>
-      <p className="reveal-item mt-6 max-w-2xl text-lg leading-relaxed text-text-muted">
+      <p className="reveal-item mt-6 max-w-2xl text-[0.98rem] leading-relaxed text-text-muted md:text-lg">
         {body}
       </p>
     </div>

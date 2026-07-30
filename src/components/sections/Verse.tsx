@@ -2,7 +2,7 @@
 
 import { useRef, useEffect } from "react";
 import Image from "next/image";
-import { gsap } from "@/lib/gsap";
+import { gsap, DESKTOP } from "@/lib/gsap";
 import { useLang } from "@/components/layout/LanguageProvider";
 
 export function Verse() {
@@ -14,33 +14,40 @@ export function Verse() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Layered parallax: backdrop drifts down + breathes
-      gsap.fromTo(
-        imgRef.current,
-        { yPercent: -8, scale: 1.18 },
-        {
-          yPercent: 12,
-          scale: 1.05,
+      /* ── Desktop only: the layered parallax ─────────────────────────────
+         Backdrop translating and scaling, text counter-translating, both
+         scrubbed — three of the page's transforms in one section, over a
+         full-bleed photograph. The word-by-word illumination below stays on
+         every device: it is what this section IS, and it animates opacity on
+         short spans of text rather than resampling an image. */
+      const mm = gsap.matchMedia();
+      mm.add(DESKTOP, () => {
+        gsap.fromTo(
+          imgRef.current,
+          { yPercent: -8, scale: 1.18 },
+          {
+            yPercent: 12,
+            scale: 1.05,
+            ease: "none",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 1.2,
+            },
+          }
+        );
+
+        gsap.to(contentRef.current, {
+          yPercent: -10,
           ease: "none",
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top bottom",
             end: "bottom top",
-            scrub: 1.2,
+            scrub: 1.5,
           },
-        }
-      );
-
-      // Counter-parallax on text
-      gsap.to(contentRef.current, {
-        yPercent: -10,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1.5,
-        },
+        });
       });
 
       // Word-by-word illumination
@@ -63,6 +70,8 @@ export function Verse() {
           }
         );
       }
+
+      return () => mm.revert();
     }, sectionRef);
     return () => ctx.revert();
   }, [lang]);
@@ -72,9 +81,13 @@ export function Verse() {
   return (
     <section
       ref={sectionRef}
-      className="relative h-[92vh] flex items-center justify-center overflow-hidden bg-navy"
+      /* `svh`, not `vh` — the SMALL viewport. Unlike the hero this section is
+         not sticky and its picture is `inset-0`, so being a little shorter
+         than the screen costs nothing and guarantees the verse is never
+         partly behind a phone's address bar. On desktop the two are equal. */
+      className="relative h-[92svh] flex items-center justify-center overflow-hidden bg-navy"
     >
-      <div ref={imgRef} className="absolute inset-0 will-change-transform">
+      <div ref={imgRef} className="absolute inset-0 md:will-change-transform">
         <Image
           src="/church-interior.jpeg"
           alt=""
@@ -97,11 +110,15 @@ export function Verse() {
         <path d="M50 4v132M14 40h72" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
       </svg>
 
-      <div ref={contentRef} className="relative z-10 max-w-4xl mx-auto px-6 text-center will-change-transform">
+      <div ref={contentRef} className="relative z-10 max-w-4xl mx-auto px-6 text-center md:will-change-transform">
         <p className="kicker justify-center mb-9 text-gold/90!">{t.home.verseLabel}</p>
+        {/* Fluid rather than a flat `text-3xl`: this is the one block on the
+            page with nothing else beside it, so it can take a larger share of
+            a phone screen than a heading with body copy under it — and it must
+            still not collide with the gutters on a 320px device. */}
         <p
           ref={wordsRef}
-          className={`font-serif text-3xl md:text-5xl lg:text-6xl text-white/95 leading-tight ${
+          className={`font-serif text-[clamp(1.7rem,8vw,2.1rem)] md:text-5xl lg:text-6xl text-white/95 leading-tight ${
             lang === "ta" ? "leading-normal" : ""
           }`}
         >

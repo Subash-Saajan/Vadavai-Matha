@@ -6,6 +6,7 @@ import {
   BISHOPS,
   CHROME_TA,
   PERIODS,
+  TENURE_PRESENT_TA,
   TOMBS,
   showTamilByName,
   tenureLabel,
@@ -63,6 +64,14 @@ const MAX_TENURE = Math.max(...ALL_PRIESTS.map(tenureYears));
  * Decorative in the accessibility sense — it restates the years printed
  * directly above it — so it is hidden from screen readers rather than
  * announced twice.
+ *
+ * IT IS THE SAME ON A PHONE, AND DELIBERATELY SO. It is not motion: the width
+ * is a percentage computed on the server and written once into the style
+ * attribute, so there is no scroll trigger, no transform and nothing to gate to
+ * desktop — sixty-nine of these cost the phone one static rule apiece. It is
+ * also content rather than decoration in the design sense, the only mark on the
+ * page that lets the fifty-four men with no surviving story be compared to each
+ * other at all, so it would stay even if it did cost something.
  */
 function TenureStroke({ years }: { years: number }) {
   const pct = Math.max(7, Math.round((years / MAX_TENURE) * 100));
@@ -110,7 +119,7 @@ function Plate({ priest, size, lang }: { priest: Priest; size: "sm" | "lg"; lang
           />
         </div>
         {size === "lg" && priest.portraitFrom ? (
-          <figcaption className="mt-2 text-[0.6rem] leading-snug tracking-wide text-text-muted">
+          <figcaption className="mt-2 text-[0.7rem] leading-snug tracking-wide text-text-muted sm:text-[0.6rem]">
             {priest.portraitFrom}
           </figcaption>
         ) : null}
@@ -120,11 +129,22 @@ function Plate({ priest, size, lang }: { priest: Priest; size: "sm" | "lg"; lang
 
   if (priest.plate && size === "lg") {
     return (
+      /* ⚠ `.font-tamil` CARRIES A 66% size-adjust, so the declared size is not
+         the rendered one. The plate was set at 0.66rem — 10.6px — which the
+         face then draws at about SEVEN pixels. That is the honorific the
+         village itself used for this man, standing in for a face nobody
+         photographed, and it was the smallest thing on the page by a wide
+         margin. 0.82rem renders near 8.7px, which the 104px roundel has room
+         for (these names wrap to two or three lines either way). The desktop
+         value is held at `sm:`, unchanged.
+
+         The real fix is a larger declared size everywhere `.font-tamil` is
+         used at label scale; that is a sitewide decision, not this page's. */
       <div
         className="flex shrink-0 items-center justify-center rounded-full border border-gold/45"
         style={{ width: px, height: px }}
       >
-        <span className="font-tamil px-2.5 text-center text-[0.66rem] leading-tight text-gold-dark">
+        <span className="font-tamil px-2.5 text-center text-[0.82rem] leading-tight text-gold-dark sm:text-[0.66rem]">
           {priest.plate}
         </span>
       </div>
@@ -150,10 +170,47 @@ function Row({ priest, lang }: { priest: Priest; lang: Lang }) {
   const prose = ta ? (priest.lifeTa ?? priest.noteTa ?? priest.life ?? priest.note) : (priest.life ?? priest.note);
 
   return (
+    /* ── THE THREE-COLUMN ROW ON A 360px SCREEN ──────────────────────────────
+       The track list was `1.6rem 1fr 4.5rem` with a 0.75rem gutter either side:
+       25.6 + 12 + 12 + 72 = 121.6px of the 312px available spent before the
+       name gets any. What that bought was a years column too narrow to hold the
+       years at a readable size — see the note on the tenure label below — so
+       both were losing.
+
+       The numeral track comes down (it holds at most two digits, and 1.35rem is
+       ample for two digits of Cinzel), the gutters tighten by 2px each, and the
+       whole saving plus a little goes to the years. Net effect on the name
+       column is about 6px; net effect on the years is that they can be read.
+       Every `sm:` value is the one that was there, so nothing at 640px and
+       above moves.
+
+       ⚠ TAMIL GETS A WIDER YEARS TRACK, AND IT IS NOT A PREFERENCE.
+       `tenureLabelTa` returns "2025 – இன்று வரை" for the serving priest — four
+       digits, a dash, and then two Tamil words where English has none at all
+       ("2025 – present" is one short word; "இன்று வரை" is two). Set
+       `whitespace-nowrap` in a fixed 5.1rem track, that row overflowed its own
+       cell on /ta at every breakpoint, desktop included.
+
+       The track is widened AND the label is allowed to break after the dash —
+       both, because either alone is not enough once the Tamil words are set at
+       a size anyone can read (see the tenure figure below, where they are).
+       At their proper size the phrase and the numerals together want more room
+       than a sane years column has on a 360px screen, so the label may take a
+       second line; what it may NOT do is split "இன்று வரை" itself, which is why
+       the nowrap sits on that phrase rather than on the paragraph. A widened
+       track alone would have squeezed the name column; a wrap alone would have
+       stranded "வரை" on its own line. Written as a conditional rather than a `ta:` utility on
+       purpose: `ta:` is a `:where()` variant and so adds no specificity, which
+       means which of two equal grid-template utilities won would depend on the
+       order Tailwind happened to emit them in. A branch cannot be ambiguous.
+       Same reasoning as the `!` on the `short:md:` height in
+       ChronicleCarousel. */
     <li
-      className={`grid grid-cols-[1.6rem_1fr_4.5rem] gap-x-3 border-t border-gold/15 sm:grid-cols-[2rem_1fr_6rem] sm:gap-x-6 ${
-        life ? "py-7" : "py-4"
-      }`}
+      className={`grid gap-x-2.5 border-t border-gold/15 sm:gap-x-6 ${
+        ta
+          ? "grid-cols-[1.35rem_1fr_6.6rem] sm:grid-cols-[2rem_1fr_7.4rem]"
+          : "grid-cols-[1.35rem_1fr_5.1rem] sm:grid-cols-[2rem_1fr_6rem]"
+      } ${life ? "py-6 sm:py-7" : "py-4"}`}
     >
       <span className="pt-1 font-display text-[0.78rem] tabular-nums text-gold-dark/70">
         {priest.n}
@@ -163,22 +220,47 @@ function Row({ priest, lang }: { priest: Priest; lang: Lang }) {
         {hasPlate ? <Plate priest={priest} size={plateSize} lang={lang} /> : null}
 
         <div className="min-w-0">
+          {/* ⚠ THE NAME WAS SMALLER THAN THE PARAGRAPH ABOUT HIM, AND ON THE
+              ILLUMINATED ROWS IT WAS EXACTLY THE SAME SIZE. An ordinary row set
+              the priest's name at 0.97rem (15.5px) over prose at `text-base`
+              (16px); a `life` row set both at `text-lg`. On a page whose entire
+              subject is sixty-nine names, the name is the one thing that must
+              read as the heading of its row — a reader scanning for a man does
+              not read the paragraphs, he reads the names down the left edge.
+
+              Ordinary rows: name 17.3px over prose 16.8px. That looks like a
+              narrow margin and is not — the name is Cinzel, a caps-only
+              inscriptional face whose cap height fills the em, against
+              Cormorant, which is drawn on old Garamond proportions with an
+              unusually small x-height. At the same declared size Cinzel reads
+              distinctly larger. (Same reason the serif body sits ABOVE the sans
+              body everywhere else on this site — see Patroness.tsx.)
+
+              Life rows: name 20px over prose 17.3px, so the twelve men with a
+              documented life still open with a clear heading. All `sm:` values
+              are the ones that were already there. */}
           <h3
             className={`${ta ? "font-tamil" : "font-display"} leading-snug text-navy ${
-              life ? "text-lg sm:text-2xl" : "text-[0.97rem] sm:text-lg"
+              life ? "text-[1.25rem] sm:text-2xl" : "text-[1.08rem] sm:text-lg"
             }`}
           >
             {heading}
           </h3>
 
+          {/* The by-name the village used, and it is always Tamil — so it too
+              is drawn at the 66% size-adjust: `text-sm` rendered near 9px. Up to
+              a declared 1rem on a phone, which lands about 10.6px. */}
           {byName ? (
-            <p className="font-tamil mt-0.5 text-sm leading-snug text-navy/55">
+            <p className="font-tamil mt-0.5 text-[1rem] leading-snug text-navy/55 sm:text-sm">
               {byName}
             </p>
           ) : null}
 
+          {/* The other attested spellings — "Bergenthal · Berghental" — which is
+              exactly what a reader who arrived from a search engine is checking
+              the row against. 0.68rem is 10.9px. */}
           {alsoLine ? (
-            <p className="mt-1 text-[0.68rem] leading-snug tracking-wide text-text-muted">
+            <p className="mt-1 text-[0.76rem] leading-snug tracking-wide text-text-muted sm:text-[0.68rem]">
               {alsoLine}
             </p>
           ) : null}
@@ -186,7 +268,7 @@ function Row({ priest, lang }: { priest: Priest; lang: Lang }) {
           {prose ? (
             <p
               className={`${ta ? "font-tamil" : "font-serif"} leading-relaxed text-navy/75 ${
-                life ? "mt-3 text-lg sm:text-xl" : "mt-2 text-base sm:text-lg"
+                life ? "mt-3 text-[1.08rem] sm:text-xl" : "mt-2 text-[1.05rem] sm:text-lg"
               }`}
             >
               {prose}
@@ -195,9 +277,56 @@ function Row({ priest, lang }: { priest: Priest; lang: Lang }) {
         </div>
       </div>
 
+      {/* ⚠ THE YEARS ARE HALF THE CONTENT OF THIS REGISTER AND THEY WERE THE
+          SMALLEST TEXT IN THE ROW. For fifty-four of these sixty-nine men, the
+          name and the span of years are the ONLY two things the parish still
+          knows — and the years were set at 0.68rem, 10.9px, in tabular Cinzel:
+          smaller than the row number beside them, smaller than the footnote of
+          alternative spellings, smaller than everything except the photograph
+          credit. "1751 – 1775" at that size is a thing you lean in for.
+
+          0.76rem (12.2px) clears the 12px floor below which figures stop being
+          read and start being reconstructed. It is nowrap in a fixed track, so
+          the track above was widened to 5.1rem to take it; `sm:` restores both
+          the size and the width that were there. */}
+      {/* ⚠ THE TAMIL HALF OF THIS FIGURE DRAWS SMALLER THAN THE DIGITS BESIDE
+          IT, FROM THE SAME DECLARATION. "2025 – இன்று வரை" is one string in two
+          scripts, and the Tamil @font-face carries `size-adjust` (58% for the
+          display cut, 66% for the small one — see globals.css). The digits and
+          the dash are NOT in the Tamil unicode-range, so they fall through to
+          Cinzel at full size; only the two Tamil words take the cut. At
+          0.76rem that meant 12.2px numerals sitting next to 7px words in the
+          same breath. There is no single font-size that fixes this, which is
+          why the phrase is typeset as its own element.
+
+          `1.5em` is RELATIVE, so it holds at both breakpoints without a second
+          number: 0.76rem x 1.5 x 0.66 = 12.0px against the digits' 12.2px, and
+          at `sm` 0.8rem x 1.5 x 0.66 = 12.7px against 12.8px. `font-tamil`
+          rather than the inherited `font-display` so it takes the 66% SMALL
+          cut, not the 58% heading one.
+
+          The nowrap moved OFF the paragraph and ONTO the phrase. On the
+          paragraph it forced the whole label onto one line and overflowed the
+          cell; on the phrase it does the one thing that actually matters —
+          keeps "இன்று வரை" whole — so the only place the label may break is
+          after the dash, which is where a date range wants to break anyway.
+          Every other row, in both languages, is digits and is unaffected. */}
       <div className="text-right">
-        <p className="whitespace-nowrap font-display text-[0.68rem] tabular-nums tracking-wide text-navy/60 sm:text-[0.8rem]">
-          {ta ? tenureLabelTa(priest) : tenureLabel(priest)}
+        <p className="font-display text-[0.76rem] tabular-nums tracking-wide text-navy/60 sm:text-[0.8rem]">
+          {ta ? (
+            priest.current ? (
+              <>
+                {priest.from} –{" "}
+                <span className="font-tamil whitespace-nowrap text-[1.5em]">
+                  {TENURE_PRESENT_TA}
+                </span>
+              </>
+            ) : (
+              tenureLabelTa(priest)
+            )
+          ) : (
+            tenureLabel(priest)
+          )}
         </p>
         <TenureStroke years={tenureYears(priest)} />
       </div>
@@ -215,24 +344,36 @@ export function PriestRegister({ lang = "en" }: { lang?: Lang }) {
           {/* Sticky band. -mx/px so the cream ground reaches the column edges
               and rows disappear under it cleanly rather than beside it. */}
           <div className="sticky top-16 z-30 -mx-6 border-b border-gold/25 bg-cream/95 px-6 py-3 backdrop-blur-sm md:top-20">
-            <p className={`${ta ? "font-tamil" : "font-display uppercase tracking-[0.3em]"} text-[0.6rem] text-gold-dark`}>
+            {/* "PERIOD III" at 0.6rem is 9.6px, thrown 0.3em apart — the one
+                piece of wayfinding on a page sixty-nine rows long, and it was
+                the least legible thing in the band that exists to carry it. Up
+                to 10.9px with the tracking paying for the width. It is worse
+                still in Tamil, where `.font-tamil`'s 66% size-adjust drew the
+                same declared size at about 6px, so this correction helps both
+                views; the tracking sits in the English branch because Tamil
+                syllables are connected units and must not be spaced at all. */}
+            <p
+              className={`${
+                ta ? "font-tamil" : "font-display uppercase tracking-[0.16em] md:tracking-[0.3em]"
+              } text-[0.68rem] text-gold-dark md:text-[0.6rem]`}
+            >
               {ta ? `${CHROME_TA.period} ${period.numeral}` : `Period ${period.numeral}`}
             </p>
             <div className="flex items-baseline justify-between gap-4">
               <h2 className={`${ta ? "font-tamil" : "font-display"} text-xl leading-tight text-navy sm:text-2xl`}>
                 {ta && period.titleTa ? period.titleTa : period.title}
               </h2>
-              <span className="whitespace-nowrap font-display text-[0.7rem] tabular-nums tracking-wide text-navy/55 sm:text-[0.82rem]">
+              <span className="whitespace-nowrap font-display text-[0.76rem] tabular-nums tracking-wide text-navy/55 sm:text-[0.82rem]">
                 {period.years}
               </span>
             </div>
           </div>
 
-          <p className={`mt-6 ${ta ? "font-tamil" : "font-serif"} text-lg leading-relaxed text-navy/75 sm:text-xl`}>
+          <p className={`mt-6 ${ta ? "font-tamil" : "font-serif"} text-[1.08rem] leading-relaxed text-navy/75 sm:text-xl`}>
             {ta && period.turnTa ? period.turnTa : period.turn}
           </p>
 
-          <ol className="mt-8 mb-16">
+          <ol className="mt-7 mb-12 sm:mt-8 sm:mb-16">
             {period.priests.map((p) => (
               <Row key={`${p.n}-${p.from}`} priest={p} lang={lang} />
             ))}
@@ -244,11 +385,11 @@ export function PriestRegister({ lang = "en" }: { lang?: Lang }) {
           Published as its own block rather than merged into the numbering,
           because the disagreement between the parish's list and the Jesuit
           archives is itself part of the record. */}
-      <section id="archives" className="scroll-mt-24 border-t border-gold/30 pt-14">
+      <section id="archives" className="scroll-mt-24 border-t border-gold/30 pt-10 sm:pt-14">
         <h2 className={`${ta ? "font-tamil" : "font-display"} text-2xl leading-snug text-navy sm:text-3xl`}>
           {ta ? CHROME_TA.archivesTitle : "Names the archives add"}
         </h2>
-        <p className={`mt-4 ${ta ? "font-tamil" : "font-serif"} text-lg leading-relaxed text-navy/75`}>
+        <p className={`mt-4 ${ta ? "font-tamil" : "font-serif"} text-[1.05rem] leading-relaxed text-navy/75 md:text-lg`}>
           {ta ? (
             CHROME_TA.archivesIntro
           ) : (
@@ -261,16 +402,16 @@ export function PriestRegister({ lang = "en" }: { lang?: Lang }) {
           )}
         </p>
 
-        <dl className="mt-10 space-y-8">
+        <dl className="mt-8 space-y-7 sm:mt-10 sm:space-y-8">
           {ARCHIVE_ADDITIONS.map((a) => (
-            <div key={a.name} className="border-l border-gold/30 pl-5">
+            <div key={a.name} className="border-l border-gold/30 pl-4 sm:pl-5">
               <dt className={`${ta ? "font-tamil" : "font-display"} text-lg leading-snug text-navy`}>
                 {ta && a.nameTa ? a.nameTa : a.name}
-                <span className="ml-2 text-[0.75rem] tabular-nums tracking-wide text-navy/50">
+                <span className="ml-2 text-[0.8rem] tabular-nums tracking-wide text-navy/50 sm:text-[0.75rem]">
                   {ta && "whenTa" in a && a.whenTa ? a.whenTa : a.when}
                 </span>
               </dt>
-              <dd className={`mt-2 ${ta ? "font-tamil" : "font-serif"} text-lg leading-relaxed text-navy/75`}>
+              <dd className={`mt-2 ${ta ? "font-tamil" : "font-serif"} text-[1.05rem] leading-relaxed text-navy/75 md:text-lg`}>
                 {ta && a.whatTa ? a.whatTa : a.what}
               </dd>
             </div>
@@ -279,11 +420,11 @@ export function PriestRegister({ lang = "en" }: { lang?: Lang }) {
       </section>
 
       {/* ── Bishops ──────────────────────────────────────────────────────── */}
-      <section id="bishops" className="mt-20 scroll-mt-24 border-t border-gold/30 pt-14">
+      <section id="bishops" className="mt-14 scroll-mt-24 border-t border-gold/30 pt-10 sm:mt-20 sm:pt-14">
         <h2 className={`${ta ? "font-tamil" : "font-display"} text-2xl leading-snug text-navy sm:text-3xl`}>
           {ta ? CHROME_TA.bishopsTitle : "The bishops who acted here"}
         </h2>
-        <p className={`mt-4 ${ta ? "font-tamil" : "font-serif"} text-lg leading-relaxed text-navy/75`}>
+        <p className={`mt-4 ${ta ? "font-tamil" : "font-serif"} text-[1.05rem] leading-relaxed text-navy/75 md:text-lg`}>
           {ta ? (
             CHROME_TA.bishopsIntro
           ) : (
@@ -294,7 +435,7 @@ export function PriestRegister({ lang = "en" }: { lang?: Lang }) {
           )}
         </p>
 
-        <ul className="mt-10 space-y-9">
+        <ul className="mt-8 space-y-8 sm:mt-10 sm:space-y-9">
           {BISHOPS.map((b) => (
             <li key={b.name} className="flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-5">
               {b.portrait ? (
@@ -323,14 +464,21 @@ export function PriestRegister({ lang = "en" }: { lang?: Lang }) {
                 <h3 className={`${ta ? "font-tamil" : "font-display"} text-lg leading-snug text-navy`}>
                   {ta && b.nameTa ? b.nameTa : b.name}
                 </h3>
+                {/* The bishop's office — "Vicar Apostolic of Madurai" — at
+                    0.66rem is 10.6px of spaced Cinzel caps, and it is the line
+                    that says who the man in the roundel actually was. Same
+                    trade as everywhere else on this page: size up, tracking
+                    down, no extra width used. */}
                 <p
                   className={`mt-0.5 ${
-                    ta ? "font-tamil" : "font-display uppercase tracking-[0.22em]"
-                  } text-[0.66rem] text-gold-dark`}
+                    ta
+                      ? "font-tamil"
+                      : "font-display uppercase tracking-[0.14em] md:tracking-[0.22em]"
+                  } text-[0.72rem] text-gold-dark md:text-[0.66rem]`}
                 >
                   {ta && b.roleTa ? b.roleTa : b.role}
                 </p>
-                <p className={`mt-2 ${ta ? "font-tamil" : "font-serif"} text-lg leading-relaxed text-navy/75`}>
+                <p className={`mt-2 ${ta ? "font-tamil" : "font-serif"} text-[1.05rem] leading-relaxed text-navy/75 md:text-lg`}>
                   {ta && b.whatTa ? b.whatTa : b.what}
                 </p>
               </div>
@@ -343,11 +491,11 @@ export function PriestRegister({ lang = "en" }: { lang?: Lang }) {
           The close, and the page's whole argument in one photograph: three
           priests, 1863, 1950 and 2002, standing in a line against the same
           wall. Most of these men have no face — but they are not lost. */}
-      <section id="tombs" className="mt-20 scroll-mt-24 border-t border-gold/30 pt-14">
+      <section id="tombs" className="mt-14 scroll-mt-24 border-t border-gold/30 pt-10 sm:mt-20 sm:pt-14">
         <h2 className={`${ta ? "font-tamil" : "font-display"} text-2xl leading-snug text-navy sm:text-3xl`}>
           {ta ? CHROME_TA.tombsTitle : "They are buried here"}
         </h2>
-        <p className={`mt-4 ${ta ? "font-tamil" : "font-serif"} text-lg leading-relaxed text-navy/75`}>
+        <p className={`mt-4 ${ta ? "font-tamil" : "font-serif"} text-[1.05rem] leading-relaxed text-navy/75 md:text-lg`}>
           {ta ? (
             CHROME_TA.tombsIntro
           ) : (
@@ -361,7 +509,7 @@ export function PriestRegister({ lang = "en" }: { lang?: Lang }) {
           )}
         </p>
 
-        <figure className="mt-10">
+        <figure className="mt-8 sm:mt-10">
           <div className="relative aspect-[16/10] overflow-hidden">
             <Image
               src="/images/priests/tombs.jpg"
@@ -375,8 +523,21 @@ export function PriestRegister({ lang = "en" }: { lang?: Lang }) {
               className="object-cover"
             />
           </div>
+          {/* ⚠ TAMIL NEEDS A BIGGER NUMBER HERE TO RENDER THE SAME SIZE.
+              `.font-tamil` resolves to "Kumudam Tamil", declared with
+              `size-adjust: 66%` at the top of globals.css — so a Tamil glyph
+              set at 0.8rem DRAWS AT 0.53rem, about 8.4px. The size-adjust is
+              correct and deliberate (it stops Tamil rendering heavier than the
+              Latin at matching sizes), but it means every small `text-[…]`
+              this class meets is two-thirds of what it says. The Tamil branch
+              therefore asks for ~1.5× to arrive at the same drawn size.
+              The English branch is untouched at both widths. */}
           <figcaption
-            className={`mt-3 ${ta ? "font-tamil" : ""} text-[0.72rem] leading-relaxed tracking-wide text-text-muted`}
+            className={`mt-3 leading-relaxed tracking-wide text-text-muted ${
+              ta
+                ? "font-tamil text-[1.2rem] sm:text-[1.08rem]"
+                : "text-[0.8rem] sm:text-[0.72rem]"
+            }`}
           >
             {ta ? (
               CHROME_TA.tombsCaption
@@ -390,12 +551,12 @@ export function PriestRegister({ lang = "en" }: { lang?: Lang }) {
           </figcaption>
         </figure>
 
-        <ul className="mt-12 space-y-7">
+        <ul className="mt-10 space-y-6 sm:mt-12 sm:space-y-7">
           {TOMBS.map((t) => (
-            <li key={t.name} className="border-l border-gold/30 pl-5">
+            <li key={t.name} className="border-l border-gold/30 pl-4 sm:pl-5">
               <p className={`${ta ? "font-tamil" : "font-display"} text-lg leading-snug text-navy`}>
                 {ta && t.nameTa ? t.nameTa : t.name}
-                <span className="ml-2 text-[0.75rem] tabular-nums tracking-wide text-navy/50">
+                <span className="ml-2 text-[0.8rem] tabular-nums tracking-wide text-navy/50 sm:text-[0.75rem]">
                   {t.died}
                 </span>
               </p>
@@ -403,17 +564,17 @@ export function PriestRegister({ lang = "en" }: { lang?: Lang }) {
                   their own language in both views — a quoted stone is evidence,
                   not copy, and translating it would make it neither. */}
               {t.inscription ? (
-                <p className="prose-quote mt-2 font-serif text-lg leading-relaxed text-navy/80">
+                <p className="prose-quote mt-2 font-serif text-[1.05rem] leading-relaxed text-navy/80 md:text-lg">
                   “{t.inscription}”
                 </p>
               ) : null}
               {t.note ? (
-                <p className={`mt-2 ${ta ? "font-tamil" : "font-serif"} text-lg leading-relaxed text-navy/70`}>
+                <p className={`mt-2 ${ta ? "font-tamil" : "font-serif"} text-[1.05rem] leading-relaxed text-navy/70 md:text-lg`}>
                   {ta && t.noteTa ? t.noteTa : t.note}
                 </p>
               ) : null}
               {t.worn ? (
-                <p className={`mt-2 ${ta ? "font-tamil" : "font-serif"} text-lg leading-relaxed text-navy/70`}>
+                <p className={`mt-2 ${ta ? "font-tamil" : "font-serif"} text-[1.05rem] leading-relaxed text-navy/70 md:text-lg`}>
                   {ta ? (
                     CHROME_TA.tombWorn
                   ) : (

@@ -46,7 +46,8 @@ export function HowItStands() {
                 <PhotoOrnaments />
               </div>
             </div>
-            <figcaption className="mt-4 text-center font-display text-[0.62rem] uppercase tracking-[0.24em] text-text-muted">
+            {/* Same 9.9px caption correction as Towers — the note there. */}
+            <figcaption className="mt-4 text-center font-display text-[0.7rem] tracking-[0.15em] md:text-[0.62rem] md:tracking-[0.24em] uppercase text-text-muted">
               {a.craftCaption}
             </figcaption>
           </figure>
@@ -54,14 +55,25 @@ export function HowItStands() {
           {/* The argument */}
           <div className="lg:col-span-7">
             <p className="reveal-item kicker mb-6">{a.craftLabel}</p>
-            <h2 className="reveal-item font-serif text-5xl md:text-6xl lg:text-7xl text-navy leading-[1.04]">
+            {/* See the heading note in Towers.tsx. */}
+            <h2 className="reveal-item font-serif text-[clamp(1.95rem,7.8vw,2.25rem)] md:text-6xl lg:text-7xl text-navy leading-[1.04]">
               {a.craftTitle}
             </h2>
-            <p className="reveal-item text-text-muted text-lg leading-relaxed mt-6">
+            <p className="reveal-item text-text-muted text-[0.98rem] md:text-lg leading-relaxed mt-6">
               {a.craftBody}
             </p>
 
-            <dl className="reveal-item mt-10 grid grid-cols-3 gap-6 pt-7 border-t border-gold/25">
+            {/* ── THE THREE NEGATIVES STACK BELOW `sm`, AND THAT WAS A REAL
+                DEFECT. Three columns of a 342px screen with a 24px gutter is
+                about 98px each. "NO CEMENT" — Cinzel caps at 16px with 0.12em
+                tracking — needs 106px, so every one of the three broke across
+                two lines, and the gloss beneath it ("no beam, no pillar, no
+                centring") came out at eleven characters a line, five lines
+                deep. In Tamil, where the words are longer still, it was worse.
+                Stacked, each negative is one short line and one short gloss,
+                which is what these three are. Three across from `sm` up, where
+                the column is wide enough to hold them, exactly as before. */}
+            <dl className="reveal-item mt-10 grid grid-cols-1 gap-5 sm:grid-cols-3 sm:gap-6 pt-7 border-t border-gold/25">
               {a.craftNegatives.map((n, i) => (
                 <div key={i}>
                   <dt className="font-display text-base md:text-lg uppercase tracking-[0.12em] text-gradient-gold-deep">
@@ -77,7 +89,7 @@ export function HowItStands() {
         </div>
 
         {/* What the mortar was made of */}
-        <div className="mt-20 md:mt-24">
+        <div className="mt-14 md:mt-24">
           <h3 className="reveal-item text-center font-serif text-2xl md:text-3xl italic text-gradient-gold-deep">
             {a.recipeTitle}
           </h3>
@@ -86,7 +98,7 @@ export function HowItStands() {
             {a.recipe.map((r, i) => (
               <div
                 key={i}
-                className="reveal-item group relative bg-white/90 backdrop-blur-sm rounded-2xl p-7 shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden ring-1 ring-gold/10"
+                className="reveal-item group relative bg-white/90 backdrop-blur-sm rounded-2xl p-5 md:p-7 shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden ring-1 ring-gold/10"
               >
                 <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-gold/50 to-transparent" />
                 <div className="absolute inset-0 bg-linear-to-br from-gold/12 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -94,7 +106,10 @@ export function HowItStands() {
                 <p className="relative font-tamil text-3xl text-navy leading-snug">
                   {r.ta}
                 </p>
-                <p className="relative mt-2 font-display text-[0.62rem] uppercase tracking-[0.26em] text-gold-dark">
+                {/* The romanisation is the bridge for a reader who cannot read
+                    the Tamil above it, so it cannot be the 9.9px line on the
+                    card. Same correction as the captions — see Towers.tsx. */}
+                <p className="relative mt-2 font-display text-[0.7rem] tracking-[0.16em] md:text-[0.62rem] md:tracking-[0.26em] uppercase text-gold-dark">
                   {r.tr}
                 </p>
                 <p className="relative mt-4 font-serif text-xl text-navy/90">{r.gloss}</p>

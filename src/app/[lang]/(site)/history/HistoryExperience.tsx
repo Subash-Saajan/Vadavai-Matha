@@ -492,7 +492,11 @@ export default function HistoryPage() {
         <section className="relative bg-cream-dark parchment-swell section-padding overflow-hidden">
           <div className="relative max-w-3xl mx-auto">
             <p className="reveal-item kicker mb-4">{h.contentsLabel}</p>
-            <p className="reveal-item text-base text-text-muted mb-10 max-w-lg">
+            {/* The house mobile body size, 15.7px — see the note in
+                sections/Patroness.tsx. 16px Geist in a 340px column sets about
+                36 characters a line; this lands nearer 40, which is where the
+                sans copy sits everywhere else on the site. */}
+            <p className="reveal-item text-[0.98rem] md:text-base text-text-muted mb-10 max-w-lg">
               {h.contentsHint}
             </p>
             <ol className="border-t border-gold/20">
@@ -546,7 +550,14 @@ export default function HistoryPage() {
                 </span>
               </div>
 
-              <div className="stage-inner relative w-full max-w-7xl mx-auto px-6 lg:px-10 py-24 md:py-0 grid md:grid-cols-[minmax(0,31rem)_1fr] gap-12 md:gap-16 lg:gap-20 items-center">
+              {/* `py-16`, not `py-24`. Both the animated paths override this
+                  padding outright — desktop centres a 100vh stage, the phone
+                  block sets 4.9rem/0 — so the only reader who ever sees it is
+                  the one on a phone with prefers-reduced-motion set, where
+                  nothing pins and every year stands in normal flow. 6rem of
+                  dead space above and below each chapter is a monitor value;
+                  4rem is the phone one. Desktop is untouched at `md:py-0`. */}
+              <div className="stage-inner relative w-full max-w-7xl mx-auto px-6 lg:px-10 py-16 md:py-0 grid md:grid-cols-[minmax(0,31rem)_1fr] gap-12 md:gap-16 lg:gap-20 items-center">
                 {/* IMAGE — held to its existing width (31rem) even as the stage
                     widens to match the navbar's max-w-7xl, so the extra room
                     goes entirely to the text column instead of stretching the
@@ -569,7 +580,13 @@ export default function HistoryPage() {
                       </div>
                     ))}
                     <div className="frame-scrim absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/25 to-navy/10" />
-                    <div className="era-caption absolute inset-x-0 bottom-0 p-7 md:p-9">
+                    {/* `p-5` on a phone: like the padding above, this caption is
+                        hidden in the animated mobile stage (the year and its
+                        title take the picture there) and survives only on the
+                        reduced-motion path — where 1.75rem of inset on either
+                        side of a 340px frame is a tenth of the screen spent on
+                        margin. `md:p-9` keeps the designed desktop inset. */}
+                    <div className="era-caption absolute inset-x-0 bottom-0 p-5 md:p-9">
                       <p className="font-display text-gold text-xs md:text-sm tracking-[0.4em] uppercase mb-3">
                         {era.span}
                       </p>
@@ -682,7 +699,13 @@ export default function HistoryPage() {
                           <h3 className="dot-title mt-4 font-serif text-2xl md:text-3xl text-navy">
                             {dot.title}
                           </h3>
-                          <p className="dot-body mt-3 text-lg leading-relaxed">
+                          {/* The animated phone stage sets its own size for
+                              `.dot-body` in the CSS below (a clamp, so the
+                              paragraph fits its scroll box); this pair is what
+                              the reduced-motion phone reader gets, and 18px was
+                              the monitor number left standing. 15.7px is the
+                              house mobile body — see sections/Patroness.tsx. */}
+                          <p className="dot-body mt-3 text-[0.98rem] md:text-lg leading-relaxed">
                             {renderProse(dot.body)}
                           </p>
 
@@ -906,6 +929,19 @@ export default function HistoryPage() {
           font-variant-numeric: tabular-nums;
           white-space: nowrap;
         }
+        /* The span — "1542–1685" — is the only thing on a Contents row that
+           isn't the chapter's name, and it is how a reader picks the century
+           they came for. At 0.7rem it was 11.2px of spaced-out Cinzel, right on
+           the floor below which small caps stop being read and start being
+           guessed at. It goes up half a step and the tracking comes off to pay
+           for it: 0.7rem/0.16em and 0.76rem/0.1em set to the same width, so no
+           row grows and the column beside the title is unchanged. */
+        @media (max-width: 767px) {
+          .history-timeline .contents-span {
+            font-size: 0.76rem;
+            letter-spacing: 0.1em;
+          }
+        }
         @media (max-width: 480px) {
           .history-timeline .contents-row {
             grid-template-columns: 2.25rem 1fr;
@@ -1116,6 +1152,85 @@ export default function HistoryPage() {
           border-radius: 3px;
         }
 
+        /* ── The apparatus on a phone, at a size a phone can read ──────────────
+           The footnote and the citation line are where this page keeps its doubt
+           and its evidence — the two things that make it citable. All of it had
+           been tuned DOWN for the phone (0.78rem note, 0.5rem tier, 0.65rem
+           chip) on the reasoning that it is secondary to the story; but 8px caps
+           and a 10.4px link are not secondary, they are absent. A note nobody
+           can read is a note that is not there.
+
+           ⚠ THIS BLOCK IS DELIBERATELY NOT INSIDE THE no-preference MOTION
+           BLOCK BELOW. How large a footnote should be has nothing to do with
+           whether a reader has asked for less animation — and the reduced-motion
+           phone reader is the one who sees the MOST of this apparatus, since
+           every year of every chapter stands open in normal flow for them
+           instead of one at a time. Written the other way round they would have
+           kept all of the 8px type. */
+        @media (max-width: 767px) {
+          /* Was 12.5px, and BELOW its own desktop size (0.84rem/13.4px) — the
+             one place on the page where the phone had been given less than the
+             monitor. 0.85rem is 13.6px, which holds the same ~0.9 ratio to the
+             body copy beside it that the home page's honest-note keeps to its
+             prose, so it still reads as an aside rather than as part of the
+             story. The margins tighten because a phone column needs less. */
+          .history-timeline .dot-note {
+            margin-top: 1rem;
+            padding-left: 0.7rem;
+            font-size: 0.85rem;
+            line-height: 1.55;
+          }
+          /* 0.55rem is 8.8px — the "Note" that opens the footnote was the
+             smallest type on the page. Up to 9.9px, tracking traded down to pay
+             for the width so the white-space: nowrap label still fits on the
+             first line of the note beside it. */
+          .history-timeline .dot-note-label {
+            font-size: 0.62rem;
+            letter-spacing: 0.14em;
+          }
+          /* The row gap comes almost off because the chips inside it are now
+             tall (see below): with 0.3rem of row gap as well, a moment citing
+             four books would push its wrapped second row a third of the way
+             down the scroll box. */
+          .history-timeline .dot-cite {
+            margin-top: 1.1rem;
+            gap: 0.15rem 0.5rem;
+          }
+          /* 0.5rem is EIGHT PIXELS. The tier badge is not decoration — it is the
+             honest strength of the claim above it, "documented" or "parish
+             tradition" or "devotion", and the documented half of this page is
+             believed precisely because the rest is labelled. At 8px of
+             letterspaced caps it was a texture, not a word. 0.62rem is 9.9px,
+             tracking down to 0.13em so the longest label gains about a tenth of
+             its width, in a row that wraps anyway. */
+          .history-timeline .dot-tier {
+            font-size: 0.62rem;
+            letter-spacing: 0.13em;
+            padding: 0.34rem 0.55rem 0.3rem;
+          }
+          /* ⚠ THESE ARE LINKS, AND THEY WERE A 10.4px LINE OF TEXT.
+             A chip opens the actual page of the actual book — the whole
+             reference reader hangs off it — and its tap target was its own font
+             size, about 10px tall, in a row of other chips. 0.72rem takes the
+             type to 11.5px and 0.62rem of block padding takes the target to
+             ~31px, with the row gap tightened above so wrapped rows sit ~34px
+             apart and never overlap each other's hit areas.
+
+             Not the full 44px, and knowingly: four chips at 44 with the
+             clearance a 44px target implies is 100px of citation apparatus under
+             every year, inside a scroll box about 260px tall. This is the
+             largest target that does not make the footnotes the tallest thing on
+             the stage. */
+          .history-timeline .cite-chip {
+            font-size: 0.72rem;
+            padding: 0.62rem 0.15rem;
+          }
+          /* Where a moment rests on nothing outside the parish, this sentence is
+             the whole disclosure — 10.9px of italic display type was too quiet
+             for the one line that keeps the page honest. */
+          .history-timeline .cite-none { font-size: 0.74rem; }
+        }
+
         /* ── Desktop: photo left, rail + stepping panel right ── */
         @media (min-width: 768px) {
           .history-timeline .stage {
@@ -1245,8 +1360,16 @@ export default function HistoryPage() {
             right: 0;
             padding: 1.1rem 1.35rem 0;
             font-family: var(--font-display), serif;
-            font-size: 0.6rem;
-            letter-spacing: 0.22em;
+            /* 0.6rem was 9.6px — and this is the ONLY thing on the mobile stage
+               that tells the reader which of the eight chapters they are in, set
+               in white at 72% over a photograph, which is already the hardest
+               ground on the page to read from. Small display caps need ~11px
+               before they stop being deciphered and start being read; 0.68rem
+               is 10.9px, and the tracking comes off to buy it: 9.6px at 0.22em
+               and 10.9px at 0.13em set to the SAME width, so a long chapter
+               name wraps exactly where it did before. */
+            font-size: 0.68rem;
+            letter-spacing: 0.13em;
             text-transform: uppercase;
             line-height: 1.4;
             color: rgba(255, 255, 255, 0.72);
@@ -1282,8 +1405,12 @@ export default function HistoryPage() {
             text-shadow: 0 2px 18px rgba(10, 19, 34, 0.55);
           }
           .history-timeline .frame-dot-count {
-            font-size: 0.6rem;
-            letter-spacing: 0.2em;
+            /* "03 / 07" — how far through the chapter you are, and the only
+               progress indicator on a stage that has deliberately taken the
+               scrollbar away. Same correction as .frame-label directly above:
+               9.6px → 10.9px, tracking traded for size at equal width. */
+            font-size: 0.68rem;
+            letter-spacing: 0.12em;
             color: rgba(255, 255, 255, 0.6);
             font-variant-numeric: tabular-nums;
             white-space: nowrap;
@@ -1322,7 +1449,23 @@ export default function HistoryPage() {
              Unchanged from the scroll-scrubbed layout: the rail turns on its side
              into a row of beads, no years (the year is set large in the photo).
              They are the instrument for moving through a chapter — tap any bead
-             and go straight to that year. Tap targets stay 26px + padding. */
+             and go straight to that year.
+
+             ⚠ THE ROW OVERFLOWED, AND THE LONGEST CHAPTER IS THE ONE IT
+             OVERFLOWED ON. The beads were rigid: 26px each, flex: none on the
+             box inside them, 0.35rem apart. The chapter with twelve years
+             therefore asked for 12x26 + 11x5.6 = 374px of row inside the 342px
+             a 390px phone has between the stage's px-6 gutters — and .stage
+             is overflow: hidden, so the first and last years of the longest
+             chapter in the book were simply cut off the screen. On a 360px
+             Android it lost two beads at each end. Nothing in the layout said
+             12, so it was invisible until you scrolled to that chapter.
+
+             The fix is to let the row shrink instead of spill: 26px is now a
+             flex BASIS rather than a width, so a chapter of ten years or fewer
+             is pixel-for-pixel what it was, and only the twelve-year one
+             tightens (to ~23px a bead) to fit. The bead itself — an 8px core —
+             never changes size; only the box around it does. */
           .history-timeline .rail {
             flex-direction: row;
             justify-content: center;
@@ -1330,6 +1473,7 @@ export default function HistoryPage() {
             gap: 0.35rem;
             flex: none;
           }
+          .history-timeline .rail-dot { flex: 0 1 26px; min-width: 0; }
           .history-timeline .rail::before {
             top: 50%;
             bottom: auto;
@@ -1340,11 +1484,19 @@ export default function HistoryPage() {
             transform: translateY(-0.5px);
           }
           .history-timeline .rail-year { display: none; }
+          /* 26px of box and 6px of padding made a 38px-tall target for the
+             control a reader uses most on this page. 9px takes it to 44, the
+             height a thumb actually needs, and it costs the paragraph below it
+             six pixels of scroll box — which scrolls, so it costs it nothing. */
           .history-timeline .rail-btn {
             justify-content: center;
-            padding: 6px 0;
+            padding: 9px 0;
           }
-          .history-timeline .rail-dotbox { width: 26px; height: 26px; }
+          /* width: 100%, not 26px: the box has to be able to follow its li
+             down when a twelve-year chapter tightens the row (see above). A
+             fixed width here would keep min-content at 26px and put the
+             overflow straight back. */
+          .history-timeline .rail-dotbox { width: 100%; height: 26px; }
 
           /* minmax(0, 1fr), not the default auto row: an auto row sizes to its
              tallest content and would push past the pinned stage instead of
@@ -1375,8 +1527,12 @@ export default function HistoryPage() {
             overflow-y: auto;
             overscroll-behavior-y: contain;
             /* Clears the button overlay, so the last line of a year can be
-               scrolled out from under the circles instead of sitting behind them. */
-            padding-bottom: 4.75rem;
+               scrolled out from under the circles instead of sitting behind them.
+               Tracks the overlay's real height: 1.75rem of top gradient + the
+               button + 0.85rem beneath it. The buttons grew to 2.75rem (see the
+               note on .nav-btn), so this grew with them — leave the two in step
+               or the last footnote of a year strands under the chapter arrows. */
+            padding-bottom: 5.4rem;
             opacity: 0;
             transform: translateY(20px);
             transition: opacity .45s cubic-bezier(.16,1,.3,1),
@@ -1399,22 +1555,6 @@ export default function HistoryPage() {
             line-height: 1.66;
             margin-top: 0;
           }
-          .history-timeline .dot-note {
-            margin-top: 1rem;
-            padding-left: 0.7rem;
-            font-size: 0.78rem;
-            line-height: 1.55;
-          }
-          .history-timeline .dot-cite {
-            margin-top: 1.1rem;
-            gap: 0.3rem 0.45rem;
-          }
-          .history-timeline .dot-tier {
-            font-size: 0.5rem;
-            letter-spacing: 0.2em;
-            padding: 0.3rem 0.5rem 0.27rem;
-          }
-          .history-timeline .cite-chip { font-size: 0.65rem; }
 
           /* ── The four steps ──
              One line, nothing in the middle: « ‹ pushed into the left corner and
@@ -1450,17 +1590,31 @@ export default function HistoryPage() {
           .history-timeline .era-nav-side {
             display: flex;
             align-items: center;
-            gap: 0.4rem;
+            /* 0.4rem was fine between two 35px circles and is not fine between
+               two 44px ones: the pair either side of it are a year forward and
+               a whole chapter forward, and a mistap between them costs the
+               reader their place. */
+            gap: 0.5rem;
             min-width: 0;
           }
+          /* ⚠ 2.2rem IS 35px, AND THESE ARE THE PAGE. On a phone the stage does
+             not scroll, so apart from a swipe and the beads above, these four
+             circles are the only way through fifty-six years — and every one of
+             them was nine pixels under the 44px a thumb needs, in the corners
+             of the screen, which is where a target is least forgiving because
+             half the ways you can miss it are off the edge of the glass.
+             2.75rem is exactly 44. It costs the paragraph above about ten
+             pixels of visible text (the overlay is taller, so .dot-panel's
+             bottom padding grew with it) — and the paragraph scrolls, while a
+             missed tap does not. */
           .history-timeline .nav-btn {
             flex: none;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 0.4rem;
-            width: 2.2rem;
-            height: 2.2rem;
+            width: 2.75rem;
+            height: 2.75rem;
             padding: 0;
             border: 0;
             border-radius: 9999px;
@@ -1477,8 +1631,10 @@ export default function HistoryPage() {
             outline: 2px solid var(--gold);
             outline-offset: 3px;
           }
+          /* Follows the circle up — a 15px chevron in a 44px disc reads as a
+             mark that missed its target rather than as a button face. */
           .history-timeline .nav-chev {
-            font-size: 0.95rem;
+            font-size: 1.05rem;
             line-height: 1;
           }
           /* The year pair — the move you make most, so it is the gold one. */
@@ -1496,19 +1652,33 @@ export default function HistoryPage() {
           /* Armed: the circle opens into a pill naming where it would send you.
              The only thing on this row allowed to grow, and it shrinks back the
              moment it fires or times out. */
+          /* flex: 0 1 auto and min-width: 0, not the flex: none it
+             inherits: the pill is the one thing in this row sized by its
+             CONTENT — a chapter heading — and with the circles now 44px there
+             is no longer room for a 13.5rem pill plus three discs plus the
+             gutters on a 360px screen. Unable to shrink, it pushed the year
+             arrow off the edge of the stage, which is overflow: hidden.
+             Shrinkable, it gives way to the buttons and lets .nav-target's
+             ellipsis do the rest — the heading is cut, nothing is lost. */
           .history-timeline .nav-btn--chapter.is-armed {
             width: auto;
-            max-width: 13.5rem;
+            flex: 0 1 auto;
+            min-width: 0;
+            max-width: 12rem;
             padding: 0 0.85rem;
             color: var(--gold-dark);
             background: rgba(196, 160, 73, 0.14);
             box-shadow: inset 0 0 0 1px rgba(196, 160, 73, 0.5);
           }
+          /* The destination of a two-tap jump, and the reason the arming step
+             exists at all — it is there to be READ before the second tap, so
+             10.2px was the wrong size for it. 11.2px, tracking down to keep the
+             pill the width it was. */
           .history-timeline .nav-target {
             min-width: 0;
             font-family: var(--font-display), serif;
-            font-size: 0.64rem;
-            letter-spacing: 0.1em;
+            font-size: 0.7rem;
+            letter-spacing: 0.07em;
             text-transform: uppercase;
             line-height: 1;
             white-space: nowrap;

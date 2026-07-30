@@ -56,17 +56,17 @@ export function DistanceFromYou() {
   if (state.kind === "found") {
     const km = state.km < 10 ? state.km.toFixed(1) : Math.round(state.km).toLocaleString();
     return (
-      <p aria-live="polite" className="font-serif text-lg text-navy/75">
+      <p aria-live="polite" className="font-serif text-[1.05rem] md:text-lg text-navy/75">
         {t.contact.travel.youAre}{" "}
         <span className="text-gold-dark tabular-nums text-2xl">{km} {t.contact.travel.km}</span>{" "}
-        <span className="text-text-muted text-base">{t.contact.travel.straightLine}</span>
+        <span className="text-text-muted text-[0.95rem] md:text-base">{t.contact.travel.straightLine}</span>
       </p>
     );
   }
 
   if (state.kind === "denied") {
     return (
-      <p aria-live="polite" className="text-sm text-text-muted italic">
+      <p aria-live="polite" className="text-[0.88rem] md:text-sm text-text-muted italic">
         {t.contact.travel.locateDenied}
       </p>
     );
@@ -77,7 +77,7 @@ export function DistanceFromYou() {
       type="button"
       onClick={locate}
       disabled={state.kind === "locating"}
-      className="inline-flex items-center gap-2.5 min-h-[46px] px-6 rounded-full border border-navy/20 text-navy/70 font-display text-[0.62rem] uppercase tracking-[0.22em] hover:border-gold hover:text-gold-dark transition-colors disabled:opacity-60"
+      className="inline-flex items-center gap-2.5 min-h-[46px] px-5 md:px-6 rounded-full border border-navy/20 text-navy/70 font-display text-[0.7rem] tracking-[0.12em] md:text-[0.62rem] md:tracking-[0.22em] uppercase hover:border-gold hover:text-gold-dark transition-colors disabled:opacity-60"
     >
       {/* The "Finding you…" label already announces the wait, so the needle
           need not spin for someone who has asked for less motion. */}

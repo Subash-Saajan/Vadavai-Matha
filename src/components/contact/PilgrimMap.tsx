@@ -20,9 +20,14 @@ const COORDS = `${GEO.lat}, ${GEO.lng}`;
 
 /* One shape for all three controls: same height, same radius, same type.
    Their widths are equalised by the 3-column grid they sit in, so the row
-   reads as a single instrument rather than three loose buttons. */
+   reads as a single instrument rather than three loose buttons.
+
+   `whitespace-nowrap` means the label cannot wrap out of trouble, so at
+   0.64rem/0.2em — 10.2px of Cinzel carrying a fifth of its width in air —
+   "GET DIRECTIONS" was already close to the width of a phone. Larger and
+   tighter is both more legible and narrower; `md` keeps the drawn values. */
 const PILL =
-  "inline-flex h-12 items-center justify-center gap-2.5 rounded-full px-5 font-display text-[0.64rem] uppercase tracking-[0.2em] whitespace-nowrap transition-colors";
+  "inline-flex h-12 items-center justify-center gap-2.5 rounded-full px-5 font-display text-[0.7rem] tracking-[0.12em] md:text-[0.64rem] md:tracking-[0.2em] uppercase whitespace-nowrap transition-colors";
 
 /* Apple's own mark. Lucide has no brand glyphs, and an "external link" box
    said nothing about where the link goes. */
@@ -58,7 +63,7 @@ export function PilgrimMap({ id }: { id?: string }) {
       </span>
 
       <div className="relative max-w-6xl mx-auto">
-        <header className="text-center mb-12 reveal max-w-2xl mx-auto">
+        <header className="text-center mb-9 md:mb-12 reveal max-w-2xl mx-auto">
           <p className="kicker justify-center mb-5">{t.contact.map.heading}</p>
           <h2 className="font-serif text-3xl md:text-4xl text-navy leading-snug">
             {t.contact.map.intro}
@@ -68,7 +73,14 @@ export function PilgrimMap({ id }: { id?: string }) {
         {/* The plate — a framed map, like the portrait on the home page. The
             ground under the tiles is parchment, not black: for the moment
             before they paint, the frame should read as an empty page. */}
-        <div className="reveal relative aspect-3/2 md:aspect-2/1 rounded-[1.75rem] overflow-hidden shadow-2xl ring-1 ring-gold/25 bg-cream">
+        {/* On a phone the plate is 342px wide, so `aspect-3/2` gave it 228px of
+            height — a letterbox of a village, in which the pin, the two zoom
+            buttons and the OSM credit occupy most of the frame and there is
+            barely room left to see which road the shrine is on. 4/3 buys 28%
+            more map for 28px of scroll, on the one section of this page whose
+            entire purpose is showing somebody where to go. The desktop plate is
+            the drawn 2:1 and is untouched. */}
+        <div className="reveal relative aspect-4/3 md:aspect-2/1 rounded-[1.75rem] overflow-hidden shadow-2xl ring-1 ring-gold/25 bg-cream">
           <InteractiveMap title={t.contact.map.iframeTitle} />
 
           {/* Corner serifs, the site's framing motif */}
@@ -79,13 +91,19 @@ export function PilgrimMap({ id }: { id?: string }) {
         {/* The navigational truth. Always present, JS or no JS, map or no map. */}
         <div className="reveal mt-8 flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between lg:gap-14">
           <address className="not-italic">
-            <p className="font-display text-[0.6rem] uppercase tracking-[0.32em] text-gold-dark mb-4">
+            <p className="font-display text-[0.66rem] tracking-[0.18em] md:text-[0.6rem] md:tracking-[0.32em] uppercase text-gold-dark mb-4">
               {ADDRESS.name}
             </p>
+            {/* The address holds `text-lg` on a phone rather than taking the
+                serif body's step down: this is the block somebody reads into a
+                taxi driver's ear or copies into another app, and addresses do
+                not shrink on this site. */}
             <p className="font-serif text-lg md:text-xl text-navy leading-relaxed max-w-sm">
               {t.contact.address}
             </p>
-            <p className="mt-4 text-xs text-text-muted tabular-nums tracking-wide">
+            {/* 12px of decimal coordinates is a string that has to be
+                transcribed digit for digit if the copy button is refused. */}
+            <p className="mt-4 text-[0.82rem] md:text-xs text-text-muted tabular-nums tracking-wide">
               {GEO.lat}°N, {GEO.lng}°E
             </p>
           </address>

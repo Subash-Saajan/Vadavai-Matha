@@ -202,7 +202,10 @@ html[lang|="ta"] .kicker,
 html[lang|="ta"] .section-numeral,
 html[lang|="ta"] .saint-note-label,
 html[lang|="ta"] .saint-tier,
-html[lang|="ta"] .saint-chip {
+html[lang|="ta"] .saint-chip,
+html[lang|="ta"] .ui-label,
+html[lang|="ta"] .micro-label,
+html[lang|="ta"] .field-label {
   font-family: "Kumudam Tamil", var(--font-display), var(--font-serif), serif;
 }
 
@@ -242,6 +245,14 @@ body {
    FILM GRAIN — a single fixed, blend-mode texture layer over everything.
    Gives the whole site an aged-paper / photographic tactility instead of
    flat digital fills. Pointer-events off; cheap, GPU-friendly.
+
+   ⚠ DESKTOP ONLY — see the media query directly below this rule. It is
+   cheap on a desktop GPU and it is not cheap on a phone: a FIXED layer with
+   `mix-blend-mode` has to be re-composited against whatever is passing
+   beneath it on every single scrolled frame, full-screen, which is one of
+   the more reliable ways to lose frames on mobile Safari. At 5% opacity on
+   a 6-inch screen almost nobody could tell you it was there; the smoothness
+   they can feel.
    ====================================================================== */
 body::after {
   content: "";
@@ -253,6 +264,12 @@ body::after {
   mix-blend-mode: soft-light;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 180px 180px;
+}
+
+@media (max-width: 767px) {
+  body::after {
+    display: none;
+  }
 }
 
 /* ======================================================================
@@ -290,6 +307,25 @@ body::after {
   background: linear-gradient(to right, transparent, var(--gold));
 }
 
+/* ── The kicker on a phone ────────────────────────────────────────────────
+   0.42em is a monitor value. Letterspacing that heavy needs width to read as
+   engraving rather than as damage, and on a 390px screen — where the text
+   column is about 340px — a long eyebrow set that wide either wraps or crowds
+   the rule in front of it. Half a step up in size and a third off the tracking
+   keeps the same inscriptional voice at a width the screen actually has, and
+   lifts an 11.2px label to 11.7px, which matters at arm's length in daylight.
+   The rule shortens with it so the proportion is unchanged. */
+@media (max-width: 767px) {
+  .kicker {
+    font-size: 0.73rem;
+    letter-spacing: 0.28em;
+    gap: 0.65rem;
+  }
+  .kicker::before {
+    width: 1.6rem;
+  }
+}
+
 /* The kicker is Cinzel CAPS at 0.7rem with 0.42em tracking — proportions that
    suit Latin small-caps and nothing else. In Tamil the same numbers give ~7px
    glyphs flung apart by half their own width.
@@ -300,6 +336,156 @@ body::after {
 html[lang|="ta"] .kicker {
   font-size: 0.95rem;
   letter-spacing: 0.1em;
+  text-transform: none;
+}
+
+/* ── Button / link labels ────────────────────────────────────────────────
+   Every CTA on the site was written the same way: `font-display
+   text-[0.7rem] uppercase tracking-[0.2em]` — Cinzel small-caps, spelled out
+   in Tailwind on each element. In Tamil that collapsed to roughly 6.5px of
+   spaced-out glyphs, for two compounding reasons:
+
+   1. FAMILY. `.font-display` outside nav/header/footer falls to the block
+      above and picks up "Kumudam Display" — the 58% HEADING cut, which
+      exists to pull a 132px title back onto two lines. On 0.7rem type it is
+      a disaster. `.ui-label` is in the small-type list above instead, so
+      these labels take the 66% cut like the kickers and the nav.
+   2. METRICS. Same as the kicker directly above — size up, tracking to
+      almost nothing (Tamil syllables are connected units; pulling them apart
+      reads as breakage, not elegance), and drop a text-transform that does
+      nothing in a script without letter case.
+
+   THE SIZE AND TRACKING LIVE HERE, NOT IN THE MARKUP, and that is the whole
+   point. A first attempt left `text-[0.7rem] tracking-[0.22em]` on the
+   element and added only the Tamil override — and the override lost. Do not
+   put a `text-*`, `tracking-*` or `uppercase` utility on a `.ui-label`; it
+   will win in Tamil and the label will shrink back to 6px. The element
+   carries `ui-label` and its colour, nothing more.
+
+   This is exactly how `.kicker` is built, and it is why `.kicker` works. */
+.ui-label {
+  font-family: var(--font-display), var(--font-serif), Georgia, serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* Every CTA on the site is a `.ui-label`, and 0.7rem is 11.2px — under the
+   12px floor below which small caps stop being read and start being guessed
+   at, which is a poor thing for a button to be. 0.78rem clears it; the
+   tracking comes in to pay for the extra width so no button gets wider.
+
+   The size lives HERE and not on the element — read the block above, which is
+   the whole reason this class exists. A `text-*` utility on a `.ui-label`
+   wins over this rule AND over the Tamil one below it. */
+@media (max-width: 767px) {
+  .ui-label {
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+  }
+}
+
+html[lang|="ta"] .ui-label {
+  font-size: 1.2rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+/* ── Micro-labels ────────────────────────────────────────────────────────
+   One step below `.ui-label`: the very small engraved caps that sit beside
+   something else rather than standing on their own — the "Morning" / "Evening"
+   heads over the week grid on /mass-timings, the horizons at either end of the
+   day arc, the month cut into the year's spine, the "Next" badge on a feast.
+
+   It exists for exactly the reason `.ui-label` does, one size down. Written as
+   `font-display text-[0.55rem] uppercase tracking-[0.22em]` these came out at
+   roughly 5px of spaced-out Tamil: `.font-display` outside nav/header/footer
+   resolves to "Kumudam Display", the 58% cut meant for 130px titles, and 58% of
+   0.55rem is nothing at all.
+
+   SAME RULE AS `.ui-label`, AND IT IS NOT OPTIONAL: do not put a `text-*`,
+   `tracking-*` or `uppercase` utility on a `.micro-label`. The size and the
+   tracking live here so that the Tamil form can actually replace them. An
+   element carries `micro-label` and its colour, nothing more. */
+.micro-label {
+  font-family: var(--font-display), var(--font-serif), Georgia, serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+
+/* ── The micro-label on a phone ───────────────────────────────────────────
+   0.55rem is 8.8px. That is the smallest type on the site, and on
+   /mass-timings it is not decoration — it sets the DATE on all eight feast
+   cards, the NOW / NEXT badge, the countdown to the August feast, the TODAY
+   marker on the week grid and the chapel-open label. A reader deciding
+   whether to travel for a feast was reading the date at 8.8px.
+
+   It had to be fixed here and could not be fixed in the markup: the note
+   directly above forbids a `text-*` or `tracking-*` utility on this class,
+   because such a utility also beats the Tamil override below and collapses
+   the Tamil form to about 5px. Same trade as `.kicker` and `.ui-label` — up
+   in size, in on tracking, so nothing it labels gets any wider. */
+@media (max-width: 767px) {
+  .micro-label {
+    font-size: 0.64rem;
+    letter-spacing: 0.13em;
+  }
+}
+
+html[lang|="ta"] .micro-label {
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+/* ── Form field labels ────────────────────────────────────────────────────
+   THE THIRD MEMBER OF THE `.kicker` / `.ui-label` FAMILY, AND IT EXISTS FOR
+   EXACTLY THE SAME REASON THEY DO.
+
+   The labels over the /contact form's fields were written inline as
+   `font-display text-[0.6rem] tracking-[0.24em] uppercase`, which on the
+   English side is correct and on /ta was a bug: `.font-display` outside
+   nav/header/footer falls to the "Kumudam Display" rule near the top of this
+   file — the 58% HEADING cut, which exists to pull a 132px title back onto two
+   lines. Applied to a 0.6rem label it gave roughly SIX PIXELS. Every field on
+   the contact form was labelled in type a Tamil reader could not read.
+
+   The fix is the one the rest of the site already uses, and it has two halves,
+   both of which are required:
+     1. the class is listed with `.kicker` and `.ui-label` in the SMALL-type
+        Tamil block above, so it takes the 66% cut instead of the 58% one;
+     2. the size and tracking live HERE, so the Tamil rule below can actually
+        replace them — size up, tracking to almost nothing (Tamil syllables are
+        connected units and pulling them apart reads as breakage), and
+        `text-transform` dropped because Tamil has no letter case.
+
+   ⚠ DO NOT put a `text-*`, `tracking-*` or `uppercase` utility on a
+   `.field-label`. It would win over both rules and put the 6px back. The
+   element carries `field-label` and its colour, nothing more. This is the same
+   warning that stands over `.ui-label` and `.micro-label`, and it is the one
+   thing about this family that is easy to undo by accident.
+
+   The two numbers below are the ones the elements were already carrying, so
+   adopting the class changed nothing at any width in English. */
+.field-label {
+  font-family: var(--font-display), var(--font-serif), Georgia, serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 767px) {
+  .field-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+  }
+}
+
+html[lang|="ta"] .field-label {
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
   text-transform: none;
 }
 
@@ -514,6 +700,28 @@ html[lang|="ta"] .kicker {
   opacity: 1;
   animation: plan-breathe 2.6s ease-in-out infinite;
 }
+
+/* ── The lit region on a phone: steady, not breathing ─────────────────────
+   `plan-breathe` animates an SVG `drop-shadow()` — a real filter, re-rasterised
+   every frame over the lit path — and it runs on an infinite loop for as long
+   as a reading is selected, which on this page is most of the time a reader
+   spends in the section. It is the most expensive thing left on /architecture
+   for a phone GPU.
+
+   The breathing exists to pull the eye to the newly lit region. On a handset
+   it cannot do that job anyway: the plan is stacked ABOVE the readings list
+   there, so at the moment of the tap the thing that would be breathing is
+   frequently off-screen. What survives is the steady glow, which is what
+   actually says "this part, not that part" once the reader scrolls back to it.
+
+   Deliberately the same treatment `prefers-reduced-motion` already gets below
+   — one lit state, drawn once, no loop. */
+@media (max-width: 767px) {
+  .plan-region--on {
+    animation: none;
+    filter: drop-shadow(0 0 8px rgba(236, 210, 138, 0.6));
+  }
+}
 @keyframes plan-breathe {
   0%,
   100% {
@@ -622,10 +830,22 @@ html[lang|="ta"] .kicker {
   opacity: 1;
 }
 
-/* ── Navbar blur ── */
+/* ── Navbar blur ──
+   A backdrop-filter is sampled and re-blurred against everything that passes
+   under it, every scrolled frame — and the bar is fixed, so on the home page
+   that is the entire scroll. A 20px radius is a real cost on a phone GPU for
+   an effect sitting behind an 80%-opaque cream fill that has already hidden
+   most of what is being blurred. Halved on mobile; indistinguishable there,
+   and it is the one filter that runs the whole length of the page. */
 .navbar-blur {
   backdrop-filter: blur(20px) saturate(160%);
   -webkit-backdrop-filter: blur(20px) saturate(160%);
+}
+@media (max-width: 767px) {
+  .navbar-blur {
+    backdrop-filter: blur(10px) saturate(140%);
+    -webkit-backdrop-filter: blur(10px) saturate(140%);
+  }
 }
 
 .magnetic-btn {
@@ -661,9 +881,14 @@ html[lang|="ta"] .kicker {
   will-change: transform, opacity;
 }
 
-/* ── Section padding utility ── */
+/* ── Section padding utility ──
+   6rem was the phone value too, and 96px of nothing above and below every
+   section — 192px at each seam — is a monitor's rhythm shrunk onto a screen a
+   fifth the size. It read as a page that kept losing its place. 4.5rem keeps
+   the sections clearly separate at roughly the same proportion of the screen
+   they occupy on desktop, and gives back most of a viewport across the page. */
 .section-padding {
-  padding: 6rem 1.5rem;
+  padding: 4.5rem 1.5rem;
 }
 @media (min-width: 768px) {
   .section-padding {
@@ -673,6 +898,29 @@ html[lang|="ta"] .kicker {
 @media (min-width: 1024px) {
   .section-padding {
     padding: 10rem 4rem;
+  }
+}
+
+/* ── THE STICKY CALL BAR OCCLUDES THE FOOTER, AND THIS IS WHERE IT IS FIXED ──
+   /contact carries a `position: fixed` call bar along the bottom of the screen
+   below `lg`. It is about 86px tall, and the footer is a SIBLING of <main> in
+   SiteLayout — so when a reader reaches the very bottom of the document, the
+   bar is simply parked on top of the footer's last rows. Nothing inside the
+   contact page can fix that: padding there only opens a gap ABOVE the footer,
+   which is not where the bar is.
+
+   `body:has(.contact-page)` is the join. `.contact-page` is the class on the
+   contact page's own root inside <main>, so this reaches out of the subtree
+   that knows about the bar and pads the sibling that does not — without giving
+   every other page on the site a phantom 5.5rem of dead space, and without
+   Footer.tsx having to learn which routes have a sticky bar.
+
+   Capped at `lg` because the bar itself is `lg:hidden`, and the safe-area inset
+   is added on top because the bar has its own — the two must agree or the
+   padding is short by the height of the iPhone home indicator. */
+@media (max-width: 1023px) {
+  body:has(.contact-page) footer {
+    padding-bottom: calc(env(safe-area-inset-bottom) + 5.5rem);
   }
 }
 
@@ -851,6 +1099,34 @@ html[lang|="ta"] .prose-term {
   outline: 2px solid var(--gold);
   outline-offset: 3px;
   border-radius: 3px;
+}
+
+/* ── The citation apparatus on a phone ────────────────────────────────────
+   Three of these are monitor values that fall under the 11px floor on a
+   handset: the tier badge is 0.58rem (9.3px) thrown 0.26em apart, the note
+   label is 0.6rem (9.6px) at 0.26em, and the source chips — which are LINKS —
+   are 0.7rem (11.2px). On the saints' pages this is the whole apparatus that
+   tells a reader whether what he has just read is documented, remembered or
+   merely believed. On a site whose case rests on being citable, it is the
+   last thing that should be guessed at.
+
+   Same trade as `.kicker` and `.ui-label` above: size UP, tracking DOWN, so
+   nothing it labels gets any wider. The sizes live here rather than on the
+   elements for the reason spelled out beside `.ui-label` — a `text-*` utility
+   on one of these would win over this rule AND over the Tamil rule that has
+   to replace it. */
+@media (max-width: 767px) {
+  .saint-page .saint-tier {
+    font-size: 0.66rem;
+    letter-spacing: 0.14em;
+  }
+  .saint-page .saint-note-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+  }
+  .saint-page .saint-chip {
+    font-size: 0.78rem;
+  }
 }
 
 /* The paintings drift inside their frame; the frame itself never moves, so

@@ -15,6 +15,21 @@ import { ChevronDown } from "lucide-react";
 const FRAME_COUNT = 150;
 const frameSrc = (i: number) => `/hero-frames/f${String(i + 1).padStart(3, "0")}.webp`;
 
+/**
+ * The church is not in the middle of its own footage. gen-scrub-frames.mjs
+ * takes a dead-centre 4:5 slice of the drone master, and in that slice the
+ * spire sits at about 51% of the frame's width at the start of the scrub and
+ * drifts out to about 56% by the end — the drone is descending towards it, not
+ * orbiting it. A desktop viewport is wide enough that the whole 4:5 field is on
+ * screen and nobody notices; a phone crops another ~40% off the sides, which
+ * magnifies that offset into a church visibly parked right of centre.
+ *
+ * So the mobile canvas draws from 54.5% of the frame instead of 50% — a
+ * compromise between the two ends of the pan that reads as centred throughout.
+ * Canvas-only by construction, so the desktop <video> keeps its full field.
+ */
+const CHURCH_FOCUS_X = 0.545;
+
 export function Hero() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -33,6 +48,7 @@ export function Hero() {
     canvasRef,
     frameCount: FRAME_COUNT,
     frameSrc,
+    focusX: CHURCH_FOCUS_X,
   });
 
   useEffect(() => {
@@ -144,20 +160,45 @@ export function Hero() {
     <section
       ref={sectionRef}
       data-nav-hero /* Navbar stays transparent while this is behind it */
-      className="relative bg-navy"
-      style={{ height: "300vh" }} /* scroll runway for the video scrub */
+      /* ── THE SCROLL RUNWAY, AND WHY IT IS SHORTER ON A PHONE ────────────────
+         300vh is 200vh of actual scrub once the sticky stage has taken its
+         viewport. On a monitor that is two flicks of a wheel. On a phone, where
+         one comfortable thumb swipe moves something like half a screen, it is
+         eight or nine swipes to get out of the hero — and a reader who has to
+         work that hard to leave the first section concludes the page is stuck,
+         not that it is cinematic. 220vh gives 120vh of scrub, about four
+         swipes, and the film reads faster per gesture as a result.
+
+         Deliberately `vh`, NOT `svh`/`dvh`, on both the runway and the stage
+         below. `vh` is the LARGE viewport, so the stage always covers the
+         screen whether the address bar is showing or not, and — because it is
+         a constant — showing or hiding that bar mid-scroll resizes nothing.
+         `dvh` would track the bar exactly and re-lay-out the sticky stage on
+         every frame of its animation, which is the "jump" this kind of hero is
+         famous for. The cost of `vh` is that the bottom ~60px sits under the
+         bar while it is shown, which is what the scroll indicator's own
+         `bottom-24 md:bottom-10` is for. */
+      className="relative h-[220vh] bg-navy md:h-[300vh]"
     >
       {/* Sticky stage */}
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         {/* First frame as instant poster under whichever scrub medium mounts —
-            also the mobile LCP, since phones never load the video itself. */}
+            also the mobile LCP, since phones never load the video itself.
+
+            The poster is the uncropped landscape frame, so on a phone
+            object-cover happens to crop it to exactly the same slice the 4:5
+            scrub frames show. It therefore has to carry the same off-centre
+            framing as CHURCH_FOCUS_X, or the church would visibly jump
+            sideways the moment frame 1 lands on the canvas over it. 52.7% of
+            this frame's overflow is the same ~30px nudge that 54.5% of the
+            narrower crop is. Phones only — desktop shows the whole field. */}
         <Image
           src="/hero-frames/poster.webp"
           alt=""
           fill
           priority
           sizes="100vw"
-          className="object-cover"
+          className="object-cover object-[52.7%_center] md:object-center"
         />
 
         {mode === "video" && (
@@ -194,7 +235,10 @@ export function Hero() {
             <svg width="16" height="24" viewBox="0 0 13 20" fill="none" className="text-gold animate-float" aria-hidden="true">
               <path d="M6.5 0v20M0.5 6h12" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
             </svg>
-            <span className="font-display text-[0.72rem] md:text-sm tracking-[0.55em] uppercase text-gold-light drop-shadow-[0_2px_8px_rgba(0,0,0,0.55)]">
+            {/* 0.55em of tracking on an 11.5px word needs about 150px to sit
+                in and is the first thing to crowd on a narrow screen. Up in
+                size, in on tracking — the same trade the `.kicker` makes. */}
+            <span className="font-display text-[0.78rem] tracking-[0.38em] uppercase text-gold-light drop-shadow-[0_2px_8px_rgba(0,0,0,0.55)] md:text-sm md:tracking-[0.55em]">
               Little Rome
             </span>
           </div>
@@ -223,14 +267,30 @@ export function Hero() {
               Our Lady of Assumption — the Holy Family Shrine, Vadakkankulam,
               called Little Rome
             </span>
+            {/* ── THE TWO LINES ARE FLUID BELOW `md`, AND LINE TWO WAS BROKEN ──
+                "of Assumption" was a flat 2.75rem (44px). Thirteen characters
+                of Cinzel at 44px want roughly 345px; a 390px phone minus the
+                `px-6` gutters leaves 342, and a 360px one leaves 312 — so on
+                every common phone the site's own <h1> was running off the edge
+                of the screen or breaking onto a third line. It is the first
+                thing anyone sees.
+
+                `clamp()` instead of a breakpoint step, because the failure was
+                continuous — it got worse smoothly as the screen narrowed, and
+                a single `sm:` jump would only move where it happened. The
+                middle term is the one doing the work: 8.8vw holds the line at
+                a constant share of the screen, so it fits at 320px and at
+                430px, and the max is exactly the 2.75rem this was designed at,
+                reached just before `md` takes over. Line one is set to 11.5vw
+                so the two keep the size relationship the design has. */}
             <span aria-hidden="true" className="block">
               <span className="block overflow-hidden">
-                <span className="title-line block text-5xl md:text-7xl lg:text-[7.5rem]">
+                <span className="title-line block text-[clamp(2.35rem,11.5vw,3rem)] md:text-7xl lg:text-[7.5rem]">
                   Our Lady
                 </span>
               </span>
               <span className="block overflow-hidden mt-1 md:mt-2">
-                <span className="title-line block text-[2.75rem] md:text-6xl lg:text-[6rem] text-gradient-gold">
+                <span className="title-line block text-[clamp(1.8rem,8.8vw,2.75rem)] text-gradient-gold md:text-6xl lg:text-[6rem]">
                   of Assumption
                 </span>
               </span>
@@ -244,17 +304,25 @@ export function Hero() {
                 <path d="M7 0v14M0 7h14" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
               </svg>
             </div>
-            <p className="text-base md:text-lg text-white/75 font-serif italic tracking-wide leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
+            {/* Cormorant italic renders visibly smaller than sans at the same
+                number — see the note on the serif body sizes in Patroness.tsx.
+                It sits a step above the page's sans body, not level with it. */}
+            <p className="text-[1.02rem] md:text-lg text-white/75 font-serif italic tracking-wide leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
               A sacred sanctuary of faith, prayer &amp; community
             </p>
           </div>
 
           {/* Scroll indicator */}
+          {/* `bottom-24` on a phone, not `bottom-10`: the stage is a large
+              viewport (see the runway note on the section), so its bottom
+              40px sit behind the browser's own address bar for as long as
+              that bar is showing — which is exactly when a reader is looking
+              for the invitation to scroll. */}
           <div
             ref={scrollRef}
-            className="absolute bottom-10 flex flex-col items-center gap-2"
+            className="absolute bottom-24 flex flex-col items-center gap-2 md:bottom-10"
           >
-            <span className="font-display text-[0.6rem] uppercase tracking-[0.35em] text-white/55">
+            <span className="font-display text-[0.68rem] uppercase tracking-[0.26em] text-white/60 md:text-[0.6rem] md:tracking-[0.35em]">
               Scroll to enter
             </span>
             <ChevronDown className="w-5 h-5 text-gold animate-scroll-bounce" />

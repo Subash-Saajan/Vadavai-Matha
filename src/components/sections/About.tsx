@@ -2,7 +2,7 @@
 
 import { useRef, useEffect } from "react";
 import Image from "next/image";
-import { gsap } from "@/lib/gsap";
+import { gsap, DESKTOP, revealY } from "@/lib/gsap";
 import { useLang } from "@/components/layout/LanguageProvider";
 import { PhotoOrnaments } from "@/components/ornaments/CornerOrnament";
 
@@ -33,44 +33,13 @@ export function About() {
         }
       );
 
-      // ── Parallax: sky drifts slow, church drifts faster ──
-      gsap.to(skyRef.current, {
-        yPercent: -8,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1,
-        },
-      });
-      gsap.to(churchRef.current, {
-        yPercent: -22,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1,
-        },
-      });
-
-      // Halo glow breathing
-      gsap.to(haloRef.current, {
-        scale: 1.15,
-        opacity: 0.85,
-        duration: 4,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: -1,
-      });
-
-      // Text staggered reveal
+      // Text staggered reveal — every device.
+      const from = revealY();
       const items = textRef.current?.querySelectorAll(".reveal-item");
       items?.forEach((el, i) => {
         gsap.fromTo(
           el,
-          { y: 42, opacity: 0 },
+          { y: from, opacity: 0 },
           {
             y: 0,
             opacity: 1,
@@ -85,6 +54,47 @@ export function About() {
           }
         );
       });
+
+      /* ── Desktop only: the two-layer parallax and the breathing halo ─────
+         This card is the most expensive thing in the section — two full-bleed
+         images inside one rounded, clipped box, each getting its own transform
+         written every scrolled frame. Compositing a clipped, rounded, shadowed
+         container whose children are both moving is exactly the case a phone
+         is slowest at. The card still reads: it keeps its clip-wipe entrance
+         and the depth is in the artwork. See DESKTOP in lib/gsap.ts. */
+      const mm = gsap.matchMedia();
+      mm.add(DESKTOP, () => {
+        gsap.to(skyRef.current, {
+          yPercent: -8,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+          },
+        });
+        gsap.to(churchRef.current, {
+          yPercent: -22,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+          },
+        });
+
+        gsap.to(haloRef.current, {
+          scale: 1.15,
+          opacity: 0.85,
+          duration: 4,
+          ease: "sine.inOut",
+          yoyo: true,
+          repeat: -1,
+        });
+      });
+      return () => mm.revert();
     }, sectionRef);
     return () => ctx.revert();
   }, [lang]);
@@ -104,25 +114,28 @@ export function About() {
         <div ref={textRef} className="lg:col-span-7 space-y-6 order-2 lg:order-1">
           <p className="reveal-item kicker">{t.home.aboutLabel}</p>
 
-          <h2 className="reveal-item font-serif text-5xl md:text-6xl lg:text-7xl text-navy leading-[1.04]">
+          {/* Sizes deliberately identical to Patroness — the two sections are
+              the same layout mirrored, and the long note explaining why the
+              sans goes down and the serif goes up lives there. */}
+          <h2 className="reveal-item font-serif text-[clamp(2.25rem,9vw,3rem)] md:text-6xl lg:text-7xl text-navy leading-[1.04]">
             {t.home.aboutTitle}
           </h2>
 
-          <p className="reveal-item text-2xl md:text-3xl font-serif italic text-gradient-gold">
+          <p className="reveal-item text-[clamp(1.4rem,5.6vw,1.5rem)] md:text-3xl font-serif italic text-gradient-gold">
             {t.home.aboutSubtitle}
           </p>
 
           <div className="reveal-item space-y-5 pt-2">
-            <p className="text-text-muted text-lg leading-relaxed">
+            <p className="text-text-muted text-[0.98rem] md:text-lg leading-relaxed">
               {t.home.aboutP1}
             </p>
-            <p className="text-text-muted text-lg leading-relaxed">
+            <p className="text-text-muted text-[0.98rem] md:text-lg leading-relaxed">
               {t.home.aboutP2}
             </p>
           </div>
 
           <div className="reveal-item pt-7 mt-1 border-t border-gold/25">
-            <p className="font-serif italic text-navy/80 text-xl leading-relaxed flex items-start gap-3">
+            <p className="font-serif italic text-navy/80 text-[1.08rem] md:text-xl leading-relaxed flex items-start gap-3">
               <span className="text-gold text-3xl leading-none mt-1 font-display">&ldquo;</span>
               {t.home.aboutQuote}
             </p>
@@ -138,11 +151,11 @@ export function About() {
 
           <div
             ref={cardRef}
-            className="relative w-full max-w-md aspect-[4/5] rounded-[1.75rem] overflow-hidden shadow-2xl ring-1 ring-gold/25 bg-navy will-change-transform"
+            className="relative w-full max-w-md aspect-[4/5] rounded-[1.75rem] overflow-hidden shadow-2xl ring-1 ring-gold/25 bg-navy md:will-change-transform"
           >
             <div
               ref={skyRef}
-              className="absolute inset-0 -top-[10%] h-[120%] will-change-transform"
+              className="absolute inset-0 -top-[10%] h-[120%] md:will-change-transform"
             >
               <Image
                 src="/background.jpeg"
@@ -155,7 +168,7 @@ export function About() {
 
             <div
               ref={churchRef}
-              className="absolute inset-x-0 bottom-0 h-[115%] will-change-transform"
+              className="absolute inset-x-0 bottom-0 h-[115%] md:will-change-transform"
             >
               <Image
                 src="/images/church-night.png"

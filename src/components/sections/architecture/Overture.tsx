@@ -33,14 +33,29 @@ export function Overture() {
       <div className="relative max-w-3xl mx-auto text-center">
         <p className="reveal-item kicker justify-center mb-8">{a.overtureLabel}</p>
 
-        <p className="reveal-item font-serif text-2xl md:text-3xl text-navy leading-snug">
+        {/* The lead is the page's opening voice, so it stays a step above the
+            prose beneath it — but 24px of Cormorant was the phone size as well
+            as the tablet one, and a two-clause chronicler's verdict set at 24px
+            in a 342px column runs to six lines before it says anything. The
+            clamp gives it back the size the moment the screen can carry it
+            (1.5rem is reached at 480px) and `md` is untouched. */}
+        <p className="reveal-item font-serif text-[clamp(1.25rem,5vw,1.5rem)] md:text-3xl text-navy leading-snug">
           {a.overtureLead}
         </p>
 
+        {/* The house mobile body size — see the long note in Patroness.tsx.
+            18px Geist here set about 33 characters a line; 15.7px lands near
+            40, which is the readable band. */}
         <div className="reveal-item space-y-5 mt-10 text-left md:text-center">
-          <p className="text-text-muted text-lg leading-relaxed">{a.overtureP1}</p>
-          <p className="text-text-muted text-lg leading-relaxed">{a.overtureP2}</p>
-          <p className="text-text-muted text-lg leading-relaxed">{a.overtureP3}</p>
+          <p className="text-text-muted text-[0.98rem] md:text-lg leading-relaxed">
+            {a.overtureP1}
+          </p>
+          <p className="text-text-muted text-[0.98rem] md:text-lg leading-relaxed">
+            {a.overtureP2}
+          </p>
+          <p className="text-text-muted text-[0.98rem] md:text-lg leading-relaxed">
+            {a.overtureP3}
+          </p>
         </div>
 
         <div className="cross-rule mt-12 max-w-xs mx-auto">
@@ -61,7 +76,13 @@ export function Overture() {
               <dt className="font-display text-5xl md:text-6xl tabular-nums text-gradient-gold-deep leading-none">
                 {n.v}
               </dt>
-              <dd className="mt-3 font-display text-[0.62rem] uppercase tracking-[0.24em] text-text-muted">
+              {/* 0.62rem is 9.9px, and 0.24em of tracking on top of it is the
+                  combination that reads as damage rather than as engraving at
+                  arm's length. Up to 11.2px on a phone with the tracking cut to
+                  pay for the width, so the longest key ("iron in the roof")
+                  still sets on one line in a half-width column; the designed
+                  numbers return at `md`. */}
+              <dd className="mt-3 font-display text-[0.7rem] tracking-[0.14em] md:text-[0.62rem] md:tracking-[0.24em] uppercase text-text-muted">
                 {n.k}
               </dd>
             </div>

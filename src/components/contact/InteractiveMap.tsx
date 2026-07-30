@@ -129,12 +129,17 @@ export default function InteractiveMap({ title }: { title: string }) {
           {/* The credit. Required by the ODbL — the map data is other people's
               work, given freely — so it is always visible, never behind a
               disclosure. Set small, in our own type, rather than in a control
-              that belongs to somebody else's design system. */}
+              that belongs to somebody else's design system.
+
+              8px was not "small", it was illegible, and a licence condition
+              nobody can read is not a licence condition that has been met. It
+              goes to 9.6px on a phone with the tracking pulled in to pay for
+              the width, so the badge is no wider than before. */}
           <a
             href="https://www.openstreetmap.org/copyright"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-1 rounded-full bg-white/75 px-2.5 py-1 font-display text-[0.5rem] uppercase tracking-[0.14em] text-navy/55 backdrop-blur-sm transition-colors hover:text-gold-dark"
+            className="mt-1 rounded-full bg-white/75 px-2.5 py-1 font-display text-[0.6rem] tracking-[0.08em] md:text-[0.5rem] md:tracking-[0.14em] uppercase text-navy/55 backdrop-blur-sm transition-colors hover:text-gold-dark"
           >
             © OpenStreetMap · OpenMapTiles
           </a>
@@ -158,7 +163,16 @@ function ZoomButton({
       type="button"
       onClick={onClick}
       aria-label={label}
-      className="flex h-9 w-9 items-center justify-center rounded-full bg-navy/90 text-gold ring-1 ring-gold/40 shadow-lg backdrop-blur-sm transition-colors hover:bg-navy hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+      /* ⚠ 36px WAS A REAL DEFECT, AND ON TOUCH IT WAS THE WORST ONE ON THE
+         PAGE. Read the head of this file: on a coarse pointer we deliberately
+         turn OFF dragPan, touchZoomRotate and scrollZoom so the map cannot
+         swallow the page's scroll — which leaves these two buttons as the only
+         way a phone can change the view at all. They were 36px, under the 44px
+         minimum, sitting 6px apart in the corner of the frame: a visitor who
+         hit between them got nothing, and a visitor who overshot hit the map,
+         which by design does not respond. 44px on touch, the drawn 36px from
+         `md` up where a cursor is doing the aiming. */
+      className="flex h-11 w-11 md:h-9 md:w-9 items-center justify-center rounded-full bg-navy/90 text-gold ring-1 ring-gold/40 shadow-lg backdrop-blur-sm transition-colors hover:bg-navy hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
     >
       {children}
     </button>

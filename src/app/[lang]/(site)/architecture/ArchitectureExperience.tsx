@@ -2,7 +2,6 @@
 
 import { useLang } from "@/components/layout/LanguageProvider";
 import { PageHero } from "@/components/sections/PageHero";
-import { VisitCTA } from "@/components/sections/VisitCTA";
 
 import { Overture } from "@/components/sections/architecture/Overture";
 import { ThreeChurches } from "@/components/sections/architecture/ThreeChurches";
@@ -34,9 +33,9 @@ import { Colophon } from "@/components/sections/architecture/Colophon";
  *   IV   LightAndDye      — the first-impression "wow" on stepping inside:
  *        stained glass and plant-dye colour.
  *   V    Creed            — the climax, held for the peak on purpose: the
- *        building read as doctrine, nine numbers — five on the measured floor
- *        plan, four more at the altar, read against a photograph of the reredos
- *        (two of those four mapped onto it; see AltarPhoto.tsx for why not all).
+ *        building read as doctrine, nine numbers — four on the measured floor
+ *        plan, five more at the altar, read against a photograph of it (three of
+ *        those five mapped onto it; see AltarPhoto.tsx for why not all).
  *   VI   ImagesItCarries  — devotional detail: the two images the building
  *        holds, closing on the Marian inscription over the porch.
  *   VII  ThreeChurches    — history, deliberately moved LAST of the numbered
@@ -44,15 +43,21 @@ import { Colophon } from "@/components/sections/architecture/Colophon";
  *        than as a gate up front.
  *
  * Roman numerals run I–VII; the opening Overture and the closing Colophon
- * stay unnumbered, as home leaves its Hero and VisitCTA unnumbered. Numeral
- * side alternates with parity — odd (I, III, V, VII) sits left, even
- * (II, IV, VI) sits right — independent of which section holds the number,
- * so reordering a section here means only renumbering it, never re-siding it.
+ * stay unnumbered, as home leaves its Hero unnumbered. Numeral side alternates
+ * with parity — odd (I, III, V, VII) sits left, even (II, IV, VI) sits right —
+ * independent of which section holds the number, so reordering a section here
+ * means only renumbering it, never re-siding it.
+ *
+ * NO VisitCTA. The "come and see / find your way here" panel was removed in
+ * July 2026 at the owner's request; home is now the only page that carries it.
+ * This page ends on the Colophon — a closing note rather than an invitation —
+ * deliberately, so do not re-add the CTA as a "missing" component. The footer
+ * still carries the parish address, the phone number and the contact link.
  *
  * Ground rhythm — never two true-darks (cathedral-depth) in a row until the
  * close, and no two adjacent light sections share the same cream tier:
  *   hero(dark) → cream → cream-dark → cream → DARK(Bells) → cream-dark →
- *   DARK(Creed) → cream → cream-dark → DARK(Colophon) → CTA(dark)
+ *   DARK(Creed) → cream → cream-dark → DARK(Colophon, last)
  *
  * The measured floor plan lives inside the Creed section, read as doctrine
  * rather than as a plan of the old caste seating; the scroll-scrubbed PeelFilm
@@ -81,8 +86,6 @@ export default function ArchitectureExperience() {
       <ImagesItCarries />
       <ThreeChurches />
       <Colophon />
-
-      <VisitCTA />
     </main>
   );
 }

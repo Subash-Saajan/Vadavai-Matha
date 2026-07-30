@@ -25,12 +25,22 @@ export function useScrubMedia({
   canvasRef,
   frameCount,
   frameSrc,
+  focusX = 0.5,
 }: {
   videoRef: RefObject<HTMLVideoElement | null>;
   canvasRef: RefObject<HTMLCanvasElement | null>;
   frameCount: number;
   /** Module-level constant, so the loader effect never re-runs. */
   frameSrc: (i: number) => string;
+  /**
+   * Horizontal focal point of the SOURCE frame, 0–1, that should land in the
+   * middle of the canvas — the canvas equivalent of `object-position`, and
+   * therefore mobile-only (the desktop <video> path ignores it). 0.5 is plain
+   * centre-cover; above 0.5 slides the image left to bring something that
+   * sits right of frame-centre into the middle. Clamped so the crop can never
+   * run past an edge of the frame.
+   */
+  focusX?: number;
 }) {
   const [mode, setMode] = useState<"video" | "canvas" | null>(null);
   const [mediaReady, setMediaReady] = useState(false);
@@ -78,12 +88,15 @@ export function useScrubMedia({
       }
       if (idx < 0 || idx === drawn) return;
       const img = frames[idx] as HTMLImageElement;
-      // Same geometry as the video's object-cover.
+      // Same geometry as the video's object-cover, with focusX standing in
+      // for object-position's x. Put focusX*dw under the canvas centre, then
+      // clamp into [cw - dw, 0] so the frame still covers edge to edge.
       const { width: cw, height: ch } = canvas;
       const scale = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
       const dw = img.naturalWidth * scale;
       const dh = img.naturalHeight * scale;
-      ctx.drawImage(img, (cw - dw) / 2, (ch - dh) / 2, dw, dh);
+      const dx = Math.max(Math.min(cw - dw, 0), Math.min(0, cw / 2 - focusX * dw));
+      ctx.drawImage(img, dx, (ch - dh) / 2, dw, dh);
       drawn = idx;
     };
     drawRef.current = draw;
@@ -140,7 +153,7 @@ export function useScrubMedia({
       drawRef.current = null;
       window.removeEventListener("resize", size);
     };
-  }, [mode, frameCount, frameSrc, canvasRef]);
+  }, [mode, frameCount, frameSrc, canvasRef, focusX]);
 
   return { mode, mediaReady, frameTargetRef, drawRef };
 }

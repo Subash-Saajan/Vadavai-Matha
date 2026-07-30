@@ -39,10 +39,14 @@ export function Bells() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           <div className="lg:col-span-7">
             <p className="reveal-item kicker text-gold! mb-6">{a.bellsLabel}</p>
-            <h2 className="reveal-item font-display uppercase tracking-[0.03em] text-4xl md:text-5xl lg:text-6xl text-white leading-tight">
+            {/* The display heading clamp — Cinzel caps are wider than the
+                serif per character, so the big-display band tops out a little
+                lower than the serif one. 36px of uppercase Cinzel is already
+                as much as a 342px column will take. */}
+            <h2 className="reveal-item font-display uppercase tracking-[0.03em] text-[clamp(1.85rem,7.4vw,2.25rem)] md:text-5xl lg:text-6xl text-white leading-tight">
               {a.bellsTitle}
             </h2>
-            <p className="reveal-item text-white/70 text-lg leading-relaxed mt-7">
+            <p className="reveal-item text-white/70 text-[0.98rem] md:text-lg leading-relaxed mt-7">
               {a.bellsBody}
             </p>
           </div>
@@ -62,14 +66,17 @@ export function Bells() {
                 <PhotoOrnaments />
               </div>
             </div>
-            <figcaption className="mt-4 text-center font-display text-[0.62rem] uppercase tracking-[0.24em] text-white/45">
+            {/* The caption correction of Towers.tsx, and worse here: 9.9px of
+                spaced Cinzel at 45% white on cathedral-dark is under 3:1, so
+                the opacity comes up on a phone too. Both revert at `md`. */}
+            <figcaption className="mt-4 text-center font-display text-[0.7rem] tracking-[0.15em] md:text-[0.62rem] md:tracking-[0.24em] uppercase text-white/60 md:text-white/45">
               {a.bellsCaption}
             </figcaption>
           </figure>
         </div>
 
         {/* The three beats of the bells' journey, along one gold hairline */}
-        <ol className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 md:border-t border-gold/25">
+        <ol className="mt-12 md:mt-16 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 md:border-t border-gold/25">
           {a.bellsBeats.map((b, i) => (
             <li key={i} className="reveal-item relative md:pt-10 md:pr-6">
               <span className="hidden md:block absolute -top-[5px] left-0 w-2.5 h-2.5 rounded-full bg-gold" />
@@ -83,14 +90,20 @@ export function Bells() {
         </ol>
 
         {/* The older bell — the one that rang the 1803 miracle */}
-        <div className="reveal-item mt-20 max-w-3xl mx-auto text-center">
+        <div className="reveal-item mt-14 md:mt-20 max-w-3xl mx-auto text-center">
           <div className="cross-rule max-w-xs mx-auto mb-9">
             <span className="text-gold text-lg">✦</span>
           </div>
-          <p className="font-display text-[0.62rem] uppercase tracking-[0.3em] text-gold/70">
+          {/* 9.9px at 0.3em — the widest tracking on the page on the smallest
+              type on the page. Up, and the tracking halved to hold the width. */}
+          <p className="font-display text-[0.7rem] tracking-[0.16em] md:text-[0.62rem] md:tracking-[0.3em] uppercase text-gold/70">
             {a.bellsOlderLead}
           </p>
-          <p className="mt-5 font-serif italic text-white/85 text-xl md:text-2xl leading-relaxed">
+          {/* The section's closing line, and the one pull-quote in it. Serif
+              sits above the sans beside it on purpose — Cormorant's small
+              x-height means the same number renders visibly smaller in it —
+              but 20px was the phone size as well as the tablet one. */}
+          <p className="mt-5 font-serif italic text-white/85 text-[1.08rem] md:text-2xl leading-relaxed">
             {a.bellsOlder}
           </p>
         </div>

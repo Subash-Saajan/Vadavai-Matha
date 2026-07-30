@@ -40,8 +40,13 @@ export function StickyCallBar() {
           tabIndex={shown ? 0 : -1}
           className="flex-1 inline-flex items-center justify-center gap-2.5 min-h-[50px] rounded-full bg-gold text-navy font-medium"
         >
-          <Phone className="w-4 h-4" aria-hidden="true" />
-          <span className="tabular-nums text-sm">{PHONE.display}</span>
+          <Phone className="w-4 h-4 shrink-0" aria-hidden="true" />
+          {/* This is the most-tapped element on the whole site, and its label
+              was 14px. It is a telephone number on a gold pill, read at a
+              glance by somebody deciding whether to press it — the one string
+              on this page with the least excuse for being under 16px. There is
+              room: the pill is `flex-1` across most of the screen. */}
+          <span className="tabular-nums text-base font-medium">{PHONE.display}</span>
         </a>
 
         {hasWhatsApp && (

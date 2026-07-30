@@ -225,6 +225,13 @@ export default async function ReferencePage({
           font-size: 1.08rem;
           line-height: 1.75;
           color: rgba(28,26,21,.72);
+          /* Insurance, not decoration. A claim on this page can carry a
+             transliterated place-name or a bracketed archival shelfmark with no
+             break opportunity in it, and at a 300px measure one unbreakable
+             token is all it takes to push the document wider than the viewport.
+             break-word only ever engages when a word would otherwise overflow,
+             so nothing that fits today is set any differently. */
+          overflow-wrap: break-word;
         }
         .ref-tier-row {
           margin-top: 1.3rem;
@@ -306,8 +313,79 @@ export default async function ReferencePage({
         }
         .ref-back:hover { text-decoration: underline; text-underline-offset: 5px; }
 
+        /* ── The phone build ───────────────────────────────────────────────
+           This route is the site's densest concentration of citation
+           apparatus, and citation apparatus is where microscopic type breeds:
+           every label here was set between 0.56rem and 0.62rem — 9.0px to
+           9.9px — because on a 1440px monitor small engraved caps beside a
+           big serif claim read as a printer's mark. On a 360px screen they
+           read as nothing at all, and three of them are the page's only
+           navigation.
+
+           The rule applied throughout is the site's: SIZE UP, TRACKING DOWN,
+           so no label gets wider than the one it replaces. Nothing here is a
+           font-size change alone.
+
+           The second half of the block is touch. The tabs, the crumb and the
+           three footer links are the only ways off this page, and all three
+           were 12–25px tall — a quarter to a half of the 44px minimum — which
+           on a page a reader arrives at from a footnote and must leave again
+           is the difference between a reference and a dead end. */
         @media (max-width: 640px) {
           .ref-page { padding-top: 6.5rem; }
+
+          /* The way back to /history, and it was 9.6px flung apart by a quarter
+             of an em. The block's own bottom margin gives back what the taller
+             target takes, so the year below it does not move down the page. */
+          .ref-crumb {
+            font-size: .68rem;
+            letter-spacing: .14em;
+            margin-bottom: .9rem;
+          }
+          .ref-crumb a {
+            display: inline-flex;
+            align-items: center;
+            min-height: 44px;
+          }
+
+          /* The tier pill. 9.0px is the smallest type on the route and it is
+             the word that tells the reader how much to trust the claim. */
+          .ref-tier {
+            font-size: .64rem;
+            letter-spacing: .15em;
+            padding: .45rem .7rem .38rem;
+          }
+
+          /* Flipping between the books behind one moment — a real control, and
+             it was a 25px-tall pill of 9.9px caps. */
+          .ref-tabs { gap: .45rem; }
+          .ref-tab {
+            display: inline-flex;
+            align-items: center;
+            min-height: 44px;
+            font-size: .7rem;
+            letter-spacing: .08em;
+            padding: 0 .95rem;
+          }
+
+          .ref-establishes-label {
+            font-size: .66rem;
+            letter-spacing: .16em;
+          }
+
+          /* The three ways out. Each becomes a full 44px row; the row-gap goes
+             to zero at the same time, because 1.4rem of gap on top of three
+             44px boxes that already wrap onto three lines is 66px per link of
+             mostly empty footer. The column gap is untouched for the case where
+             two of them do share a line. */
+          .ref-foot { gap: 0 1.4rem; padding-top: 1rem; }
+          .ref-back {
+            display: inline-flex;
+            align-items: center;
+            min-height: 44px;
+            font-size: .7rem;
+            letter-spacing: .1em;
+          }
         }
       `}</style>
     </>

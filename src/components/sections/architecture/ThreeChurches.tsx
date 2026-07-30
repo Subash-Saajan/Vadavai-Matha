@@ -31,14 +31,15 @@ export function ThreeChurches() {
         {/* Text */}
         <div className="lg:col-span-7 order-2 lg:order-1">
           <p className="reveal-item kicker mb-6">{a.churchesLabel}</p>
-          <h2 className="reveal-item font-serif text-5xl md:text-6xl lg:text-7xl text-navy leading-[1.04]">
+          {/* See the heading note in Towers.tsx. */}
+          <h2 className="reveal-item font-serif text-[clamp(1.95rem,7.8vw,2.25rem)] md:text-6xl lg:text-7xl text-navy leading-[1.04]">
             {a.churchesTitle}
           </h2>
-          <p className="reveal-item text-text-muted text-lg leading-relaxed mt-6">
+          <p className="reveal-item text-text-muted text-[0.98rem] md:text-lg leading-relaxed mt-6">
             {a.churchesBody}
           </p>
 
-          <ol className="mt-12 border-l border-gold/30">
+          <ol className="mt-10 md:mt-12 border-l border-gold/30">
             {a.churches.map((c, i) => (
               <li key={i} className="reveal-item relative pl-8 pb-10 last:pb-0">
                 <span className="absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full bg-gold ring-4 ring-cream-dark" />
@@ -69,7 +70,8 @@ export function ThreeChurches() {
               <PhotoOrnaments />
             </div>
           </div>
-          <figcaption className="mt-4 text-center font-display text-[0.62rem] uppercase tracking-[0.24em] text-text-muted">
+          {/* Same 9.9px caption correction as Towers — the note there. */}
+          <figcaption className="mt-4 text-center font-display text-[0.7rem] tracking-[0.15em] md:text-[0.62rem] md:tracking-[0.24em] uppercase text-text-muted">
             {a.churchesCaption}
           </figcaption>
         </figure>

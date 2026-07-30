@@ -665,7 +665,20 @@ export const dict = {
           body: "Honouring St. Michael the Archangel at Michaelpalayam, defender of the faithful.",
         },
       ],
+      /* ── Furniture for the rebuilt /mass-timings ────────────────────────
+         The countdown and the "next" badge are computed against lib/feasts.ts,
+         the site's one machine-readable copy of this calendar. Nothing here
+         restates a date: the dates a reader sees are still the localised
+         strings above.                                                       */
+      nextBadge: "Next",
+      nowBadge: "Now",
+      countdownLead: "The flag rises in",
+      countdownDays: "days",
+      countdownDay: "day",
+      countdownNow: "The feast is being kept now",
       marianLabel: "Special Marian Days",
+      marianIntro:
+        "Two days in the year belong to Our Lady alone — one her birthday, and one the day this village remembers her turning towards it.",
       marian: [
         {
           name: "Nativity of Our Lady",
@@ -1505,6 +1518,79 @@ export const dict = {
         { when: "Second Friday", time: "6:30 PM", service: "St. Devasahayam Procession & Adoration" },
         { when: "Last Friday", time: "6:30 PM", service: "Our Lady of Help (Sahaya Matha) Church" },
       ],
+
+      /* ── The rebuilt /mass-timings page ─────────────────────────────────
+         The page is now read as three clocks — the day, the week, the year —
+         and each gets its own numbered section. `cards` and `weeklyLabel`
+         above are no longer rendered: the times themselves come from
+         SCHEDULE in lib/contact.ts and are typeset by formatClock, so the
+         hours exist in exactly one place on the site. The keys are kept
+         because they are the parish's own wording for the same facts.       */
+      overture: {
+        lead: "The shrine keeps three clocks",
+        day: "The Day",
+        dayNote: "Two Masses before sunrise, the beads at evening",
+        week: "The Week",
+        weekNote: "Six quiet mornings, and a Sunday",
+        year: "The Year",
+        yearNote: "Eight feasts, and the great one in August",
+      },
+
+      day: {
+        label: "The Day",
+        title: "From first light to Benediction",
+        body:
+          "Two Masses before the sun is properly up, then the long quiet middle of the day with the chapel open, and at evening the beads and the Blessed Sacrament. This is the shrine's ordinary day, kept the same way from Monday to Saturday.",
+        firstLight: "First light",
+        nightfall: "Nightfall",
+        chapelOpen: "The chapel stands open",
+        now: "Now",
+        marks: {
+          massFirst: { title: "First Mass", note: "The first bell, before dawn" },
+          massSecond: { title: "Second Mass", note: "The second, as the light comes" },
+          rosary: { title: "Holy Rosary", note: "The beads, said together" },
+          benediction: { title: "Benediction", note: "The Blessed Sacrament, and the day is closed" },
+        },
+        sundayNote:
+          "On Sunday a third morning Mass is added, and the evening devotion begins an hour earlier.",
+      },
+
+      week: {
+        label: "The Week",
+        title: "Six quiet mornings, and a Sunday",
+        body:
+          "Monday to Saturday the shrine keeps the same two Masses. On Sunday a third is added and the whole parish comes — which is why one column here is gilded and six are not.",
+        days: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday",
+        ],
+        daysShort: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+        morning: "Morning",
+        evening: "Evening",
+        today: "Today",
+        gathering: "The parish gathers",
+        // English puts "From" before the time; Tamil puts "முதல்" after it.
+        fromLead: "From",
+        fromTail: "",
+      },
+
+      register: {
+        label: "Month by month",
+        title: "The monthly register",
+        body:
+          "Some things come round once a month rather than once a week — a Mass in another language, a devotion, a procession. They are entered here in the order the month brings them.",
+      },
+
+      colophon: {
+        lead: "Before you travel",
+        body:
+          "Times can shift on a feast day, or for a funeral. If you are coming from far away, telephone the parish the day before and ask.",
+      },
     },
     contact: {
       label: "Visit · Write · Pray",
@@ -2361,7 +2447,14 @@ export const dict = {
           body: `விசுவாசிகளின் பாதுகாவலரான புனித மிக்கேல் அதிதூதரை மிக்கேல்பாளையத்தில் போற்றும் திருவிழா.`,
         },
       ],
+      nextBadge: `அடுத்தது`,
+      nowBadge: `இப்போது`,
+      countdownLead: `கொடியேற்றத்திற்கு இன்னும்`,
+      countdownDays: `நாட்கள்`,
+      countdownDay: `நாள்`,
+      countdownNow: `திருவிழா இப்போது நடைபெறுகிறது`,
       marianLabel: `அன்னையின் சிறப்பு நாட்கள்`,
+      marianIntro: `ஆண்டில் இரு நாட்கள் அன்னைக்கு மட்டுமே உரியவை — ஒன்று அவரது பிறந்த திருநாள்; மற்றொன்று அன்னை இவ்வூரை நோக்கித் திரும்பியதாக நினைவுகூரப்படும் நாள்.`,
       marian: [
         {
           name: `அன்னை மரியாளின் பிறந்த திருநாள்`,
@@ -3234,6 +3327,78 @@ FIDES VNA SIT, VNAQVE MENS.`,
           service: `சகாய மாதா ஆலயம்`,
         },
       ],
+
+      overture: {
+        lead: `இத்திருத்தலத்தில் நேரம் மூன்று வகையில் ஓடுகிறது`,
+        day: `நாள்`,
+        dayNote: `விடியலுக்கு முன் இரு திருப்பலிகள்; மாலையில் செபமாலை`,
+        week: `வாரம்`,
+        weekNote: `அமைதியான ஆறு காலைகள்; ஒரு ஞாயிறு`,
+        year: `ஆண்டு`,
+        yearNote: `எட்டுத் திருவிழாக்கள்; ஆகஸ்டில் பெருவிழா`,
+      },
+
+      day: {
+        label: `நாள்`,
+        title: `விடியல் முதல் நற்கருணை ஆசீர்வாதம் வரை`,
+        body: `கதிரவன் நன்கு எழுவதற்கு முன்பே இரு திருப்பலிகள்; பின் நாள் முழுவதும் அமைதி — நற்கருணைச் சிற்றாலயம் திறந்தே இருக்கும்; மாலையில் திருச்செபமாலையும் நற்கருணை ஆசீர்வாதமும். திங்கள் முதல் சனி வரை ஒவ்வொரு நாளும் இதுவே இத்திருத்தலத்தின் வழக்கமான நாள்.`,
+        firstLight: `விடியல்`,
+        nightfall: `இரவு`,
+        chapelOpen: `நற்கருணைச் சிற்றாலயம் திறந்திருக்கும்`,
+        now: `இப்போது`,
+        marks: {
+          massFirst: {
+            title: `முதல் திருப்பலி`,
+            note: `விடியலுக்கு முன், முதல் மணியோசையுடன்`,
+          },
+          massSecond: {
+            title: `இரண்டாம் திருப்பலி`,
+            note: `வெளிச்சம் வரத் தொடங்கும் நேரத்தில்`,
+          },
+          rosary: {
+            title: `திருச்செபமாலை`,
+            note: `அனைவரும் இணைந்து செபிக்கும் மணி`,
+          },
+          benediction: {
+            title: `நற்கருணை ஆசீர்வாதம்`,
+            note: `நற்கருணை ஆசீர்வாதத்தோடு நாள் நிறைவடைகிறது`,
+          },
+        },
+        sundayNote: `ஞாயிற்றுக்கிழமை காலையில் மூன்றாவது திருப்பலி ஒன்று சேர்க்கப்படுகிறது; மாலை வழிபாடும் ஒரு மணி நேரம் முன்னதாகவே தொடங்குகிறது.`,
+      },
+
+      week: {
+        label: `வாரம்`,
+        title: `அமைதியான ஆறு காலைகள், ஒரு ஞாயிறு`,
+        body: `திங்கள் முதல் சனி வரை அதே இரு திருப்பலிகள். ஞாயிறன்று மூன்றாவது ஒன்று சேர்க்கப்படுகிறது; பங்கு முழுவதும் ஒன்றுகூடுகிறது — அதனால்தான் இங்கே ஒரு நெடுவரிசை மட்டும் பொன்னிறத்தில் நிற்கிறது.`,
+        days: [
+          `திங்கள்`,
+          `செவ்வாய்`,
+          `புதன்`,
+          `வியாழன்`,
+          `வெள்ளி`,
+          `சனி`,
+          `ஞாயிறு`,
+        ],
+        daysShort: [`திங்`, `செவ்`, `புத`, `வியா`, `வெள்`, `சனி`, `ஞாயி`],
+        morning: `காலை`,
+        evening: `மாலை`,
+        today: `இன்று`,
+        gathering: `பங்கு ஒன்றுகூடுகிறது`,
+        fromLead: ``,
+        fromTail: `முதல்`,
+      },
+
+      register: {
+        label: `மாதந்தோறும்`,
+        title: `மாதாந்திரப் பதிவேடு`,
+        body: `சில வழிபாடுகள் வாரந்தோறும் அல்ல, மாதம் ஒருமுறை நடைபெறுகின்றன — வேறு மொழியில் ஒரு திருப்பலி, ஒரு பக்தி முயற்சி, ஓர் ஊர்வலம். மாதம் அவற்றைக் கொண்டுவரும் வரிசையிலேயே இங்கே பதியப்பட்டுள்ளன.`,
+      },
+
+      colophon: {
+        lead: `புறப்படுவதற்கு முன்`,
+        body: `திருவிழா நாட்களிலோ இறுதிச் சடங்கு நடக்கும் நாட்களிலோ நேரங்கள் மாறக்கூடும். தொலைவிலிருந்து வருபவராயின், முந்தைய நாள் பங்கு அலுவலகத்திற்குத் தொலைபேசியில் அழைத்து உறுதிப்படுத்திக் கொள்ளுங்கள்.`,
+      },
     },
     contact: {
       label: `வாருங்கள் · எழுதுங்கள் · செபியுங்கள்`,

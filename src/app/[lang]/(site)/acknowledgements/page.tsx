@@ -52,28 +52,34 @@ export default async function AcknowledgementsRoute({
       {!DRAFT && <JsonLd data={jsonLd} />}
 
       <section className="bg-cream text-navy">
-        <div className="max-w-3xl mx-auto px-6 pt-32 pb-20 md:pt-40 md:pb-28">
-          <p className="font-display tracking-[0.28em] text-xs md:text-sm uppercase text-gold-dark">
+        {/* Same masthead measurements as /faq and /sources. */}
+        <div className="max-w-3xl mx-auto px-6 pt-28 pb-16 md:pt-40 md:pb-28">
+          <p className="font-display tracking-[0.18em] md:tracking-[0.28em] text-xs md:text-sm uppercase text-gold-dark">
             {c.eyebrow}
           </p>
-          <h1 className="mt-5 font-display text-4xl md:text-6xl leading-[1.05]">
+          <h1 className="mt-5 font-display text-[clamp(1.85rem,7.4vw,2.25rem)] md:text-6xl leading-[1.05]">
             {c.title}
           </h1>
-          <div className="leaf-rule my-8" />
+          <div className="leaf-rule my-6 md:my-8" />
 
-          <p className="font-serif text-xl md:text-2xl leading-relaxed text-navy/75">
+          <p className="font-serif text-[1.12rem] md:text-2xl leading-relaxed text-navy/75">
             {c.intro}
           </p>
 
           {/* The masthead. Role and names share a baseline on desktop and stack
               on a phone; every name is set at the same size and weight. */}
-          <dl className="mt-16 border-t border-gold/25">
+          <dl className="mt-12 md:mt-16 border-t border-gold/25">
             {CREDITS.map((credit) => (
               <div
                 key={credit.role}
-                className="grid grid-cols-1 md:grid-cols-[minmax(0,13rem)_1fr] gap-2 md:gap-8 border-b border-gold/25 py-8"
+                className="grid grid-cols-1 md:grid-cols-[minmax(0,13rem)_1fr] gap-2 md:gap-8 border-b border-gold/25 py-6 md:py-8"
               >
-                <dt className="font-display text-[0.62rem] md:text-[0.66rem] tracking-[0.22em] uppercase text-gold-dark md:pt-1.5">
+                {/* The role labels were 9.9px of spaced Cinzel caps on a phone
+                    — and on a phone they are not a side column any more, they
+                    are the HEADING over the names, since the grid collapses to
+                    one column below md. A heading cannot be the smallest thing
+                    in its own block. Up to 11.2px, tracking in to pay for it. */}
+                <dt className="font-display text-[0.7rem] tracking-[0.14em] md:text-[0.66rem] md:tracking-[0.22em] uppercase text-gold-dark md:pt-1.5">
                   {ta && credit.roleTa ? credit.roleTa : credit.role}
                 </dt>
                 <dd className="text-navy">
@@ -93,10 +99,18 @@ export default async function AcknowledgementsRoute({
                                 needs no Tamil equivalent, and it separates the
                                 names without implying an order between them.
                                 flex-wrap lets a long pair fall to a second line
-                                on a phone without the rule stranding itself. */}
-                            <span className="flex flex-wrap items-center gap-x-5 gap-y-1 font-display text-lg md:text-xl leading-snug">
+                                on a phone without the rule stranding itself.
+
+                                The 20px gaps are 20px on EACH side of the
+                                hairline, so two names cost 41px of rule and air
+                                before either of them is set — a fifth of a
+                                312px column. Two thirds of that comes back
+                                below md, which is often the difference between
+                                a pair sharing a line and each name taking its
+                                own. */}
+                            <span className="flex flex-wrap items-center gap-x-3 md:gap-x-5 gap-y-1 font-display text-[1.05rem] md:text-xl leading-snug">
                               {e.names.map((name, i) => (
-                                <span key={name} className="flex items-center gap-x-5">
+                                <span key={name} className="flex items-center gap-x-3 md:gap-x-5">
                                   {i > 0 && (
                                     <span
                                       aria-hidden="true"
@@ -107,14 +121,14 @@ export default async function AcknowledgementsRoute({
                                 </span>
                               ))}
                             </span>
-                            <span className="mt-1 block font-serif text-base leading-relaxed text-navy/60">
+                            <span className="mt-1 block font-serif text-[1.02rem] md:text-base leading-relaxed text-navy/60">
                               {ta && e.noteTa ? e.noteTa : e.note}
                             </span>
                           </li>
                         ))}
                     </ul>
                   ) : (
-                    <span className="font-serif text-base text-navy/45">
+                    <span className="font-serif text-[1.02rem] md:text-base text-navy/45">
                       {ta && credit.pendingTa ? credit.pendingTa : credit.pending}
                     </span>
                   )}
@@ -123,30 +137,33 @@ export default async function AcknowledgementsRoute({
             ))}
           </dl>
 
-          <p className="mt-10 font-serif text-lg leading-relaxed text-navy/70">
+          <p className="mt-10 font-serif text-[1.05rem] md:text-lg leading-relaxed text-navy/70">
             {c.also}
           </p>
-          <p className="mt-6 text-sm leading-relaxed text-navy/45">
+          <p className="mt-6 text-[0.88rem] md:text-sm leading-relaxed text-navy/50 md:text-navy/45">
             {c.orderNote}
           </p>
 
           {DRAFT && (
-            <p className="mt-6 font-display text-[0.62rem] tracking-[0.18em] uppercase text-gold-dark/70">
+            <p className="mt-6 font-display text-[0.7rem] tracking-[0.12em] md:text-[0.62rem] md:tracking-[0.18em] uppercase text-gold-dark/70">
               {c.draftLine}
             </p>
           )}
 
           {/* The paragraph that does the real work. See CLOSING_NOTE. */}
-          <div className="mt-16 border-t border-gold/30 pt-12">
-            <h2 className="font-display text-2xl md:text-3xl">
+          <div className="mt-12 md:mt-16 border-t border-gold/30 pt-10 md:pt-12">
+            <h2 className="font-display text-[1.3rem] md:text-3xl">
               {closing.heading}
             </h2>
-            <p className="mt-4 font-serif text-lg leading-relaxed text-navy/75">
+            <p className="mt-4 font-serif text-[1.05rem] md:text-lg leading-relaxed text-navy/75">
               {closing.body}
             </p>
+            {/* Same correction as the "Open the page" link on /sources: 9.9px
+                in a ~19px box becomes 11.2px in a ~44px one, and the top
+                margin gives back what the padding takes. */}
             <Link
               href={localePath(lang, "/contact")}
-              className="mt-6 inline-flex items-center gap-2 font-display text-[0.62rem] tracking-[0.2em] uppercase text-gold-dark hover:text-navy transition-colors"
+              className="mt-4 py-2 md:mt-6 md:py-0 inline-flex items-center gap-2 font-display text-[0.7rem] tracking-[0.12em] md:text-[0.62rem] md:tracking-[0.2em] uppercase text-gold-dark hover:text-navy transition-colors"
             >
               {closing.cta} ❧
             </Link>

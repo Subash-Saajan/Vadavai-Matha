@@ -3,9 +3,10 @@
 import { useRef, useEffect } from "react";
 import Image from "next/image";
 import { Link } from "@/components/LocaleLink";
-import { gsap } from "@/lib/gsap";
+import { gsap, DESKTOP, revealY } from "@/lib/gsap";
 import { Sunrise, Church, MoonStar, ArrowUpRight } from "lucide-react";
 import { useLang } from "@/components/layout/LanguageProvider";
+import { ANNUAL_FEAST, FEASTS, nextFeastIndices, useToday } from "@/lib/feasts";
 
 /**
  * VI · The parish rhythm — the year and the week, in one section.
@@ -31,14 +32,27 @@ import { useLang } from "@/components/layout/LanguageProvider";
  * changes a Mass time, this file and /mass-timings must change together.
  */
 
-// Local imagery matched to the first three feasts of the calendar (St Sebastian,
-// Presentation of the BVM, St John de Britto) — the same pairings /mass-timings
-// uses, so the teaser and the page it opens agree.
-const cards = [
-  { img: "/images/vadavai-st-sebasthiyarchurch.jpg", key: 0 },
-  { img: "/images/kannikai-matha-church.jpg", key: 1 },
-  { img: "/images/de-britto-grotto.jpg", key: 2 },
-];
+/**
+ * ⚠ THE BAND-ONE CARDS ARE NO LONGER THE FIRST THREE OF THE CALENDAR.
+ *
+ * They were three large 3:4 photographs of whatever happened to sit at the top
+ * of `t.festivals.list` — St Sebastian, the Presentation, de Britto — which
+ * meant that in September a reader was shown three feasts that had gone past in
+ * January and February. Now the band shows FIVE small cards:
+ *
+ *   · card one is always the parish's own annual feast (t.festivals.featured),
+ *     the same feast /mass-timings gives its big navy plate to. It is the
+ *     church's feast, so it is pinned first whatever the date;
+ *   · cards two to five are the next four feasts due, counted from today, and
+ *     they wrap round the year (a feast already running counts as due now).
+ *
+ * The dates and photographs behind that ordering live in `lib/feasts.ts`, which
+ * is the site's single machine-readable copy of the parish calendar — the
+ * strings in i18n.ts are localised prose and cannot be parsed. /mass-timings
+ * reads the same table.
+ */
+const FEATURED_IMG = ANNUAL_FEAST.img;
+const SLOTS = 4; // feasts shown after the pinned annual feast
 
 export function ParishRhythm() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -46,6 +60,9 @@ export function ParishRhythm() {
   const cardsRef = useRef<HTMLDivElement>(null);
   const weekRef = useRef<HTMLDivElement>(null);
   const { t, lang } = useLang();
+
+  const today = useToday();
+  const upcoming = nextFeastIndices(today, SLOTS);
 
   const schedule = [
     {
@@ -73,10 +90,11 @@ export function ParishRhythm() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      const from = revealY();
       const reveal = (el: Element, delay = 0) =>
         gsap.fromTo(
           el,
-          { y: 40, opacity: 0 },
+          { y: from, opacity: 0 },
           {
             y: 0,
             opacity: 1,
@@ -90,27 +108,37 @@ export function ParishRhythm() {
       headerRef.current?.querySelectorAll(".reveal-item").forEach((el, i) => reveal(el, i * 0.1));
       weekRef.current?.querySelectorAll(".week-col").forEach((el, i) => reveal(el, i * 0.1));
 
-      Array.from(cardsRef.current?.children ?? []).forEach((el, i) => {
-        // Gentle offset drift, kept smaller than the old teaser's: the cards now
-        // share a section with a plate of Mass times, and a card that travels
-        // 25% pulls the eye off the numbers underneath it.
-        gsap.to(el, {
-          yPercent: i % 2 === 0 ? -6 : -14,
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 1.2,
-          },
+      const cards = Array.from(cardsRef.current?.children ?? []);
+      cards.forEach((el, i) => reveal(el, i * 0.12));
+
+      /* Desktop only: the offset drift across the five cards. Five more
+         per-frame transforms in a section that also carries the week plate;
+         and on a phone the cards are two-across, so a 3%-versus-8% offset
+         between neighbours reads as a grid that has come loose rather than as
+         depth — the effect needs the five-wide row to make sense of itself.
+         See lib/gsap.ts. */
+      const mm = gsap.matchMedia();
+      mm.add(DESKTOP, () => {
+        cards.forEach((el, i) => {
+          gsap.to(el, {
+            yPercent: i % 2 === 0 ? -3 : -8,
+            ease: "none",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 1.2,
+            },
+          });
         });
-        reveal(el, i * 0.12);
       });
+      return () => mm.revert();
     }, sectionRef);
     return () => ctx.revert();
-  }, [lang]);
-
-  const feasts = t.festivals.list.slice(0, 3);
+    // `today` is in here so the tweens are rebuilt after the order settles on
+    // the first client render — otherwise the cards that swap in, which are new
+    // DOM nodes, carry no reveal at all.
+  }, [lang, today]);
 
   return (
     <section
@@ -124,53 +152,95 @@ export function ParishRhythm() {
       <div className="relative mx-auto max-w-7xl">
         <div ref={headerRef} className="mb-14 max-w-2xl">
           <p className="reveal-item kicker mb-5">{t.home.rhythmLabel}</p>
-          <h2 className="reveal-item font-serif text-4xl leading-tight text-navy md:text-5xl lg:text-6xl">
+          <h2 className="reveal-item font-serif text-[clamp(1.95rem,7.8vw,2.25rem)] leading-tight text-navy md:text-5xl lg:text-6xl">
             {t.home.rhythmTitle}
           </h2>
-          <p className="reveal-item mt-5 text-lg leading-relaxed text-text-muted">
+          <p className="reveal-item mt-5 text-[0.98rem] leading-relaxed text-text-muted md:text-lg">
             {t.home.festivalsBody}
           </p>
         </div>
 
         {/* ── Band one: the year ──────────────────────────────────────────── */}
-        <p className="mb-6 flex items-center gap-4 font-display text-[0.6rem] uppercase tracking-[0.3em] text-gold-dark">
+        {/* The two band labels were 0.6rem — 9.6px — at 0.3em. Up and in on a
+            phone, as everything else small-cap on this page is. */}
+        <p className="mb-6 flex items-center gap-4 font-display text-[0.68rem] uppercase tracking-[0.2em] text-gold-dark md:text-[0.6rem] md:tracking-[0.3em]">
           {t.home.rhythmYearBand}
           <span className="h-px flex-1 bg-gold/25" />
         </p>
 
-        <div ref={cardsRef} className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
-          {cards.map((c, i) => {
-            const item = feasts[i];
+        {/* Five narrow cards, not three tall ones. The annual feast is card one
+            and is ringed in gold; the rest are whatever falls next. */}
+        <div ref={cardsRef} className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5">
+          <Link
+            href="/mass-timings#festivals"
+            className="group relative block aspect-[3/4] overflow-hidden rounded-2xl bg-navy ring-1 ring-gold/40 md:will-change-transform"
+          >
+            <Image
+              src={FEATURED_IMG}
+              alt={t.festivals.featured.name}
+              fill
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+              // Portrait source, and the monstrance under its canopy sits high in
+              // the frame — bias the crop up so it survives the narrow card.
+              className="object-cover object-[50%_32%] transition-transform duration-[1.4s] ease-out group-hover:scale-110"
+            />
+            <div className="absolute inset-0 bg-linear-to-t from-night-deep/95 via-navy/35 to-transparent" />
+            {/* ── THE CARD TEXT WAS 8–9px ON A PHONE ────────────────────────
+                These sizes were chosen for a five-across row on a monitor,
+                where each card is about 250px wide. On a phone the row is two
+                across, so the card is roughly 164px and the text inside it was
+                a 0.5rem label (8px) over a 0.55rem date (8.8px) — smaller than
+                anything else on the site, on the one card carrying a date
+                somebody might travel for. Up on both, and the padding comes in
+                to `p-3` so the name still gets its width back. */}
+            <span className="absolute left-3 top-3 rounded-full bg-gold/95 px-2.5 py-1 font-display text-[0.58rem] uppercase tracking-[0.1em] text-navy md:text-[0.5rem] md:tracking-[0.16em]">
+              {t.festivals.featuredLabel}
+            </span>
+            <div className="absolute inset-x-0 bottom-0 p-3 md:p-4">
+              <p className="mb-1.5 font-display text-[0.62rem] uppercase tracking-[0.14em] text-gold md:text-[0.55rem] md:tracking-[0.22em]">
+                {t.festivals.featured.date}
+              </p>
+              <h3 className="font-serif text-[1.02rem] leading-snug text-white md:text-base">
+                {t.festivals.featured.name}
+              </h3>
+            </div>
+            <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-gold/0 transition-all duration-700 group-hover:ring-gold/50" />
+          </Link>
+
+          {upcoming.map((i) => {
+            const item = t.festivals.list[i];
             return (
               <Link
-                key={c.key}
+                key={item.name}
                 href="/mass-timings#festivals"
-                className="group relative block aspect-[4/3] overflow-hidden rounded-3xl bg-navy ring-1 ring-gold/10 will-change-transform md:aspect-[3/4]"
+                className="group relative block aspect-[3/4] overflow-hidden rounded-2xl bg-navy ring-1 ring-gold/10 md:will-change-transform"
               >
                 <Image
-                  src={c.img}
+                  src={FEASTS[i].img}
                   alt={item.name}
                   fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
                   className="object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-night-deep/95 via-navy/30 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-7">
-                  <p className="mb-2 font-display text-[0.6rem] uppercase tracking-[0.28em] text-gold">
+                {/* Same sizes as the featured card above — see the note there. */}
+                <div className="absolute inset-x-0 bottom-0 p-3 md:p-4">
+                  <p className="mb-1.5 font-display text-[0.62rem] uppercase tracking-[0.14em] text-gold md:text-[0.55rem] md:tracking-[0.22em]">
                     {item.date}
                   </p>
-                  <h3 className="mb-2 font-serif text-2xl text-white">{item.name}</h3>
-                  <p className="line-clamp-2 text-sm leading-relaxed text-white/70">{item.body}</p>
+                  <h3 className="font-serif text-[1.02rem] leading-snug text-white md:text-base">
+                    {item.name}
+                  </h3>
                 </div>
-                <span className="pointer-events-none absolute left-4 top-4 h-6 w-6 border-l border-t border-gold/0 transition-colors duration-700 group-hover:border-gold/50" />
-                <div className="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-inset ring-gold/0 transition-all duration-700 group-hover:ring-gold/30" />
+                <span className="pointer-events-none absolute left-3 top-3 h-5 w-5 border-l border-t border-gold/0 transition-colors duration-700 group-hover:border-gold/50" />
+                <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-gold/0 transition-all duration-700 group-hover:ring-gold/30" />
               </Link>
             );
           })}
         </div>
 
         {/* ── Band two: the week ──────────────────────────────────────────── */}
-        <p className="mb-6 mt-16 flex items-center gap-4 font-display text-[0.6rem] uppercase tracking-[0.3em] text-gold-dark">
+        <p className="mb-6 mt-16 flex items-center gap-4 font-display text-[0.68rem] uppercase tracking-[0.2em] text-gold-dark md:text-[0.6rem] md:tracking-[0.3em]">
           {t.home.rhythmWeekBand}
           <span className="h-px flex-1 bg-gold/25" />
         </p>
@@ -181,17 +251,22 @@ export function ParishRhythm() {
         >
           {schedule.map((item) => {
             const Icon = item.icon;
+            // `p-5` on a phone. The plate is one column there, so the 28px
+            // desktop padding is buying nothing but height on the section
+            // people actually come to this page to read. The times themselves
+            // go UP: a Mass time is the one thing on this page someone reads
+            // at five in the morning.
             return (
-              <div key={item.title} className="week-col bg-white/90 p-7 backdrop-blur-sm">
+              <div key={item.title} className="week-col bg-white/90 p-5 backdrop-blur-sm md:p-7">
                 <div className="mb-4 flex items-center gap-3">
                   <Icon className="h-4 w-4 shrink-0 text-gold-dark" />
-                  <h3 className="font-serif text-lg text-navy">{item.title}</h3>
+                  <h3 className="font-serif text-[1.05rem] text-navy md:text-lg">{item.title}</h3>
                 </div>
-                <ul className="space-y-2">
+                <ul className="space-y-2.5 md:space-y-2">
                   {item.times.map((time) => (
                     <li
                       key={time}
-                      className="flex items-center gap-2.5 text-[0.95rem] text-text-muted"
+                      className="flex items-center gap-2.5 text-[0.98rem] text-text-muted md:text-[0.95rem]"
                     >
                       <span className="h-1 w-1 shrink-0 rounded-full bg-gold" />
                       {time}
@@ -208,7 +283,7 @@ export function ParishRhythm() {
         <div className="mt-12">
           <Link
             href="/mass-timings"
-            className="group inline-flex items-center gap-2 rounded-full bg-navy px-7 py-3.5 font-display text-[0.7rem] uppercase tracking-[0.2em] text-white transition-all duration-500 hover:bg-gold hover:text-navy"
+            className="group inline-flex items-center gap-2 rounded-full bg-navy px-7 py-3.5 font-display text-[0.78rem] uppercase tracking-[0.15em] text-white transition-all duration-500 hover:bg-gold hover:text-navy md:text-[0.7rem] md:tracking-[0.2em]"
           >
             {t.home.rhythmCta}
             <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

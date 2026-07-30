@@ -35,13 +35,13 @@ export function ThresholdBar() {
         : "bg-navy/30";
 
   return (
-    <div className="relative z-20 -mt-14 md:-mt-20 px-6 md:px-8 lg:px-16">
+    <div className="relative z-20 -mt-12 md:-mt-20 px-4 md:px-8 lg:px-16">
       <div className="max-w-6xl mx-auto">
         <div className="relative bg-white/95 backdrop-blur rounded-2xl ring-1 ring-gold/20 shadow-2xl overflow-hidden">
           {/* Gold top rule — the home page's card signature */}
           <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-gold/60 to-transparent" aria-hidden="true" />
 
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 px-6 py-6 md:px-10 md:py-7">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5 md:gap-6 px-5 py-5 md:px-10 md:py-7">
             {/* Live status */}
             <div
               className="flex items-center gap-4"
@@ -78,7 +78,12 @@ export function ThresholdBar() {
                   honours it on div/span/section; it does not affect indexing or
                   ranking, only the text Google is permitted to quote. */}
               <div className="min-w-0" data-nosnippet>
-                <p className="font-display text-[0.66rem] uppercase tracking-[0.28em] text-navy">
+                {/* "OPEN NOW" / "MASS IS BEING SAID" at 0.66rem/0.28em is
+                    10.6px of spaced caps — the one line on this page that
+                    answers "can I go there right now", and it was the smallest
+                    thing in the brass plate. Up on a phone, tracking in so the
+                    longest of the three states still holds one line. */}
+                <p className="font-display text-[0.74rem] tracking-[0.16em] md:text-[0.66rem] md:tracking-[0.28em] uppercase text-navy">
                   {/* Before hydration — and permanently, for a visitor without
                       JavaScript — this states something true at any hour. It
                       upgrades to the live reading once the clock is read. */}
@@ -90,7 +95,7 @@ export function ThresholdBar() {
                         ? t.contact.status.open
                         : t.contact.status.closed}
                 </p>
-                <p className="mt-1.5 text-[0.78rem] text-text-muted tabular-nums">
+                <p className="mt-1.5 text-[0.88rem] md:text-[0.78rem] text-text-muted tabular-nums">
                   {status === null ? (
                     t.contact.status.staticHours
                   ) : (
@@ -107,14 +112,25 @@ export function ThresholdBar() {
             </div>
 
             {/* Actions. ≥46px tall — these are pressed with a thumb, often by
-                someone standing at a bus stop. */}
+                someone standing at a bus stop.
+
+                On a phone these three wrap onto two rows inside a card about
+                300px wide, so the Cinzel labels were the constraint: 0.64rem
+                with 0.2em of tracking is 10.2px of type carrying a fifth of
+                its own width in air, and "DIRECTIONS" alone ate a whole row.
+                Larger and tighter is both more legible AND narrower, which is
+                the trade this site makes everywhere small caps are used.
+                `px-4` recovers another 8px per pill. */}
             <div className="flex flex-wrap items-center gap-2.5">
               <a
                 href={`tel:${PHONE.e164}`}
-                className="inline-flex items-center gap-2.5 min-h-[46px] px-5 rounded-full bg-navy text-white font-display text-[0.64rem] uppercase tracking-[0.2em] hover:bg-gold hover:text-navy transition-colors"
+                className="inline-flex items-center gap-2.5 min-h-[46px] px-4 md:px-5 rounded-full bg-navy text-white font-display text-[0.7rem] tracking-[0.12em] md:text-[0.64rem] md:tracking-[0.2em] uppercase hover:bg-gold hover:text-navy transition-colors"
               >
-                <Phone className="w-4 h-4" aria-hidden="true" />
-                <span className="tabular-nums tracking-normal font-sans text-sm font-medium">
+                <Phone className="w-4 h-4 shrink-0" aria-hidden="true" />
+                {/* The parish's number, on the brass plate, above the fold.
+                    14px is below the floor this site holds for a telephone
+                    number on a phone — see the note in ContactExperience. */}
+                <span className="tabular-nums tracking-normal font-sans text-base md:text-sm font-medium">
                   {PHONE.display}
                 </span>
               </a>
@@ -124,9 +140,9 @@ export function ThresholdBar() {
                   href={whatsAppLink(`${ADDRESS.name}: `)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 min-h-[46px] px-5 rounded-full border border-gold/30 text-navy/75 font-display text-[0.64rem] uppercase tracking-[0.2em] hover:border-gold hover:text-gold-dark transition-colors"
+                  className="inline-flex items-center gap-2 min-h-[46px] px-4 md:px-5 rounded-full border border-gold/30 text-navy/75 font-display text-[0.7rem] tracking-[0.12em] md:text-[0.64rem] md:tracking-[0.2em] uppercase hover:border-gold hover:text-gold-dark transition-colors"
                 >
-                  <MessageCircle className="w-4 h-4" aria-hidden="true" />
+                  <MessageCircle className="w-4 h-4 shrink-0" aria-hidden="true" />
                   {t.contact.actions.whatsapp}
                 </a>
               )}
@@ -135,7 +151,7 @@ export function ThresholdBar() {
                 href={MAP_LINKS.googleDirections}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 min-h-[46px] px-5 rounded-full border border-gold/30 text-navy/75 font-display text-[0.64rem] uppercase tracking-[0.2em] hover:border-gold hover:text-gold-dark transition-colors"
+                className="inline-flex items-center gap-2 min-h-[46px] px-4 md:px-5 rounded-full border border-gold/30 text-navy/75 font-display text-[0.7rem] tracking-[0.12em] md:text-[0.64rem] md:tracking-[0.2em] uppercase hover:border-gold hover:text-gold-dark transition-colors"
               >
                 {/* Gold-leaf stroke rather than a flat colour. Same 135° axis and
                     the same gold tokens through the middle as

@@ -862,9 +862,20 @@ export function tenureLabel(p: Priest): string {
   return `${p.from} – ${p.to}`;
 }
 
+/**
+ * "இன்று வரை" — the ONLY Tamil words a tenure label ever contains.
+ *
+ * Exported separately because the register has to typeset it apart from the
+ * numerals it sits beside. Every other tenure label, in either language, is
+ * digits and a dash; this one row mixes scripts, and the two halves do not
+ * render at the same size from the same declaration — see the note at the
+ * tenure figure in PriestRegister.tsx.
+ */
+export const TENURE_PRESENT_TA = "இன்று வரை";
+
 /** In Tamil, "2025 – today". Years stay in Western Arabic numerals. */
 export function tenureLabelTa(p: Priest): string {
-  if (p.current) return `${p.from} – இன்று வரை`;
+  if (p.current) return `${p.from} – ${TENURE_PRESENT_TA}`;
   if (p.to === p.from) return `${p.from}`;
   return `${p.from} – ${p.to}`;
 }

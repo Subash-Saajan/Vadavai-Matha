@@ -226,7 +226,7 @@ function CarouselCard({ frame, meta }: { frame: ChronicleFrame; meta: ChronicleF
           <span className="block font-display text-lg tracking-[0.14em] text-gold tabular-nums">
             {frame.year}
           </span>
-          <span className="mt-1.5 block max-w-[11rem] font-display text-[0.55rem] uppercase leading-snug tracking-[0.24em] text-white/50">
+          <span className="mt-1.5 block max-w-[11rem] font-display text-[0.63rem] uppercase leading-snug tracking-[0.16em] text-white/60 md:text-[0.55rem] md:tracking-[0.24em] md:text-white/50">
             {frame.chapter}
           </span>
         </span>
@@ -243,17 +243,28 @@ function CarouselCard({ frame, meta }: { frame: ChronicleFrame; meta: ChronicleF
         </span>
       </div>
 
-      <div className="absolute inset-x-0 bottom-0 p-7 short:p-5">
-        {/* The Tamil sizes are not a font correction — they are a copy-length
-            one. The same frame runs 40–70% longer in Tamil, which pushed the
-            text block up over the painting until the art was barely visible.
-            At 1.34rem every title returns to a single line as in English, and
-            the smaller body buys back two lines of artwork. */}
-        <h3 className="font-serif text-[1.55rem] leading-tight text-white ta:text-[1.34rem] short:text-[1.3rem]">
+      {/* ⚠ EVERY `short:` HERE IS NOW `short:md:`, AND IT WAS A REAL BUG.
+          `short:` is `max-height: 820px` — written for a 1366×768 laptop, where
+          a pinned section has no vertical room to spare. But a phone held
+          upright is ALSO under 820px tall (an iPhone 15 gives about 745px of
+          viewport), so every phone was silently taking the laptop's emergency
+          sizes: the card body dropped to 0.85rem — 13.6px of Cormorant, which
+          with its small x-height reads at about 11px — on a card that is 78vw
+          wide and has all the room in the world. The pin does not even exist on
+          the phone build. Scoping each one to `md` keeps the laptop rescue and
+          gives the phone its proper sizes back.
+
+          The Tamil sizes are not a font correction — they are a copy-length
+          one. The same frame runs 40–70% longer in Tamil, which pushed the
+          text block up over the painting until the art was barely visible.
+          At 1.34rem every title returns to a single line as in English, and
+          the smaller body buys back two lines of artwork. */}
+      <div className="absolute inset-x-0 bottom-0 p-6 md:p-7 short:md:p-5">
+        <h3 className="font-serif text-[1.5rem] leading-tight text-white md:text-[1.55rem] ta:text-[1.34rem] short:md:text-[1.3rem]">
           {frame.title}
         </h3>
-        <div className="my-4 h-px w-12 bg-gold/45 short:my-3" />
-        <p className="font-serif text-[0.95rem] leading-relaxed text-white/75 ta:text-[0.82rem] ta:leading-normal short:text-[0.85rem]">
+        <div className="my-4 h-px w-12 bg-gold/45 short:md:my-3" />
+        <p className="font-serif text-[0.95rem] leading-relaxed text-white/80 md:text-[0.95rem] md:text-white/75 ta:text-[0.82rem] ta:leading-normal short:md:text-[0.85rem]">
           {frame.line}
         </p>
       </div>
@@ -279,19 +290,20 @@ function CarouselDoor({
     <article className="chron-card relative flex h-full w-[78vw] shrink-0 flex-col justify-center overflow-hidden rounded-3xl border border-gold/30 bg-cream-dark px-8 shadow-xl ring-1 ring-gold/10 sm:w-[22rem] md:px-9">
       <div className="light-shaft absolute -top-10 left-[10%] h-[140%] w-[60%] -rotate-12 opacity-60" />
       <div className="relative">
-        <p className="font-display text-[0.6rem] uppercase tracking-[0.3em] text-gold-dark">
+        {/* Same `short:md:` correction as CarouselCard — read the note there. */}
+        <p className="font-display text-[0.68rem] uppercase tracking-[0.2em] text-gold-dark md:text-[0.6rem] md:tracking-[0.3em]">
           {label}
         </p>
-        <p className="mt-5 font-serif text-[1.85rem] leading-tight text-navy short:mt-4 short:text-[1.55rem]">
+        <p className="mt-5 font-serif text-[1.7rem] leading-tight text-navy md:text-[1.85rem] short:md:mt-4 short:md:text-[1.55rem]">
           {title}
         </p>
-        <p className="mt-5 font-serif text-[1rem] leading-relaxed text-text-muted short:mt-4 short:text-[0.9rem]">
+        <p className="mt-5 font-serif text-[1rem] leading-relaxed text-text-muted md:text-[1rem] short:md:mt-4 short:md:text-[0.9rem]">
           {body}
         </p>
         <Link
           href="/history"
           draggable={false}
-          className="group mt-8 inline-flex items-center gap-2 rounded-full bg-navy px-6 py-3 font-display text-[0.65rem] uppercase tracking-[0.2em] text-white transition-all duration-500 hover:bg-gold hover:text-navy short:mt-6"
+          className="group mt-8 inline-flex items-center gap-2 rounded-full bg-navy px-6 py-3.5 font-display text-[0.76rem] uppercase tracking-[0.15em] text-white transition-all duration-500 hover:bg-gold hover:text-navy md:py-3 md:text-[0.65rem] md:tracking-[0.2em] short:md:mt-6"
         >
           {cta}
           <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -646,7 +658,7 @@ export function ChronicleCarousel() {
   return (
     <section
       ref={sectionRef}
-      className="parchment-sheen relative overflow-hidden bg-cream py-24 md:py-32 lg:py-0"
+      className="parchment-sheen relative overflow-hidden bg-cream py-16 md:py-32 lg:py-0"
     >
       {/* ⚠ `lg:pt-20` IS THE NAVBAR, AND IT IS LOAD-BEARING.
           The bar is `position: fixed` and 5rem tall on this breakpoint, so it

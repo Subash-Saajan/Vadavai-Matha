@@ -33,10 +33,16 @@ export function Towers() {
         {/* Text */}
         <div className="lg:col-span-7">
           <p className="reveal-item kicker mb-6">{a.towersLabel}</p>
-          <h2 className="reveal-item font-serif text-5xl md:text-6xl lg:text-7xl text-navy leading-[1.04]">
+          {/* `text-5xl` was the phone size too: 48px of Cormorant with
+              `leading-[1.04]` in a 342px column is about nine characters a
+              line, which stops being a heading and becomes a stack. The clamp
+              holds it at a share of the screen and tops out at 36px; `md` and
+              up are the sizes this was drawn at. Same move as the home page —
+              see the note in Patroness.tsx. */}
+          <h2 className="reveal-item font-serif text-[clamp(1.95rem,7.8vw,2.25rem)] md:text-6xl lg:text-7xl text-navy leading-[1.04]">
             {a.towersTitle}
           </h2>
-          <p className="reveal-item text-text-muted text-lg leading-relaxed mt-6">
+          <p className="reveal-item text-text-muted text-[0.98rem] md:text-lg leading-relaxed mt-6">
             {a.towersBody}
           </p>
         </div>
@@ -56,7 +62,13 @@ export function Towers() {
               <PhotoOrnaments />
             </div>
           </div>
-          <figcaption className="mt-4 text-center font-display text-[0.62rem] uppercase tracking-[0.24em] text-text-muted">
+          {/* THE FIGURE CAPTION, AND IT IS THE SAME CORRECTION IN EVERY BAND OF
+              THIS PAGE. 0.62rem is 9.9px; Cinzel caps flung 0.24em apart at
+              that size are guessed at rather than read, and this caption is the
+              only thing naming what the photograph shows. Up half a step and
+              the tracking down to pay for the width — the caption occupies the
+              same line length it did — with the drawn values restored at `md`. */}
+          <figcaption className="mt-4 text-center font-display text-[0.7rem] tracking-[0.15em] md:text-[0.62rem] md:tracking-[0.24em] uppercase text-text-muted">
             {a.towersCaption}
           </figcaption>
         </figure>

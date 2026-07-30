@@ -80,10 +80,23 @@ export function PurposeSelector({
       </p>
 
       {/* The seven clauses. */}
+      {/* SEVEN TAP TARGETS THAT WRAP ONTO FOUR ROWS ON A PHONE, and they are
+          how a pilgrim tells the parish what they want. Two things had to give:
+
+          · the labels were `text-[0.66rem] tracking-[0.2em]` — 10.6px of
+            Cinzel caps carrying a fifth of their width in air. Larger and
+            tighter is more legible and NARROWER, so more of the seven fit per
+            row and fewer rows are needed.
+          · `gap-y-1` is 4px between rows of stacked 44px targets. The targets
+            themselves are compliant, but 4px between two of them is inside the
+            slop of a moving thumb, and choosing "a sick call" by accident is a
+            worse mistake here than on any other page. 6px on mobile.
+
+          Both revert at `md`, where the row fits on one line anyway. */}
       <div
         role="radiogroup"
         aria-labelledby={labelledBy}
-        className="reveal mt-8 flex flex-wrap items-center justify-center gap-y-1"
+        className="reveal mt-8 flex flex-wrap items-center justify-center gap-y-1.5 md:gap-y-1"
       >
         {PURPOSES.map((purpose, i) => {
           const selected = value === purpose;
@@ -101,7 +114,7 @@ export function PurposeSelector({
                 tabIndex={i === activeIndex ? 0 : -1}
                 onClick={() => onChange(purpose)}
                 onKeyDown={(e) => onKeyDown(e, i)}
-                className={`group relative min-h-11 px-3.5 py-2 font-display text-[0.66rem] uppercase tracking-[0.2em] transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:rounded-sm ${
+                className={`group relative min-h-11 px-3 md:px-3.5 py-2 font-display text-[0.72rem] tracking-[0.1em] md:text-[0.66rem] md:tracking-[0.2em] uppercase transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:rounded-sm ${
                   isUrgent
                     ? selected
                       ? "text-oxblood"
@@ -117,14 +130,16 @@ export function PurposeSelector({
                     struck once the word is in the sentence. */}
                 <span
                   aria-hidden="true"
-                  className={`absolute inset-x-3.5 bottom-1.5 origin-center transition-transform duration-300 ease-out ${
+                  /* Inset must track the button's own horizontal padding, or
+                     the rule under a chosen word overhangs it. */
+                  className={`absolute inset-x-3 md:inset-x-3.5 bottom-1.5 origin-center transition-transform duration-300 ease-out ${
                     isUrgent ? "bg-oxblood" : "bg-gold"
                   } ${selected ? "h-0.5 scale-x-100" : "h-px scale-x-0 group-hover:scale-x-100"}`}
                 />
               </button>
 
               {i < PURPOSES.length - 1 && (
-                <span aria-hidden="true" className="text-gold/40 text-[0.5rem] select-none">
+                <span aria-hidden="true" className="text-gold/40 text-[0.55rem] md:text-[0.5rem] select-none">
                   ✦
                 </span>
               )}
@@ -133,9 +148,10 @@ export function PurposeSelector({
         })}
       </div>
 
-      {/* What the chosen clause means in practice. */}
+      {/* What the chosen clause means in practice. Cormorant, so it sits a
+          step above the sans on a phone rather than level with it. */}
       <p
-        className={`mt-7 font-serif text-lg md:text-xl leading-snug ${
+        className={`mt-7 font-serif text-[1.05rem] md:text-xl leading-snug ${
           urgent ? "text-oxblood" : "text-text-muted"
         }`}
       >

@@ -58,4 +58,45 @@ if (typeof window !== "undefined") {
 export const useIsomorphicLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
+/**
+ * THE ONE BREAKPOINT MOTION IS DECIDED AT. Same 768px `useLenis` and
+ * `useScrubMedia` already switch on, so a device is either "the desktop
+ * build" everywhere or "the phone build" everywhere — never smoothed but
+ * unparallaxed, or parallaxed but unsmoothed.
+ *
+ * ⚠ DECORATIVE SCROLL-SCRUBBED MOTION IS DESKTOP-ONLY, AND THIS IS THE SWITCH.
+ *
+ * The home page used to build every parallax on every device. That came to
+ * roughly twenty-eight scrubbed ScrollTriggers on a phone — six gallery tiles
+ * drifting plus six photographs panning inside them, five feast cards, two
+ * backdrops, a counter-parallax, a façade zoom — each writing a transform on a
+ * full-bleed image every frame, on top of the hero's canvas scrub and forty
+ * entrance reveals. Desktop absorbs that; a mid-range Android does not, and
+ * what the reader gets instead of depth is a page that stutters.
+ *
+ * So on a phone the decorative drifts do not exist — they are not merely
+ * paused, they are never built, which also means no permanent compositor layer
+ * per element. What survives on touch is what the reader actually came for:
+ * the hero's frame scrub, the Chronicle's native swipe, the Verse lighting
+ * word by word, and every entrance reveal.
+ *
+ * Wrap desktop-only motion in `gsap.matchMedia()` rather than an `if` on
+ * `matchMedia(...).matches`: matchMedia BUILDS and REVERTS the tweens as the
+ * query flips, so rotating a tablet or dragging a window across the breakpoint
+ * lands on the right build instead of whichever one happened to mount.
+ */
+export const DESKTOP = "(min-width: 768px)";
+
+/**
+ * How far an entrance reveal travels, in pixels.
+ *
+ * 42px is right on a 1440px monitor and much too far on a 390px phone, where
+ * it is more than a tenth of the screen: the copy visibly slides into place
+ * rather than settling, and on a fast flick the reader meets a paragraph still
+ * on its way. Read once, when the effect builds — a reveal that has already
+ * played does not want re-deciding on rotation.
+ */
+export const revealY = (): number =>
+  typeof window !== "undefined" && window.matchMedia(DESKTOP).matches ? 42 : 20;
+
 export { gsap, ScrollTrigger, Draggable };

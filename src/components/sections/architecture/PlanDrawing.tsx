@@ -40,16 +40,17 @@
  * "east-facing altar" cannot both be right, and this project has not resolved which.
  *
  * INTERACTIVE REGIONS (added for the Creed section). The drawing is grouped into
- * five readable regions — `doors`, `piers`, `arrows`, `stations`, `altar` — plus the
- * neutral base (outer walls, porch, the priests' jambs, steps, compass). A line of the
- * creed beside the plan, or a region itself, lifts that region and dims EVERYTHING
- * else, the base included. Geometry is untouched; only the JSX is reorganised into
- * region groups. The `.plan-line/.plan-dot/.plan-mark` classes are kept as inert
- * markers in case the scroll-draw ever returns.
+ * four readable regions — `doors`, `arrows`, `stations`, `altar` — plus the neutral
+ * base (outer walls, porch, the priests' jambs, the twelve piers, steps, compass).
+ * A line of the creed beside the plan, or a region itself, lifts that region and
+ * dims EVERYTHING else, the base included. Geometry is untouched; only the JSX is
+ * reorganised into region groups. The `.plan-line/.plan-dot/.plan-mark` classes are
+ * kept as inert markers in case the scroll-draw ever returns.
  */
 
-/** The five regions the creed can point at. */
-export type PlanRegion = "doors" | "piers" | "arrows" | "stations" | "altar";
+/** The four regions the creed can point at. `piers` was a fifth until July 2026 —
+    see the note on THE TWELVE PIERS group for where that reading went. */
+export type PlanRegion = "doors" | "arrows" | "stations" | "altar";
 
 /**
  * THE TWELVE PIERS — a polar grid, not a scatter.
@@ -270,7 +271,19 @@ export function PlanDrawing({
    */
   const bcls = "plan-region" + (active ? " plan-region--off" : "");
   /** Click-to-select on the region itself (a bonus affordance; the list drives it).
-      It only reports the clicked region — the parent owns the toggle/hover state. */
+      It only reports the clicked region — the parent owns the toggle/hover state.
+
+      ⚠ ON A PHONE IT IS ONLY EVER A BONUS, AND IT CANNOT BE MORE THAN THAT.
+      At the ~0.227 scale a 390px screen gives this drawing, a 44px tap target
+      is 194 drawing units — but the marks of the four regions are as little as
+      116 units apart (the central entry arrow at y=1030 sits just above door 3
+      at y=1146), and a door jamb is a 9-unit stroke, or two screen pixels.
+      Non-overlapping thumb-sized targets do not fit in this plan, and inventing
+      hotspot rectangles that do not follow the ink would light "the five
+      wounds" when a reader taps a pier. So the touch affordance is the list of
+      readings beside the plan — every one of those is a full-width button well
+      over 44px tall, and `creedReadHint` tells the reader to use it ("Tap a
+      reading to light it on the plan"). Do not shrink those buttons. */
   const pick = (region: PlanRegion) =>
     onSelect ? { onClick: () => onSelect(region) } : {};
 
@@ -515,8 +528,15 @@ export function PlanDrawing({
         </g>
       </g>
 
-      {/* ── THE TWELVE PIERS — the twelve apostles: rects + labels ─────────── */}
-      <g className={rcls("piers")} data-region="piers" {...pick("piers")}>
+      {/* ── THE TWELVE PIERS — rects + labels ──────────────────────────────
+          NOT a region any more. These twelve used to carry the creed's twelve,
+          read as the twelve apostles — but the parish note gives its twelve to
+          the two flanks of the TABERNACLE, and a July 2026 photograph shows
+          exactly that: six small statues in a gold arcade either side of it
+          (see AltarPhoto.tsx). The reading moved to the altar in July 2026 and
+          the piers went back to being what the source draws: piers. They are
+          part of the neutral base now, so they dim with it. */}
+      <g className={bcls}>
         <g className="text-gold" fill="currentColor">
           {PIERS.map(([ray, radius, len, brd, id]) => {
             const t = (ray * Math.PI) / 180;
@@ -538,7 +558,31 @@ export function PlanDrawing({
             );
           })}
         </g>
-        <g className="plan-mark font-display text-gold/55" fill="currentColor" fontSize={34}>
+        {/* ⚠ THE PIER LABELS WERE 7.7px ON A PHONE, AND THE SIZE IS SET IN CSS
+            RATHER THAN AS AN ATTRIBUTE SO THAT IT CAN VARY BY BREAKPOINT.
+
+            Everything in this drawing is scaled by the width the column gives
+            the SVG: 1400 units across. On a monitor that is around 620px — a
+            scale of 0.44, and the 34-unit labels come out at 15px. On a 390px
+            phone the same drawing is about 318px wide, a scale of 0.227, and
+            34 units is 7.7px: not small type, but type that is simply not
+            legible, sitting beside twelve piers it exists to name.
+
+            50 units brings them to 11.4px there. It is as far as they can go:
+            "P9" and "P10" are printed inside the corridor, and at 50 units
+            "P9" already ends ten units short of the left low wall's inner
+            face. Anything larger and the label crosses the wall it stands
+            beside. `md:text-[34px]` restores the source's own size on a
+            monitor, so nothing changes on the desktop drawing.
+
+            (A CSS `font-size` in px inside a viewBox resolves to user units,
+            not screen pixels, and it beats the presentation attribute — which
+            is why the attribute is gone rather than left as a fallback that
+            could never win.) */}
+        <g
+          className="plan-mark font-display text-gold/55 text-[50px] md:text-[34px]"
+          fill="currentColor"
+        >
           {PIER_LABELS.map(([x, y, id]) => (
             <text key={id} x={x} y={y} textAnchor="middle">
               {id}
