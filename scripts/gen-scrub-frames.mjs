@@ -143,8 +143,37 @@ const QUALITY = "68";
    Both halves must always agree: the filter converts, `-color_range tv` flags
    it, and a stream converted one way and flagged the other crushes blacks or
    washes them grey depending which way round it got it. */
+/* ── THE FILM IS CUT TO A PHONE, NOT TO 4:5 ───────────────────────────────
+   The stills are 4:5 because that is a sensible crop of a landscape master.
+   It is the wrong shape for the thing that actually displays them. The hero
+   canvas is the viewport: 1080×2527 on the Galaxy A55 this was measured on,
+   1179×2760 on an iPhone 15 Pro. Covering those with a 4:5 frame means scaling
+   it up by 1.9× and 2.0× — and because a 4:5 picture is far wider than a phone,
+   nearly 40% of every encoded frame was cropped away unseen. The film was
+   paying for pixels nobody saw and blowing up the ones they did.
+
+   Worse, it was ALSO throwing away the master's vertical resolution: 1350 lines
+   out of 2160, a 37% cut, before any of that upscaling happened.
+
+   Cutting to 1008×2160 fixes both at once. 2160 is the master's own height, so
+   there is no vertical scaling anywhere in the pipeline — the film is now a
+   pure CROP of the source, never a resample. Measured against real devices:
+
+     iPhone SE      1.07× → 0.74×   (now downscaling: sharpest possible)
+     iPhone XR/11   1.43× → 0.90×   (downscaling)
+     iPhone 12–16   2.03× → 1.27×
+     Galaxy A55     1.87× → 1.17×
+     iPhone 15 PM   2.24× → 1.40×   (the master has only 2160 lines; this is
+                                     the floor without inventing detail)
+     Z Fold inner   1.75× → 1.74×   (unchanged — a squarish screen crops the
+                                     film's top and bottom instead)
+
+   Nothing regresses on any device tested. 1008 = 2160 × 0.4667, which sits
+   between the tallest phones (~0.43) and the squarest (~0.52), so both crop a
+   little rather than either cropping a lot. */
+const FILM_CROP = "crop=ih*0.4667:ih:(iw-ih*0.4667)/2:0";
 const FILM_SIZE =
-  "scale=1080:1350:flags=lanczos:out_color_matrix=bt709:out_range=tv,format=yuv420p";
+  "scale=1008:2160:flags=lanczos:out_color_matrix=bt709:out_range=tv,format=yuv420p";
 const FILM_CRF = "23";
 /** 1 = every picture is an IDR. Read the note above before raising this. */
 const FILM_GOP = 1;
@@ -340,7 +369,7 @@ for (const name of names) {
       "-i", src,
       ...job.mapArgs,
       "-vf",
-      `select=not(mod(n\\,${job.step})),${CROP},${FILM_SIZE}` +
+      `select=not(mod(n\\,${job.step})),${FILM_CROP},${FILM_SIZE}` +
         `${job.reversed ? ",reverse" : ""},setpts=N/30/TB`,
       "-r", "30",
       "-c:v", "libx264",
