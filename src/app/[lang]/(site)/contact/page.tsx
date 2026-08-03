@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 
 import { JsonLd } from "@/components/JsonLd";
 import { graph, pageNode, trailTo } from "@/lib/schema";
-import { localizedMetadata } from "@/lib/seo";
+import { pageMetadata } from "@/lib/seo";
 
 import { ContactExperience } from "./ContactExperience";
 
@@ -20,7 +20,53 @@ import { ContactExperience } from "./ContactExperience";
  * genuinely its own: that it is the ContactPage, and where it sits in the tree.
  * One entity, described once.
  */
-export const generateMetadata = localizedMetadata("contact");
+/**
+ * THIS PAGE'S TITLE DELIBERATELY OMITS "LITTLE ROME", and it is the only page
+ * on the site that does.
+ *
+ * Search Console, 2 August 2026, for the query "little rome":
+ *
+ *     /contact   17 clicks, 28 impressions, position 3.2
+ *     /          0 clicks,   3 impressions, position 1.0
+ *
+ * Read that carefully: when Google shows the HOME page for this query it ranks
+ * FIRST — better than this page does. The home page is not weaker. Google is
+ * simply picking this page nine times out of ten, and then ranking it worse.
+ * That is a page-selection problem, not a ranking one, and every one of those
+ * 17 clicks teaches Google the choice was right.
+ *
+ * Why it picks this page: the root layout's title template appends
+ * "· Little Rome" to every route, so this page's title was literally
+ * "Contact & Visit · Little Rome" — an exact match for the query, on a page
+ * whose whole subject is visiting the place. The h1 was already changed to
+ * defer ("Come to the Shrine"); the title never was, which left the strongest
+ * signal of the two still pointing here.
+ *
+ * So the title is absolute, and carries the village instead of the brand. The
+ * page keeps every other way of being found — its description still says
+ * Little Rome, the schema still names it, and nobody looking for directions
+ * will fail to find it. It simply stops competing with the home page for the
+ * home page's own name.
+ *
+ * If "little rome" ever settles on "/" in GSC, this can go back to
+ * `localizedMetadata("contact")` — but check the numbers first, not the hunch.
+ */
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const l = lang === "ta" ? "ta" : "en";
+  return pageMetadata("contact", l, {
+    title: {
+      absolute:
+        l === "ta"
+          ? "தொடர்பும் வருகையும் — வடக்கன்குளம் திருக்குடும்பத் திருத்தலம்"
+          : "Contact & Visit — Holy Family Shrine, Vadakkankulam",
+    },
+  });
+}
 
 export const viewport: Viewport = {
   themeColor: "#0a1322",
