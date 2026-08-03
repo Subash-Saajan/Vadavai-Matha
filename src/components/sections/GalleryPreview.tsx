@@ -552,8 +552,12 @@ export function GalleryPreview() {
             one after the other made neither of them read as the primary action,
             and the one that matters at the foot of the page is "come here". */}
         <div className="mt-16 text-center">
+          {/* This said "Open Gallery" and opened /architecture, because until
+              August 2026 there was no gallery to open. There is one now, and a
+              section of six photographs that promises more should lead to the
+              thirty-nine rather than to a page about the building. */}
           <Link
-            href="/architecture"
+            href="/gallery"
             className="inline-flex items-center gap-2 border-b border-gold/40 pb-1.5 font-display text-xs uppercase tracking-[0.22em] text-gold transition-colors duration-500 hover:border-white hover:text-white group"
           >
             {t.home.galleryCta}

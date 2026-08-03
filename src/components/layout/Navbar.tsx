@@ -85,6 +85,13 @@ export function Navbar() {
        footer already files them under. */
     {
       label: t.footer.shrine,
+      /* ⚠ /gallery IS DELIBERATELY NOT HERE (owner's call, August 2026). It was
+         added to this panel when the page shipped and taken out again — the bar
+         is the site's scarcest surface and the photographs are not what it
+         should spend a slot on. The page is reached from the footer's Shrine
+         column and from the "Open Gallery" link under the home page's mosaic,
+         which is where a reader who wants pictures is already looking. Do not
+         put it back without asking. */
       children: [
         { href: "/architecture", label: t.nav.architecture },
         { href: "/priests", label: t.nav.priests },

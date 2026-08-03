@@ -60,6 +60,7 @@ export type RouteKey =
   | "faq"
   | "priests"
   | "sources"
+  | "gallery"
   | "acknowledgements";
 
 export type RouteDef = {
@@ -230,6 +231,28 @@ export const ROUTES: Record<RouteKey, RouteDef> = {
     image: "/images/architecture/archival.jpg",
     ogImage: "/og/sources.jpg",
   },
+  // ⚠ `/gallery` HAS BEEN A 301 TO /architecture SINCE THE OLD gallery section
+  // was folded into that page. The redirect is removed in next.config.ts as of
+  // this route's launch, so anything Google consolidated onto /architecture has
+  // to be re-discovered — which is what the sitemap entry below is for. Do not
+  // re-add the redirect: this is a real page again.
+  //
+  // The description names the SUBJECTS, not the medium. "Photo gallery" is a
+  // query nobody types about a specific shrine; "the chariot", "the two-nave
+  // church", "St Devasahayam Pillai" are. Google Images reads the page's own
+  // captions and alt text (lib/gallery.ts), which is where the detail lives.
+  gallery: {
+    path: "/gallery",
+    title: "Photographs of the Shrine, Vadakkankulam",
+    fullTitle: "Photographs of Vadavai Matha — the shrine, the feast and the village",
+    description:
+      "The Holy Family Shrine at Vadakkankulam in photographs: the twin-towered façade, the two naves and the gilded high altar, the crowned statue of Vadavai Matha, the chariot of the August feast, the eight other churches of Little Rome, the graves behind the church — and the oldest known photograph of this church, printed in Paris in 1901.",
+    crumb: "Photographs",
+    priority: 0.7,
+    changeFrequency: "monthly",
+    image: "/images/fest-noon.jpg",
+    ogImage: "/og/gallery.jpg",
+  },
   // Deliberately absent from INDEXABLE while the page is a draft (see DRAFT in
   // src/lib/acknowledgements.ts). It still needs an entry here, because the
   // canonical, the hreflang pair and the breadcrumb all read this table.
@@ -261,6 +284,7 @@ export const INDEXABLE: RouteKey[] = [
   "faq",
   "architecture",
   "priests",
+  "gallery",
   "sources",
 ];
 

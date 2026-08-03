@@ -84,8 +84,15 @@ const nextConfig: NextConfig = {
       { source: "/home", destination: "/", permanent: true },
       // Festivals were merged into the combined "Mass & Festivals" page.
       { source: "/festivals", destination: "/mass-timings", permanent: true },
-      // The Gallery page was reworked into the dedicated Architecture page.
-      { source: "/gallery", destination: "/architecture", permanent: true },
+      /* ⚠ `/gallery` USED TO 301 HERE. The old home-page gallery section was
+         folded into /architecture and the URL was pointed at it. There is a
+         real page at /gallery again (app/[lang]/(site)/gallery), so the
+         redirect is gone — leaving it would have made the new route
+         unreachable, and a `permanent: true` that a browser has already cached
+         makes that failure look like a routing bug rather than a redirect.
+
+         Nothing replaces it: the route exists, it is in INDEXABLE, and the
+         sitemap advertises it in both languages. */
     ];
   },
 };

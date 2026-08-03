@@ -111,6 +111,7 @@ export function Footer() {
                 section on the home page now; this is its second way in. */}
             <li><Link href="/priests" className={COL_LINK}>{t.nav.priests}</Link></li>
             <li><Link href="/architecture" className={COL_LINK}>{t.nav.architecture}</Link></li>
+            <li><Link href="/gallery" className={COL_LINK}>{t.nav.gallery}</Link></li>
             {/* Both saint pages had the same problem /priests did: reachable
                 only from a card on the home page. */}
             <li><Link href="/saints/john-de-britto" className={COL_LINK}>{t.nav.britto}</Link></li>

@@ -133,7 +133,7 @@ const TA = {
     "ஆகஸ்ட் 6 அன்று கொடியேற்றத்துடன் தொடங்கும் பத்து நாள் ஆண்டுத் திருவிழா. ஆகஸ்ட் 14 இரவு 11:00 மணிக்குத் தேர் புறப்பட்டு, இரவு முழுவதும் ஊரை வலம் வரும்; சுமார் ஒரு லட்சம் யாத்திரிகர்கள் கூடுவர். ஆகஸ்ட் 15 திருவிழா நாள்; தேர் ஆகஸ்ட் 15, 16 ஆகிய நாட்களில் பொதுமக்கள் பார்வைக்கு நிற்கும்.",
   apparitionName: "மாதா காட்சிப் பெருவிழா",
   apparitionDescription:
-    "1803 அக்டோபர் 23 அன்று ஊர் முன்னிலையில் அன்னை கண்ணீர் சிந்தியதாகச் சொல்லப்படும் நிகழ்வை, ஆண்டுதோறும் அக்டோபர் 22–23 அன்று பங்கு நினைவுகூர்ந்து வருகிறது. இது ஊரிலும் மறைமாவட்டத்திலும் நிலவும் ஒரு பக்தி மரபு; இது வத்திக்கானின் விசாரணைக்கு உட்பட்டது அல்ல.",
+    "1803 அக்டோபர் 21 அன்று ஊர் முன்னிலையில் அன்னை கண்ணீர் சிந்தியதாகச் சொல்லப்படும் நிகழ்வை, ஆண்டுதோறும் அக்டோபர் 22–23 அன்று பங்கு நினைவுகூர்ந்து வருகிறது. இது ஊரிலும் மறைமாவட்டத்திலும் நிலவும் ஒரு பக்தி மரபு; இது வத்திக்கானின் விசாரணைக்கு உட்பட்டது அல்ல.",
   devasahayamName: "புனித தேவசகாயம் பிள்ளை",
   devasahayamDescription:
     "திருவிதாங்கூரின் மார்த்தாண்ட வர்மா அரசவையின் அதிகாரி. 1745 மே 14 அன்று வடக்கன்குளம் திருக்குடும்ப ஆலயத்தில், இயேசு சபை அருட்தந்தை புத்தாரி அவர்களால் திருமுழுக்குப் பெற்று, “கடவுளே என் துணை” எனப் பொருள்படும் தேவசகாயம் என்னும் பெயரைப் பெற்றார். 1752 ஜனவரி 14 அன்று ஆரல்வாய்மொழிக் கணவாயில் விசுவாசத்திற்காக இரத்தசாட்சியானார்; 2022 மே 15 அன்று புனிதராக அறிவிக்கப்பட்டார் — இந்தியாவில் பிறந்த முதல் பொதுநிலைப் புனிதர். 2025-ல் இந்தியப் பொதுநிலையினரின் பாதுகாவலராக அறிவிக்கப்பட்டார்.",
@@ -318,7 +318,7 @@ export function apparitionFeast(now?: Date, lang: Locale = "en"): Event {
       : "The Commemoration of the Apparition (Matha Kaatchi)",
     description: isTa(lang)
       ? TA.apparitionDescription
-      : "The parish's annual commemoration, kept on 22–23 October, of the weeping of Our Lady before the village on 23 October 1803. A local and diocesan tradition; it has never been the subject of a Vatican investigation.",
+      : "The parish's annual commemoration, kept on 22–23 October, of the weeping of Our Lady before the village on 21 October 1803. A local and diocesan tradition; it has never been the subject of a Vatican investigation.",
     startDate: `${y}-10-22`,
     endDate: `${y}-10-23`,
     eventStatus: "https://schema.org/EventScheduled",
@@ -497,6 +497,47 @@ export function pageNode(
       "@type": "ImageObject",
       url: abs(r.image),
     },
+  } as WebPage;
+}
+
+/* ── The gallery ───────────────────────────────────────────────────────────
+   An `ImageGallery` IS a `WebPage`, so this replaces `pageNode("gallery")`
+   rather than sitting beside it — two nodes on one `@id` describing the same
+   document is how a graph teaches a crawler to distrust it.
+
+   `associatedMedia` and not `image`. `image` on a WebPage means "a picture OF
+   this page" — the share card. What is wanted here is "these are the media
+   objects this document is a gallery of", and each carries its own `caption`
+   and `contentUrl`, which is the pair Google Images actually reads. The captions
+   handed in are the page's own visible captions, in the page's own language: a
+   machine must never be shown a caption a reader is not.                     */
+export function imageGallery(
+  images: { url: string; caption: string; width: number; height: number }[],
+  lang: Locale = "en",
+): WebPage {
+  const r = ROUTES.gallery;
+  const c = routeCopy("gallery", lang);
+  const url = abs(localePath(lang, r.path));
+  return {
+    "@type": "ImageGallery",
+    "@id": `${url}#page`,
+    url,
+    name: c.fullTitle,
+    description: c.description,
+    inLanguage: LOCALE_TAG[lang],
+    isPartOf: { "@id": WEBSITE_ID },
+    about: { "@id": SHRINE_ID },
+    primaryImageOfPage: {
+      "@type": "ImageObject",
+      url: abs(r.image),
+    },
+    associatedMedia: images.map((i) => ({
+      "@type": "ImageObject" as const,
+      contentUrl: abs(i.url),
+      caption: i.caption,
+      width: `${i.width}`,
+      height: `${i.height}`,
+    })),
   } as WebPage;
 }
 
