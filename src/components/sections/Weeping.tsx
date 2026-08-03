@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import Image from "next/image";
+import { ResidentImage } from "@/components/ResidentImage";
 import { Link } from "@/components/LocaleLink";
 import { ArrowUpRight } from "lucide-react";
 import { gsap, DESKTOP, revealY } from "@/lib/gsap";
@@ -96,7 +96,7 @@ export function Weeping() {
       className="relative overflow-hidden bg-night-deep py-16 md:py-32"
     >
       <div ref={bgRef} className="absolute inset-0 md:will-change-transform">
-        <Image
+        <ResidentImage
           src="/images/history/the-weeping-madonna-4.jpg"
           alt=""
           fill
@@ -115,7 +115,7 @@ export function Weeping() {
             moment, so a reader who follows the link recognises where they are. */}
         <div className="reveal-item lg:col-span-5">
           <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-[1.75rem] shadow-2xl ring-1 ring-gold/25">
-            <Image
+            <ResidentImage
               src="/images/history/the-weeping-madonna-2.jpg"
               alt="The statue of Our Lady of the Assumption at Vadakkankulam, as the parish remembers the forenoon of 23 October 1803."
               fill

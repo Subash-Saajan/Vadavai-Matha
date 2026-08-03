@@ -1,10 +1,10 @@
 "use client";
 
 import { Link } from "@/components/LocaleLink";
-import { ArrowUpRight, Shirt, Camera, Accessibility, HandCoins } from "lucide-react";
+import { ArrowUpRight, Shirt, DoorOpen, HandCoins } from "lucide-react";
 import { useLang } from "@/components/layout/LanguageProvider";
 import { SCHEDULE, hasUpi, upiLink, config } from "@/lib/contact";
-import { formatClockList } from "@/lib/formatTime";
+import { formatClock, formatClockList } from "@/lib/formatTime";
 
 /**
  * When to come, and what to know before you do.
@@ -19,11 +19,47 @@ import { formatClockList } from "@/lib/formatTime";
 export function VisitWindow() {
   const { t, lang } = useLang();
 
+  // Two notes, not three: the photography note is gone at the parish's
+  // request. See the comment where its strings used to be in i18n.ts.
+  //
+  // `DoorOpen` rather than lucide's `Accessibility`, which is the wheelchair
+  // pictogram — an international access symbol sitting alone in a column of
+  // hairline outline icons, and it read as a regulation sign rather than as
+  // this page's own hand. A door standing open is what this note actually
+  // says (the church is at ground level; ring ahead and they will see you in)
+  // and it is the site's own image — /contact opens on a threshold.
   const notes = [
     { icon: Shirt, title: t.contact.notes.dress, body: t.contact.notes.dressBody },
-    { icon: Camera, title: t.contact.notes.photography, body: t.contact.notes.photographyBody },
-    { icon: Accessibility, title: t.contact.notes.access, body: t.contact.notes.accessBody },
+    { icon: DoorOpen, title: t.contact.notes.access, body: t.contact.notes.accessBody },
   ];
+
+  /* ⚠ EVERY HOUR BELOW COMES FROM `SCHEDULE` IN lib/contact.ts — the same
+     source /mass-timings reads, typeset by the same `formatClock`. It used to
+     be four hand-written strings in i18n.ts, and they had drifted: the evening
+     row said "Rosary 6:30 PM · Benediction 7:00 PM" flat, while /mass-timings
+     says the Sunday devotion begins at 5:30 PM. Assembling them here means the
+     parish changing an hour is one edit in one file, and the two pages cannot
+     disagree again. Words stay in i18n; numbers never do. */
+  const v = t.contact.visit;
+  // "Open daily, 9:00 AM – 8:00 PM" / "தினமும் காலை 9:00 – இரவு 8:00 வரை
+  // திறந்திருக்கும்". The verb sits before the hours in English and after them
+  // in Tamil, so the sentence is built from a lead and a tail, either of which
+  // may be empty. See the note on these keys in i18n.ts for why it says OPEN.
+  const chapelHours = [
+    v.chapelOpenLead,
+    `${formatClock(SCHEDULE.chapel.open, lang)} – ${formatClock(SCHEDULE.chapel.close, lang)}`,
+    v.chapelOpenTail,
+  ]
+    .filter(Boolean)
+    .join(" ");
+  const devotionHours = `${v.rosary} ${formatClock(SCHEDULE.devotions.rosary, lang)} · ${v.benediction} ${formatClock(SCHEDULE.devotions.benediction, lang)}`;
+  const sundayDevotions = [
+    v.sundayDevotionsLead,
+    formatClock(SCHEDULE.devotions.sundayStart, lang),
+    v.sundayDevotionsTail,
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <section className="section-padding relative overflow-hidden parchment-swell">
@@ -50,8 +86,16 @@ export function VisitWindow() {
               value: formatClockList(SCHEDULE.sundayMass, lang),
               sub: t.contact.visit.massHeading,
             },
-            { label: t.contact.visit.chapel, value: t.contact.visit.chapelHours, sub: "" },
-            { label: t.contact.visit.devotions, value: t.contact.visit.devotionsHours, sub: "" },
+            { label: t.contact.visit.chapel, value: chapelHours, sub: "" },
+            {
+              label: t.contact.visit.devotions,
+              value: devotionHours,
+              sub: "",
+              // The one line that was wrong. Sunday's devotion is an hour
+              // earlier than the other six days', and this row is the only
+              // place on /contact that can say so.
+              note: sundayDevotions,
+            },
           ].map((row) => (
             <div key={row.label}>
               {/* "WEEKDAYS · MASS", "SUNDAY · MASS" — 9.3px of Cinzel with a
@@ -65,6 +109,11 @@ export function VisitWindow() {
               <p className="font-serif text-xl md:text-2xl text-navy tabular-nums leading-snug">
                 {row.value}
               </p>
+              {"note" in row && row.note && (
+                <p className="mt-1.5 text-[0.84rem] md:text-[0.8rem] text-text-muted tabular-nums">
+                  {row.note}
+                </p>
+              )}
             </div>
           ))}
         </div>
@@ -108,14 +157,17 @@ export function VisitWindow() {
         {/* Before you come */}
         <div className="reveal mt-12 md:mt-16">
           <p className="kicker mb-7 md:mb-8">{t.contact.notes.heading}</p>
-          <div className="grid md:grid-cols-3 gap-7 md:gap-8">
+          {/* Two columns, because there are two notes. It was three, sized for
+              the photography note that no longer exists — leaving that grid
+              would have hung an empty third of the page beside them. */}
+          <div className="grid md:grid-cols-2 gap-7 md:gap-8">
             {notes.map((n) => {
               const Icon = n.icon;
               return (
                 <div key={n.title}>
                   <Icon className="w-4 h-4 text-gold-dark mb-3.5 md:mb-4" aria-hidden="true" />
                   <h3 className="font-serif text-xl text-navy mb-2.5">{n.title}</h3>
-                  <p className="text-[0.9rem] md:text-[0.85rem] text-text-muted leading-relaxed">{n.body}</p>
+                  <p className="text-[0.9rem] md:text-[0.85rem] text-text-muted leading-relaxed md:max-w-md">{n.body}</p>
                 </div>
               );
             })}

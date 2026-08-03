@@ -97,6 +97,7 @@ export const dict = {
       chronicleBody:
         "{n} moments, from a woman's cross in a forest clearing to a canonisation in Rome. Not one of them is claimed here without the book it came out of — and where the books disagree, this parish prints both.",
       chronicleCta: "Read the chronicle",
+      chronicleHeaderCta: "Read the full history",
       chronicleDoorTitle: "It does not end at {y}",
       chronicleDoorBody:
         "{n} more moments wait across the {c} chapters — and the last one is still open. This parish has not gone a single year without a priest since 1697, and it is still being written into.",
@@ -613,12 +614,21 @@ export const dict = {
           { when: "August 6 · Day 1", detail: "Flag Hoisting — 6:00 PM" },
           { when: "August 6 – 14 · Days 1–9", detail: "Tamil Masses — 5:00 AM, 6:15 AM & 7:15 AM" },
           { when: "August 14 · Day 9", detail: "Malayalam Mass — 4:00 PM" },
-          // The chariot is the largest thing in the feast and the site had never
-          // said when it moves. It leaves on the NIGHT OF THE 14th, not on the
-          // 15th — so a pilgrim who comes "for the chariot on the 15th" arrives
-          // the morning after it has passed. Stated by the parish.
-          { when: "August 14 · Night", detail: "Chariot leaves at 11:00 PM — through the night, around the village" },
+          /* ⚠ THE CHARIOT GOES OUT TWICE, AND BOTH TIMES ARE ON THE 15th.
+             This said "August 14 · Night — chariot leaves at 11:00 PM", and it
+             was wrong twice over: it leaves at ONE IN THE MORNING on the 15th,
+             and it goes out a SECOND time at three that afternoon, which the
+             site had never mentioned at all. Corrected by the parish, and the
+             1 a.m. start is what the Knowledge Base has as well (file 09: the
+             ther procession "at ~1 a.m. on 15 August").
+
+             This is the single most consequential line on the page. It is the
+             hour a hundred thousand people travel for, and getting it wrong by
+             one day is the difference between standing in the crowd and
+             arriving to an empty street. Do not edit it from a guess. */
+          { when: "August 15 · First procession", detail: "The chariot leaves at 1:00 AM — through the small hours, around the village" },
           { when: "August 15 · Feast Day", detail: "Bishop's Mass — 5:00 AM · English Mass" },
+          { when: "August 15 · Second procession", detail: "The chariot goes out again at 3:00 PM" },
           { when: "August 15 – 16", detail: "The chariot stands for people to see" },
         ],
       },
@@ -687,7 +697,14 @@ export const dict = {
         },
         {
           name: "The Apparition of Our Lady",
-          date: "October 23",
+          // ⚠ 21 OCTOBER IS THE FEAST; 23 OCTOBER 1803 IS THE EVENT. Do not
+          // "correct" one into the other. The parish keeps the feast of the
+          // Matha Kaatchi on 21 October (given by the parish, Aug 2026); the
+          // weeping it commemorates happened on Friday 23 October 1803, and
+          // that date is fixed and heavily sourced — it stays exactly as it is
+          // everywhere it appears in the history, the FAQ and APPARITION in
+          // lib/history.ts. Only the day the village keeps it has moved here.
+          date: "October 21",
           body: "Commemorating the Matha Kaatchi — the day Our Lady's statue is remembered to have extended her hands towards the faithful.",
         },
       ],
@@ -1265,36 +1282,40 @@ export const dict = {
         { t: "No timber", d: "no beam, no pillar, no centring" },
       ],
       recipeTitle: "What the mortar was made of",
+      /* Two lines a card, not three. The romanisation (`tr: "padaneer"` and
+         its three siblings) was removed in July 2026 at the owner's
+         instruction: it only respelled the Tamil headword in Latin letters
+         and said nothing the English gloss below it did not. Do not add the
+         field back. */
       recipe: [
         {
           ta: "பதனீர்",
-          tr: "padaneer",
           gloss: "Palm sap",
           d: "drawn from the palmyra, before it ferments",
         },
         {
           ta: "சுண்ணாம்பு",
-          tr: "chunnambu",
           gloss: "Lime",
           d: "burnt shell and limestone, the binder",
         },
         {
           ta: "கடுக்காய்",
-          tr: "kadukkai",
           gloss: "Myrobalan",
           d: "Terminalia chebula, the tannin that hardens it",
         },
         {
           ta: "முட்டை",
-          tr: "muttai",
           gloss: "Egg",
           d: "beaten in, for a mortar that sets like stone",
         },
       ],
       recipeNote:
         "This is the recipe the parish itself hands down. The English parish history calls the sap toddy, already fermented; the Tamil sources call it padaneer, fresh from the tree. On the lime, the kadukkai and the egg, every source agrees.",
+      /* Reworded July 2026 with the photograph. The old frame looked at the
+         sanctuary; the one that replaced it looks straight up into the nave
+         vault — see the figure note in HowItStands.tsx. */
       craftCaption:
-        "The vault above the sanctuary, arches turned without iron, beam or centring",
+        "The nave vault, its arches turned without iron, beam or centring",
 
       creedLabel: "The Meaning",
       creedTitle: "The Church as a Creed",
@@ -1439,11 +1460,16 @@ export const dict = {
       lightTitle: "Glass, Dye and Gold",
       lightBody:
         "For its first hundred years, the church told a plainer story in glass. The twenty-three traceries around it held ordinary, unmatched panes, and sixteen more windows along the side walls stayed sealed completely shut. They were kept airtight through the whole of the Jesuit years, for a reason the parish still gives simply as “the cold.” Then came 1972, the church's centenary, and the parish filled every tracery with coloured glass at last, and finally let the sealed windows open. What you see today is that gift, a hundred years late: diamond lattices of red, blue and yellow glass caught inside pointed Gothic arches, trefoil rosettes catching the light at their centres, and high over the nave, a rose window sits in the painted vault like a wheel cut from jewels. Inside, the vaults, arches and pillars are painted with flowers and scenery, made not from paint or chemical but from the dyes of plants and trees. Nothing has faded. Nothing has ever been repainted.",
+      /* One caption per photograph, in the order LightAndDye.tsx lays them out
+         — [0] [1] across the top of the 2×2 block, [2] [3] beneath. All four
+         were rewritten in July 2026 when the photographs changed: the old set
+         had the same lancet window twice and the captions had drifted off
+         what was actually pictured. These describe what is in the frame. */
       glassCaptions: [
-        "A rose window of jewelled glass set in painted vaulting",
-        "Lancet traceries, coloured at the 1972 centenary",
-        "Diamond panes and trefoil rosettes",
-        "Light falling through the nave toward the eastern doors",
+        "A four-light tracery window, its glass filled at the 1972 centenary",
+        "The rose window set in the painted vault",
+        "Diamond panes and trefoil rosettes in the lancet heads",
+        "Coloured glass in a wall stencilled in plant dye",
       ],
 
       imagesLabel: "What It Carries",
@@ -1574,6 +1600,16 @@ export const dict = {
         evening: "Evening",
         today: "Today",
         gathering: "The parish gathers",
+        // ⚠ THE PHONE NAMES EACH SERVICE; THE SEVEN-COLUMN GRID DOES NOT.
+        // On a monitor a column carries two headings — MORNING and EVENING —
+        // and the two times under each are self-evidently the two Masses and
+        // the two devotions. Turned into a row on a phone those headings were
+        // dropped, and the day became four bare numbers: "5:00 AM 6:10 AM |
+        // 6:30 PM 7:00 PM", with nothing anywhere saying which was Mass and
+        // which was the Rosary. These three name them, one line each.
+        massLabel: "Mass",
+        rosaryLabel: "Rosary",
+        benedictionLabel: "Benediction",
         // English puts "From" before the time; Tamil puts "முதல்" after it.
         fromLead: "From",
         fromTail: "",
@@ -1812,9 +1848,32 @@ export const dict = {
         weekday: "Monday – Saturday",
         sunday: "Sunday",
         chapel: "Adoration Chapel",
-        chapelHours: "Daily, 9:00 AM – 8:00 PM",
         devotions: "Evening devotions",
-        devotionsHours: "Rosary 6:30 PM · Benediction 7:00 PM",
+        // ⚠ NO HOUR IS WRITTEN OUT HERE ANY MORE. Every time in this block is
+        // now assembled in VisitWindow from SCHEDULE in lib/contact.ts, the
+        // same source /mass-timings reads. The hand-written strings that used
+        // to sit here said the evening devotion was the Rosary at 6:30 and
+        // Benediction at 7:00 on every day of the week — which is what
+        // /mass-timings contradicts: on SUNDAY it begins an hour earlier, at
+        // 5:30. Two pages of this site were telling a pilgrim two different
+        // things about the same Sunday evening. Words only, from here on.
+        // ⚠ "OPEN", NOT "ADORATION AT". The only thing any source gives for
+        // the Eucharistic chapel is its opening hours — 9 a.m. to 8 p.m.
+        // (History_2026 "Parish Statistics", via KB file 09 §11). Adoration as
+        // a scheduled service is recorded only on the first Saturday of the
+        // month and on particular feast days (150yr souvenir p.8), never as a
+        // daily 9 a.m. office. "Daily, 9:00 AM – 8:00 PM" under the heading
+        // "Adoration Chapel" invited exactly the wrong reading — that
+        // adoration runs eleven hours a day. It says open, because open is
+        // what we know. English leads, Tamil closes with the verb.
+        chapelOpenLead: "Open daily,",
+        chapelOpenTail: "",
+        rosary: "Rosary",
+        benediction: "Benediction",
+        // "Sundays from 5:30 PM" — English leads, Tamil trails ("… முதல்"),
+        // the same idiom as mass.week.fromLead / fromTail.
+        sundayDevotionsLead: "Sundays from",
+        sundayDevotionsTail: "",
         fullTimings: "See all Mass timings and feasts",
         workingChurch:
           "This is a working parish, not a museum. Please come quietly if a Mass or a funeral is in progress.",
@@ -1843,9 +1902,9 @@ export const dict = {
         heading: "Before you come",
         dress: "Dress",
         dressBody: "Modest dress, as in any Indian church. Shoulders and knees covered.",
-        photography: "Photographs",
-        photographyBody:
-          "Welcome outside and at the back of the church. Please do not photograph during Mass or a funeral.",
+        // The photography note was removed at the parish's request. Do not put
+        // it back without asking: it is a rule this site should not be the one
+        // publishing.
         access: "Access",
         accessBody:
           "The church is at ground level. For help with wheelchair access or with an elderly pilgrim, telephone the parish office before you travel and they will make arrangements.",
@@ -1930,6 +1989,7 @@ export const dict = {
       chronicleTitle: `இங்கு நடந்த அனைத்தும் எழுதி வைக்கப்பட்டுள்ளன`,
       chronicleBody: `காட்டுவெளியில் ஒரு பெண்மணி எழுப்பிய குருசடி முதல் உரோமையில் ஒரு புனிதர் பட்டம் வரை — {n} தருணங்கள். எந்த ஒன்றும் அது வந்த நூல் இல்லாமல் இங்கே கூறப்படவில்லை; நூல்கள் ஒன்றோடொன்று முரண்படும் இடங்களில் இரு கூற்றுகளையும் இப்பங்கு வெளியிடுகிறது.`,
       chronicleCta: `வரலாற்று ஏட்டைப் படிக்க`,
+      chronicleHeaderCta: `முழு வரலாற்றையும் படிக்க`,
       chronicleDoorTitle: `{y}-உடன் இது முடிந்துவிடவில்லை`,
       chronicleDoorBody: `{c} அத்தியாயங்கள் முழுவதிலும் இன்னும் {n} தருணங்கள் காத்திருக்கின்றன — கடைசி அத்தியாயம் இன்னும் முடியவில்லை. 1697 முதல் இந்தப் பங்கில் அருட்தந்தை இல்லாத ஓராண்டும் இல்லை; இன்றும் இதில் புதிய பக்கங்கள் சேர்ந்துகொண்டே இருக்கின்றன.`,
       chronicleFrames: [
@@ -2391,12 +2451,16 @@ export const dict = {
             detail: `மலையாளத் திருப்பலி — மாலை 4:00`,
           },
           {
-            when: `ஆகஸ்ட் 14 · இரவு`,
-            detail: `தேர் ஊர்வலம் — இரவு 11:00 மணிக்குப் புறப்பட்டு, இரவு முழுவதும் ஊர் வலம்`,
+            when: `ஆகஸ்ட் 15 · முதல் ஊர்வலம்`,
+            detail: `தேர் அதிகாலை 1:00 மணிக்குப் புறப்பட்டு, விடியும்வரை ஊர் வலம்`,
           },
           {
             when: `ஆகஸ்ட் 15 · திருவிழா நாள்`,
             detail: `ஆயரின் திருப்பலி — காலை 5:00 · ஆங்கிலத் திருப்பலி`,
+          },
+          {
+            when: `ஆகஸ்ட் 15 · இரண்டாம் ஊர்வலம்`,
+            detail: `தேர் மீண்டும் மதியம் 3:00 மணிக்குப் புறப்படும்`,
           },
           {
             when: `ஆகஸ்ட் 15 – 16`,
@@ -2463,7 +2527,7 @@ export const dict = {
         },
         {
           name: `மாதாவின் புதுமைக் காட்சி`,
-          date: `அக்டோபர் 23`,
+          date: `அக்டோபர் 21`,
           body: `அன்னையின் திருவுருவம் விசுவாசிகளை நோக்கித் தம் திருக்கரங்களை நீட்டியதாகப் போற்றப்படும் மாதா காட்சி இந்நாளில் நினைவுகூரப்படுகிறது.`,
         },
       ],
@@ -3069,34 +3133,35 @@ FIDES VNA SIT, VNAQVE MENS.`,
         },
       ],
       recipeTitle: `சாந்தில் கலந்தவை`,
+      /* See the note on `recipe` in the English block: the romanisation line
+         is gone. Here `gloss` is Tamil too, and for three of the four it is
+         simply the headword again — HowItStands drops the repeat rather than
+         printing சுண்ணாம்பு twice, so leaving it identical is correct, not a
+         missing translation. */
       recipe: [
         {
           ta: `பதனீர்`,
-          tr: `padaneer`,
           gloss: `பனஞ்சாறு`,
           d: `புளிக்கும் முன் பனையிலிருந்து இறக்கப்பட்டது`,
         },
         {
           ta: `சுண்ணாம்பு`,
-          tr: `chunnambu`,
           gloss: `சுண்ணாம்பு`,
           d: `சுட்ட சங்கும் சுண்ணாம்புக் கல்லும், பிணைப்பான்`,
         },
         {
           ta: `கடுக்காய்`,
-          tr: `kadukkai`,
           gloss: `கடுக்காய்`,
           d: `Terminalia chebula, சாந்தை இறுகச் செய்யும் டானின் சத்து`,
         },
         {
           ta: `முட்டை`,
-          tr: `muttai`,
           gloss: `முட்டை`,
           d: `கல் போல் இறுகும் சாந்துக்காகக் கலக்கப்பட்டது`,
         },
       ],
       recipeNote: `பங்கு தானே தரும் செய்முறை இது. ஆங்கிலப் பங்கு வரலாறு “கள்” (புளித்த சாறு) என்கிறது; தமிழ் ஆதாரங்கள் “பதனீர்” என்கின்றன. சுண்ணாம்பு, கடுக்காய், முட்டை ஆகியவற்றில் அனைத்து ஆதாரங்களும் ஒன்றுபடுகின்றன.`,
-      craftCaption: `பீடப்பகுதிக்கு மேலுள்ள வளைவு, இரும்போ, உத்திரமோ, சட்டமோ இன்றி எழுப்பப்பட்டது`,
+      craftCaption: `நடைக்கு மேலுள்ள கூரை வளைவு, இரும்போ, உத்திரமோ, சட்டமோ இன்றி எழுப்பப்பட்டது`,
       creedLabel: `பொருள்`,
       creedTitle: `விசுவாசப் பிரமாணமாய் நிற்கும் ஆலயம்`,
       creedBody: `தன் கட்டிடத்தையே எண்களாகப் படிக்கிறது இப்பங்கு. பங்கின் சொந்தக் கையெழுத்துக் குறிப்பாலும் வாய்மொழியாலும் தலைமுறை தலைமுறையாகக் காக்கப்பட்ட மரபு இது, 1855-இல் கட்டியவர்களே எழுதி வைத்தது அல்ல. இங்கு எதுவும் வெறும் கட்டமைப்பு அல்ல. ஒவ்வொரு எண்ணும் ஒரு மறையுண்மை. கீழே ஒரு வரியைத் தொடுங்கள், அது வரைபடத்தில் ஒளிரும். பின், பலிபீடத்தில் காத்திருக்கும் எண்களையும் அதே வழியில் படியுங்கள்.`,
@@ -3206,10 +3271,10 @@ FIDES VNA SIT, VNAQVE MENS.`,
       lightTitle: `கண்ணாடி, சாயம், பொன்`,
       lightBody: `முதல் நூறு ஆண்டுகளில், ஆலயம் கண்ணாடியில் சொன்னது வேறொரு எளிமையான கதை. ஆலயத்தைச் சுற்றியுள்ள 23 சாளர வேலைப்பாடுகளிலும் சாதாரண, பொருந்தாத கண்ணாடியே இருந்தது. பக்கச் சுவர்களிலுள்ள மேலும் 16 சாளரங்கள் முற்றிலும் மூடப்பட்டே இருந்தன, இயேசு சபையின் நிர்வாகக் காலம் முழுவதும் காற்றுப் புகாதபடி அடைக்கப்பட்டிருந்தன, பங்கு இன்றும் சொல்லும் காரணம் வெறுமனே “குளிர்.” பின்னர் 1972 வந்தது, ஆலயத்தின் நூற்றாண்டு விழா, பங்கு ஒவ்வொரு சாளரத்தையும் இறுதியாக வண்ணக் கண்ணாடியால் நிரப்பியது, அடைக்கப்பட்டிருந்த சாளரங்களையும் திறந்தது. இன்று நீங்கள் காண்பது நூறு ஆண்டுகள் தாமதமாக வந்த அந்த அன்பளிப்பே: சிவப்பு, நீலம், மஞ்சள் நிற வைர வடிவக் கண்ணாடிகள் கூர்முனை கோத்திக் வளைவுகளுக்குள் பதிந்திருக்கின்றன, மும்மடல் ரோஜா வடிவங்கள் தம் மையத்தில் ஒளியைப் பிடிக்கின்றன, நடையின் மேல் உயரே, வண்ணம் தீட்டிய கூரை வளைவுக்குள் ஒரு ரோஜா சாளரம் ரத்தினத்தால் செதுக்கப்பட்ட சக்கரம் போல் அமர்ந்திருக்கிறது. உள்ளே, கூரை வளைவுகள், வில்வளைவுகள், தூண்கள் என எங்கும் பூக்களும் இயற்கைக் காட்சிகளும் தீட்டப்பட்டுள்ளன, வண்ணப் பூச்சாலோ ரசாயனத்தாலோ அல்ல, மரம் செடிகளிலிருந்து எடுத்த இயற்கைச் சாயங்களால். எதுவும் மங்கவில்லை. எதுவும் ஒருபோதும் மீண்டும் பூசப்படவில்லை.`,
       glassCaptions: [
-        `வர்ணக் கண்ணாடி இதழ்ச் சாளரம், வண்ணம் தீட்டிய வளைவில்`,
-        `1972 நூற்றாண்டு விழாவில் வண்ணமேற்றப்பட்ட நீள் சாளரங்கள்`,
-        `வைர வடிவக் கண்ணாடிக் கட்டங்களும் மும்மடல் ரோஜா வடிவங்களும்`,
-        `நடையின் வழியே கிழக்கு வாசல் நோக்கி விழும் ஒளி`,
+        `1972 நூற்றாண்டு விழாவில் வண்ணக் கண்ணாடி நிரப்பப்பட்ட நான்கு பிரிவுச் சாளரம்`,
+        `வண்ணம் தீட்டிய கூரை வளைவில் அமர்ந்திருக்கும் ரோஜா சாளரம்`,
+        `நீள் சாளரங்களின் தலைப்பகுதியில் வைர வடிவக் கண்ணாடிகளும் மும்மடல் ரோஜா வடிவங்களும்`,
+        `இயற்கைச் சாயம் தீட்டிய சுவரில் அமைந்த வண்ணக் கண்ணாடி`,
       ],
       imagesLabel: `ஆலயம் சுமப்பவை`,
       imagesTitle: `கட்டிடம் தாங்கும் இரு சொரூபங்கள்`,
@@ -3385,6 +3450,9 @@ FIDES VNA SIT, VNAQVE MENS.`,
         evening: `மாலை`,
         today: `இன்று`,
         gathering: `பங்கு ஒன்றுகூடுகிறது`,
+        massLabel: `திருப்பலி`,
+        rosaryLabel: `செபமாலை`,
+        benedictionLabel: `ஆசீர்வாதம்`,
         fromLead: ``,
         fromTail: `முதல்`,
       },
@@ -3575,9 +3643,13 @@ FIDES VNA SIT, VNAQVE MENS.`,
         weekday: `திங்கள் – சனி`,
         sunday: `ஞாயிறு`,
         chapel: `ஆராதனைச் சிற்றாலயம்`,
-        chapelHours: `தினமும், காலை 9:00 – இரவு 8:00`,
         devotions: `மாலைப் பக்தி முயற்சிகள்`,
-        devotionsHours: `செபமாலை மாலை 6:30 · ஆசீர்வாதம் மாலை 7:00`,
+        chapelOpenLead: `தினமும்`,
+        chapelOpenTail: `வரை திறந்திருக்கும்`,
+        rosary: `செபமாலை`,
+        benediction: `ஆசீர்வாதம்`,
+        sundayDevotionsLead: `ஞாயிறு அன்று`,
+        sundayDevotionsTail: `முதல்`,
         fullTimings: `அனைத்துத் திருப்பலி நேரங்களையும் திருவிழாக்களையும் பாருங்கள்`,
         workingChurch: `இது வழிபாடு நடைபெறும் பங்கு ஆலயம்; அருங்காட்சியகம் அல்ல. திருப்பலியோ இறுதிச் சடங்கோ நடந்துகொண்டிருந்தால், தயவுசெய்து அமைதியாக வாருங்கள்.`,
         feastTitle: `திருவிழாவின் போது, ஆகஸ்ட் 6 – 15`,
@@ -3601,8 +3673,6 @@ FIDES VNA SIT, VNAQVE MENS.`,
         heading: `வருவதற்கு முன்`,
         dress: `உடை`,
         dressBody: `இந்தியாவின் எந்த ஆலயத்திலும் போலவே, அடக்கமான உடை அணிந்து வாருங்கள். தோள்களும் முழங்கால்களும் மூடப்பட்டிருக்க வேண்டும்.`,
-        photography: `புகைப்படங்கள்`,
-        photographyBody: `ஆலயத்திற்கு வெளியேயும் ஆலயத்தின் பின்பகுதியிலும் புகைப்படம் எடுக்கலாம். திருப்பலியோ இறுதிச் சடங்கோ நடக்கும்போது தயவுசெய்து புகைப்படம் எடுக்க வேண்டாம்.`,
         access: `அணுகல்`,
         accessBody: `ஆலயம் தரைமட்டத்தில் உள்ளது. சக்கர நாற்காலியில் வருபவர்களுக்கோ, வயது முதிர்ந்த திருப்பயணிகளுக்கோ உதவி தேவைப்பட்டால், பயணத்திற்கு முன் பங்கு அலுவலகத்திற்குத் தொலைபேசியில் அழையுங்கள்; அவர்கள் ஏற்பாடு செய்வார்கள்.`,
         offeringTitle: `காணிக்கைகள்`,

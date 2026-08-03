@@ -2,7 +2,7 @@
 
 import { useRef, useEffect } from "react";
 import { Link } from "@/components/LocaleLink";
-import Image from "next/image";
+import { ResidentImage } from "@/components/ResidentImage";
 import { gsap, revealY } from "@/lib/gsap";
 import { useLang } from "@/components/layout/LanguageProvider";
 
@@ -100,7 +100,7 @@ export function Saints() {
               className="saint-card group relative block aspect-3/4 rounded-2xl overflow-hidden bg-navy ring-1 ring-gold/20 shadow-xl sm:rounded-3xl"
             >
               {/* Portrait fills the whole card — the photo holder */}
-              <Image
+              <ResidentImage
                 src={s.image}
                 alt={s.name}
                 fill

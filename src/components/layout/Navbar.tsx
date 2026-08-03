@@ -103,7 +103,12 @@ export function Navbar() {
       ref={navRef}
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "navbar-blur bg-cream/80 border-b border-gold/15"
+          ? /* `bg-cream/95` on a phone, `/80` from `md`. The bar carries no
+               backdrop-filter below `md` any more — it was the site's only
+               per-frame filter that is on screen for the whole of every scroll
+               — so the opacity does the work the blur was doing. See the note
+               on `.navbar-blur` in globals.css; the two must change together. */
+            "navbar-blur bg-cream/95 border-b border-gold/15 md:bg-cream/80"
           : "bg-transparent"
       }`}
     >

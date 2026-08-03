@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import Image from "next/image";
+import { ResidentImage } from "@/components/ResidentImage";
 import { Link } from "@/components/LocaleLink";
 import { gsap, DESKTOP, revealY } from "@/lib/gsap";
 import { ArrowUpRight } from "lucide-react";
@@ -69,7 +69,7 @@ export function VisitCTA() {
       className="relative h-[82svh] min-h-130 overflow-hidden flex items-center justify-center"
     >
       <div ref={imgRef} className="absolute inset-0 md:will-change-transform">
-        <Image
+        <ResidentImage
           src="/images/facade-day.jpg"
           alt=""
           fill

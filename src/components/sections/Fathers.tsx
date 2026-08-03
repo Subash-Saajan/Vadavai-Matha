@@ -120,10 +120,35 @@ export function Fathers() {
             register, so a 19th-century plate and a modern photograph sit in one
             row without the modern one shouting. Unlabelled by design — the copy
             above does not mention how many there are. */}
-        <div ref={rowRef} className="mt-14 flex flex-wrap items-end gap-x-3 gap-y-5 sm:gap-x-4">
+        {/* Centred on a phone. Left-aligned, the last row of a wrapped grid
+            ends in a ragged gap the width of two or three missing faces, with
+            the counted rule beneath it — it read as a column that had failed to
+            fill rather than as a row of portraits. From `sm` the composition is
+            the intended one: faces running from the left into the rule that
+            counts the men who left no likeness, which only works flush. */}
+        <div
+          ref={rowRef}
+          className="mt-14 flex flex-wrap items-end justify-center gap-x-3 gap-y-5 sm:justify-start sm:gap-x-4"
+        >
           {FACES.map((p) => (
-            <figure key={`${p.n}-${p.portrait}`} className="father-face group relative">
-              <div className="relative h-16 w-16 overflow-hidden rounded-full ring-1 ring-gold/45 transition-all duration-500 group-hover:ring-gold sm:h-20 sm:w-20">
+            /* ── WHY THE Z-INDEX IS ON THE FIGURE AND NOT ON THE CAPTION ─────
+               The caption already carried `z-10` and was still painted UNDER
+               the faces of the next row. GSAP animates `.father-face` — and a
+               non-`none` transform makes an element a STACKING CONTEXT, which
+               these figures keep after the tween lands. That traps the
+               caption's `z-10` inside its own figure, so the figures paint in
+               DOM order and every face in the row below covers the name of the
+               face above it. Raising the figure is the only thing that can
+               work; raising the caption cannot, at any value.
+
+               `tabIndex` + `group-focus` because a phone has no hover: without
+               it these names were reachable by pointer only. */
+            <figure
+              key={`${p.n}-${p.portrait}`}
+              tabIndex={0}
+              className="father-face group relative z-0 rounded-full hover:z-30 focus:z-30 focus-within:z-30"
+            >
+              <div className="relative h-16 w-16 overflow-hidden rounded-full ring-1 ring-gold/45 transition-all duration-500 group-hover:ring-gold group-focus:ring-gold sm:h-20 sm:w-20">
                 <Image
                   src={`/images/priests/${p.portrait}.jpg`}
                   alt={p.name}
@@ -134,7 +159,7 @@ export function Fathers() {
               </div>
               {/* Name and years on hover only — eleven captions at rest would
                   turn a row of faces into a table. */}
-              <figcaption className="pointer-events-none absolute -bottom-1 left-1/2 z-10 w-40 -translate-x-1/2 translate-y-full rounded-lg bg-navy px-3 py-2 text-center opacity-0 shadow-lg transition-opacity duration-300 group-hover:opacity-100">
+              <figcaption className="pointer-events-none absolute -bottom-1 left-1/2 w-40 -translate-x-1/2 translate-y-full rounded-lg bg-navy px-3 py-2 text-center opacity-0 shadow-lg transition-opacity duration-300 group-hover:opacity-100 group-focus:opacity-100">
                 <span className="block font-serif text-[0.78rem] leading-tight text-white">
                   {p.name}
                 </span>
@@ -149,7 +174,9 @@ export function Fathers() {
               a rule, not a face. */}
           <div className="ml-1 flex min-w-[10rem] flex-1 flex-col justify-end pb-1.5">
             <span className="block h-px w-full bg-gold-dark/30" />
-            <span className="ui-label mt-2 block text-text-muted">
+            {/* Centred with the faces on a phone, where this rule is a full
+                line of its own beneath them rather than the tail of the row. */}
+            <span className="ui-label mt-2 block text-center text-text-muted sm:text-left">
               + {NAMELESS} {t.home.fathersStat1}
             </span>
           </div>

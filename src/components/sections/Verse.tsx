@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import Image from "next/image";
+import { ResidentImage } from "@/components/ResidentImage";
 import { gsap, DESKTOP } from "@/lib/gsap";
 import { useLang } from "@/components/layout/LanguageProvider";
 
@@ -88,7 +88,7 @@ export function Verse() {
       className="relative h-[92svh] flex items-center justify-center overflow-hidden bg-navy"
     >
       <div ref={imgRef} className="absolute inset-0 md:will-change-transform">
-        <Image
+        <ResidentImage
           src="/church-interior.jpeg"
           alt=""
           fill

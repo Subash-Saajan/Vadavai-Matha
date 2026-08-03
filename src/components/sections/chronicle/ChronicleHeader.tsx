@@ -1,6 +1,8 @@
 "use client";
 
 import { useRef, useEffect } from "react";
+import { ArrowUpRight } from "lucide-react";
+import { Link } from "@/components/LocaleLink";
 import { gsap } from "@/lib/gsap";
 import { useLang } from "@/components/layout/LanguageProvider";
 import { chronicleCounts, fillCounts } from "@/lib/chronicle";
@@ -61,10 +63,50 @@ export function ChronicleHeader({ className = "" }: { className?: string }) {
       <p className="reveal-item kicker mb-5">{t.home.chronicleLabel}</p>
       <h2 className="reveal-item max-w-3xl font-serif text-[clamp(1.95rem,7.8vw,2.25rem)] leading-[1.05] text-navy md:text-5xl lg:text-6xl">
         {t.home.chronicleTitle}
+        {/* Desktop: the link rides INSIDE the heading, as one more inline word
+            after "…written down". Set as a sibling block it would align to the
+            right edge of the h2's max-w-3xl box — a third of a screen adrift of
+            the text it belongs to, which is how it read beside the paragraph.
+            Inline, it follows the last line wherever that line happens to end,
+            in either language. It is far shorter than the 1.05 line box it sits
+            in, so it adds NO height — which matters, because this section is
+            pinned to exactly one viewport at `lg` and every pixel gained up
+            here is taken off the cards. */}
+        <HistoryLink className="ml-5 hidden align-middle lg:inline-flex" />
       </h2>
       <p className="reveal-item mt-6 max-w-2xl text-[0.98rem] leading-relaxed text-text-muted md:text-lg">
         {body}
       </p>
+      {/* Below `lg` there is no pin and no room beside a heading that is already
+          filling the screen, so the same link stacks under the paragraph. */}
+      <HistoryLink className="reveal-item mt-6 inline-flex lg:hidden" />
     </div>
+  );
+}
+
+/**
+ * The Chronicle header's way into /history.
+ *
+ * Rendered twice — once inline in the heading for `lg`, once stacked for
+ * everything under it — because the two placements are a layout difference, not
+ * a styling one, and only one is ever visible. The caller supplies the display
+ * class and the position; everything else is fixed here so the two cannot drift
+ * apart. Deliberately the outline pill and not the filled navy one the last
+ * card of the strip carries: two doors into the same page should not look like
+ * the same button twice.
+ *
+ * It is NOT a `.reveal-item` in the heading — it inherits the h2's own reveal
+ * there, and animating a child inside an animating parent reads as a stutter.
+ */
+function HistoryLink({ className = "" }: { className?: string }) {
+  const { t } = useLang();
+  return (
+    <Link
+      href="/history"
+      className={`group shrink-0 items-center gap-2 whitespace-nowrap rounded-full border border-gold/60 px-5 py-2.5 font-display text-[0.7rem] leading-none tracking-[0.18em] text-navy uppercase transition-colors duration-500 hover:border-gold hover:bg-gold hover:text-navy lg:text-[0.65rem] lg:tracking-[0.2em] ${className}`}
+    >
+      {t.home.chronicleHeaderCta}
+      <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+    </Link>
   );
 }

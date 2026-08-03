@@ -109,6 +109,45 @@ export function nextFeastIndex(today: number): number {
   return today ? nextFeastIndices(today, 1)[0] : -1;
 }
 
+/* ── What the parish is keeping next ───────────────────────────────────────
+   `nextFeastIndex` answers only "which of the EIGHT", and for most of July
+   that is the wrong answer: it would name a September feast while the whole
+   village is preparing the Assumption, which is not in the eight because it is
+   pinned separately. The plate at the head of /mass-timings — the one thing on
+   that page a reader sees without scrolling — has to name whichever comes
+   first, so the annual feast is put back into the comparison here.            */
+export type NextObservance = { running: boolean } & (
+  | { kind: "annual" }
+  | { kind: "feast"; index: number }
+);
+
+/** Ordinal wait for any dated range, on the same coarse scale as `waitFor`. */
+function waitForRange(
+  start: readonly [number, number],
+  end: readonly [number, number],
+  today: number,
+): number {
+  const from = ord(start);
+  if (today >= from && today <= ord(end)) return 0;
+  return from >= today ? from - today : from - today + YEAR;
+}
+
+/** The soonest observance of any kind — the eight, or the Assumption. `null`
+ *  on the server and the first client paint, where the date is not yet known. */
+export function nextObservance(today: number): NextObservance | null {
+  if (!today) return null;
+
+  const annualWait = waitForRange(ANNUAL_FEAST.start, ANNUAL_FEAST.end, today);
+  const index = nextFeastIndex(today);
+  const feastWait = waitFor(index, today);
+
+  // Ties go to the annual feast: if the parish's own ten days are running,
+  // nothing else on the calendar is what a visitor means by "the festival".
+  return annualWait <= feastWait
+    ? { kind: "annual", running: annualWait === 0 }
+    : { kind: "feast", index, running: feastWait === 0 };
+}
+
 /* ── The annual feast's countdown ──────────────────────────────────────────
    The ten-day feast is the one thing on this site a pilgrim plans travel
    around, so it gets real day arithmetic rather than the coarse ordinal above.

@@ -21,19 +21,24 @@ import { PHONE } from "@/lib/contact";
       between two of them. One of those links is the parish TELEPHONE NUMBER,
       which is the single most consequential thing in this footer.
 
-      The fix is `py-2` on the anchor itself, NOT on the `<li>` — the padded
+      The fix is padding on the anchor itself, NOT on the `<li>` — the padded
       box has to be the link's own box or the space around the words is dead.
-      Row spacing drops to `space-y-1` at the same time, because the padding
+      Row spacing drops to `space-y-0.5` at the same time, because the padding
       supplies the separation and leaving both would only push the columns
-      down the page. 15px text + 16px of padding is a ~53px target on a 4px
-      gutter, which no longer overlaps its neighbour. Desktop restores
-      `py-0` / `space-y-2.5` / 14px exactly. */
+      down the page. Desktop restores `py-0` / `space-y-2.5` / 14px exactly.
+
+   The mobile column now runs at 13.6px on `py-1.5`: a ~33px target on a 2px
+   gutter. Under the 44px guideline and deliberately so — the footer moved to
+   two columns to stop being a full screen of scrolling, and a 53px row eleven
+   times over is most of what made it that tall. 33px with clear separation is
+   the trade; the phone number keeps the taller target below, because that one
+   gets tapped from a roadside. */
 const COL_HEAD =
-  "font-display text-[0.72rem] tracking-[0.18em] md:text-[0.65rem] md:tracking-[0.32em] uppercase text-gold mb-4 md:mb-5";
+  "font-display text-[0.7rem] tracking-[0.14em] md:text-[0.65rem] md:tracking-[0.32em] uppercase text-gold mb-2.5 md:mb-5";
 const COL_LIST =
-  "space-y-1 md:space-y-2.5 text-white/80 text-[0.95rem] md:text-sm";
+  "space-y-0.5 md:space-y-2.5 text-white/80 text-[0.85rem] md:text-sm";
 const COL_LINK =
-  "inline-block py-2 md:py-0 hover:text-gold transition-colors";
+  "inline-block py-1.5 md:py-0 hover:text-gold transition-colors";
 
 export function Footer() {
   const { t } = useLang();
@@ -57,15 +62,26 @@ export function Footer() {
       {/* top hairline */}
       <div className="relative h-px bg-linear-to-r from-transparent via-gold/40 to-transparent" />
 
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-10 py-14 md:py-20 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-12 gap-10 md:gap-12">
+      {/* Two columns on a phone, not one. Stacked, the four blocks ran to
+          roughly a screen and a half of nothing but links — you scrolled past
+          the footer the way you scroll past a page. Paired, the whole thing
+          fits inside one viewport.
+
+          The placement is explicit rather than left to auto-flow: the story
+          column is the tall one (five links), so it takes both rows of the
+          left side and Visit / The Record stack down the right. Auto-flow
+          would have put The Record back under the story column and left a
+          ragged hole. All of it is `md:`-reset — the 3-across and 12-across
+          desktop grids are untouched. */}
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-10 py-9 md:py-20 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-12 gap-x-6 gap-y-7 md:gap-12">
         {/* At md the brand takes its own full row above the three columns; at
             lg it becomes the first of four equal twelfths-of-three. */}
-        <div className="md:col-span-3 lg:col-span-3">
-          <div className="flex items-center gap-3 mb-2">
+        <div className="col-span-2 md:col-span-3 lg:col-span-3">
+          <div className="flex items-center gap-3 mb-1.5 md:mb-2">
             <svg width="14" height="22" viewBox="0 0 13 20" fill="none" className="text-gold" aria-hidden="true">
               <path d="M6.5 0v20M0.5 6h12" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
             </svg>
-            <span className="font-display text-2xl tracking-[0.16em] uppercase">
+            <span className="font-display text-xl md:text-2xl tracking-[0.16em] uppercase">
               Little Rome
             </span>
           </div>
@@ -74,16 +90,17 @@ export function Footer() {
               smaller than any legibility floor and then pulled apart by 0.4em
               on the narrowest screen we serve. Up to 10.9px and the tracking
               comes in to pay for the width, so the line does not get longer. */}
-          <p className="text-[0.68rem] tracking-[0.2em] md:text-[0.6rem] md:tracking-[0.4em] uppercase text-gold mb-5 ml-7">
+          <p className="text-[0.68rem] tracking-[0.2em] md:text-[0.6rem] md:tracking-[0.4em] uppercase text-gold mb-3 md:mb-5 ml-7">
             Our Lady of Assumption
           </p>
-          <p className="text-white/75 max-w-sm leading-relaxed font-serif text-[1.05rem] md:text-lg">
+          <p className="text-white/75 max-w-sm leading-relaxed font-serif text-[0.95rem] md:text-lg">
             {t.footer.tagline}
           </p>
         </div>
 
-        {/* 1 — the story. Who we are and how we got here. */}
-        <div className="lg:col-span-3">
+        {/* 1 — the story. Who we are and how we got here. The five-link column,
+            so on a phone it holds the whole left side. */}
+        <div className="row-span-2 md:row-span-1 lg:col-span-3">
           <p className={COL_HEAD}>
             {t.footer.shrine}
           </p>
@@ -102,7 +119,7 @@ export function Footer() {
         </div>
 
         {/* 2 — the practical column. Everything a pilgrim planning a trip needs. */}
-        <div className="lg:col-span-3">
+        <div className="col-start-2 md:col-start-auto lg:col-span-3">
           <p className={COL_HEAD}>
             {t.footer.visit}
           </p>
@@ -112,23 +129,25 @@ export function Footer() {
             <li><Link href="/contact" className={COL_LINK}>{t.nav.contact}</Link></li>
             <li>
               {/* The one link in this footer a pilgrim taps while standing in a
-                  road. It gets the same padded target as the rest. */}
+                  road. It keeps the full-size target the rest of the column
+                  gave up, which is why the padding is spelled out here instead
+                  of coming from COL_LINK. */}
               <a
                 href={`tel:${PHONE.e164}`}
-                className={`${COL_LINK} tabular-nums`}
+                className="inline-block py-2.5 md:py-0 hover:text-gold transition-colors tabular-nums"
               >
                 {PHONE.display}
               </a>
             </li>
-            {/* Not a link, so it carries its own top space back — `space-y-1`
+            {/* Not a link, so it carries its own top space back — `space-y-0.5`
                 assumes the padded anchors above are supplying the gutter. */}
-            <li className="pt-2 md:pt-0 text-white/60 leading-relaxed">{t.contact.address}</li>
+            <li className="pt-1.5 md:pt-0 text-[0.78rem] md:text-sm text-white/60 leading-relaxed">{t.contact.address}</li>
           </ul>
         </div>
 
         {/* 3 — where the claims come from. Sources, answers, and the people who
             found the documents. Provenance kept apart from devotion on purpose. */}
-        <div className="lg:col-span-3">
+        <div className="col-start-2 md:col-start-auto lg:col-span-3">
           <p className={COL_HEAD}>
             {t.footer.record}
           </p>
@@ -146,19 +165,31 @@ export function Footer() {
             35% opacity over a near-black ground is not quiet, it is absent.
             Both go up a step below `md` and the credit's ink comes up with it;
             desktop keeps 12px / 10.4px / 35% unchanged. */}
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-[0.78rem] md:text-xs text-white/60">
-          <p>© {year} Vadakankulam Matha Church · {t.footer.rights}</p>
-          <p className="font-serif italic text-white/75">In faith, in stillness, in light.</p>
+        {/* Three lines that were three rows with a 12px gutter between them and
+            16px of anchor padding inside the last one — a stacked block taller
+            than some of the link columns above it, for the least important
+            type on the page. On a phone the three now sit as one tight
+            centred group: the motto leads (it is the only line anyone reads),
+            the copyright and the credit share a row under it, and the credit's
+            tap padding comes off since nobody arrives here to reach it.
+            `md:` puts back the left / centre / right row unchanged. */}
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 py-4 md:py-6 flex flex-col md:flex-row items-center justify-between gap-1 md:gap-3 text-center md:text-left text-[0.72rem] md:text-xs text-white/60">
+          <p className="order-2 md:order-0">
+            © {year} Vadakankulam Matha Church · {t.footer.rights}
+          </p>
+          <p className="order-1 md:order-0 font-serif italic text-white/75">
+            In faith, in stillness, in light.
+          </p>
           {/* Builder credit only — no claim over the content, which belongs to
               the parish. nofollow keeps a site-wide outbound footer link from
               reading as a link scheme to Google. */}
-          <p className="text-[0.72rem] md:text-[0.65rem] text-white/55 md:text-white/35">
+          <p className="order-3 md:order-0 text-[0.68rem] md:text-[0.65rem] text-white/45 md:text-white/35">
             {t.footer.builtBy}{" "}
             <a
               href="https://subashsaajan.site"
               target="_blank"
               rel="noopener noreferrer nofollow"
-              className="inline-block py-2 md:py-0 hover:text-gold transition-colors"
+              className="inline-block hover:text-gold transition-colors"
             >
               Subash Saajan
             </a>

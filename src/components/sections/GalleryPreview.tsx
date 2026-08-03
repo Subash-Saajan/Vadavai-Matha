@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import Image from "next/image";
+import { ResidentImage } from "@/components/ResidentImage";
 import { Link } from "@/components/LocaleLink";
 import { ArrowUpRight } from "lucide-react";
 import { gsap, ScrollTrigger, DESKTOP } from "@/lib/gsap";
@@ -507,7 +507,7 @@ export function GalleryPreview() {
                     // the tile is simply its first photograph.
                     className={`gallery-frame absolute inset-0 ${fi === 0 ? "" : "invisible opacity-0"}`}
                   >
-                    <Image
+                    <ResidentImage
                       src={frame.img}
                       alt={frame.alt}
                       fill

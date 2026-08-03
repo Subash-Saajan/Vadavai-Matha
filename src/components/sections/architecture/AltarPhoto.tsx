@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import Image from "next/image";
 
 /**
@@ -55,11 +56,30 @@ import Image from "next/image";
  * COORDINATES. `/images/architecture/altar-reredos.jpg` is cut from the owner's
  * July 2026 photograph (`1000206865.jpg.jpeg`, 4000×2252 with EXIF orientation 6
  * — the turn is BAKED IN, not left to the tag, since Next's image pipeline
- * cannot be trusted to carry it). Upright that is 2252×4000; the crop is box
- * (60,760)–(2200,2600) = 2140×1840, exported at ×0.8 = 1712×1472, so the viewBox
- * below lands on the pixels without distortion. Re-cropping means re-measuring
- * every shape: the scripts are in the session scratchpad, and the method was to
- * draw the candidates onto the JPEG and look at them.
+ * cannot be trusted to carry it). The file lives in the owner's Downloads
+ * folder, NOT in PIcs; scripts/fix-architecture-images.mjs cuts the crop and is
+ * the only thing that should. Upright the original is 2252×4000.
+ *
+ * ── THE CROP GREW, AND THE SHAPES DID NOT HAVE TO BE RE-MEASURED. ───────────
+ * The crop was box (60,760)–(2200,2600) = 2140×1840; it is now (60,380)–
+ * (2200,2980) = 2140×2600, because the old box cut the apse vault off the top
+ * and sliced the painted altar frontal in half at the bottom. The x range did
+ * not change and the new box only extends in y, so every shape below moves by
+ * a pure translation — SPOT_DY — and none of the measuring had to be redone.
+ * SPOTS stays in the ORIGINAL 2140×1840 space for exactly that reason: it is
+ * the space they were measured in, against a JPEG that was drawn on and looked
+ * at, and re-basing the numbers would throw that provenance away for nothing.
+ * If the crop ever moves in x, or is re-cut from a different frame, that no
+ * longer holds and every shape must be measured again.
+ *
+ * ── ONE FILE, TWO FRAMINGS. ─────────────────────────────────────────────────
+ * The taller crop is a desktop change only; the phone keeps the picture it had.
+ * That works off a single file because the new box is SYMMETRIC about y=1680,
+ * the old box's centre: a centred `object-cover` in a container still shaped
+ * 2140:1840 lands back on exactly (60,760)–(2200,2600). The SVG tracks it with
+ * `preserveAspectRatio="xMidYMid slice"`, which is object-cover's rule written
+ * in SVG. Container aspect, image fit and preserveAspectRatio are three
+ * statements of one thing; change one and you must change all three.
  */
 
 export type AltarSpot = "apostles" | "arches" | "trinity";
@@ -117,8 +137,17 @@ const HIT_GROW: Record<AltarSpot, number> = {
   trinity: 0,
 };
 
+/** The crop as it is cut today: 2140×2600 from (60,380). */
 const W = 2140;
-const H = 1840;
+const H = 2600;
+
+/** The crop the shapes in SPOTS were measured against: 2140×1840 from
+    (60,760). Its origin sits SPOT_DY lower in the current one, so every shape
+    is drawn inside a group translated by that much. See the coordinates note. */
+const SPOT_DY = 760 - 380;
+
+/** The phone keeps the old framing: same width, the old 1840 height. */
+const PHONE_H = 1840;
 
 /** One shape, drawn either as the hole in the dim or as the ring around it.
     The presentation props are listed rather than spread from SVGProps: ellipse
@@ -159,12 +188,20 @@ export function AltarPhoto({
   onSelect?: (spot: AltarSpot) => void;
 }) {
   return (
-    /* The ratio is set here rather than with an aspect-* utility because it has
-       to be EXACTLY the crop's — the overlay's viewBox lines up with the pixels
-       underneath, and Image `fill` has no height without it. */
+    /* Two ratios, one file. Below `lg` the box keeps the OLD crop's shape and
+       object-cover centres the taller picture back onto exactly the old
+       framing; from `lg` up the box is the full crop and nothing is hidden.
+       Both are written as exact ratios rather than a rounded aspect utility,
+       because the overlay's viewBox lines up with the pixels underneath —
+       and Image `fill` has no height without one. */
     <div
-      className="relative rounded-2xl overflow-hidden ring-1 ring-gold/20 shadow-2xl"
-      style={{ aspectRatio: `${W} / ${H}` }}
+      className="relative rounded-2xl overflow-hidden ring-1 ring-gold/20 shadow-2xl aspect-(--altar-phone) lg:aspect-(--altar-full)"
+      style={
+        {
+          "--altar-phone": `${W} / ${PHONE_H}`,
+          "--altar-full": `${W} / ${H}`,
+        } as CSSProperties
+      }
     >
       <Image
         src="/images/architecture/altar-reredos.jpg"
@@ -176,6 +213,11 @@ export function AltarPhoto({
 
       <svg
         viewBox={`0 0 ${W} ${H}`}
+        /* object-cover's rule, in SVG: fill the box, keep the ratio, clip the
+           overflow, centred. Without it the default is `meet`, which letterboxes
+           — and every hotspot slides off the photograph on a phone, where the
+           box is shorter than the viewBox. */
+        preserveAspectRatio="xMidYMid slice"
         className="absolute inset-0 w-full h-full pointer-events-none"
         aria-hidden="true"
       >
@@ -185,9 +227,15 @@ export function AltarPhoto({
                spotlights out of it. */
             <mask key={region} id={`altar-spot-${region}`}>
               <rect width={W} height={H} fill="white" />
-              {SPOTS[region].map((s) => (
-                <Mark key={keyOf(s)} shape={s} fill="black" />
-              ))}
+              {/* The white rect is the full CURRENT crop; the shapes are in the
+                  older, shorter one, so they and only they are shifted. Same
+                  pairing in the ring group and the hit group below — all three
+                  must move together. */}
+              <g transform={`translate(0 ${SPOT_DY})`}>
+                {SPOTS[region].map((s) => (
+                  <Mark key={keyOf(s)} shape={s} fill="black" />
+                ))}
+              </g>
             </mask>
           ))}
         </defs>
@@ -210,7 +258,10 @@ export function AltarPhoto({
                 opacity={0.72}
                 mask={`url(#altar-spot-${region})`}
               />
-              <g className={on ? "plan-region--on" : undefined}>
+              <g
+                className={on ? "plan-region--on" : undefined}
+                transform={`translate(0 ${SPOT_DY})`}
+              >
                 {SPOTS[region].map((s) => (
                   <Mark
                     key={keyOf(s)}
@@ -233,6 +284,7 @@ export function AltarPhoto({
             <g
               key={`hit-${region}`}
               className="pointer-events-auto cursor-pointer"
+              transform={`translate(0 ${SPOT_DY})`}
               onClick={() => onSelect(region)}
             >
               {SPOTS[region].map((s) => (

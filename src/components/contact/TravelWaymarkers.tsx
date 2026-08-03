@@ -67,31 +67,49 @@ export function TravelWaymarkers() {
           </div>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        {/* ── ON A PHONE THIS IS ONE PLATE, NOT THREE CARDS ─────────────────
+            Rail, road and air are three columns of a single timetable on a
+            monitor, and they were three separate raised cards on a phone —
+            each with its own rounded shell, its own ring, its own shadow, its
+            own 48px navy icon plate and its own 8-pixel gutter to the next
+            one. Stacked, that is the same piece of furniture built three
+            times: about a screen and a half of chrome wrapped around fifteen
+            short lines of distance.
+
+            Below `md` the shell moves OUT to the container — one plate, three
+            groups separated by the hairline the `divide-y` already draws for
+            free — and each group's heading turns into a row: a small brass
+            square with the title beside it, rather than a large one stacked
+            above it. Nothing is hidden and no distance is dropped; the reader
+            simply stops paying for the frame twice more.
+
+            At `md` every one of those classes is handed back and the desktop
+            three-card grid is exactly what it was. */}
+        <div className="divide-y divide-gold/15 overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-gold/15 md:grid md:grid-cols-3 md:gap-8 md:divide-y-0 md:overflow-visible md:rounded-none md:bg-transparent md:shadow-none md:ring-0">
           {boards.map((b) => {
             const Icon = b.icon;
             return (
               <article
                 key={b.title}
-                className="reveal group relative bg-white backdrop-blur-sm rounded-2xl p-5 md:p-8 shadow-md hover:shadow-xl transition-all duration-500 overflow-hidden ring-1 ring-gold/15"
+                className="reveal group relative p-5 md:overflow-hidden md:rounded-2xl md:bg-white md:p-8 md:shadow-md md:ring-1 md:ring-gold/15 md:backdrop-blur-sm md:transition-all md:duration-500 md:hover:shadow-xl"
               >
-                <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-gold/50 to-transparent" aria-hidden="true" />
-                <div className="absolute inset-0 bg-linear-to-br from-gold/12 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true" />
+                {/* The card signature — a gold rule along the top edge — only
+                    means anything when there is a top edge to draw it on. */}
+                <div className="absolute inset-x-0 top-0 hidden h-px bg-linear-to-r from-transparent via-gold/50 to-transparent md:block" aria-hidden="true" />
+                <div className="absolute inset-0 hidden bg-linear-to-br from-gold/12 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 md:block" aria-hidden="true" />
 
                 <div className="relative z-10">
-                  {/* Three cards stack on a phone, so every pixel the chrome
-                      takes is repeated three times before the reader reaches
-                      the section below. The plate, the heading gap and the
-                      card's own padding each come in a step. */}
-                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-navy flex items-center justify-center mb-5 md:mb-6 group-hover:bg-gold transition-colors duration-500">
-                    <Icon className="w-6 h-6 text-gold group-hover:text-navy transition-colors duration-500" aria-hidden="true" />
-                  </div>
+                  <div className="mb-4 flex items-center gap-3.5 md:mb-6 md:block">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-navy transition-colors duration-500 group-hover:bg-gold md:mb-6 md:h-14 md:w-14 md:rounded-xl">
+                      <Icon className="h-5 w-5 text-gold transition-colors duration-500 group-hover:text-navy md:h-6 md:w-6" aria-hidden="true" />
+                    </div>
 
-                  <h3 className="font-serif text-2xl text-navy mb-5 md:mb-6">{b.title}</h3>
+                    <h3 className="font-serif text-xl text-navy md:text-2xl">{b.title}</h3>
+                  </div>
 
                   <ul className="divide-y divide-gold/12 border-t border-gold/15">
                     {b.rows.map((r) => (
-                      <li key={r.name} className="flex items-baseline justify-between gap-4 py-3">
+                      <li key={r.name} className="flex items-baseline justify-between gap-4 py-2.5 md:py-3">
                         <span className="min-w-0">
                           <span className="block text-navy/85 text-[0.95rem] leading-snug">{r.name}</span>
                           {/* The station code and the journey time — 10.6px of
@@ -111,12 +129,12 @@ export function TravelWaymarkers() {
                     ))}
                   </ul>
 
-                  <p className="mt-5 pt-4 border-t border-gold/12 text-[0.86rem] md:text-[0.8rem] text-text-muted leading-relaxed">
+                  <p className="mt-4 pt-3.5 border-t border-gold/12 text-[0.86rem] md:mt-5 md:pt-4 md:text-[0.8rem] text-text-muted leading-relaxed">
                     {b.note}
                   </p>
                 </div>
 
-                <span className="pointer-events-none absolute bottom-4 right-4 w-6 h-6 border-b border-r border-gold/0 group-hover:border-gold/40 transition-colors duration-700" aria-hidden="true" />
+                <span className="pointer-events-none absolute bottom-4 right-4 hidden h-6 w-6 border-b border-r border-gold/0 transition-colors duration-700 group-hover:border-gold/40 md:block" aria-hidden="true" />
               </article>
             );
           })}

@@ -143,7 +143,7 @@ export const PERIODS: Period[] = [
         tier: "life",
         plate: "பென்னாட் டி சூசா",
         life:
-          "The list opens with him, and it opens unsteadily. The parish's history names him Bernard de Saa and dates him from 1697; the 150th-anniversary souvenir writes Bennet de Souza and dates him from 1698; and the souvenir's own prose says that “in the year 1698, Rev. Fr. Ponnaiya took charge… the first parish priest of Vadavai”. Three names, two start years, one man — or perhaps two. It is published as it stands, because the alternative is to choose one and sound certain. Whoever he was, a letter of his own survives, dated 14 October 1713: villagers who believed he was hiding treasure seized him and knocked out every one of his teeth. A fellow Jesuit — Fr Peter Martin, who also held this same parish, #3 on this list — saw the marks himself, and de Saa was freed only after another priest pleaded his case to Rani Mangammal, the reigning queen of Madurai, and he returned to the village.",
+          "The list opens with him, and it opens unsteadily. The parish's history names him Bernard de Saa and dates him from 1697; the 150th-anniversary souvenir writes Bennet de Souza and dates him from 1698; and the souvenir's own prose says that “in the year 1698, Rev. Fr. Ponnaiya took charge… the first parish priest of Vadavai”. Three names, two start years, one man, or perhaps two. It is published as it stands, because the alternative is to choose one and sound certain. Whoever he was, a letter of his own survives, dated 14 October 1713: villagers who believed he was hiding treasure seized him and knocked out every one of his teeth. A fellow Jesuit, Fr Peter Martin, who also held this same parish and stands at #3 on this list, saw the marks himself, and de Saa was freed only after another priest pleaded his case to Rani Mangammal, the reigning queen of Madurai, and he returned to the village.",
         lifeTa: `பட்டியல் இவரோடு தொடங்குகிறது; தொடக்கமே தடுமாற்றத்தோடு. பங்கின் வரலாறு இவரைப் பெர்னார்ட் தெ சா என்று பெயரிட்டு, 1697 முதல் என்று குறிக்கிறது; 150-ஆம் ஆண்டு நினைவு மலரோ பென்னாட் டி சூசா என்று எழுதி, 1698 முதல் என்கிறது; அதே மலரின் உரைநடையோ “1698-ஆம் ஆண்டில் அருட்தந்தை பொன்னையா பொறுப்பேற்றார்… வடவையின் முதல் பங்குத் தந்தை” என்று சொல்கிறது. மூன்று பெயர்கள், இரு தொடக்க ஆண்டுகள், ஒரே மனிதர் — அல்லது ஒருவேளை இருவர். இருப்பது இருப்பதுபோலவே இங்கே வெளியிடப்படுகிறது; ஏனெனில் மற்றொரு வழி, ஒன்றைத் தேர்ந்தெடுத்து உறுதியாகப் பேசுவதுதான். அவர் யாராயிருந்தாலும், 1713 அக்டோபர் 14 நாளிட்ட, அவரே எழுதிய கடிதம் ஒன்று எஞ்சியுள்ளது: அவர் புதையலை மறைத்து வைத்திருக்கிறார் என்று நம்பிய ஊரார் அவரைப் பிடித்து, அவரது பற்கள் அனைத்தையும் உடைத்தெறிந்தார்கள். இப்பட்டியலில் மூன்றாமவராய், இதே பங்கை ஏற்றிருந்த சக இயேசு சபை அருட்தந்தை பீட்டர் மார்ட்டின் அவர்களே அத்தழும்புகளைத் தாமே கண்டார். மற்றொரு அருட்தந்தை, அப்போது மதுரையை ஆண்ட மங்கம்மாள் அரசியிடம் இவரது வழக்கை எடுத்துச் சென்ற பின்னரே தெ சா விடுவிக்கப்பட்டார்; அவர் ஊருக்குத் திரும்பினார்.`,
       },
       {
@@ -155,7 +155,7 @@ export const PERIODS: Period[] = [
         from: 1700,
         to: 1704,
         tier: "line",
-        note: "Bertrand's letters record him imprisoned forty days during this first term — the earliest documented hardship any priest of this parish is known to have suffered for it.",
+        note: "Bertrand's letters record him imprisoned forty days during this first term. It is the earliest documented hardship any priest of this parish is known to have suffered for it.",
         noteTa: `இம்முதல் பதவிக்காலத்தில் இவர் நாற்பது நாட்கள் சிறையில் அடைக்கப்பட்டதைப் பெர்த்ராண்டின் கடிதங்கள் பதிவு செய்கின்றன — இப்பங்கிற்காக ஓர் அருட்தந்தை பட்டதாக ஆவணத்தில் அறியக்கிடைக்கும் மிகப் பழைய துன்பம் இதுவே.`,
       },
       {
@@ -167,7 +167,7 @@ export const PERIODS: Period[] = [
         from: 1705,
         to: 1707,
         tier: "line",
-        note: "The same Fr Pierre Martin whose own letters, printed in the French Jesuits' Lettres édifiantes, are among the earliest sources on this mission — and who saw for himself the beating that cost Fr Bernard de Saa, also on this list, every one of his teeth.",
+        note: "The same Fr Pierre Martin whose own letters, printed in the French Jesuits' Lettres édifiantes, are among the earliest sources on this mission, and who saw for himself the beating that cost Fr Bernard de Saa, also on this list, every one of his teeth.",
         noteTa: `பிரெஞ்சு இயேசு சபையினரின் Lettres édifiantes தொகுப்பில் அச்சான தம் சொந்தக் கடிதங்களால், இப்பணிக்களத்தைப் பற்றிய மிகப் பழைய ஆதாரங்களுள் ஒன்றாய் நிற்பவர் இவரே; இப்பட்டியலிலேயே இடம்பெறும் அருட்தந்தை பெர்னார்ட் தெ சா அவர்களின் பற்கள் அனைத்தையும் பறித்த அந்த அடிகளைத் தாமே கண்டவரும் இவரே.`,
       },
       {
@@ -203,7 +203,7 @@ export const PERIODS: Period[] = [
         to: 1712,
         tier: "line",
         note:
-          "He held the title only on paper — his own letters admit he could not visit during his “nominal charge”, and Fr Bernard de Saa covered the work in his stead. What he did that year was write the mission's Annual Letters and begin the French–Tamil dictionaries that make Tamil scholars remember him still.",
+          "He held the title only on paper: his own letters admit he could not visit during his “nominal charge”, and Fr Bernard de Saa covered the work in his stead. What he did that year was write the mission's Annual Letters and begin the French–Tamil dictionaries that make Tamil scholars remember him still.",
         noteTa: `இப்பொறுப்பு இவருக்குக் காகிதத்தில் மட்டுமே இருந்தது — தமது “பெயரளவிலான பொறுப்பு” காலத்தில் இங்கே வர இயலவில்லை என்பதை இவரது சொந்தக் கடிதங்களே ஒப்புக்கொள்கின்றன; அப்பணியை இவருக்குப் பதிலாக அருட்தந்தை பெர்னார்ட் தெ சா செய்தார். அவ்வாண்டில் இவர் செய்தது இரண்டு: பணிக்களத்தின் ஆண்டறிக்கைக் கடிதங்களை எழுதியது; தமிழ் அறிஞர்கள் இன்றும் இவரை நினைவுகூரக் காரணமான பிரெஞ்சு–தமிழ் அகராதிகளைத் தொடங்கியது.`,
       },
       {
@@ -227,7 +227,7 @@ export const PERIODS: Period[] = [
         from: 1714,
         to: 1714,
         tier: "line",
-        note: "The parish's other own list reads this same year differently, as “Rev. Bernard (Bernardino)” — and a colleague's letter from that October has Fr Bernard de Saa “again presiding”. This may be his own third, unlisted return, not a separate man.",
+        note: "The parish's other own list reads this same year differently, as “Rev. Bernard (Bernardino)”, and a colleague's letter from that October has Fr Bernard de Saa “again presiding”. This may be his own third, unlisted return, not a separate man.",
         noteTa: `பங்கின் மற்றொரு சொந்தப் பட்டியல் இதே ஆண்டை வேறுவிதமாக — “அருட்தந்தை பெர்னார்ட் (பெர்னார்டினோ)” என்று — வாசிக்கிறது; அந்த அக்டோபரில் ஒரு சக அருட்தந்தை எழுதிய கடிதமோ, அருட்தந்தை பெர்னார்ட் தெ சா “மீண்டும் தலைமையேற்றிருப்பதாகச்” சொல்கிறது. இது தனி ஒரு மனிதராக இல்லாமல், தெ சா அவர்களின், பட்டியலில் இடம்பெறாத மூன்றாவது வருகையாகவும் இருக்கலாம்.`,
       },
       {
@@ -241,7 +241,7 @@ export const PERIODS: Period[] = [
         tier: "life",
         plate: "அந்தோனிநாதர்",
         life:
-          "A first-person letter of his survives, written as resident of this village the year before he held it — the earliest inside view of Vadakkankulam in the whole documentary record. He stood witness at a fellow missionary's final vows that same October, 1714, and was sent to Rome in 1720 to argue the Jesuits' case in the Malabar Rites controversy, where his own brother, a cardinal, lobbied on his behalf.",
+          "A first-person letter of his survives, written as resident of this village the year before he held it, and it is the earliest inside view of Vadakkankulam in the whole documentary record. He stood witness at a fellow missionary's final vows that same October, 1714, and was sent to Rome in 1720 to argue the Jesuits' case in the Malabar Rites controversy, where his own brother, a cardinal, lobbied on his behalf.",
         lifeTa: `இப்பங்கை இவர் ஏற்பதற்கு முந்தைய ஆண்டில், இவ்வூரின் குடியிருப்பாளராக இவரே எழுதிய கடிதம் ஒன்று எஞ்சியுள்ளது — ஆவணப் பதிவு முழுவதிலும் வடக்கன்குளத்தை உள்ளிருந்து காட்டும் மிகப் பழைய பார்வை அதுவே. அதே 1714 அக்டோபரில், ஒரு சக மறைப்பணியாளரின் இறுதி வார்த்தைப்பாட்டிற்குச் சாட்சியாக நின்றார். 1720-ஆம் ஆண்டில், மலபார்ச் சடங்குகள் பற்றிய சர்ச்சையில் இயேசு சபையின் தரப்பை எடுத்துரைக்க உரோமைக்கு அனுப்பப்பட்டார்; அங்கே கர்தினாலாயிருந்த இவரது சொந்தச் சகோதரரே இவருக்காகப் பரிந்து பேசினார்.`,
       },
       { n: 11, name: "Fr Alexander", nameTa: `அருட்தந்தை அல்லக்சாண்டர்`, tamil: "அல்லக்சாண்டர்", from: 1716, to: 1716, tier: "name" },
@@ -254,7 +254,7 @@ export const PERIODS: Period[] = [
         from: 1717,
         to: 1727,
         tier: "line",
-        note: "In 1726 or 1727 he ordered a younger missionary, Constantine Beschi, to write the Veda Vilakkam — a Tamil catechetical work still read today.",
+        note: "In 1726 or 1727 he ordered a younger missionary, Constantine Beschi, to write the Veda Vilakkam, a Tamil catechetical work still read today.",
         noteTa: `1726 அல்லது 1727-ஆம் ஆண்டில், தமக்கு இளையவரான மறைப்பணியாளர் கான்ஸ்தந்தீன் பெஸ்கியை வேத விளக்கம் எழுதுமாறு பணித்தார் — இன்றும் வாசிக்கப்படும் ஒரு தமிழ் மறைக்கல்வி நூல் அது.`,
       },
       {
@@ -266,7 +266,7 @@ export const PERIODS: Period[] = [
         from: 1728,
         to: 1728,
         tier: "line",
-        note: "A Jesuit history of the Malabar mission places a Fr Bigaglia in this same post the same year, and has him rise to superior of the whole Madurai mission by 1739 — training, that year, the young Fr Buttari who would one day baptise St Devasahayam here.",
+        note: "A Jesuit history of the Malabar mission places a Fr Bigaglia in this same post the same year, and has him rise to superior of the whole Madurai mission by 1739, training that year the young Fr Buttari who would one day baptise St Devasahayam here.",
         noteTa: `மலபார்ப் பணிக்களத்தைப் பற்றிய ஓர் இயேசு சபை வரலாறு, இதே ஆண்டில் இதே பொறுப்பில் அருட்தந்தை பிகாலியா ஒருவரை வைக்கிறது; 1739-க்குள் அவர் மதுரைப் பணிக்களம் முழுவதற்கும் தலைவராக உயர்ந்ததாகவும் சொல்கிறது — அவ்வாண்டில், பின்னொரு நாள் இங்கே புனித தேவசகாயத்திற்குத் திருமுழுக்கு அளிக்கவிருந்த இளம் அருட்தந்தை புத்தாரிக்கு அவரே பயிற்சி அளித்தார்.`,
       },
       {
@@ -280,7 +280,7 @@ export const PERIODS: Period[] = [
         tier: "life",
         plate: "பாக்கியநாதர்",
         life:
-          "A Saivite poosari of Vittapuram, Chidambaram Pillai, was walking to Cape Comorin with his wife Aantavalli when he heard this church's bell. He stopped for the Mass, stayed for instruction, and was baptised Gnanapragasam — spiritual light. Fr Giuliani made him catechist of the village and built him a house. Twelve years later Gnanapragasam stood godfather at the baptism of St Devasahayam Pillai. Giuliani himself died in office, of blood poisoning, in January 1733.",
+          "A Saivite poosari of Vittapuram, Chidambaram Pillai, was walking to Cape Comorin with his wife Aantavalli when he heard this church's bell. He stopped for the Mass, stayed for instruction, and was baptised Gnanapragasam, spiritual light. Fr Giuliani made him catechist of the village and built him a house. Twelve years later Gnanapragasam stood godfather at the baptism of St Devasahayam Pillai. Giuliani himself died in office, of blood poisoning, in January 1733.",
         lifeTa: `விட்டப்புரத்தைச் சேர்ந்த சைவப் பூசாரி சிதம்பரம் பிள்ளை, தம் மனைவி ஆந்தவல்லியுடன் கன்னியாகுமரிக்கு நடந்து சென்றுகொண்டிருந்தபோது இவ்வாலயத்தின் மணியோசையைக் கேட்டார். திருப்பலிக்காக நின்றார்; மறைக்கல்விக்காகத் தங்கினார்; ஞானப்பிரகாசம் — ஞான ஒளி — என்னும் பெயரில் திருமுழுக்குப் பெற்றார். அருட்தந்தை ஜுலியானி அவரை ஊரின் மறைக்கல்வியாளராக்கி, அவருக்கு ஒரு வீடும் கட்டிக் கொடுத்தார். பன்னிரண்டு ஆண்டுகள் கழித்து, புனித தேவசகாயம் பிள்ளையின் திருமுழுக்கில் ஞானப்பிரகாசமே ஞானத்தந்தையாக நின்றார். ஜுலியானி அவர்களோ, குருதி நச்சேறியதால், பதவியிலிருக்கும்போதே 1733 ஜனவரியில் இறந்தார்.`,
       },
       {
@@ -291,7 +291,7 @@ export const PERIODS: Period[] = [
         from: 1734,
         to: 1740,
         tier: "line",
-        note: "An outside history of the Jesuits in Malabar independently confirms his posting here, though it gives 1741 as his last year — one later than the parish's own count.",
+        note: "An outside history of the Jesuits in Malabar independently confirms his posting here, though it gives 1741 as his last year, one later than the parish's own count.",
         noteTa: `மலபாரில் இயேசு சபையினரைப் பற்றிய ஒரு வெளி வரலாறு, இங்கே இவர் பணியிலிருந்ததைத் தனித்து உறுதிப்படுத்துகிறது; ஆயினும் இவரது இறுதி ஆண்டாக 1741-ஐத் தருகிறது — பங்கின் சொந்தக் கணக்கைவிட ஓராண்டு பிந்தியது.`,
       },
       {
@@ -305,7 +305,7 @@ export const PERIODS: Period[] = [
         tier: "life",
         plate: "பரஞ்சோதிநாதர்",
         life:
-          "On 14 May 1745 he baptised Neelakanta Pillai, a captain of the Travancore army, by the name Devasahayam — the man the Church canonised in 2022 as the first Indian layman to be declared a saint. In 1749 he began the first stone church, and it was the timber for that building that undid his convert: sent to cut wood in the royal forest, Devasahayam fell into the dispute that ended in his arrest. This church still keeps a piece of his garment and the chains he was bound with. Buttari was moved on to Aoor as the missionary best able to heal that congregation's ills; at Vadakkankulam, Auguste Jean writes, “his memory is held in benediction”.",
+          "On 14 May 1745 he baptised Neelakanta Pillai, a captain of the Travancore army, by the name Devasahayam. He is the man the Church canonised in 2022 as the first Indian layman to be declared a saint. In 1749 he began the first stone church, and it was the timber for that building that undid his convert: sent to cut wood in the royal forest, Devasahayam fell into the dispute that ended in his arrest. This church still keeps a piece of his garment and the chains he was bound with. Buttari was moved on to Aoor as the missionary best able to heal that congregation's ills; at Vadakkankulam, Auguste Jean writes, “his memory is held in benediction”.",
         lifeTa: `1745 மே 14-ஆம் நாள், திருவிதாங்கூர்ப் படையின் தலைவராயிருந்த நீலகண்ட பிள்ளைக்குத் தேவசகாயம் என்னும் பெயரில் திருமுழுக்கு அளித்தார் — புனிதராக அறிவிக்கப்பட்ட முதல் இந்தியப் பொதுநிலையினர் என்று 2022-ஆம் ஆண்டில் திருச்சபை இவரையே அறிவித்தது. 1749-ஆம் ஆண்டில் முதல் கல் ஆலயத்தைத் தொடங்கினார்; அக்கட்டிடத்திற்கான மரமே அவரது மனமாற்றம் பெற்றவரை வீழ்த்தியது — அரசக் காட்டில் மரம் வெட்டச் சென்ற தேவசகாயம், அவரது கைது வரை சென்று முடிந்த அந்தத் தகராற்றில் சிக்கினார். அவரது ஆடையின் ஒரு துண்டையும், அவர் கட்டப்பட்டிருந்த சங்கிலிகளையும் இவ்வாலயம் இன்றும் காத்து வைத்திருக்கிறது. அச்சபையின் நோய்களைத் தீர்க்க மிகவும் தகுதியான மறைப்பணியாளர் என்பதால் புத்தாரி ஆவூருக்கு மாற்றப்பட்டார்; வடக்கன்குளத்தில் “அவரது நினைவு ஆசீரோடு காக்கப்படுகிறது” என்று அகுஸ்த் ஜான் எழுதுகிறார்.`,
       },
       {
@@ -319,7 +319,7 @@ export const PERIODS: Period[] = [
         tier: "life",
         plate: "மதுரேந்திரநாதர்",
         life:
-          "He finished the church Buttari had begun — built in the form of a cross, facing east — and he was the last Jesuit to hold this parish before Rome suppressed the Society of Jesus in 1773. Feeling his end near, he had himself carried to Taley, and died there in 1775, aged seventy-five. Bertrand records what followed: the Christians venerated him as a saint, gave his name to their children and visited his tomb, and in times of drought even the village's Hindus would call on him.",
+          "He finished the church Buttari had begun, built in the form of a cross and facing east, and he was the last Jesuit to hold this parish before Rome suppressed the Society of Jesus in 1773. Feeling his end near, he had himself carried to Taley, and died there in 1775, aged seventy-five. Bertrand records what followed: the Christians venerated him as a saint, gave his name to their children and visited his tomb, and in times of drought even the village's Hindus would call on him.",
         lifeTa: `புத்தாரி தொடங்கிவைத்த ஆலயத்தை இவர் கட்டி முடித்தார் — சிலுவை வடிவில், கிழக்கு நோக்கி எழுப்பப்பட்டது அது. 1773-ஆம் ஆண்டில் உரோமை இயேசு சபையை ஒடுக்குவதற்கு முன், இப்பங்கை ஏற்றிருந்த கடைசி இயேசு சபை அருட்தந்தையும் இவரே. தமது முடிவு நெருங்குவதை உணர்ந்து, தம்மைத் தளைக்குச் சுமந்து செல்லச் சொன்னார்; எழுபத்தைந்து வயதில், 1775-ஆம் ஆண்டில் அங்கேயே இறந்தார். அதன் பின் நடந்ததைப் பெர்த்ராண்ட் பதிவு செய்கிறார்: கிறிஸ்தவர்கள் அவரை ஒரு புனிதராக வணங்கினார்கள், தங்கள் பிள்ளைகளுக்கு அவரது பெயரைச் சூட்டினார்கள், அவரது கல்லறைக்குச் சென்று வந்தார்கள்; வறட்சிக் காலங்களில் இவ்வூரின் இந்துக்களும்கூட அவரை மன்றாடினார்கள்.`,
       },
     ],
@@ -330,7 +330,7 @@ export const PERIODS: Period[] = [
     titleTa: `கொச்சி அருட்தந்தையர்`,
     years: "1776 – 1835",
     turn:
-      "The Society of Jesus had been suppressed by the Pope in 1773. Fr Thomassini died two years later and there was no Jesuit left to send, so the parish passed to the Malabar priests under the Archbishop of Cranganore. For these sixty years it was the sole centre of the whole inland mission, with three smaller stations under it — a government gazetteer records that its priests handed that charge to the newly arrived Jesuits in a single dated act, in 1837. Sixty years, seven priests — and, in the middle of them, the year the parish has commemorated ever since.",
+      "The Society of Jesus had been suppressed by the Pope in 1773. Fr Thomassini died two years later and there was no Jesuit left to send, so the parish passed to the Malabar priests under the Archbishop of Cranganore. For these sixty years it was the sole centre of the whole inland mission, with three smaller stations under it, and a government gazetteer records that its priests handed that charge to the newly arrived Jesuits in a single dated act, in 1837. Sixty years, seven priests, and in the middle of them the year the parish has commemorated ever since.",
     turnTa: `1773-ஆம் ஆண்டில் திருத்தந்தை இயேசு சபையை ஒடுக்கியிருந்தார். இரண்டு ஆண்டுகள் கழித்து அருட்தந்தை தோமஸினி இறந்தார்; அனுப்புவதற்கு இயேசு சபையில் ஆள் எஞ்சவில்லை. எனவே இப்பங்கு, கொடுங்களூர்ப் பேராயரின் கீழிருந்த மலபார் அருட்தந்தையரிடம் சென்றது. அந்த அறுபது ஆண்டுகளில், தன் கீழ் மூன்று சிறு நிலையங்களை வைத்திருந்த இவ்வூரே உள்நாட்டுப் பணிக்களம் முழுவதற்குமான ஒரே மையமாக இருந்தது — 1837-ஆம் ஆண்டில், புதிதாக வந்த இயேசு சபையினரிடம் அப்பொறுப்பை இவ்வூர் அருட்தந்தையர் நாளிட்ட ஒரே செயலால் ஒப்படைத்தார்கள் என்று ஓர் அரசு அரசிதழ் பதிவு செய்கிறது. அறுபது ஆண்டுகள், ஏழு அருட்தந்தையர் — அவர்களுக்கு நடுவில், அன்று முதல் இப்பங்கு நினைவுகூர்ந்து வரும் அந்த ஆண்டு.`,
     priests: [
       { n: 18, name: "Fr Deva Varadhanar", nameTa: `அருட்தந்தை தேவ வரதனார்`, tamil: "தேவ வரதனார்", from: 1776, to: 1791, tier: "name" },
@@ -345,7 +345,7 @@ export const PERIODS: Period[] = [
         tier: "life",
         plate: "ஜாண் லூயிஸ் கர்டோசா",
         life:
-          "His name occupies a single year of this list, and it is the year. On 23 October 1803 the statue of Our Lady in this church was seen to weep. Fr Cardoza — with a second priest and a European laywoman who examined the statue herself — declared it an extraordinary event, which is why this parish can still name the priest who authenticated its devotion. The souvenir's occasional “1805” is a copying slip: the list shows him parish priest in 1803 and in no other year, between Fr Ignatius and Fr de Miranda.",
+          "His name occupies a single year of this list, and it is the year. On 23 October 1803 the statue of Our Lady in this church was seen to weep. Fr Cardoza, with a second priest and a European laywoman who examined the statue herself, declared it an extraordinary event, which is why this parish can still name the priest who authenticated its devotion. The souvenir's occasional “1805” is a copying slip: the list shows him parish priest in 1803 and in no other year, between Fr Ignatius and Fr de Miranda.",
         lifeTa: `இப்பட்டியலில் இவரது பெயர் ஒரே ஓராண்டை மட்டுமே அடைத்திருக்கிறது — ஆனால் அது அந்த ஆண்டு. 1803 அக்டோபர் 23-ஆம் நாள், இவ்வாலயத்தில் அன்னையின் திருவுருவம் கண்ணீர் சிந்துவது காணப்பட்டது. அருட்தந்தை கர்டோசா — இரண்டாவது அருட்தந்தை ஒருவரோடும், திருவுருவத்தைத் தாமே பரிசோதித்த ஓர் ஐரோப்பியப் பெண்மணியோடும் சேர்ந்து — அதை வழக்கத்திற்கு மாறான ஒரு நிகழ்வு என்று அறிவித்தார்; அதனால்தான் தன் பக்திக்குச் சான்று பகர்ந்த அருட்தந்தையின் பெயரை இப்பங்கால் இன்றும் சொல்ல முடிகிறது. நினைவு மலரில் அவ்வப்போது வரும் “1805” ஒரு நகல் பிழையே: அருட்தந்தை இக்னேசியஸுக்கும் அருட்தந்தை தெ மிராந்தாவுக்கும் இடையில், 1803-ஆம் ஆண்டில் மட்டுமே — வேறு எந்த ஆண்டிலும் அல்ல — இவரைப் பங்குத் தந்தையாகப் பட்டியல் காட்டுகிறது.`,
       },
       { n: 21, name: "Fr Francis de Miranda", nameTa: `அருட்தந்தை பிரான்சிஸ் தெ மிராந்தா`, tamil: "பிரான்சிஸ் டி பிரான்டா", from: 1804, to: 1808, tier: "name" },
@@ -385,7 +385,7 @@ export const PERIODS: Period[] = [
         tier: "life",
         plate: "அலக்சாண்டர் மார்ட்டின்",
         life:
-          "Born at Nîmes on 15 December 1798, he was one of the first two Jesuits to set foot in this parish since the Society had been suppressed, visiting on 15–16 June 1838. His own path here had already run through Montrouge, Montmorillon and Bordeaux, the Roman College, and the Portugal mission at Lisbon. He did not live to see the mission he had helped restart take root: riding out to keep the Ascension feast, he fell ill and died at Idaikattur in the Marava less than two years later, on 30 May 1840, aged forty-two — the first Jesuit death of the whole renewed Madurai mission. Fr Louis du Ranquet, who would one day die the same way, had been his travelling companion.",
+          "Born at Nîmes on 15 December 1798, he was one of the first two Jesuits to set foot in this parish since the Society had been suppressed, visiting on 15–16 June 1838. His own path here had already run through Montrouge, Montmorillon and Bordeaux, the Roman College, and the Portugal mission at Lisbon. He did not live to see the mission he had helped restart take root: riding out to keep the Ascension feast, he fell ill and died at Idaikattur in the Marava less than two years later, on 30 May 1840, aged forty-two, the first Jesuit death of the whole renewed Madurai mission. Fr Louis du Ranquet, who would one day die the same way, had been his travelling companion.",
         lifeTa: `1798 டிசம்பர் 15-ஆம் நாள் நீம் நகரில் பிறந்தவர். இயேசு சபை ஒடுக்கப்பட்ட பின் இப்பங்கில் கால் பதித்த முதல் இரு இயேசு சபை அருட்தந்தையருள் ஒருவர் இவர்; 1838 ஜூன் 15–16 நாட்களில் இங்கே வந்தார். இங்கே வந்து சேர்வதற்கு முன்பே இவரது பாதை மொந்ரூஜ், மொந்மொரியோன், போர்தோ, உரோமைக் கல்லூரி, லிஸ்பனிலிருந்த போர்ச்சுக்கல் பணிக்களம் ஆகியவற்றின் வழியாக ஓடியிருந்தது. தாம் மீண்டும் தொடங்கிவைக்க உதவிய பணிக்களம் வேரூன்றுவதைக் காண இவர் வாழவில்லை: ஆண்டவரின் விண்ணேற்புத் திருவிழாவைக் கொண்டாடக் குதிரையில் புறப்பட்டுச் சென்றபோது நோய்வாய்ப்பட்டு, இரண்டு ஆண்டுகள்கூட நிறைவடையுமுன், 1840 மே 30-ஆம் நாள், நாற்பத்திரண்டு வயதில், மறவ நாட்டின் இடைக்காட்டூரில் இறந்தார் — புதுப்பிக்கப்பட்ட மதுரைப் பணிக்களம் முழுவதிலும் நிகழ்ந்த முதல் இயேசு சபை மரணம் இதுவே. ஒருநாள் இதே வழியில் இறக்கவிருந்த அருட்தந்தை லூயி து ரான்கே இவரது பயணத் துணையாக இருந்தார்.`,
       },
       {
@@ -437,7 +437,7 @@ export const PERIODS: Period[] = [
         portrait: "verdier",
         portraitFrom: "Dessal, Le Père Louis Verdier, 1902",
         life:
-          "Vadakkankulam was his first appointment in India — 1 December 1847 — and the village named him Gnanapragasiar, “spiritual light”, which is the Tamil for Louis. At Anakarei, the other half of his parish, the old Jesuit church was falling down, so he asked every parishioner, “men and women, great and small, young people and old folk”, to carry twenty-four stones to the site before or after the sacraments. In a month and a half he had heard a thousand confessions and twenty-four thousand stones had arrived. He rose to Vicar General of the whole Madurai mission.",
+          "Vadakkankulam was his first appointment in India, on 1 December 1847, and the village named him Gnanapragasiar, “spiritual light”, which is the Tamil for Louis. At Anakarei, the other half of his parish, the old Jesuit church was falling down, so he asked every parishioner, “men and women, great and small, young people and old folk”, to carry twenty-four stones to the site before or after the sacraments. In a month and a half he had heard a thousand confessions and twenty-four thousand stones had arrived. He rose to Vicar General of the whole Madurai mission.",
         lifeTa: `இந்தியாவில் இவருக்குக் கிடைத்த முதல் நியமனம் வடக்கன்குளம்தான் — 1847 டிசம்பர் 1. லூயி என்னும் பெயருக்கு நிகரான தமிழ்ச் சொல் “ஞான ஒளி” என்பதால், ஊர் இவரை ஞானப்பிரகாசியார் என்று அழைத்தது. இவரது பங்கின் மறுபாதியான ஆனைக்கரையில் பழைய இயேசு சபை ஆலயம் இடிந்து விழும் நிலையில் இருந்தது; எனவே அருட்சாதனங்களுக்கு முன்னோ பின்னோ இருபத்து நான்கு கற்களைத் தளத்திற்குச் சுமந்து வருமாறு, “ஆண், பெண், பெரியோர், சிறியோர், இளையோர், முதியோர்” என ஒவ்வொரு பங்கு மக்களையும் கேட்டுக்கொண்டார். ஒன்றரை மாதத்தில் ஆயிரம் பாவசங்கீர்த்தனங்களைக் கேட்டிருந்தார்; இருபத்து நான்காயிரம் கற்கள் வந்து சேர்ந்திருந்தன. பின்னர் மதுரைப் பணிக்களம் முழுவதற்கும் பொதுவிகாரியாக உயர்ந்தார்.`,
       },
       {
@@ -451,7 +451,7 @@ export const PERIODS: Period[] = [
         tier: "life",
         plate: "ஜெரோம் மெஸ்",
         life:
-          "A refugee of the Piedmont revolution of 1848, he served at Aour and then the cholera-stricken Marava after this parish. He died on the last day of 1862, aged forty-eight, and his own Society recorded that he died en odeur de sainteté — in the odour of sanctity.",
+          "A refugee of the Piedmont revolution of 1848, he served at Aour and then the cholera-stricken Marava after this parish. He died on the last day of 1862, aged forty-eight, and his own Society recorded that he died en odeur de sainteté, in the odour of sanctity.",
         lifeTa: `1848-ஆம் ஆண்டு பீட்மாந்துப் புரட்சியிலிருந்து தப்பி வந்த அகதி. இப்பங்கிற்குப் பின் ஆவூரிலும், பின்னர் காலரா பீடித்திருந்த மறவ நாட்டிலும் பணியாற்றினார். 1862-ஆம் ஆண்டின் கடைசி நாளில், நாற்பத்தெட்டு வயதில் இறந்தார்; அவர் en odeur de sainteté — புனிதத்தின் நறுமணத்தில் — இறந்தார் என்று அவரது சொந்த சபையே பதிவு செய்தது.`,
       },
       {
@@ -464,7 +464,7 @@ export const PERIODS: Period[] = [
         tier: "life",
         plate: "ஜோசப் கிரகோரி",
         life:
-          "Auguste Jean calls him, simply, the apostle of Vadakkankulam: “it is chiefly to his persevering energy that this fine Christian community owes its great church.” Bishop Canoz blessed the foundation stone on 9 August 1855, and for seventeen years Grégoire drove the building of it, with the Westphalian lay brother Joseph Bergenthal as his architect. What they finished in 1872 was, in Auguste Jean's phrase, “a church probably without equal in the world” — but on the very day the parish took possession of it, the congregation broke apart and the quarrel went to law; obliged to give evidence against part of his own flock, Grégoire lost his eating and his sleeping, and his strength never came back. He died in the crossing of the Red Sea on 19 September 1873, on the voyage home to France, and was buried at sea. Both of his chroniclers give that same date — an earlier reading of “1875” in one of them, published here for a time, turned out to be a damaged digit rather than a second date.",
+          "Auguste Jean calls him, simply, the apostle of Vadakkankulam: “it is chiefly to his persevering energy that this fine Christian community owes its great church.” Bishop Canoz blessed the foundation stone on 9 August 1855, and for seventeen years Grégoire drove the building of it, with the Westphalian lay brother Joseph Bergenthal as his architect. What they finished in 1872 was, in Auguste Jean's phrase, “a church probably without equal in the world”. But on the very day the parish took possession of it, the congregation broke apart and the quarrel went to law; obliged to give evidence against part of his own flock, Grégoire lost his eating and his sleeping, and his strength never came back. He died in the crossing of the Red Sea on 19 September 1873, on the voyage home to France, and was buried at sea. Both of his chroniclers give that same date. An earlier reading of “1875” in one of them, published here for a time, turned out to be a damaged digit rather than a second date.",
         lifeTa: `அகுஸ்த் ஜான் இவரை எளிமையாக “வடக்கன்குளத்தின் திருத்தூதர்” என்றே அழைக்கிறார்: “இந்த அழகிய கிறிஸ்தவ சமூகம் தன் மாபெரும் ஆலயத்தைப் பெற்றது, முதன்மையாக இவரது விடாமுயற்சி மிக்க ஆற்றலால்தான்.” 1855-ஆம் ஆண்டு ஆகஸ்ட் 9-ஆம் நாள் ஆயர் கனோஸ் அடிக்கல்லை ஆசீர்வதித்தார்; பதினேழு ஆண்டுகள் கிரகோயர் அக்கட்டுமானத்தை முன்னின்று நடத்தினார் — வெஸ்ட்பாலியாவைச் சேர்ந்த பொதுநிலைச் சகோதரர் ஜோசப் பெர்கந்தால் அவரது கட்டிடக் கலைஞராக இருந்தார். 1872-ஆம் ஆண்டில் அவர்கள் கட்டி முடித்தது, அகுஸ்த் ஜானின் சொற்களில், “உலகிலேயே ஒருவேளை நிகரற்ற ஓர் ஆலயம்.” ஆனால் மக்கள் அதைப் பொறுப்பேற்ற அதே நாளில் சபை பிளவுபட்டது; அந்தத் தகராறு நீதிமன்றம் வரை சென்றது. தம் சொந்த மந்தையின் ஒரு பகுதிக்கு எதிராகச் சாட்சி சொல்ல வேண்டியதாயிற்று; கிரகோயர் உணவையும் உறக்கத்தையும் இழந்தார்; அவரது வலிமை மீளவே இல்லை. பிரான்சுக்குத் திரும்பிச் சென்ற கப்பல் பயணத்தில், 1873 செப்டம்பர் 19-ஆம் நாள், செங்கடலைக் கடக்கும்போது இறந்தார்; கடலிலேயே அடக்கம் செய்யப்பட்டார். அவரைப் பற்றி எழுதிய இரு வரலாற்றாசிரியர்களும் அதே நாளையே தருகிறார்கள் — அவர்களுள் ஒருவரிடம் காணப்பட்ட “1875” என்னும் முந்தைய வாசிப்பு சில காலம் இங்கே வெளியிடப்பட்டிருந்தது; அது இரண்டாவது தேதி அல்ல, சேதமடைந்த ஓர் இலக்கமே என்று பின்னர் தெரியவந்தது.`,
       },
       {
@@ -478,7 +478,7 @@ export const PERIODS: Period[] = [
         tier: "life",
         plate: "காஸ்டானியர்",
         life:
-          "The parish's own sources call him Clément, but he signed his own letters Alexis Castanier — born in the Lozère on 16 February 1802, a Jesuit from 1826, in India from 1839. He rose to superior of the mission's southern, northern and central districts in turn, and of Negapatam, and died on 17 February 1874. A full printed biography of him exists in French, in a two-volume history of fifty years of the Madurai mission.",
+          "The parish's own sources call him Clément, but he signed his own letters Alexis Castanier. He was born in the Lozère on 16 February 1802, a Jesuit from 1826, and in India from 1839. He rose to superior of the mission's southern, northern and central districts in turn, and of Negapatam, and died on 17 February 1874. A full printed biography of him exists in French, in a two-volume history of fifty years of the Madurai mission.",
         lifeTa: `பங்கின் சொந்த ஆதாரங்கள் இவரைக் கிளமென் என்று அழைக்கின்றன; ஆனால் தம் கடிதங்களில் இவர் அலெக்சிஸ் காஸ்டானியர் என்றே கையொப்பமிட்டார். 1802 பிப்ரவரி 16-ஆம் நாள் லொஸேர் நாட்டில் பிறந்தவர்; 1826 முதல் இயேசு சபையினர்; 1839 முதல் இந்தியாவில். பணிக்களத்தின் தென், வட, மத்தியக் கோட்டங்களுக்கும், நாகப்பட்டினத்திற்கும் முறையே தலைவராக உயர்ந்தார்; 1874 பிப்ரவரி 17-ஆம் நாள் இறந்தார். மதுரைப் பணிக்களத்தின் ஐம்பது ஆண்டுகளைப் பற்றிய இரு தொகுதி வரலாற்று நூலில், இவரது முழு வாழ்க்கை வரலாறு ஒன்று பிரெஞ்சு மொழியில் அச்சில் உள்ளது.`,
       },
       {
@@ -513,7 +513,7 @@ export const PERIODS: Period[] = [
         from: 1875,
         to: 1875,
         tier: "line",
-        note: "The name is very likely a garbling of Frixius Cabos, who had been superior of the whole Southern Mission of Madurai since 1869 — so this single year here came in the middle of a much larger charge.",
+        note: "The name is very likely a garbling of Frixius Cabos, who had been superior of the whole Southern Mission of Madurai since 1869, so this single year here came in the middle of a much larger charge.",
         noteTa: `இப்பெயர், 1869 முதல் மதுரையின் தென்பகுதிப் பணிக்களம் முழுவதற்கும் தலைவராயிருந்த ஃபிரிக்சியுஸ் காபோஸ் என்பவரின் பெயர் சிதைந்த வடிவமாக இருப்பதற்கே வாய்ப்பு மிகுதி — அப்படியெனில், இங்கே இவர் இருந்த இந்த ஒரே ஆண்டு, அதைவிட மிகப் பெரிய ஒரு பொறுப்பின் நடுவே வந்ததாகும்.`,
       },
       {
@@ -527,7 +527,7 @@ export const PERIODS: Period[] = [
         portrait: "delpech",
         portraitFrom: "Suau, L'Inde tamoule, 1899",
         life:
-          "He preached with statues and marionettes worked by hidden springs, and he had been Fr Grégoire's travelling companion on the voyage where Grégoire died. Acting parish priest in 1876, he then served this church eleven years as assistant, and he died in it — “in the arms of Fr Pouget, at Vadakenkoulam, the eve of the feast of the most holy Name of Jesus”, 16 January 1887. He is buried behind the church, and the black stone over him, photographed in 2026, is cut “Natus 10 Nov. 1835 · Mortuus 16 Jan. 1887” — the same date a survey of European tombs made in 1894 had already read: “1887, 16th January. Victor Delpech S.J., aged 52 years.”",
+          "He preached with statues and marionettes worked by hidden springs, and he had been Fr Grégoire's travelling companion on the voyage where Grégoire died. Acting parish priest in 1876, he then served this church eleven years as assistant, and he died in it, “in the arms of Fr Pouget, at Vadakenkoulam, the eve of the feast of the most holy Name of Jesus”, 16 January 1887. He is buried behind the church, and the black stone over him, photographed in 2026, is cut “Natus 10 Nov. 1835 · Mortuus 16 Jan. 1887”, the same date a survey of European tombs made in 1894 had already read: “1887, 16th January. Victor Delpech S.J., aged 52 years.”",
         lifeTa: `மறைவான சுருள்வில்களால் இயக்கப்பட்ட திருவுருவங்களையும் பொம்மைகளையும் கொண்டு மறையுரை ஆற்றியவர். அருட்தந்தை கிரகோயர் இறந்த அந்தக் கப்பல் பயணத்தில் அவரது துணையாகச் சென்றவரும் இவரே. 1876-ஆம் ஆண்டில் பதில் பங்குத் தந்தையாக இருந்தார்; பின்னர் பதினொரு ஆண்டுகள் இவ்வாலயத்தில் உதவி அருட்தந்தையாகப் பணியாற்றி, இங்கேயே இறந்தார் — “வடக்கன்குளத்தில், மகா பரிசுத்த இயேசுவின் திருப்பெயர் விழாவின் முன்னாளில், அருட்தந்தை பூஜே அவர்களின் கைகளில்”, 1887 ஜனவரி 16-ஆம் நாள். ஆலயத்திற்குப் பின்புறம் அடக்கம் செய்யப்பட்டுள்ளார்; 2026-ஆம் ஆண்டில் புகைப்படம் எடுக்கப்பட்ட அவரது கருங்கல்லில் “Natus 10 Nov. 1835 · Mortuus 16 Jan. 1887” என்று செதுக்கப்பட்டுள்ளது — 1894-ஆம் ஆண்டில் ஐரோப்பியக் கல்லறைகள் பற்றிய ஒரு கணக்கெடுப்பு ஏற்கெனவே வாசித்திருந்த அதே தேதி: “1887, 16th January. Victor Delpech S.J., aged 52 years.”`,
       },
       {
@@ -540,7 +540,7 @@ export const PERIODS: Period[] = [
         tier: "life",
         plate: "ஜோசப் பெல்லஸ்வில்லே",
         life:
-          "The Rome catalogue of 1880 lists him here as minister and superior. He went on to become Rector of St Joseph's College, Trichinopoly, and in 1887 Rome named him coadjutor bishop of Trichinopoly — a promotion he had the bulls withdrawn rather than accept, out of humility. He rose instead to Superior-General of the whole Madurai mission in 1898.",
+          "The Rome catalogue of 1880 lists him here as minister and superior. He went on to become Rector of St Joseph's College, Trichinopoly, and in 1887 Rome named him coadjutor bishop of Trichinopoly, a promotion he had the bulls withdrawn rather than accept, out of humility. He rose instead to Superior-General of the whole Madurai mission in 1898.",
         lifeTa: `1880-ஆம் ஆண்டு உரோமைப் பதிவேடு, இவரை இங்கே இல்ல நிர்வாகியாகவும் தலைவராகவும் பட்டியலிடுகிறது. பின்னர் திருச்சிராப்பள்ளி புனித சூசையப்பர் கல்லூரியின் முதல்வரானார்; 1887-ஆம் ஆண்டில் திருச்சிராப்பள்ளியின் துணை ஆயராக உரோமை இவரை நியமித்தது — ஆனால் தாழ்ச்சியின் காரணமாக அப்பதவியை ஏற்காமல், அதற்கான திருமடல்களைத் திரும்பப் பெறச் செய்தார். அதற்குப் பதிலாக 1898-ஆம் ஆண்டில் மதுரைப் பணிக்களம் முழுவதற்கும் பொதுத் தலைவராக உயர்ந்தார்.`,
       },
       {
@@ -553,7 +553,7 @@ export const PERIODS: Period[] = [
         tier: "life",
         plate: "வில்லியம் புக்கே",
         life:
-          "By 1887 he was already the resident priest here, and it was in his arms that Fr Delpech died that January. Two Christmases later he took a visitor up into the church towers, pointed out a hedge at the garden's end and told him not to go near it after dark — a tiger had carried off a cow from that spot the year before — and then opened the reliquary that holds St Devasahayam's turban and the chains he was bound with, so the visitor could see them for himself.",
+          "By 1887 he was already the resident priest here, and it was in his arms that Fr Delpech died that January. Two Christmases later he took a visitor up into the church towers, pointed out a hedge at the garden's end and told him not to go near it after dark, because a tiger had carried off a cow from that spot the year before, and then opened the reliquary that holds St Devasahayam's turban and the chains he was bound with, so the visitor could see them for himself.",
         lifeTa: `1887-ஆம் ஆண்டிற்குள்ளேயே இவர் இங்கே தங்கியிருந்த அருட்தந்தையாக இருந்தார்; அந்த ஜனவரியில் அருட்தந்தை தெல்பெஷ் இறந்தது இவரது கைகளிலேயே. இரண்டு கிறிஸ்து பிறப்பு விழாக்களுக்குப் பின், வந்திருந்த ஒரு பார்வையாளரை ஆலயக் கோபுரங்களின் மேலே அழைத்துச் சென்று, தோட்டத்தின் முனையில் இருந்த ஒரு புதரைச் சுட்டிக்காட்டி, இருட்டிய பின் அதனருகே செல்ல வேண்டாம் என்று சொன்னார் — முந்தைய ஆண்டு அவ்விடத்திலிருந்தே ஒரு புலி ஒரு பசுவைத் தூக்கிச் சென்றிருந்தது. பின்னர், புனித தேவசகாயத்தின் தலைப்பாகையையும் அவர் கட்டப்பட்டிருந்த சங்கிலிகளையும் வைத்திருக்கும் திருஎச்சப் பேழையைத் திறந்து, அப்பார்வையாளர் அவற்றைத் தாமே காணும்படி செய்தார்.`,
       },
       {
@@ -591,7 +591,7 @@ export const PERIODS: Period[] = [
         to: 1910,
         tier: "line",
         note:
-          "Parish priest, chaplain to the convent of the native Sisters of the Seven Sorrows, and director of the schools — the three offices every late-Jesuit pastor of this village held at once.",
+          "Parish priest, chaplain to the convent of the native Sisters of the Seven Sorrows, and director of the schools: the three offices every late-Jesuit pastor of this village held at once.",
         noteTa: `பங்குத் தந்தை; நாட்டு ஏழு வியாகுல அன்னையின் அருட்சகோதரிகளின் மடத்திற்கு ஆன்மிகத் தந்தை; பள்ளிகளின் இயக்குநர் — இவ்வூரின் பிற்காலத்து இயேசு சபைப் பங்குத் தந்தையர் ஒவ்வொருவரும் ஒரே நேரத்தில் ஏற்றிருந்த மூன்று பொறுப்புகள் இவை.`,
       },
     ],
@@ -602,7 +602,7 @@ export const PERIODS: Period[] = [
     titleTa: `நவீன காலம்`,
     years: "1910 – today",
     turn:
-      "The parish's own list opens its last period in 1910, but the change it marks came in 1923: the Diocese of Tuticorin was erected and the church passed from the Society of Jesus to the diocesan clergy. That is why, from Fr Ignatius onward, every name here is Tamil — and why the last twelve pastors are the first whose faces the parish still has.",
+      "The parish's own list opens its last period in 1910, but the change it marks came in 1923: the Diocese of Tuticorin was erected and the church passed from the Society of Jesus to the diocesan clergy. That is why, from Fr Ignatius onward, every name here is Tamil, and why the last twelve pastors are the first whose faces the parish still has.",
     turnTa: `பங்கின் சொந்தப் பட்டியல் தன் இறுதிக் காலப்பகுதியை 1910-ல் தொடங்குகிறது; ஆனால் அது குறிக்கும் மாற்றம் நிகழ்ந்தது 1923-ல்தான் — தூத்துக்குடி மறைமாவட்டம் நிறுவப்பட்டு, ஆலயம் இயேசு சபையிடமிருந்து மறைமாவட்ட அருட்தந்தையரிடம் சென்றது. அதனால்தான் அருட்தந்தை இன்னாசியார் முதல் இங்குள்ள ஒவ்வொரு பெயரும் தமிழ்ப் பெயராக உள்ளது; பங்கு இன்றும் முகத்தை வைத்திருக்கும் முதல் பங்குத் தந்தையர் இந்தக் கடைசிப் பன்னிரண்டு பேரே.`,
     priests: [
       {
@@ -616,7 +616,7 @@ export const PERIODS: Period[] = [
         portrait: "caussanel",
         portraitFrom: "La Mission du Maduré, 1930",
         life:
-          "His own Jesuit obituary says of this pastorate only that at Vadakenkoulam “he sustained long struggles”. He took down the partitions that divided the inside of the 1872 church, so that the whole parish stood in one nave and sang together, and he held to it in the face of determined opposition — the case went to the District Court in 1913 and on to the Madras High Court, which decided it in 1926. A visitor who met him here wrote that he had never seen a man so thin: for eighteen years Fr Caussanel had taken no solid food, living on milk and bananas. In whatever hours he had left he sat with the parish's old registers and letters working out what they said, and wrote from them a history that the Society's archive still holds — historians came to consult him about it. He founded the Brothers of the Sacred Heart at Palamcottah in 1902, and died at Kallikulam on 25 January 1930. His own obituary judged him two men at once: the difficult one that some in the mission never forgave, and the one the village would have canonised on the spot.",
+          "His own Jesuit obituary says of this pastorate only that at Vadakenkoulam “he sustained long struggles”. He took down the partitions that divided the inside of the 1872 church, so that the whole parish stood in one nave and sang together, and he held to it in the face of determined opposition. The case went to the District Court in 1913 and on to the Madras High Court, which decided it in 1926. A visitor who met him here wrote that he had never seen a man so thin: for eighteen years Fr Caussanel had taken no solid food, living on milk and bananas. In whatever hours he had left he sat with the parish's old registers and letters working out what they said, and wrote from them a history that the Society's archive still holds, and historians came to consult him about it. He founded the Brothers of the Sacred Heart at Palamcottah in 1902, and died at Kallikulam on 25 January 1930. His own obituary judged him two men at once: the difficult one that some in the mission never forgave, and the one the village would have canonised on the spot.",
         lifeTa: `இப்பங்குப் பணியைப் பற்றி இவரது இயேசு சபை இரங்கல் குறிப்பு சொல்வது இவ்வளவே: வடக்கன்குளத்தில் “நீண்ட போராட்டங்களைத் தாங்கினார்.” 1872-ஆம் ஆண்டு ஆலயத்தின் உட்புறத்தைப் பிரித்திருந்த தடுப்புகளை இவர் இடித்து அகற்றினார்; அதனால் பங்கு முழுவதும் ஒரே மண்டபத்தில் நின்று ஒன்றாகப் பாடியது. உறுதியான எதிர்ப்புக்கு நடுவிலும் அதில் அவர் நிலைத்து நின்றார் — அவ்வழக்கு 1913-ஆம் ஆண்டில் மாவட்ட நீதிமன்றத்திற்கும், பின்னர் சென்னை உயர் நீதிமன்றத்திற்கும் சென்று, 1926-ஆம் ஆண்டில் தீர்ப்புப் பெற்றது. இங்கே இவரைச் சந்தித்த ஒரு பார்வையாளர், இத்தனை மெலிந்த மனிதரைத் தாம் ஒருபோதும் கண்டதில்லை என்று எழுதினார்: பதினெட்டு ஆண்டுகளாக அருட்தந்தை கௌசானல் திடமான உணவு எதுவும் உண்ணாமல், பாலிலும் வாழைப்பழத்திலும் வாழ்ந்து வந்தார். எஞ்சிய நேரங்களில் பங்கின் பழைய பதிவேடுகளோடும் கடிதங்களோடும் அமர்ந்து, அவை என்ன சொல்கின்றன என்பதைக் கண்டறிந்தார்; அவற்றிலிருந்து ஒரு வரலாற்றை எழுதினார் — அது இன்றும் இயேசு சபையின் ஆவணக்காப்பகத்தில் உள்ளது; வரலாற்றாசிரியர்கள் அதைப் பற்றி இவரைக் கலந்தாலோசிக்க வந்தார்கள். 1902-ஆம் ஆண்டில் பாளையங்கோட்டையில் திரு இருதய சகோதரர் சபையை நிறுவினார்; 1930 ஜனவரி 25-ஆம் நாள் கள்ளிகுளத்தில் இறந்தார். இவரை ஒரே நேரத்தில் இரு மனிதராக இவரது இரங்கல் குறிப்பே எடைபோட்டது: பணிக்களத்தில் சிலர் ஒருபோதும் மன்னிக்காத கடினமான மனிதர்; அதே நேரத்தில், அவ்விடத்திலேயே புனிதராக அறிவித்திருக்கும் அளவுக்கு ஊர் கண்ட மனிதர்.`,
       },
       {
@@ -640,7 +640,7 @@ export const PERIODS: Period[] = [
         to: 1936,
         tier: "line",
         note:
-          "The first diocesan priest on this list. The Catholic Directory of India for 1924 finds him here with an assistant, Fr G. Michael, 4,765 Catholics and seventeen villages — one church of brick and four of clay.",
+          "The first diocesan priest on this list. The Catholic Directory of India for 1924 finds him here with an assistant, Fr G. Michael, 4,765 Catholics and seventeen villages, one church of brick and four of clay.",
         noteTa: `இப்பட்டியலில் இடம்பெறும் முதல் மறைமாவட்ட அருட்தந்தை. 1924-ஆம் ஆண்டுக்கான இந்தியக் கத்தோலிக்க வழிகாட்டி நூல் இவரை இங்கே காண்கிறது — உதவி அருட்தந்தையாக அருட்தந்தை G. மைக்கேல், 4,765 கத்தோலிக்கர், பதினேழு ஊர்கள்; ஒரு செங்கல் ஆலயமும் நான்கு களிமண் ஆலயங்களும்.`,
       },
       { n: 51, name: "Fr Mariadas", nameTa: `அருட்தந்தை மரியதாஸ்`, tamil: "மரியதாஸ்", from: 1936, to: 1943, tier: "name" },
@@ -683,7 +683,7 @@ export const PERIODS: Period[] = [
         portrait: "ms-antony",
         portraitFrom: "Diocese of Thoothukudi",
         life:
-          "He had gone to school here himself, at St Theresa's, before he was ever its priest. Ordained in 1948, he served eleven parishes across four decades before he returned to Vadakkankulam to lead it — and while here he raised St Theresa's to a higher secondary school and laid the mosaic floor of the church itself. He is also credited with founding the parish's Don Bosco Youth Movement sodality in 1971, three years before his tenure as parish priest is otherwise listed as beginning. Among the vocations he guided was a boy who would himself become parish priest here decades later, Fr Thaddeus Rajan. He died on 3 October 2021.",
+          "He had gone to school here himself, at St Theresa's, before he was ever its priest. Ordained in 1948, he served eleven parishes across four decades before he returned to Vadakkankulam to lead it, and while here he raised St Theresa's to a higher secondary school and laid the mosaic floor of the church itself. He is also credited with founding the parish's Don Bosco Youth Movement sodality in 1971, three years before his tenure as parish priest is otherwise listed as beginning. Among the vocations he guided was a boy who would himself become parish priest here decades later, Fr Thaddeus Rajan. He died on 3 October 2021.",
         lifeTa: `இவ்வூரின் அருட்தந்தையாவதற்கு நெடுங்காலம் முன்பே, இங்குள்ள புனித தெரேசாள் பள்ளியில் இவர் மாணவராகப் படித்தவர். 1948-ஆம் ஆண்டில் குருத்துவம் பெற்று, நான்கு பத்தாண்டுகளில் பதினொரு பங்குகளில் பணியாற்றிய பின், வடக்கன்குளத்தை வழிநடத்த இங்கேயே திரும்பி வந்தார். இங்கிருந்தபோது புனித தெரேசாள் பள்ளியை மேல்நிலைப் பள்ளியாக உயர்த்தினார்; ஆலயத்தின் மொசைக் தரையையும் இட்டார். 1971-ஆம் ஆண்டில் பங்கின் தான் போஸ்கோ இளையோர் இயக்கச் சபையை நிறுவியதும் இவரே எனச் சொல்லப்படுகிறது — பங்குத் தந்தையாக இவரது பதவிக்காலம் தொடங்கியதாகப் பட்டியல் காட்டும் ஆண்டுக்கு மூன்று ஆண்டுகள் முன்பே. இவர் வழிநடத்திய குருத்துவ அழைத்தல்களுள் ஒன்று, பல பத்தாண்டுகளுக்குப் பின் இங்கேயே பங்குத் தந்தையான ஒரு சிறுவனுடையது — அருட்தந்தை தத்தேயு ராஜன். 2021 அக்டோபர் 3-ஆம் நாள் இறந்தார்.`,
       },
       {
@@ -742,7 +742,7 @@ export const PERIODS: Period[] = [
         tier: "line",
         portrait: "mariadas",
         portraitFrom: "150th-anniversary souvenir, 2022",
-        note: "A Monsignor — the only one on this list.",
+        note: "A Monsignor, the only one on this list.",
         noteTa: `ஒரு மேதகு அருட்தந்தை — இப்பட்டியலில் இவர் ஒருவரே.`,
       },
       { n: 62, name: "Fr Job De Rose", nameTa: `அருட்தந்தை ஜோப் தெ ரோஸ்`, from: 1997, to: 1998, tier: "line", note: "His second term.", noteTa: `இவரது இரண்டாம் பதவிக்காலம்.` },
@@ -787,12 +787,17 @@ export const PERIODS: Period[] = [
         tamil: "தடேயுஸ் ராஜன்",
         from: 2013,
         to: 2018,
-        tier: "life",
+        /* `line`, not `life`, though the paragraph is a full one: at `life` this
+           row drew a 104px plate and larger type between two ordinary rows, and
+           read as an illuminated entry the sources do not actually support. The
+           prose is unchanged; only the setting comes down to the register's
+           ordinary scale. */
+        tier: "line",
         portrait: "thaddeus-rajan",
         portraitFrom: "150th-anniversary souvenir, 2022",
-        life:
+        note:
           "He completed the Calvary chapel of the apparition church, set up in it the statues of St Devasahayam and St Arulanandar, and began the First-Saturday devotion that the parish keeps still. In 2014 he had the festival chariot that carries Our Lady through the village newly designed and built.",
-        lifeTa: `காட்சி மாதா ஆலயத்தின் சிலுவைக் கோவிலை இவர் கட்டி முடித்தார்; அதில் புனித தேவசகாயம், புனித அருளானந்தர் ஆகியோரின் திருவுருவங்களை நிறுவினார்; பங்கு இன்றும் கடைப்பிடிக்கும் முதல் சனிக்கிழமைப் பக்திமுயற்சியைத் தொடங்கிவைத்தார். 2014-ஆம் ஆண்டில், அன்னையை ஊரெங்கும் ஏந்திச் செல்லும் திருத்தேரைப் புதிதாக வடிவமைத்துச் செய்வித்தார்.`,
+        noteTa: `காட்சி மாதா ஆலயத்தின் சிலுவைக் கோவிலை இவர் கட்டி முடித்தார்; அதில் புனித தேவசகாயம், புனித அருளானந்தர் ஆகியோரின் திருவுருவங்களை நிறுவினார்; பங்கு இன்றும் கடைப்பிடிக்கும் முதல் சனிக்கிழமைப் பக்திமுயற்சியைத் தொடங்கிவைத்தார். 2014-ஆம் ஆண்டில், அன்னையை ஊரெங்கும் ஏந்திச் செல்லும் திருத்தேரைப் புதிதாக வடிவமைத்துச் செய்வித்தார்.`,
       },
       {
         n: 67,
@@ -907,7 +912,7 @@ export const ARCHIVE_ADDITIONS = [
     when: "about 1690",
     whenTa: `சுமார் 1690`,
     what:
-      "A South Indian Mission (1937) names him as the missionary under whom the first group of converts here was made — “a most active pioneer”. A history of the Jesuits in Malabar independently places him working from Cottar, wearing Indian dress, at the same time as a newly arrived Fr Bernard de Saa worked the neighbouring station of Marungur. The earliest priest of this village on any record, seven years before de Saa opens the parish's own numbered list.",
+      "A South Indian Mission (1937) names him as the missionary under whom the first group of converts here was made, calling him “a most active pioneer”. A history of the Jesuits in Malabar independently places him working from Cottar, wearing Indian dress, at the same time as a newly arrived Fr Bernard de Saa worked the neighbouring station of Marungur. The earliest priest of this village on any record, seven years before de Saa opens the parish's own numbered list.",
     whatTa: `A South Indian Mission (1937) என்னும் நூல், இங்கே முதல் கூட்ட மனமாற்றம் நிகழ்ந்தது இவரது கீழேயே என்று இவரைப் பெயரிட்டுச் சொல்கிறது — “மிகவும் சுறுசுறுப்பான ஒரு முன்னோடி.” மலபாரில் இயேசு சபையினரைப் பற்றிய ஒரு வரலாறு, புதிதாக வந்திருந்த அருட்தந்தை பெர்னார்ட் தெ சா அருகிலிருந்த மருங்கூர் நிலையத்தில் பணியாற்றிக்கொண்டிருந்த அதே காலத்தில், இந்திய உடையணிந்து கோட்டாற்றிலிருந்து இவர் பணியாற்றியதாகத் தனித்துப் பதிவு செய்கிறது. எந்தப் பதிவிலும் அறியக்கிடைக்கும் இவ்வூரின் மிகப் பழைய அருட்தந்தை இவரே — பங்கின் சொந்த எண்ணிடப்பட்ட பட்டியலைத் தெ சா தொடங்குவதற்கு ஏழு ஆண்டுகள் முன்பு.`,
   },
   {
@@ -915,7 +920,7 @@ export const ARCHIVE_ADDITIONS = [
     nameTa: `அருட்தந்தை காலினி, இ.ச.`,
     when: "1716",
     what:
-      "Quoted in the 1917 Tinnevelly Gazetteer as “stationed at Vadakkankulam, which had two years previously become a residence” — which independently dates the founding of the Jesuit residence here to about 1714.",
+      "Quoted in the 1917 Tinnevelly Gazetteer as “stationed at Vadakkankulam, which had two years previously become a residence”, which independently dates the founding of the Jesuit residence here to about 1714.",
     whatTa: `1917-ஆம் ஆண்டு திருநெல்வேலி அரசிதழில், “இரண்டு ஆண்டுகளுக்கு முன் ஓர் அருட்தந்தை நிலையாகத் தங்கும் இல்லமாக ஆகியிருந்த வடக்கன்குளத்தில் நிலைகொண்டிருந்தார்” என்று இவர் மேற்கோள் காட்டப்படுகிறார் — இது, இங்கே இயேசு சபையின் இல்லம் தொடங்கப்பட்ட ஆண்டைச் சுமார் 1714 என்று தனித்து உறுதிப்படுத்துகிறது.`,
   },
   {
@@ -932,7 +937,7 @@ export const ARCHIVE_ADDITIONS = [
     nameTa: `சகோதரர் ஜோசப் பெர்கந்தால், இ.ச.`,
     when: "1855 – 1872",
     what:
-      "The lay brother who drew and built the present church. The Rome catalogue for 1872 lists him at this station with the title Ædif. eccl. — builder of the church — and the parish's own English history calls him four times its chief architect. A German Catholic magazine, writing in 1885, agreed from entirely outside the parish: the church, it said, “bears brilliant witness to the talent of our Br Bergenthal.” He appears on no website in any language.",
+      "The lay brother who drew and built the present church. The Rome catalogue for 1872 lists him at this station with the title Ædif. eccl., builder of the church, and the parish's own English history calls him four times its chief architect. A German Catholic magazine, writing in 1885, agreed from entirely outside the parish: the church, it said, “bears brilliant witness to the talent of our Br Bergenthal.” He appears on no website in any language.",
     whatTa: `இன்றைய ஆலயத்தை வரைந்து கட்டிய பொதுநிலைச் சகோதரர். 1872-ஆம் ஆண்டு உரோமைப் பதிவேடு, இந்நிலையத்தில் இவரை Ædif. eccl. — ஆலயம் கட்டியவர் — என்னும் பட்டத்தோடு பட்டியலிடுகிறது; பங்கின் சொந்த ஆங்கில வரலாறு இவரை நான்கு முறை அதன் தலைமைக் கட்டிடக் கலைஞர் என்று அழைக்கிறது. 1885-ஆம் ஆண்டில் ஒரு ஜெர்மன் கத்தோலிக்க இதழ், பங்கிற்கு முற்றிலும் வெளியிலிருந்து அதையே ஒப்புக்கொண்டது: அவ்வாலயம் “எங்கள் சகோதரர் பெர்கந்தாலின் திறமைக்கு ஒளிமிக்க சான்று பகர்கிறது” என்று அது எழுதியது. எந்த மொழியிலும் எந்த இணையதளத்திலும் இவரது பெயர் இல்லை.`,
   },
   {
@@ -940,7 +945,7 @@ export const ARCHIVE_ADDITIONS = [
     nameTa: `அருட்தந்தை மரியானுஸ் மைக்கேல், இ.ச.`,
     when: "1872",
     what:
-      "The Rome catalogue for 1872 lists him at this station alongside Fr Grégoire and Br Bergenthal, simply as “Mission.” — a second missionary, otherwise unrecorded, serving through the year the great church was finished.",
+      "The Rome catalogue for 1872 lists him at this station alongside Fr Grégoire and Br Bergenthal, simply as “Mission.”: a second missionary, otherwise unrecorded, serving through the year the great church was finished.",
     whatTa: `1872-ஆம் ஆண்டு உரோமைப் பதிவேடு, அருட்தந்தை கிரகோயருக்கும் சகோதரர் பெர்கந்தாலுக்கும் அருகில், “Mission.” என்று மட்டுமே இவரை இந்நிலையத்தில் பட்டியலிடுகிறது — மாபெரும் ஆலயம் கட்டி முடிந்த அந்த ஆண்டு முழுவதும் பணியாற்றிய, வேறெங்கும் பதிவாகாத இரண்டாவது மறைப்பணியாளர்.`,
   },
   {
@@ -984,7 +989,7 @@ export const BISHOPS: Bishop[] = [
     role: "First Bishop of Tuticorin",
     roleTa: `தூத்துக்குடியின் முதல் ஆயர்`,
     what:
-      "In 1926 he called Vadakkankulam “Little Rome” — Chinna Romapuri — and the name has stuck to the village for a century.",
+      "In 1926 he called Vadakkankulam “Little Rome”, Chinna Romapuri, and the name has stuck to the village for a century.",
     whatTa: `1926-ஆம் ஆண்டில் வடக்கன்குளத்தை “சின்ன ரோமாபுரி” என்று இவர் அழைத்தார்; ஒரு நூற்றாண்டாக அப்பெயர் இவ்வூரோடு ஒட்டிக்கொண்டிருக்கிறது.`,
   },
   {
@@ -1038,7 +1043,7 @@ export const TOMBS: Tomb[] = [
     nameTa: `அருட்தந்தை விக்தோர் தெல்பெஷ், இ.ச.`,
     died: "1835 – 1887",
     inscription: "1887, 16th January. Victor Delpech S.J., aged 52 years.",
-    note: "His own stone, cut in Latin, gives the same day and adds that his brethren raised this tomb — and the ones around it.",
+    note: "His own stone, cut in Latin, gives the same day and adds that his brethren raised this tomb, and the ones around it.",
     noteTa: `இலத்தீனில் செதுக்கப்பட்ட அவரது சொந்தக் கல்லும் அதே நாளையே தருகிறது; இக்கல்லறையையும் அதைச் சுற்றியுள்ளவற்றையும் எழுப்பியவர்கள் அவரது சபைச் சகோதரர்களே என்பதையும் சேர்த்துச் சொல்கிறது.`,
   },
   { name: "Fr Remigius Fernandez, S.J.", nameTa: `அருட்தந்தை ரெமீஜியுஸ் பெர்னாண்டஸ், இ.ச.`, died: "1899" },

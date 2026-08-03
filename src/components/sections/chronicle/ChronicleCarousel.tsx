@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState, useCallback, useId } from "react";
-import Image from "next/image";
+import { ResidentImage } from "@/components/ResidentImage";
 import { Link } from "@/components/LocaleLink";
 import { ArrowUpRight } from "lucide-react";
 import { gsap, ScrollTrigger, useIsomorphicLayoutEffect } from "@/lib/gsap";
@@ -209,14 +209,24 @@ function CarouselCard({ frame, meta }: { frame: ChronicleFrame; meta: ChronicleF
       aria-label={`${frame.year} — ${frame.title}`}
       className="chron-card group relative block h-full w-[78vw] shrink-0 overflow-hidden rounded-3xl bg-navy shadow-xl ring-1 ring-gold/15 sm:w-[23rem]"
     >
-      <Image
+      {/* A HORIZONTAL slack, not the default vertical one: on a phone this strip
+          is a native side-scroller, so a card that is nowhere near the screen is
+          still inside the viewport's vertical band. The vertical default would
+          call all eight of them visible and never release a single painting —
+          which is exactly the bug this is here to fix. A full viewport width is
+          more than a card either side of the one being read. */}
+      <ResidentImage
         src={`/images/history/${meta.photo}`}
         alt={frame.title}
         fill
         sizes="(max-width: 640px) 78vw, 23rem"
         className="object-cover"
         draggable={false}
+        slack="0px 100%"
       />
+      {/* Sits over the painting, and over the bare navy card while the painting
+          is away — so a stripped card is a dark plate with its year and title
+          on it, never a hole. */}
       <div className="absolute inset-0 bg-linear-to-t from-night-deep via-navy/60 to-navy/10" />
 
       {/* Year and chapter stack together on the left, which frees the opposite
@@ -717,7 +727,15 @@ export function ChronicleCarousel() {
             //
             // No `pr-*`: the trailing gutter is the [data-chron-tail] element at
             // the end of the track. See `measure`.
-            className={`flex h-[30rem] gap-5 will-change-transform md:h-[clamp(19rem,50vh,32rem)] md:gap-6 short:md:h-[clamp(16rem,42vh,22rem)]! ${RAIL} ${
+            //
+            // `lg:will-change-transform`, matching the breakpoint the desktop
+            // build switches on. Only that build writes a transform here; below
+            // `lg` the track never moves — the VIEWPORT around it scrolls — so
+            // the bare class was a standing promise to move that was never kept.
+            // It is not a small one either: the track is seven screens wide, and
+            // promoting it asks a phone to hold the whole strip as one texture
+            // on top of the scrolling layer the browser has already made for it.
+            className={`flex h-[30rem] gap-5 lg:will-change-transform md:h-[clamp(19rem,50vh,32rem)] md:gap-6 short:md:h-[clamp(16rem,42vh,22rem)]! ${RAIL} ${
               // `.chron-card`, not `*` — the trailing spacer is a child of this
               // track too, and a snap point on an empty box lets the scroller
               // rest there with the closing panel pushed half off the screen.

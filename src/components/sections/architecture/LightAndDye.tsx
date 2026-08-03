@@ -1,24 +1,20 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import Image from "next/image";
-import { gsap, DESKTOP } from "@/lib/gsap";
 import { useLang } from "@/components/layout/LanguageProvider";
 import { useReveal } from "./useReveal";
 
-/** The rose window in the painted vault — the strongest of the four, so it
-    stands beside the copy rather than queueing below it with the rest. */
-const LEAD = { src: "/images/architecture/glass-1.jpg", caption: 0 };
-
-/** The three that follow, in one row. `drift` is the parallax travel in percent;
-    they are staggered so the row breathes, but gently — these three are the same
-    size side by side, so a large spread reads as misalignment rather than
-    movement (the old masonry layout could carry -34 because no two tiles shared
-    an edge). */
-const TRIO = [
-  { src: "/images/architecture/glass-2.jpg", caption: 1, drift: -8 },
-  { src: "/images/architecture/glass-3.jpg", caption: 2, drift: -18 },
-  { src: "/images/architecture/glass-4.jpg", caption: 3, drift: -12 },
+/**
+ * The four windows, read across then down: the four-light tracery window and
+ * the rose window the copy names on the top row, the lancet heads and the
+ * angled window in its stencilled wall beneath them. See the layout note.
+ */
+const WINDOWS = [
+  { src: "/images/architecture/glass-1.jpg", caption: 0 },
+  { src: "/images/architecture/glass-2.jpg", caption: 1 },
+  { src: "/images/architecture/glass-3.jpg", caption: 2 },
+  { src: "/images/architecture/glass-4.jpg", caption: 3 },
 ];
 
 /**
@@ -30,23 +26,35 @@ const TRIO = [
  * KB file 12 §"Stained glass, nave, ceiling" — not from any documented
  * symbolism, since none is recorded for the glass specifically.
  *
- * LAYOUT (rebuilt July 2026). This section used to run its copy in a `max-w-2xl`
- * column with a four-tile masonry grid underneath. On a wide screen that left
- * the entire top right of the section empty, and lightBody is the longest body
- * on the page, so the void was at its most obvious right here — every other
- * numbered section pairs its text with a figure across twelve columns. It now
- * does the same: the rose window at col-5, the copy at col-7, the other three
- * windows in a row below.
+ * ── LAYOUT: A 2×2 BLOCK BESIDE THE COPY. ────────────────────────────────────
+ * This section has been through four shapes; this is the one the owner chose.
+ * It began as a `max-w-2xl` column of copy over a four-tile masonry grid,
+ * which left the whole top right of a wide screen empty. It became a lead
+ * figure beside the copy with the other three in a centred row beneath, and
+ * that is the one that failed — not because there were four photographs, but
+ * because of how they were arranged: a big lead and three small tiles at a
+ * different width, centred under a left-aligned lead they could not line up
+ * with. It was then cut to a pair, and the owner asked for the four back as a
+ * square block.
  *
- * The figure sits LEFT to keep the page's alternation intact — I Towers right,
+ * So: four equal frames, 2×2, in six of the twelve columns, with the copy in
+ * the other six. Equal is the whole point — the failure mode here was never
+ * the count, it was tiles of different sizes on different centre lines. Every
+ * frame is the same width, the same 3:4, and on one of two shared column
+ * edges. If you add or remove a photograph, keep it even: 2×2 or 1×2, never
+ * three, and never one big one with small ones under it.
+ *
+ * The figures sit LEFT to keep the page's alternation intact — I Towers right,
  * II HowItStands left, III Bells right, IV here left, VII ThreeChurches right.
  * That is a separate rhythm from the Roman numeral's side; don't conflate them.
  *
- * All four sources are 4:3 (2560×1920). The old grid cropped glass-4 into a
- * 2.9:1 slot, which threw most of the window away; every frame here is 4:3, so
- * they are shown as shot.
+ * The parallax drift that used to scrub these on scroll is gone for good.
+ * Tiles on a shared grid edge cannot drift against each other without simply
+ * looking misaligned, which is the fault this layout exists to fix. The
+ * section keeps its entrance reveal, which is what a reader actually sees.
+ * This component no longer touches GSAP at all.
  */
-/** One window: 4:3 as shot, gold hairline, caption on hover. */
+/** One window: 3:4 upright, gold hairline, caption on hover. */
 function GlassTile({
   src,
   alt,
@@ -59,30 +67,47 @@ function GlassTile({
   className?: string;
 }) {
   return (
-    <figure
-      className={`relative aspect-4/3 rounded-2xl overflow-hidden group ring-1 ring-gold/15 shadow-lg ${className}`}
-    >
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        className="object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110"
-        sizes={sizes}
-      />
-      <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-gold/0 group-hover:ring-gold/40 transition-all duration-700" />
-      {/* ⚠ VISIBLE AT REST ON TOUCH. This caption was `opacity-0` until hover,
-          and a phone has no hover — so on the device where most readers meet
-          this section, the only thing naming each of the four windows did not
-          exist. These are photographs of specific windows and the caption is
-          the whole of their identification; it is content, not a flourish. It
-          goes back to being a hover reveal from `md` up, where a pointer
-          exists to reveal it, so the desktop composition is unchanged.
-          The size is the same 9.3px→11.2px correction as every other engraved
-          caption on the page — see Towers.tsx. */}
-      <figcaption className="absolute inset-x-0 bottom-0 p-4 md:p-5 bg-linear-to-t from-navy/85 to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500">
-        <span className="font-display text-[0.7rem] tracking-[0.13em] md:text-[0.62rem] md:tracking-[0.2em] uppercase text-white/90">
-          {alt}
-        </span>
+    <figure className={className}>
+      <div className="relative aspect-3/4 rounded-2xl overflow-hidden group ring-1 ring-gold/15 shadow-lg">
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          className="object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110"
+          sizes={sizes}
+        />
+        <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-gold/0 group-hover:ring-gold/40 transition-all duration-700" />
+        {/* The desktop caption, laid over the picture and revealed on hover.
+            It is `aria-hidden` and duplicates the alt text on purpose: the
+            real <figcaption> is the one below, and a <figure> may hold only
+            one. Hidden outright below `md`, where there is no pointer to
+            reveal it with — see the note on the figcaption. */}
+        <div
+          aria-hidden
+          className="hidden md:block absolute inset-x-0 bottom-0 p-4 bg-linear-to-t from-navy/85 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        >
+          <span className="font-display text-[0.62rem] tracking-[0.18em] uppercase text-white/90">
+            {alt}
+          </span>
+        </div>
+      </div>
+      {/* ⚠ VISIBLE AT REST ON TOUCH, AND OUTSIDE THE FRAME. This caption was
+          `opacity-0` until hover, and a phone has no hover — so on the device
+          where most readers meet this section, the only thing naming each
+          window did not exist. These are photographs of specific windows and
+          the caption is the whole of their identification; it is content, not
+          a flourish.
+
+          It sits BELOW the picture rather than over it, because the two tiles
+          are half-width on a phone: forty characters of spaced Cinzel laid
+          over a 155px frame runs four lines deep and covers a third of the
+          window. Under the frame it costs the photograph nothing. From `md`
+          up it goes back to being a hover reveal inside the frame, so the
+          desktop composition is unchanged. The size is the same 9.3px→11.2px
+          correction as every other engraved caption on the page — see
+          Towers.tsx. */}
+      <figcaption className="md:hidden mt-3 font-display text-[0.7rem] tracking-[0.12em] uppercase text-text-muted leading-relaxed">
+        {alt}
       </figcaption>
     </figure>
   );
@@ -90,55 +115,9 @@ function GlassTile({
 
 export function LightAndDye() {
   const ref = useRef<HTMLElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
   const { t, lang } = useLang();
   const a = t.architecture;
   useReveal(ref, lang);
-
-  useEffect(() => {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) return;
-
-    const ctx = gsap.context(() => {
-      /* ── DESKTOP ONLY: the drift of the three windows ───────────────────
-         This is the whole of this page's decorative scrubbed motion — three
-         photographs given a transform on every scrolled frame purely so the
-         row breathes. It is depth behind the subject, not the subject, and
-         on a phone the three tiles are stacked one under another anyway, so
-         the stagger that makes the row read as a row on a monitor cannot be
-         seen at all: what was left was the cost. The section keeps its
-         entrance reveal, which is what a reader on a phone actually sees.
-         See the note on DESKTOP in lib/gsap.ts.
-
-         `matchMedia` rather than an `if` on `matchMedia(...).matches`: it
-         builds and reverts as the query flips, so a tablet rotated across
-         768px lands on the right build instead of whichever one mounted. */
-      const mm = gsap.matchMedia();
-      mm.add(DESKTOP, () => {
-        const tiles = gridRef.current?.children;
-        if (!tiles) return;
-
-        // The lead figure does NOT drift: it sits beside the copy, and moving
-        // it against a fixed block of text only makes the text look crooked.
-        Array.from(tiles).forEach((el, i) => {
-          gsap.to(el, {
-            yPercent: TRIO[i]?.drift ?? -12,
-            ease: "none",
-            scrollTrigger: {
-              trigger: ref.current,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: 1.2,
-            },
-          });
-        });
-      });
-
-      return () => mm.revert();
-    }, ref);
-
-    return () => ctx.revert();
-  }, [lang]);
 
   return (
     <section
@@ -150,13 +129,36 @@ export function LightAndDye() {
       </span>
 
       <div className="relative max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
-          <GlassTile
-            className="lg:col-span-5 reveal-item"
-            src={LEAD.src}
-            alt={a.glassCaptions[LEAD.caption]}
-            sizes="(max-width: 1024px) 92vw, 30rem"
-          />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          {/* ── THE BLOCK, AND HOW BIG IT IS ALLOWED TO GET. Filling six of
+              twelve columns it was ~600px square and ~810px tall in total,
+              which is a wall of stained glass beside the paragraph rather than
+              an illustration of it. It is five columns capped at 26rem now:
+              each window ~198 across and ~264 down, the whole block ~548 tall,
+              against copy that runs about 430. Two goes at this have both been
+              told it was still too big, so treat 26rem as a ceiling, not a
+              starting point.
+
+              Cap the WIDTH, never the aspect: a shorter box crops the head off
+              a Gothic window, which is the subject. And no `mx-auto` — the
+              block is flush with the container's left edge, the same edge the
+              heading and every other section on the page start from.
+
+              Two across at every width, phone included. The block is then the
+              same shape everywhere, and it is the shape that makes this work —
+              stacking them one per row on a phone was 1300px of scroll through
+              four near-fullscreen pictures of the same thing. */}
+          <div className="lg:col-span-5 lg:max-w-104 grid grid-cols-2 gap-3 sm:gap-4">
+            {WINDOWS.map((tile) => (
+              <GlassTile
+                key={tile.src}
+                className="reveal-item"
+                src={tile.src}
+                alt={a.glassCaptions[tile.caption]}
+                sizes="(max-width: 1024px) 46vw, 13rem"
+              />
+            ))}
+          </div>
 
           <div className="lg:col-span-7">
             <p className="reveal-item kicker mb-6">{a.lightLabel}</p>
@@ -170,27 +172,6 @@ export function LightAndDye() {
               {a.lightBody}
             </p>
           </div>
-        </div>
-
-        <div
-          ref={gridRef}
-          className="reveal-item mt-16 md:mt-20 grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6"
-        >
-          {TRIO.map((tile) => (
-            <GlassTile
-              key={tile.src}
-              /* `md:will-change-transform`, not bare: `will-change` promotes
-                 the tile to its own compositor layer for the whole life of the
-                 page, and since the drift above is desktop-only nothing moves
-                 these three on a phone. A standing promise to move that is
-                 never kept is just memory — three full-bleed photographs' worth
-                 of it. */
-              className="md:will-change-transform"
-              src={tile.src}
-              alt={a.glassCaptions[tile.caption]}
-              sizes="(max-width: 640px) 92vw, (max-width: 1024px) 45vw, 26rem"
-            />
-          ))}
         </div>
       </div>
     </section>

@@ -47,7 +47,23 @@ export function ImagesItCarries() {
           </p>
         </div>
 
-        <div className="mt-12 md:mt-16 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
+        {/* ── CAPPED, AND FLUSH LEFT. Two 4:5 figures across the full 7xl
+            container come out ~610px wide and ~760px down on a laptop, which
+            is taller than the viewport: you cannot see either photograph and
+            its caption at the same time, and the pair reads as two posters
+            rather than as the two images the building holds. So the grid is
+            capped — 64rem, ~484×605 a tile.
+
+            ⚠ NO `mx-auto` ON THIS. Capping it and centring it was tried, and
+            it put the pair's left edge 190px inside the heading's: the
+            heading, the intro paragraph and every other section on the page
+            start at the container's left edge, and the photographs suddenly
+            did not. A narrower block on this page is fine; a block on a
+            different centre line from the words above it is not.
+
+            The 4:5 aspect is deliberate and stays: the relief and the altar
+            screen are both upright subjects. */}
+        <div className="mt-12 md:mt-16 max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-14">
           {a.figures.map((f, i) => (
             <figure key={i} className="reveal-item">
               <div className="relative w-full aspect-4/5">
@@ -57,7 +73,7 @@ export function ImagesItCarries() {
                     alt={f.caption}
                     fill
                     className="object-cover"
-                    sizes="(max-width: 768px) 90vw, 45vw"
+                    sizes="(max-width: 768px) 90vw, 31rem"
                   />
                   <div className="pointer-events-none absolute inset-0 rounded-[1.75rem] ring-1 ring-inset ring-gold/30" />
                   <PhotoOrnaments />

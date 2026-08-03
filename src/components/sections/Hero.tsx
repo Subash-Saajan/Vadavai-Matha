@@ -16,6 +16,19 @@ const FRAME_COUNT = 150;
 const frameSrc = (i: number) => `/hero-frames/f${String(i + 1).padStart(3, "0")}.webp`;
 
 /**
+ * The same film as a single H.264 stream, which is what a phone actually plays
+ * now — the stills above are the fallback for anything that cannot decode it.
+ *
+ * It is 1080×1350 against the stills' 864×1080 and 3.93 MB against their
+ * 14.7 MB, both at once, because inter-frame compression is the thing a
+ * sequence of separate images cannot do. The reason it exists is memory
+ * though, not bytes: a decoded VideoFrame is released by calling close(), so
+ * the mobile hero holds one canvas and nothing else. See useScrubFilm.ts.
+ */
+const FILM_SRC = "/hero-frames/film.h264";
+const FILM_INDEX_SRC = "/hero-frames/film.json";
+
+/**
  * The church is not in the middle of its own footage. gen-scrub-frames.mjs
  * takes a dead-centre 4:5 slice of the drone master, and in that slice the
  * spire sits at about 51% of the frame's width at the start of the scrub and
@@ -48,6 +61,8 @@ export function Hero() {
     canvasRef,
     frameCount: FRAME_COUNT,
     frameSrc,
+    filmSrc: FILM_SRC,
+    filmIndexSrc: FILM_INDEX_SRC,
     focusX: CHURCH_FOCUS_X,
   });
 
@@ -211,7 +226,12 @@ export function Hero() {
             className="absolute inset-0 w-full h-full object-cover"
           />
         )}
-        {mode === "canvas" && (
+        {/* One canvas for both mobile paths. `film` decodes the H.264 stream
+            with WebCodecs; `canvas` draws the WebP stills. They are the same
+            element on purpose — a hero that demotes from film to stills
+            mid-load keeps its canvas, and therefore whatever was last painted
+            on it, instead of blanking while React swaps one node for another. */}
+        {(mode === "film" || mode === "canvas") && (
           <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
         )}
 

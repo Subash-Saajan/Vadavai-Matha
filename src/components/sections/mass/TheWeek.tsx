@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 
 import { gsap } from "@/lib/gsap";
 import { SCHEDULE } from "@/lib/contact";
-import { formatClock } from "@/lib/formatTime";
+import { formatClock, formatClockList } from "@/lib/formatTime";
 import { useLang } from "@/components/layout/LanguageProvider";
 import { useReveal } from "@/hooks/useReveal";
 import { useIstWeekday } from "@/hooks/useShrineClock";
@@ -37,9 +37,19 @@ export function TheWeek() {
   /* Monday-first index of today, or −1 before the clock is read. */
   const todayCol = weekday === null ? -1 : (weekday + 6) % 7;
 
+  /* "From 5:30 PM" — English leads, Tamil trails with "முதல்". */
+  const fromClock = (at: string) =>
+    [w.fromLead, formatClock(at, lang), w.fromTail].filter(Boolean).join(" ");
+
   /* Sunday is the seventh column; the first six are identical. */
   const columns = w.days.map((name, i) => {
     const sunday = i === 6;
+    const evening = sunday
+      ? [{ at: SCHEDULE.devotions.sundayStart, from: true }]
+      : [
+          { at: SCHEDULE.devotions.rosary, from: false },
+          { at: SCHEDULE.devotions.benediction, from: false },
+        ];
     return {
       name,
       short: w.daysShort[i],
@@ -47,12 +57,21 @@ export function TheWeek() {
       masses: sunday ? SCHEDULE.sundayMass : SCHEDULE.weekdayMass,
       // Sunday's devotion has a published start and no published parts, so it
       // is stated as a start; the weekdays have both parts and get them.
-      evening: sunday
-        ? [{ at: SCHEDULE.devotions.sundayStart, from: true }]
-        : [
-            { at: SCHEDULE.devotions.rosary, from: false },
-            { at: SCHEDULE.devotions.benediction, from: false },
-          ],
+      evening,
+      /* The same day, named, for the phone. The grid above can rely on two
+         column headings to say what four numbers are; a row cannot, so each
+         service is given its own line and its own name. Sunday's evening has
+         no published parts, so it stays the general "Evening" rather than
+         claiming a Rosary at 5:30 that no source gives. */
+      lines: [
+        { label: w.massLabel, value: formatClockList(sunday ? SCHEDULE.sundayMass : SCHEDULE.weekdayMass, lang), evening: false },
+        ...(sunday
+          ? [{ label: w.evening, value: fromClock(SCHEDULE.devotions.sundayStart), evening: true }]
+          : [
+              { label: w.rosaryLabel, value: formatClock(SCHEDULE.devotions.rosary, lang), evening: true },
+              { label: w.benedictionLabel, value: formatClock(SCHEDULE.devotions.benediction, lang), evening: true },
+            ]),
+      ],
     };
   });
 
@@ -121,7 +140,7 @@ export function TheWeek() {
             return (
               <div
                 key={col.name}
-                className={`week-column relative flex items-center justify-between gap-5 px-5 py-4 lg:flex-col lg:items-stretch lg:justify-start lg:px-4 lg:py-7 ${
+                className={`week-column relative px-5 py-4 lg:flex lg:flex-col lg:items-stretch lg:justify-start lg:px-4 lg:py-7 ${
                   col.sunday ? "bg-navy" : "bg-white/92 backdrop-blur-sm"
                 }`}
               >
@@ -134,14 +153,73 @@ export function TheWeek() {
                   />
                 )}
 
-                <div className="flex shrink-0 items-baseline gap-2.5 lg:mb-5 lg:flex-col lg:items-start lg:gap-1.5">
+                {/* ── THE DAY, NAMED, ON A PHONE ────────────────────────────
+                    A separate block rather than fifteen more responsive
+                    utilities on the grid below — the same split TheDay.tsx
+                    makes between its arc and its stacked list, and for the
+                    same reason: below `lg` this stops being a column of a
+                    timetable and becomes a small register of its own, where
+                    every line carries the name of what it is. */}
+                <div className="lg:hidden">
+                  <div className="mb-2.5 flex items-baseline gap-2.5">
+                    <h3 className={`ui-label ${col.sunday ? "text-gold" : "text-navy"}`}>
+                      {col.name}
+                    </h3>
+                    {isToday && (
+                      <span
+                        className={`micro-label ${
+                          col.sunday ? "text-white/55" : "text-gold-dark"
+                        }`}
+                      >
+                        {w.today}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* A description list, because that is what it is: the name
+                      of a service, and the time it is said. */}
+                  <dl className="space-y-1">
+                    {col.lines.map((line) => (
+                      <div key={line.label} className="flex items-baseline justify-between gap-4">
+                        {/* `micro-label`, not `ui-label` — one step down, so
+                            the name of the service never competes with the
+                            name of the day beside it. Colour only: the size
+                            and tracking live in globals.css so the Tamil rule
+                            can replace them. */}
+                        <dt
+                          className={`micro-label ${
+                            col.sunday ? "text-white/45" : "text-text-muted/75"
+                          }`}
+                        >
+                          {line.label}
+                        </dt>
+                        {/* 15.7px — the hours are what a phone came for, and
+                            they hold the size the home page's week plate uses. */}
+                        <dd
+                          className={`text-[0.98rem] tabular-nums ${
+                            line.evening
+                              ? col.sunday
+                                ? "text-white/75"
+                                : "text-text-muted"
+                              : col.sunday
+                                ? "text-gold-light"
+                                : "text-navy/85"
+                          }`}
+                        >
+                          {line.value}
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+
+                <div className="hidden shrink-0 items-baseline gap-2.5 lg:mb-5 lg:flex lg:flex-col lg:items-start lg:gap-1.5">
                   <h3
                     className={`ui-label ${
                       col.sunday ? "text-gold" : "text-navy"
                     }`}
                   >
-                    <span className="lg:hidden">{col.name}</span>
-                    <span className="hidden lg:inline">{col.short}</span>
+                    {col.short}
                   </h3>
                   {isToday && (
                     <span
@@ -154,32 +232,24 @@ export function TheWeek() {
                   )}
                 </div>
 
-                <div className="flex flex-wrap items-center justify-end gap-x-4 gap-y-1 lg:block lg:justify-start">
+                {/* ── The seven-column grid, from `lg` up ──────────────────
+                    Two headings and four numbers. Unchanged: what used to be
+                    responsive here is now the phone's own block above, so
+                    every class below states the desktop case plainly. */}
+                <div className="hidden lg:block">
                   {/* Morning */}
                   <p
-                    className={`micro-label hidden lg:block ${
+                    className={`micro-label ${
                       col.sunday ? "text-white/40" : "text-text-muted/60"
                     }`}
                   >
                     {w.morning}
                   </p>
-                  {/* ── THE TIMES GO UP ON A PHONE, NOT DOWN ──────────────
-                      0.9rem is 14.4px, and it was chosen for a seven-across
-                      grid on a monitor where each column is about 130px wide
-                      and every number is on its own line. Below `lg` the whole
-                      layout turns — the day becomes a ROW and the times are set
-                      flush right in a wrapping cluster — but the size stayed at
-                      the one picked to survive a narrow column. That is the
-                      wrong way round: the prose on this page is what a phone
-                      should shed, and the hours are what it came for. 15.7px
-                      matches the week plate on the home page, which is the same
-                      object at half the length. Restored at `md`, so both the
-                      tablet row and the seven-column grid are untouched. */}
-                  <ul className="flex flex-wrap justify-end gap-x-3 lg:mt-2 lg:block lg:space-y-1">
+                  <ul className="mt-2 space-y-1">
                     {col.masses.map((at) => (
                       <li
                         key={at}
-                        className={`text-[0.98rem] tabular-nums md:text-[0.9rem] ${
+                        className={`text-[0.9rem] tabular-nums ${
                           col.sunday ? "text-gold-light" : "text-navy/80"
                         }`}
                       >
@@ -188,37 +258,30 @@ export function TheWeek() {
                     ))}
                   </ul>
 
-                  {/* The divider turns with the layout: a short upright tick
-                      between the two lists when the day is a row, a full rule
-                      beneath the morning when the day is a column. Without it
-                      the two sets of times run together on a phone. */}
+                  {/* A full rule beneath the morning; without it the two sets
+                      of times run together down the column. */}
                   <span
-                    className={`h-3.5 w-px shrink-0 lg:my-4 lg:h-px lg:w-full ${
+                    className={`my-4 block h-px w-full ${
                       col.sunday ? "bg-white/20" : "bg-gold/30"
                     }`}
                     aria-hidden="true"
                   />
                   <p
-                    className={`micro-label hidden lg:block ${
+                    className={`micro-label ${
                       col.sunday ? "text-white/40" : "text-text-muted/60"
                     }`}
                   >
                     {w.evening}
                   </p>
-                  <ul className="flex flex-wrap justify-end gap-x-3 lg:mt-2 lg:block lg:space-y-1">
+                  <ul className="mt-2 space-y-1">
                     {col.evening.map(({ at, from }) => (
                       <li
                         key={at}
-                        className={`text-[0.98rem] tabular-nums md:text-[0.9rem] ${
+                        className={`text-[0.9rem] tabular-nums ${
                           col.sunday ? "text-white/70" : "text-text-muted"
                         }`}
                       >
-                        {/* English leads with "From", Tamil trails with
-                            "முதல்" — hence a lead and a tail, either of which
-                            may be empty in a given language. */}
-                        {from && w.fromLead ? `${w.fromLead} ` : ""}
-                        {formatClock(at, lang)}
-                        {from && w.fromTail ? ` ${w.fromTail}` : ""}
+                        {from ? fromClock(at) : formatClock(at, lang)}
                       </li>
                     ))}
                   </ul>

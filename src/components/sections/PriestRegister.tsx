@@ -205,8 +205,16 @@ function Row({ priest, lang }: { priest: Priest; lang: Lang }) {
        order Tailwind happened to emit them in. A branch cannot be ambiguous.
        Same reasoning as the `!` on the `short:md:` height in
        ChronicleCarousel. */
+    /* ⚠ THE RULE BETWEEN TWO PRIESTS IS THE ONLY THING SEPARATING THEM, and at
+       `gold/15` it was a 15%-alpha hairline over cream: about two steps of
+       tone, invisible on any screen the sun is on. Sixty-nine entries with no
+       visible boundary read as one continuous column of text, which is exactly
+       the way a register stops being readable — the eye cannot tell where one
+       man's paragraph ends and the next man's name begins. `gold/45` is still a
+       hairline and still gold, not a grey table border; it is simply dark
+       enough to be seen. */
     <li
-      className={`grid gap-x-2.5 border-t border-gold/15 sm:gap-x-6 ${
+      className={`grid gap-x-2.5 border-t border-gold/45 sm:gap-x-6 ${
         ta
           ? "grid-cols-[1.35rem_1fr_6.6rem] sm:grid-cols-[2rem_1fr_7.4rem]"
           : "grid-cols-[1.35rem_1fr_5.1rem] sm:grid-cols-[2rem_1fr_6rem]"
@@ -341,9 +349,22 @@ export function PriestRegister({ lang = "en" }: { lang?: Lang }) {
     <>
       {PERIODS.map((period) => (
         <section key={period.numeral} id={`period-${period.numeral.toLowerCase()}`} className="scroll-mt-24">
-          {/* Sticky band. -mx/px so the cream ground reaches the column edges
-              and rows disappear under it cleanly rather than beside it. */}
-          <div className="sticky top-16 z-30 -mx-6 border-b border-gold/25 bg-cream/95 px-6 py-3 backdrop-blur-sm md:top-20">
+          {/* Sticky band. `.period-band` (globals.css) takes it out of the
+              reading column to the full width of the screen and fades it back
+              to nothing over the width it gained, so rows disappear under a
+              ground that has no edge rather than sliding behind a card. The
+              padding it carries puts this text back exactly where the column
+              had it.
+
+              IT IS SET ON `cream-dark`, NOT `cream`, AND THAT IS THE POINT OF IT.
+              At 95% cream on a cream page the band was the same colour as what
+              it was covering: rows slid under an invisible edge and the reader
+              had to infer where the heading stopped and the register began.
+              `--cream-dark` (#e8dec9) is one step down from `--cream` (#f4eee1),
+              the same pair the section grounds elsewhere on the site already
+              use, so the band now reads as a band without becoming a dark bar
+              across a bright page. The bottom rule comes up with it. */}
+          <div className="period-band sticky top-16 z-30 border-b border-gold/40 bg-cream-dark/95 py-3 backdrop-blur-sm md:top-20">
             {/* "PERIOD III" at 0.6rem is 9.6px, thrown 0.3em apart — the one
                 piece of wayfinding on a page sixty-nine rows long, and it was
                 the least legible thing in the band that exists to carry it. Up
@@ -430,7 +451,7 @@ export function PriestRegister({ lang = "en" }: { lang?: Lang }) {
           ) : (
             <>
               Four bishops did something at this church that the parish still lives
-              inside — a foundation stone, a name, a decree, a flagstaff.
+              inside: a foundation stone, a name, a decree, a flagstaff.
             </>
           )}
         </p>
@@ -501,7 +522,7 @@ export function PriestRegister({ lang = "en" }: { lang?: Lang }) {
           ) : (
             <>
               Six dated stones stand in a row behind the church, the earliest from 1863
-              and the latest from 2002 — a hundred and forty years of this parish&apos;s
+              and the latest from 2002, a hundred and forty years of this parish&apos;s
               priests along one wall. Two of the inscriptions were read and printed in
               1894, by a colonial survey of the European tombs of Tinnevelly, so those
               two can be quoted exactly.

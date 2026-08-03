@@ -100,12 +100,12 @@ export default async function PriestsRoute({
             ) : (
               <>
                 This parish has numbered its priests since 1697, and the list now runs
-                to sixty-nine — a few of them the second and third terms of the same
+                to sixty-nine, a few of them the second and third terms of the same
                 man. It has kept the name of every one. For about fifteen the Jesuit
                 archives in Rome, the French mission histories and the parish&apos;s own
                 diaries preserve a life: what he built, what he refused, how he died.
                 For the rest, what survives is the two things that mattered to the
-                village — his name, and the years he stayed.
+                village: his name, and the years he stayed.
               </>
             )}
           </p>
@@ -122,10 +122,10 @@ export default async function PriestsRoute({
             ) : (
               <>
                 The list below is the parish&apos;s own, numbered 1 to 69 and divided
-                into the five periods it uses itself. Where the sources disagree — and
-                over three hundred and twenty-eight years they disagree often, about
-                the first priest&apos;s name, about the year a pastor died at sea — both
-                readings are given rather than one chosen.{" "}
+                into the five periods it uses itself. Where the sources disagree, both
+                readings are given rather than one chosen. Over three hundred and
+                twenty-eight years they disagree often: about the first priest&apos;s
+                name, about the year a pastor died at sea.{" "}
                 <span className="text-navy/80">
                   The rule under each set of years is the length of that pastorate:
                 </span>{" "}
@@ -245,8 +245,8 @@ export default async function PriestsRoute({
                     The parish&apos;s own
                     150th-anniversary souvenir printed the photograph roundels of Fr
                     Job De Rose and Fr Irudayaraj blank. The diocese&apos;s own website
-                    does not have them either, though it does hold portraits — used
-                    here — of some more recent priests the souvenir itself is missing.
+                    does not have them either, though it does hold portraits, used
+                    here, of some more recent priests the souvenir itself is missing.
                     The parish almost certainly still has better prints than either
                     source.
                   </>

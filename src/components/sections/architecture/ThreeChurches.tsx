@@ -57,7 +57,14 @@ export function ThreeChurches() {
 
         {/* Archival photograph */}
         <figure className="lg:col-span-5 order-1 lg:order-2 reveal-item">
-          <div className="relative w-full aspect-4/5 max-w-md mx-auto">
+          {/* `lg:ml-auto lg:mr-0`, not `mx-auto`, from `lg` up. Centred inside
+              a col-5 slot that is wider than 28rem, the photograph's right
+              edge stopped ~19px short of the container's — so it did not line
+              up with the section's own right border, nor with the heading's
+              left one across the page. Flush right on the right-hand side of
+              the split; the same rule the other way round would apply if this
+              figure ever moved back to the left. */}
+          <div className="relative w-full aspect-4/5 max-w-md mx-auto lg:ml-auto lg:mr-0">
             <div className="relative w-full h-full rounded-[1.75rem] overflow-hidden shadow-2xl ring-1 ring-gold/25">
               <Image
                 src="/images/architecture/archival.jpg"

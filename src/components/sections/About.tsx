@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import Image from "next/image";
+import { ResidentImage } from "@/components/ResidentImage";
 import { gsap, DESKTOP, revealY } from "@/lib/gsap";
 import { useLang } from "@/components/layout/LanguageProvider";
 import { PhotoOrnaments } from "@/components/ornaments/CornerOrnament";
@@ -157,7 +157,7 @@ export function About() {
               ref={skyRef}
               className="absolute inset-0 -top-[10%] h-[120%] md:will-change-transform"
             >
-              <Image
+              <ResidentImage
                 src="/background.jpeg"
                 alt=""
                 fill
@@ -170,7 +170,7 @@ export function About() {
               ref={churchRef}
               className="absolute inset-x-0 bottom-0 h-[115%] md:will-change-transform"
             >
-              <Image
+              <ResidentImage
                 src="/images/church-night.png"
                 alt="Vadakankulam Matha Church"
                 fill

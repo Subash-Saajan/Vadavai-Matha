@@ -109,6 +109,15 @@ const ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI"
 // counts gestures. See buildMobile.
 const STEP_VH = { desktop: 52 };
 
+// DESKTOP. The quiet needed before a wheel event counts as a NEW gesture rather
+// than the tail of the one before it. A trackpad fling keeps firing for the best
+// part of a second after the fingers have left the glass, so without this the
+// same throw that reads a paragraph out would also step the year — and the
+// contract is that reading to the end and then scrolling AGAIN is what moves
+// you on. Events keep arriving about every 16ms while a fling is alive, so any
+// gap wider than a couple of frames means the reader let go and came back.
+const GESTURE_GAP_MS = 200;
+
 // How long an armed chapter button stays armed before it forgets. Long enough to
 // read the destination and decide; short enough that a button left open by a
 // wandering thumb doesn't fire on the next unrelated tap.
@@ -123,6 +132,36 @@ const photoFor = (eraId: string, di: number) => {
   const named = citationsFor(eraId, di)?.photo;
   return `/images/history/${named ?? `${eraId}-${di + 1}.jpg`}`;
 };
+
+/* ── WHY THIS PAGE KILLED IPHONES, AND WHAT THE WINDOW IS FOR ──────────────
+   `.era-photo` is `opacity: 0`, NOT `display: none` — it has to be, because the
+   years crossfade into one another and you cannot fade something that is not
+   laid out. But an `opacity: 0` image is still a rendered image: lazy-loading
+   fires for it, and it decodes. Every photograph in a chapter is stacked at
+   `inset: 0` in the same frame, so they all cross the lazy-load threshold in
+   the same instant — the moment the chapter comes near the viewport the phone
+   is asked to decode the WHOLE CHAPTER at once, and nothing ever releases it.
+
+   Measured against an iPhone XR (414pt at DPR 2, 3 GB of RAM), the eight
+   chapters hold 7, 5, 7, 12, 12, 8, 3 and 6 photographs. Chapter four is 40 MB
+   in one hit; by the foot of the page all fifty-eight have decoded and none
+   have been freed — around 190 MB, on a phone whose whole tab is killed
+   somewhere past two hundred.
+
+   So a phone mounts only a window: the live year, one behind, two ahead. Two
+   ahead is the number that matters — it is what makes the next photograph
+   already loaded when the crossfade to it starts, which is more than the old
+   code guaranteed. The wrapper `.era-photo` div always stays: GSAP indexes
+   that list BY POSITION (`gsap.utils.toArray(".era-photo", era)`), so dropping
+   one would silently shift every later year onto the wrong picture.
+
+   Unmounting the <img> is the point. Dropping a reference is the only thing
+   that lets WebKit reclaim a decoded bitmap; hiding it, or moving it off
+   screen, does not. Desktop is deliberately exempt — it is not where the
+   memory is scarce, and gating it on React state would force a re-render on
+   every year of a scrub the code goes out of its way to keep out of React. */
+const PHOTO_BACK = 1;
+const PHOTO_FWD = 2;
 
 export default function HistoryPage() {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -143,6 +182,59 @@ export default function HistoryPage() {
   const [activeDots, setActiveDots] = useState<Record<string, number>>({});
   const [armed, setArmed] = useState<string | null>(null);
   const dotOf = (eraId: string) => activeDots[eraId] ?? 0;
+
+  /* Which chapters are near enough to be allowed to hold pictures. A chapter is
+     resident until the observer has actually SAID it is not: `undefined` reads
+     as "keep", so the frame is never briefly empty in the gap between mounting
+     and the observer's first callback. */
+  const [eraNear, setEraNear] = useState<Record<string, boolean>>({});
+
+  /* The observer below is only ever built on a phone, and its first callback
+     reports EVERY element it observes — so "the map has anything in it" is
+     exactly "we are on a phone and windowing applies". Deriving it beats a
+     second `windowed` flag: there is no separate state to fall out of step, and
+     nothing sets state synchronously in an effect to cascade a second render.
+     Server and first client render both see an empty map and emit every
+     photograph, which is what this page has always sent. */
+  const windowed = Object.keys(eraNear).length > 0;
+
+  useEffect(() => {
+    if (!window.matchMedia("(max-width: 767px)").matches) return;
+
+    const root = rootRef.current;
+    if (!root) return;
+
+    /* Three-quarters of a viewport of slack either side. A chapter therefore
+       mounts its pictures well before any of them could be looked at, and is
+       only stripped once it is a good way off screen — so this never takes a
+       photograph out from under a reader who is still near it. */
+    const io = new IntersectionObserver(
+      (entries) => {
+        setEraNear((prev) => {
+          let next = prev;
+          for (const e of entries) {
+            const id = (e.target as HTMLElement).id;
+            if (!id || prev[id] === e.isIntersecting) continue;
+            if (next === prev) next = { ...prev };
+            next[id] = e.isIntersecting;
+          }
+          return next;
+        });
+      },
+      { rootMargin: "75% 0px" }
+    );
+
+    root.querySelectorAll<HTMLElement>(".era").forEach((s) => io.observe(s));
+    return () => io.disconnect();
+  }, []);
+
+  /** Is this chapter allowed to hold decoded pictures at all? */
+  const eraLive = (eraId: string) => !windowed || eraNear[eraId] !== false;
+
+  /** Is this particular year's photograph one of the few kept mounted? */
+  const photoLive = (eraId: string, di: number, ai: number) =>
+    !windowed ||
+    (eraNear[eraId] !== false && di >= ai - PHOTO_BACK && di <= ai + PHOTO_FWD);
 
   // The contents index is an ordinary band above every pin, so the house
   // reveal is safe here. Scoped to `frontRef` so it can never touch a
@@ -203,17 +295,106 @@ export default function HistoryPage() {
     };
 
     // ── DESKTOP: pin the stage, scrub the year off scroll progress ──
+    //
+    // ⚠ THE PARAGRAPH READS BEFORE THE PAGE MOVES. A year is bounded now — the
+    // panel is exactly as tall as the photograph beside it and scrolls inside
+    // itself (see .panel-wrap / .dot-panel in the CSS). It has to be: the
+    // longest years run well past a 100vh stage, and the stage is
+    // overflow: hidden, so the end of those paragraphs was simply cut off.
+    //
+    // Bounding it is only half the fix; the other half is that the wheel has to
+    // reach the box. So the stage takes the wheel first: while the active year
+    // still has text below (or above, going back), that scroll is spent on the
+    // paragraph and the page does not move at all — which means the scrub does
+    // not advance and the year holds. The moment the paragraph has no more to
+    // give, the event is let through to Lenis and the page carries on to the
+    // next year exactly as it always did. Read to the end, keep going, move on:
+    // the same contract the phone has had since July, now on the monitor too.
     const buildDesktop = () => {
       const cleanups: Array<() => void> = [];
+      const eras = gsap.utils.toArray<HTMLElement>(".era");
 
-      gsap.utils.toArray<HTMLElement>(".era").forEach((era) => {
-        const { railBtns, n, setActive } = wire(era, false);
+      // ONE LOCK FOR THE WHOLE PAGE, not one per chapter. While a step is
+      // animating, every stage swallows the wheel: a trackpad throws a burst of
+      // twenty events and, without this, the first would step the year and the
+      // other nineteen would step it another six — the same fling problem the
+      // phone has, arriving here the moment a scroll started doing something
+      // other than moving the page. Shared rather than per-era because a step
+      // can cross into the next chapter, whose own stage would otherwise be
+      // under the cursor and free to step again.
+      let stepping = 0;
+      // When the last wheel event landed, anywhere on the page — see
+      // GESTURE_GAP_MS. Shared with the lock, and for the same reason: one
+      // throw of a trackpad is one gesture wherever the cursor happens to be.
+      let lastWheel = 0;
+      const busy = () => stepping !== 0;
+      const hold = (ms: number) => {
+        window.clearTimeout(stepping);
+        stepping = window.setTimeout(() => {
+          stepping = 0;
+        }, ms);
+      };
+      cleanups.push(() => window.clearTimeout(stepping));
+
+      // Each chapter's handles, in document order, so the last year of one can
+      // hand the reader to the first year of the next. Filled as the loop goes;
+      // read only from event handlers, long after every entry exists.
+      const chapters: Array<{ n: number; goTo: (k: number, d?: number) => void }> =
+        [];
+
+      eras.forEach((era, eraIdx) => {
+        const { panels, railBtns, n, setActive: light, at } = wire(era, false);
         if (!n) return;
+
+        const wrap = era.querySelector<HTMLElement>(".panel-wrap");
+
+        // "There is more text below" — the bottom fade on the panel. Without it
+        // a paragraph that has been cut at the box edge looks finished, and the
+        // reader scrolls on past the half of it they never saw.
+        const syncFade = () => {
+          const p = panels[at()];
+          wrap?.classList.toggle(
+            "has-more",
+            !!p && p.scrollTop + p.clientHeight < p.scrollHeight - 2
+          );
+        };
+
+        // Every year opens at its first line — and, coming back up the page, at
+        // its last one, so the reader carries on reading in the direction they
+        // were already going instead of being dropped at the top of a paragraph
+        // they have just read the end of.
+        const setActive = (idx: number) => {
+          const prev = at();
+          if (idx === prev) return;
+          light(idx);
+          const p = panels[idx];
+          if (p) {
+            gsap.killTweensOf(p);
+            p.scrollTop = idx > prev ? 0 : p.scrollHeight;
+          }
+          syncFade();
+        };
+
+        panels.forEach((p) => {
+          p.addEventListener("scroll", syncFade, { passive: true });
+          cleanups.push(() => p.removeEventListener("scroll", syncFade));
+        });
+
         setActive(0);
         cleanups.push(() => setActive(0));
 
         const stage = era.querySelector<HTMLElement>(".stage");
         if (!stage) return;
+
+        // Whether a year overflows its box depends on a measurement, and the
+        // measurement changes when the window resizes or a webfont finally
+        // swaps in. ScrollTrigger refreshes on exactly those, so ride its
+        // signal rather than keeping a second set of listeners.
+        ScrollTrigger.addEventListener("refresh", syncFade);
+        cleanups.push(() => {
+          ScrollTrigger.removeEventListener("refresh", syncFade);
+          panels.forEach((p) => gsap.killTweensOf(p));
+        });
 
         // Pin with GSAP rather than CSS sticky: body sets overflow-x:hidden,
         // which makes it a scroll container and kills position:sticky.
@@ -230,16 +411,38 @@ export default function HistoryPage() {
               Math.max(0, Math.min(n - 1, Math.floor(self.progress * n)))
             );
           },
+          // Leaving a chapter is the one move that does not change the year, so
+          // the panel it leaves behind would keep the scroll position it had —
+          // and a reader who comes back to that chapter would find its first
+          // year already half-read. Rewind the year at each end of the chapter
+          // to where a reader arriving from that direction should meet it: the
+          // top coming down, the last line coming back up.
+          onLeaveBack: () => {
+            const p = panels[0];
+            if (!p) return;
+            gsap.killTweensOf(p);
+            p.scrollTop = 0;
+            syncFade();
+          },
+          onLeave: () => {
+            const p = panels[n - 1];
+            if (!p) return;
+            gsap.killTweensOf(p);
+            p.scrollTop = p.scrollHeight;
+            syncFade();
+          },
         });
 
-        const goTo = (k: number) => {
+        // Land in the MIDDLE of year k's band of scroll, so the scrub reads it
+        // as k with room either side rather than balanced on the boundary.
+        const goTo = (k: number, duration = 1) => {
           const target = st.start + (st.end - st.start) * ((k + 0.5) / n);
           const lenis = (
             window as unknown as {
               __lenis?: { scrollTo: (t: number, o?: object) => void };
             }
           ).__lenis;
-          if (lenis?.scrollTo) lenis.scrollTo(target, { duration: 1 });
+          if (lenis?.scrollTo) lenis.scrollTo(target, { duration });
           else window.scrollTo({ top: target, behavior: "smooth" });
         };
         railBtns.forEach((btn, k) => {
@@ -248,9 +451,135 @@ export default function HistoryPage() {
           cleanups.push(() => btn.removeEventListener("click", handler));
         });
         goToRef.current[era.id] = goTo;
+        chapters[eraIdx] = { n, goTo };
         cleanups.push(() => {
           delete goToRef.current[era.id];
         });
+
+        // ── One scroll past the end of the text, one year ──
+        //
+        // Reading the paragraph out used to hand the wheel straight back to the
+        // page, and the page then had to travel the REST of that year's band —
+        // up to half a screen of scrolling with nothing changing — before the
+        // scrub reached the next year. So the last thing a reader did at the end
+        // of every year was scroll into dead space.
+        //
+        // The step is taken deliberately instead: the year is scrolled to, at
+        // the same place the rail dots go to, and the page is held still for the
+        // length of that animation. At the ends of a chapter the same move
+        // carries into the chapter on that side. At the two ends of the BOOK —
+        // the first year of the first chapter going up, the last year of the
+        // last going down — nothing is taken, and the page scrolls out to the
+        // Contents or to the footer as it always did. Those are the covers.
+
+        // Asked BEFORE the gesture is spent, so that at a cover the wheel is
+        // never taken at all and the page runs on as it used to.
+        const canStep = (dir: number) => {
+          const next = at() + dir;
+          return (next >= 0 && next < n) || !!chapters[eraIdx + dir];
+        };
+
+        const step = (dir: number) => {
+          const next = at() + dir;
+          if (next >= 0 && next < n) {
+            goTo(next, 0.7);
+            hold(780);
+            return true;
+          }
+          const neighbour = chapters[eraIdx + dir];
+          if (!neighbour) return false;
+          neighbour.goTo(dir > 0 ? 0 : neighbour.n - 1, 1);
+          hold(1080);
+          return true;
+        };
+
+        // A wheel notch in lines or pages, in pixels. Firefox reports lines.
+        const pixels = (e: WheelEvent, box: HTMLElement) =>
+          e.deltaMode === 1
+            ? e.deltaY * 16
+            : e.deltaMode === 2
+              ? e.deltaY * box.clientHeight
+              : e.deltaY;
+
+        // Lenis listens on window, so stopping the bubble is what keeps the page
+        // still. `lenisStopPropagation` is belt and braces for the case where it
+        // is ever moved onto a wrapper inside this one.
+        const swallow = (e: WheelEvent) => {
+          e.preventDefault();
+          e.stopPropagation();
+          (e as WheelEvent & { lenisStopPropagation?: boolean })
+            .lenisStopPropagation = true;
+        };
+
+        const onWheel = (e: WheelEvent) => {
+          if (e.ctrlKey) return; // a pinch-zoom, not a scroll
+
+          // Is this a new gesture, or the tail of the one before it? Measured
+          // before anything else can return, so a fling that starts outside the
+          // pin is still recognised as the same fling once it arrives inside.
+          const now = performance.now();
+          const fresh = now - lastWheel > GESTURE_GAP_MS;
+          lastWheel = now;
+
+          // ⚠ ONLY WHILE THIS CHAPTER IS THE ONE BEING READ. A section is in
+          // view for a long time before its pin engages, and the cursor sits
+          // over it the whole way down. Without this the paragraph would eat
+          // the scroll that was trying to bring the reader INTO the chapter.
+          if (!st.isActive) return;
+
+          const p = panels[at()];
+          if (!p) return;
+          const dy = pixels(e, p);
+          if (!dy) return;
+
+          if (busy()) {
+            swallow(e); // a step is in flight; the rest of the fling is spent
+            return;
+          }
+
+          // The paragraph reads first.
+          const wants =
+            dy > 0
+              ? p.scrollTop + p.clientHeight < p.scrollHeight - 1
+              : p.scrollTop > 1;
+          if (wants) {
+            swallow(e);
+            // Tweened, not assigned: the page around it is Lenis-smoothed, and
+            // a paragraph that jumped a notch at a time next to it would read
+            // as a different, cheaper page.
+            const target = Math.max(
+              0,
+              Math.min(p.scrollHeight - p.clientHeight, p.scrollTop + dy)
+            );
+            gsap.to(p, {
+              scrollTop: target,
+              duration: 0.45,
+              ease: "power2.out",
+              overwrite: true,
+              onUpdate: syncFade,
+            });
+            return;
+          }
+
+          const dir = dy > 0 ? 1 : -1;
+          if (!canStep(dir)) return; // a cover of the book — the page has it
+
+          // The paragraph is read out. Anything still arriving from the throw
+          // that read it is spent here rather than stepping the year: the
+          // reader has to come back and scroll again, which is the whole
+          // contract. (Swallowed, not passed on — letting it through would
+          // scroll the page into the dead half of the year's band instead.)
+          if (!fresh) {
+            swallow(e);
+            return;
+          }
+
+          // Read to the end, keep going, move on.
+          step(dir);
+          swallow(e);
+        };
+        stage.addEventListener("wheel", onWheel, { passive: false });
+        cleanups.push(() => stage.removeEventListener("wheel", onWheel));
       });
 
       return () => cleanups.forEach((fn) => fn());
@@ -344,27 +673,56 @@ export default function HistoryPage() {
           return true;
         };
 
+        // Is this chapter allowed to hand the page a gesture going this way?
+        // Only at the two edges of the book — the first year of the first
+        // chapter going back, the last year of the last going on. Everywhere
+        // else the gesture belongs to the stage.
+        const isOurs = (dir: number) => {
+          const next = at() + dir;
+          const leaving = next < 0 || next >= n;
+          return !(leaving && !eras[eraIdx + dir]);
+        };
+
         let startY = 0;
         let spent = false;
+        /* ⚠ THE GESTURE IS CLAIMED ON ITS FIRST PIXEL, NOT ITS SIXTEENTH.
+           A swipe on the PHOTOGRAPH used to leave the chapter altogether: 16px
+           is the point at which a wobble becomes a swipe worth STEPPING on, and
+           the old code did nothing at all below it — but WebKit decides what a
+           touch is for the moment it first moves. Let that first move through
+           unprevented and the gesture is committed to the page there and then,
+           and every preventDefault() after it is ignored. The page scrolled,
+           proximity snap settled it on the NEXT ERA, and one swipe on the
+           picture skipped a whole chapter.
+
+           The paragraph never showed the bug because it is a scroll box with
+           overscroll-behavior: contain, so it cannot chain to the page whatever
+           the handler does. Everything else on the stage — the photo, the bead
+           rail, the buttons, the padding between them — is a plain box, and all
+           of it leaked.
+
+           So the claim is made once per gesture, on the first move that has a
+           direction at all, and the 16px threshold now governs only whether the
+           year steps. Two things are still released: a paragraph with more to
+           read (it scrolls itself), and the two edges of the book (the reader
+           has to be able to get out). */
+        let mine: boolean | null = null;
         const onTouchStart = (e: TouchEvent) => {
           startY = e.touches[0].clientY;
           spent = false;
+          mine = null;
         };
         const onTouchMove = (e: TouchEvent) => {
           const dy = startY - e.touches[0].clientY;
-          if (Math.abs(dy) < 16) return; // not yet a gesture, just a wobble
+          if (!dy) return; // no direction yet, so nothing to decide
           const dir = dy > 0 ? 1 : -1;
-          // Already stepped on this gesture: hold the page still for whatever is
-          // left of it, so the follow-through cannot step again.
-          if (spent) {
-            e.preventDefault();
-            return;
-          }
-          if (paragraphWants(dir)) return;
-          if (advance(dir)) {
-            spent = true;
-            e.preventDefault();
-          }
+          if (mine === null) mine = !paragraphWants(dir) && isOurs(dir);
+          if (!mine) return;
+          e.preventDefault();
+          // Already stepped on this gesture: the page is held still for the
+          // rest of it above, so the follow-through cannot step again.
+          if (spent || Math.abs(dy) < 16) return;
+          if (advance(dir)) spent = true;
         };
 
         // Trackpads and mice, for a narrow desktop window. These fire in bursts,
@@ -570,13 +928,23 @@ export default function HistoryPage() {
                         key={di}
                         className={`era-photo ${di === ai ? "is-active" : ""}`}
                       >
-                        <Image
-                          src={photoFor(era.id, di)}
-                          alt={`${era.heading} — ${dot.year}`}
-                          fill
-                          className="object-cover"
-                          sizes="(max-width: 768px) 100vw, 45vw"
-                        />
+                        {/* The div is unconditional, the picture is not — see
+                            the note above PHOTO_BACK for why the wrapper has to
+                            stay even when nothing is inside it. */}
+                        {photoLive(era.id, di, ai) && (
+                          <Image
+                            src={photoFor(era.id, di)}
+                            alt={`${era.heading} — ${dot.year}`}
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 768px) 100vw, 45vw"
+                            /* The year about to be faded TO is fetched at high
+                               priority, so the crossfade starts on a picture
+                               that has arrived. Safari honours this from 17.2;
+                               everywhere else it is ignored, not harmful. */
+                            fetchPriority={di === ai + 1 ? "high" : undefined}
+                          />
+                        )}
                       </div>
                     ))}
                     <div className="frame-scrim absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/25 to-navy/10" />
@@ -681,14 +1049,20 @@ export default function HistoryPage() {
                               crossfading stack above never advances past photo 1 —
                               each year carries its own picture instead. Hidden (and
                               so, being lazy, never fetched) in the animated paths. */}
+                          {/* Chapter-level residency only, NOT the dot window:
+                              on the reduced-motion path every year stands open
+                              in normal flow, so all of them are genuinely
+                              scrolled past and each needs its own picture. */}
                           <div className="panel-photo relative">
-                            <Image
-                              src={photoFor(era.id, di)}
-                              alt={`${era.heading} — ${dot.year}`}
-                              fill
-                              className="object-cover"
-                              sizes="(max-width: 768px) 100vw, 45vw"
-                            />
+                            {eraLive(era.id) && (
+                              <Image
+                                src={photoFor(era.id, di)}
+                                alt={`${era.heading} — ${dot.year}`}
+                                fill
+                                className="object-cover"
+                                sizes="(max-width: 768px) 100vw, 45vw"
+                              />
+                            )}
                           </div>
                           <p className="panel-count font-display text-text-muted text-xs tracking-[0.4em] uppercase mb-4">
                             {String(di + 1).padStart(2, "0")} / {String(era.dots.length).padStart(2, "0")}
@@ -1239,14 +1613,96 @@ export default function HistoryPage() {
             align-items: center;
             overflow: hidden;
           }
+
+          /* ⚠ THE PANEL IS BOUNDED, AND IT HAS TO BE. It used to be an absolute
+             box 26rem tall holding whatever the year happened to weigh, centred
+             — so a long year overflowed it in BOTH directions at once, ran up
+             behind the navbar and down past the foot of the stage, and .stage is
+             overflow: hidden, so the top and the bottom of the longest
+             paragraphs on the page were simply cut off. Nothing in the layout
+             said 26rem was enough; it was invisible until the chapter with the
+             long years.
+
+             The height now matches the photograph beside it (.era-frame is
+             md:h-[70vh]), so the two columns are the same page, and the text
+             scrolls inside it. A height, not a min-height, because the Tailwind
+             md:min-h-[26rem] on the wrap stays as the floor for a very short
+             window. The stage is 100vh and this is 70 of it, so it can never
+             push past the pin again whatever a year weighs. */
+          .history-timeline .panel-wrap { height: 70vh; }
+
+          /* The "there is more below" fade — see syncFade in buildDesktop. It
+             resolves to the page colour and is only shown while the active year
+             has text under the fold, so a paragraph that ends inside the box
+             ends cleanly with nothing over it. */
+          .history-timeline .panel-wrap::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 4.5rem;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity .35s ease;
+            background: linear-gradient(
+              to top,
+              var(--cream) 16%,
+              rgba(244, 238, 225, 0)
+            );
+          }
+          .history-timeline .panel-wrap.has-more::after { opacity: 1; }
+
           .history-timeline .dot-panel {
             position: absolute;
             inset: 0;
+            /* GRID, not the flex + justify-center it inherits from Tailwind. In
+               a column flex container the children are shrinkable, so a
+               paragraph taller than the box is COMPRESSED to fit instead of
+               overflowing — and a scroll box with nothing overflowing it does
+               not scroll (the phone stage hit this exact thing; see the note on
+               .dot-panel in the mobile block). Grid rows size to their content
+               and overflow honestly.
+
+               The align-content is "safe center" so a short year still sits
+               centred against the photograph, while a long one packs to the top
+               instead of having its first lines centred out of reach above the
+               scroll origin — unreachable overflow is the classic
+               centred-scroll-box bug. The plain "center" above it is the
+               fallback for anything that doesn't know the keyword. */
+            display: grid;
+            align-content: center;
+            align-content: safe center;
+            overflow-y: auto;
+            /* NOT "contain", which is what the phone uses. A wheel can never
+               chain here anyway — either this handler takes the event and
+               preventDefaults it, or Lenis does — so containment would buy
+               nothing and would cost the one reader it still applies to: a
+               finger on a touchscreen laptop, who has no wheel to hand the page
+               back with and would be sealed inside the paragraph. */
+            overscroll-behavior-y: auto;
+            /* Reserved always, so the text column doesn't shift a few pixels
+               between a year that scrolls and one that doesn't. */
+            scrollbar-gutter: stable;
+            padding-right: 0.6rem;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(196, 160, 73, 0.45) transparent;
             opacity: 0;
             transform: translateY(38px);
             transition: opacity .6s cubic-bezier(.16,1,.3,1),
               transform .6s cubic-bezier(.16,1,.3,1);
             pointer-events: none;
+          }
+          .history-timeline .dot-panel::-webkit-scrollbar { width: 6px; }
+          .history-timeline .dot-panel::-webkit-scrollbar-track {
+            background: transparent;
+          }
+          .history-timeline .dot-panel::-webkit-scrollbar-thumb {
+            background: rgba(196, 160, 73, 0.45);
+            border-radius: 9999px;
+          }
+          .history-timeline .dot-panel:hover::-webkit-scrollbar-thumb {
+            background: rgba(196, 160, 73, 0.7);
           }
           .history-timeline .dot-panel.is-above {
             transform: translateY(-38px);
@@ -1703,7 +2159,20 @@ export default function HistoryPage() {
             opacity: 1 !important;
             transform: none !important;
             pointer-events: auto !important;
+            /* The desktop block above bounds the panel to 70vh and scrolls it,
+               which is the right answer for a pinned stage and the wrong one
+               here: nothing is pinned, no wheel is intercepted, and every year
+               stands open in normal flow. A scroll box inside a page that
+               already scrolls is just a paragraph with its end hidden. */
+            overflow: visible !important;
+            height: auto !important;
+            padding-right: 0 !important;
           }
+          .history-timeline .panel-wrap {
+            height: auto !important;
+            display: block !important;
+          }
+          .history-timeline .panel-wrap::after { display: none; }
           .history-timeline .dot-panel + .dot-panel { margin-top: 3.5rem; }
           /* The era's opening photo sits directly above year one, so year one
              showing it again would just be the same picture twice. */

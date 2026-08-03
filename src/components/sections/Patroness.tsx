@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import Image from "next/image";
+import { ResidentImage } from "@/components/ResidentImage";
 import { gsap, DESKTOP, revealY } from "@/lib/gsap";
 import { useLang } from "@/components/layout/LanguageProvider";
 import { PhotoOrnaments } from "@/components/ornaments/CornerOrnament";
@@ -111,16 +111,24 @@ export function Patroness() {
           {/* `md:will-change-transform`, not bare: `will-change` promotes the
               element to its own compositor layer for the whole life of the
               page, and nothing animates this frame on a phone any more. A
-              standing promise to move that is never kept is just memory. */}
+              standing promise to move that is never kept is just memory.
+
+              ⚠ THE SAME APPLIES TO THE INNER FRAME BELOW, which was left bare
+              when the outer one was fixed. Its clip-wipe is an ENTRANCE — it
+              runs once, near the top of the page, and then never again — so
+              the layer it was holding was permanent and the movement it was
+              promising had been over since the reader's first swipe. GSAP puts
+              its own `will-change` on for the duration of a tween and takes it
+              off afterwards, which is the behaviour that was wanted. */}
           <div
             ref={imgWrapRef}
             className="relative w-full max-w-md aspect-[4/5] md:will-change-transform"
           >
             <div
               ref={imgInnerRef}
-              className="relative w-full h-full rounded-[1.75rem] overflow-hidden shadow-2xl ring-1 ring-gold/25 will-change-transform"
+              className="relative w-full h-full rounded-[1.75rem] overflow-hidden shadow-2xl ring-1 ring-gold/25"
             >
-              <Image
+              <ResidentImage
                 src="/images/home_1.jpg"
                 alt="Vadakankulam Matha — Our Lady of the Assumption"
                 fill

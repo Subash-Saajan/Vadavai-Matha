@@ -835,16 +835,30 @@ html[lang|="ta"] .field-label {
    under it, every scrolled frame — and the bar is fixed, so on the home page
    that is the entire scroll. A 20px radius is a real cost on a phone GPU for
    an effect sitting behind an 80%-opaque cream fill that has already hidden
-   most of what is being blurred. Halved on mobile; indistinguishable there,
-   and it is the one filter that runs the whole length of the page. */
+   most of what is being blurred.
+
+   ⚠ BELOW `md` THERE IS NO BLUR AT ALL, AND THAT IS THE POINT.
+   Halving the radius was the first attempt and it missed what is expensive
+   here: the cost of a backdrop-filter is not mostly the radius, it is that the
+   element forces the compositor to READ BACK the pixels beneath it and
+   re-filter them on every frame the page moves. Ten pixels of blur is nearly
+   as expensive as twenty, and it is the only per-frame filter that is on
+   screen for the ENTIRE length of every page on the site — so it taxes all of
+   the scrolling, not one section of it.
+
+   What replaces it is opacity: the bar goes to 95% cream on a phone (see
+   Navbar.tsx), so the 5% still showing through is a suggestion of what is
+   underneath rather than a legible image of it — which is all the blur was
+   achieving at 80% anyway. If this is ever reinstated, reinstate the /80 with
+   it or the bar will read as a flat plate. */
 .navbar-blur {
   backdrop-filter: blur(20px) saturate(160%);
   -webkit-backdrop-filter: blur(20px) saturate(160%);
 }
 @media (max-width: 767px) {
   .navbar-blur {
-    backdrop-filter: blur(10px) saturate(140%);
-    -webkit-backdrop-filter: blur(10px) saturate(140%);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 }
 
@@ -1147,4 +1161,47 @@ html[lang|="ta"] .prose-term {
   .saint-page .plate-img {
     transform: none !important;
   }
+}
+
+/* ── /priests: the sticky period band ─────────────────────────────────────
+   The band that names the era a reader is currently scrolling through. It
+   breaks out of the 48rem reading column to the full viewport, and then gives
+   that gained width straight back as a fade: fully opaque across the text
+   column, gone by the time it reaches either screen edge. A band that simply
+   stopped at the column edge read as a floating card; one that ran hard to
+   both edges read as a toolbar. This reads as neither.
+
+   IT IS A MASK, NOT A GRADIENT BACKGROUND, and that is the point: the ground,
+   the backdrop blur and the bottom hairline all fade together. A gradient
+   background would have faded the fill while leaving the rule running edge to
+   edge underneath it, which is the one seam this is meant to avoid.
+
+   `--band-fade` is HALF THE BREAKOUT, and `max(0px, …)` is load-bearing:
+   below 45rem there is no breakout to fade, so the fade collapses to nothing
+   and a phone gets exactly the band it had — text starts where the opaque
+   region starts, and is never touched by the mask at any width.
+
+   The margin/padding pair is the standard full-bleed inversion: percentages
+   resolve against the column, so `50% - 50vw` reaches the viewport edge and
+   the matching padding puts the text back precisely where it was. 100vw
+   includes the scrollbar; `body { overflow-x: hidden }` absorbs the few
+   pixels, and the fade means nobody could see where they went. */
+.period-band {
+  --band-fade: max(0px, (100vw - 45rem) / 2);
+  margin-inline: calc(50% - 50vw);
+  padding-inline: calc(50vw - 50%);
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 var(--band-fade),
+    #000 calc(100% - var(--band-fade)),
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 var(--band-fade),
+    #000 calc(100% - var(--band-fade)),
+    transparent
+  );
 }

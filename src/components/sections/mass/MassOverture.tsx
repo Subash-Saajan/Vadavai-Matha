@@ -1,11 +1,12 @@
 "use client";
 
-import { Sunrise, CalendarDays, CalendarRange, ArrowDown } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 
 import { useLang } from "@/components/layout/LanguageProvider";
 import { useShrineStatus } from "@/components/contact/useShrineStatus";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { formatClock, formatGap } from "@/lib/formatTime";
+import { nextObservance, useToday } from "@/lib/feasts";
 
 /**
  * THE BRASS PLATE ON THE THRESHOLD OF THIS PAGE.
@@ -16,20 +17,31 @@ import { formatClock, formatGap } from "@/lib/formatTime";
  * must not have to relearn it on the other.
  *
  * What it carries is different, though. /contact answers "is it open, how do I
- * reach someone"; this answers "when is the next Mass, and what does this page
- * hold". The live half reads the same clock (useShrineStatus) and the same
- * strings (t.contact.status), so the two pages can never disagree about
- * whether Mass is being said.
+ * reach someone"; this answers the two questions this page is opened with:
+ * WHEN IS THE NEXT MASS, and WHAT IS THE PARISH KEEPING NEXT. The live half
+ * reads the same clock (useShrineStatus) and the same strings
+ * (t.contact.status), so the two pages can never disagree about whether Mass is
+ * being said; the feast half reads lib/feasts.ts, the same calendar the home
+ * page and the grid further down this page read.
  *
- * The lower half is the page's own table of contents — the three clocks the
- * shrine keeps. It exists because the page is now long: without it a reader
- * looking only for Sunday's times has to scroll past the whole year.
+ * ⚠ THE THREE CLOCKS ARE GONE, AND ARE NOT TO BE PUT BACK. The plate used to
+ * carry a second row beneath the live line — three tabs, "The Day", "The Week",
+ * "The Year", jumping to the three sections. The owner asked for them out. They
+ * were a table of contents for a page a reader can simply scroll, and they cost
+ * the whole lower half of the plate — the most valuable strip on the page — to
+ * repeat three headings that appear again, in full, a screen below. What sits
+ * there now is something the page could not otherwise say at all: which feast
+ * is next, and when.
+ *
+ * The overture's dict block is deliberately left whole in i18n.ts: only
+ * `overture.year` is still read (TheYear uses it as its kicker), but the rest
+ * is the parish's own wording for these three sections and costs nothing.
  */
 export function MassOverture() {
   const { t, lang } = useLang();
   const status = useShrineStatus();
   const reducedMotion = usePrefersReducedMotion();
-  const o = t.mass.overture;
+  const f = t.festivals;
 
   const gapUnits = {
     hour: t.contact.status.hourUnit,
@@ -44,11 +56,22 @@ export function MassOverture() {
         ? "bg-emerald-500"
         : "bg-navy/30";
 
-  const clocks = [
-    { href: "#day", icon: Sunrise, name: o.day, note: o.dayNote, numeral: "I" },
-    { href: "#week", icon: CalendarDays, name: o.week, note: o.weekNote, numeral: "II" },
-    { href: "#festivals", icon: CalendarRange, name: o.year, note: o.yearNote, numeral: "V" },
-  ];
+  /* Which feast is next. `null` until the client knows the date — same
+     hydration contract as the Mass status beside it, and handled the same way:
+     the server renders something that is true at every hour of every day (the
+     parish's own annual feast, unbadged), and the live reading replaces it. */
+  const today = useToday();
+  const next = nextObservance(today);
+
+  const annual = { name: f.featured.name, date: f.featured.date, href: "#festivals" };
+  const feast =
+    next === null || next.kind === "annual"
+      ? annual
+      : {
+          name: f.list[next.index].name,
+          date: f.list[next.index].date,
+          href: "#year",
+        };
 
   return (
     <div className="relative z-20 -mt-14 px-6 md:-mt-20 md:px-8 lg:px-16">
@@ -115,50 +138,42 @@ export function MassOverture() {
               </div>
             </div>
 
-            {/* Serif prose, so it comes down less far than the sans would —
-                Cormorant's small x-height means 1.05rem here reads about the
-                size 0.98rem does in Geist. See the note in Patroness.tsx. */}
-            <p className="shrink-0 font-serif text-[1.05rem] italic leading-snug text-navy/70 sm:text-right md:text-lg">
-              {o.lead}
-            </p>
-          </div>
+            {/* ── What the parish is keeping next ──────────────────────────
+                The one thing this page held nowhere above the fold. It stays a
+                link, so the row the three tabs used to do — reaching the feasts
+                without scrolling — is not lost with them; it simply costs one
+                line instead of a whole band, and it says something true about
+                today rather than repeating a heading.
 
-          {/* ── The three clocks ── */}
-          <div className="grid grid-cols-1 gap-px border-t border-gold/15 bg-gold/15 sm:grid-cols-3">
-            {clocks.map(({ href, icon: Icon, name, note, numeral }) => (
-              <a
-                key={href}
-                href={href}
-                className="group relative flex items-center gap-4 bg-white px-6 py-4 transition-colors duration-500 hover:bg-cream/70 md:px-8 md:py-5"
-              >
-                <span
-                  className="section-numeral pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 select-none text-[3.2rem] opacity-[0.07] transition-opacity duration-500 group-hover:opacity-[0.16]"
-                  aria-hidden="true"
-                >
-                  {numeral}
+                The gap between the plates on a phone is a hairline rule, not a
+                gutter: this is one plate, and the feast is the second half of
+                the same sentence as the Mass beside it. */}
+            <a
+              href={feast.href}
+              className="group flex shrink-0 items-center gap-3.5 border-t border-gold/15 pt-5 sm:border-t-0 sm:pt-0"
+            >
+              {/* The badge appears only once the date is known; before that the
+                  block is a plain statement of the parish's own feast, which is
+                  true whenever it is read. */}
+              {next !== null && (
+                <span className="micro-label shrink-0 rounded-full bg-gold/15 px-2.5 py-1 text-gold-dark">
+                  {next.running ? f.nowBadge : f.nextBadge}
                 </span>
-                <Icon className="h-5 w-5 shrink-0 text-gold-dark" aria-hidden="true" />
-                <span className="relative min-w-0">
-                  <span className="block font-serif text-[1.05rem] leading-tight text-navy md:text-lg">
-                    {name}
-                  </span>
-                  <span className="mt-0.5 block text-[0.88rem] leading-snug text-text-muted md:text-[0.78rem]">
-                    {note}
-                  </span>
+              )}
+              <span className="min-w-0 sm:text-right">
+                <span className="block font-serif text-[1.05rem] leading-tight text-navy md:text-lg">
+                  {feast.name}
                 </span>
-                {/* THE ARROW WAS INVISIBLE ON A PHONE. `text-gold/0` until
-                    `group-hover` is a pointer idiom: a touch device never
-                    hovers, so the only mark telling the reader these three rows
-                    jump down the page rather than off the site was simply not
-                    drawn. Shown at rest below md — muted, so it reads as an
-                    affordance and not as a third piece of content — and the
-                    hover reveal is left exactly as it was above it. */}
-                <ArrowDown
-                  className="ml-auto h-4 w-4 shrink-0 text-gold/55 transition-all duration-500 group-hover:translate-y-0.5 group-hover:text-gold md:text-gold/0"
-                  aria-hidden="true"
-                />
-              </a>
-            ))}
+                <span className="micro-label mt-1 block text-text-muted">{feast.date}</span>
+              </span>
+              {/* Muted at rest rather than revealed on hover: a touch device
+                  never hovers, and this arrow is the only mark saying the row
+                  jumps down the page rather than off the site. */}
+              <ArrowDown
+                className="h-4 w-4 shrink-0 text-gold/55 transition-all duration-500 group-hover:translate-y-0.5 group-hover:text-gold"
+                aria-hidden="true"
+              />
+            </a>
           </div>
         </div>
       </div>

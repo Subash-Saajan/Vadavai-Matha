@@ -44,9 +44,9 @@ function Entry({
   return (
     <div className={`flex flex-col md:flex-row md:items-baseline gap-3 md:gap-10 px-5 md:px-8 ${lead ? "py-7 md:py-8" : "py-5 md:py-6"}`}>
       {/* The label that says whether this line is the parish office, the
-          priest, the chapel or the diocese — 0.58rem at 0.3em is 9.3px, which
-          on a register whose whole job is telling four entries apart is the
-          least helpful place on the page to hide a word. */}
+          priest or the diocese — 0.58rem at 0.3em is 9.3px, which on a register
+          whose whole job is telling its entries apart is the least helpful
+          place on the page to hide a word. */}
       <p className="md:w-40 shrink-0 font-display text-[0.66rem] tracking-[0.16em] md:text-[0.58rem] md:tracking-[0.3em] uppercase text-gold-dark">
         {label}
       </p>
@@ -120,11 +120,13 @@ export function Directory() {
             name={PARISH_PRIEST}
             note={t.contact.directory.priestNote}
           />
-          <Entry
-            label={t.contact.directory.chapel}
-            name={t.contact.visit.chapel}
-            note={t.contact.directory.chapelNote}
-          />
+          {/* The Adoration Chapel entry was removed from this register. It was
+              the only line here that answered no question of the form "whom do
+              I call" — it had no number to ring and no correspondent, only
+              opening hours, which VisitWindow already gives under "When to
+              come". Its copy (directory.chapel / chapelNote) is left in i18n
+              rather than deleted; see the note in the contact.visit block for
+              why the wording is "open", not "adoration at". */}
           <Entry
             label={t.contact.directory.diocese}
             name={DIOCESE.name}

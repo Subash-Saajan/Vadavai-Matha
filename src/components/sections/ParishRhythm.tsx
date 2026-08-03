@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import Image from "next/image";
+import { ResidentImage } from "@/components/ResidentImage";
 import { Link } from "@/components/LocaleLink";
 import { gsap, DESKTOP, revealY } from "@/lib/gsap";
 import { Sunrise, Church, MoonStar, ArrowUpRight } from "lucide-react";
@@ -175,7 +175,7 @@ export function ParishRhythm() {
             href="/mass-timings#festivals"
             className="group relative block aspect-[3/4] overflow-hidden rounded-2xl bg-navy ring-1 ring-gold/40 md:will-change-transform"
           >
-            <Image
+            <ResidentImage
               src={FEATURED_IMG}
               alt={t.festivals.featured.name}
               fill
@@ -215,7 +215,7 @@ export function ParishRhythm() {
                 href="/mass-timings#festivals"
                 className="group relative block aspect-[3/4] overflow-hidden rounded-2xl bg-navy ring-1 ring-gold/10 md:will-change-transform"
               >
-                <Image
+                <ResidentImage
                   src={FEASTS[i].img}
                   alt={item.name}
                   fill
@@ -257,7 +257,12 @@ export function ParishRhythm() {
             // go UP: a Mass time is the one thing on this page someone reads
             // at five in the morning.
             return (
-              <div key={item.title} className="week-col bg-white/90 p-5 backdrop-blur-sm md:p-7">
+              // No `backdrop-blur-sm`. It sat behind a 90%-opaque white fill,
+              // over a flat cream section — so it was blurring a tenth of a
+              // colour into itself, which is nothing, in exchange for three
+              // more elements asking the compositor to read back and filter
+              // what is under them on every frame the page moves.
+              <div key={item.title} className="week-col bg-white/90 p-5 md:p-7">
                 <div className="mb-4 flex items-center gap-3">
                   <Icon className="h-4 w-4 shrink-0 text-gold-dark" />
                   <h3 className="font-serif text-[1.05rem] text-navy md:text-lg">{item.title}</h3>
