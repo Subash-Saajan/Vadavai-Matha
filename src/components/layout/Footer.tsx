@@ -135,9 +135,6 @@ export function Footer() {
           <ul className={COL_LIST}>
             <li><Link href="/sources" className={COL_LINK}>{t.nav.sources}</Link></li>
             <li><Link href="/faq" className={COL_LINK}>{t.nav.faq}</Link></li>
-            {/* Beside the sources they made findable, not in a column of their
-                own — /sources names the documents, this names the people. */}
-            <li><Link href="/acknowledgements" className={COL_LINK}>{t.nav.acknowledgements}</Link></li>
           </ul>
         </div>
       </div>
