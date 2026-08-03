@@ -42,6 +42,8 @@ type FilmIndex = {
   width: number;
   height: number;
   gop: number;
+  /** still-crop ÷ film-crop; converts Hero's focal track into film space. */
+  focusScale?: number;
   /** Per picture: [byte offset, byte length, 1 if a keyframe]. */
   frames: [number, number, number][];
 };
@@ -56,7 +58,14 @@ const TICK = 33_333;
    decoding pictures the playhead has already gone past. A little over one GOP
    keeps the queue honest — the output callback pumps again, so a long seek
    still completes, just in checkable steps. */
-const MAX_QUEUE = 12;
+/* One picture in the decoder, one behind it. This was 12, sized back when
+   reaching a frame meant walking a GOP; nothing walks anything now — pump
+   submits only the picture the scrub currently wants — so every extra slot is
+   pure latency. Measured on the Galaxy A55, one keyframe costs ~12ms to decode,
+   so a queue of 12 is ~140ms of pictures from scroll positions the thumb has
+   already left, which is the film sitting still while the decoder works through
+   a backlog. Frames the thumb flew past are now never decoded at all. */
+const MAX_QUEUE = 1;
 
 /* The hero's copy is gated on `ready`, so `ready` must not be hostage to a
    4 MB download on a slow Indian mobile connection. The poster is already
@@ -148,7 +157,14 @@ export function useScrubFilm({
       const { width: cw, height: ch } = canvas;
       const iw = frame.displayWidth;
       const ih = frame.displayHeight;
-      const focusX = focusXAt(i);
+      /* Hero's CHURCH_TRACK is measured on the WebP stills — an ih*0.8 crop.
+         This film is an ih*0.6 crop of the same master, so the same point in
+         the world is a different fraction of the frame. `focusScale` is that
+         ratio, published by the generator (the only thing that knows both
+         crops). Without it the pan aims at the wrong place and the church sits
+         off centre, worst at the end of the film where the drift is largest.
+         Falls back to 1 for an index built before the field existed. */
+      const focusX = 0.5 + (focusXAt(i) - 0.5) * (index?.focusScale ?? 1);
       const scale = Math.max(cw / iw, ch / ih);
       const dw = iw * scale;
       const dh = ih * scale;

@@ -171,9 +171,29 @@ const QUALITY = "68";
    Nothing regresses on any device tested. 1008 = 2160 × 0.4667, which sits
    between the tallest phones (~0.43) and the squarest (~0.52), so both crop a
    little rather than either cropping a lot. */
-const FILM_CROP = "crop=ih*0.4667:ih:(iw-ih*0.4667)/2:0";
+/* ── THE FILM MUST BE WIDER THAN THE PHONE, NOT EQUAL TO IT ────────────────
+   This was ih*0.4667 — a phone's own shape, chosen so the film would need no
+   scaling on screen. It is the sharpest possible cut and it broke the one
+   thing that matters more: the church is not centred in this drone shot, it
+   drifts right as the camera descends, and Hero.tsx corrects for that by
+   sliding the frame under the canvas (CHURCH_TRACK → focusXAt).
+
+   That slide needs somewhere to slide TO. Cut the film to exactly a phone's
+   aspect and `object-cover` scales it until its width equals the canvas width
+   — measured on the Galaxy A55, a 1008-wide film draws at exactly 1080px on a
+   1080px canvas. Zero horizontal slack. `dx` clamps to 0, the pan is discarded
+   whatever focusX asks for, and the church sits wherever the crop happened to
+   leave it, worst at the end of the film where the drift is largest.
+
+   ih*0.6 is wider than any phone canvas (they run ~0.42–0.52), so cover always
+   scales by HEIGHT and there is always width left over to pan within. On that
+   same A55 the slack goes 0px → 270px, and the focal track needs about 108px
+   of it. Do not narrow this again to chase sharpness: a sharp picture of the
+   wrong part of the frame is worse than a slightly softer one of the right
+   part. */
+const FILM_CROP = "crop=ih*0.6:ih:(iw-ih*0.6)/2:0";
 const FILM_SIZE =
-  "scale=1008:2160:flags=lanczos:out_color_matrix=bt709:out_range=tv,format=yuv420p";
+  "scale=960:1600:flags=lanczos:out_color_matrix=bt709:out_range=tv,format=yuv420p";
 const FILM_CRF = "23";
 /** 1 = every picture is an IDR. Read the note above before raising this. */
 const FILM_GOP = 1;
@@ -407,7 +427,22 @@ for (const name of names) {
     const [w, h] = FILM_SIZE.match(/scale=(\d+):(\d+)/).slice(1).map(Number);
     writeFileSync(
       resolve(out, "film.json"),
-      JSON.stringify({ codec, width: w, height: h, gop: FILM_GOP, frames })
+      /* CHURCH_TRACK in Hero.tsx is measured on the STILLS, which are an
+         ih*0.8 crop; the film is an ih*0.6 crop of the same master. The same
+         point in the world is therefore a different FRACTION of each frame,
+         and feeding the stills' fraction straight to the film path aims the
+         pan at the wrong place. Both crops are centred, so one ratio converts:
+             f_film = 0.5 + (f_still - 0.5) x (still_crop / film_crop)
+         Published here because this is the only place that knows both crops —
+         change either and it regenerates itself instead of rotting. */
+      JSON.stringify({
+        codec, width: w, height: h, gop: FILM_GOP,
+        focusScale: Number(
+          (Number(CROP.match(/ih\*([\d.]+)/)[1]) /
+            Number(FILM_CROP.match(/ih\*([\d.]+)/)[1])).toFixed(6)
+        ),
+        frames,
+      })
     );
 
     const keys = frames.filter((f) => f[2]).length;
