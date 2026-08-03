@@ -65,16 +65,38 @@ const QUALITY = "68";
        whole tab dies somewhere past two hundred.
      · SIZE. Fifty of these frames differ from their neighbour by a few pixels
        of drone drift. Inter-frame compression is the entire point, and WebP
-       cannot do it: 150 stills is 14.7 MB, the same film is 3.93 MB.
+       cannot do it: 150 stills is 14.7 MB, the same film is 9.7 MB all-intra
+       (and would be 6.1 MB with long GOPs, which seek too badly to use).
 
    Which is what pays for the resolution. 1080×1350 is 56% more pixels than the
    864×1080 stills and still a 73% smaller download.
 
-   GOP 10, and NO B-FRAMES. Both are about seeking, not quality: a scrub jumps
-   backwards constantly, and to show frame 97 the decoder must run from the
-   keyframe at 90 — nine frames of hardware decode, about two milliseconds.
-   Longer GOPs are smaller and seek worse; B-frames reorder output and would
-   force the hook to buffer and sort. Neither trade is worth it here.
+   ── EVERY FRAME IS A KEYFRAME, AND THAT IS THE WHOLE DESIGN ──────────────
+   This was GOP 10, and it was measured on a real phone (Galaxy A55, over CDP)
+   to be badly wrong. Scrolling DOWN the hero the picture changed every 16px;
+   scrolling back UP it changed every 74px — the reader's own words were "it's
+   just stuck as an image when I come back up". The drawn frames' timestamps
+   were exactly 333,330µs apart, which is exactly ten frames: going backwards,
+   the scrub was showing keyframes and nothing else.
+
+   The cause is that a backward step is not a step at all. Forwards, frame 98
+   follows 97 and costs one decode. Backwards, frame 97 after 98 means rewinding
+   to the keyframe at 90 and running seven pictures the reader must never see —
+   per frame, for every frame of a backward scrub. Any code that walks that GOP
+   is either slow or, as ours was, wrong about which picture to paint.
+
+   So the format changes instead of the workaround getting cleverer. A SCROLL
+   SCRUB IS PURE RANDOM ACCESS: it never plays the film in order, which is the
+   one thing inter-frame compression optimises for. Making every frame a
+   keyframe means frame 97 costs exactly one decode from any starting point,
+   backwards is identical to forwards, and the rewind machinery disappears from
+   the hook entirely rather than being fixed.
+
+   It costs size — measured at 1080×1350, CRF 23: GOP 10 was 6.14 MB, all-intra
+   is 9.7 MB. Still a third less than the 14.7 MB of WebP stills this replaced,
+   at 56% more pixels, and it is the difference between a film that scrubs and one
+   that sticks. NO B-FRAMES for the same family of reason: they reorder output
+   and would force the hook to buffer and sort.
 
    ANNEX-B, not MP4, and that is what keeps mp4box.js (~250 KB of JavaScript)
    off the page: an MP4 would have to be demuxed in the browser, whereas an
@@ -83,9 +105,49 @@ const QUALITY = "68";
    and hands it straight to VideoDecoder. Annex-B is also the format that needs
    no `description` in the decoder config — the parameter sets travel in-band
    with every keyframe. */
-const FILM_SIZE = "scale=1080:1350:flags=lanczos";
-const FILM_CRF = "25";
-const FILM_GOP = 10;
+/* ── COLOUR, WHICH MUST BE STATED AND NOT LEFT TO BE GUESSED ───────────────
+   The first cut of this scaled with a bare `scale=` and tagged nothing, and
+   ffmpeg's default for an RGB source is BT.601 — so the stream came out
+   declaring `bt470bg/unknown/unknown` while the master it derives from is
+   `yuv420p(tv, bt709)`. The picture was encoded with one set of coefficients
+   and labelled with none.
+
+   Measured on the phone, the DECODED pixels came back within 0.2% of the
+   original stills, so this is not a decode bug and Chrome is coping. But
+   `getImageData` reads the canvas, which is upstream of the panel: a phone
+   treats a video surface according to what the stream says it is, and a
+   Samsung AMOLED in particular post-processes tagged video differently from
+   the sRGB images sitting beside it on the same page. Untagged or mis-tagged
+   is exactly the case where the film drifts away from the photographs around
+   it, which is what "a lil dull" describes.
+
+   So the conversion matrix and the tag are both stated, both bt709.
+
+   LIMITED range, matching the master. Full range was measured on the phone as
+   an alternative and came out identical (-1.88% luma against the source stills
+   versus -1.83%), so there is nothing to buy there — and limited range is the
+   universally-respected one, while a full-range flag is quietly ignored by some
+   hardware decoders, which washes the picture out badly. Take the safe one when
+   the measurement says they are the same.
+
+   ⚠ AND THIS IS NOT WHY THE FILM MIGHT LOOK DULL. Every variant tried —
+   untagged BT.601, bt709 limited, bt709 full — landed within 2% of the source
+   stills as painted by the phone, which is far below anything an eye reads as
+   "duller". The tagging here is correctness, not a cure. If the film reads
+   flatter than the photographs beside it on a Samsung, the cause is the panel:
+   Vivid mode boosts sRGB images and colour-manages tagged video accurately, so
+   an ACCURATE film sits next to BOOSTED stills. Do not try to fix that by
+   over-saturating the encode — it would be wrong everywhere else, on every
+   iPhone and every desktop, to flatter one display mode.
+
+   Both halves must always agree: the filter converts, `-color_range tv` flags
+   it, and a stream converted one way and flagged the other crushes blacks or
+   washes them grey depending which way round it got it. */
+const FILM_SIZE =
+  "scale=1080:1350:flags=lanczos:out_color_matrix=bt709:out_range=tv,format=yuv420p";
+const FILM_CRF = "23";
+/** 1 = every picture is an IDR. Read the note above before raising this. */
+const FILM_GOP = 1;
 
 const JOBS = {
   hero: {
@@ -249,11 +311,38 @@ for (const name of names) {
     const stills = readdirSync(out).filter((f) => /^f\d+\.webp$/.test(f));
     const film = resolve(out, "film.h264");
 
+    /* ── FROM THE MASTER, NEVER FROM THE STILLS ────────────────────────────
+       This read `f%03d.webp` and it was quietly the worst thing in the file.
+       Those stills are 864×1080 at WebP q68, so the film was being built by
+       taking a 1728×2160 crop of the 4K master, throwing three quarters of it
+       away, compressing THAT lossily, then UPSCALING the result 1.25× to
+       1080×1350 and compressing it again. Every one of the film's "extra"
+       pixels was invented from an 864-wide picture that had already been
+       through a lossy encoder. Held next to a native crop of the master the
+       difference is not subtle — the tracery, the finials and the lettering
+       over the door go from crisp to smeared, which is what reads as grain.
+
+       The film now takes the same frames off the same master with the same
+       crop, and the only scale it ever does is a DOWNscale of 1728→1080. The
+       WebP sequence is still generated, because the fallback path still needs
+       it, but the two are now siblings from one source rather than one being
+       derived from the other.
+
+       `reverse` does here what the renaming loop above does for the stills —
+       the master plays church→sky and the site scrubs it the other way. It
+       buffers the whole selection (~330 MB at this size), which is why it sits
+       AFTER the scale rather than before it. `setpts` then relays clean 30fps
+       timestamps, since selecting every eighth frame of a 59.94fps master
+       leaves gaps the indexer would otherwise have to reason about. */
     execFileSync(ffmpeg, [
       "-hide_banner", "-loglevel", "error",
-      "-framerate", "30",
-      "-i", resolve(out, "f%03d.webp"),
-      "-vf", FILM_SIZE,
+      ...job.inputArgs,
+      "-i", src,
+      ...job.mapArgs,
+      "-vf",
+      `select=not(mod(n\\,${job.step})),${CROP},${FILM_SIZE}` +
+        `${job.reversed ? ",reverse" : ""},setpts=N/30/TB`,
+      "-r", "30",
       "-c:v", "libx264",
       "-profile:v", "high",
       "-crf", FILM_CRF,
@@ -261,7 +350,13 @@ for (const name of names) {
       "-keyint_min", String(FILM_GOP),
       "-bf", "0",            // see the note on FILM_SIZE — B-frames reorder output
       "-sc_threshold", "0",  // keyframes on the grid, not where the scene cuts
-      "-pix_fmt", "yuv420p",
+      // Stated, not guessed — see the note on FILM_SIZE. These tag the stream;
+      // the matrix/range CONVERSION is done by the scale filter above, and the
+      // two must always be changed together.
+      "-colorspace", "bt709",
+      "-color_primaries", "bt709",
+      "-color_trc", "bt709",
+      "-color_range", "tv",
       "-an",
       "-f", "h264",
       film,

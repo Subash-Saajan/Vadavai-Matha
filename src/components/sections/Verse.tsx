@@ -22,12 +22,34 @@ export function Verse() {
          short spans of text rather than resampling an image. */
       const mm = gsap.matchMedia();
       mm.add(DESKTOP, () => {
+        /* ── THE DRIFT MUST NEVER BE WHAT COVERS THE SECTION ────────────────
+           This used to run -8 → +12 yPercent while the scale FELL 1.18 → 1.05,
+           and those two are not independent: the scale is the only thing
+           holding the backdrop over the section's edges, and a scale of 1.05
+           buys 2.5% of overhang at each end. Ending the drift 12% down the
+           section therefore left a 9.5% strip of bare `bg-navy` above the
+           photograph.
+
+           At rest that strip is above the fold — by the progress that produces
+           it the section has already scrolled off the top — which is why it
+           survived. But `scrub` is a LAG, not a mapping: fling the page back up
+           and the tween is still 1.2s behind, holding an end-of-range transform
+           while the section is squarely back on screen. The strip is on screen
+           for about a second, which is exactly long enough to see and to
+           screenshot.
+
+           So the coverage is now STATIC — the box is 124% tall and pulled up
+           12%, the same trade the saint-page plates make in globals.css — and
+           the tween only moves inside that margin. ±5 yPercent of a 124% box
+           is ±6.2% of the section against 12% of bleed, so every combination of
+           lagging yPercent and lagging scale in this range still covers, and
+           the scale can now land on 1.0 without being load-bearing at all. */
         gsap.fromTo(
           imgRef.current,
-          { yPercent: -8, scale: 1.18 },
+          { yPercent: -5, scale: 1.08 },
           {
-            yPercent: 12,
-            scale: 1.05,
+            yPercent: 5,
+            scale: 1,
             ease: "none",
             scrollTrigger: {
               trigger: sectionRef.current,
@@ -87,7 +109,14 @@ export function Verse() {
          partly behind a phone's address bar. On desktop the two are equal. */
       className="relative h-[92svh] flex items-center justify-center overflow-hidden bg-navy"
     >
-      <div ref={imgRef} className="absolute inset-0 md:will-change-transform">
+      {/* 124% tall, pulled up 12%, so the box is centred on the section and
+          overhangs it by 12% at each end WITHOUT a transform. If the script
+          never runs — no JS, reduced motion, a phone — the picture is still
+          correctly framed and still covers. See the tween above. */}
+      <div
+        ref={imgRef}
+        className="absolute inset-x-0 -top-[12%] h-[124%] md:will-change-transform"
+      >
         <ResidentImage
           src="/church-interior.jpeg"
           alt=""

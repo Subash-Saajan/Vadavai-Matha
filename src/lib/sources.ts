@@ -701,8 +701,8 @@ export const WEIGHING_NOTE = {
     {
       label: "Local and diocesan devotion",
       labelTa: `ஊரின், மறைமாவட்டத்தின் பக்தி`,
-      body: "The weeping of Our Lady on 23 October 1803. Its printed anchor is Besse's La Mission du Maduré (1914) — a real book, held in four known libraries, whose relevant pages no one working on this project has yet physically opened. It is a continuous local and diocesan tradition, honoured here for more than two centuries. It has never been the subject of a Vatican investigation, and we do not claim that it has.",
-      bodyTa: `1803 அக்டோபர் 23 அன்று அன்னை கண்ணீர் சிந்தியது. அதன் அச்சு ஆதாரம் பெஸ்ஸின் “La Mission du Maduré” (1914) — உண்மையிலேயே இருக்கும் ஒரு நூல்; நான்கு நூலகங்களில் இருப்பது தெரியும்; அதன் தொடர்புடைய பக்கங்களை இப்பணியில் ஈடுபட்ட எவரும் இதுவரை நேரில் திறந்ததில்லை. இது ஊரிலும் மறைமாவட்டத்திலும் அறுபடாமல் தொடரும் ஒரு மரபு; இரு நூற்றாண்டுகளுக்கும் மேலாக இங்கே சிறப்பிக்கப்பட்டு வருகிறது. வத்திக்கானின் எந்த ஆய்வுக்கும் இது ஒருபோதும் உட்படுத்தப்படவில்லை; உட்படுத்தப்பட்டதாக நாம் உரிமை கோரவும் இல்லை.`,
+      body: "The weeping of Our Lady on 21 October 1803. Its printed anchor is Besse's La Mission du Maduré (1914) — a real book, held in four known libraries, whose relevant pages no one working on this project has yet physically opened. It is a continuous local and diocesan tradition, honoured here for more than two centuries. It has never been the subject of a Vatican investigation, and we do not claim that it has.",
+      bodyTa: `1803 அக்டோபர் 21 அன்று அன்னை கண்ணீர் சிந்தியது. அதன் அச்சு ஆதாரம் பெஸ்ஸின் “La Mission du Maduré” (1914) — உண்மையிலேயே இருக்கும் ஒரு நூல்; நான்கு நூலகங்களில் இருப்பது தெரியும்; அதன் தொடர்புடைய பக்கங்களை இப்பணியில் ஈடுபட்ட எவரும் இதுவரை நேரில் திறந்ததில்லை. இது ஊரிலும் மறைமாவட்டத்திலும் அறுபடாமல் தொடரும் ஒரு மரபு; இரு நூற்றாண்டுகளுக்கும் மேலாக இங்கே சிறப்பிக்கப்பட்டு வருகிறது. வத்திக்கானின் எந்த ஆய்வுக்கும் இது ஒருபோதும் உட்படுத்தப்படவில்லை; உட்படுத்தப்பட்டதாக நாம் உரிமை கோரவும் இல்லை.`,
     },
   ],
   closing:

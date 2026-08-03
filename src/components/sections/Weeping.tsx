@@ -8,7 +8,7 @@ import { gsap, DESKTOP, revealY } from "@/lib/gsap";
 import { useLang } from "@/components/layout/LanguageProvider";
 
 /**
- * 23 October 1803 — one moment, told properly.
+ * 21 October 1803 — one moment, told properly.
  *
  * WHAT IT IS FOR. The Chronicle above it moves fast and shows seven things.
  * This section shows one, and stops. It is the page's emotional peak, placed
@@ -52,12 +52,16 @@ export function Weeping() {
          frame, which is the picture it was chosen for. See lib/gsap.ts. */
       const mm = gsap.matchMedia();
       mm.add(DESKTOP, () => {
+        /* The bleed is the 120% box below, not the scale — see the long note
+           in Verse.tsx for why a falling scale must never be the thing holding
+           a backdrop over its section's edges. ±4 yPercent of a 120% box is
+           ±4.8% against 10% of margin at each end. */
         gsap.fromTo(
           bgRef.current,
-          { yPercent: -6, scale: 1.12 },
+          { yPercent: -4, scale: 1.06 },
           {
-            yPercent: 6,
-            scale: 1.04,
+            yPercent: 4,
+            scale: 1,
             ease: "none",
             scrollTrigger: {
               trigger: sectionRef.current,
@@ -95,7 +99,10 @@ export function Weeping() {
       ref={sectionRef}
       className="relative overflow-hidden bg-night-deep py-16 md:py-32"
     >
-      <div ref={bgRef} className="absolute inset-0 md:will-change-transform">
+      <div
+        ref={bgRef}
+        className="absolute inset-x-0 -top-[10%] h-[120%] md:will-change-transform"
+      >
         <ResidentImage
           src="/images/history/the-weeping-madonna-4.jpg"
           alt=""
@@ -117,7 +124,7 @@ export function Weeping() {
           <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-[1.75rem] shadow-2xl ring-1 ring-gold/25">
             <ResidentImage
               src="/images/history/the-weeping-madonna-2.jpg"
-              alt="The statue of Our Lady of the Assumption at Vadakkankulam, as the parish remembers the forenoon of 23 October 1803."
+              alt="The statue of Our Lady of the Assumption at Vadakkankulam, as the parish remembers the forenoon of 21 October 1803."
               fill
               sizes="(max-width: 1024px) 80vw, 26rem"
               className="object-cover"

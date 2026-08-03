@@ -200,8 +200,16 @@ export const STATUE = {
 
 export const APPARITION = {
   /** Settled: 1803, never 1805. Every external source agrees; the parish
-   *  souvenir's "1805" is a copying slip. Tamil year 979, Aippasi 7, a Friday. */
-  date: "1803-10-23",
+   *  souvenir's "1805" is a copying slip. Tamil year 979, Aippasi, a Friday.
+   *
+   *  THE DAY IS THE 21st, AND THE WEEKDAY IS WHY. Both of the earliest printed
+   *  witnesses — Dessal (Lettres de Gemert, 1905) and Besse via the Moumas
+   *  typescript — give 21 October, and every account of that morning, in every
+   *  language, calls it a Friday. 21 October 1803 was a Friday; 23 October 1803
+   *  was a Sunday. The 23rd is the day the diocese commemorates on, which is a
+   *  different fact and is kept below as `feastDays`. See the long note on the
+   *  weeping in citations.ts. */
+  date: "1803-10-21",
   year: 1803,
   tamilYear: 979,
   tier: "devotion" as Tier,
@@ -211,13 +219,13 @@ export const APPARITION = {
   feastDaysTa: "அக்டோபர் 22–23",
   /** The sentence the website should use when it must be exact. */
   honestStatement:
-    "The parish has commemorated the weeping of Our Lady on 23 October 1803 ever since. It is a local and diocesan tradition, recorded by the Jesuit historian Léon Besse, and has never been the subject of a Vatican investigation.",
+    "The parish has commemorated the weeping of Our Lady on 21 October 1803 ever since. It is a local and diocesan tradition, recorded by the Jesuit historian Léon Besse, and has never been the subject of a Vatican investigation.",
   /**
    * The Tamil twin. Hedged to exactly the same strength as the English — a
    * local and diocesan tradition, never examined by Rome. Do not strengthen it.
    */
   honestStatementTa:
-    "1803 அக்டோபர் 23-ஆம் நாள் அன்னை கண்ணீர் சிந்தியதை அன்று முதல் இப்பங்கு நினைவுகூர்ந்து வருகிறது. இது இப்பகுதிக்கும் மறைமாவட்டத்திற்கும் உரிய ஒரு மரபு; இயேசு சபை வரலாற்றாசிரியர் லெயோன் பெஸ் இதைப் பதிவு செய்துள்ளார்; இது ஒருபோதும் வத்திக்கானின் விசாரணைக்கு உட்படுத்தப்பட்டதில்லை.",
+    "1803 அக்டோபர் 21-ஆம் நாள் அன்னை கண்ணீர் சிந்தியதை அன்று முதல் இப்பங்கு நினைவுகூர்ந்து வருகிறது. இது இப்பகுதிக்கும் மறைமாவட்டத்திற்கும் உரிய ஒரு மரபு; இயேசு சபை வரலாற்றாசிரியர் லெயோன் பெஸ் இதைப் பதிவு செய்துள்ளார்; இது ஒருபோதும் வத்திக்கானின் விசாரணைக்கு உட்படுத்தப்பட்டதில்லை.",
 } as const;
 
 /** St Francis Xavier never came here — he died in 1552, well over a century

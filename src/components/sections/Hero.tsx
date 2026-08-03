@@ -28,20 +28,43 @@ const frameSrc = (i: number) => `/hero-frames/f${String(i + 1).padStart(3, "0")}
 const FILM_SRC = "/hero-frames/film.h264";
 const FILM_INDEX_SRC = "/hero-frames/film.json";
 
-/**
- * The church is not in the middle of its own footage. gen-scrub-frames.mjs
- * takes a dead-centre 4:5 slice of the drone master, and in that slice the
- * spire sits at about 51% of the frame's width at the start of the scrub and
- * drifts out to about 56% by the end — the drone is descending towards it, not
- * orbiting it. A desktop viewport is wide enough that the whole 4:5 field is on
- * screen and nobody notices; a phone crops another ~40% off the sides, which
- * magnifies that offset into a church visibly parked right of centre.
- *
- * So the mobile canvas draws from 54.5% of the frame instead of 50% — a
- * compromise between the two ends of the pan that reads as centred throughout.
- * Canvas-only by construction, so the desktop <video> keeps its full field.
- */
-const CHURCH_FOCUS_X = 0.545;
+/* ── THE CHURCH MOVES INSIDE ITS OWN FOOTAGE, SO THE CROP HAS TO MOVE TOO ──
+   gen-scrub-frames.mjs takes a dead-centre 4:5 slice of the drone master, and
+   the church does not sit still in that slice: the drone is descending towards
+   it, not orbiting it, so the spire starts at 50.9% of the frame's width,
+   drifts right for the first two thirds of the scrub and settles at about 56%.
+   A desktop viewport is wide enough that the whole 4:5 field is on screen and
+   nobody notices; a phone crops another ~40% off the sides, which magnifies
+   that drift into a church visibly off centre.
+
+   This used to be ONE number, 0.545, chosen as a compromise between the two
+   ends of the pan — which is the best a single number can do and still wrong
+   at both. It was tuned closest to where the film ends, so the church came to
+   rest nicely centred and the FIRST SCREEN — the one every visitor sees, and
+   the only one they see if they never scroll — had it sitting ~26px left of
+   centre on a 390px phone.
+
+   So the focus is now a track rather than a value. These are measurements, not
+   taste: the little red cross on the spire is the only saturated pure red in
+   the frame, so its centroid was read out of all 150 stills and sampled every
+   tenth frame here. Anything between samples is linear, which is within about
+   a pixel of the real path — the drift is smooth. Re-cut the film and these
+   numbers are wrong; re-measure, don't guess.
+
+   Canvas-only by construction (see focusXAt in useScrubMedia), so the desktop
+   <video> keeps its full uncropped field and is untouched by any of this. */
+const CHURCH_TRACK = [
+  0.509, 0.512, 0.516, 0.523, 0.531, 0.538, 0.544, 0.549, 0.555, 0.560,
+  0.561, 0.560, 0.558, 0.559, 0.561, 0.560,
+] as const;
+
+/** Linear read of CHURCH_TRACK, whose samples are every (FRAME_COUNT-1)/15 frames. */
+const churchFocusX = (frame: number) => {
+  const last = CHURCH_TRACK.length - 1;
+  const p = Math.max(0, Math.min(1, frame / (FRAME_COUNT - 1))) * last;
+  const i = Math.min(Math.floor(p), last - 1);
+  return CHURCH_TRACK[i] + (CHURCH_TRACK[i + 1] - CHURCH_TRACK[i]) * (p - i);
+};
 
 export function Hero() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -63,7 +86,7 @@ export function Hero() {
     frameSrc,
     filmSrc: FILM_SRC,
     filmIndexSrc: FILM_INDEX_SRC,
-    focusX: CHURCH_FOCUS_X,
+    focusXAt: churchFocusX,
   });
 
   useEffect(() => {
@@ -200,20 +223,26 @@ export function Hero() {
         {/* First frame as instant poster under whichever scrub medium mounts —
             also the mobile LCP, since phones never load the video itself.
 
-            The poster is the uncropped landscape frame, so on a phone
-            object-cover happens to crop it to exactly the same slice the 4:5
-            scrub frames show. It therefore has to carry the same off-centre
-            framing as CHURCH_FOCUS_X, or the church would visibly jump
-            sideways the moment frame 1 lands on the canvas over it. 52.7% of
-            this frame's overflow is the same ~30px nudge that 54.5% of the
-            narrower crop is. Phones only — desktop shows the whole field. */}
+            The poster is the uncropped 1920×1080 master; the scrub frames are
+            its dead-centre 864-wide slice. So a point at x in a frame is at
+            0.275 + 0.45x in the poster, and this has to be aimed at whatever
+            CHURCH_TRACK says frame 0 is — otherwise the church jumps sideways
+            the moment the canvas paints over the poster.
+
+            The percentage is not that point, though: `object-position: P%`
+            aligns the P% of the IMAGE with the P% of the BOX, so putting a
+            focal point in the middle needs P = (cw/2 − focal·dw)/(cw − dw),
+            which for a full-height 16:9 poster on any phone works out at
+            50.5% for CHURCH_TRACK[0]. (It was 52.7% when the whole film was
+            pinned to one 0.545 focus.) Phones only — desktop shows the whole
+            field, unshifted, exactly as before. */}
         <Image
           src="/hero-frames/poster.webp"
           alt=""
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[52.7%_center] md:object-center"
+          className="object-cover object-[50.5%_center] md:object-center"
         />
 
         {mode === "video" && (

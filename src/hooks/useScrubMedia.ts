@@ -103,6 +103,13 @@ const KEEP_BEHIND = 6 * STEP;
 const IN_FLIGHT = 6;
 
 /**
+ * Default focal track: plain centre-cover, every frame. Module-level so the
+ * default is referentially stable — an inline `() => 0.5` would be a new
+ * function on every render and would rebuild the loader effect with it.
+ */
+const CENTRE = () => 0.5;
+
+/**
  * Picks how a scroll-scrubbed film renders and wires the mobile path.
  *
  * Desktop (≥768px, same breakpoint as useLenis) scrubs the real <video> via
@@ -127,7 +134,7 @@ export function useScrubMedia({
   frameSrc,
   filmSrc,
   filmIndexSrc,
-  focusX = 0.5,
+  focusXAt = CENTRE,
 }: {
   videoRef: RefObject<HTMLVideoElement | null>;
   canvasRef: RefObject<HTMLCanvasElement | null>;
@@ -150,8 +157,13 @@ export function useScrubMedia({
    * centre-cover; above 0.5 slides the image left to bring something that
    * sits right of frame-centre into the middle. Clamped so the crop can never
    * run past an edge of the frame.
+   *
+   * It is asked PER FRAME, not once, because the subject of a moving film
+   * moves within it: a single number can only be right at one point of the
+   * pan. Must be a module-level constant or a stable useCallback — it is an
+   * effect dependency, and a fresh arrow per render would rebuild the loader.
    */
-  focusX?: number;
+  focusXAt?: (frame: number) => number;
 }) {
   const [mode, setMode] = useState<"video" | "film" | "canvas" | null>(null);
   const [mediaReady, setMediaReady] = useState(false);
@@ -186,7 +198,7 @@ export function useScrubMedia({
     manifestSrc: filmIndexSrc ?? "",
     filmSrc: filmSrc ?? "",
     frameCount,
-    focusX,
+    focusXAt,
     onFail: onFilmFail,
   });
 
@@ -251,10 +263,14 @@ export function useScrubMedia({
       }
       if (idx < 0 || idx === drawn) return;
       const img = frames[idx] as HTMLImageElement;
-      // Same geometry as the video's object-cover, with focusX standing in
-      // for object-position's x. Put focusX*dw under the canvas centre, then
-      // clamp into [cw - dw, 0] so the frame still covers edge to edge.
+      // Same geometry as the video's object-cover, with focusXAt standing in
+      // for object-position's x. Put focusXAt(idx)*dw under the canvas centre,
+      // then clamp into [cw - dw, 0] so the frame still covers edge to edge.
+      // The focus is asked for the frame ACTUALLY drawn, not the one wanted:
+      // during a fast flick those differ, and pairing a frame with another
+      // frame's focus is a visible sideways twitch.
       const { width: cw, height: ch } = canvas;
+      const focusX = focusXAt(idx);
       const scale = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
       const dw = img.naturalWidth * scale;
       const dh = img.naturalHeight * scale;
@@ -438,7 +454,7 @@ export function useScrubMedia({
       // Leaving the page must not leave 33 decoded frames behind it.
       frames.fill(null);
     };
-  }, [mode, frameCount, frameSrc, canvasRef, focusX]);
+  }, [mode, frameCount, frameSrc, canvasRef, focusXAt]);
 
   return { mode, mediaReady, frameTargetRef, drawRef };
 }

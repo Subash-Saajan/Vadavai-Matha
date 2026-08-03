@@ -180,7 +180,7 @@ export const dict = {
          it back into two paragraphs of gist. The narrative facts here are the
          /history page's (i18n `the-weeping-madonna` dots) and Besse via the
          Moumas typescript p.842; keep them consistent with that page. */
-      weepingLabel: "23 October 1803",
+      weepingLabel: "21 October 1803",
       weepingTitle: "They said the Mother was weeping",
       weepingBody1:
         "It was a Friday forenoon in the Tamil month of Aippasi, in a village that had gone a generation without a Jesuit. A man from Tirunelveli, Savarimuthu Pillai, had come over to see the European family settled here, and stopped in the church first to pray. Our Lady stood above the altar in a recess closed by a double door, and that morning both leaves were open. He knelt down.",
@@ -697,13 +697,16 @@ export const dict = {
         },
         {
           name: "The Apparition of Our Lady",
-          // ⚠ 21 OCTOBER IS THE FEAST; 23 OCTOBER 1803 IS THE EVENT. Do not
-          // "correct" one into the other. The parish keeps the feast of the
-          // Matha Kaatchi on 21 October (given by the parish, Aug 2026); the
-          // weeping it commemorates happened on Friday 23 October 1803, and
-          // that date is fixed and heavily sourced — it stays exactly as it is
-          // everywhere it appears in the history, the FAQ and APPARITION in
-          // lib/history.ts. Only the day the village keeps it has moved here.
+          // ⚠ THIS IS THE FEAST DAY, NOT THE EVENT DATE — even now that the
+          // two read alike. The parish keeps the Matha Kaatchi on 21 October
+          // (given by the parish, Aug 2026); the weeping it commemorates is
+          // separately dated to Friday 21 October 1803 (APPARITION.date in
+          // lib/history.ts, and the note on the weeping in citations.ts). They
+          // agreeing is a coincidence of two independent readings, not one
+          // fact written twice — if either moves, the other does not follow.
+          // Note also that APPARITION.feastDays still prints "22–23 October"
+          // from the souvenir, and its disagreement with this line is open in
+          // the Mismatch Register (§L2). Do not collapse them.
           date: "October 21",
           body: "Commemorating the Matha Kaatchi — the day Our Lady's statue is remembered to have extended her hands towards the faithful.",
         },
@@ -1511,26 +1514,20 @@ export const dict = {
       intro:
         "All are welcome to pray with us. Here you will find our weekly Mass times, our monthly devotions, and the feasts our parish keeps through the year.",
       weeklyLabel: "Weekly Worship",
+      /* ⚠ THESE THREE ARE NO LONGER RENDERED ON /mass-timings — that page draws
+         the day as an arc and the week as seven columns. They are kept, and are
+         now read by the HOME PAGE's week plate (ParishRhythm), because they are
+         the parish's own naming of its three standing services and they already
+         exist in both languages. The home plate used to hand-write its headings
+         as `lang === "en" ? … : …` inline.
+
+         THE `times` ARRAYS ARE GONE. They restated hours that live in SCHEDULE
+         (lib/contact.ts) and are typeset by formatClock — the same removal made
+         in t.contact.visit for the same reason. Words here, numbers never. */
       cards: [
-        {
-          title: "Daily Mass",
-          subtitle: "Monday – Saturday",
-          times: ["5:00 AM", "6:10 AM"],
-        },
-        {
-          title: "Sunday Mass",
-          subtitle: "Every Sunday",
-          times: ["5:00 AM", "7:00 AM", "9:30 AM"],
-        },
-        {
-          title: "Evening Devotion",
-          subtitle: "Daily",
-          times: [
-            "6:30 PM — Holy Rosary",
-            "7:00 PM — Benediction",
-            "Sundays — begins 5:30 PM",
-          ],
-        },
+        { title: "Daily Mass", subtitle: "Monday – Saturday" },
+        { title: "Sunday Mass", subtitle: "Every Sunday" },
+        { title: "Evening Devotion", subtitle: "Daily" },
       ],
       devotionsLabel: "Other Language Masses & Monthly Devotions",
       devotionsNote:
@@ -2036,7 +2033,7 @@ export const dict = {
           line: `இந்தத் தீர்த்தத்தில் திருமுழுக்குப் பெற்ற அந்த அதிகாரி, இந்தியாவின் முதல் பொதுநிலைப் புனிதரானார். ஏழு மாதங்கள் அவரைப் பிணைத்திருந்த சங்கிலிகள், அனைத்தும் தொடங்கிய இந்த ஆலயத்திலேயே பாதுகாக்கப்படுகின்றன.`,
         },
       ],
-      weepingLabel: `1803 ஐப்பசி 7 · அக்டோபர் 23`,
+      weepingLabel: `1803 ஐப்பசி · அக்டோபர் 21`,
       weepingTitle: `அன்னை கண்ணீர் சிந்தினாள் என்றார்கள்`,
       weepingBody1: `ஐப்பசி மாதத்து ஒரு வெள்ளிக்கிழமை முற்பகல்; ஒரு தலைமுறைக் காலமாக இயேசு சபை அருட்தந்தை எவரும் இல்லாதிருந்த ஊர். இங்கே குடியேறியிருந்த ஐரோப்பியக் குடும்பத்தைச் சந்திக்கத் திருநெல்வேலியிலிருந்து வந்திருந்த சவரிமுத்து பிள்ளை என்பவர், முதலில் செபிப்பதற்காக ஆலயத்திற்குள் நுழைந்தார். பீடத்திற்கு மேலே, இரட்டைக் கதவு கொண்ட ஒரு மாடத்தில் அன்னை நின்றார்; அன்று காலை அதன் இரு கதவுகளுமே திறந்திருந்தன. அவர் முழந்தாளிட்டார்.`,
       weepingBody2: `பின்னர் அவர் சொன்னது இதுவே: மெல்லிய ஒளி ஊடுருவும் மேகம் ஒன்று அன்னைக்குப் பின்னால் திரண்டு அவரைச் சுற்றிப் போர்த்தியது; அவருடைய கண்கள் உயர்ந்து நிறைந்தன, கன்னங்களில் கண்ணீர் வழிந்தோடியது; கூப்பியிருந்த கைகள் பிரிந்து, மாடத்தின் சுவர்களைத் தொடும் அளவுக்கு நீண்டன. தன் கண்களே தன்னை ஏமாற்றுகின்றன என்று எண்ணிய அவர், வெளியே சென்று மறைக்கல்வியாளர் யாகப்பர் பிள்ளையையும், அவ்வீட்டு மகள் ஹென்ரியட்டையும் அழைத்துவந்தார். தாங்களும் அதைக் கண்டதாக அவர்கள் சொன்னார்கள். ஒரு மறைக்கல்வியாளர் பீடத்தில் ஏறி அன்னையின் முகத்தைத் துடைத்தார்; கண்ணீர் மீண்டும் வந்தது, நிற்கவே இல்லை.`,
@@ -3329,28 +3326,14 @@ FIDES VNA SIT, VNAQVE MENS.`,
         {
           title: `தினசரி திருப்பலி`,
           subtitle: `திங்கள் – சனி`,
-          times: [
-            `காலை 5:00`,
-            `காலை 6:10`,
-          ],
         },
         {
           title: `ஞாயிறு திருப்பலி`,
           subtitle: `ஒவ்வொரு ஞாயிறும்`,
-          times: [
-            `காலை 5:00`,
-            `காலை 7:00`,
-            `காலை 9:30`,
-          ],
         },
         {
           title: `மாலை வழிபாடு`,
           subtitle: `தினமும்`,
-          times: [
-            `மாலை 6:30 — திருச்செபமாலை`,
-            `மாலை 7:00 — நற்கருணை ஆசீர்வாதம்`,
-            `ஞாயிறு — மாலை 5:30 முதல்`,
-          ],
         },
       ],
       devotionsLabel: `பிற மொழித் திருப்பலிகளும் மாதந்தோறும் பக்தி முயற்சிகளும்`,

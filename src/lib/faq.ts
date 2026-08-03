@@ -94,8 +94,8 @@ export const FAQS: Faq[] = [
   {
     q: "Is there a second annual observance?",
     qTa: `ஆண்டுதோறும் நடைபெறும் இரண்டாவது நினைவுவிழா ஒன்று உண்டா?`,
-    a: `Yes. The parish also keeps the commemoration of the apparition — the Matha Kaatchi — each year on ${APPARITION.feastDays}, remembering the weeping of Our Lady before the village on 23 October 1803.`,
-    aTa: `உண்டு. 1803 அக்டோபர் 23 அன்று இவ்வூர் மக்கள் முன்னிலையில் அன்னை கண்ணீர் சிந்திய நிகழ்வை நினைவுகூர்ந்து, “மாதா காட்சி” எனப்படும் காட்சிப் பெருவிழாவையும் இப்பங்கு ஆண்டுதோறும் ${APPARITION.feastDaysTa} தேதிகளில் கொண்டாடி வருகிறது.`,
+    a: `Yes. The parish also keeps the commemoration of the apparition — the Matha Kaatchi — each year on ${APPARITION.feastDays}, remembering the weeping of Our Lady before the village on 21 October 1803.`,
+    aTa: `உண்டு. 1803 அக்டோபர் 21 அன்று இவ்வூர் மக்கள் முன்னிலையில் அன்னை கண்ணீர் சிந்திய நிகழ்வை நினைவுகூர்ந்து, “மாதா காட்சி” எனப்படும் காட்சிப் பெருவிழாவையும் இப்பங்கு ஆண்டுதோறும் ${APPARITION.feastDaysTa} தேதிகளில் கொண்டாடி வருகிறது.`,
   },
   {
     q: "What are the Mass timings?",
@@ -178,8 +178,8 @@ export const FAQS: Faq[] = [
   {
     q: "What happened here in 1803?",
     qTa: `1803-ஆம் ஆண்டு இங்கே என்ன நிகழ்ந்தது?`,
-    a: `${APPARITION.honestStatement} The parish's account is that on the morning of Friday 23 October 1803, as a villager knelt in prayer, the statue's face darkened, tears ran down it, and her folded hands opened outward; the bell was rung, the village gathered, and the parish priest of that year examined the statue and declared the event genuine. The centenary was kept in 1903, and the commemoration is held every year on 22–23 October.`,
-    aTa: `${APPARITION.honestStatementTa} இப்பங்கின் சொந்தப் பதிவு இவ்வாறு சொல்கிறது: 1803 அக்டோபர் 23, வெள்ளிக்கிழமை காலையில், இவ்வூரைச் சேர்ந்த ஒருவர் முழந்தாளிட்டுச் செபித்துக்கொண்டிருந்தபோது, திருவுருவத்தின் திருமுகம் இருண்டது; கண்ணீர் வழிந்தோடியது; கூப்பியிருந்த அன்னையின் கைகள் விரிந்தன. மணி ஒலிக்கப்பட்டது, ஊர் மக்கள் திரண்டார்கள்; அவ்வாண்டின் பங்குத் தந்தை திருவுருவத்தை ஆய்ந்து பார்த்து, அந்நிகழ்வு உண்மையானது என்று அறிவித்தார். 1903-ல் இதன் நூற்றாண்டு விழா கொண்டாடப்பட்டது; ஆண்டுதோறும் அக்டோபர் 22, 23 ஆகிய நாட்களில் இந்நினைவு விழா நடைபெறுகிறது.`,
+    a: `${APPARITION.honestStatement} The parish's account is that on the morning of Friday 21 October 1803, as a villager knelt in prayer, the statue's face darkened, tears ran down it, and her folded hands opened outward; the bell was rung, the village gathered, and the parish priest of that year examined the statue and declared the event genuine. The centenary was kept in 1903, and the commemoration is held every year on 22–23 October.`,
+    aTa: `${APPARITION.honestStatementTa} இப்பங்கின் சொந்தப் பதிவு இவ்வாறு சொல்கிறது: 1803 அக்டோபர் 21, வெள்ளிக்கிழமை காலையில், இவ்வூரைச் சேர்ந்த ஒருவர் முழந்தாளிட்டுச் செபித்துக்கொண்டிருந்தபோது, திருவுருவத்தின் திருமுகம் இருண்டது; கண்ணீர் வழிந்தோடியது; கூப்பியிருந்த அன்னையின் கைகள் விரிந்தன. மணி ஒலிக்கப்பட்டது, ஊர் மக்கள் திரண்டார்கள்; அவ்வாண்டின் பங்குத் தந்தை திருவுருவத்தை ஆய்ந்து பார்த்து, அந்நிகழ்வு உண்மையானது என்று அறிவித்தார். 1903-ல் இதன் நூற்றாண்டு விழா கொண்டாடப்பட்டது; ஆண்டுதோறும் அக்டோபர் 22, 23 ஆகிய நாட்களில் இந்நினைவு விழா நடைபெறுகிறது.`,
     source: "Léon Besse, La Mission du Maduré (1914); Diocese of Thoothukudi",
     sourceTa: `லெயோன் பெஸ், La Mission du Maduré (1914); தூத்துக்குடி மறைமாவட்டம்`,
   },

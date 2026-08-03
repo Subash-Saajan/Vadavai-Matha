@@ -64,6 +64,9 @@ const MAX_QUEUE = 12;
    film arrives looks exactly like one that was always a photograph. */
 const READY_FLOOR_MS = 1200;
 
+/** Default focal track — see the note on the same constant in useScrubMedia. */
+const CENTRE = () => 0.5;
+
 export function useScrubFilm({
   canvasRef,
   frameTargetRef,
@@ -72,7 +75,7 @@ export function useScrubFilm({
   manifestSrc,
   filmSrc,
   frameCount,
-  focusX = 0.5,
+  focusXAt = CENTRE,
   onFail,
 }: {
   canvasRef: RefObject<HTMLCanvasElement | null>;
@@ -84,7 +87,8 @@ export function useScrubFilm({
   manifestSrc: string;
   filmSrc: string;
   frameCount: number;
-  focusX?: number;
+  /** Per-frame focal x, 0–1. Same contract as useScrubMedia's. */
+  focusXAt?: (frame: number) => number;
   /** Called once if this path cannot run, so the caller can drop to the stills. */
   onFail: () => void;
 }) {
@@ -140,10 +144,11 @@ export function useScrubFilm({
       drawn = -1; // resizing wipes the bitmap
     };
 
-    const paint = (frame: VideoFrame) => {
+    const paint = (frame: VideoFrame, i: number) => {
       const { width: cw, height: ch } = canvas;
       const iw = frame.displayWidth;
       const ih = frame.displayHeight;
+      const focusX = focusXAt(i);
       const scale = Math.max(cw / iw, ch / ih);
       const dw = iw * scale;
       const dh = ih * scale;
@@ -152,26 +157,15 @@ export function useScrubFilm({
     };
 
     // ── Decoder bookkeeping ──
-    /** Keyframe index of the GOP currently loaded in the decoder. */
-    let gopStart = -1;
     /** Last picture index handed to decode(). */
     let submitted = -1;
     /** Last picture index actually painted. */
     let drawn = -1;
-    /** Lowest output index allowed to paint on this run. See `pump`. */
-    let floor = -1;
     /** Hero on screen AND tab in front — see the residency note below. */
     let live = true;
 
     const want = () =>
       Math.max(0, Math.min(frameCount - 1, Math.round(frameTargetRef.current)));
-
-    /** The keyframe a given picture must be decoded from. */
-    const keyFor = (i: number) => {
-      let k = i;
-      while (k > 0 && !index!.frames[k][2]) k--;
-      return k;
-    };
 
     const configure = () => {
       decoder!.configure({
@@ -214,38 +208,33 @@ export function useScrubFilm({
          looking at, which is the one thing residency exists to prevent. */
       if (!live) return;
 
+      if (decoder.state === "unconfigured") configure();
+
       const target = want();
-      if (drawn === target && submitted >= target) return;
+      if (target === submitted) return;
+      if (!havePicture(target)) return;
 
-      const key = keyFor(target);
+      /* ── ONE DECODE, ANY DIRECTION, NO REWIND ────────────────────────────
+         This used to track which GOP was loaded and rewind the decoder when the
+         scrub left it. That is where the "stuck when I come back up" bug lived:
+         moving BACKWARD inside a single GOP satisfied `key === gopStart` but not
+         `target > submitted`, so it took the rewind branch and reset the decoder
+         on EVERY scroll tick — and the next tick reset it again before the walk
+         from the keyframe could reach the picture actually wanted. Only
+         keyframes ever finished. Measured on the Galaxy A55: one picture per
+         74px of backward scroll, timestamps exactly ten frames apart.
 
-      /* Two ways to reach a picture. If it is in the GOP already loaded and
-         ahead of what has been submitted, keep feeding — that is the ordinary
-         forward scrub and it costs one decode per picture. Otherwise the
-         decoder has to be rewound to a keyframe, which is what reset() is: it
-         throws away queued work and output, and (per spec) leaves the decoder
-         unconfigured, hence the immediate re-configure.
+         Every picture is now an IDR (see gen-scrub-frames.mjs), so there is no
+         GOP to be inside or outside of and no rewind to get wrong: any frame can
+         be handed to a configured decoder at any time, in any order, and comes
+         back as itself for one decode. Backward is exactly as cheap as forward.
 
-         `floor` is the difference between the two in what gets PAINTED. Running
-         forward, every picture decoded is a picture the scrub is passing
-         through, so painting them all is the film gliding. Rewinding, the
-         pictures between the keyframe and the destination are scaffolding the
-         reader must never see — paint those and a backward flick flashes
-         forwards from the keyframe first. So a rewind paints only its
-         destination. */
-      if (key === gopStart && target > submitted) {
-        floor = -1;
-      } else {
-        decoder.reset();
-        configure();
-        gopStart = key;
-        submitted = key - 1;
-        floor = target;
-        drawn = -1;
-      }
-
-      const stop = Math.min(target, submitted + MAX_QUEUE);
-      while (submitted < stop && havePicture(submitted + 1)) submit(submitted + 1);
+         Only the picture actually wanted is submitted — never the ones passed
+         over on the way. During a fast flick the scrub can move several frames
+         between ticks, and decoding the skipped ones would just be work whose
+         output is stale before it lands. */
+      if (decoder.decodeQueueSize > MAX_QUEUE) return;
+      submit(target);
     };
 
     drawRef.current = () => pump();
@@ -266,7 +255,6 @@ export function useScrubFilm({
       if (!decoder || decoder.state === "closed") return;
       if (!live && decoder.state === "configured") {
         decoder.reset();
-        gopStart = -1;
         submitted = -1;
       } else if (live && decoder.state === "unconfigured" && index) {
         configure();
@@ -317,8 +305,14 @@ export function useScrubFilm({
         decoder = new VideoDecoder({
           output: (frame) => {
             const i = Math.round(frame.timestamp / TICK);
-            if (!cancelled && i >= floor && i >= drawn) {
-              paint(frame);
+            /* `i !== drawn`, NOT `i >= drawn`. The old test silently made the
+               film one-way: scrolling back up produces LOWER indices than the
+               one on screen, so every backward picture failed `i >= drawn` and
+               was closed without ever being painted. Nothing is submitted now
+               except the picture the scrub actually wants, so whatever arrives
+               is by definition the one to show. */
+            if (!cancelled && i !== drawn) {
+              paint(frame, i);
               drawn = i;
               announce();
             }
@@ -380,7 +374,7 @@ export function useScrubFilm({
     };
     // `onFail` must be a stable useCallback at the call site — an inline arrow
     // would rebuild the decoder and re-download the film on every render.
-  }, [active, canvasRef, drawRef, frameTargetRef, frameCount, manifestSrc, filmSrc, focusX, onFail]);
+  }, [active, canvasRef, drawRef, frameTargetRef, frameCount, manifestSrc, filmSrc, focusXAt, onFail]);
 
   return { ready };
 }
