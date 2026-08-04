@@ -70,27 +70,66 @@ const FILM_INDEX = resolve(FILM_DIR, "film.json");
 
 /* ── THE CHROMIUM CUT ──────────────────────────────────────────────────────
    Sharp, because WebCodecs decodes one frame at a time and does not care.
-   960×1600 is what production ran and what looked right on a Galaxy A55.
+
+   ⚠ THE RIGHT SIZE IS SET BY THE CANVAS, NOT BY TASTE, AND IT IS ARITHMETIC.
+   useScrubFilm caps the backing store at devicePixelRatio 2, so the canvas is
+   exactly (CSS width x 2) by (CSS height x 2) device pixels, and the film is
+   drawn into it with object-cover. Every phone is TALLER than this film's
+   aspect (see CROP_W_FRAC), so cover always scales by HEIGHT — which makes
+   FILM_H the only number that decides whether the hero is sharp, and the test
+   is simply "is FILM_H at least twice the tallest phone's CSS height".
+
+       phone (CSS)      canvas        960x1600      1080x1920
+       393 x 852        786 x 1704    1.065  ↑      0.888  ↓
+       430 x 932        860 x 1864    1.165  ↑      0.971  ↓
+
+   So 960x1600 — which is what production ran, and what looked right on a
+   Galaxy A55 — was being UPSCALED on every modern phone, by 6% on a small
+   one and 16% on a large one. 1080x1920 is the first size that downsamples
+   everywhere, and it is where the gain stops: the canvas cannot ask for more
+   than 1864 rows while the DPR cap is 2, so going higher would buy nothing
+   and cost megabytes. If that cap is ever raised to 3, this has to rise with
+   it — the two numbers are a pair.
+
+   It also throws away far less of the master. At crop 0.6 the scale filter
+   took 1296 source columns down to 960 (74%); at 0.5625 it takes 1215 down to
+   1080 (89%). More of what the drone actually recorded survives.
 
    GOP 1 — every picture an IDR — is not a size choice here, it is what makes
    the hook work: it submits ONLY the frame the scroll currently wants, in any
    direction, with no rewinding and no walking forward from a keyframe. Take
-   it away and scrubbing backwards has to replay a GOP per tick. */
-const FILM_W = 960;
-const FILM_H = 1600;
-const FILM_CRF = "23";
+   it away and scrubbing backwards has to replay a GOP per tick.
+
+   CRF 24 rather than 23 because the pixel count went up 35%: this holds the
+   file near where it was while still being the sharper picture, since on a
+   high-DPI screen resolution buys more than quantisation does. */
+const FILM_W = 1080;
+const FILM_H = 1920;
+const FILM_CRF = "24";
 
 /** Every STEPth source frame. 1197 frames of master → 150 pictures. */
 const STEP = 8;
 const FRAMES = 150;
 
-/* Portrait slice of the landscape master. ih*0.6 is wider than any phone
-   (they run ~0.42–0.52 of their height), so object-cover always scales by
-   HEIGHT and there is width left over — which is what keeps the baked pan
-   below from ever exposing an edge. Do not narrow it to chase sharpness: a
-   sharp picture of the wrong part of the frame is worse than a slightly
-   softer one of the right part. */
-const CROP_W_FRAC = 0.6;
+/* Portrait slice of the landscape master, as a fraction of its height. This
+   has to stay WIDER than any phone (they run ~0.42–0.52 of their height) so
+   that object-cover always scales by HEIGHT and there is width left over —
+   which is what keeps the baked pan below from ever exposing an edge.
+
+   0.5625 is 9:16 exactly. It was 0.6, and the 0.0375 that came off was width
+   that no phone has ever displayed: a 0.46-aspect screen crops a 0.6-aspect
+   film by 23% of its width, so those columns were encoded, downloaded and
+   decoded on every phone and then thrown away by the cover. Spending the same
+   bytes on the rows that ARE shown is strictly better.
+
+   ⚠ Narrow it no further. The margin over a 0.52 phone is now 8%, and the pan
+   below eats into it. A sharp picture of the wrong part of the frame is worse
+   than a slightly softer one of the right part.
+
+   (Portrait tablets under the 768px breakpoint — an iPad mini is 744x1133,
+   i.e. 0.657 — are WIDER than this and therefore cover by width and crop the
+   top and bottom. That was already true at 0.6; nothing changes for them.) */
+const CROP_W_FRAC = 0.5625;
 
 /* ── THE WEBKIT CUT: RESOLUTION IS THE SMOOTHNESS DIAL HERE ────────────────
    Only this file is seeked, and a seek is a pipeline flush plus a decode
@@ -105,14 +144,21 @@ const CROP_W_FRAC = 0.6;
    The p90 matters as much as the median: updates arriving at 27ms and then
    53ms do not read as "slow", they read as JITTERY.
 
-   648×1080 is the compromise. 540 measurably scrubs better but was reported
-   as visibly soft (~2.8× upscale on a DPR-3 screen against ~1.9× at 810);
-   810 was reported as jittery. ⚠ These numbers are from an ANDROID device
-   that no longer runs this file — iPhone media hardware differs and nobody
-   has measured it. If iOS scrubbing is poor, drop to 540×900 before
-   reaching for anything cleverer. */
-const OUT_W = 648;
-const OUT_H = 1080;
+   ⚠ EVERY NUMBER IN THAT TABLE IS FROM A GALAXY A55, AND NO ANDROID PHONE
+   HAS LOADED THIS FILE SINCE. Android takes the WebCodecs cut; this one is
+   read by iPhones and by nothing else. So the resolution was being set by a
+   measurement from a device that is not the device — and 648 was chosen on
+   that basis, then reported as soft, which it is: a <video> is not DPR-capped
+   the way the canvas is, so on a 393pt DPR-3 iPhone this is a 1179-wide box
+   showing a 648-wide picture, an upscale of 1.8×.
+
+   810×1440 is the step back up, matching the 9:16 crop. It is the size the
+   A55 called jittery — but Apple's decode block is not Qualcomm's, and the
+   whole point of re-testing is that the old number was never about iOS. If an
+   iPhone jitters at 810, come down to 720×1280 (and re-check GOP with it, see
+   below) rather than going straight back to 648. */
+const OUT_W = 810;
+const OUT_H = 1440;
 
 /* ⚠ GOP 1 IS FASTER HERE, BUT ONLY BECAUSE THE FRAMES ARE SMALL. DO NOT
    GENERALISE IT.
@@ -125,15 +171,25 @@ const OUT_H = 1080;
        540× 900   GOP  5 → 23.6 ms      GOP 1 → 19.5 ms   (all-intra WINS)
 
    At 810 the single big I-frame costs more to decode than a small I-frame
-   plus nine P-frames; at 540 it does not. So the pairing below is a measured
-   pair, not two independent choices — change the resolution and GOP has to
-   be re-measured with it.
+   plus nine P-frames; at 540 it does not. So this is a measured pair, not two
+   independent choices — change the resolution and GOP has to move with it.
+
+   Which is exactly what happened above: OUT_W went from 648 to 810, so GOP
+   goes from 1 to 10, because 810 is on the far side of that crossover. Making
+   the resolution bigger while leaving every picture an IDR would have been
+   the slowest combination on the table (37.9 ms) and would have read as a
+   REGRESSION in smoothness dressed up as an improvement in sharpness.
+
+   ⚠ The crossover itself was measured on the A55 and the trade is at least
+   partly device-specific. If 810/GOP-10 is jittery on an iPhone, try
+   810/GOP-5 before dropping resolution — a shorter GOP is a smaller walk from
+   the keyframe, and it is the cheaper thing to give up.
 
    -bf 0 is NOT part of that trade and must never move: B-frames reorder
    output, so decode order stops matching presentation order and currentTime
    no longer lands on the picture you asked for. */
 const CRF = "26";
-const GOP = 1;
+const GOP = 10;
 
 /* Measured spire centroid, as a fraction of the width of the WEBP STILLS —
    an ih*0.8 crop — sampled every tenth picture in PRESENTATION order (the
@@ -147,14 +203,15 @@ const CHURCH_TRACK = [
 
 /* ⚠ THE TRACK IS NOT IN THIS FILE'S COORDINATE SPACE, AND USING IT RAW IS A
    SILENT 2%-OFF-CENTRE BUG.
-   The track was read off an ih*0.8 crop; this film is an ih*0.6 crop of the
+   The track was read off an ih*0.8 crop; this film is a NARROWER crop of the
    same master. The same point in the world is therefore a different FRACTION
    of each frame. Both crops are centred, so one ratio converts:
        f_film = 0.5 + (f_still - 0.5) x (still_crop / film_crop)
-   Skipping it under-corrects the pan by exactly (0.580 - 0.560) = 2% of the
-   frame at the end of the scrub, which is what a measurement of the output
-   showed before this line existed. film.json used to publish this same number
-   as `focusScale`. */
+   Skipping it under-corrects the pan at the end of the scrub by 2% of the
+   frame at crop 0.6, and 2.5% at 0.5625 — a measurement of the output showed
+   exactly that before this line existed. Note that the error GROWS as the
+   crop narrows, so this matters more now, not less. film.json used to publish
+   the same ratio as `focusScale`. */
 const STILL_CROP_W_FRAC = 0.8;
 const toFilmSpace = (f) =>
   0.5 + (f - 0.5) * (STILL_CROP_W_FRAC / CROP_W_FRAC);

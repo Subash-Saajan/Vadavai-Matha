@@ -16,10 +16,13 @@ import { ChevronDown } from "lucide-react";
      desktop      the uncropped 16:9 cut, seeked in a <video> (unchanged)
      film         Chromium on a phone — WebCodecs decodes one picture per
                   scroll position onto a <canvas>. ~2ms, any direction, and
-                  sharp, because a single-frame decode is cheap.
+                  sharp, because a single-frame decode is cheap. 1080×1920,
+                  which is exactly what a DPR-2-capped canvas can show.
      mobileVideo  WebKit on a phone — a <video> seeked with currentTime.
-                  Slower (20–50ms a seek) and therefore a smaller cut, but
-                  WebCodecs on Safari 18 is what kills iPhones.
+                  Slower (20–50ms a seek), so a smaller cut: 810×1440.
+                  Kept off the film because WebCodecs on Safari 18 is
+                  believed to kill iPhones — see the note in useHeroMedia
+                  on why that is still a belief and not a measurement.
 
    Both phone cuts come from the same generator and the same crop, with the
    church's drift across the frame BAKED IN, so neither needs a runtime pan
@@ -46,7 +49,7 @@ import { ChevronDown } from "lucide-react";
    anything on disk, so the generator stays simple and this stays a one-line
    bump. Immutable hashed filenames would be the tidier answer if these ever
    change often enough to be worth the plumbing. */
-const CUT = "2";
+const CUT = "3";
 
 const DESKTOP_SRC = "/hero-video.mp4";
 const MOBILE_SRC = `/hero-mobile.mp4?c=${CUT}`;
@@ -225,11 +228,18 @@ export function Hero() {
         {/* First frame as instant poster under the video — also the mobile
             LCP, since the video cannot paint until it has loaded and seeked.
 
-            The poster is the uncropped 1920×1080 master; the mobile video is
-            a 1296-wide slice of it whose left edge sits at x=1287.6 at the
-            start of the scrub, i.e. centred on 0.504 of the master's width.
-            That has to be what the poster aims at too, or the church jumps
-            sideways the moment the video paints over it.
+            The poster is the uncropped master; the phone cuts are a 1215-wide
+            slice of it whose left edge sits at x=1328.1 at the start of the
+            scrub, i.e. centred on 0.504 of the master's width. That has to be
+            what the poster aims at too, or the church jumps sideways the
+            moment the video paints over it.
+
+            That 0.504 is invariant to the crop width, which is why this
+            percentage survived the cut being renarrowed from 0.6 to 0.5625:
+            the crop is positioned to put the SAME point in the world at its
+            centre, so making it narrower moves both its edges inward and
+            leaves its centre where it was. Only a change to CHURCH_TRACK, or
+            to which end of the pan the scrub starts at, can move this number.
 
             The percentage is not that point, though: `object-position: P%`
             aligns the P% of the IMAGE with the P% of the BOX, so putting a
