@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 
+import { bbClear, useFlightRecord } from "@/lib/blackbox";
+
 /**
  * WHICH HERO PATH DOES THIS PHONE ACTUALLY TAKE?
  *
@@ -31,6 +33,11 @@ type Row = { k: string; v: string; bad?: boolean; good?: boolean };
 export function Diagnostics() {
   const [rows, setRows] = useState<Row[]>([]);
   const [done, setDone] = useState(false);
+  /* The record of the page that died — read through a store rather than an
+     effect so it is available on the first render and needs no setState. */
+  const record = useFlightRecord();
+  const [cleared, setCleared] = useState(false);
+  const flight = cleared ? [] : record;
 
   useEffect(() => {
     let dead = false;
@@ -217,6 +224,75 @@ export function Diagnostics() {
       <p className="mt-6 text-sm text-text-muted">
         {done ? "Finished." : "Running…"}
       </p>
+
+      {/* ── The flight recorder ────────────────────────────────────────────
+          What the page that died was doing, up to the last moment it managed
+          to write. The FINAL ROW is the answer: how much was decoded, how far
+          down the page, and whether frames were still advancing. */}
+      <h2 className="mt-16 font-display text-xl text-navy">
+        Last recorded page {flight.length ? `(${flight.length} entries)` : ""}
+      </h2>
+
+      {flight.length === 0 ? (
+        <p className="mt-3 text-sm text-text-muted">
+          Nothing recorded yet. Open{" "}
+          <span className="font-mono text-navy">littlerome.net/?bb=1</span>,
+          let it die, then come back here.
+        </p>
+      ) : (
+        <>
+          <p className="mt-2 text-sm text-text-muted">
+            The last row is the moment before the crash. `frames` still rising
+            means it was alive and ran out of something; `frames` stuck while
+            `t` climbs means it froze first.
+          </p>
+          <div className="mt-4 overflow-x-auto">
+            <table className="w-full border-collapse text-left font-mono text-[0.68rem]">
+              <thead>
+                <tr className="border-b border-gold/40 text-navy/60">
+                  <th className="py-1 pr-3">t ms</th>
+                  <th className="py-1 pr-3">what</th>
+                  <th className="py-1 pr-3">img MB</th>
+                  <th className="py-1 pr-3">canvas</th>
+                  <th className="py-1 pr-3">imgs</th>
+                  <th className="py-1 pr-3">scrollY</th>
+                  <th className="py-1">frames</th>
+                </tr>
+              </thead>
+              <tbody>
+                {flight.map((e, i) => {
+                  const last = i === flight.length - 1;
+                  return (
+                    <tr
+                      key={i}
+                      className={`border-b border-gold/10 ${
+                        last ? "bg-red-50 font-bold text-red-800" : "text-navy"
+                      }`}
+                    >
+                      <td className="py-1 pr-3">{e.t}</td>
+                      <td className="py-1 pr-3">{e.note ? `${e.label} ${e.note}` : e.label}</td>
+                      <td className="py-1 pr-3">{e.imgMB ?? ""}</td>
+                      <td className="py-1 pr-3">{e.canvasMB ?? ""}</td>
+                      <td className="py-1 pr-3">{e.imgs ?? ""}</td>
+                      <td className="py-1 pr-3">{e.scrollY ?? ""}</td>
+                      <td className="py-1">{e.frames ?? ""}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+          <button
+            onClick={() => {
+              bbClear();
+              setCleared(true);
+            }}
+            className="mt-5 rounded-full border border-gold/40 px-4 py-2 font-display text-xs uppercase tracking-widest text-navy"
+          >
+            Clear and stop recording
+          </button>
+        </>
+      )}
     </section>
   );
 }
