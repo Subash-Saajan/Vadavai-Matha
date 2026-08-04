@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 
+import { cappedSizes } from "@/lib/imageSizes";
 import { gsap, DESKTOP } from "@/lib/gsap";
 import { useLang } from "@/components/layout/LanguageProvider";
 import { useReveal } from "@/hooks/useReveal";
@@ -126,7 +127,7 @@ export function TheYear() {
                   alt={item.name}
                   fill
                   className="object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-110"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  sizes={cappedSizes("(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw")}
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-night-deep/95 via-navy/45 to-transparent" />
                 <PhotoOrnaments corners="diagonal" size="[--orn:2.25rem] md:[--orn:3rem]" />

@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
+import { cappedSizes } from "@/lib/imageSizes";
 import { useLang } from "@/components/layout/LanguageProvider";
 import { PhotoOrnaments } from "@/components/ornaments/CornerOrnament";
 import { useReveal } from "./useReveal";
@@ -58,7 +59,7 @@ export function HowItStands() {
                   alt={a.craftCaption}
                   fill
                   className="object-cover"
-                  sizes="(max-width: 1024px) 80vw, 40vw"
+                  sizes={cappedSizes("(max-width: 1024px) 80vw, 40vw")}
                 />
                 <div className="pointer-events-none absolute inset-0 rounded-[1.75rem] ring-1 ring-inset ring-gold/30" />
                 <PhotoOrnaments />

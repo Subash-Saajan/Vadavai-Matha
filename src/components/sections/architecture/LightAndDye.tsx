@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
+import { cappedSizes } from "@/lib/imageSizes";
 import { useLang } from "@/components/layout/LanguageProvider";
 import { useReveal } from "./useReveal";
 
@@ -155,7 +156,7 @@ export function LightAndDye() {
                 className="reveal-item"
                 src={tile.src}
                 alt={a.glassCaptions[tile.caption]}
-                sizes="(max-width: 1024px) 46vw, 13rem"
+                sizes={cappedSizes("(max-width: 1024px) 46vw, 13rem")}
               />
             ))}
           </div>

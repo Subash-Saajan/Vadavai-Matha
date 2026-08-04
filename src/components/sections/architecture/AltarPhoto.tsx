@@ -3,6 +3,8 @@
 import type { CSSProperties } from "react";
 import Image from "next/image";
 
+import { cappedSizes } from "@/lib/imageSizes";
+
 /**
  * The high altar's reredos, used as a diagram — the second half of the creed,
  * read on the thing itself.
@@ -208,7 +210,7 @@ export function AltarPhoto({
         alt={alt}
         fill
         className="object-cover"
-        sizes="(max-width: 1024px) 92vw, 48rem"
+        sizes={cappedSizes("(max-width: 1024px) 92vw, 48rem")}
       />
 
       <svg

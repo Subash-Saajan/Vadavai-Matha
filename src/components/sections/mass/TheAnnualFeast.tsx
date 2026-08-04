@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 
+import { cappedSizes } from "@/lib/imageSizes";
 import { gsap, DESKTOP } from "@/lib/gsap";
 import { useLang } from "@/components/layout/LanguageProvider";
 import { useReveal } from "@/hooks/useReveal";
@@ -123,7 +124,7 @@ export function TheAnnualFeast() {
                   // Portrait 3:4 source in a landscape panel — bias the crop
                   // upward so the canopy and monstrance stay in frame.
                   className="scale-110 object-cover object-[50%_35%]"
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  sizes={cappedSizes("(max-width: 768px) 100vw, 50vw")}
                 />
               </div>
               <div className="absolute inset-0 bg-linear-to-t from-navy/75 via-navy/10 to-transparent md:bg-linear-to-r" />

@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
+import { cappedSizes } from "@/lib/imageSizes";
 import { useLang } from "@/components/layout/LanguageProvider";
 import { PhotoOrnaments } from "@/components/ornaments/CornerOrnament";
 import { useReveal } from "./useReveal";
@@ -73,7 +74,7 @@ export function ImagesItCarries() {
                     alt={f.caption}
                     fill
                     className="object-cover"
-                    sizes="(max-width: 768px) 90vw, 31rem"
+                    sizes={cappedSizes("(max-width: 768px) 90vw, 31rem")}
                   />
                   <div className="pointer-events-none absolute inset-0 rounded-[1.75rem] ring-1 ring-inset ring-gold/30" />
                   <PhotoOrnaments />

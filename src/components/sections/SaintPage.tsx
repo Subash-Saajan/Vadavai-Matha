@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
+import { cappedSizes } from "@/lib/imageSizes";
 import { Link } from "@/components/LocaleLink";
 import Image from "next/image";
 import { gsap, DESKTOP, revealY } from "@/lib/gsap";
@@ -430,7 +431,7 @@ export function SaintPage({
                       src={cite.photo}
                       alt={altFor(sec.key, sec.heading)}
                       fill
-                      sizes="(max-width: 768px) 100vw, 48rem"
+                      sizes={cappedSizes("(max-width: 768px) 100vw, 48rem")}
                       className="plate-img object-cover md:will-change-transform"
                     />
                     <span className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-gold/15 rounded-2xl" />
@@ -513,7 +514,7 @@ export function SaintPage({
             alt=""
             fill
             className="object-cover"
-            sizes="100vw"
+            sizes={cappedSizes("100vw")}
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-navy/90 via-navy/80 to-navy" />

@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
+import { cappedSizes } from "@/lib/imageSizes";
 import { ResidentImage } from "@/components/ResidentImage";
 import { useReveal } from "@/hooks/useReveal";
 import { CHAPTERS, CHROME, CHROME_TA, platesOf, type Plate } from "@/lib/gallery";
@@ -258,6 +259,9 @@ export function GalleryPlates({ lang }: { lang: "en" | "ta" }) {
                       className="relative block w-full"
                       style={{ aspectRatio: `${p.w} / ${p.h}` }}
                     >
+                      {/* `sizes` is the honest layout string — ResidentImage
+                          caps it for phones itself. See the "apply exactly
+                          once" rule at the head of lib/imageSizes.ts. */}
                       <ResidentImage
                         src={p.src}
                         alt={alt(p)}
@@ -341,7 +345,7 @@ export function GalleryPlates({ lang }: { lang: "en" | "ta" }) {
                 alt={alt(cur)}
                 fill
                 className="object-contain"
-                sizes="100vw"
+                sizes={cappedSizes("100vw")}
               />
             </div>
 

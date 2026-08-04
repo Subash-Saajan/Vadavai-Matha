@@ -3,6 +3,8 @@
 import Image, { type ImageProps } from "next/image";
 import { useEffect, useRef, useState } from "react";
 
+import { cappedSizes } from "@/lib/imageSizes";
+
 /* ── LAZY LOADING SOLVED BANDWIDTH. NOBODY SOLVED MEMORY. ──────────────────
    Every image on this site is already `loading="lazy"`, so nothing is fetched
    until the reader is near it — which is why the home page downloads under two
@@ -23,12 +25,18 @@ import { useEffect, useRef, useState } from "react";
    viewport the <img> is UNMOUNTED and the memory goes back; inside it, the
    picture is the ordinary next/image with every one of its props untouched.
 
+   Residency is half the answer. The other half is how big each bitmap is
+   while it IS resident, and that is `cappedSizes` below: a phone is served an
+   effective pixel ratio of 2 rather than 3, which halves every one of these
+   numbers on its own. The two are independent and the page needs both — see
+   `lib/imageSizes.ts`. Anything rendering a large photo should therefore come
+   through here rather than reaching for `next/image` directly.
+
    THREE THINGS THIS DELIBERATELY DOES NOT DO:
 
-     · It does not touch quality. Not the format, not the dimensions, not the
-       `sizes` attribute, not the quality setting. When a picture is on screen
-       it is byte-for-byte the image that was there before. This is purely a
-       question of WHEN a bitmap is resident, never of what it looks like.
+     · It does not change the format or the quality setting, and it never
+       alters what is drawn — only how many device pixels back it and when
+       they are resident. Every other prop is passed through untouched.
      · It does not re-download anything. A remount reads the file from the
        browser's cache and decodes it again — no network, no data cost to a
        reader on mobile data.
@@ -50,6 +58,7 @@ const SLACK = "200% 0px";
 
 export function ResidentImage({
   slack = SLACK,
+  sizes,
   ...props
 }: ImageProps & {
   /**
@@ -93,7 +102,7 @@ export function ResidentImage({
           it is required by ImageProps, so every caller is checked for it by the
           type system instead, at the call site where the words actually are. */}
       {/* eslint-disable-next-line jsx-a11y/alt-text */}
-      {near && <Image {...props} />}
+      {near && <Image {...props} sizes={sizes && cappedSizes(sizes)} />}
     </span>
   );
 }

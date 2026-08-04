@@ -2,6 +2,7 @@
 
 import { useRef, useEffect } from "react";
 import Image from "next/image";
+import { cappedSizes } from "@/lib/imageSizes";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { useScrubMedia } from "@/hooks/useScrubMedia";
 import { ChevronDown } from "lucide-react";
@@ -241,7 +242,7 @@ export function Hero() {
           alt=""
           fill
           priority
-          sizes="100vw"
+          sizes={cappedSizes("100vw")}
           className="object-cover object-[50.5%_center] md:object-center"
         />
 

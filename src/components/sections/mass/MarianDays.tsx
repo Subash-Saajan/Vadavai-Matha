@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 
+import { cappedSizes } from "@/lib/imageSizes";
 import { gsap, DESKTOP } from "@/lib/gsap";
 import { useLang } from "@/components/layout/LanguageProvider";
 import { useReveal } from "@/hooks/useReveal";
@@ -87,7 +88,7 @@ export function MarianDays() {
             alt=""
             fill
             className="scale-110 object-cover object-[50%_18%] opacity-[0.34]"
-            sizes="(max-width: 768px) 100vw, 52vw"
+            sizes={cappedSizes("(max-width: 768px) 100vw, 52vw")}
           />
         </div>
         <div className="absolute inset-0 bg-linear-to-t from-night-deep via-night-deep/70 to-night-deep/85 md:bg-linear-to-r md:from-night-deep md:via-night-deep/55 md:to-night-deep/80" />

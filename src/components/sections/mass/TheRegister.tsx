@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 
+import { cappedSizes } from "@/lib/imageSizes";
 import { useLang } from "@/components/layout/LanguageProvider";
 import { useReveal } from "@/hooks/useReveal";
 
@@ -48,7 +49,7 @@ export function TheRegister() {
           alt=""
           fill
           className="object-cover object-top"
-          sizes="100vw"
+          sizes={cappedSizes("100vw")}
         />
         <div className="absolute inset-0 bg-linear-to-b from-navy/70 via-night-deep/85 to-night-deep" />
       </div>

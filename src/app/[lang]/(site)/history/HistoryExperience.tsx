@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState, useCallback } from "react";
 import Image from "next/image";
+import { cappedSizes } from "@/lib/imageSizes";
 import { Link } from "@/components/LocaleLink";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { PageHero } from "@/components/sections/PageHero";
@@ -13,6 +14,8 @@ import {
   SOURCE_SHORT,
   TIER_LABEL,
 } from "@/lib/citations";
+import { useIsPhone } from "@/hooks/useIsPhone";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { noteFor } from "@/lib/historyNotes";
 import { renderProse } from "@/lib/prose";
 import { SOURCE_INDEX } from "@/lib/sources";
@@ -172,6 +175,8 @@ export default function HistoryPage() {
   // trigger work out which year that is. See the note at the head.
   const goToRef = useRef<Record<string, (k: number) => void>>({});
   const { t, lang } = useLang();
+  /* Gates the per-year panel photographs, which only that path ever shows. */
+  const stillReader = usePrefersReducedMotion();
 
   const h = t.history;
 
@@ -189,17 +194,34 @@ export default function HistoryPage() {
      and the observer's first callback. */
   const [eraNear, setEraNear] = useState<Record<string, boolean>>({});
 
-  /* The observer below is only ever built on a phone, and its first callback
-     reports EVERY element it observes — so "the map has anything in it" is
-     exactly "we are on a phone and windowing applies". Deriving it beats a
-     second `windowed` flag: there is no separate state to fall out of step, and
-     nothing sets state synchronously in an effect to cascade a second render.
-     Server and first client render both see an empty map and emit every
-     photograph, which is what this page has always sent. */
-  const windowed = Object.keys(eraNear).length > 0;
+  /* ── THE WINDOW IS ON BEFORE THE PAGE HAS EVEN RENDERED ─────────────────
+     This used to be derived — `Object.keys(eraNear).length > 0`, i.e. "the
+     observer has spoken, so we must be on a phone". That read well and it
+     meant the SERVER emitted all fifty-eight photographs, plus fifty-eight
+     more in the reduced-motion panels: a hundred and seventeen <img> in the
+     document, of which a phone wants about three.
+
+     They are all `loading="lazy"`, so most are never fetched — but "never
+     fetched" is not "free". Every one is a node in the DOM, a candidate the
+     lazy-load machinery must test against the viewport on scroll, and a
+     srcset the preload scanner parses. And the window could not close them
+     until React had hydrated and an observer had fired, which on a cheap
+     phone on Indian mobile data is seconds after the pictures started
+     arriving — so the burst this window exists to prevent had already begun.
+
+     Starting the window CLOSED and opening it for desktop inverts that. The
+     document ships the handful of pictures the top of the page can actually
+     show; the phone never opens it further, and a desktop opens it on its
+     first client render — before GSAP has wired anything, and on a machine
+     with the memory to spare.
+
+     `useIsPhone` is a store rather than state-set-from-an-effect so that the
+     server snapshot is stable and hydration cannot mismatch on it. It answers
+     `true` on the server on purpose; the note in that file says why. */
+  const windowed = useIsPhone();
 
   useEffect(() => {
-    if (!window.matchMedia("(max-width: 767px)").matches) return;
+    if (!windowed) return;
 
     const root = rootRef.current;
     if (!root) return;
@@ -226,15 +248,30 @@ export default function HistoryPage() {
 
     root.querySelectorAll<HTMLElement>(".era").forEach((s) => io.observe(s));
     return () => io.disconnect();
-  }, []);
+  }, [windowed]);
+
+  /* Before the observer has said anything, only the FIRST chapter counts as
+     near. That is the one the reader is looking at, and it is the only one the
+     server can know about — every other chapter is somewhere below the fold, so
+     assuming it is near means shipping its photographs to a phone that will
+     drop them again a frame later.
+
+     The old rule was the opposite ("unknown reads as keep"), to guarantee the
+     frame is never briefly empty in the gap between mount and the observer's
+     first callback. That guarantee is kept where it is actually visible — the
+     first chapter — and given up where it is not: a chapter still below the
+     fold has nothing to look empty. The observer's first callback reports
+     every element it observes at once, so the true set arrives within a frame
+     of mount, long before any later chapter is scrolled to. */
+  const near = (eraId: string) => eraNear[eraId] ?? eraId === h.eras[0]?.id;
 
   /** Is this chapter allowed to hold decoded pictures at all? */
-  const eraLive = (eraId: string) => !windowed || eraNear[eraId] !== false;
+  const eraLive = (eraId: string) => !windowed || near(eraId);
 
   /** Is this particular year's photograph one of the few kept mounted? */
   const photoLive = (eraId: string, di: number, ai: number) =>
     !windowed ||
-    (eraNear[eraId] !== false && di >= ai - PHOTO_BACK && di <= ai + PHOTO_FWD);
+    (near(eraId) && di >= ai - PHOTO_BACK && di <= ai + PHOTO_FWD);
 
   // The contents index is an ordinary band above every pin, so the house
   // reveal is safe here. Scoped to `frontRef` so it can never touch a
@@ -937,7 +974,7 @@ export default function HistoryPage() {
                             alt={`${era.heading} — ${dot.year}`}
                             fill
                             className="object-cover"
-                            sizes="(max-width: 768px) 100vw, 45vw"
+                            sizes={cappedSizes("(max-width: 768px) 100vw, 45vw")}
                             /* The year about to be faded TO is fetched at high
                                priority, so the crossfade starts on a picture
                                that has arrived. Safari honours this from 17.2;
@@ -1047,20 +1084,34 @@ export default function HistoryPage() {
                         >
                           {/* Reduced-motion only. Nothing is pinned there, so the
                               crossfading stack above never advances past photo 1 —
-                              each year carries its own picture instead. Hidden (and
-                              so, being lazy, never fetched) in the animated paths. */}
+                              each year carries its own picture instead.
+
+                              ⚠ THE CONDITION HERE MUST MATCH THE CSS BELOW, which
+                              is `display: none` except under
+                              `prefers-reduced-motion: reduce`, and there only for
+                              `:not(:first-of-type)`. It used to be gated on
+                              `eraLive` alone, on the reasoning that a hidden lazy
+                              image is never fetched. True, and it still put
+                              fifty-eight <img> that nobody would ever see into
+                              every copy of this document — the great majority of
+                              the hundred and seventeen it was shipping. Not
+                              fetching is not the same as not existing.
+
+                              The hook's server snapshot is a stable `false`, so
+                              these cost nothing until a client that actually
+                              wants them says so. */}
                           {/* Chapter-level residency only, NOT the dot window:
                               on the reduced-motion path every year stands open
                               in normal flow, so all of them are genuinely
                               scrolled past and each needs its own picture. */}
                           <div className="panel-photo relative">
-                            {eraLive(era.id) && (
+                            {stillReader && di > 0 && eraLive(era.id) && (
                               <Image
                                 src={photoFor(era.id, di)}
                                 alt={`${era.heading} — ${dot.year}`}
                                 fill
                                 className="object-cover"
-                                sizes="(max-width: 768px) 100vw, 45vw"
+                                sizes={cappedSizes("(max-width: 768px) 100vw, 45vw")}
                               />
                             )}
                           </div>

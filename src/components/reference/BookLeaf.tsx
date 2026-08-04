@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { cappedSizes } from "@/lib/imageSizes";
 import type { Leaf } from "@/lib/referenceIndex";
 import { RIGHTS_NOTE } from "@/lib/referenceIndex";
 
@@ -180,7 +181,7 @@ export function BookLeaf({ leaf, url }: { leaf: Leaf; url?: string }) {
                 width={1300}
                 height={2000}
                 className="w-full h-auto"
-                sizes="(max-width: 768px) 100vw, 44rem"
+                sizes={cappedSizes("(max-width: 768px) 100vw, 44rem")}
               />
               {/* The cue is inside the button so it can never drift away from
                   the thing it describes, and aria-hidden because the button's
@@ -438,7 +439,7 @@ export function BookLeaf({ leaf, url }: { leaf: Leaf; url?: string }) {
               width={1300}
               height={2000}
               className="leaf-zoom-img"
-              sizes="1300px"
+              sizes={cappedSizes("1300px")}
             />
           </div>
         </dialog>

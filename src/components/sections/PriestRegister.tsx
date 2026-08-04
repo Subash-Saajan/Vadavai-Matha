@@ -15,6 +15,8 @@ import {
   type Priest,
 } from "@/lib/priests";
 
+import { cappedSizes } from "@/lib/imageSizes";
+
 /**
  * The succession of parish priests, as a register.
  *
@@ -114,7 +116,7 @@ function Plate({ priest, size, lang }: { priest: Priest; size: "sm" | "lg"; lang
             }
             width={px * 2}
             height={px * 2}
-            sizes={`${px}px`}
+            sizes={cappedSizes(`${px}px`)}
             className="h-full w-full object-cover saturate-[0.88]"
           />
         </div>
@@ -474,7 +476,7 @@ export function PriestRegister({ lang = "en" }: { lang?: Lang }) {
                       }
                       width={152}
                       height={152}
-                      sizes="76px"
+                      sizes={cappedSizes("76px")}
                       className="h-full w-full object-cover saturate-[0.88]"
                     />
                   </div>
@@ -540,7 +542,7 @@ export function PriestRegister({ lang = "en" }: { lang?: Lang }) {
                   : "Three whitewashed Gothic tomb monuments in a row against the church wall, each with a black inscribed plaque: Fr Dharmanathar, Fr Eugène Rossignol S.J., and Fr J. M. Nicholas."
               }
               fill
-              sizes="(min-width: 768px) 48rem, 100vw"
+              sizes={cappedSizes("(min-width: 768px) 48rem, 100vw")}
               className="object-cover"
             />
           </div>

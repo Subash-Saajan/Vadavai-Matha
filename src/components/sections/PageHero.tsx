@@ -2,6 +2,7 @@
 
 import { useRef, useEffect } from "react";
 import Image from "next/image";
+import { cappedSizes } from "@/lib/imageSizes";
 import { gsap, DESKTOP, revealY } from "@/lib/gsap";
 
 interface Props {
@@ -153,7 +154,7 @@ export function PageHero({
           alt={alt}
           fill
           className={`object-cover ${imagePosition ?? "object-center"}`}
-          sizes="100vw"
+          sizes={cappedSizes("100vw")}
           preload
         />
         <div className={`absolute inset-0 ${overlayClassName ?? DEFAULT_OVERLAY}`} />
