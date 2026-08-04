@@ -439,7 +439,13 @@ export function ChronicleCarousel({ off = "" }: { off?: string } = {}) {
       cards.length > 1 ? cards[1].offsetLeft - first.offsetLeft : first.offsetWidth;
 
     curveRef.current = cards.map((el) => {
-      gsap.set(el, { transformOrigin: "center center", force3D: true });
+      gsap.set(el, {
+        transformOrigin: "center center",
+        // temporary — see the note on `off`. force3D:true puts translate3d()
+        // on all nine cards for the life of the page, which is nine permanent
+        // composited layers.
+        force3D: off.includes("force3d") ? false : true,
+      });
       return {
         el,
         centre: el.offsetLeft + el.offsetWidth / 2,
@@ -447,7 +453,7 @@ export function ChronicleCarousel({ off = "" }: { off?: string } = {}) {
         setScale: gsap.quickSetter(el, "scale") as (v: number) => void,
       };
     });
-  }, []);
+  }, [off]);
 
   /**
    * Lay the cards on the arc for a given strip offset, and keep the progress
@@ -612,7 +618,12 @@ export function ChronicleCarousel({ off = "" }: { off?: string } = {}) {
       paint(viewport.scrollLeft);
     };
 
-    viewport.addEventListener("scroll", onScroll, { passive: true });
+    // temporary — see the note on `off`. Without this the arc is measured and
+    // painted exactly once and never touched again, which separates "setting
+    // up nine composited layers" from "rewriting them on every scroll frame".
+    if (!off.includes("scroll")) {
+      viewport.addEventListener("scroll", onScroll, { passive: true });
+    }
     window.addEventListener("resize", onResize);
     return () => {
       viewport.removeEventListener("scroll", onScroll);

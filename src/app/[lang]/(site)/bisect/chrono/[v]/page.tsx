@@ -160,6 +160,35 @@ const VARIANTS: { id: string; what: string; css: string; off?: string }[] = [
       ".chron-card img{display:none!important}",
     off: "arc,entrance",
   },
+
+  /* ── SPLITTING THE ARC, WHICH IS THE CONFIRMED CULPRIT ─────────────────
+     11 (arc on, entrance off) crashes; 10 (arc off, entrance on) and 12
+     (both off) load. So it is measure()/paint()/the scroll handler. That is
+     two separable things, and these say which. */
+  {
+    id: "14",
+    what: "arc runs, but WITHOUT force3D — no permanent composited layers",
+    // measure() puts translate3d() on all nine cards for the life of the
+    // page. Dropping it leaves the arc's geometry and its per-frame writes
+    // intact but stops the cards being promoted.
+    css: "",
+    off: "force3d",
+  },
+  {
+    id: "15",
+    what: "arc set up once, then never again — no scroll handler",
+    // Everything measure() does still happens, including force3D, but paint()
+    // is never called again. Separates "creating nine layers" from "rewriting
+    // their transforms on every scroll frame".
+    css: "",
+    off: "scroll",
+  },
+  {
+    id: "16",
+    what: "arc with neither force3D nor the scroll handler",
+    css: "",
+    off: "force3d,scroll",
+  },
 ];
 
 export function generateStaticParams() {
