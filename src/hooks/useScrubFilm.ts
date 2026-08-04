@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState, type RefObject } from "react";
-import { bbMark } from "@/lib/blackbox";
 
 /* ── WHY THE PHONE DECODES A VIDEO ITSELF INSTEAD OF LOADING PICTURES ──────
    The frame sequence this replaces works, and it is still here as the fallback
@@ -43,8 +42,6 @@ type FilmIndex = {
   width: number;
   height: number;
   gop: number;
-  /** still-crop ÷ film-crop; converts Hero's focal track into film space. */
-  focusScale?: number;
   /** Per picture: [byte offset, byte length, 1 if a keyframe]. */
   frames: [number, number, number][];
 };
@@ -74,9 +71,6 @@ const MAX_QUEUE = 1;
    film arrives looks exactly like one that was always a photograph. */
 const READY_FLOOR_MS = 1200;
 
-/** Default focal track — see the note on the same constant in useScrubMedia. */
-const CENTRE = () => 0.5;
-
 export function useScrubFilm({
   canvasRef,
   frameTargetRef,
@@ -85,11 +79,10 @@ export function useScrubFilm({
   manifestSrc,
   filmSrc,
   frameCount,
-  focusXAt = CENTRE,
   onFail,
 }: {
   canvasRef: RefObject<HTMLCanvasElement | null>;
-  /** Written by the caller's scrub; read here. Same contract as useScrubMedia. */
+  /** Written by the caller's scrub; read here. */
   frameTargetRef: RefObject<number>;
   /** Populated here so the caller's ScrollTrigger can nudge us per tick. */
   drawRef: RefObject<(() => void) | null>;
@@ -97,9 +90,7 @@ export function useScrubFilm({
   manifestSrc: string;
   filmSrc: string;
   frameCount: number;
-  /** Per-frame focal x, 0–1. Same contract as useScrubMedia's. */
-  focusXAt?: (frame: number) => number;
-  /** Called once if this path cannot run, so the caller can drop to the stills. */
+  /** Called once if this path cannot run, so the caller can drop to <video>. */
   onFail: () => void;
 }) {
   const [ready, setReady] = useState(false);
@@ -155,23 +146,19 @@ export function useScrubFilm({
       drawn = -1; // resizing wipes the bitmap
     };
 
-    const paint = (frame: VideoFrame, i: number) => {
+    /* Plain centre-cover. This used to carry a per-frame horizontal pan, to
+       keep the church centred as the drone drifted across the frame; the pan
+       is baked into the crop by scripts/gen-hero-mobile.mjs now, so both this
+       and the <video> path are already centred and neither needs to know
+       anything about where the church is. */
+    const paint = (frame: VideoFrame) => {
       const { width: cw, height: ch } = canvas;
       const iw = frame.displayWidth;
       const ih = frame.displayHeight;
-      /* Hero's CHURCH_TRACK is measured on the WebP stills — an ih*0.8 crop.
-         This film is an ih*0.6 crop of the same master, so the same point in
-         the world is a different fraction of the frame. `focusScale` is that
-         ratio, published by the generator (the only thing that knows both
-         crops). Without it the pan aims at the wrong place and the church sits
-         off centre, worst at the end of the film where the drift is largest.
-         Falls back to 1 for an index built before the field existed. */
-      const focusX = 0.5 + (focusXAt(i) - 0.5) * (index?.focusScale ?? 1);
       const scale = Math.max(cw / iw, ch / ih);
       const dw = iw * scale;
       const dh = ih * scale;
-      const dx = Math.max(Math.min(cw - dw, 0), Math.min(0, cw / 2 - focusX * dw));
-      ctx.drawImage(frame, dx, (ch - dh) / 2, dw, dh);
+      ctx.drawImage(frame, (cw - dw) / 2, (ch - dh) / 2, dw, dh);
     };
 
     // ── Decoder bookkeeping ──
@@ -299,7 +286,6 @@ export function useScrubFilm({
 
     (async () => {
       try {
-        bbMark("film:manifest fetch");
         const manifestRes = await fetch(manifestSrc, { signal: abort.signal });
         if (!manifestRes.ok) throw new Error(`film index ${manifestRes.status}`);
         index = (await manifestRes.json()) as FilmIndex;
@@ -331,7 +317,7 @@ export function useScrubFilm({
                except the picture the scrub actually wants, so whatever arrives
                is by definition the one to show. */
             if (!cancelled && i !== drawn) {
-              paint(frame, i);
+              paint(frame);
               drawn = i;
               announce();
             }
@@ -349,13 +335,11 @@ export function useScrubFilm({
            live from the first GOP instead of after four megabytes — which on a
            mobile connection is the difference between a hero that works and one
            that is a still photograph for ten seconds. */
-        bbMark("film:h264 fetch start");
         const filmRes = await fetch(filmSrc, { signal: abort.signal });
         if (!filmRes.ok) throw new Error(`film ${filmRes.status}`);
 
         const total = Number(filmRes.headers.get("content-length")) || 0;
         if (filmRes.body && total > 0) {
-          bbMark("film:alloc", `${(total / 1048576).toFixed(1)} MB Uint8Array`);
           bytes = new Uint8Array(total);
           const reader = filmRes.body.getReader();
           for (;;) {
@@ -395,7 +379,7 @@ export function useScrubFilm({
     };
     // `onFail` must be a stable useCallback at the call site — an inline arrow
     // would rebuild the decoder and re-download the film on every render.
-  }, [active, canvasRef, drawRef, frameTargetRef, frameCount, manifestSrc, filmSrc, focusXAt, onFail]);
+  }, [active, canvasRef, drawRef, frameTargetRef, frameCount, manifestSrc, filmSrc, onFail]);
 
   return { ready };
 }

@@ -27,7 +27,7 @@ import { AltarPhoto, type AltarSpot } from "./AltarPhoto";
  * ONE drawing only. A second SVG — a symbolic elevation of the altarpiece —
  * carried the altar numbers as its own interactive diagram; it was cut in July
  * 2026 because it invented what it could not measure. AltarpieceDrawing.tsx
- * stays in the repo, simply no longer imported (as PeelFilm does on this page).
+ * stays in the repo, simply no longer imported.
  * Its readings did not go with it: they now sit beside a PHOTOGRAPH of the
  * reredos, and two of the four are mapped onto it. Why only two — AltarPhoto.tsx.
  *

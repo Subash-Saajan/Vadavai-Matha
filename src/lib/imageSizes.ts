@@ -14,7 +14,7 @@
 
    On iOS that is fatal. Safari does not swap or degrade; it kills the tab and
    shows "This page couldn't load — Reload to try again", with no console and
-   no clue as to the cause. See the head of `useScrubMedia.ts`, which fought
+   no clue as to the cause. See the head of `useScrubVideo.ts`, which fought
    the same fight for the hero's film. The budget is tighter still inside the
    in-app browsers — WhatsApp's above all, which is how most people arrive here.
 

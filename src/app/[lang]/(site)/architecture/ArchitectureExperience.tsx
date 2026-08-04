@@ -60,8 +60,10 @@ import { Colophon } from "@/components/sections/architecture/Colophon";
  *   DARK(Creed) → cream → cream-dark → DARK(Colophon, last)
  *
  * The measured floor plan lives inside the Creed section, read as doctrine
- * rather than as a plan of the old caste seating; the scroll-scrubbed PeelFilm
- * that once opened this page remains in the repo, simply no longer imported.
+ * rather than as a plan of the old caste seating. A scroll-scrubbed PeelFilm
+ * once opened this page; it was never re-rendered after the stand-in footage
+ * was dropped, and its component was deleted in August 2026 along with the
+ * rest of the canvas-scrub stack (see useScrubVideo.ts for why that went).
  */
 export default function ArchitectureExperience() {
   const { t } = useLang();

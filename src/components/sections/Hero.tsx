@@ -2,71 +2,38 @@
 
 import { useRef, useEffect } from "react";
 import Image from "next/image";
-import { bbMark } from "@/lib/blackbox";
 import { cappedSizes } from "@/lib/imageSizes";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
-import { useScrubMedia } from "@/hooks/useScrubMedia";
+import { useHeroMedia } from "@/hooks/useHeroMedia";
+import { useScrubFilm } from "@/hooks/useScrubFilm";
+import { useScrubVideo } from "@/hooks/useScrubVideo";
 import { ChevronDown } from "lucide-react";
 
-/**
- * Mobile scrub frames — generated from hero-video.mp4 by
- * scripts/gen-scrub-frames.mjs. Phones can't scrub a <video> smoothly (every
- * currentTime set is a full async seek through the media pipeline), so under
- * md the hero draws these onto a canvas instead, Apple-product-page style.
- */
-const FRAME_COUNT = 150;
-const frameSrc = (i: number) => `/hero-frames/f${String(i + 1).padStart(3, "0")}.webp`;
+/* ── THREE HEROES, ONE SCRUB ───────────────────────────────────────────────
+   The scroll drives a single 0–1 playhead. What consumes it depends on the
+   engine, and useHeroMedia.ts is where that is decided and why:
 
-/**
- * The same film as a single H.264 stream, which is what a phone actually plays
- * now — the stills above are the fallback for anything that cannot decode it.
- *
- * It is 1080×1350 against the stills' 864×1080 and 3.93 MB against their
- * 14.7 MB, both at once, because inter-frame compression is the thing a
- * sequence of separate images cannot do. The reason it exists is memory
- * though, not bytes: a decoded VideoFrame is released by calling close(), so
- * the mobile hero holds one canvas and nothing else. See useScrubFilm.ts.
- */
+     desktop      the uncropped 16:9 cut, seeked in a <video> (unchanged)
+     film         Chromium on a phone — WebCodecs decodes one picture per
+                  scroll position onto a <canvas>. ~2ms, any direction, and
+                  sharp, because a single-frame decode is cheap.
+     mobileVideo  WebKit on a phone — a <video> seeked with currentTime.
+                  Slower (20–50ms a seek) and therefore a smaller cut, but
+                  WebCodecs on Safari 18 is what kills iPhones.
+
+   Both phone cuts come from the same generator and the same crop, with the
+   church's drift across the frame BAKED IN, so neither needs a runtime pan
+   or an object-position — plain object-cover centres both at every point of
+   the scrub. Regenerate with:
+
+       node scripts/gen-hero-mobile.mjs
+
+   Re-cut either file and re-measure; do not adjust any of this by eye. */
+const DESKTOP_SRC = "/hero-video.mp4";
+const MOBILE_SRC = "/hero-mobile.mp4";
 const FILM_SRC = "/hero-frames/film.h264";
 const FILM_INDEX_SRC = "/hero-frames/film.json";
-
-/* ── THE CHURCH MOVES INSIDE ITS OWN FOOTAGE, SO THE CROP HAS TO MOVE TOO ──
-   gen-scrub-frames.mjs takes a dead-centre 4:5 slice of the drone master, and
-   the church does not sit still in that slice: the drone is descending towards
-   it, not orbiting it, so the spire starts at 50.9% of the frame's width,
-   drifts right for the first two thirds of the scrub and settles at about 56%.
-   A desktop viewport is wide enough that the whole 4:5 field is on screen and
-   nobody notices; a phone crops another ~40% off the sides, which magnifies
-   that drift into a church visibly off centre.
-
-   This used to be ONE number, 0.545, chosen as a compromise between the two
-   ends of the pan — which is the best a single number can do and still wrong
-   at both. It was tuned closest to where the film ends, so the church came to
-   rest nicely centred and the FIRST SCREEN — the one every visitor sees, and
-   the only one they see if they never scroll — had it sitting ~26px left of
-   centre on a 390px phone.
-
-   So the focus is now a track rather than a value. These are measurements, not
-   taste: the little red cross on the spire is the only saturated pure red in
-   the frame, so its centroid was read out of all 150 stills and sampled every
-   tenth frame here. Anything between samples is linear, which is within about
-   a pixel of the real path — the drift is smooth. Re-cut the film and these
-   numbers are wrong; re-measure, don't guess.
-
-   Canvas-only by construction (see focusXAt in useScrubMedia), so the desktop
-   <video> keeps its full uncropped field and is untouched by any of this. */
-const CHURCH_TRACK = [
-  0.509, 0.512, 0.516, 0.523, 0.531, 0.538, 0.544, 0.549, 0.555, 0.560,
-  0.561, 0.560, 0.558, 0.559, 0.561, 0.560,
-] as const;
-
-/** Linear read of CHURCH_TRACK, whose samples are every (FRAME_COUNT-1)/15 frames. */
-const churchFocusX = (frame: number) => {
-  const last = CHURCH_TRACK.length - 1;
-  const p = Math.max(0, Math.min(1, frame / (FRAME_COUNT - 1))) * last;
-  const i = Math.min(Math.floor(p), last - 1);
-  return CHURCH_TRACK[i] + (CHURCH_TRACK[i + 1] - CHURCH_TRACK[i]) * (p - i);
-};
+const FRAME_COUNT = 150;
 
 export function Hero() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -78,26 +45,34 @@ export function Hero() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
-  // Desktop scrubs the real video; touch draws the frame sequence (and never
-  // downloads the 8 MB video). mode is null until mounted, so SSR paints
-  // only the poster.
-  const { mode, mediaReady, frameTargetRef, drawRef } = useScrubMedia({
-    videoRef,
+  /** Written by the scrub below, read by useScrubFilm. */
+  const frameTargetRef = useRef(0);
+  const drawRef = useRef<(() => void) | null>(null);
+
+  // `mode` is null until mounted, so SSR paints only the poster.
+  const { mode, demoteFilm } = useHeroMedia();
+
+  const videoSrc =
+    mode === "desktop" ? DESKTOP_SRC : mode === "mobileVideo" ? MOBILE_SRC : null;
+
+  const { ready: videoReady, scrubTo } = useScrubVideo({ videoRef, src: videoSrc });
+
+  const { ready: filmReady } = useScrubFilm({
     canvasRef,
-    frameCount: FRAME_COUNT,
-    frameSrc,
+    frameTargetRef,
+    drawRef,
+    active: mode === "film",
+    manifestSrc: FILM_INDEX_SRC,
     filmSrc: FILM_SRC,
-    filmIndexSrc: FILM_INDEX_SRC,
-    focusXAt: churchFocusX,
+    frameCount: FRAME_COUNT,
+    onFail: demoteFilm,
   });
 
+  const ready = mode === "film" ? filmReady : videoReady;
+
   useEffect(() => {
-    if (!mediaReady || !mode) return;
+    if (!ready || !mode) return;
 
-    const video = videoRef.current;
-    if (mode === "video" && (!video || !video.duration)) return;
-
-    bbMark("hero:gsap build");
     const ctx = gsap.context(() => {
       // ── Entrance: stone rises out of darkness, line by line ──
       const lines = headingRef.current?.querySelectorAll(".title-line");
@@ -127,41 +102,46 @@ export function Hero() {
           "-=0.3"
         );
 
-      // ── Scroll-driven scrub (the Apple-style core effect) ──
-      if (mode === "video" && video) {
-        const videoScrub = { time: 0 };
-        gsap.to(videoScrub, {
-          time: video.duration,
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top top",
-            end: "bottom bottom",
-            scrub: 0.5,
-          },
-          onUpdate: () => {
-            if (video.readyState >= 2) video.currentTime = videoScrub.time;
-          },
-        });
-      } else {
-        const frameScrub = { frame: 0 };
-        gsap.to(frameScrub, {
-          frame: FRAME_COUNT - 1,
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top top",
-            end: "bottom bottom",
-            // More catch-up than desktop's 0.5: raw touch scroll has no Lenis
-            // easing in front of it, so the scrub supplies the glide instead.
-            scrub: 1,
-          },
-          onUpdate: () => {
-            frameTargetRef.current = frameScrub.frame;
+      /* ── Scroll-driven scrub (the Apple-style core effect) ──
+         The tween drives a plain 0–1 proxy rather than the element: the video
+         may be mid-seek when a tick arrives, and useScrubVideo decides when
+         it can actually service one. Trying to write currentTime from here,
+         every frame, is precisely the mistake that made this stutter on
+         phones before.
+
+         ⚠ THE SEEKING PATH WANTS LESS EASING THAN THE DECODING ONE.
+         `scrub: n` is how many seconds the playhead takes to catch up to the
+         scroll position. On the film a whole second reads as glide, because a
+         decode-and-draw is ~2ms and the canvas can track that eased target
+         exactly — which is what the mobile hero has always used. A seek
+         cannot: it costs 20–50ms, so the medium ALREADY lags and a second of
+         easing stacks on top of it. That combination is what read as "laggy
+         and jittery" when every phone was briefly put on the <video> path.
+
+         So the film keeps 1, and the seeking path gets 0.35 — enough
+         smoothing to absorb the variance between one seek and the next
+         without adding perceptible lag of its own. Desktop sits between: a
+         desktop seek is far cheaper, and Lenis is already easing the wheel in
+         front of it (useLenis is >=768px only). */
+      const playhead = { p: 0 };
+      gsap.to(playhead, {
+        p: 1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: mode === "desktop" ? 0.5 : mode === "film" ? 1 : 0.35,
+        },
+        onUpdate: () => {
+          if (mode === "film") {
+            frameTargetRef.current = playhead.p * (FRAME_COUNT - 1);
             drawRef.current?.();
-          },
-        });
-      }
+          } else {
+            scrubTo(playhead.p);
+          }
+        },
+      });
 
       // ── Text drifts up + fades as you descend ──
       ScrollTrigger.create({
@@ -195,7 +175,7 @@ export function Hero() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [mediaReady, mode, frameTargetRef, drawRef]);
+  }, [ready, mode, scrubTo]);
 
   return (
     <section
@@ -223,22 +203,20 @@ export function Hero() {
     >
       {/* Sticky stage */}
       <div className="sticky top-0 h-screen w-full overflow-hidden">
-        {/* First frame as instant poster under whichever scrub medium mounts —
-            also the mobile LCP, since phones never load the video itself.
+        {/* First frame as instant poster under the video — also the mobile
+            LCP, since the video cannot paint until it has loaded and seeked.
 
-            The poster is the uncropped 1920×1080 master; the scrub frames are
-            its dead-centre 864-wide slice. So a point at x in a frame is at
-            0.275 + 0.45x in the poster, and this has to be aimed at whatever
-            CHURCH_TRACK says frame 0 is — otherwise the church jumps sideways
-            the moment the canvas paints over the poster.
+            The poster is the uncropped 1920×1080 master; the mobile video is
+            a 1296-wide slice of it whose left edge sits at x=1287.6 at the
+            start of the scrub, i.e. centred on 0.504 of the master's width.
+            That has to be what the poster aims at too, or the church jumps
+            sideways the moment the video paints over it.
 
             The percentage is not that point, though: `object-position: P%`
             aligns the P% of the IMAGE with the P% of the BOX, so putting a
             focal point in the middle needs P = (cw/2 − focal·dw)/(cw − dw),
             which for a full-height 16:9 poster on any phone works out at
-            50.5% for CHURCH_TRACK[0]. (It was 52.7% when the whole film was
-            pinned to one 0.545 focus.) Phones only — desktop shows the whole
-            field, unshifted, exactly as before. */}
+            50.5%. Phones only — desktop shows the whole field, unshifted. */}
         <Image
           src="/hero-frames/poster.webp"
           alt=""
@@ -248,22 +226,29 @@ export function Hero() {
           className="object-cover object-[50.5%_center] md:object-center"
         />
 
-        {mode === "video" && (
+        {/* `muted` + `playsinline` are what make an inline video legal to load
+            and decode without a gesture on iOS; `preload="auto"` asks for the
+            data up front (see the kick() note in useScrubVideo for what
+            happens when iOS ignores it). No `loop`, no `autoplay` — nothing
+            here ever plays, it is only ever seeked. */}
+        {videoSrc && (
           <video
             ref={videoRef}
-            src="/hero-video.mp4"
+            src={videoSrc}
             muted
             playsInline
             preload="auto"
+            aria-hidden="true"
+            tabIndex={-1}
             className="absolute inset-0 w-full h-full object-cover"
           />
         )}
-        {/* One canvas for both mobile paths. `film` decodes the H.264 stream
-            with WebCodecs; `canvas` draws the WebP stills. They are the same
-            element on purpose — a hero that demotes from film to stills
-            mid-load keeps its canvas, and therefore whatever was last painted
-            on it, instead of blanking while React swaps one node for another. */}
-        {(mode === "film" || mode === "canvas") && (
+
+        {/* The WebCodecs film draws here. Its pictures are already centred by
+            the crop, so this is a plain full-bleed surface with no geometry
+            of its own — useScrubFilm sizes the backing store to the element
+            at a pixel ratio capped at 2. */}
+        {mode === "film" && (
           <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
         )}
 

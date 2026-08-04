@@ -60,7 +60,7 @@ export const useIsomorphicLayoutEffect =
 
 /**
  * THE ONE BREAKPOINT MOTION IS DECIDED AT. Same 768px `useLenis` and
- * `useScrubMedia` already switch on, so a device is either "the desktop
+ * `useScrubVideo` already switch on, so a device is either "the desktop
  * build" everywhere or "the phone build" everywhere — never smoothed but
  * unparallaxed, or parallaxed but unsmoothed.
  *
