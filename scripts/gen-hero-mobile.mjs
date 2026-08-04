@@ -388,3 +388,13 @@ function indexAnnexB(buf) {
 
   return { frames, codec };
 }
+
+/* ⚠ After running this, bump `CUT` in src/components/sections/Hero.tsx.
+   These filenames are stable and next.config.ts serves them with a day of
+   max-age, so returning readers keep the old bytes at the same URL — and
+   film.json is a byte index into film.h264, so a mismatched pair breaks
+   every decode. See the note on CUT there. */
+console.log(
+  "\n⚠ now bump `CUT` in src/components/sections/Hero.tsx, or returning\n" +
+  "  readers will keep the previous cut for up to 24 hours."
+);

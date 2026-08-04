@@ -29,10 +29,29 @@ import { ChevronDown } from "lucide-react";
        node scripts/gen-hero-mobile.mjs
 
    Re-cut either file and re-measure; do not adjust any of this by eye. */
+/* ⚠ BUMP `CUT` WHENEVER gen-hero-mobile.mjs IS RE-RUN.
+   The generated filenames are stable and next.config.ts serves them with a
+   day of max-age, so without this a returning reader keeps yesterday's bytes
+   at today's URL for up to 24 hours. That is not a cosmetic staleness:
+
+     · film.json is a BYTE INDEX into film.h264. A cached pair from different
+       cuts points the decoder at the wrong offsets — every picture fails, the
+       hook demotes to <video>, and a Chromium phone silently loses the good
+       path with nothing in any log to say why.
+     · the church's pan is baked into the crop now. An older film drawn by
+       this code, which no longer applies the runtime correction it was cut
+       for, sits visibly off centre.
+
+   A query string is enough: it changes the cache key without renaming
+   anything on disk, so the generator stays simple and this stays a one-line
+   bump. Immutable hashed filenames would be the tidier answer if these ever
+   change often enough to be worth the plumbing. */
+const CUT = "2";
+
 const DESKTOP_SRC = "/hero-video.mp4";
-const MOBILE_SRC = "/hero-mobile.mp4";
-const FILM_SRC = "/hero-frames/film.h264";
-const FILM_INDEX_SRC = "/hero-frames/film.json";
+const MOBILE_SRC = `/hero-mobile.mp4?c=${CUT}`;
+const FILM_SRC = `/hero-frames/film.h264?c=${CUT}`;
+const FILM_INDEX_SRC = `/hero-frames/film.json?c=${CUT}`;
 const FRAME_COUNT = 150;
 
 export function Hero() {
