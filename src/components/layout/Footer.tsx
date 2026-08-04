@@ -183,8 +183,15 @@ export function Footer() {
           </p>
           {/* Builder credit only — no claim over the content, which belongs to
               the parish. nofollow keeps a site-wide outbound footer link from
-              reading as a link scheme to Google. */}
-          <p className="order-3 md:order-0 text-[0.68rem] md:text-[0.65rem] text-white/45 md:text-white/35">
+              reading as a link scheme to Google.
+
+              Desktop was 0.65rem — 10.4px, and the one line on the page set
+              SMALLER on a monitor than on a phone, which is backwards. 0.72rem
+              is 11.5px: a step up, and still under the 12px copyright beside
+              it, so the row keeps its hierarchy. The ink is left at 35% —
+              size and contrast compound, and this line is meant to be found
+              rather than read. */}
+          <p className="order-3 md:order-0 text-[0.68rem] md:text-[0.72rem] text-white/45 md:text-white/35">
             {t.footer.builtBy}{" "}
             <a
               href="https://subashsaajan.site"
