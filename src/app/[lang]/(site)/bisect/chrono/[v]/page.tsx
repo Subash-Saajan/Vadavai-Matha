@@ -189,6 +189,41 @@ const VARIANTS: { id: string; what: string; css: string; off?: string }[] = [
     css: "",
     off: "force3d,scroll",
   },
+
+  /* ── EXHAUSTIVE OVER WHAT IS LEFT ──────────────────────────────────────
+     12 loads (the whole arc off) and 16 crashes (arc on, no force3D, no
+     scroll handler). Between those two the arc has exactly FOUR observable
+     side effects, and 17-20 remove them one at a time. One of these four
+     must be it — there is nothing else in measure() or paint(). All of them
+     keep the scroll handler off, so each is 16 minus one more thing. */
+  {
+    id: "17",
+    what: "16, and no transform written to any card",
+    // setScale/setY are the only thing that puts a transform on a card.
+    css: "",
+    off: "force3d,scroll,cardtransform",
+  },
+  {
+    id: "18",
+    what: "16, and no gsap.set on the cards (no transformOrigin either)",
+    css: "",
+    off: "force3d,scroll,gsapset",
+  },
+  {
+    id: "19",
+    what: "16, and the progress bar is never scaled",
+    css: "",
+    off: "force3d,scroll,progress",
+  },
+  {
+    id: "20",
+    what: "16, and no resize listener",
+    // iOS fires resize on every URL-bar show/hide, and onResize re-runs the
+    // whole of measure() — nine forced layout reads and eighteen new
+    // quick-setters, mid-scroll.
+    css: "",
+    off: "force3d,scroll,resize",
+  },
 ];
 
 export function generateStaticParams() {

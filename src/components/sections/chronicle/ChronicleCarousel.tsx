@@ -439,13 +439,15 @@ export function ChronicleCarousel({ off = "" }: { off?: string } = {}) {
       cards.length > 1 ? cards[1].offsetLeft - first.offsetLeft : first.offsetWidth;
 
     curveRef.current = cards.map((el) => {
-      gsap.set(el, {
-        transformOrigin: "center center",
-        // temporary — see the note on `off`. force3D:true puts translate3d()
-        // on all nine cards for the life of the page, which is nine permanent
-        // composited layers.
-        force3D: off.includes("force3d") ? false : true,
-      });
+      // temporary — see the note on `off`. force3D:true puts translate3d() on
+      // all nine cards for the life of the page, which is nine permanent
+      // composited layers; "gsapset" skips the write entirely.
+      if (!off.includes("gsapset")) {
+        gsap.set(el, {
+          transformOrigin: "center center",
+          force3D: off.includes("force3d") ? false : true,
+        });
+      }
       return {
         el,
         centre: el.offsetLeft + el.offsetWidth / 2,
@@ -481,18 +483,24 @@ export function ChronicleCarousel({ off = "" }: { off?: string } = {}) {
       // see the note on CURVE.tilt.
       const u = Math.min(1, Math.abs(item.centre - offset - focal) / CURVE.reach / pitch);
 
-      item.setScale(1 - CURVE.shrink * u);
-      // Squared, so the top of the curve is broad and flat and the fall-off
-      // happens further out. A linear drop reads as a ramp, not a curve.
-      item.setY(CURVE.dip * u * u);
+      // temporary — see the note on `off`. This is the only thing that puts a
+      // transform on a card, so "cardtransform" leaves the arc measured but
+      // never drawn.
+      if (!off.includes("cardtransform")) {
+        item.setScale(1 - CURVE.shrink * u);
+        // Squared, so the top of the curve is broad and flat and the fall-off
+        // happens further out. A linear drop reads as a ramp, not a curve.
+        item.setY(CURVE.dip * u * u);
+      }
     }
 
     const span = spanRef.current;
     const progress = span === 0 ? 1 : Math.min(1, Math.max(0, offset / span));
-    if (progressRef.current) {
+    // temporary — see the note on `off`.
+    if (progressRef.current && !off.includes("progress")) {
       progressRef.current.style.transform = `scaleX(${Math.max(progress, 0.02)})`;
     }
-  }, []);
+  }, [off]);
 
   /* ── DESKTOP: the page's scroll drives the strip ──────────────────────────
      A LAYOUT effect, not `useEffect`. ScrollTrigger's `pin` WRAPS the section in
@@ -624,7 +632,11 @@ export function ChronicleCarousel({ off = "" }: { off?: string } = {}) {
     if (!off.includes("scroll")) {
       viewport.addEventListener("scroll", onScroll, { passive: true });
     }
-    window.addEventListener("resize", onResize);
+    // temporary — see the note on `off`. iOS fires resize every time the URL
+    // bar shows or hides, and onResize re-runs the whole of measure().
+    if (!off.includes("resize")) {
+      window.addEventListener("resize", onResize);
+    }
     return () => {
       viewport.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
