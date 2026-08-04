@@ -266,11 +266,54 @@ export function Diagnostics() {
 /** One recorded page load. The final row is the moment before it stopped. */
 function FlightTable({ title, rows }: { title: string; rows: Entry[] }) {
   if (rows.length === 0) return null;
+
+  /* A 300-row table cannot be screenshotted, and the rows that matter are at
+     the top. One tap puts the whole record on the clipboard as text. */
+  const asText = () =>
+    [
+      `${title} — ${rows.length} rows`,
+      "t\twhat\timgMB\tcanvasMB\timgs\tDOM\tscrollY\tframes",
+      ...rows.map((e) =>
+        [
+          e.t,
+          e.note ? `${e.label} ${e.note}` : e.label,
+          e.imgMB ?? "",
+          e.canvasMB ?? "",
+          e.imgs ?? "",
+          e.el ?? "",
+          e.scrollY ?? "",
+          e.frames ?? "",
+        ].join("\t"),
+      ),
+    ].join("\n");
+
+  const last = rows[rows.length - 1];
+  const cleanExit = /pagehide|visibility/.test(last?.label ?? "");
+
   return (
     <>
       <h2 className="mt-14 font-display text-xl text-navy">
         {title} ({rows.length} entries)
       </h2>
+
+      {/* Whether this record is even of a crash. A run that ends on pagehide
+          was navigated away from and has nothing to tell us. */}
+      <p
+        className={`mt-2 rounded-lg px-3 py-2 text-xs ${
+          cleanExit ? "bg-amber-50 text-amber-900" : "bg-red-50 text-red-800"
+        }`}
+      >
+        {cleanExit
+          ? "Ended cleanly (navigated away) — this page did NOT crash."
+          : "Ended abruptly — no pagehide. This is a crash."}
+      </p>
+
+      <button
+        onClick={() => navigator.clipboard?.writeText(asText())}
+        className="mt-3 rounded-full bg-navy px-4 py-2 font-display text-xs uppercase tracking-widest text-cream"
+      >
+        Copy this record
+      </button>
       <p className="mt-2 text-sm text-text-muted">
         `frames` still rising at the end means it was alive and ran out of
         something; `frames` stuck while `t` climbs means it froze first.

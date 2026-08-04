@@ -56,7 +56,15 @@ for(var i=0;i<im.length;i++){if(im[i].naturalWidth>0){b+=im[i].naturalWidth*im[i
 var cb=0,cv=document.getElementsByTagName("canvas");
 for(var j=0;j<cv.length;j++){cb+=cv[j].width*cv[j].height*4}
 return{imgMB:+(b/1048576).toFixed(1),canvasMB:+(cb/1048576).toFixed(1),imgs:d+"/"+im.length}}
-function flush(){try{localStorage.setItem(K,JSON.stringify(log.slice(-MAX)))}catch(e){}}
+function flush(){try{localStorage.setItem(K,JSON.stringify(keep()))}catch(e){}}
+/* ⚠ KEEP THE HEAD, NOT JUST THE TAIL. slice(-MAX) discarded the opening rows
+   the moment a page survived long enough to fill the buffer — and the opening
+   rows are the whole point: parse, DOMContentLoaded, hydration, hero:mode,
+   film:alloc all happen in the first second. A 24-second visit reported 300
+   rows of an idle page and none of the startup it was recording for. */
+function keep(){if(log.length<=MAX)return log;
+var h=Math.floor(MAX/2);
+return log.slice(0,h).concat([{t:log[h].t,label:"… "+(log.length-MAX)+" rows omitted …"}]).concat(log.slice(-(MAX-h-1)))}
 function push(label,note){var o=m();o.t=Math.round(performance.now()-t0);o.label=label;
 if(note)o.note=note;o.frames=n;try{o.scrollY=Math.round(scrollY)}catch(e){}
 o.el=document.getElementsByTagName("*").length;log.push(o);flush()}
