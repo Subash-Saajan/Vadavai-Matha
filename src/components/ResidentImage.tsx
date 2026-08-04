@@ -4,6 +4,7 @@ import Image, { type ImageProps } from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 import { cappedSizes } from "@/lib/imageSizes";
+import { useProbe } from "@/lib/probe";
 
 /* ── LAZY LOADING SOLVED BANDWIDTH. NOBODY SOLVED MEMORY. ──────────────────
    Every image on this site is already `loading="lazy"`, so nothing is fetched
@@ -76,6 +77,10 @@ export function ResidentImage({
      delay one. */
   const [near, setNear] = useState(true);
 
+  /* Diagnostic override — see lib/probe.ts. False for every visitor who has
+     not typed `?probe=noimages`, so this is inert in normal use. */
+  const suppressed = useProbe("noimages");
+
   useEffect(() => {
     if (!window.matchMedia("(max-width: 767px)").matches) return;
     const el = boxRef.current;
@@ -102,7 +107,9 @@ export function ResidentImage({
           it is required by ImageProps, so every caller is checked for it by the
           type system instead, at the call site where the words actually are. */}
       {/* eslint-disable-next-line jsx-a11y/alt-text */}
-      {near && <Image {...props} sizes={sizes && cappedSizes(sizes)} />}
+      {near && !suppressed && (
+        <Image {...props} sizes={sizes && cappedSizes(sizes)} />
+      )}
     </span>
   );
 }

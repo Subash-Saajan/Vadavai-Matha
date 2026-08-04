@@ -93,13 +93,6 @@ export const HISTORY_NOTES: Record<string, HistoryNote> = {
 
   /* ── VIII. The Shrine and the Saint ────────────────────────────────────── */
 
-  // The shrine's present style is not the style of the year it was declared, and
-  // back-dating it by twenty-nine years would be a small, easy untruth.
-  "shrine-and-the-saint:0": {
-    en: "Every witness of 1993 names the church by its old dedication, to the Holy Family. The Marian style the shrine carries today — Our Lady of the Assumption — is first found in the diocese's letters of 2022.",
-    ta: "1993-ஆம் ஆண்டின் ஒவ்வொரு சான்றும் இவ்வாலயத்தை அதன் பழைய அர்ப்பணப் பெயரான திருக்குடும்ப ஆலயம் என்றே குறிக்கிறது. இன்று இத்திருத்தலம் தாங்கும் மரியன்னை அடையாளம் — விண்ணேற்பு மாதா — முதன்முதலில் காணப்படுவது 2022-ஆம் ஆண்டு மறைமாவட்டக் கடிதங்களிலேயே.",
-  },
-
   // Two institutions count the same people and reach different totals.
   "shrine-and-the-saint:5": {
     en: "The head-count is the parish's own. The diocese's roll gives a smaller figure: about 7,350 Catholics in some 1,600 families.",

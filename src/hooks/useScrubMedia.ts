@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useRef, useState, type RefObject } from "react";
 
+import { probe } from "@/lib/probe";
+
 import { useScrubFilm } from "./useScrubFilm";
 
 /* ── THE PHONE MEMORY BUDGET, AND WHY THIS IS NOT A PLAIN PRELOAD ──────────
@@ -185,6 +187,11 @@ export function useScrubMedia({
        which is also the route taken if the film 404s or the decoder errors
        mid-scroll. Demotion is one-way: `failedRef` inside useScrubFilm makes
        sure a demoted hero cannot flip back and re-download the film. */
+    // Diagnostic override — see lib/probe.ts. No flag, no change.
+    if (probe("nofilm")) {
+      setMode("canvas");
+      return;
+    }
     setMode(hasFilm && "VideoDecoder" in window ? "film" : "canvas");
   }, [hasFilm]);
 
@@ -241,7 +248,9 @@ export function useScrubMedia({
        is the poster already underneath the canvas, so nothing shifts and they
        carry none of this memory. Read once: `mediaReady` still fires below or
        the hero's copy would never be revealed. */
-    const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const still =
+      probe("stillonly") ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const want = () =>
       Math.max(0, Math.min(frameCount - 1, Math.round(frameTargetRef.current)));
