@@ -56,10 +56,33 @@ function subscribe(onChange: () => void): () => void {
   return () => mq.removeEventListener("change", onChange);
 }
 
+/* ── ?hero=film — TEMPORARY, FOR TESTING WEBCODECS ON AN ACTUAL iPHONE ─────
+   The reason WebKit is kept off the film is PRECAUTIONARY, not measured. The
+   iPhone tab kill turned out to be the Chronicle carousel's arc, not the hero
+   — iPhones died just as reliably with no canvas, no decoder and no frames on
+   the page at all. So the film has never actually been tried on an iPhone;
+   it was ruled out on research (partial WebCodecs in Safari 16.4–18.7, an
+   isConfigSupported that only prefix-matches the codec string, and a decoder
+   living in the GPU process where a failure takes every tab down) rather than
+   on evidence from the device.
+
+   This flag lets one phone opt in without changing what anybody else gets. If
+   an iPhone runs `?hero=film` cleanly — including a scroll all the way through
+   the hero and back — the default below can move and this can go.
+
+   Safe to read here: getServerSnapshot returns null, so SSR emits no media at
+   all and there is nothing for a query string to disagree with. */
+function forcedMode(): HeroMode | null {
+  const v = new URLSearchParams(window.location.search).get("hero");
+  return v === "film" || v === "mobileVideo" ? v : null;
+}
+
 /* Returns one of three stable strings, so useSyncExternalStore's identity
    check never loops. */
 function getSnapshot(): HeroMode {
   if (window.matchMedia(DESKTOP).matches) return "desktop";
+  const forced = forcedMode();
+  if (forced) return forced;
   if (isWebKit()) return "mobileVideo";
   return "VideoDecoder" in window ? "film" : "mobileVideo";
 }
