@@ -144,7 +144,8 @@ export function useScrubFilm({
 
     // ── Canvas geometry: identical cover maths to the stills path ──
     const size = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 3);
+      // Capped at 2, matching the stills path and every image on the site.
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const w = Math.round(canvas.clientWidth * dpr);
       const h = Math.round(canvas.clientHeight * dpr);
       if (canvas.width === w && canvas.height === h) return;

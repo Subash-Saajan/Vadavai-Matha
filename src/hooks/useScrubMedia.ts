@@ -69,9 +69,31 @@ import { useScrubFilm } from "./useScrubFilm";
    If the film is ever re-cut, the number to keep in view is frames-per-pixel,
    not the frame count: 150 frames over 120vh is what makes ~6.4px a frame. */
 const STEP = 2;
+/* ── THE WINDOW WAS STILL THE BIGGEST THING ON THE PAGE ────────────────────
+   Everything below this line was tuned against a page whose images cost
+   151 MB, where 75 MB of frames looked like a reasonable share. They are not
+   a reasonable share of anything. Measured on the home page as it now stands:
+
+       21 resident frames × 3.56 MB  =  75 MB   ← this window
+       canvas backing store at DPR 3 =  12 MB
+       every photograph on the page  =  80 MB
+
+   The hero was costing MORE than the fifty-two photographs it sits above, and
+   three separate rounds of image work never touched it. A phone that renders
+   the page and dies a second later is one that painted, then decoded.
+
+   14 steps ahead is a lot of runway. It was chosen so a hard flick never
+   outruns the window — but the nearest-resident search in `draw` already
+   covers that case by design, and it covers it invisibly during fast motion,
+   which is the only time the window is outrun. Six steps ahead and two behind
+   holds 9 frames — 32 MB — and the difference is only visible on a flick,
+   where nothing is legible anyway.
+
+   If this is ever raised again, raise it against a measured total, not against
+   how it feels on a desk. */
 /** Raw-index reach of the resident window, ahead of and behind the playhead. */
-const AHEAD = 14 * STEP;
-const BEHIND = 4 * STEP;
+const AHEAD = 6 * STEP;
+const BEHIND = 2 * STEP;
 /* ── THE WINDOW IS NOT SYMMETRIC, BECAUSE THE SCROLL IS NOT ───────────────
    This used to be one `KEEP = 16 * STEP` applied to |i - at|, which quietly
    made the trailing half of the window the most expensive thing on the page.
@@ -98,9 +120,11 @@ const BEHIND = 4 * STEP;
    scrolling back through the film, where a re-fetch is a disk-cache hit by
    design (see the max-age note at the head of this file).
 
-   Resident count: ~31 frames → ~21. 110 MB → 75 MB, no pixel changed. */
+   Resident count: ~31 frames → ~21. 110 MB → 75 MB, no pixel changed.
+   Then AHEAD came down as well — see the note on it — and the same arithmetic
+   takes it to 9 frames and 32 MB. */
 const KEEP_AHEAD = AHEAD;
-const KEEP_BEHIND = 6 * STEP;
+const KEEP_BEHIND = 2 * STEP;
 /** Concurrent fetches — enough to stay ahead of a scroll, polite to the page. */
 const IN_FLIGHT = 6;
 
@@ -289,11 +313,13 @@ export function useScrubMedia({
     };
 
     const size = () => {
-      // Render at native density (capped at 3×) — capping lower makes the
-      // browser upscale the canvas element itself, which visibly softens
-      // the film on flagship phones. One full-screen canvas at 3× is only
-      // ~12 MB of backing store; drawImage cost is unaffected by dpr here.
-      const dpr = Math.min(window.devicePixelRatio || 1, 3);
+      /* Capped at 2, the same effective ratio every photograph on the site is
+         now served at (lib/imageSizes.ts). It was 3, on the reasoning that
+         "one full-screen canvas at 3× is only ~12 MB" — true in isolation, and
+         the frames it draws are 864 wide, so on a 390pt phone at 3× the canvas
+         is 1170 wide and the browser is upscaling the source to fill it. The
+         extra 7 MB buys resolution the film does not have. */
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const w = Math.round(canvas.clientWidth * dpr);
       const h = Math.round(canvas.clientHeight * dpr);
       if (canvas.width === w && canvas.height === h) return; // address-bar churn
