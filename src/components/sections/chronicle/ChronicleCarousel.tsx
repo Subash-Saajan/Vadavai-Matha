@@ -247,7 +247,25 @@ function CarouselCard({ frame, meta }: { frame: ChronicleFrame; meta: ChronicleF
             its edge instead and the leaf stays lit throughout. */}
         <span
           aria-hidden="true"
-          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/20 bg-navy/25 backdrop-blur-[2px] transition-colors duration-500 group-hover:border-gold/70 group-hover:bg-navy/45"
+          /* ⚠ THE BLUR IS `md:` ONLY, AND IT IS THE LAST ONE ON THIS PAGE.
+             A backdrop-filter makes the compositor read back the pixels under
+             the element and re-filter them on every frame the page moves — see
+             the note on `.navbar-blur` in globals.css, which is why the bar
+             carries no blur below `md` either, and the one in ParishRhythm,
+             which is why those cards carry none at all.
+
+             This disc is the case that got missed, and it is the worst-placed
+             of the three: there is one PER CARD, so seven of them, and every
+             card has its `y` and `scale` rewritten by paint() on every scroll
+             frame. A filter that costs a read-back per frame, sitting on seven
+             elements that move every frame, is not the same proposition as one
+             fixed bar — and this section is the one an iPhone bisect
+             (/bisect/4) singled out as where the tab dies.
+
+             Nothing is lost visually. Two pixels of blur behind a disc that is
+             already 25% navy over a dark photograph is not a legible effect at
+             any size, let alone at 36px. */
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/20 bg-navy/25 transition-colors duration-500 md:backdrop-blur-[2px] group-hover:border-gold/70 group-hover:bg-navy/45"
         >
           <GildedArrow className="h-[1.05rem] w-[1.05rem] transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </span>
