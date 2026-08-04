@@ -43,6 +43,7 @@ export type Entry = {
    dead page — re-reading it as the reader scrolls would mean nothing. */
 const EMPTY: Entry[] = [];
 let cached: Entry[] | null = null;
+let cachedPrev: Entry[] | null = null;
 const noSubscribe = () => () => {};
 
 /** The record of the page that died, safe to read during render. */
@@ -54,21 +55,41 @@ export function useFlightRecord(): Entry[] {
   );
 }
 
-export function bbRead(): Entry[] {
+/** The run before it, kept so one stray page load cannot lose the evidence. */
+export function usePrevFlightRecord(): Entry[] {
+  return useSyncExternalStore(
+    noSubscribe,
+    () => (cachedPrev ??= bbReadPrev()),
+    () => EMPTY,
+  );
+}
+
+function readKey(k: string): Entry[] {
   if (typeof window === "undefined") return [];
   try {
-    return JSON.parse(localStorage.getItem(KEY) || "[]") as Entry[];
+    return JSON.parse(localStorage.getItem(k) || "[]") as Entry[];
   } catch {
     return [];
   }
 }
 
+export function bbRead(): Entry[] {
+  return readKey(KEY);
+}
+
+/** The run before the current one — see the rotation note in BlackboxScript. */
+export function bbReadPrev(): Entry[] {
+  return readKey(`${KEY}-prev`);
+}
+
 export function bbClear() {
   try {
     localStorage.removeItem(KEY);
+    localStorage.removeItem(`${KEY}-prev`);
     sessionStorage.removeItem(FLAG);
   } catch {}
   cached = EMPTY;
+  cachedPrev = EMPTY;
 }
 
 /**

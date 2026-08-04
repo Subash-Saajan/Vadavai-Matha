@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { bbClear, useFlightRecord } from "@/lib/blackbox";
+import { bbClear, useFlightRecord, usePrevFlightRecord, type Entry } from "@/lib/blackbox";
 
 /**
  * WHICH HERO PATH DOES THIS PHONE ACTUALLY TAKE?
@@ -36,8 +36,10 @@ export function Diagnostics() {
   /* The record of the page that died — read through a store rather than an
      effect so it is available on the first render and needs no setState. */
   const record = useFlightRecord();
+  const prev = usePrevFlightRecord();
   const [cleared, setCleared] = useState(false);
   const flight = cleared ? [] : record;
+  const flightPrev = cleared ? [] : prev;
 
   useEffect(() => {
     let dead = false;
@@ -226,75 +228,93 @@ export function Diagnostics() {
       </p>
 
       {/* ── The flight recorder ────────────────────────────────────────────
-          What the page that died was doing, up to the last moment it managed
-          to write. The FINAL ROW is the answer: how much was decoded, how far
-          down the page, and whether frames were still advancing. */}
-      <h2 className="mt-16 font-display text-xl text-navy">
-        Last recorded page {flight.length ? `(${flight.length} entries)` : ""}
-      </h2>
+          Two records, because the reader used to overwrite the very thing it
+          was opened to show. `-prev` is the run before this one. */}
+      <FlightTable title="Last recorded page" rows={flight} />
+      <FlightTable title="The run before that" rows={flightPrev} />
 
-      {flight.length === 0 ? (
-        <p className="mt-3 text-sm text-text-muted">
-          Nothing recorded yet. Open{" "}
-          <span className="font-mono text-navy">littlerome.net/?bb=1</span>,
-          let it die, then come back here.
-        </p>
-      ) : (
+      {flight.length === 0 && flightPrev.length === 0 && (
         <>
-          <p className="mt-2 text-sm text-text-muted">
-            The last row is the moment before the crash. `frames` still rising
-            means it was alive and ran out of something; `frames` stuck while
-            `t` climbs means it froze first.
+          <h2 className="mt-14 font-display text-xl text-navy">
+            Last recorded page
+          </h2>
+          <p className="mt-3 text-sm text-text-muted">
+            Nothing recorded. Open{" "}
+            <span className="font-mono text-navy">littlerome.net/?bb=1</span>,
+            let it die, then come back here. The recorder deliberately skips
+            this page now, so opening it can no longer overwrite what it was
+            opened to show.
           </p>
-          <div className="mt-4 overflow-x-auto">
-            <table className="w-full border-collapse text-left font-mono text-[0.68rem]">
-              <thead>
-                <tr className="border-b border-gold/40 text-navy/60">
-                  <th className="py-1 pr-3">t ms</th>
-                  <th className="py-1 pr-3">what</th>
-                  <th className="py-1 pr-3">img MB</th>
-                  <th className="py-1 pr-3">canvas</th>
-                  <th className="py-1 pr-3">imgs</th>
-                  <th className="py-1 pr-3">DOM</th>
-                  <th className="py-1 pr-3">scrollY</th>
-                  <th className="py-1">frames</th>
-                </tr>
-              </thead>
-              <tbody>
-                {flight.map((e, i) => {
-                  const last = i === flight.length - 1;
-                  return (
-                    <tr
-                      key={i}
-                      className={`border-b border-gold/10 ${
-                        last ? "bg-red-50 font-bold text-red-800" : "text-navy"
-                      }`}
-                    >
-                      <td className="py-1 pr-3">{e.t}</td>
-                      <td className="py-1 pr-3">{e.note ? `${e.label} ${e.note}` : e.label}</td>
-                      <td className="py-1 pr-3">{e.imgMB ?? ""}</td>
-                      <td className="py-1 pr-3">{e.canvasMB ?? ""}</td>
-                      <td className="py-1 pr-3">{e.imgs ?? ""}</td>
-                      <td className="py-1 pr-3">{e.el ?? ""}</td>
-                      <td className="py-1 pr-3">{e.scrollY ?? ""}</td>
-                      <td className="py-1">{e.frames ?? ""}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-          <button
-            onClick={() => {
-              bbClear();
-              setCleared(true);
-            }}
-            className="mt-5 rounded-full border border-gold/40 px-4 py-2 font-display text-xs uppercase tracking-widest text-navy"
-          >
-            Clear and stop recording
-          </button>
         </>
       )}
+
+      {(flight.length > 0 || flightPrev.length > 0) && (
+        <button
+          onClick={() => {
+            bbClear();
+            setCleared(true);
+          }}
+          className="mt-5 rounded-full border border-gold/40 px-4 py-2 font-display text-xs uppercase tracking-widest text-navy"
+        >
+          Clear and stop recording
+        </button>
+      )}
     </section>
+  );
+}
+
+/** One recorded page load. The final row is the moment before it stopped. */
+function FlightTable({ title, rows }: { title: string; rows: Entry[] }) {
+  if (rows.length === 0) return null;
+  return (
+    <>
+      <h2 className="mt-14 font-display text-xl text-navy">
+        {title} ({rows.length} entries)
+      </h2>
+      <p className="mt-2 text-sm text-text-muted">
+        `frames` still rising at the end means it was alive and ran out of
+        something; `frames` stuck while `t` climbs means it froze first.
+      </p>
+      <div className="mt-4 overflow-x-auto">
+        <table className="w-full border-collapse text-left font-mono text-[0.68rem]">
+          <thead>
+            <tr className="border-b border-gold/40 text-navy/60">
+              <th className="py-1 pr-3">t ms</th>
+              <th className="py-1 pr-3">what</th>
+              <th className="py-1 pr-3">img MB</th>
+              <th className="py-1 pr-3">canvas</th>
+              <th className="py-1 pr-3">imgs</th>
+              <th className="py-1 pr-3">DOM</th>
+              <th className="py-1 pr-3">scrollY</th>
+              <th className="py-1">frames</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((e, i) => {
+              const last = i === rows.length - 1;
+              return (
+                <tr
+                  key={i}
+                  className={`border-b border-gold/10 ${
+                    last ? "bg-red-50 font-bold text-red-800" : "text-navy"
+                  }`}
+                >
+                  <td className="py-1 pr-3">{e.t}</td>
+                  <td className="py-1 pr-3">
+                    {e.note ? `${e.label} ${e.note}` : e.label}
+                  </td>
+                  <td className="py-1 pr-3">{e.imgMB ?? ""}</td>
+                  <td className="py-1 pr-3">{e.canvasMB ?? ""}</td>
+                  <td className="py-1 pr-3">{e.imgs ?? ""}</td>
+                  <td className="py-1 pr-3">{e.el ?? ""}</td>
+                  <td className="py-1 pr-3">{e.scrollY ?? ""}</td>
+                  <td className="py-1">{e.frames ?? ""}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 }

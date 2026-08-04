@@ -30,10 +30,26 @@
    Inert without `?bb=1` — it reads one sessionStorage key and returns. Delete
    with lib/probe.ts and /diagnostics once the cause is settled. */
 
+/* ⚠ THE READER MUST NOT RECORD ITSELF, AND THE FIRST VERSION DID.
+   This script runs on every route, /diagnostics included, and every run writes
+   the same localStorage key. So opening the reader to look at the crashed page
+   overwrote the crashed page's record with the reader's own — 169 elements,
+   no images, reaching `load` quite happily. The evidence was destroyed by the
+   act of going to read it.
+
+   (The earlier React-mounted version survived this by luck: it read the record
+   during render, which happens before its own effect could overwrite it. The
+   inline version writes during parse, long before any of that.)
+
+   Two defences. The recorder skips the diagnostics route outright, and every
+   start rotates the previous record to `-prev` first, so one accidental
+   overwrite can no longer lose the only copy. */
 const SCRIPT = `(function(){try{
 var K="vm-blackbox",F="vm-blackbox-on",BEAT=40,MAX=300;
 try{if(new URLSearchParams(location.search).get("bb")==="1")sessionStorage.setItem(F,"1");
 if(sessionStorage.getItem(F)!=="1")return;}catch(e){return}
+if(location.pathname.indexOf("/diagnostics")!==-1)return;
+try{var old=localStorage.getItem(K);if(old&&old!=="[]")localStorage.setItem(K+"-prev",old)}catch(e){}
 var t0=performance.now(),log=[],raf=0,lastFrame=0,lastBeat=-1e9,n=0;
 function m(){var b=0,d=0,im=document.getElementsByTagName("img");
 for(var i=0;i<im.length;i++){if(im[i].naturalWidth>0){b+=im[i].naturalWidth*im[i].naturalHeight*4;d++}}
