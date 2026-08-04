@@ -442,7 +442,11 @@ export function ChronicleCarousel({ off = "" }: { off?: string } = {}) {
       // temporary — see the note on `off`. force3D:true puts translate3d() on
       // all nine cards for the life of the page, which is nine permanent
       // composited layers; "gsapset" skips the write entirely.
-      if (!off.includes("gsapset")) {
+      /* Desktop only, for the same reason paint() is: nothing transforms
+         these cards on a phone any more, so promoting them to their own
+         composited layers would be paying for a texture apiece to hold nine
+         pictures that never move. */
+      if (isDesktop && !off.includes("gsapset")) {
         gsap.set(el, {
           transformOrigin: "center center",
           force3D: off.includes("force3d") ? false : true,
@@ -455,7 +459,7 @@ export function ChronicleCarousel({ off = "" }: { off?: string } = {}) {
         setScale: gsap.quickSetter(el, "scale") as (v: number) => void,
       };
     });
-  }, [off]);
+  }, [off, isDesktop]);
 
   /**
    * Lay the cards on the arc for a given strip offset, and keep the progress
@@ -476,17 +480,39 @@ export function ChronicleCarousel({ off = "" }: { off?: string } = {}) {
     const focal = focalRef.current;
     const pitch = pitchRef.current || 1;
 
-    for (let i = 0; i < items.length; i++) {
-      const item = items[i];
-      // Distance from the focal slot, in card-widths. Unsigned: the arc is the
-      // same shape on either side of the focus, and nothing here is rotated —
-      // see the note on CURVE.tilt.
-      const u = Math.min(1, Math.abs(item.centre - offset - focal) / CURVE.reach / pitch);
+    /* ⚠ THE ARC IS DESKTOP-ONLY, AND THIS IS THE LINE THAT KILLED iPHONES.
+       Writing a transform to these cards is what made Safari destroy the tab —
+       "A problem repeatedly occurred", deterministically, on every iPhone
+       tried, while Android and desktop were fine. It was found by bisection
+       rather than by reasoning (/bisect/N to the section, then
+       /bisect/chrono/N through the section), and it is narrower than any of
+       the things that looked guilty on the way: not the seven backdrop
+       filters, not the entrance tween, not force3D, not the scroll handler.
+       A SINGLE paint() call, writing translate+scale to nine cards, is enough.
 
-      // temporary — see the note on `off`. This is the only thing that puts a
-      // transform on a card, so "cardtransform" leaves the arc measured but
-      // never drawn.
-      if (!off.includes("cardtransform")) {
+       Each card is 78vw x 30rem with `overflow: hidden`, `rounded-3xl`, a ring
+       and a shadow, and they sit inside a horizontally scrolling container
+       seven screens wide. Transforming nine of those asks WebKit's compositor
+       for something it does not survive; the exact internal limit is not
+       documented and the crash log never named one.
+
+       What is lost on a phone: `shrink: 0.1` and `dip: 18` — far cards at 90%
+       and eighteen pixels lower. In a native scroller showing about one card
+       at a time that was nearly invisible, and it is not worth a dead page.
+       Desktop is untouched: there the strip is a transformed track under a
+       pinned section, the arc is the whole point of it, and it has never
+       crashed anything.
+
+       If this is ever reinstated on touch, reinstate it against a real iPhone,
+       not a simulator — the Simulator has no jetsam and will not reproduce it. */
+    if (isDesktop && !off.includes("cardtransform")) {
+      for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+        // Distance from the focal slot, in card-widths. Unsigned: the arc is
+        // the same shape on either side of the focus, and nothing here is
+        // rotated — see the note on CURVE.tilt.
+        const u = Math.min(1, Math.abs(item.centre - offset - focal) / CURVE.reach / pitch);
+
         item.setScale(1 - CURVE.shrink * u);
         // Squared, so the top of the curve is broad and flat and the fall-off
         // happens further out. A linear drop reads as a ramp, not a curve.
@@ -497,10 +523,15 @@ export function ChronicleCarousel({ off = "" }: { off?: string } = {}) {
     const span = spanRef.current;
     const progress = span === 0 ? 1 : Math.min(1, Math.max(0, offset / span));
     // temporary — see the note on `off`.
+    /* The progress rail stays on both builds. It is one span, one pixel tall,
+       taking a scaleX — not a card, not clipped, not inside the scroller, and
+       nothing the bisect implicated. It is also the only feedback a phone
+       reader gets about how far through the chronicle they are, now that the
+       arc is gone. */
     if (progressRef.current && !off.includes("progress")) {
       progressRef.current.style.transform = `scaleX(${Math.max(progress, 0.02)})`;
     }
-  }, [off]);
+  }, [off, isDesktop]);
 
   /* ── DESKTOP: the page's scroll drives the strip ──────────────────────────
      A LAYOUT effect, not `useEffect`. ScrollTrigger's `pin` WRAPS the section in
