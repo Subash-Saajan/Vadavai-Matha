@@ -66,7 +66,7 @@ import { hasLeaf } from "@/lib/referenceIndex";
  * years at once. Distance is the wrong input. The GESTURE is the input — one
  * swipe means one year, however far it throws.
  *
- * So on a phone each era is a plain 100svh block, the page does not scroll inside
+ * So on a phone each era is a plain 100dvh block, the page does not scroll inside
  * a chapter at all (touchmove is prevented), and every move — year, chapter, dot,
  * button — is driven by hand. See buildMobile. The layout that sits on top of it:
  *
@@ -629,7 +629,7 @@ export default function HistoryPage() {
     // asked for — tore through six years at once. Distance is the wrong input.
     // The gesture is the input: one swipe means one year, however far it throws.
     //
-    // So each era is a plain 100svh block and the page does not scroll inside it
+    // So each era is a plain 100dvh block and the page does not scroll inside it
     // at all. A touch is read directly, and while a chapter is mid-way the page
     // scroll is prevented outright. Everything else — moving between chapters,
     // the buttons, the dots — is a programmatic, animated scroll, so the stage is
@@ -1778,8 +1778,10 @@ export default function HistoryPage() {
            the photo and letting the text scroll instead puts the variance where it
            can't be seen.
 
-           svh, not vh or dvh: dvh re-flows as the URL bar animates, and a card
-           that resizes under a reader's thumb loses their place mid-sentence. */
+           The card is dvh and the photograph in it is svh — see the ⚠ note on
+           .stage below. Short version: svh everywhere left a gap the height of
+           a retracted URL bar under every chapter, and dvh only re-flows the
+           one box (the scrolling paragraph) where a re-flow cannot be felt. */
         @media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
           /* The touch handler owns every gesture that starts INSIDE a chapter,
              but it cannot own the one that arrives from outside: a fling thrown
@@ -1798,8 +1800,28 @@ export default function HistoryPage() {
           html { scroll-snap-type: y proximity; }
           .history-timeline .era { scroll-snap-align: start; }
 
+          /* ⚠ THE CARD IS dvh AND THE PHOTOGRAPH INSIDE IT IS svh, ON PURPOSE.
+             This was 100svh throughout, and svh is the viewport with the URL bar
+             SHOWN — so the moment a phone retracts its toolbar (Chrome and
+             Samsung Internet on Android, Safari on iOS; not browsers that keep
+             the bar down, which is why it only showed up in "some" of them) the
+             real viewport grew by ~55px and every chapter fell that far short of
+             the glass: a cream band under the buttons and the top of the next
+             chapter's photograph peeking in beneath it.
+
+             dvh closes it, and the reason svh was chosen in the first place —
+             "a card that resizes under a reader's thumb loses their place" —
+             does not actually bite here, because everything ABOVE the paragraph
+             is fixed: 4.9rem of navbar clearance, then a 45svh photograph (left
+             in svh below, deliberately: the picture must never breathe with the
+             toolbar). So the whole of the dvh↔svh difference lands on the ONE
+             box that can absorb it, .era-body — a scroll box, which keeps its
+             scrollTop and simply reveals another line or two at the foot. No
+             line of type moves. Only the bottom edge and the four buttons ride
+             down with the bar, which is where a reader expects them to be. */
           .history-timeline .stage {
-            height: 100svh;
+            height: 100vh; /* fallback: browsers with neither svh nor dvh */
+            height: 100dvh;
             display: flex;
             align-items: center;
             overflow: hidden;
