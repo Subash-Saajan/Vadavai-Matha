@@ -80,6 +80,14 @@ export default async function ReferencePage({
   const siblings = siblingsOf(era, dotIndex);
   const biblio = SOURCE_INDEX[source];
 
+  /* Back to the MOMENT, not to the top of the book. /history reads this
+     fragment on arrival and puts the reader on the year they left from — see
+     the note above RETURN_KEY in HistoryExperience. A hash rather than a query
+     is deliberate: it is the same URL as far as Google is concerned, so
+     following it costs /history nothing, and it survives being pasted to
+     somebody in a way a remembered scroll position could not. */
+  const back = L(`/history#${era}~${dotIndex}`);
+
   return (
     <>
       <JsonLd
@@ -101,7 +109,7 @@ export default async function ReferencePage({
         <div className="ref-inner">
           {/* ── The claim. First, and on its own. ── */}
           <nav className="ref-crumb">
-            <Link href={L("/history")}>The History</Link>
+            <Link href={back}>The History</Link>
             <span aria-hidden>·</span>
             <span>{m.era.heading}</span>
           </nav>
@@ -161,8 +169,8 @@ export default async function ReferencePage({
           )}
 
           <footer className="ref-foot">
-            <Link href={L("/history")} className="ref-back">
-              ← Back to the history
+            <Link href={back} className="ref-back">
+              ← Back to the moment
             </Link>
             <Link href={L(`/sources#${source}`)} className="ref-back">
               This book in the bibliography →

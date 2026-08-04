@@ -166,6 +166,62 @@ const photoFor = (eraId: string, di: number) => {
 const PHOTO_BACK = 1;
 const PHOTO_FWD = 2;
 
+/* ── COMING BACK FROM A CITATION ───────────────────────────────────────────
+   A chip on this page opens a whole route about ONE moment — the claim, the
+   leaf of the book, what the book actually settles. Leaving it used to put the
+   reader back at the top of an eight-chapter book, which meant the cost of
+   checking a source was finding your place again afterwards. Nobody pays that
+   twice, and a page whose whole argument is "go and look at the evidence"
+   cannot afford to charge for it.
+
+   So a moment has an address — `<era-id>~<dot index>` — and there are two ways
+   home, because there are two ways a reader leaves:
+
+     the page's own links  — the crumb and "← Back to the history" carry the
+                             address as a URL HASH. It survives a cold load and
+                             can be pasted to somebody, which a scroll offset
+                             cannot.
+     the browser's back    — returns to the bare /history URL with no hash at
+                             all, so the chip writes the same address to
+                             sessionStorage on its way out.
+
+   The stored one is consumed on the first read, so it can never resurface days
+   later and teleport a reader who arrived at /history for their own reasons. */
+const RETURN_KEY = "history:return";
+const markerFor = (eraId: string, dot: number) => `${eraId}~${dot}`;
+
+/* Era ids contain hyphens and could one day contain anything else, so the
+   separator is found from the RIGHT — the dot index is the only part whose
+   shape is known. Unknown ids are dropped rather than trusted: this string
+   can arrive from the address bar. */
+const parseMarker = (raw: string | null | undefined, ids: string[]) => {
+  if (!raw) return null;
+  const cut = raw.lastIndexOf("~");
+  if (cut < 1) return null;
+  const eraId = raw.slice(0, cut);
+  const dot = Number(raw.slice(cut + 1));
+  if (!ids.includes(eraId) || !Number.isInteger(dot) || dot < 0) return null;
+  return { eraId, dot };
+};
+
+/* Safari in private mode throws on sessionStorage rather than returning null.
+   Losing the return address is a disappointment; taking the page down with it
+   is not an option. */
+const rememberReturn = (eraId: string, dot: number) => {
+  try {
+    sessionStorage.setItem(RETURN_KEY, markerFor(eraId, dot));
+  } catch {}
+};
+const takeReturn = () => {
+  try {
+    const v = sessionStorage.getItem(RETURN_KEY);
+    sessionStorage.removeItem(RETURN_KEY);
+    return v;
+  } catch {
+    return null;
+  }
+};
+
 export default function HistoryPage() {
   const rootRef = useRef<HTMLDivElement>(null);
   const frontRef = useRef<HTMLDivElement>(null);
@@ -174,6 +230,17 @@ export default function HistoryPage() {
   // the one authority here, so a button has to MOVE THE SCROLL and let the
   // trigger work out which year that is. See the note at the head.
   const goToRef = useRef<Record<string, (k: number) => void>>({});
+  /* Per-era "put the reader on year k of this chapter, from wherever they are
+     now". Not the same job as goToRef: those are the rail dots and ‹ ›, pressed
+     while the chapter is already square with the viewport, so they only have to
+     move the YEAR. Arriving from somewhere else — the Contents, or back from a
+     citation — has to TRAVEL as well, and on a phone travelling is a separate
+     move from setting the year. Each build registers the version that is true
+     for it; `instant` is for a restore, where an animated scroll across seven
+     chapters would be a spectacle nobody asked for. */
+  const openRef = useRef<
+    Record<string, (k: number, instant?: boolean) => void>
+  >({});
   const { t, lang } = useLang();
   /* Gates the per-year panel photographs, which only that path ever shows. */
   const stillReader = usePrefersReducedMotion();
@@ -472,6 +539,7 @@ export default function HistoryPage() {
 
         // Land in the MIDDLE of year k's band of scroll, so the scrub reads it
         // as k with room either side rather than balanced on the boundary.
+        // `duration: 0` means be there now, for a restore.
         const goTo = (k: number, duration = 1) => {
           const target = st.start + (st.end - st.start) * ((k + 0.5) / n);
           const lenis = (
@@ -479,8 +547,15 @@ export default function HistoryPage() {
               __lenis?: { scrollTo: (t: number, o?: object) => void };
             }
           ).__lenis;
-          if (lenis?.scrollTo) lenis.scrollTo(target, { duration });
-          else window.scrollTo({ top: target, behavior: "smooth" });
+          if (lenis?.scrollTo)
+            lenis.scrollTo(target, duration ? { duration } : { immediate: true });
+          else
+            window.scrollTo({
+              top: target,
+              behavior: duration ? "smooth" : "auto",
+            });
+          // A jump gives the trigger no intermediate frames to notice it in.
+          if (!duration) ScrollTrigger.update();
         };
         railBtns.forEach((btn, k) => {
           const handler = () => goTo(k);
@@ -488,9 +563,24 @@ export default function HistoryPage() {
           cleanups.push(() => btn.removeEventListener("click", handler));
         });
         goToRef.current[era.id] = goTo;
+        /* ⚠ OPENING A CHAPTER AIMS AT YEAR ONE, NOT AT THE SECTION TOP.
+           The Contents used to scroll to the <section> itself, and the section
+           top IS st.start — the exact boundary at which this trigger becomes
+           active. Stop a hair short of it (a smooth scroll lands on a
+           subpixel; Lenis measured the target before the pin spacers had
+           settled) and the trigger is NOT active, so onUpdate never fires and
+           the stage is left showing whatever year it held when the reader last
+           walked out of this chapter. Open chapter IV from the index after
+           reading it once and it opened on 1874.
+
+           Half a year's band further in, the answer is not on a knife edge:
+           it is the same pixel the first rail dot travels to, so the index and
+           the dots now agree by construction rather than by coincidence. */
+        openRef.current[era.id] = (k, instant) => goTo(k, instant ? 0 : 1.1);
         chapters[eraIdx] = { n, goTo };
         cleanups.push(() => {
           delete goToRef.current[era.id];
+          delete openRef.current[era.id];
         });
 
         // ── One scroll past the end of the text, one year ──
@@ -791,8 +881,26 @@ export default function HistoryPage() {
           cleanups.push(() => btn.removeEventListener("click", handler));
         });
         goToRef.current[era.id] = goTo;
+        /* Two moves here where desktop needs only one. Desktop reads the year
+           back off scroll position, so scrolling IS setting the year; here the
+           year is state and the page has to be carried to the chapter
+           separately. Doing only the second is what left a chapter you had
+           read before re-opening half way through itself — the Contents said
+           "chapter IV" and got 1874, because nothing had told it otherwise. */
+        openRef.current[era.id] = (k, instant) => {
+          goTo(k);
+          era.scrollIntoView({
+            behavior: instant ? "auto" : "smooth",
+            block: "start",
+          });
+          // The travel is longer than a year-step, so the gesture lock has to
+          // outlast it — otherwise the swipe that follows lands mid-flight and
+          // is spent squaring the stage up instead of turning the page.
+          if (!instant) hold(700);
+        };
         cleanups.push(() => {
           delete goToRef.current[era.id];
+          delete openRef.current[era.id];
         });
       });
 
@@ -820,10 +928,15 @@ export default function HistoryPage() {
     return () => window.clearTimeout(id);
   }, [armed]);
 
-  // Bring an element to the top of the viewport — which, for an era, is exactly
-  // where its pin begins, so landing on it drops the reader at that era's first
-  // year. Lenis is desktop-only; a phone falls through to the browser's own
-  // smooth scroll.
+  // Bring an element to the top of the viewport. Lenis is desktop-only; a phone
+  // falls through to the browser's own smooth scroll.
+  //
+  // This is NOT how a chapter is opened any more, and the reasoning that said it
+  // was is worth keeping as a warning: an era's top is exactly where its pin
+  // BEGINS, so landing on it looked like landing on that era's first year. It is
+  // the boundary, not the inside — see the ⚠ on openRef in buildDesktop. Only
+  // the reduced-motion page, where nothing is pinned and a section top is just a
+  // section top, still travels this way.
   const scrollToTopOf = useCallback((el: Element | null) => {
     if (!el) return;
     const lenis = (
@@ -848,17 +961,84 @@ export default function HistoryPage() {
     goToRef.current[eraId]?.(next);
   };
 
-  // Open a chapter — from the Contents index, or from « ». An era's section top
-  // is exactly where its pin begins, so this lands on that chapter's first year.
+  /** Put the reader on year `dot` of chapter `eraId`, wherever they are now. */
+  const openAt = useCallback(
+    (eraId: string, dot: number, instant = false) => {
+      const open = openRef.current[eraId];
+      if (open) {
+        open(dot, instant);
+        return;
+      }
+      // No build ran: prefers-reduced-motion, where nothing is pinned, nothing
+      // is stepped, and every year of every chapter stands open in normal
+      // flow. There is no machinery to drive — the moment is simply an element
+      // on the page, so scroll to it. Falls back to the chapter if the page is
+      // somehow not laid out yet.
+      const el =
+        document.querySelector(`[data-moment="${markerFor(eraId, dot)}"]`) ??
+        document.getElementById(eraId);
+      if (!el) return;
+      if (instant) el.scrollIntoView({ block: "start" });
+      else scrollToTopOf(el);
+    },
+    [scrollToTopOf]
+  );
+
+  // Open a chapter — from the Contents index, or from « ». Always at its first
+  // year: a chapter you have read before must not re-open half way through it.
   const openChapter = useCallback(
     (index: number) => {
       const target = h.eras[index];
       if (!target) return;
       setArmed(null);
-      scrollToTopOf(document.getElementById(target.id));
+      openAt(target.id, 0);
     },
-    [h.eras, scrollToTopOf]
+    [h.eras, openAt]
   );
+
+  /* ── Coming back to the moment you left from ──
+     See the note above RETURN_KEY. The hash is what this page's own citation
+     route links back with; sessionStorage catches the reader who used the
+     browser's back button instead, which returns to a bare /history. */
+  useEffect(() => {
+    const ids = h.eras.map((e) => e.id);
+    let hash: string | null = null;
+    try {
+      hash = decodeURIComponent(window.location.hash.slice(1));
+    } catch {
+      // A malformed %-escape in the address bar. Not our problem to solve.
+    }
+    // Read unconditionally, so a stored address is spent even when a hash wins
+    // — leaving it behind would fire it at some later, unrelated visit.
+    const stored = takeReturn();
+    const where = parseMarker(hash, ids) ?? parseMarker(stored, ids);
+    if (!where) return;
+
+    let raf = 0;
+    /* ⚠ NOT BEFORE THE PAGE HAS FINISHED MEASURING ITSELF. On desktop the year
+       is READ BACK OFF scroll position, so the restore is only as good as
+       ScrollTrigger's idea of where each chapter starts — and that moves when
+       a late image finally lands. ScrollTrigger re-measures on `load`; going
+       first would put the reader on the right pixel and the wrong year.
+
+       Two frames, not one, because a soft navigation brings its own scroll
+       with it: Next scrolls a new route to the top after render, and a restore
+       that ran in the same frame would simply be overwritten. */
+    const run = () => {
+      raf = requestAnimationFrame(() => {
+        raf = requestAnimationFrame(() =>
+          openAt(where.eraId, where.dot, true)
+        );
+      });
+    };
+    if (document.readyState === "complete") run();
+    else window.addEventListener("load", run, { once: true });
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("load", run);
+    };
+  }, [h.eras, openAt]);
 
   // ‹Previous chapter / Next chapter› — two taps. The first arms the button and
   // opens it to name the chapter it would take you to; only the second travels.
@@ -1071,6 +1251,11 @@ export default function HistoryPage() {
                       return (
                         <article
                           key={di}
+                          // The moment's address, and the only handle the
+                          // reduced-motion path has for a restore — there is no
+                          // build there to ask, so openAt() finds the year the
+                          // way a reader would: as an element on the page.
+                          data-moment={markerFor(era.id, di)}
                           // `is-above` is rendered as well as toggled, so that a
                           // re-render reproduces EXACTLY what the scrub would have
                           // set. Leave it out and React, rewriting this attribute
@@ -1170,6 +1355,13 @@ export default function HistoryPage() {
                                           ? `/reference/${era.id}/${di}/${s.id}`
                                           : `/sources#${s.id}`
                                       }
+                                      /* Drop a return address on the way out.
+                                         The citation route links back with the
+                                         same address in the URL; this is for
+                                         the reader who uses the browser's back
+                                         button, and for /sources, which has no
+                                         idea which moment sent them. */
+                                      onClick={() => rememberReturn(era.id, di)}
                                       className={`cite-chip ${open ? "cite-chip--open" : ""}`}
                                       title={
                                         open
