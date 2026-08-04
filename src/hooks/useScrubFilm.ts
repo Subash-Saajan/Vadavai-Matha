@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type RefObject } from "react";
+import { bbMark } from "@/lib/blackbox";
 
 /* ── WHY THE PHONE DECODES A VIDEO ITSELF INSTEAD OF LOADING PICTURES ──────
    The frame sequence this replaces works, and it is still here as the fallback
@@ -298,6 +299,7 @@ export function useScrubFilm({
 
     (async () => {
       try {
+        bbMark("film:manifest fetch");
         const manifestRes = await fetch(manifestSrc, { signal: abort.signal });
         if (!manifestRes.ok) throw new Error(`film index ${manifestRes.status}`);
         index = (await manifestRes.json()) as FilmIndex;
@@ -347,11 +349,13 @@ export function useScrubFilm({
            live from the first GOP instead of after four megabytes — which on a
            mobile connection is the difference between a hero that works and one
            that is a still photograph for ten seconds. */
+        bbMark("film:h264 fetch start");
         const filmRes = await fetch(filmSrc, { signal: abort.signal });
         if (!filmRes.ok) throw new Error(`film ${filmRes.status}`);
 
         const total = Number(filmRes.headers.get("content-length")) || 0;
         if (filmRes.body && total > 0) {
+          bbMark("film:alloc", `${(total / 1048576).toFixed(1)} MB Uint8Array`);
           bytes = new Uint8Array(total);
           const reader = filmRes.body.getReader();
           for (;;) {

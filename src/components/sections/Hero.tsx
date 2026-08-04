@@ -2,6 +2,7 @@
 
 import { useRef, useEffect } from "react";
 import Image from "next/image";
+import { bbMark } from "@/lib/blackbox";
 import { cappedSizes } from "@/lib/imageSizes";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { useScrubMedia } from "@/hooks/useScrubMedia";
@@ -96,6 +97,7 @@ export function Hero() {
     const video = videoRef.current;
     if (mode === "video" && (!video || !video.duration)) return;
 
+    bbMark("hero:gsap build");
     const ctx = gsap.context(() => {
       // ── Entrance: stone rises out of darkness, line by line ──
       const lines = headingRef.current?.querySelectorAll(".title-line");

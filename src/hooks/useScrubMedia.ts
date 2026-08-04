@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState, type RefObject } from "react";
 
+import { bbMark } from "@/lib/blackbox";
 import { probe } from "@/lib/probe";
 
 import { useScrubFilm } from "./useScrubFilm";
@@ -213,10 +214,13 @@ export function useScrubMedia({
        sure a demoted hero cannot flip back and re-download the film. */
     // Diagnostic override — see lib/probe.ts. No flag, no change.
     if (probe("nofilm")) {
+      bbMark("hero:mode", "canvas (probe)");
       setMode("canvas");
       return;
     }
-    setMode(hasFilm && "VideoDecoder" in window ? "film" : "canvas");
+    const chosen = hasFilm && "VideoDecoder" in window ? "film" : "canvas";
+    bbMark("hero:mode", chosen);
+    setMode(chosen);
   }, [hasFilm]);
 
   const onFilmFail = useCallback(() => setMode("canvas"), []);

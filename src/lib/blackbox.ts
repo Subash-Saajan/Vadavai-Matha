@@ -36,7 +36,19 @@ import { useSyncExternalStore } from "react";
 
 const KEY = "vm-blackbox";
 const FLAG = "vm-blackbox-on";
-const HEARTBEAT_MS = 400;
+/* ── 400 ms WAS TOO COARSE: THE FIRST RUN RECORDED ONE ROW ─────────────────
+   `start` was written and the first beat never arrived, which means the page
+   died inside 400 ms of hydrating. That is already the single most useful
+   fact this investigation has produced — it rules out anything gradual, and
+   every image change made so far was aimed at something gradual — but one row
+   cannot say WHICH operation was in flight.
+
+   40 ms, driven off requestAnimationFrame rather than a timer, gives about ten
+   samples in the window where it dies AND makes the frame counter meaningful:
+   a beat that is late is a main thread that was blocked, and the gap says by
+   how long. A timer cannot show that, because a blocked thread delays the
+   timer too and the two are indistinguishable. */
+const HEARTBEAT_MS = 40;
 /** Enough tail to see the last few seconds; small enough to write cheaply. */
 const MAX_ENTRIES = 120;
 
@@ -153,29 +165,47 @@ export function bbStart(): () => void {
   if (started || !bbOn()) return () => {};
   started = true;
   t0 = performance.now();
-  log = [{ t: 0, label: "start", note: `${innerWidth}x${innerHeight} dpr${devicePixelRatio}` }];
+  log = [
+    {
+      t: 0,
+      label: "start",
+      note: `${innerWidth}x${innerHeight} dpr${devicePixelRatio}`,
+      // The first run left this row's columns blank because it never measured.
+      // The state at hydration is exactly what we most want to see.
+      ...measure(),
+      frames: 0,
+    },
+  ];
   flush();
 
+  /* Beats ride requestAnimationFrame, not setInterval. A frame callback that
+     arrives 300 ms after the last one is proof the main thread was blocked for
+     300 ms; a setInterval that fires late is indistinguishable from one that
+     was merely scheduled late. `gap` carries that number. */
   let raf = 0;
+  let lastBeat = 0;
+  let lastFrame = 0;
   const tick = () => {
     rafCount++;
+    const now = performance.now() - t0;
+    if (now - lastBeat >= HEARTBEAT_MS) {
+      const gap = Math.round(now - lastFrame);
+      log.push({
+        t: Math.round(now),
+        label: gap > 120 ? `STALL ${gap}ms` : "beat",
+        scrollY: Math.round(window.scrollY),
+        frames: rafCount,
+        ...measure(),
+      });
+      flush();
+      lastBeat = now;
+    }
+    lastFrame = now;
     raf = requestAnimationFrame(tick);
   };
   raf = requestAnimationFrame(tick);
 
-  const beat = setInterval(() => {
-    log.push({
-      t: Math.round(performance.now() - t0),
-      label: "beat",
-      scrollY: Math.round(window.scrollY),
-      frames: rafCount,
-      ...measure(),
-    });
-    flush();
-  }, HEARTBEAT_MS);
-
   return () => {
-    clearInterval(beat);
     cancelAnimationFrame(raf);
     started = false;
   };
