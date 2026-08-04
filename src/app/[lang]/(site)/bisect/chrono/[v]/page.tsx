@@ -78,6 +78,44 @@ const VARIANTS: { id: string; what: string; css: string }[] = [
     what: "no shadows or rings on the cards",
     css: ".chron-card{box-shadow:none!important;--tw-ring-shadow:0 0 #0000!important}",
   },
+
+  /* ── FINDING THE FLOOR ─────────────────────────────────────────────────
+     If 1-6 all still fail, no SINGLE trigger is responsible and taking them
+     away one at a time will never show anything. These take away a lot at
+     once, to establish what the section can survive at all. Work down: the
+     first of these that LOADS brackets the problem between itself and the
+     variant above it. */
+  {
+    id: "7",
+    what: "ONE card instead of nine (everything else untouched)",
+    // If nine cards die and one lives, the trigger scales with the number of
+    // cards — layers, decoded images or scroller width — rather than being
+    // any one property. That is a different fix from removing a feature.
+    css: ".chron-card:nth-of-type(n+2){display:none!important}",
+  },
+  {
+    id: "8",
+    what: "everything off at once — 1+2+3+4+5+6 combined",
+    // Same DOM, same JS, same scroll handlers, but nothing left that asks
+    // WebKit for a composited layer or an offscreen buffer. If this still
+    // fails the cause is not compositing at all, and the remaining suspects
+    // are the markup itself and the JS that runs over it.
+    css:
+      ".chron-card{transform:none!important;border-radius:0!important;" +
+      "overflow:visible!important;box-shadow:none!important;" +
+      "--tw-ring-shadow:0 0 #0000!important}" +
+      '[aria-roledescription="carousel"]{overflow-x:hidden!important}' +
+      ".light-shaft{display:none!important}" +
+      ".chron-card img{display:none!important}",
+  },
+  {
+    id: "9",
+    what: "no cards at all — the section header alone",
+    // The floor. If even this fails, nothing in the carousel is to blame and
+    // the trigger is in the shared layout or the header, which would also
+    // mean /faq surviving needs explaining.
+    css: '[aria-roledescription="carousel"]{display:none!important}',
+  },
 ];
 
 export function generateStaticParams() {
