@@ -341,7 +341,19 @@ function CarouselDoor({
   );
 }
 
-export function ChronicleCarousel() {
+/* ⚠ TEMPORARY DEBUG SWITCH — remove with the /bisect routes.
+   An iPhone kills the tab on this section and only this section, and loading
+   it with JavaScript disabled in Safari makes it survive. So the trigger is
+   in the script, not the markup, the CSS or the images — which the CSS-only
+   variants in /bisect/chrono could never have shown, because they left every
+   line of this file running.
+
+   `off` turns individual effects off so the phone can say which one:
+     "arc"       the measure/paint/scroll machinery
+     "entrance"  the fade-and-rise tween on the scroller
+   Comma-separated. Nothing passes it in normal use, so the default is the
+   component exactly as it shipped. */
+export function ChronicleCarousel({ off = "" }: { off?: string } = {}) {
   const sectionRef = useRef<HTMLElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
@@ -577,6 +589,7 @@ export function ChronicleCarousel() {
   /* ── MOBILE: the finger drives it, sideways only ───────────────────────── */
   useEffect(() => {
     if (isDesktop) return;
+    if (off.includes("arc")) return; // temporary — see the note on `off`
     const viewport = viewportRef.current;
     if (!viewport) return;
 
@@ -605,12 +618,13 @@ export function ChronicleCarousel() {
       viewport.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
     };
-  }, [lang, isDesktop, measure, paint]);
+  }, [lang, isDesktop, measure, paint, off]);
 
   // The strip arrives once, on scroll into view. It moves the VIEWPORT, never
   // the cards: the arc owns every card's transform and repaints it each frame,
   // so a second tween on the same property would fight it.
   useEffect(() => {
+    if (off.includes("entrance")) return; // temporary — see the note on `off`
     const ctx = gsap.context(() => {
       gsap.fromTo(
         viewportRef.current,
@@ -629,7 +643,7 @@ export function ChronicleCarousel() {
       );
     }, sectionRef);
     return () => ctx.revert();
-  }, [lang]);
+  }, [lang, off]);
 
   /* ── NO ARROWS, NO COUNTER, AND NOTHING LOST BY IT ────────────────────────
      There was a row of prev/next buttons and an 03 / 08 counter under the

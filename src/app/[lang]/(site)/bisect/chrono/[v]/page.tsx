@@ -30,7 +30,7 @@ import { Chronicle } from "@/components/sections/Chronicle";
 
    DELETE THIS ROUTE, and /bisect/[n], once the cause is found. */
 
-const VARIANTS: { id: string; what: string; css: string }[] = [
+const VARIANTS: { id: string; what: string; css: string; off?: string }[] = [
   {
     id: "0",
     what: "control — the Chronicle alone, untouched",
@@ -111,10 +111,54 @@ const VARIANTS: { id: string; what: string; css: string }[] = [
   {
     id: "9",
     what: "no cards at all — the section header alone",
-    // The floor. If even this fails, nothing in the carousel is to blame and
-    // the trigger is in the shared layout or the header, which would also
-    // mean /faq surviving needs explaining.
+    /* ⚠ CONTAMINATED, KEPT ONLY SO THE NUMBERING DOES NOT MOVE.
+       display:none does not stop the JS: measure() still reads offsetLeft and
+       offsetWidth on all nine cards, which inside a hidden container are all
+       0, so pitch is 0 and paint() then feeds NaN into every transform. This
+       variant is "the carousel hidden AND the maths broken", which is not a
+       question anyone asked. Use 10-13 instead. */
     css: '[aria-roledescription="carousel"]{display:none!important}',
+  },
+
+  /* ── THE JS VARIANTS, WHICH ARE THE ONES THAT MATTER NOW ───────────────
+     Safari with JavaScript disabled renders this section fine. So the
+     trigger is in the script — and 0-9 could never have found it, because
+     CSS cannot switch an effect off. These do, through a temporary `off`
+     prop on ChronicleCarousel. Same markup, same CSS, same images. */
+  {
+    id: "10",
+    what: "JS: no arc — measure(), paint() and the scroll handler never run",
+    css: "",
+    off: "arc",
+  },
+  {
+    id: "11",
+    what: "JS: no entrance tween — no fade/rise on the scroller",
+    // gsap.fromTo(viewport, {y:44, opacity:0} …). An opacity tween forces the
+    // element to be composited, and this element is the horizontal scroller
+    // that contains all nine cards.
+    css: "",
+    off: "entrance",
+  },
+  {
+    id: "12",
+    what: "JS: both off — the carousel is inert markup",
+    css: "",
+    off: "arc,entrance",
+  },
+  {
+    id: "13",
+    what: "JS: both off AND every compositing trigger off (12 + 8)",
+    // If even this fails, nothing in this component is responsible and the
+    // remaining suspects are the header's own GSAP reveals and the layout.
+    css:
+      ".chron-card{transform:none!important;border-radius:0!important;" +
+      "overflow:visible!important;box-shadow:none!important;" +
+      "--tw-ring-shadow:0 0 #0000!important}" +
+      '[aria-roledescription="carousel"]{overflow-x:hidden!important}' +
+      ".light-shaft{display:none!important}" +
+      ".chron-card img{display:none!important}",
+    off: "arc,entrance",
   },
 ];
 
@@ -141,7 +185,7 @@ export default async function ChronoBisect({
       {variant.css ? (
         <style dangerouslySetInnerHTML={{ __html: variant.css }} />
       ) : null}
-      <Chronicle />
+      <Chronicle off={variant.off} />
       {/* Named on the page so a tester can see which one they are looking at
           without reading the URL — the variants are otherwise identical. */}
       <p className="px-6 py-10 text-center font-mono text-xs text-text-muted">
