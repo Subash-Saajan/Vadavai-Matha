@@ -7,6 +7,7 @@ import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { useHeroMedia } from "@/hooks/useHeroMedia";
 import { useScrubFilm } from "@/hooks/useScrubFilm";
 import { useScrubVideo } from "@/hooks/useScrubVideo";
+import { VARIANT_SCRUB } from "@/lib/heroVariants";
 import { ChevronDown } from "lucide-react";
 
 /* ── THREE HEROES, ONE SCRUB ───────────────────────────────────────────────
@@ -71,11 +72,18 @@ export function Hero() {
   const frameTargetRef = useRef(0);
   const drawRef = useRef<(() => void) | null>(null);
 
-  // `mode` is null until mounted, so SSR paints only the poster.
-  const { mode, demoteFilm } = useHeroMedia();
+  /* `mode` is null until mounted, so SSR paints only the poster. `variant` is
+     non-null ONLY when ?hero=<rung> names one of the test cuts — see
+     src/lib/heroVariants.ts. Temporary; goes when the ladder does. */
+  const { mode, variant, demoteFilm } = useHeroMedia();
 
-  const videoSrc =
-    mode === "desktop" ? DESKTOP_SRC : mode === "mobileVideo" ? MOBILE_SRC : null;
+  const videoSrc = variant
+    ? (variant.videoSrc ?? null)
+    : mode === "desktop"
+      ? DESKTOP_SRC
+      : mode === "mobileVideo"
+        ? MOBILE_SRC
+        : null;
 
   const { ready: videoReady, scrubTo } = useScrubVideo({ videoRef, src: videoSrc });
 
@@ -84,8 +92,8 @@ export function Hero() {
     frameTargetRef,
     drawRef,
     active: mode === "film",
-    manifestSrc: FILM_INDEX_SRC,
-    filmSrc: FILM_SRC,
+    manifestSrc: variant?.indexSrc ?? FILM_INDEX_SRC,
+    filmSrc: variant?.filmSrc ?? FILM_SRC,
     frameCount: FRAME_COUNT,
     onFail: demoteFilm,
   });
@@ -153,7 +161,15 @@ export function Hero() {
           trigger: sectionRef.current,
           start: "top top",
           end: "bottom bottom",
-          scrub: mode === "desktop" ? 0.5 : mode === "film" ? 1 : 0.35,
+          /* A ladder rung pins this, so a tester compares mechanism and
+             resolution rather than easing — see VARIANT_SCRUB. */
+          scrub: variant
+            ? VARIANT_SCRUB
+            : mode === "desktop"
+              ? 0.5
+              : mode === "film"
+                ? 1
+                : 0.35,
         },
         onUpdate: () => {
           if (mode === "film") {
@@ -197,7 +213,7 @@ export function Hero() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [ready, mode, scrubTo]);
+  }, [ready, mode, variant, scrubTo]);
 
   return (
     <section

@@ -263,118 +263,170 @@ const dims = info.match(/Stream #0:0.*?, (\d+)x(\d+)/);
 if (!dims) throw new Error(`could not read the master's dimensions from:\n${info}`);
 const [srcW, srcH] = [Number(dims[1]), Number(dims[2])];
 
-const vf = [
-  `select=not(mod(n\\,${STEP}))`,
-  cropExpr(srcW, srcH),
-  `scale=${OUT_W}:${OUT_H}:flags=lanczos:out_color_matrix=bt709:out_range=tv`,
-  "format=yuv420p",
-  "reverse",
-  "setpts=N/30/TB",
-].join(",");
-
-console.log(`master ${srcW}x${srcH} → ${OUT_W}x${OUT_H}, every ${STEP}th frame`);
-console.log(`vf: ${vf}\n`);
-
-execFileSync(
-  ffmpeg,
+/** The filter chain up to the scale, which every cut shares. */
+const chain = (w, h) =>
   [
-    "-hide_banner", "-loglevel", "error", "-y",
-    "-display_rotation", "0",
-    "-i", SRC,
-    "-map", "0:0",            // skip the attached-thumbnail stream
-    "-vf", vf,
-    "-r", "30",
-    "-c:v", "libx264",
-    "-profile:v", "high",
-    "-preset", "slow",
-    "-crf", CRF,
-    "-g", String(GOP),
-    "-keyint_min", String(GOP),
-    "-sc_threshold", "0",     // keyframes on the grid, not where the scene cuts
-    "-bf", "0",               // see the note at the head of this file
-    // These TAG the stream; the conversion itself is done by the scale filter
-    // above. The two must always be changed together.
-    "-colorspace", "bt709",
-    "-color_primaries", "bt709",
-    "-color_trc", "bt709",
-    "-color_range", "tv",
-    "-movflags", "+faststart", // moov atom first, so it streams progressively
-    "-an",
-    OUT,
-  ],
-  { stdio: "inherit" }
-);
+    `select=not(mod(n\\,${STEP}))`,
+    cropExpr(srcW, srcH),
+    `scale=${w}:${h}:flags=lanczos:out_color_matrix=bt709:out_range=tv`,
+    "format=yuv420p",
+    "reverse",
+    "setpts=N/30/TB",
+  ].join(",");
 
-const bytes = statSync(OUT).size;
+/** Colour tagging. The scale filter above does the conversion; this only
+    LABELS it, and the two must always be changed together. */
+const TAG = [
+  "-colorspace", "bt709",
+  "-color_primaries", "bt709",
+  "-color_trc", "bt709",
+  "-color_range", "tv",
+];
+
+/** An MP4 to be seeked with currentTime — the WebKit shape. */
+function encodeVideo({ w, h, crf, gop, out }) {
+  execFileSync(
+    ffmpeg,
+    [
+      "-hide_banner", "-loglevel", "error", "-y",
+      "-display_rotation", "0",
+      "-i", SRC,
+      "-map", "0:0",            // skip the attached-thumbnail stream
+      "-vf", chain(w, h),
+      "-r", "30",
+      "-c:v", "libx264",
+      "-profile:v", "high",
+      "-preset", "slow",
+      "-crf", String(crf),
+      "-g", String(gop),
+      "-keyint_min", String(gop),
+      "-sc_threshold", "0",     // keyframes on the grid, not where the scene cuts
+      "-bf", "0",               // see the note at the head of this file
+      ...TAG,
+      "-movflags", "+faststart", // moov atom first, so it streams progressively
+      "-an",
+      out,
+    ],
+    { stdio: "inherit" }
+  );
+  return statSync(out).size;
+}
+
+/* ── THE WEBCODECS SHAPE: a raw Annex-B elementary stream, not an MP4 ──────
+   WebCodecs takes EncodedVideoChunks, not a container, so there is nothing
+   for an MP4 to do here except add a parser. The stream is emitted flat and
+   the sidecar .json says where each picture starts and how long it is, which
+   is all the hook needs to hand one picture at a time to the decoder. */
+function encodeFilm({ w, h, crf, out, indexOut }) {
+  mkdirSync(dirname(out), { recursive: true });
+  execFileSync(
+    ffmpeg,
+    [
+      "-hide_banner", "-loglevel", "error", "-y",
+      "-display_rotation", "0",
+      "-i", SRC,
+      "-map", "0:0",
+      "-vf", chain(w, h),
+      "-r", "30",
+      "-c:v", "libx264",
+      "-profile:v", "high",
+      "-preset", "slow",
+      "-crf", String(crf),
+      "-g", "1", "-keyint_min", "1", "-sc_threshold", "0",
+      "-bf", "0",
+      ...TAG,
+      "-an",
+      "-f", "h264",             // Annex-B elementary stream, no container
+      out,
+    ],
+    { stdio: "inherit" }
+  );
+
+  const buf = readFileSync(out);
+  const { frames, codec } = indexAnnexB(buf);
+  if (frames.length !== FRAMES) {
+    throw new Error(
+      `indexed ${frames.length} pictures but the encode should have produced ` +
+      `${FRAMES} — the Annex-B walk is wrong, not the film.`
+    );
+  }
+  const keys = frames.filter((f) => f[2]).length;
+  if (keys !== frames.length) {
+    throw new Error(`only ${keys} of ${frames.length} pictures are keyframes — GOP 1 did not hold`);
+  }
+  /* No `focusScale`, unlike the film this replaces. That field existed to
+     convert a focal track measured in one crop's coordinates into another's;
+     the pan is baked into the crop now, so every cut is already centred and
+     the canvas draws a plain centre-cover. */
+  writeFileSync(indexOut, JSON.stringify({ codec, width: w, height: h, gop: 1, frames }));
+  return { bytes: buf.length, codec, keys };
+}
+
+/* ── --variants: THE LADDER, FOR DECIDING ON A REAL iPHONE ─────────────────
+   An iPhone has now run WebCodecs without the tab dying, which retires the
+   assumption this whole split was built on — but it read as LAGGIER than the
+   seeked <video>, and that comparison was not a fair one: the film had 78%
+   more pixels AND a full second of scrub easing against the video's 0.35.
+   Two variables, one result, no conclusion.
+
+   These cuts hold everything constant except the two things being chosen.
+   src/lib/heroVariants.ts pins the easing at 0.35 for all of them, so what a
+   tester feels is mechanism and resolution and nothing else.
+
+   Only the three that do not already exist are encoded — v810 is production's
+   hero-mobile.mp4 and f1080 is production's film.h264, byte for byte, so the
+   baseline in the ladder really is the baseline and not a re-encode of it.
+
+   Throwaway. Delete public/hero-test/ and this block once a winner is picked;
+   the winner's numbers move into the constants at the top of this file. */
+const VARIANT_CUTS = [
+  { id: "v648",  kind: "video", w: 648,  h: 1152, crf: 26, gop: 1 },
+  { id: "v1080", kind: "video", w: 1080, h: 1920, crf: 26, gop: 10 },
+  { id: "f810",  kind: "film",  w: 810,  h: 1440, crf: 24 },
+];
+
+if (process.argv.includes("--variants")) {
+  const dir = resolve(ROOT, "public/hero-test");
+  mkdirSync(dir, { recursive: true });
+  console.log(`master ${srcW}x${srcH} → variant ladder in public/hero-test/\n`);
+  for (const c of VARIANT_CUTS) {
+    if (c.kind === "video") {
+      const out = resolve(dir, `${c.id}.mp4`);
+      const bytes = encodeVideo({ ...c, out });
+      console.log(
+        `${c.id.padEnd(6)} ${c.w}x${c.h}  GOP ${c.gop}  ` +
+        `${(bytes / 1024 / 1024).toFixed(2)} MB   (seeked)`
+      );
+    } else {
+      const out = resolve(dir, `${c.id}.h264`);
+      const { bytes, codec } = encodeFilm({
+        ...c, out, indexOut: resolve(dir, `${c.id}.json`),
+      });
+      console.log(
+        `${c.id.padEnd(6)} ${c.w}x${c.h}  ${codec}  ` +
+        `${(bytes / 1024 / 1024).toFixed(2)} MB   (WebCodecs)`
+      );
+    }
+  }
+  console.log("\ndone — the ladder is at /hero-test on the site.");
+  process.exit(0);
+}
+
+console.log(`master ${srcW}x${srcH} → ${OUT_W}x${OUT_H}, every ${STEP}th frame\n`);
+
+const bytes = encodeVideo({ w: OUT_W, h: OUT_H, crf: CRF, gop: GOP, out: OUT });
 console.log(
   `\nhero-mobile.mp4  ${OUT_W}x${OUT_H}  GOP ${GOP}  ` +
   `${(bytes / 1024 / 1024).toFixed(2)} MB   (WebKit — seeked)`
 );
 
-/* ── THE CHROMIUM CUT: a raw Annex-B elementary stream, not an MP4 ─────────
-   WebCodecs takes EncodedVideoChunks, not a container, so there is nothing
-   for an MP4 to do here except add a parser. The stream is emitted flat and
-   `film.json` says where each picture starts and how long it is, which is
-   all the hook needs to hand one picture at a time to the decoder. */
 console.log("\nencoding the Chromium cut…");
-mkdirSync(FILM_DIR, { recursive: true });
-execFileSync(
-  ffmpeg,
-  [
-    "-hide_banner", "-loglevel", "error", "-y",
-    "-display_rotation", "0",
-    "-i", SRC,
-    "-map", "0:0",
-    "-vf", [
-      `select=not(mod(n\\,${STEP}))`,
-      cropExpr(srcW, srcH),
-      `scale=${FILM_W}:${FILM_H}:flags=lanczos:out_color_matrix=bt709:out_range=tv`,
-      "format=yuv420p",
-      "reverse",
-      "setpts=N/30/TB",
-    ].join(","),
-    "-r", "30",
-    "-c:v", "libx264",
-    "-profile:v", "high",
-    "-preset", "slow",
-    "-crf", FILM_CRF,
-    "-g", "1", "-keyint_min", "1", "-sc_threshold", "0",
-    "-bf", "0",
-    "-colorspace", "bt709",
-    "-color_primaries", "bt709",
-    "-color_trc", "bt709",
-    "-color_range", "tv",
-    "-an",
-    "-f", "h264",             // Annex-B elementary stream, no container
-    FILM,
-  ],
-  { stdio: "inherit" }
-);
-
-const filmBuf = readFileSync(FILM);
-const { frames, codec } = indexAnnexB(filmBuf);
-if (frames.length !== FRAMES) {
-  throw new Error(
-    `indexed ${frames.length} pictures but the encode should have produced ` +
-    `${FRAMES} — the Annex-B walk is wrong, not the film.`
-  );
-}
-const keys = frames.filter((f) => f[2]).length;
-if (keys !== frames.length) {
-  throw new Error(`only ${keys} of ${frames.length} pictures are keyframes — GOP 1 did not hold`);
-}
-/* No `focusScale` here, unlike the film this replaces. That field existed to
-   convert a focal track measured in one crop's coordinates into another's;
-   the pan is baked into the crop now, so both cuts are already centred and
-   the canvas draws a plain centre-cover. */
-writeFileSync(
-  FILM_INDEX,
-  JSON.stringify({ codec, width: FILM_W, height: FILM_H, gop: 1, frames })
-);
-
+const film = encodeFilm({
+  w: FILM_W, h: FILM_H, crf: FILM_CRF, out: FILM, indexOut: FILM_INDEX,
+});
 console.log(
-  `film.h264        ${FILM_W}x${FILM_H}  ${codec}  ${frames.length} pictures ` +
-  `(${keys} keyframes)  ${(filmBuf.length / 1024 / 1024).toFixed(2)} MB   (Chromium — WebCodecs)`
+  `film.h264        ${FILM_W}x${FILM_H}  ${film.codec}  ${FRAMES} pictures ` +
+  `(${film.keys} keyframes)  ${(film.bytes / 1024 / 1024).toFixed(2)} MB   (Chromium — WebCodecs)`
 );
 
 /**

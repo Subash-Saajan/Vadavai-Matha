@@ -2,6 +2,13 @@
 
 import { useCallback, useState, useSyncExternalStore } from "react";
 
+import {
+  HERO_VARIANTS,
+  isHeroVariantId,
+  type HeroVariant,
+  type HeroVariantId,
+} from "@/lib/heroVariants";
+
 /* ── WHICH OF THE THREE HEROES THIS DEVICE GETS ────────────────────────────
    There are two mobile implementations and they exist for opposite reasons.
 
@@ -43,6 +50,9 @@ const DESKTOP = "(min-width: 768px)";
 
 export type HeroMode = "desktop" | "film" | "mobileVideo";
 
+/** What the store actually holds: a mode, or a ladder rung that implies one. */
+type HeroChoice = HeroMode | HeroVariantId;
+
 function isWebKit(): boolean {
   return (
     "GestureEvent" in window ||
@@ -56,32 +66,32 @@ function subscribe(onChange: () => void): () => void {
   return () => mq.removeEventListener("change", onChange);
 }
 
-/* ── ?hero=film — TEMPORARY, FOR TESTING WEBCODECS ON AN ACTUAL iPHONE ─────
-   The reason WebKit is kept off the film is PRECAUTIONARY, not measured. The
-   iPhone tab kill turned out to be the Chronicle carousel's arc, not the hero
-   — iPhones died just as reliably with no canvas, no decoder and no frames on
-   the page at all. So the film has never actually been tried on an iPhone;
-   it was ruled out on research (partial WebCodecs in Safari 16.4–18.7, an
-   isConfigSupported that only prefix-matches the codec string, and a decoder
-   living in the GPU process where a failure takes every tab down) rather than
-   on evidence from the device.
+/* ── ?hero=<id> — TEMPORARY, THE LADDER IN src/lib/heroVariants.ts ─────────
+   ⚠ THE CRASH STORY ABOVE IS NOW HALF WRONG, AND THIS IS THE CORRECTION.
+   The iPhone tab kill was the Chronicle carousel's arc, not the hero —
+   iPhones died just as reliably with no canvas, no decoder and no frames on
+   the page at all. An iPhone has since run the film with NO CRASH, so
+   "WebCodecs kills iPhones" is retired: it is not a safety question.
 
-   This flag lets one phone opt in without changing what anybody else gets. If
-   an iPhone runs `?hero=film` cleanly — including a scroll all the way through
-   the hero and back — the default below can move and this can go.
+   What remains is a performance question. The film felt laggier than the
+   seeked video on that phone — but it was carrying 78% more pixels and three
+   times the scroll easing at the time, so that result names no cause. The
+   ladder holds both of those constant and varies only mechanism and
+   resolution. See heroVariants.ts for how to read a result.
 
    Safe to read here: getServerSnapshot returns null, so SSR emits no media at
    all and there is nothing for a query string to disagree with. */
-function forcedMode(): HeroMode | null {
+function forcedChoice(): HeroChoice | null {
   const v = new URLSearchParams(window.location.search).get("hero");
+  if (isHeroVariantId(v)) return v;
   return v === "film" || v === "mobileVideo" ? v : null;
 }
 
-/* Returns one of three stable strings, so useSyncExternalStore's identity
-   check never loops. */
-function getSnapshot(): HeroMode {
+/* Returns a stable STRING, never an object, so useSyncExternalStore's identity
+   check never loops — the variant record is looked up from it below. */
+function getSnapshot(): HeroChoice {
   if (window.matchMedia(DESKTOP).matches) return "desktop";
-  const forced = forcedMode();
+  const forced = forcedChoice();
   if (forced) return forced;
   if (isWebKit()) return "mobileVideo";
   return "VideoDecoder" in window ? "film" : "mobileVideo";
@@ -91,7 +101,7 @@ function getSnapshot(): HeroMode {
    <video> nor a <canvas> and there is nothing to mismatch — the poster
    carries the first paint on every device. React re-renders once with the
    real answer immediately after hydration. */
-const getServerSnapshot = (): HeroMode | null => null;
+const getServerSnapshot = (): HeroChoice | null => null;
 
 export function useHeroMedia() {
   const detected = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
@@ -101,8 +111,17 @@ export function useHeroMedia() {
   const [filmFailed, setFilmFailed] = useState(false);
   const demoteFilm = useCallback(() => setFilmFailed(true), []);
 
-  const mode: HeroMode | null =
-    detected === "film" && filmFailed ? "mobileVideo" : detected;
+  const variant: HeroVariant | null =
+    detected && isHeroVariantId(detected) ? HERO_VARIANTS[detected] : null;
 
-  return { mode, demoteFilm };
+  const base: HeroMode | null = variant ? variant.mode : (detected as HeroMode | null);
+
+  /* A variant is NOT demoted on failure. Everywhere else that fallback is a
+     kindness; here it would quietly serve the tester a different cut from the
+     one named in the URL, and they would report on the wrong file. A rung that
+     cannot run should visibly not run. */
+  const mode: HeroMode | null =
+    !variant && base === "film" && filmFailed ? "mobileVideo" : base;
+
+  return { mode, variant, demoteFilm };
 }
