@@ -255,6 +255,7 @@ export function Diagnostics() {
                   <th className="py-1 pr-3">img MB</th>
                   <th className="py-1 pr-3">canvas</th>
                   <th className="py-1 pr-3">imgs</th>
+                  <th className="py-1 pr-3">DOM</th>
                   <th className="py-1 pr-3">scrollY</th>
                   <th className="py-1">frames</th>
                 </tr>
@@ -274,6 +275,7 @@ export function Diagnostics() {
                       <td className="py-1 pr-3">{e.imgMB ?? ""}</td>
                       <td className="py-1 pr-3">{e.canvasMB ?? ""}</td>
                       <td className="py-1 pr-3">{e.imgs ?? ""}</td>
+                      <td className="py-1 pr-3">{e.el ?? ""}</td>
                       <td className="py-1 pr-3">{e.scrollY ?? ""}</td>
                       <td className="py-1">{e.frames ?? ""}</td>
                     </tr>

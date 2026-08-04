@@ -4,6 +4,7 @@ import { Geist, Cormorant_Garamond, Cinzel } from "next/font/google";
 import { LanguageProvider } from "@/components/layout/LanguageProvider";
 import { JsonLd } from "@/components/JsonLd";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { BlackboxScript } from "@/components/BlackboxScript";
 import { PreloadTamilFonts } from "@/components/PreloadTamilFonts";
 import { baseNodes, graph } from "@/lib/schema";
 import { SITE_NAME, SITE_URL, siteTitle, siteDescription } from "@/lib/seo";
@@ -147,6 +148,9 @@ export default async function RootLayout({
       className={`notranslate ${geistSans.variable} ${cormorant.variable} ${cinzel.variable} antialiased`}
     >
       <body className="min-h-screen">
+        {/* FIRST, deliberately — the iOS flight recorder must run before any
+            markup below it exists. Inert without ?bb=1. See the file. */}
+        <BlackboxScript />
         {lang === "ta" ? <PreloadTamilFonts /> : null}
         <GoogleAnalytics />
         {/* The shrine, the parish and the website — asserted on every route.
