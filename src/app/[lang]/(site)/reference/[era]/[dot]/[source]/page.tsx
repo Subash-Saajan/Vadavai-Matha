@@ -9,7 +9,7 @@ import { citationsFor, SOURCE_SHORT, TIER_LABEL } from "@/lib/citations";
 import { dict } from "@/lib/i18n";
 import { plainProse, renderProse } from "@/lib/prose";
 import { allLeafKeys, getLeaf, siblingsOf } from "@/lib/references";
-import { SOURCE_INDEX } from "@/lib/sources";
+import { publicLink, SOURCE_INDEX } from "@/lib/sources";
 import { abs } from "@/lib/seo";
 
 /**
@@ -79,6 +79,11 @@ export default async function ReferencePage({
 
   const siblings = siblingsOf(era, dotIndex);
   const biblio = SOURCE_INDEX[source];
+  /* The one link this page may pass on. For a book it is undefined: this route
+     shows the page the claim stands on and nothing beyond it — the full-volume
+     rule in lib/sources.ts. For a Vatican homily or a diocesan page, it is the
+     document itself, and there is no volume to withhold. */
+  const onward = publicLink(biblio?.url);
 
   /* Back to the MOMENT, not to the top of the book. /history reads this
      fragment on arrival and puts the reader on the year they left from — see
@@ -100,7 +105,10 @@ export default async function ReferencePage({
             "@type": "CreativeWork",
             name: leaf.title,
             description: leaf.imprint,
-            ...(biblio?.url ? { url: biblio.url } : {}),
+            /* Machines get what readers get. A `url` here would put the volume
+               link back into the page's HTML — invisible to a reader, and
+               exactly the thing an AI answer would repeat as "read it here". */
+            ...(onward ? { url: onward } : {}),
           },
         }}
       />
@@ -150,10 +158,10 @@ export default async function ReferencePage({
           )}
 
           {/* ── The evidence. ──
-              The bibliography's link is handed down so a leaf that can only show
-              a quotation can point at the book itself, on the sheet, where the
-              reader hits the limit rather than three sections later. */}
-          <BookLeaf leaf={leaf} url={biblio?.url} />
+              Only a link the reader may actually be given is handed down. Where
+              the source is a whole book this is undefined and the sheet says
+              plainly that the page is where we stop. */}
+          <BookLeaf leaf={leaf} url={onward} />
 
           {/* What the book actually settles — including where it settles less
               than the moment above claims. This is the sentence that makes the
@@ -175,14 +183,21 @@ export default async function ReferencePage({
             <Link href={L(`/sources#${source}`)} className="ref-back">
               This book in the bibliography →
             </Link>
-            {biblio?.url && (
+            {/* There was a "Read the whole book ↗" here, on all 160 leaves. It
+                is gone by parish decision, not by oversight: a footnote that
+                opens the entire volume publishes, in the parish's voice, every
+                chapter of it — including the ones this site has decided not to
+                carry. The page above is the evidence; the bibliography beside it
+                names the book. That is the whole of what we owe the reader.
+                See the full-volume rule in lib/sources.ts before restoring it. */}
+            {onward && (
               <a
-                href={biblio.url}
+                href={onward}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="ref-back"
               >
-                Read the whole book ↗
+                Read the document ↗
               </a>
             )}
           </footer>

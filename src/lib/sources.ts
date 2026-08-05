@@ -72,6 +72,48 @@ export type Source = {
   archiveOnly?: boolean;
 };
 
+/* ─────────────────────────────────────────────────────────────────────────
+ * THE FULL-VOLUME RULE. A parish decision, and the reason it lives here.
+ *
+ * `url` on an entry above is the bibliographic record: where this book was
+ * consulted, kept so the citation can be checked by anyone who goes looking
+ * and so nobody re-hunts a scan we have already found. It is NOT a licence to
+ * put a door to the whole volume on the website.
+ *
+ * The books we cite are wider than the pages we cite from. Several of them
+ * carry, on chapters we have no interest in reproducing, the caste history the
+ * parish has decided this site will not carry — see the header of history.ts.
+ * A footnote that hands the reader the entire volume hands them that too, in
+ * the parish's voice, on a page the parish published. So: the site shows the
+ * PAGE it stands on, and stops there.
+ *
+ * Enforced by host rather than by a per-entry flag on purpose. A flag has to be
+ * remembered; a host list catches the next archive.org link somebody adds in
+ * two years without having read this comment. If you add a source whose link
+ * opens a complete scanned volume on a repository not named below, add the
+ * host — do not work around it.
+ *
+ * Living web pages are untouched: the Vatican's homily, a diocesan parish page,
+ * a census record, a newspaper report. Those are documents, not books, and
+ * linking them is what a bibliography is for.
+ * ───────────────────────────────────────────────────────────────────────── */
+const FULL_VOLUME_HOSTS = [
+  "archive.org",
+  "gallica.bnf.fr",
+  "bndigital.bnportugal.gov.pt",
+  "library.oapen.org",
+  "books.google.",
+  "menachery.org",
+];
+
+/** True where following `url` would open the complete book, not one document. */
+export const isFullVolumeLink = (url?: string): boolean =>
+  !!url && FULL_VOLUME_HOSTS.some((h) => url.includes(h));
+
+/** The link a reader may actually be shown — undefined for a whole volume. */
+export const publicLink = (url?: string): string | undefined =>
+  isFullVolumeLink(url) ? undefined : url;
+
 export type SourceGroup = {
   heading: string;
   headingTa?: string;

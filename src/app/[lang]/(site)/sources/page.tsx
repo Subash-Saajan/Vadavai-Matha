@@ -6,7 +6,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { graph, pageNode, trailTo } from "@/lib/schema";
 import { localizedMetadata } from "@/lib/seo";
 import { localePath } from "@/lib/locale";
-import { SOURCE_GROUPS, WEIGHING_NOTE } from "@/lib/sources";
+import { publicLink, SOURCE_GROUPS, WEIGHING_NOTE } from "@/lib/sources";
 
 /**
  * Sources & Further Reading.
@@ -26,7 +26,7 @@ const COPY = {
     eyebrow: "Little Rome",
     title: "Sources & Further Reading",
     intro:
-      "Everything on this website that makes a historical claim rests on a document. These are the documents — the Jesuit archives in Rome, the printed mission histories, the colonial gazetteers, the Vatican's own record of the baptism that took place here. Where a source can be read online, we link it. Where it exists only on a shelf, we say so.",
+      "Everything on this website that makes a historical claim rests on a document. These are the documents — the Jesuit archives in Rome, the printed mission histories, the colonial gazetteers, the Vatican's own record of the baptism that took place here. Where we hold a book, we open it to the page the claim stands on, and stop there: these volumes range far beyond this village, and publishing the rest of them is not the parish's business. Where a source exists only on a shelf, we say so.",
     archiveOnly: " · archive only",
     online: " · free to read online",
     openLeaf: "Open the page ❧",
@@ -34,7 +34,7 @@ const COPY = {
   ta: {
     eyebrow: `சின்ன ரோமாபுரி`,
     title: `மூலங்களும் மேலதிக வாசிப்பும்`,
-    intro: `இவ்விணையதளத்தில் ஒரு வரலாற்றுச் செய்தியைச் சொல்லும் ஒவ்வொன்றும் ஓர் ஆவணத்தின்மேல் நிற்கிறது. அந்த ஆவணங்கள் இவைதான் — உரோமையில் உள்ள இயேசு சபை ஆவணக்காப்பகங்கள், அச்சிடப்பட்ட பணிக்கள வரலாறுகள், காலனிய காலத்து மாவட்டக் கையேடுகள், இங்கே நிகழ்ந்த திருமுழுக்கைப் பற்றிய வத்திக்கானின் சொந்தப் பதிவு. ஒரு மூலத்தை இணையத்தில் வாசிக்க முடியுமானால், அதற்கான இணைப்பைத் தருகிறோம். அது ஒரு நூலகத்தின் அலமாரியில் மட்டுமே இருந்தால், அதையும் சொல்லிவிடுகிறோம்.`,
+    intro: `இவ்விணையதளத்தில் ஒரு வரலாற்றுச் செய்தியைச் சொல்லும் ஒவ்வொன்றும் ஓர் ஆவணத்தின்மேல் நிற்கிறது. அந்த ஆவணங்கள் இவைதான் — உரோமையில் உள்ள இயேசு சபை ஆவணக்காப்பகங்கள், அச்சிடப்பட்ட பணிக்கள வரலாறுகள், காலனிய காலத்து மாவட்டக் கையேடுகள், இங்கே நிகழ்ந்த திருமுழுக்கைப் பற்றிய வத்திக்கானின் சொந்தப் பதிவு. ஒரு நூல் நம்மிடம் இருந்தால், அச்செய்தி எந்தப் பக்கத்தின்மேல் நிற்கிறதோ அப்பக்கத்தைத் திறந்து காட்டுகிறோம் — அத்துடன் நிற்கிறோம். இந்நூல்கள் இவ்வூரைத் தாண்டி வெகுதூரம் செல்பவை; அவற்றை முழுமையாக வெளியிடுவது இப்பங்கின் பணி அல்ல. ஒரு மூலம் ஒரு நூலகத்தின் அலமாரியில் மட்டுமே இருந்தால், அதையும் சொல்லிவிடுகிறோம்.`,
     archiveOnly: ` · ஆவணக்காப்பகத்தில் மட்டும்`,
     online: ` · இணையத்தில் இலவசமாக வாசிக்கலாம்`,
     openLeaf: `அப்பக்கத்தைத் திறக்க ❧`,
@@ -94,7 +94,9 @@ export default async function SourcesRoute({
               ) : null}
 
               <ul className="mt-6 space-y-7 md:mt-8 md:space-y-8">
-                {group.items.map((s) => (
+                {group.items.map((s) => {
+                  const href = publicLink(s.url);
+                  return (
                   // The id is the anchor a citation elsewhere on the site links to
                   // (/sources#pate_gazetteer_1917). scroll-mt clears the fixed navbar,
                   // which would otherwise land the reader on top of the entry they came for.
@@ -107,13 +109,18 @@ export default async function SourcesRoute({
                       {s.author ? (
                         <span className="text-navy/60">{s.author} — </span>
                       ) : null}
-                      {s.url ? (
+                      {/* publicLink(), not s.url. Where the link would open the
+                          whole volume the title is set as plain text — see the
+                          full-volume rule in lib/sources.ts. The entry still
+                          names the book in full, so a reader who wants it can
+                          find it; we simply do not hand it over. */}
+                      {href ? (
                         // `py-2` grows an inline link's hit region without
                         // altering the line box it sits in — a book title is
                         // one or two lines of 16px type, which is a 24px
                         // target otherwise.
                         <a
-                          href={s.url}
+                          href={href}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="py-2 md:py-0 text-gold-dark underline underline-offset-4 decoration-gold/40 hover:decoration-gold-dark transition-colors"
@@ -134,7 +141,11 @@ export default async function SourcesRoute({
                         measure only costs it a line. */}
                     <p className="mt-1 text-sm tracking-normal md:tracking-wide text-navy/55 md:text-navy/50">
                       {s.detail}
-                      {s.archiveOnly ? c.archiveOnly : s.url ? c.online : ""}
+                      {/* "free to read online" is claimed against the link the
+                          reader is actually given, not against s.url — a book
+                          whose volume link is withheld must not advertise a
+                          door that isn't on the page. */}
+                      {s.archiveOnly ? c.archiveOnly : href ? c.online : ""}
                     </p>
                     <p className="mt-3 font-serif text-[1.05rem] md:text-lg leading-relaxed text-navy/80">
                       {t(s.noteTa, s.note)}
@@ -166,7 +177,8 @@ export default async function SourcesRoute({
                       );
                     })()}
                   </li>
-                ))}
+                  );
+                })}
               </ul>
             </div>
           ))}

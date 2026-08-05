@@ -236,30 +236,44 @@ export function BookLeaf({ leaf, url }: { leaf: Leaf; url?: string }) {
           </section>
         )}
 
-        {/* ── Where the rest of it is ──
+        {/* ── Where this stops ──
             A leaf that can only ever show a quotation must not dead-end. Stopping
             at six words and saying nothing more is a citation asking to be taken
-            on trust, which is the exact habit this reader exists to break: if the
-            law will not let us print the page, the least we owe is the door.
+            on trust, which is the exact habit this reader exists to break — so
+            the sheet always says why it stops where it does.
+
+            What changed: it used to end in a door to the whole volume. For books
+            it no longer does. The parish will not put the rest of these volumes
+            on its own website (see the full-volume rule in lib/sources.ts), so
+            `url` arrives undefined for a book and defined only for a document
+            that IS the thing cited — a homily, a diocesan page, a census record.
+            The sentence stayed; only the door went.
 
             Only on leaves with no page of their own. Where a facsimile is already
-            on the sheet, the reader HAS the rest, and the link belongs in the
-            footer with the other navigation, not in the middle of the evidence. */}
-        {leaf.kind !== "leaf" && url && host && (
+            on the sheet, the reader HAS the page, and there is nothing to say. */}
+        {leaf.kind !== "leaf" && (
           <p className="leaf-onward">
-            {leaf.kind === "unavailable"
-              ? "Nobody here has opened this book. If you want to, it is at "
-              : "This is as much of it as we may lawfully print. The rest is at "}
-            <a
-              href={url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="leaf-onward-link"
-            >
-              {host}
-              <span aria-hidden> ↗</span>
-            </a>
-            .
+            {url && host ? (
+              <>
+                {leaf.kind === "unavailable"
+                  ? "Nobody here has opened this. If you want to, it is at "
+                  : "This is as much of it as we may lawfully print. The rest is at "}
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="leaf-onward-link"
+                >
+                  {host}
+                  <span aria-hidden> ↗</span>
+                </a>
+                .
+              </>
+            ) : leaf.kind === "unavailable" ? (
+              "Nobody here has opened this book. What it is cited for is written above, and no more than that is claimed."
+            ) : (
+              "This is as much of the book as this site prints. It is named in full in the bibliography below."
+            )}
           </p>
         )}
 
