@@ -4,7 +4,14 @@ import { useRef, useEffect } from "react";
 import { ResidentImage } from "@/components/ResidentImage";
 import { Link } from "@/components/LocaleLink";
 import { ArrowUpRight } from "lucide-react";
-import { gsap, ScrollTrigger, DESKTOP } from "@/lib/gsap";
+import {
+  gsap,
+  ScrollTrigger,
+  DESKTOP,
+  revealStart,
+  revealDuration,
+  revealDelay,
+} from "@/lib/gsap";
 import { useLang } from "@/components/layout/LanguageProvider";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
@@ -327,14 +334,14 @@ export function GalleryPreview() {
           {
             scale: 1,
             opacity: 1,
-            duration: 1,
+            duration: revealDuration(1),
             ease: "power3.out",
             scrollTrigger: {
               trigger: el,
-              start: "top 92%",
+              start: revealStart("top 92%"),
               toggleActions: "play none none none",
             },
-            delay: i * 0.1,
+            delay: revealDelay(i, 0.1),
           },
         );
       });

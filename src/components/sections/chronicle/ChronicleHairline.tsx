@@ -4,7 +4,7 @@ import { useRef, useEffect } from "react";
 import Image from "next/image";
 import { Link } from "@/components/LocaleLink";
 import { ArrowUpRight } from "lucide-react";
-import { gsap } from "@/lib/gsap";
+import { gsap, onPhone, revealStart, revealDuration, revealTravel } from "@/lib/gsap";
 import { useLang } from "@/components/layout/LanguageProvider";
 import { CHRONICLE_FRAMES } from "@/lib/chronicle";
 import { ChronicleHeader } from "./ChronicleHeader";
@@ -54,9 +54,12 @@ export function ChronicleHairline() {
             ease: "none",
             scrollTrigger: {
               trigger: railRef.current,
-              start: "top 78%",
+              // Scrubbed, so this is a mapping and not a moment — but on a
+              // phone the rule should be drawing by the time the first entry
+              // is read, and the lag has to be short enough to survive a flick.
+              start: onPhone() ? "top 95%" : "top 78%",
               end: "bottom 65%",
-              scrub: 0.8,
+              scrub: onPhone() ? 0.4 : 0.8,
             },
           },
         );
@@ -66,13 +69,17 @@ export function ChronicleHairline() {
       railRef.current?.querySelectorAll(".chron-entry").forEach((el) => {
         gsap.fromTo(
           el,
-          { x: -26, opacity: 0 },
+          { x: -revealTravel(26), opacity: 0 },
           {
             x: 0,
             opacity: 1,
-            duration: 0.85,
+            duration: revealDuration(0.85),
             ease: "power3.out",
-            scrollTrigger: { trigger: el, start: "top 86%", toggleActions: "play none none none" },
+            scrollTrigger: {
+              trigger: el,
+              start: revealStart("top 86%"),
+              toggleActions: "play none none none",
+            },
           },
         );
       });
@@ -85,9 +92,13 @@ export function ChronicleHairline() {
           {
             scale: 1,
             opacity: 1,
-            duration: 0.5,
+            duration: revealDuration(0.5),
             ease: "back.out(2)",
-            scrollTrigger: { trigger: el, start: "top 84%", toggleActions: "play none none none" },
+            scrollTrigger: {
+              trigger: el,
+              start: revealStart("top 84%"),
+              toggleActions: "play none none none",
+            },
           },
         );
       });

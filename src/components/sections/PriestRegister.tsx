@@ -523,7 +523,7 @@ export function PriestRegister({ lang = "en" }: { lang?: Lang }) {
             CHROME_TA.tombsIntro
           ) : (
             <>
-              Six dated stones stand in a row behind the church, the earliest from 1863
+              Six dated stones stand in a row in front of the church, the earliest from 1863
               and the latest from 2002, a hundred and forty years of this parish&apos;s
               priests along one wall. Two of the inscriptions were read and printed in
               1894, by a colonial survey of the European tombs of Tinnevelly, so those
@@ -566,7 +566,7 @@ export function PriestRegister({ lang = "en" }: { lang?: Lang }) {
               CHROME_TA.tombsCaption
             ) : (
               <>
-                The row behind the church, July 2026. Left to right: Fr Dharmanathar
+                The row in front of the church, July 2026. Left to right: Fr Dharmanathar
                 (1880–1950), Fr Eugène Rossignol, S.J. (died 1863), and Fr J. M.
                 Nicholas (1911–2002), a son of this village.
               </>

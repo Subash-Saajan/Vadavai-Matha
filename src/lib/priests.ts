@@ -527,8 +527,8 @@ export const PERIODS: Period[] = [
         portrait: "delpech",
         portraitFrom: "Suau, L'Inde tamoule, 1899",
         life:
-          "He preached with statues and marionettes worked by hidden springs, and he had been Fr Grégoire's travelling companion on the voyage where Grégoire died. Acting parish priest in 1876, he then served this church eleven years as assistant, and he died in it, “in the arms of Fr Pouget, at Vadakenkoulam, the eve of the feast of the most holy Name of Jesus”, 16 January 1887. He is buried behind the church, and the black stone over him, photographed in 2026, is cut “Natus 10 Nov. 1835 · Mortuus 16 Jan. 1887”, the same date a survey of European tombs made in 1894 had already read: “1887, 16th January. Victor Delpech S.J., aged 52 years.”",
-        lifeTa: `மறைவான சுருள்வில்களால் இயக்கப்பட்ட திருவுருவங்களையும் பொம்மைகளையும் கொண்டு மறையுரை ஆற்றியவர். அருட்தந்தை கிரகோயர் இறந்த அந்தக் கப்பல் பயணத்தில் அவரது துணையாகச் சென்றவரும் இவரே. 1876-ஆம் ஆண்டில் பதில் பங்குத் தந்தையாக இருந்தார்; பின்னர் பதினொரு ஆண்டுகள் இவ்வாலயத்தில் உதவி அருட்தந்தையாகப் பணியாற்றி, இங்கேயே இறந்தார் — “வடக்கன்குளத்தில், மகா பரிசுத்த இயேசுவின் திருப்பெயர் விழாவின் முன்னாளில், அருட்தந்தை பூஜே அவர்களின் கைகளில்”, 1887 ஜனவரி 16-ஆம் நாள். ஆலயத்திற்குப் பின்புறம் அடக்கம் செய்யப்பட்டுள்ளார்; 2026-ஆம் ஆண்டில் புகைப்படம் எடுக்கப்பட்ட அவரது கருங்கல்லில் “Natus 10 Nov. 1835 · Mortuus 16 Jan. 1887” என்று செதுக்கப்பட்டுள்ளது — 1894-ஆம் ஆண்டில் ஐரோப்பியக் கல்லறைகள் பற்றிய ஒரு கணக்கெடுப்பு ஏற்கெனவே வாசித்திருந்த அதே தேதி: “1887, 16th January. Victor Delpech S.J., aged 52 years.”`,
+          "He preached with statues and marionettes worked by hidden springs, and he had been Fr Grégoire's travelling companion on the voyage where Grégoire died. Acting parish priest in 1876, he then served this church eleven years as assistant, and he died in it, “in the arms of Fr Pouget, at Vadakenkoulam, the eve of the feast of the most holy Name of Jesus”, 16 January 1887. He is buried in front of the church, and the black stone over him, photographed in 2026, is cut “Natus 10 Nov. 1835 · Mortuus 16 Jan. 1887”, the same date a survey of European tombs made in 1894 had already read: “1887, 16th January. Victor Delpech S.J., aged 52 years.”",
+        lifeTa: `மறைவான சுருள்வில்களால் இயக்கப்பட்ட திருவுருவங்களையும் பொம்மைகளையும் கொண்டு மறையுரை ஆற்றியவர். அருட்தந்தை கிரகோயர் இறந்த அந்தக் கப்பல் பயணத்தில் அவரது துணையாகச் சென்றவரும் இவரே. 1876-ஆம் ஆண்டில் பதில் பங்குத் தந்தையாக இருந்தார்; பின்னர் பதினொரு ஆண்டுகள் இவ்வாலயத்தில் உதவி அருட்தந்தையாகப் பணியாற்றி, இங்கேயே இறந்தார் — “வடக்கன்குளத்தில், மகா பரிசுத்த இயேசுவின் திருப்பெயர் விழாவின் முன்னாளில், அருட்தந்தை பூஜே அவர்களின் கைகளில்”, 1887 ஜனவரி 16-ஆம் நாள். ஆலயத்திற்கு முன்புறம் அடக்கம் செய்யப்பட்டுள்ளார்; 2026-ஆம் ஆண்டில் புகைப்படம் எடுக்கப்பட்ட அவரது கருங்கல்லில் “Natus 10 Nov. 1835 · Mortuus 16 Jan. 1887” என்று செதுக்கப்பட்டுள்ளது — 1894-ஆம் ஆண்டில் ஐரோப்பியக் கல்லறைகள் பற்றிய ஒரு கணக்கெடுப்பு ஏற்கெனவே வாசித்திருந்த அதே தேதி: “1887, 16th January. Victor Delpech S.J., aged 52 years.”`,
       },
       {
         n: 40,
@@ -954,8 +954,8 @@ export const ARCHIVE_ADDITIONS = [
     when: "died here, 1863",
     whenTa: `இங்கே இறந்தார், 1863`,
     what:
-      "Not a pastor of this parish but of the mission around it. He caught the cholera that killed him while caring for the Christians of Kallikulam, and died here on 25 January 1863, aged forty-one. He is buried behind the church.",
-    whatTa: `இப்பங்கின் பங்குத் தந்தை அல்ல; இதைச் சுற்றியிருந்த பணிக்களத்தின் அருட்தந்தை. கள்ளிகுளத்துக் கிறிஸ்தவர்களைப் பணிவிடை செய்யும்போது காலரா நோய் இவரைப் பிடித்தது; அதுவே இவரைக் கொன்றது. நாற்பத்தொரு வயதில், 1863 ஜனவரி 25-ஆம் நாள் இங்கே இறந்தார். ஆலயத்திற்குப் பின்புறம் அடக்கம் செய்யப்பட்டுள்ளார்.`,
+      "Not a pastor of this parish but of the mission around it. He caught the cholera that killed him while caring for the Christians of Kallikulam, and died here on 25 January 1863, aged forty-one. He is buried in front of the church.",
+    whatTa: `இப்பங்கின் பங்குத் தந்தை அல்ல; இதைச் சுற்றியிருந்த பணிக்களத்தின் அருட்தந்தை. கள்ளிகுளத்துக் கிறிஸ்தவர்களைப் பணிவிடை செய்யும்போது காலரா நோய் இவரைப் பிடித்தது; அதுவே இவரைக் கொன்றது. நாற்பத்தொரு வயதில், 1863 ஜனவரி 25-ஆம் நாள் இங்கே இறந்தார். ஆலயத்திற்கு முன்புறம் அடக்கம் செய்யப்பட்டுள்ளார்.`,
   },
 ] as const;
 
@@ -1011,7 +1011,7 @@ export const BISHOPS: Bishop[] = [
 ];
 
 /* ── The graveyard row ─────────────────────────────────────────────────────
-   Six dated stones stand behind the church, photographed in July 2026. Two of
+   Six dated stones stand in front of the church, photographed in July 2026. Two of
    them were also read and printed in 1894, by a colonial survey of European
    tombs in Tinnevelly — so those two inscriptions can be quoted exactly, and
    are, because a verbatim stone is worth more than a paraphrase.              */
@@ -1084,8 +1084,8 @@ export const CHROME_TA = {
   bishopsTitle: `இங்கே செயலாற்றிய ஆயர்கள்`,
   bishopsIntro: `நான்கு ஆயர்கள் இவ்வாலயத்தில் ஒவ்வொன்று செய்தார்கள்; அவற்றுக்குள்ளேயே பங்கு இன்றும் வாழ்கிறது — ஓர் அடிக்கல், ஒரு பெயர், ஓர் ஆணை, ஒரு கொடிமரம்.`,
   tombsTitle: `இவர்கள் இங்கே அடக்கம் செய்யப்பட்டுள்ளார்கள்`,
-  tombsIntro: `ஆலயத்திற்குப் பின்புறம், ஆண்டு பொறிக்கப்பட்ட ஆறு கற்கள் ஒரே வரிசையில் நிற்கின்றன — மிகப் பழையது 1863, மிகப் புதியது 2002; ஒரே சுவரோரமாக இப்பங்கின் அருட்தந்தையரின் நூற்று நாற்பது ஆண்டுகள். அவற்றுள் இரு கல்வெட்டுகளைத் திருநெல்வேலியின் ஐரோப்பியக் கல்லறைகள் பற்றிய ஒரு காலனியக் கணக்கெடுப்பு 1894-ஆம் ஆண்டில் வாசித்து அச்சிட்டது; எனவே அவ்விரண்டையும் சொல்லுக்குச் சொல் மேற்கோள் காட்ட முடிகிறது.`,
-  tombsCaption: `ஆலயத்திற்குப் பின்புறமுள்ள வரிசை, 2026 ஜூலை. இடமிருந்து வலமாக: அருட்தந்தை தர்மநாதர் (1880–1950), அருட்தந்தை ஊஜென் ரொசினியோல், இ.ச. (இறப்பு 1863), இவ்வூரின் மைந்தரான அருட்தந்தை J. M. நிக்கோலாஸ் (1911–2002).`,
+  tombsIntro: `ஆலயத்திற்கு முன்புறம், ஆண்டு பொறிக்கப்பட்ட ஆறு கற்கள் ஒரே வரிசையில் நிற்கின்றன — மிகப் பழையது 1863, மிகப் புதியது 2002; ஒரே சுவரோரமாக இப்பங்கின் அருட்தந்தையரின் நூற்று நாற்பது ஆண்டுகள். அவற்றுள் இரு கல்வெட்டுகளைத் திருநெல்வேலியின் ஐரோப்பியக் கல்லறைகள் பற்றிய ஒரு காலனியக் கணக்கெடுப்பு 1894-ஆம் ஆண்டில் வாசித்து அச்சிட்டது; எனவே அவ்விரண்டையும் சொல்லுக்குச் சொல் மேற்கோள் காட்ட முடிகிறது.`,
+  tombsCaption: `ஆலயத்திற்கு முன்புறமுள்ள வரிசை, 2026 ஜூலை. இடமிருந்து வலமாக: அருட்தந்தை தர்மநாதர் (1880–1950), அருட்தந்தை ஊஜென் ரொசினியோல், இ.ச. (இறப்பு 1863), இவ்வூரின் மைந்தரான அருட்தந்தை J. M. நிக்கோலாஸ் (1911–2002).`,
   tombWorn: `அக்கல் படிக்க முடியாத அளவுக்குத் தேய்ந்துவிட்டது. இரு தேதிகளை மட்டுமே இன்னும் கண்டுகொள்ள முடிகிறது.`,
 
   /* What is still missing */

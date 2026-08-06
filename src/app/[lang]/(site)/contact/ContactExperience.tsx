@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Phone, MessageCircle } from "lucide-react";
-import { gsap, revealY } from "@/lib/gsap";
+import { gsap, revealY, revealStart, revealDuration } from "@/lib/gsap";
 import { PageHero } from "@/components/sections/PageHero";
 import { useLang } from "@/components/layout/LanguageProvider";
 import {
@@ -70,9 +70,13 @@ export function ContactExperience() {
           {
             y: 0,
             opacity: 1,
-            duration: 0.9,
+            duration: revealDuration(0.9),
             ease: "power3.out",
-            scrollTrigger: { trigger: el, start: "top 88%", toggleActions: "play none none none" },
+            scrollTrigger: {
+              trigger: el,
+              start: revealStart("top 88%"),
+              toggleActions: "play none none none",
+            },
           },
         );
       });

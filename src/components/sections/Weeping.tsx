@@ -4,7 +4,14 @@ import { useRef, useEffect } from "react";
 import { ResidentImage } from "@/components/ResidentImage";
 import { Link } from "@/components/LocaleLink";
 import { ArrowUpRight } from "lucide-react";
-import { gsap, DESKTOP, revealY } from "@/lib/gsap";
+import {
+  gsap,
+  DESKTOP,
+  revealY,
+  revealStart,
+  revealDuration,
+  revealDelay,
+} from "@/lib/gsap";
 import { useLang } from "@/components/layout/LanguageProvider";
 
 /**
@@ -81,10 +88,14 @@ export function Weeping() {
           {
             y: 0,
             opacity: 1,
-            duration: 1.1,
+            duration: revealDuration(1.1),
             ease: "power3.out",
-            delay: i * 0.12,
-            scrollTrigger: { trigger: el, start: "top 88%", toggleActions: "play none none none" },
+            delay: revealDelay(i, 0.12),
+            scrollTrigger: {
+              trigger: el,
+              start: revealStart("top 88%"),
+              toggleActions: "play none none none",
+            },
           },
         );
       });

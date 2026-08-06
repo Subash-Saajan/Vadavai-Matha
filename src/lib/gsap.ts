@@ -99,4 +99,77 @@ export const DESKTOP = "(min-width: 768px)";
 export const revealY = (): number =>
   typeof window !== "undefined" && window.matchMedia(DESKTOP).matches ? 42 : 20;
 
+/** Is this the phone build? Read once, when an effect builds — same rule as
+ *  `revealY`: a reveal that has already played does not want re-deciding.
+ *
+ *  For picking BETWEEN two builds of the same tween. Motion that simply should
+ *  not exist on a phone still belongs in `gsap.matchMedia(DESKTOP)`, which
+ *  builds and reverts as the query flips. */
+export const onPhone = (): boolean =>
+  typeof window !== "undefined" && !window.matchMedia(DESKTOP).matches;
+
+/* ── WHY A PHONE GETS ITS OWN REVEAL CLOCK ────────────────────────────────
+   The entrance reveals were all authored against a monitor: fire at `top 88%`,
+   run for a second, stagger a tenth of a second apart. On a desktop that is
+   exactly right — the reader scrolls a wheel-notch at a time, so a paragraph
+   has the whole second to settle before it is anywhere near the middle of the
+   screen.
+
+   A phone is a different machine entirely. The viewport is tall and narrow, so
+   88% of it is 100px of travel rather than 40; and a thumb-flick moves the page
+   at a speed a mouse wheel never reaches — most of a screen in a few hundred
+   milliseconds. Put those together and the arithmetic is unkind: the block is
+   still 100px below the fold when the reader flicks, so the tween starts late,
+   and then it takes a full second (plus its stagger) while the block crosses
+   the entire screen in less than half of that. What the reader actually meets
+   is a photograph at 40% opacity sliding past the middle of their phone, and
+   below it an empty box that has not been told to start yet. The page reads as
+   though it is loading, when in truth everything arrived long ago.
+
+   So on touch: fire the moment the element's top crosses the bottom edge, run
+   roughly half as long, and cut the stagger down — and cap it, so the fourth
+   item in a row is not still waiting when the row is already past. The reveal
+   is then finished by the time the block reaches comfortable reading height at
+   any scroll speed a thumb can produce. It is still a reveal, not a cut: the
+   motion is there for anyone scrolling at a readerly pace.
+
+   Desktop values are untouched — every helper takes the authored number and
+   hands it straight back on a monitor. */
+
+/**
+ * Where an entrance reveal fires. `desktop` is the authored trigger point.
+ *
+ * ⚠ SCRUBBED triggers must NOT come through here. Their `start` is one end of
+ * a position mapping, not a moment; moving it silently re-times the whole
+ * tween. This is for `toggleActions` / `once` reveals only.
+ */
+export const revealStart = (desktop = "top 88%"): string =>
+  onPhone() ? "top 96%" : desktop;
+
+/** How long an entrance reveal runs. A phone gets a little over half. */
+export const revealDuration = (desktop: number): number =>
+  onPhone() ? Math.round(desktop * 55) / 100 : desktop;
+
+/**
+ * A bespoke reveal travel, shortened on touch by the same ratio `revealY`
+ * uses (42 → 20). For the sections that slide a whole card rather than a line
+ * of type: 80px is a fifth of a phone screen, and a card crossing that in half
+ * a second is a swipe, not an entrance.
+ */
+export const revealTravel = (desktop: number): number =>
+  onPhone() ? Math.round(desktop * 0.45) : desktop;
+
+/** A tween's own `stagger`, shortened on touch. */
+export const revealStagger = (desktop: number): number =>
+  onPhone() ? Math.round(desktop * 45) / 100 : desktop;
+
+/**
+ * The per-item `delay` of a hand-rolled stagger — `delay: i * 0.1` becomes
+ * `delay: revealDelay(i, 0.1)`. On a phone the step shortens AND stops
+ * compounding after the fourth item, which is the one that used to arrive
+ * half a second after the reader had already read it.
+ */
+export const revealDelay = (i: number, step = 0.1): number =>
+  onPhone() ? Math.min(i, 3) * step * 0.45 : i * step;
+
 export { gsap, ScrollTrigger, Draggable };

@@ -3,7 +3,13 @@
 import { useRef, useEffect } from "react";
 import Image from "next/image";
 import { Link } from "@/components/LocaleLink";
-import { gsap } from "@/lib/gsap";
+import {
+  gsap,
+  revealStart,
+  revealDuration,
+  revealDelay,
+  revealTravel,
+} from "@/lib/gsap";
 import { ArrowUpRight } from "lucide-react";
 import { useLang } from "@/components/layout/LanguageProvider";
 
@@ -39,18 +45,18 @@ export function FestivalsTeaser() {
 
         gsap.fromTo(
           el,
-          { y: 80, opacity: 0 },
+          { y: revealTravel(80), opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 1,
+            duration: revealDuration(1),
             ease: "power3.out",
             scrollTrigger: {
               trigger: el,
-              start: "top 90%",
+              start: revealStart("top 90%"),
               toggleActions: "play none none none",
             },
-            delay: i * 0.12,
+            delay: revealDelay(i, 0.12),
           }
         );
       });

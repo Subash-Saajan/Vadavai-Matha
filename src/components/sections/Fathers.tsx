@@ -4,7 +4,14 @@ import { useRef, useEffect } from "react";
 import Image from "next/image";
 import { Link } from "@/components/LocaleLink";
 import { ArrowUpRight } from "lucide-react";
-import { gsap, revealY } from "@/lib/gsap";
+import {
+  gsap,
+  revealY,
+  revealStart,
+  revealDuration,
+  revealDelay,
+  revealStagger,
+} from "@/lib/gsap";
 import { useLang } from "@/components/layout/LanguageProvider";
 import { ALL_PRIESTS, TERM_COUNT, THIS_YEAR, tenureLabel } from "@/lib/priests";
 
@@ -57,10 +64,14 @@ export function Fathers() {
           {
             y: 0,
             opacity: 1,
-            duration: 1,
+            duration: revealDuration(1),
             ease: "power3.out",
-            delay: i * 0.1,
-            scrollTrigger: { trigger: el, start: "top 88%", toggleActions: "play none none none" },
+            delay: revealDelay(i, 0.1),
+            scrollTrigger: {
+              trigger: el,
+              start: revealStart("top 88%"),
+              toggleActions: "play none none none",
+            },
           },
         );
       });
@@ -76,12 +87,12 @@ export function Fathers() {
             y: 0,
             opacity: 1,
             scale: 1,
-            duration: 0.7,
+            duration: revealDuration(0.7),
             ease: "power3.out",
-            stagger: 0.07,
+            stagger: revealStagger(0.07),
             scrollTrigger: {
               trigger: rowRef.current,
-              start: "top 90%",
+              start: revealStart("top 90%"),
               toggleActions: "play none none none",
             },
           },

@@ -4,7 +4,13 @@ import { useRef, useEffect } from "react";
 import { cappedSizes } from "@/lib/imageSizes";
 import { Link } from "@/components/LocaleLink";
 import Image from "next/image";
-import { gsap, DESKTOP, revealY } from "@/lib/gsap";
+import {
+  gsap,
+  DESKTOP,
+  revealY,
+  revealStart,
+  revealDuration,
+} from "@/lib/gsap";
 import { PageHero } from "@/components/sections/PageHero";
 import { useLang } from "@/components/layout/LanguageProvider";
 import { SOURCE_SHORT, TIER_LABEL, type Tier } from "@/lib/citations";
@@ -221,11 +227,11 @@ export function SaintPage({
           {
             y: 0,
             opacity: 1,
-            duration: 1,
+            duration: revealDuration(1),
             ease: "power3.out",
             scrollTrigger: {
               trigger: el,
-              start: "top 88%",
+              start: revealStart("top 88%"),
               toggleActions: "play none none none",
             },
           }

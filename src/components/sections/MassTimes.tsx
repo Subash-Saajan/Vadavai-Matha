@@ -2,7 +2,13 @@
 
 import { useRef, useEffect } from "react";
 import { Link } from "@/components/LocaleLink";
-import { gsap } from "@/lib/gsap";
+import {
+  gsap,
+  revealStart,
+  revealDuration,
+  revealDelay,
+  revealTravel,
+} from "@/lib/gsap";
 import { Sunrise, Church, MoonStar, ArrowUpRight } from "lucide-react";
 import { useLang } from "@/components/layout/LanguageProvider";
 
@@ -46,18 +52,18 @@ export function MassTimes({ withCta = true }: { withCta?: boolean }) {
       Array.from(cards).forEach((card, i) => {
         gsap.fromTo(
           card,
-          { y: 60, opacity: 0 },
+          { y: revealTravel(60), opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 0.9,
+            duration: revealDuration(0.9),
             ease: "power3.out",
             scrollTrigger: {
               trigger: card,
-              start: "top 90%",
+              start: revealStart("top 90%"),
               toggleActions: "play none none none",
             },
-            delay: i * 0.12,
+            delay: revealDelay(i, 0.12),
           }
         );
       });

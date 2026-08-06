@@ -2,7 +2,15 @@
 
 import { useRef, useEffect } from "react";
 import { ResidentImage } from "@/components/ResidentImage";
-import { gsap, DESKTOP, revealY } from "@/lib/gsap";
+import {
+  gsap,
+  ScrollTrigger,
+  DESKTOP,
+  revealY,
+  revealStart,
+  revealDuration,
+  revealDelay,
+} from "@/lib/gsap";
 import { useLang } from "@/components/layout/LanguageProvider";
 import { PhotoOrnaments } from "@/components/ornaments/CornerOrnament";
 
@@ -24,11 +32,11 @@ export function Patroness() {
         {
           clipPath: "inset(0 0 0% 0)",
           scale: 1,
-          duration: 1.5,
+          duration: revealDuration(1.5),
           ease: "power4.out",
           scrollTrigger: {
             trigger: imgWrapRef.current,
-            start: "top 82%",
+            start: revealStart("top 82%"),
             toggleActions: "play none none none",
           },
         }
@@ -45,14 +53,14 @@ export function Patroness() {
           {
             y: 0,
             opacity: 1,
-            duration: 1,
+            duration: revealDuration(1),
             ease: "power3.out",
             scrollTrigger: {
               trigger: el,
-              start: "top 88%",
+              start: revealStart("top 88%"),
               toggleActions: "play none none none",
             },
-            delay: i * 0.1,
+            delay: revealDelay(i, 0.1),
           }
         );
       });
@@ -62,7 +70,15 @@ export function Patroness() {
          frame. The halo is worse than it looks — an infinite yoyo on a
          `blur-3xl` element never stops, on or off screen, so a phone repaints
          a 64px gaussian blur for the whole life of the page for an effect
-         nobody is looking at. See the note on DESKTOP in lib/gsap.ts. */
+         nobody is looking at. See the note on DESKTOP in lib/gsap.ts.
+
+         ⚠ THAT DIAGNOSIS WAS RIGHT AND THE FIX WAS HALF OF ONE. Gating the
+         halo to desktop stopped phones paying for it and left every monitor
+         paying for it forever — this section and About each ran one, so a
+         desktop reader had two permanent full-blur repaints going before they
+         had scrolled a pixel. It is felt as a page that is heavy to scroll
+         rather than as an animation that is slow, which is why it hid. The
+         two changes below are what actually make it cheap. */
       const mm = gsap.matchMedia();
       mm.add(DESKTOP, () => {
         gsap.to(imgWrapRef.current, {
@@ -76,13 +92,31 @@ export function Patroness() {
           },
         });
 
-        gsap.to(haloRef.current, {
-          scale: 1.15,
-          opacity: 0.85,
+        /* 1. NO `scale`. A transform on a filtered element invalidates the
+              filter, so Chromium re-rasterised the whole 64px blur — which it
+              expands by about three radii in every direction before it paints
+              — on every frame of the loop. Opacity does not invalidate it: the
+              layer is rasterised once and the compositor varies its alpha, on
+              the GPU, for free. The swell is gone and the pulse is not; the
+              range is widened a little to pay for the missing scale. */
+        const halo = gsap.to(haloRef.current, {
+          opacity: 0.8,
           duration: 4,
           ease: "sine.inOut",
           yoyo: true,
           repeat: -1,
+          paused: true,
+        });
+
+        /* 2. AND ONLY WHILE THE SECTION IS ON SCREEN. An infinite tween is
+              never done, so nothing else will ever stop it. This is most of
+              the saving: the halo is idle for the whole of the rest of the
+              page, which is most of the page. */
+        ScrollTrigger.create({
+          trigger: sectionRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          onToggle: ({ isActive }) => (isActive ? halo.play() : halo.pause()),
         });
       });
       return () => mm.revert();

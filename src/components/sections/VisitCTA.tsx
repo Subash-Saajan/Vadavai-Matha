@@ -3,7 +3,14 @@
 import { useRef, useEffect } from "react";
 import { ResidentImage } from "@/components/ResidentImage";
 import { Link } from "@/components/LocaleLink";
-import { gsap, DESKTOP, revealY } from "@/lib/gsap";
+import {
+  gsap,
+  DESKTOP,
+  revealY,
+  revealStart,
+  revealDuration,
+  revealDelay,
+} from "@/lib/gsap";
 import { ArrowUpRight } from "lucide-react";
 import { useLang } from "@/components/layout/LanguageProvider";
 
@@ -42,14 +49,14 @@ export function VisitCTA() {
           {
             y: 0,
             opacity: 1,
-            duration: 1,
+            duration: revealDuration(1),
             ease: "power3.out",
             scrollTrigger: {
               trigger: el,
-              start: "top 85%",
+              start: revealStart("top 85%"),
               toggleActions: "play none none none",
             },
-            delay: i * 0.1,
+            delay: revealDelay(i, 0.1),
           }
         );
       });

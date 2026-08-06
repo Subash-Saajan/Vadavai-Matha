@@ -151,6 +151,8 @@ export function TheDay() {
         gsap.set(marker, { opacity: 0 });
 
         const tl = gsap.timeline({
+          // No `revealStart` here: this whole block is DESKTOP-only (the arc is
+          // `hidden md:block`), so there is no phone build to re-time.
           scrollTrigger: { trigger: arcRef.current, start: "top 78%", once: true },
         });
 

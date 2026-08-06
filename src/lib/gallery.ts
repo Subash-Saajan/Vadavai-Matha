@@ -127,8 +127,8 @@ export const CHAPTERS: readonly Chapter[] = [
     title: "The Saints and the Graves",
     titleTa: `புனிதர்களும் கல்லறைகளும்`,
     blurb:
-      "The founder, the layman baptised here in 1745, his wife, and the six priests buried behind the church.",
-    blurbTa: `இப்பங்கை நிறுவியவர், 1745-இல் இங்கே திருமுழுக்குப் பெற்ற பொதுநிலையினர், அவரது மனைவி, ஆலயத்தின் பின்னால் அடக்கம் செய்யப்பட்ட ஆறு அருட்தந்தையர்.`,
+      "The founder, the layman baptised here in 1745, his wife, and the six priests buried in front of the church.",
+    blurbTa: `இப்பங்கை நிறுவியவர், 1745-இல் இங்கே திருமுழுக்குப் பெற்ற பொதுநிலையினர், அவரது மனைவி, ஆலயத்தின் முன்னால் அடக்கம் செய்யப்பட்ட ஆறு அருட்தந்தையர்.`,
   },
   {
     key: "archive",
@@ -538,10 +538,10 @@ export const PLATES: readonly Plate[] = [
     w: 2400,
     h: 1496,
     chapter: "saints",
-    alt: "Three white gabled tomb monuments in a row against a wall behind the church, each with a black inscribed plaque set into its face",
-    altTa: `ஆலயத்தின் பின்புறச் சுவரை ஒட்டி வரிசையாக நிற்கும் மூன்று வெண்ணிற முக்கோண மேற்கூரைக் கல்லறை நினைவிடங்கள்; ஒவ்வொன்றின் முகத்திலும் கருப்புக் கல்வெட்டுப் பலகை`,
-    caption: "They are buried here — the priests' graves behind the church",
-    captionTa: `இங்கே அடக்கம் — ஆலயத்தின் பின்னால் அருட்தந்தையரின் கல்லறைகள்`,
+    alt: "Three white gabled tomb monuments in a row against a wall in front of the church, each with a black inscribed plaque set into its face",
+    altTa: `ஆலயத்தின் முன்புறச் சுவரை ஒட்டி வரிசையாக நிற்கும் மூன்று வெண்ணிற முக்கோண மேற்கூரைக் கல்லறை நினைவிடங்கள்; ஒவ்வொன்றின் முகத்திலும் கருப்புக் கல்வெட்டுப் பலகை`,
+    caption: "They are buried here — the priests' graves in front of the church",
+    captionTa: `இங்கே அடக்கம் — ஆலயத்தின் முன்னால் அருட்தந்தையரின் கல்லறைகள்`,
   },
 
   /* ── VI · FROM THE ARCHIVE ───────────────────────────────────────────── */
@@ -597,7 +597,7 @@ export const CHROME = {
   heroLabel: "The Plates",
   heroTitle: "What the Shrine Looks Like",
   heroIntro:
-    "Every photograph this site holds of the church, the statue, the feast, the other churches of the village and the graves behind — in one place, at a size worth looking at.",
+    "Every photograph this site holds of the church, the statue, the feast, the other churches of the village and the graves in front — in one place, at a size worth looking at.",
   heroAlt:
     "The crowned statue of Our Lady on her flower-decked chariot at the August feast, the spires of the shrine rising behind her",
 
@@ -627,7 +627,7 @@ export const CHROME = {
 export const CHROME_TA = {
   heroLabel: `படத் தொகுப்பு`,
   heroTitle: `திருத்தலத்தின் தோற்றம்`,
-  heroIntro: `ஆலயம், மாதாவின் திருவுருவம், திருவிழா, ஊரின் பிற ஆலயங்கள், பின்னாலுள்ள கல்லறைகள் — இத்தளத்திலுள்ள ஒவ்வொரு புகைப்படமும் ஒரே இடத்தில், பார்க்கத் தகுந்த அளவில்.`,
+  heroIntro: `ஆலயம், மாதாவின் திருவுருவம், திருவிழா, ஊரின் பிற ஆலயங்கள், முன்னாலுள்ள கல்லறைகள் — இத்தளத்திலுள்ள ஒவ்வொரு புகைப்படமும் ஒரே இடத்தில், பார்க்கத் தகுந்த அளவில்.`,
   heroAlt: `ஆகஸ்ட் திருவிழாவில் மலர்களால் அலங்கரிக்கப்பட்ட தேரில் மாதாவின் முடிசூட்டப்பட்ட திருவுருவம், பின்னால் திருத்தலத்தின் கோபுரங்கள்`,
 
   lead: (n: number) =>

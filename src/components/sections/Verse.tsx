@@ -2,7 +2,7 @@
 
 import { useRef, useEffect } from "react";
 import { ResidentImage } from "@/components/ResidentImage";
-import { gsap, DESKTOP } from "@/lib/gsap";
+import { gsap, DESKTOP, onPhone } from "@/lib/gsap";
 import { useLang } from "@/components/layout/LanguageProvider";
 
 export function Verse() {
@@ -72,9 +72,17 @@ export function Verse() {
         });
       });
 
-      // Word-by-word illumination
+      /* Word-by-word illumination.
+         Scrubbed, so it is tied to scroll POSITION and cannot arrive late the
+         way a fixed-duration reveal can — but `scrub` is a lag, and a full
+         second of it on a thumb-flick means the verse is still at 12% opacity
+         as it crosses the middle of a phone. So on touch the range starts as
+         the line enters, finishes higher up the screen, and the lag is short
+         enough to keep up with a flick while still smoothing an ordinary
+         scroll. */
       const words = wordsRef.current?.querySelectorAll("span.w");
       if (words) {
+        const phone = onPhone();
         gsap.fromTo(
           words,
           { opacity: 0.12, y: 8 },
@@ -85,9 +93,9 @@ export function Verse() {
             ease: "power2.out",
             scrollTrigger: {
               trigger: wordsRef.current,
-              start: "top 80%",
-              end: "top 30%",
-              scrub: 1,
+              start: phone ? "top 94%" : "top 80%",
+              end: phone ? "top 45%" : "top 30%",
+              scrub: phone ? 0.4 : 1,
             },
           }
         );

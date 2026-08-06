@@ -4,7 +4,14 @@ import { useRef, useEffect, useState, useCallback, useId } from "react";
 import { ResidentImage } from "@/components/ResidentImage";
 import { Link } from "@/components/LocaleLink";
 import { ArrowUpRight } from "lucide-react";
-import { gsap, ScrollTrigger, useIsomorphicLayoutEffect } from "@/lib/gsap";
+import {
+  gsap,
+  ScrollTrigger,
+  useIsomorphicLayoutEffect,
+  revealStart,
+  revealDuration,
+  revealTravel,
+} from "@/lib/gsap";
 import { useLang } from "@/components/layout/LanguageProvider";
 import {
   CHRONICLE_FRAMES,
@@ -682,15 +689,15 @@ export function ChronicleCarousel({ off = "" }: { off?: string } = {}) {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         viewportRef.current,
-        { y: 44, opacity: 0 },
+        { y: revealTravel(44), opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 1,
+          duration: revealDuration(1),
           ease: "power3.out",
           scrollTrigger: {
             trigger: viewportRef.current,
-            start: "top 92%",
+            start: revealStart("top 92%"),
             toggleActions: "play none none none",
           },
         },

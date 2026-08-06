@@ -3,7 +3,13 @@
 import { useRef, useEffect } from "react";
 import { Link } from "@/components/LocaleLink";
 import { ResidentImage } from "@/components/ResidentImage";
-import { gsap, revealY } from "@/lib/gsap";
+import {
+  gsap,
+  revealY,
+  revealStart,
+  revealDuration,
+  revealDelay,
+} from "@/lib/gsap";
 import { useLang } from "@/components/layout/LanguageProvider";
 
 export function Saints() {
@@ -22,12 +28,12 @@ export function Saints() {
           {
             y: 0,
             opacity: 1,
-            duration: 1,
+            duration: revealDuration(1),
             ease: "power3.out",
             delay,
             scrollTrigger: {
               trigger: el,
-              start: "top 88%",
+              start: revealStart("top 88%"),
               toggleActions: "play none none none",
             },
           }
@@ -35,11 +41,11 @@ export function Saints() {
 
       headerRef.current
         ?.querySelectorAll(".reveal-item")
-        .forEach((el, i) => reveal(el, i * 0.1));
+        .forEach((el, i) => reveal(el, revealDelay(i, 0.1)));
 
       gridRef.current
         ?.querySelectorAll(".saint-card")
-        .forEach((el, i) => reveal(el, i * 0.15));
+        .forEach((el, i) => reveal(el, revealDelay(i, 0.15)));
     }, sectionRef);
     return () => ctx.revert();
   }, [lang]);

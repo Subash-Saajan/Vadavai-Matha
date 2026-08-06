@@ -1,7 +1,13 @@
 "use client";
 
 import { useEffect, type RefObject } from "react";
-import { gsap, revealY } from "@/lib/gsap";
+import {
+  gsap,
+  revealY,
+  revealStart,
+  revealDuration,
+  revealDelay,
+} from "@/lib/gsap";
 
 /**
  * THE HOUSE REVEAL — used by every band of /architecture and /mass-timings.
@@ -33,16 +39,16 @@ export function useReveal(root: RefObject<HTMLElement | null>, lang: string) {
           {
             y: 0,
             opacity: 1,
-            duration: 1,
+            duration: revealDuration(1),
             ease: "power3.out",
             scrollTrigger: {
               trigger: el,
-              start: "top 88%",
+              start: revealStart("top 88%"),
               toggleActions: "play none none none",
             },
             // Stagger within a row, but never let a long list cascade so far
             // that the last item is still waiting when it is already in view.
-            delay: (i % 4) * 0.08,
+            delay: revealDelay(i % 4, 0.08),
           },
         );
       });

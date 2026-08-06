@@ -2,7 +2,13 @@
 
 import { useEffect, useRef } from "react";
 
-import { gsap } from "@/lib/gsap";
+import {
+  gsap,
+  revealStart,
+  revealDuration,
+  revealStagger,
+  revealTravel,
+} from "@/lib/gsap";
 import { SCHEDULE } from "@/lib/contact";
 import { formatClock, formatClockList } from "@/lib/formatTime";
 import { useLang } from "@/components/layout/LanguageProvider";
@@ -90,14 +96,18 @@ export function TheWeek() {
       }
       gsap.fromTo(
         cols,
-        { y: 34, opacity: 0 },
+        { y: revealTravel(34), opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.85,
+          duration: revealDuration(0.85),
           ease: "power3.out",
-          stagger: 0.07,
-          scrollTrigger: { trigger: gridRef.current, start: "top 85%", once: true },
+          stagger: revealStagger(0.07),
+          scrollTrigger: {
+            trigger: gridRef.current,
+            start: revealStart("top 85%"),
+            once: true,
+          },
         },
       );
     }, gridRef);

@@ -212,7 +212,7 @@ export const ROUTES: Record<RouteKey, RouteDef> = {
     title: "The Fathers of Vadavai",
     fullTitle: "The Fathers of Vadavai — the parish priests of Vadakkankulam since 1697",
     description:
-      "The complete succession of parish priests of the Holy Family Shrine, Vadakkankulam (Vadavai Matha), numbered 1 to 69 from Fr Bernard de Saa in 1697 to today — with their Tamil honorific names, the Jesuits of the old Madurai Mission, the priest who authenticated the weeping of 1803, the builders of the 1872 church, and the six who are buried behind it.",
+      "The complete succession of parish priests of the Holy Family Shrine, Vadakkankulam (Vadavai Matha), numbered 1 to 69 from Fr Bernard de Saa in 1697 to today — with their Tamil honorific names, the Jesuits of the old Madurai Mission, the priest who authenticated the weeping of 1803, the builders of the 1872 church, and the six who are buried in front of it.",
     crumb: "The Fathers",
     priority: 0.7,
     changeFrequency: "yearly",
@@ -246,7 +246,7 @@ export const ROUTES: Record<RouteKey, RouteDef> = {
     title: "Photographs of the Shrine, Vadakkankulam",
     fullTitle: "Photographs of Vadavai Matha — the shrine, the feast and the village",
     description:
-      "The Holy Family Shrine at Vadakkankulam in photographs: the twin-towered façade, the two naves and the gilded high altar, the crowned statue of Vadavai Matha, the chariot of the August feast, the eight other churches of Little Rome, the graves behind the church — and the oldest known photograph of this church, printed in Paris in 1901.",
+      "The Holy Family Shrine at Vadakkankulam in photographs: the twin-towered façade, the two naves and the gilded high altar, the crowned statue of Vadavai Matha, the chariot of the August feast, the eight other churches of Little Rome, the graves in front of the church — and the oldest known photograph of this church, printed in Paris in 1901.",
     crumb: "Photographs",
     priority: 0.7,
     changeFrequency: "monthly",

@@ -4,7 +4,7 @@ import { useRef, useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import { Link } from "@/components/LocaleLink";
 import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
-import { gsap } from "@/lib/gsap";
+import { gsap, revealStart, revealDuration, revealTravel } from "@/lib/gsap";
 import { useLang } from "@/components/layout/LanguageProvider";
 import { CHRONICLE_FRAMES } from "@/lib/chronicle";
 import { ChronicleHeader } from "./ChronicleHeader";
@@ -66,15 +66,15 @@ export function ChronicleBook() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         bookRef.current,
-        { y: 48, opacity: 0 },
+        { y: revealTravel(48), opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 1.1,
+          duration: revealDuration(1.1),
           ease: "power3.out",
           scrollTrigger: {
             trigger: bookRef.current,
-            start: "top 86%",
+            start: revealStart("top 86%"),
             toggleActions: "play none none none",
           },
         },

@@ -3,7 +3,13 @@
 import { useRef, useEffect } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "@/components/LocaleLink";
-import { gsap } from "@/lib/gsap";
+import {
+  gsap,
+  revealStart,
+  revealDuration,
+  revealDelay,
+  revealTravel,
+} from "@/lib/gsap";
 import { useLang } from "@/components/layout/LanguageProvider";
 import { chronicleCounts, fillCounts } from "@/lib/chronicle";
 
@@ -40,14 +46,18 @@ export function ChronicleHeader({ className = "" }: { className?: string }) {
       ref.current?.querySelectorAll(".reveal-item").forEach((el, i) => {
         gsap.fromTo(
           el,
-          { y: 38, opacity: 0 },
+          { y: revealTravel(38), opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 1,
+            duration: revealDuration(1),
             ease: "power3.out",
-            delay: i * 0.1,
-            scrollTrigger: { trigger: el, start: "top 88%", toggleActions: "play none none none" },
+            delay: revealDelay(i, 0.1),
+            scrollTrigger: {
+              trigger: el,
+              start: revealStart("top 88%"),
+              toggleActions: "play none none none",
+            },
           },
         );
       });

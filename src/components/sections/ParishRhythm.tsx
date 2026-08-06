@@ -3,7 +3,14 @@
 import { useRef, useEffect } from "react";
 import { ResidentImage } from "@/components/ResidentImage";
 import { Link } from "@/components/LocaleLink";
-import { gsap, DESKTOP, revealY } from "@/lib/gsap";
+import {
+  gsap,
+  DESKTOP,
+  revealY,
+  revealStart,
+  revealDuration,
+  revealDelay,
+} from "@/lib/gsap";
 import { Sunrise, Church, MoonStar, DoorOpen, ArrowUpRight } from "lucide-react";
 import { useLang } from "@/components/layout/LanguageProvider";
 import { ANNUAL_FEAST, FEASTS, nextFeastIndices, useToday } from "@/lib/feasts";
@@ -155,18 +162,26 @@ export function ParishRhythm() {
           {
             y: 0,
             opacity: 1,
-            duration: 0.95,
+            duration: revealDuration(0.95),
             ease: "power3.out",
             delay,
-            scrollTrigger: { trigger: el, start: "top 90%", toggleActions: "play none none none" },
+            scrollTrigger: {
+              trigger: el,
+              start: revealStart("top 90%"),
+              toggleActions: "play none none none",
+            },
           },
         );
 
-      headerRef.current?.querySelectorAll(".reveal-item").forEach((el, i) => reveal(el, i * 0.1));
-      weekRef.current?.querySelectorAll(".week-col").forEach((el, i) => reveal(el, i * 0.1));
+      headerRef.current
+        ?.querySelectorAll(".reveal-item")
+        .forEach((el, i) => reveal(el, revealDelay(i, 0.1)));
+      weekRef.current
+        ?.querySelectorAll(".week-col")
+        .forEach((el, i) => reveal(el, revealDelay(i, 0.1)));
 
       const cards = Array.from(cardsRef.current?.children ?? []);
-      cards.forEach((el, i) => reveal(el, i * 0.12));
+      cards.forEach((el, i) => reveal(el, revealDelay(i, 0.12)));
 
       /* Desktop only: the offset drift across the five cards. Five more
          per-frame transforms in a section that also carries the week plate;

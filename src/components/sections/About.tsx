@@ -2,7 +2,15 @@
 
 import { useRef, useEffect } from "react";
 import { ResidentImage } from "@/components/ResidentImage";
-import { gsap, DESKTOP, revealY } from "@/lib/gsap";
+import {
+  gsap,
+  ScrollTrigger,
+  DESKTOP,
+  revealY,
+  revealStart,
+  revealDuration,
+  revealDelay,
+} from "@/lib/gsap";
 import { useLang } from "@/components/layout/LanguageProvider";
 import { PhotoOrnaments } from "@/components/ornaments/CornerOrnament";
 
@@ -23,11 +31,11 @@ export function About() {
         { clipPath: "inset(0 0 100% 0)" },
         {
           clipPath: "inset(0 0 0% 0)",
-          duration: 1.5,
+          duration: revealDuration(1.5),
           ease: "power4.out",
           scrollTrigger: {
             trigger: cardRef.current,
-            start: "top 82%",
+            start: revealStart("top 82%"),
             toggleActions: "play none none none",
           },
         }
@@ -43,14 +51,14 @@ export function About() {
           {
             y: 0,
             opacity: 1,
-            duration: 1,
+            duration: revealDuration(1),
             ease: "power3.out",
             scrollTrigger: {
               trigger: el,
-              start: "top 88%",
+              start: revealStart("top 88%"),
               toggleActions: "play none none none",
             },
-            delay: i * 0.1,
+            delay: revealDelay(i, 0.1),
           }
         );
       });
@@ -85,13 +93,27 @@ export function About() {
           },
         });
 
-        gsap.to(haloRef.current, {
-          scale: 1.15,
-          opacity: 0.85,
+        /* ── The halo: opacity only, and only while this is on screen ──────
+           `blur-3xl` is a 64px gaussian, and a scale change invalidates it, so
+           the old `scale: 1.15` loop made Chromium re-rasterise the entire
+           filtered region every frame for the whole life of the page. Patroness
+           ran an identical one, so a desktop reader carried two of them before
+           scrolling at all. Opacity leaves the rasterised layer alone and is
+           varied by the compositor. Full reasoning in Patroness.tsx. */
+        const halo = gsap.to(haloRef.current, {
+          opacity: 0.8,
           duration: 4,
           ease: "sine.inOut",
           yoyo: true,
           repeat: -1,
+          paused: true,
+        });
+
+        ScrollTrigger.create({
+          trigger: sectionRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          onToggle: ({ isActive }) => (isActive ? halo.play() : halo.pause()),
         });
       });
       return () => mm.revert();
