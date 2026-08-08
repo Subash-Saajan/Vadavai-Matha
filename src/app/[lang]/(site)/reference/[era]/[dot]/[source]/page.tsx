@@ -117,7 +117,14 @@ export default async function ReferencePage({
         <div className="ref-inner">
           {/* ── The claim. First, and on its own. ── */}
           <nav className="ref-crumb">
-            <Link href={back}>The History</Link>
+            {/* `scroll={false}` on both routes home. Next's default is to send a
+                new route to the top of the page, which /history then had to
+                undo — two scrolls racing over the same frame, and the one that
+                won depended on how fast the page laid itself out. It is the
+                fragment above that decides where this reader lands. */}
+            <Link href={back} scroll={false}>
+              The History
+            </Link>
             <span aria-hidden>·</span>
             <span>{m.era.heading}</span>
           </nav>
@@ -177,7 +184,7 @@ export default async function ReferencePage({
           )}
 
           <footer className="ref-foot">
-            <Link href={back} className="ref-back">
+            <Link href={back} className="ref-back" scroll={false}>
               ← Back to the moment
             </Link>
             <Link href={L(`/sources#${source}`)} className="ref-back">

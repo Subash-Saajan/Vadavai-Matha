@@ -185,8 +185,9 @@ const PHOTO_FWD = 2;
                              all, so the chip writes the same address to
                              sessionStorage on its way out.
 
-   The stored one is consumed on the first read, so it can never resurface days
-   later and teleport a reader who arrived at /history for their own reasons. */
+   The stored one is spent by the first restore that actually runs, so it can
+   never resurface days later and teleport a reader who arrived at /history for
+   their own reasons. */
 const RETURN_KEY = "history:return";
 const markerFor = (eraId: string, dot: number) => `${eraId}~${dot}`;
 
@@ -212,15 +213,32 @@ const rememberReturn = (eraId: string, dot: number) => {
     sessionStorage.setItem(RETURN_KEY, markerFor(eraId, dot));
   } catch {}
 };
-const takeReturn = () => {
+/* Reading and clearing are two calls, not one, so the address cannot be SPENT
+   by a mount that is then thrown away. React's StrictMode double-mount did
+   exactly that: the first pass took the address, its cleanup cancelled the
+   restore it had just scheduled, and the second pass found an empty slot — so
+   the browser-back route silently did nothing in development while working in
+   production, which is the worst way for a bug to present. Cleared by the
+   restore itself, once it has actually run. */
+const peekReturn = () => {
   try {
-    const v = sessionStorage.getItem(RETURN_KEY);
-    sessionStorage.removeItem(RETURN_KEY);
-    return v;
+    return sessionStorage.getItem(RETURN_KEY);
   } catch {
     return null;
   }
 };
+const clearReturn = () => {
+  try {
+    sessionStorage.removeItem(RETURN_KEY);
+  } catch {}
+};
+
+/* Gaps between restore attempts, in ms after the one before (so three attempts
+   in all, spanning ~1s). See the ⚠ in the restore effect: there is no "the
+   layout has stopped moving" event to wait for, and betting everything on one
+   moment is what broke this. Short enough that the page is settled long before
+   a reader has finished reading the year they landed on. */
+const RESTORE_RETRY_MS = [260, 700];
 
 export default function HistoryPage() {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -1008,35 +1026,71 @@ export default function HistoryPage() {
     } catch {
       // A malformed %-escape in the address bar. Not our problem to solve.
     }
-    // Read unconditionally, so a stored address is spent even when a hash wins
-    // — leaving it behind would fire it at some later, unrelated visit.
-    const stored = takeReturn();
-    const where = parseMarker(hash, ids) ?? parseMarker(stored, ids);
+    // Peeked rather than taken: see peekReturn. A hash still wins when both are
+    // present, and the stored one is cleared by the restore below either way, so
+    // it cannot fire at some later, unrelated visit.
+    const where = parseMarker(hash, ids) ?? parseMarker(peekReturn(), ids);
     if (!where) return;
 
-    let raf = 0;
-    /* ⚠ NOT BEFORE THE PAGE HAS FINISHED MEASURING ITSELF. On desktop the year
-       is READ BACK OFF scroll position, so the restore is only as good as
-       ScrollTrigger's idea of where each chapter starts — and that moves when
-       a late image finally lands. ScrollTrigger re-measures on `load`; going
-       first would put the reader on the right pixel and the wrong year.
+    /* ⚠ MEASURE FIRST, AND MORE THAN ONCE. On desktop the year is READ BACK OFF
+       scroll position, so a restore is only ever as good as ScrollTrigger's idea
+       of where this chapter's pin begins — and that number moves as the
+       photographs above it land and the Tamil webfont swaps in.
 
-       Two frames, not one, because a soft navigation brings its own scroll
-       with it: Next scrolls a new route to the top after render, and a restore
-       that ran in the same frame would simply be overwritten. */
-    const run = () => {
-      raf = requestAnimationFrame(() => {
-        raf = requestAnimationFrame(() =>
-          openAt(where.eraId, where.dot, true)
-        );
-      });
+       This used to wait for `load`, which is right for a cold load and quietly
+       wrong for the way readers actually come back. "← Back to the moment" is a
+       SOFT navigation: `load` fired long ago and will never fire again, so the
+       code took its `document.readyState === "complete"` branch — written for
+       "the page had already finished loading before this effect ran" — and aimed
+       at a document that had measured nothing yet. It landed a few years out, or
+       in the wrong chapter, according to what happened to still be cached.
+       ScrollTrigger.update() did not save it either: that re-reads progress from
+       the current scroll, it does not re-measure where a pin starts.
+
+       So refresh, aim, and do it again as the layout settles. There is no event
+       that means "everything has stopped moving", and betting on a single moment
+       is the mistake being fixed. */
+    let cancelled = false;
+    let attempt = 0;
+    let raf = 0;
+    let timer = 0;
+
+    const land = () => {
+      if (cancelled) return;
+      ScrollTrigger.refresh();
+      openAt(where.eraId, where.dot, true);
+      clearReturn();
+      const next = RESTORE_RETRY_MS[attempt++];
+      if (next !== undefined) timer = window.setTimeout(land, next);
     };
-    if (document.readyState === "complete") run();
-    else window.addEventListener("load", run, { once: true });
+
+    /* The reader wins the moment they touch anything. A retry firing under a
+       hand that is already scrolling stops being a restore and becomes the page
+       taking the scroll back off them — worse than landing a year out. */
+    const stop = () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+    };
+    const listen = { passive: true, once: true } as const;
+    window.addEventListener("wheel", stop, listen);
+    window.addEventListener("touchstart", stop, listen);
+    window.addEventListener("keydown", stop, listen);
+
+    /* Two frames before the first attempt, because a soft navigation brings its
+       own scroll with it. The back links pass `scroll={false}` so Next does not
+       send the route to the top, but the frames cost nothing and keep this
+       correct if that prop is ever dropped. */
+    raf = requestAnimationFrame(() => {
+      raf = requestAnimationFrame(land);
+    });
 
     return () => {
+      cancelled = true;
       cancelAnimationFrame(raf);
-      window.removeEventListener("load", run);
+      window.clearTimeout(timer);
+      window.removeEventListener("wheel", stop);
+      window.removeEventListener("touchstart", stop);
+      window.removeEventListener("keydown", stop);
     };
   }, [h.eras, openAt]);
 
