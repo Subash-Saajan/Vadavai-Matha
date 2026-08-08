@@ -14,18 +14,15 @@ import { LOCALES, localePath } from "@/lib/locale";
  * the same ROUTES table the canonicals and breadcrumbs read, so a new page
  * cannot be added to the site and forgotten by search.
  *
- * The coming-soon "/" is deliberately absent — it is `noindex`, and listing a
- * noindex URL in a sitemap is an error Search Console will report back at you.
+ * The site has LAUNCHED, so "/" is now the real home and is listed here. (It
+ * was absent while it was the `noindex` coming-soon page — listing a noindex
+ * URL in a sitemap is an error Search Console reports back at you.)
  *
  * `images` gives Google the lead photo per page. The shrine's own photographs
  * are its strongest asset (there are ~70 of them) and image search is a real
  * discovery path for a pilgrimage site.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
-  // Build time. Honest enough while the site is in active pre-launch change;
-  // if the content ever settles, move to a per-route date rather than lying.
-  const lastModified = new Date();
-
   // Every page is listed once per language. The `alternates.languages` pair is
   // the sitemap half of the hreflang contract the pages declare in their
   // metadata — Google wants the relationship asserted in both places, and
@@ -40,7 +37,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     return LOCALES.map((lang) => ({
       url: abs(localePath(lang, r.path)),
-      lastModified,
+      // Per-route, hand-maintained (see RouteDef.lastModified). This was
+      // `new Date()` — build time — which told Google on every single deploy
+      // that all 22 URLs had changed. A sitemap that says everything changed
+      // always is a sitemap whose `lastmod` Google learns to ignore, and this
+      // one needs to be believed.
+      //
+      // Both language twins share the route's date. The Tamil page is a
+      // translation of the same content, so when the English changes the Tamil
+      // is stale until re-translated — one date is the honest reading.
+      lastModified: r.lastModified,
       changeFrequency: r.changeFrequency,
       priority: r.priority,
       images: [abs(r.image)],

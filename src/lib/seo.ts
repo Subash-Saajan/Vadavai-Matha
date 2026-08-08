@@ -75,6 +75,23 @@ export type RouteDef = {
   crumb: string;
   priority: number;
   changeFrequency: "daily" | "weekly" | "monthly" | "yearly";
+  /**
+   * `YYYY-MM-DD`, the date this page's CONTENT last actually changed.
+   *
+   * This used to be `new Date()` in sitemap.ts, so every deploy told Google all
+   * 22 URLs had changed — including pages untouched for weeks. Google responds
+   * to a sitemap that cries wolf by discounting `lastmod` for the whole domain,
+   * which costs us the one signal we most want honoured: "the home page really
+   * did change, please look again". A per-route date restores it.
+   *
+   * Bump it BY HAND when you change a page's words or pictures — not for a CSS
+   * tweak or a refactor that renders identically. Forgetting understates change,
+   * which is the safe failure; the old behaviour overstated it, which is not.
+   *
+   * Seeded from `git log -1` on each route's own files and its data module in
+   * src/lib (e.g. /history also reads history.ts + historyNotes.ts).
+   */
+  lastModified: string;
   /** The real photograph on the page. Fed to the image sitemap at full size. */
   image: string;
   /** The 1200x630 share card cut from that photograph (see public/og/).
@@ -98,6 +115,7 @@ export const ROUTES: Record<RouteKey, RouteDef> = {
     crumb: "Home",
     priority: 1.0,
     changeFrequency: "weekly",
+    lastModified: "2026-08-06",
     image: "/images/architecture/facade.jpg",
     ogImage: "/og/home.jpg",
   },
@@ -115,6 +133,7 @@ export const ROUTES: Record<RouteKey, RouteDef> = {
     crumb: "History",
     priority: 0.8,
     changeFrequency: "yearly",
+    lastModified: "2026-08-04",
     image: "/images/bw-old-pic.jpg",
     ogImage: "/og/history.jpg",
   },
@@ -131,6 +150,7 @@ export const ROUTES: Record<RouteKey, RouteDef> = {
     crumb: "Architecture",
     priority: 0.7,
     changeFrequency: "yearly",
+    lastModified: "2026-08-04",
     image: "/images/architecture/nave.jpg",
     ogImage: "/og/architecture.jpg",
   },
@@ -143,6 +163,7 @@ export const ROUTES: Record<RouteKey, RouteDef> = {
     crumb: "Mass & Feasts",
     priority: 0.9,
     changeFrequency: "monthly",
+    lastModified: "2026-08-04",
     image: "/images/fest-drone.jpg",
     ogImage: "/og/mass-timings.jpg",
   },
@@ -155,6 +176,7 @@ export const ROUTES: Record<RouteKey, RouteDef> = {
     crumb: "Contact & Visit",
     priority: 0.9,
     changeFrequency: "monthly",
+    lastModified: "2026-08-06",
     image: "/church-interior.jpeg",
     ogImage: "/og/contact.jpg",
   },
@@ -172,6 +194,7 @@ export const ROUTES: Record<RouteKey, RouteDef> = {
     crumb: "St Devasahayam Pillai",
     priority: 0.8,
     changeFrequency: "yearly",
+    lastModified: "2026-07-30",
     image: "/images/saints/devasahayam-pillai.jpg",
     ogImage: "/og/devasahayam.jpg",
   },
@@ -186,6 +209,7 @@ export const ROUTES: Record<RouteKey, RouteDef> = {
     crumb: "St John de Britto",
     priority: 0.8,
     changeFrequency: "yearly",
+    lastModified: "2026-07-31",
     image: "/images/de-britto-grotto.jpg",
     ogImage: "/og/john-de-britto.jpg",
   },
@@ -198,6 +222,7 @@ export const ROUTES: Record<RouteKey, RouteDef> = {
     crumb: "Questions & Answers",
     priority: 0.8,
     changeFrequency: "monthly",
+    lastModified: "2026-08-04",
     image: "/images/architecture/altar.jpg",
     ogImage: "/og/faq.jpg",
   },
@@ -216,6 +241,7 @@ export const ROUTES: Record<RouteKey, RouteDef> = {
     crumb: "The Fathers",
     priority: 0.7,
     changeFrequency: "yearly",
+    lastModified: "2026-08-06",
     image: "/images/architecture/archival.jpg",
     ogImage: "/og/priests.jpg",
   },
@@ -228,6 +254,7 @@ export const ROUTES: Record<RouteKey, RouteDef> = {
     crumb: "Sources",
     priority: 0.6,
     changeFrequency: "yearly",
+    lastModified: "2026-08-05",
     image: "/images/architecture/archival.jpg",
     ogImage: "/og/sources.jpg",
   },
@@ -250,6 +277,7 @@ export const ROUTES: Record<RouteKey, RouteDef> = {
     crumb: "Photographs",
     priority: 0.7,
     changeFrequency: "monthly",
+    lastModified: "2026-08-06",
     image: "/images/fest-noon.jpg",
     ogImage: "/og/gallery.jpg",
   },
@@ -266,6 +294,9 @@ export const ROUTES: Record<RouteKey, RouteDef> = {
     crumb: "Acknowledgements",
     priority: 0.4,
     changeFrequency: "yearly",
+    // Not in INDEXABLE while the page is a draft, so this date reaches no
+    // sitemap yet. The type still requires it, and it will be right when it does.
+    lastModified: "2026-07-30",
     image: "/images/architecture/archival.jpg",
     ogImage: "/og/sources.jpg",
   },
