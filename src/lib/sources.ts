@@ -475,6 +475,15 @@ export const SOURCE_GROUPS: SourceGroup[] = [
         archiveOnly: true,
       },
       {
+        id: "besse_beschi_1918",
+        author: "Léon Besse, S.J.",
+        title: "Father Beschi of the Society of Jesus: His Times and His Writings",
+        detail: "Trichinopoly: St Joseph's Industrial School Press, 1918 — 250 pp.; pp. 42 (and n. 1), 49, 51",
+        note: "The same Besse as the entry above, on the same mission, and the closest thing we can read to his un-obtainable 1914 history. It carries this parish twice. First, the profession of 28 October 1714: Beschi made his four vows to “Father Broglias Antony Brandolini, his neighbour in the district of Vadakenkulam” — and Besse then declines to say where. “We are not told, whether at Gurukelpatti itself, or at Vadakenkulam.” His footnote is the oldest printed statement of the parish's own claim: “According to a local tradition Fr. Beschi took his last vows at Vadakenkulam.” Second, at pp. 49–51, he prints Brandolini's own first-person letter, written from this village in 1714 — the only inside view of Vadakkankulam in that year anywhere in this library, and the one that independently places the priest's own catechist here, exactly as the tradition describes. Note the layer: the words “in the district of Vadakenkulam” are Besse's editorial identification as Mission Superior, not Beschi's; Beschi's own letter says only “my nearest confrère in the mission”. The book has no text layer and was read through our own OCR of the Tamil Digital Library scan.",
+        noteTa: `மேலே உள்ள பதிவின் அதே பெஸ், அதே பணிக்களத்தைப் பற்றி எழுதிய நூல் — கிடைக்காமல் போன அவரது 1914 வரலாற்றுக்கு மிக அருகில் நம்மால் சென்று வாசிக்க முடிந்தது இதுவே. இப்பங்கை இது இரு இடங்களில் சுமக்கிறது. முதலில், 1714 அக்டோபர் 28-ஆம் நாளின் வார்த்தைப்பாடு: “வடக்கன்குளம் மாவட்டத்தில் இருந்த அவரது அண்டையாரான அருட்தந்தை புரோலியாஸ் அந்தோணி பிராந்தொலினி” அவர்களிடம் பெஸ்கி தமது நான்கு வார்த்தைப்பாடுகளை உரைத்தார் — ஆனால் அது எங்கே நிகழ்ந்தது என்பதைச் சொல்ல பெஸ் முன்வரவில்லை: “அது குருக்கள்பட்டியிலா, வடக்கன்குளத்திலா என்பது நமக்குச் சொல்லப்படவில்லை.” அவரது அடிக்குறிப்பே, இப்பங்கின் சொந்த மரபு அச்சில் ஏறிய மிகப் பழைய இடம்: “ஒரு நாட்டுப்புற மரபின்படி, அருட்தந்தை பெஸ்கி தமது இறுதி வார்த்தைப்பாட்டை வடக்கன்குளத்தில் செய்தார்.” அடுத்து, பக். 49–51-இல், 1714-ஆம் ஆண்டு இவ்வூரிலிருந்தே பிராந்தொலினி தன்னிலையில் எழுதிய கடிதம் இந்நூலில் அச்சாகியுள்ளது — அவ்வாண்டின் வடக்கன்குளத்தை உள்ளிருந்து காட்டும் ஒரே பதிவு இந்நூலகம் முழுவதிலும் இதுவேதான்; மரபு சொல்வதைப்போலவே, அருட்தந்தையின் சொந்த மறைக்கல்வியாளர் இங்கே இருந்தார் என்பதைத் தனித்து உறுதிப்படுத்துவதும் இதுவே. ஓர் அடுக்கை மட்டும் பிரித்துப் பார்க்க வேண்டும்: “வடக்கன்குளம் மாவட்டத்தில்” என்னும் சொற்கள் பணிக்களத் தலைவராக பெஸ்ஸே சேர்த்த அடையாளம், பெஸ்கியுடையவை அல்ல; பெஸ்கியின் கடிதம் “பணிக்களத்தில் எனக்கு மிக அண்மையான உடன்சகோதரர்” என்று மட்டுமே சொல்கிறது. இந்நூலின் மின்படியில் எழுத்து அடுக்கே இல்லை; தமிழ் இணைய நூலகப் படியை நாமே OCR செய்துதான் வாசித்தோம்.`,
+        archiveOnly: true,
+      },
+      {
         id: "ferroli_1951",
         author: "D. Ferroli, S.J.",
         title: "The Jesuits in Malabar",

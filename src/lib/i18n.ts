@@ -318,6 +318,11 @@ export const dict = {
               title: `A house where a father lived`,
               body: `By 1714 the Society of Jesus had made Vadakkankulam a residence in its own right, no longer a village on a circuit but a house where a father lived. In the mission's own account of those years a missionary writes in the first person of an impostor who came “into the church of Vadakencoulam where I then was”, found out by the catechist walking at his side. A resident priest, a working church, a catechist beside him: within thirty years of the thatch, the parish had arrived.`,
             },
+            {
+              year: `Oct 1714`,
+              title: `The vows of Veeramamunivar`,
+              body: `That year permission came from Rome, and the Provincial named the priest who was to act on it: the father of this church. Constantine Beschi — the Italian Jesuit whom Tamil would come to know as Veeramamunivar, and whose *Thembavani* is counted among the classical poems of the language — was to make his profession of four vows, the last and gravest promise a Jesuit makes, and Fr Antonius Brandolini was to receive them, being “his neighbour in the district of Vadakenkulam.” On the feast of Saints Simon and Jude, the twenty-eighth of October 1714, the poet made his vows and the priest of Vadakkankulam received them. This village has said ever since that it was done here, and that Beschi brought his own catechist with him for the day. He was young in the mission then, and not yet the poet Tamil remembers. The annual letter written a few months later says he had given himself entirely to the study of Tamil poetry, and had gone further in it in the space of a few months than any missionary since the mission was founded — because in this country, it explains, nothing is held in higher esteem.`,
+            },
           ],
         },
         {
@@ -2142,6 +2147,11 @@ export const dict = {
               year: `1714`,
               title: `அருட்தந்தை ஒருவர் வாழ்ந்த இல்லம்`,
               body: `1714-ஆம் ஆண்டளவில், இயேசு சபை வடக்கன்குளத்தைத் தனக்கே உரிய ஒரு நிலையமாக்கியிருந்தது; இனி அது சுற்றுப் பயணத்தில் வந்து போகும் ஒரு கிராமம் அல்ல, அருட்தந்தை ஒருவர் வாழ்ந்த இல்லம். அந்த ஆண்டுகளைப் பற்றிய பணிக்களத்தின் சொந்தப் பதிவில், மறைப்பணியாளர் ஒருவர் தன்னைப் பற்றியே எழுதுகிறார்: போலிக் குரு ஒருவன் “அப்போது நான் இருந்த வடக்கன்குளம் ஆலயத்திற்குள்” நுழைந்தான்; அவருடன் உடன் நடந்துவந்த மறைக்கல்வியாளரால் அவன் அம்பலப்படுத்தப்பட்டான். இங்கேயே தங்கியிருக்கும் ஒரு குரு, இயங்கிக்கொண்டிருக்கும் ஓர் ஆலயம், அவருக்குப் பக்கத்தில் ஒரு மறைக்கல்வியாளர் — ஓலைக் கூரை எழுந்த முப்பது ஆண்டுகளுக்குள், பங்கு வந்து சேர்ந்துவிட்டது.`,
+            },
+            {
+              year: `1714 அக்.`,
+              title: `வீரமாமுனிவரின் வார்த்தைப்பாடு`,
+              body: `அவ்வாண்டு உரோமையிலிருந்து ஓர் அனுமதி வந்தது; அதை நிறைவேற்ற வேண்டியவர் யார் என்பதையும் மாகாண அதிபர் குறித்திருந்தார் — இவ்வாலயத்தின் தந்தையையே. தமிழ் உலகம் பின்னாளில் வீரமாமுனிவர் என்று போற்றவிருந்த இத்தாலிய இயேசு சபை அருட்தந்தை கான்ஸ்தந்தீன் பெஸ்கி அவர்கள் — *தேம்பாவணி* என்னும் காப்பியத்தைத் தமிழுக்குத் தந்தவர் — தமது நான்கு வார்த்தைப்பாடுகளைச் செய்யவிருந்தார்; இயேசு சபையினர் ஒருவர் தம் வாழ்நாள் முழுவதிலும் ஏற்கும் இறுதியான, மிக ஆழமான உறுதிமொழி அது. அவ்வுறுதிமொழியை ஏற்கும் பேறு அருட்தந்தை அந்தோனியுஸ் பிராந்தொலினி அவர்களுக்கு வந்தது — “வடக்கன்குளம் மாவட்டத்தில் இருந்த அவரது அண்டையார்” என்றே பணிக்களப் பதிவு அவரைக் குறிக்கிறது. புனிதர்கள் சீமோன், யூதா ஆகியோரின் திருநாளாகிய 1714 அக்டோபர் 28 அன்று, அப்புலவர் தமது வார்த்தைப்பாடுகளை உரைத்தார்; வடக்கன்குளத்தின் அருட்தந்தை அவற்றை ஏற்றுக்கொண்டார். அது இங்கேயே நிகழ்ந்தது என்றும், அன்றைய நாளுக்குத் தம் மறைக்கல்வியாளரையும் பெஸ்கி உடன் அழைத்து வந்தார் என்றும் இவ்வூர் அன்று முதல் இன்றுவரை சொல்லிவருகிறது. அப்போது அவர் பணிக்களத்தில் புதியவர்; தமிழ் இன்று நினைவுகூரும் அப்புலவராக அவர் இன்னும் உருவாகியிருக்கவில்லை. சில மாதங்கள் கழித்து எழுதப்பட்ட ஆண்டறிக்கை அவரைப் பற்றி இவ்வாறு சொல்கிறது: தமிழ்க் கவிதைப் பயிற்சியில் அவர் தம்மை முற்றிலுமாக ஒப்படைத்துவிட்டார்; பணிக்களம் தொடங்கிய நாள் முதல் வந்த எந்த மறைப்பணியாளரும் எட்டாத தூரத்தை, சில மாதங்களுக்குள்ளேயே அவர் கடந்துவிட்டார் — ஏனெனில், இந்நாட்டில் அதைவிடப் பெரிதாக மதிக்கப்படுவது வேறெதுவும் இல்லை.`,
             },
           ],
         },
