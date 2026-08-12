@@ -1,6 +1,12 @@
 "use client";
 
-import { createContext, useContext, useCallback, useMemo } from "react";
+import {
+  createContext,
+  useContext,
+  useCallback,
+  useMemo,
+  useRef,
+} from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { dict, type Dict } from "@/lib/i18n";
 import {
@@ -30,6 +36,20 @@ type Ctx = {
   toggle: () => void;
   /** This same page in the other language — give this to a <Link href>. */
   otherHref: string;
+  /**
+   * Run something in the moment BEFORE a language switch navigates away, and
+   * return the unsubscribe. Most pages need nothing: the switch keeps the
+   * scroll offset and the two renders are the same shape, so the reader stays
+   * where they were.
+   *
+   * A page that keeps its place in something other than a scroll offset does
+   * need it. The history page is the case: the same chapter is a different
+   * height in Tamil, and the year within it is held in scroll position and
+   * GSAP classes, not in the URL — so an untouched scroll offset lands on a
+   * different year. It registers here and writes its return address on the way
+   * out, and its own restore picks the address up on the other side.
+   */
+  onBeforeSwitch: (fn: () => void) => () => void;
   t: Dict;
 };
 
@@ -49,23 +69,56 @@ export function LanguageProvider({
   const basePath = stripLocale(pathname || "/");
   const otherHref = localePath(otherLocale(lang), basePath);
 
+  /* Held in a ref, and the callbacks are called rather than depended on, so
+     registering one never re-mints setLang/toggle — otherwise every page that
+     registered would re-register on its own registration. */
+  const beforeSwitch = useRef<Set<() => void>>(new Set());
+
+  const onBeforeSwitch = useCallback((fn: () => void) => {
+    const set = beforeSwitch.current;
+    set.add(fn);
+    return () => {
+      set.delete(fn);
+    };
+  }, []);
+
+  /* One page's bookkeeping must not be able to strand the reader in the
+     language they were trying to leave. */
+  const runBeforeSwitch = useCallback(() => {
+    for (const fn of beforeSwitch.current) {
+      try {
+        fn();
+      } catch {}
+    }
+  }, []);
+
   const setLang = useCallback(
     (l: Locale) => {
+      if (l === lang) return;
+      runBeforeSwitch();
       // scroll: false — a language switch is the same page in the other
       // tongue, not a new destination. Without it Next.js jumps to the top
       // of the page on every toggle, same as any other route change.
       router.push(localePath(l, basePath), { scroll: false });
     },
-    [router, basePath],
+    [router, basePath, lang, runBeforeSwitch],
   );
 
   const toggle = useCallback(() => {
+    runBeforeSwitch();
     router.push(otherHref, { scroll: false });
-  }, [router, otherHref]);
+  }, [router, otherHref, runBeforeSwitch]);
 
   const value = useMemo<Ctx>(
-    () => ({ lang, setLang, toggle, otherHref, t: dict[lang] as Dict }),
-    [lang, setLang, toggle, otherHref],
+    () => ({
+      lang,
+      setLang,
+      toggle,
+      otherHref,
+      onBeforeSwitch,
+      t: dict[lang] as Dict,
+    }),
+    [lang, setLang, toggle, otherHref, onBeforeSwitch],
   );
 
   return (

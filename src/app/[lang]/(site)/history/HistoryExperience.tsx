@@ -185,6 +185,10 @@ const PHOTO_FWD = 2;
                              all, so the chip writes the same address to
                              sessionStorage on its way out.
 
+   The language toggle later joined the second of those — it navigates to the
+   twin URL and keeps the scroll offset, which is a different year once the
+   prose is a different height. See the switch note further down.
+
    The stored one is spent by the first restore that actually runs, so it can
    never resurface days later and teleport a reader who arrived at /history for
    their own reasons. */
@@ -259,7 +263,7 @@ export default function HistoryPage() {
   const openRef = useRef<
     Record<string, (k: number, instant?: boolean) => void>
   >({});
-  const { t, lang } = useLang();
+  const { t, lang, onBeforeSwitch } = useLang();
   /* Gates the per-year panel photographs, which only that path ever shows. */
   const stillReader = usePrefersReducedMotion();
 
@@ -1093,6 +1097,73 @@ export default function HistoryPage() {
       window.removeEventListener("keydown", stop);
     };
   }, [h.eras, openAt]);
+
+  /* ── SWITCHING LANGUAGE MID-CHAPTER ───────────────────────────────────────
+     A language switch is a navigation to the twin URL with the scroll offset
+     left alone, which is right for every other page on the site and wrong for
+     this one. A chapter is a different height in Tamil — different prose,
+     different font metrics — so the same offset is a different year, and the
+     reader who pressed தமிழ் at 1803 arrived somewhere in 1785.
+
+     So it becomes the same problem as coming back from a citation, and takes
+     the same road: write the moment's address on the way out, and let the
+     restore effect above pick it up on the other side. That effect re-runs on
+     the switch (the dictionary, and so `h.eras`, is a different object in the
+     other language), and it clears the address once it has landed. */
+
+  /** Where the reader is now, as a moment address — or null if they are above
+      the first chapter, in the hero or the Contents, where there is no year to
+      keep. Read from the DOM, not from React: on desktop the year lives in
+      scroll position and the classes GSAP writes from it, and `activeDots` is
+      deliberately not mirrored there (see the note on it). */
+  const currentMoment = useCallback(() => {
+    const root = rootRef.current;
+    if (!root) return null;
+    const mid = window.innerHeight / 2;
+
+    // The chapter being read is the one straddling the middle of the screen.
+    // Chapters are contiguous, so past the Contents exactly one always is.
+    const era = Array.from(root.querySelectorAll<HTMLElement>(".era")).find(
+      (s) => {
+        const r = s.getBoundingClientRect();
+        return r.top <= mid && r.bottom >= mid;
+      }
+    );
+    if (!era?.id) return null;
+
+    const panels = Array.from(era.querySelectorAll<HTMLElement>(".dot-panel"));
+    if (!panels.length) return null;
+
+    // Desktop and phone: a build is running and its `is-active` class is the
+    // authority on the year, exactly as it is for the rail dots.
+    if (openRef.current[era.id]) {
+      const active = panels.findIndex((p) => p.classList.contains("is-active"));
+      if (active >= 0) return { eraId: era.id, dot: active };
+    }
+
+    // prefers-reduced-motion: nothing is pinned, no build ran, and every year
+    // stands open in normal flow — so the year is the one on screen.
+    let best = -1;
+    let bestGap = Infinity;
+    panels.forEach((p, k) => {
+      const r = p.getBoundingClientRect();
+      const gap = Math.abs((r.top + r.bottom) / 2 - mid);
+      if (gap < bestGap) {
+        bestGap = gap;
+        best = k;
+      }
+    });
+    return best >= 0 ? { eraId: era.id, dot: best } : null;
+  }, []);
+
+  useEffect(
+    () =>
+      onBeforeSwitch(() => {
+        const at = currentMoment();
+        if (at) rememberReturn(at.eraId, at.dot);
+      }),
+    [onBeforeSwitch, currentMoment]
+  );
 
   // ‹Previous chapter / Next chapter› — two taps. The first arms the button and
   // opens it to name the chapter it would take you to; only the second travels.
