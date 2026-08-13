@@ -8,6 +8,8 @@ import {
   gsap,
   ScrollTrigger,
   DESKTOP,
+  onPhone,
+  revealY,
   revealStart,
   revealDuration,
   revealDelay,
@@ -265,6 +267,11 @@ export function GalleryPreview() {
       const els = Array.from(gridRef.current?.children ?? []) as HTMLElement[];
       if (!els.length) return;
 
+      /* Read once, when the effect builds — the same rule every other reveal
+         helper follows. A roll that is already mid-section does not want its
+         mechanics re-decided because the address bar changed the width. */
+      const phone = onPhone();
+
       // Under prefers-reduced-motion nothing is built at all. The base markup is
       // the finished state — first frame of every roll visible, plate centred in
       // its frame — so returning here leaves a plain, correct, still mosaic
@@ -327,12 +334,25 @@ export function GalleryPreview() {
         });
       });
 
+      /* ⚠ THE ENTRANCE SCALES ON A MONITOR AND TRANSLATES ON A PHONE, and it
+         is the same argument as the swap above — with the added sting that
+         this one fires exactly WHERE the jank was measured. Six tiles, each a
+         rounded clipped box with a photograph in it, each having `scale`
+         written to it every frame for the length of its entrance, all of them
+         staggered across the moment the reader is scrolling INTO the band that
+         was missing two frame budgets on nearly a fifth of its frames.
+
+         A scale resamples; a translate does not — it is the house reveal every
+         other section on this page already uses, and `revealY()` is the travel
+         it uses. Desktop keeps the scale-up, which is the better entrance for
+         a mosaic and is free on a machine that can afford it. */
+      const from = revealY();
       els.forEach((el, i) => {
         gsap.fromTo(
           el,
-          { scale: 0.9, opacity: 0 },
+          phone ? { y: from, opacity: 0 } : { scale: 0.9, opacity: 0 },
           {
-            scale: 1,
+            ...(phone ? { y: 0 } : { scale: 1 }),
             opacity: 1,
             duration: revealDuration(1),
             ease: "power3.out",
@@ -377,13 +397,47 @@ export function GalleryPreview() {
           gsap.set(frames, { autoAlpha: 0, scale: 1, clipPath: open });
           gsap.set(incoming, { autoAlpha: 1 });
         } else {
-          // The old picture only fades. All the movement belongs to the new one,
-          // which is what makes the change read as an arrival rather than as two
-          // pictures dissolving into a muddy middle.
+          /* ⚠ THE PHONE GETS A CROSS-FADE, THE MONITOR GETS THE WIPE, AND THE
+             MEASUREMENT THAT DECIDED IT IS WORTH KEEPING.
+
+             Frame pacing was recorded over twenty-four synthesised touch flings
+             down this page on a Galaxy A55, with every served frame attributed
+             to the band it was served in. Warm (every picture already cached,
+             so this is render cost and not network) the page held 57 fps and
+             ten of its eleven bands missed two frame budgets on 0–5% of their
+             frames. This one band missed on 17.7%. It was, by a factor of
+             three, the worst thing on the home page — which is exactly where a
+             reader said the scroll "breaks up and goes jittery".
+
+             Two properties were doing it, and they are different problems:
+
+               · `scale`, on a photograph, forces the bitmap to be RESAMPLED
+                 every frame it changes. Removing it took the band to 12.3%.
+               · `clip-path`, animated from script, cannot be handed to the
+                 compositor at all: every frame is a new geometry and therefore
+                 a REPAINT of the tile — and these tiles are up to the full
+                 width of the screen with a photograph inside them.
+
+             Opacity is the one property that costs nothing: the layer is
+             rasterised once and the compositor varies its alpha on the GPU.
+             The same argument Patroness.tsx makes about its halo.
+
+             So on a phone the swap is a cross-fade. The wipe is better — it
+             reads as one photograph replacing another rather than two
+             dissolving — and on a monitor, where it is free, it stays exactly
+             as authored. On a 6-inch screen, where a tile is 90% of the width
+             and the change is over in a second, a dissolve reads as a change
+             of picture just as clearly, and it does not cost the scroll the
+             frames the section is being read through.
+
+             The gold hairline sweeps on both builds. It is one thin element
+             taking a transform, it costs nothing, and it is what keeps the
+             cross-fade reading as a deliberate change rather than an image
+             failing to load. */
           if (outgoing) {
             gsap.to(outgoing, {
               autoAlpha: 0,
-              scale: 1.04,
+              scale: phone ? 1 : 1.04,
               duration: WIPE * 0.85,
               ease: "power2.inOut",
               overwrite: "auto",
@@ -392,14 +446,23 @@ export function GalleryPreview() {
 
           gsap.fromTo(
             incoming,
-            { autoAlpha: 1, scale: 1.08, clipPath: hidden },
-            {
-              scale: 1,
-              clipPath: open,
-              duration: WIPE,
-              ease: "power3.inOut",
-              overwrite: "auto",
-            },
+            phone
+              ? { autoAlpha: 0, clipPath: open }
+              : { autoAlpha: 1, scale: 1.08, clipPath: hidden },
+            phone
+              ? {
+                  autoAlpha: 1,
+                  duration: WIPE,
+                  ease: "power2.inOut",
+                  overwrite: "auto",
+                }
+              : {
+                  scale: 1,
+                  clipPath: open,
+                  duration: WIPE,
+                  ease: "power3.inOut",
+                  overwrite: "auto",
+                },
           );
 
           // The hairline that travels with the wipe — a thread of gold crossing

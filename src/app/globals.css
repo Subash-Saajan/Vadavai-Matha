@@ -588,6 +588,34 @@ html[lang|="ta"] .field-label {
   mix-blend-mode: screen;
 }
 
+/* ⚠ NEITHER THE BLUR NOR THE BLEND SURVIVES ON A PHONE, AND FOR THE SAME
+   REASON THE FILM GRAIN AND THE NAVBAR BLUR DO NOT (see both notes above).
+   There are five of these on the home page alone — Patroness, About, Fathers,
+   Saints, the Gallery — and each one is a box up to 60% wide by 120% tall of
+   its section. Two things follow from that size:
+
+     · `filter: blur(8px)` has to rasterise the whole box, expanded by about
+       three radii in every direction, into its own surface. At DPR 3 the
+       biggest of them is comfortably over a megapixel of gaussian, and it is
+       paid the moment the section is first tiled into view — i.e. exactly
+       when the reader is scrolling towards it, which is what turns a paint
+       cost into a felt stutter.
+     · `mix-blend-mode` then takes that surface out of the plain composited
+       path: the layer can no longer simply be moved by the compositor, it has
+       to be blended against whatever is behind it wherever the two overlap.
+
+   What is lost is close to nothing. The gradient tops out at 18% gold and its
+   own stops already fade it to transparent by 60%, so the blur is smoothing an
+   edge that is not there, and `screen` at that alpha is a barely-warmer warm.
+   The shaft still reads as directional light; it just no longer costs a
+   megapixel of filter per section to say so. Desktop is untouched. */
+@media (max-width: 767px) {
+  .light-shaft {
+    filter: none;
+    mix-blend-mode: normal;
+  }
+}
+
 /* Parchment paper sheen for light sections */
 .parchment-sheen {
   background-image:

@@ -126,12 +126,27 @@ export const onPhone = (): boolean =>
    below it an empty box that has not been told to start yet. The page reads as
    though it is loading, when in truth everything arrived long ago.
 
-   So on touch: fire the moment the element's top crosses the bottom edge, run
-   roughly half as long, and cut the stagger down — and cap it, so the fourth
-   item in a row is not still waiting when the row is already past. The reveal
-   is then finished by the time the block reaches comfortable reading height at
-   any scroll speed a thumb can produce. It is still a reveal, not a cut: the
-   motion is there for anyone scrolling at a readerly pace.
+   So on touch: fire earlier than a monitor does, run shorter, and cut the
+   stagger down — and cap it, so the fourth item in a row is not still waiting
+   when the row is already past.
+
+   ⚠ THAT CORRECTION WAS OVERSHOT, AND THESE ARE THE SECOND-PASS NUMBERS.
+   The first pass took it to the far end: fire at `top 96%` — which is the
+   element's top merely TOUCHING the bottom edge — and run at 0.55 of the
+   authored duration. Both ends of the problem then swapped places. A block
+   now finished its entrance while it was still down in the last 4% of the
+   screen, so by the time the reader had scrolled far enough to look at it the
+   motion was already over: what they met was not a reveal but a page whose
+   pictures kept appearing somewhere ahead of them, fully formed, half a
+   screen before they arrived. And what motion they did catch was too quick to
+   read as motion at all.
+
+   `top 90%` is the middle: the element is a tenth of a screen into view
+   before anything starts, which is far enough in that the reveal happens
+   where the eye already is, and still early enough that a fast flick does not
+   meet a blank box. 0.8 of the authored duration is slower than the 0.55 and
+   still short of a monitor's — the phone is quicker, as it should be, but not
+   so quick that the movement is over before it is seen.
 
    Desktop values are untouched — every helper takes the authored number and
    hands it straight back on a monitor. */
@@ -144,11 +159,11 @@ export const onPhone = (): boolean =>
  * tween. This is for `toggleActions` / `once` reveals only.
  */
 export const revealStart = (desktop = "top 88%"): string =>
-  onPhone() ? "top 96%" : desktop;
+  onPhone() ? "top 90%" : desktop;
 
-/** How long an entrance reveal runs. A phone gets a little over half. */
+/** How long an entrance reveal runs. A phone gets four fifths. */
 export const revealDuration = (desktop: number): number =>
-  onPhone() ? Math.round(desktop * 55) / 100 : desktop;
+  onPhone() ? Math.round(desktop * 80) / 100 : desktop;
 
 /**
  * A bespoke reveal travel, shortened on touch by the same ratio `revealY`
@@ -161,7 +176,7 @@ export const revealTravel = (desktop: number): number =>
 
 /** A tween's own `stagger`, shortened on touch. */
 export const revealStagger = (desktop: number): number =>
-  onPhone() ? Math.round(desktop * 45) / 100 : desktop;
+  onPhone() ? Math.round(desktop * 65) / 100 : desktop;
 
 /**
  * The per-item `delay` of a hand-rolled stagger — `delay: i * 0.1` becomes
@@ -170,6 +185,6 @@ export const revealStagger = (desktop: number): number =>
  * half a second after the reader had already read it.
  */
 export const revealDelay = (i: number, step = 0.1): number =>
-  onPhone() ? Math.min(i, 3) * step * 0.45 : i * step;
+  onPhone() ? Math.min(i, 3) * step * 0.65 : i * step;
 
 export { gsap, ScrollTrigger, Draggable };

@@ -14,7 +14,37 @@ const nextConfig: NextConfig = {
   // behave normally.
   distDir: process.env.NEXT_VERIFY_BUILD ? ".next-verify" : ".next",
   images: {
-    formats: ["image/avif", "image/webp"],
+    /* ── WHY AVIF IS OFF, AND WHAT WOULD PUT IT BACK ────────────────────────
+       AVIF is smaller on the wire and MUCH more expensive to turn back into
+       pixels: it is AV1 intra-frame, decoded in software by dav1d, where WebP
+       has a decade-old fast path everywhere. On a desktop that difference is
+       invisible. On a mid-range Android it is a few hundred milliseconds per
+       large photograph, and this site is uniquely exposed to that cost for a
+       reason that has nothing to do with images: `ResidentImage` UNMOUNTS a
+       picture once it is two viewports away and remounts it when it comes
+       back, so that a phone is never holding all fifty-two bitmaps of the home
+       page at once (see the long note in that component — it exists to stop
+       iOS killing the tab). A remount reads the file from cache and DECODES IT
+       AGAIN. So the format's decode cost is not paid once per image per visit;
+       it is paid every time the reader scrolls back past one, all the way down
+       a page that is mostly photographs. That is what "laggy everywhere, only
+       on the phone" is made of.
+
+       And the bytes it buys back are not what the format's reputation
+       promises. Measured against this site's own images at w=828 q=75, AVIF vs
+       WebP: bw-old-pic −36%, weeping-madonna-2 −38%, facade-day −12%,
+       matha-midnight −3%, and architecture/altar +20% — AVIF is LARGER on the
+       last one. Roughly a seventh on average, unevenly, for a decode that
+       costs multiples.
+
+       Chrome on Android is the build that was taking AVIF (Safari asks for it
+       too). Both are served WebP now.
+
+       Put AVIF back if the decode ever stops mattering — i.e. if
+       `ResidentImage`'s remounting is dropped because phones have the memory,
+       or if the photographs are pre-encoded at sizes small enough that no
+       decode is slow. Re-measure before believing either. */
+    formats: ["image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
     remotePatterns: [
       {

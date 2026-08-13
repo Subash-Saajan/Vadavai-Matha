@@ -6,6 +6,7 @@ import {
   gsap,
   ScrollTrigger,
   DESKTOP,
+  onPhone,
   revealY,
   revealStart,
   revealDuration,
@@ -13,6 +14,39 @@ import {
 } from "@/lib/gsap";
 import { useLang } from "@/components/layout/LanguageProvider";
 import { PhotoOrnaments } from "@/components/ornaments/CornerOrnament";
+
+/* ── WHY THE PORTRAIT DOES NOT CLIP-WIPE ON A PHONE ────────────────────────
+   The authored entrance is a cinematic wipe: the picture is revealed from its
+   top edge downwards behind a `clip-path`, swelling from 1.12 to 1 as it goes.
+   On a monitor that is the best thing in the section.
+
+   On a phone it was described, exactly, as "pixel loading downwards" — and
+   that is the correct reading of what it looks like, because a top-to-bottom
+   reveal that cannot hold its frame rate is indistinguishable from a
+   progressive JPEG arriving over a slow connection. The site's own entrance
+   read as a broken image load.
+
+   ⚠ THIS IS A LOOK PROBLEM, NOT A PROVEN FRAME-RATE ONE. Say so plainly,
+   because the temptation is to dress it up as a performance fix and the
+   measurement does not support that. Frame pacing was recorded across this
+   band on a Galaxy A55 and the wipe scored 2.9% of frames missing two budgets
+   against the fade's 2.0% — a difference inside the run-to-run noise. The
+   mechanism below is real (a script-driven `clip-path` cannot reach the
+   compositor, so every frame repaints the box, and `scale` resamples the
+   bitmap on top of that), and on a page already busy with images it is worth
+   not paying. But it is not what makes the wipe wrong here.
+
+   What makes it wrong is that a top-to-bottom reveal of a photograph is the
+   exact gesture a progressive JPEG makes when it arrives over a slow
+   connection. At any frame rate, on a small screen, the shrine's own portrait
+   looks like it is failing to load. That is the whole case.
+
+   So the phone gets the house reveal instead: opacity and a short rise, the
+   same one every text block on this page already uses, on the same trigger and
+   for the same duration. It reads as the picture arriving rather than as the
+   picture loading. Desktop is untouched, where the wipe is the best thing in
+   the section — see the matching note in About.tsx, whose card is the worse
+   case because it holds two full-bleed images inside one clipped box. */
 
 export function Patroness() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -24,14 +58,18 @@ export function Patroness() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Cinematic clip-wipe reveal of the portrait. Plays once on both builds:
-      // it is an entrance, not a scrubbed effect, so it costs one animation.
+      // Cinematic clip-wipe reveal of the portrait — on a monitor. A phone
+      // fades and rises instead; read the note above the component for why.
+      const phone = onPhone();
       gsap.fromTo(
         imgInnerRef.current,
-        { clipPath: "inset(0 0 100% 0)", scale: 1.12 },
+        phone
+          ? { opacity: 0, y: revealY() }
+          : { clipPath: "inset(0 0 100% 0)", scale: 1.12 },
         {
-          clipPath: "inset(0 0 0% 0)",
-          scale: 1,
+          ...(phone
+            ? { opacity: 1, y: 0 }
+            : { clipPath: "inset(0 0 0% 0)", scale: 1 }),
           duration: revealDuration(1.5),
           ease: "power4.out",
           scrollTrigger: {

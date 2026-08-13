@@ -6,6 +6,7 @@ import {
   gsap,
   ScrollTrigger,
   DESKTOP,
+  onPhone,
   revealY,
   revealStart,
   revealDuration,
@@ -25,12 +26,26 @@ export function About() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Clip-wipe reveal of the composite card
+      /* Clip-wipe reveal of the composite card — on a monitor.
+         ⚠ A PHONE FADES AND RISES INSTEAD, and of the two portraits on this
+         page this is the one that most needed it: the box being wiped is not a
+         picture, it is a composite of TWO full-bleed images (the sky and the
+         church) stacked inside one rounded, clipped, shadowed container. A
+         script-driven `clip-path` repaints the whole of that stack every frame
+         of the entrance, and what it looks like when it cannot keep up is an
+         image loading progressively from the top down — which is how it was
+         described, and which is the last thing a shrine's own photograph
+         should look like it is doing.
+
+         The case is about how it READS, not about a measured frame-rate win;
+         the note at the head of Patroness.tsx says why, and is honest about
+         what the profiling did and did not show. Desktop keeps the wipe. */
+      const phone = onPhone();
       gsap.fromTo(
         cardRef.current,
-        { clipPath: "inset(0 0 100% 0)" },
+        phone ? { opacity: 0, y: revealY() } : { clipPath: "inset(0 0 100% 0)" },
         {
-          clipPath: "inset(0 0 0% 0)",
+          ...(phone ? { opacity: 1, y: 0 } : { clipPath: "inset(0 0 0% 0)" }),
           duration: revealDuration(1.5),
           ease: "power4.out",
           scrollTrigger: {
