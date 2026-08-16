@@ -172,6 +172,14 @@ export function shrineFor(lang: Locale = "en"): CatholicChurch {
       ? TA.shrineDescription
       : "A Marian pilgrimage shrine dedicated to the Holy Family and venerated under the title of Our Lady of the Assumption — known locally as Vadavai Matha, Paraloga Matha and Vinnerpu Matha. Founded in 1685 by St John de Britto; the present two-nave church, whose naves converge on a single altar, was built between 1855 and 1872 under Fr Joseph Grégoire, with Br Joseph Bergenthal as its architect. St Devasahayam Pillai — canonised in 2022 as the first Indian layman to be declared a saint — was baptised here on 14 May 1745. The village has been called Little Rome (Chinna Romapuri) since 1926.",
     url: abs(localePath(lang, HOME_PATH)),
+    // The shrine node is emitted from the root layout, so all twelve routes
+    // assert it identically — which is right (one entity, not twelve) but leaves
+    // nothing saying WHICH page is the entity's own. Google then picks by intent,
+    // and for "little rome" it kept picking /contact. `mainEntityOfPage` is the
+    // property that answers it: the page about this shrine is the home page.
+    // `url` alone does not carry that meaning — it is the entity's website, not
+    // its canonical document.
+    mainEntityOfPage: `${abs(localePath(lang, HOME_PATH))}#page`,
     telephone: PHONE.e164,
     image: abs(ROUTES.home.image),
     // NO `foundingDate` here, though it is tempting. A Place is a building; it

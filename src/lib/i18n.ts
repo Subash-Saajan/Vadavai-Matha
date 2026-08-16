@@ -1970,7 +1970,11 @@ export const dict = {
         patroness: "Our Lady of the Assumption",
         founded: "Founded 1685 by St John de Britto",
         shrineSince: "A shrine since 1993",
-        littleRome: "Called Little Rome since 1926",
+        // "Chinna Romapuri", not "Little Rome" — this was the contact page's last
+        // body-text claim on the home page's name (the header wordmark and the
+        // footer say it on every route, so those are neutral). Same fact, same
+        // tablet, one less reason for Google to offer /contact for "little rome".
+        littleRome: "Chinna Romapuri since 1926",
         prayerLine: "Mother of Vadakkankulam, pray for us.",
       },
 

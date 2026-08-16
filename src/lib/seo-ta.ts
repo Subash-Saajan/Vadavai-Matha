@@ -98,8 +98,11 @@ export const ROUTES_TA: Partial<Record<RouteKey, RouteCopy>> = {
   contact: {
     title: "தொடர்பும் வருகையும்",
     fullTitle: "திருத்தலத் தொடர்பும் வருகையும்",
+    // "சின்ன ரோமாபுரி" removed for the same reason it was removed from the
+    // English description — it is the home page's name, and leading with it here
+    // made Google offer this page for the brand query. See seo.ts `contact`.
     description:
-      "வடக்கன்குளம் திருக்குடும்பத் திருத்தலம் — சின்ன ரோமாபுரி. பங்கு அலுவலகம் 04637 230134, திருப்பலி நேரங்கள், நாகர்கோவில், திருநெல்வேலியிலிருந்து வழி, திருப்பலி ஒப்புக்கொடுத்தல், சான்றிதழ் கோரிக்கை.",
+      "வடக்கன்குளம் திருக்குடும்பத் திருத்தலத்திற்கு வருகை தரவும் தொடர்பு கொள்ளவும். பங்கு அலுவலகம் 04637 230134, திருப்பலி நேரங்கள், நாகர்கோவில், திருநெல்வேலியிலிருந்து வழி, திருப்பலி ஒப்புக்கொடுத்தல், சான்றிதழ் கோரிக்கை.",
     crumb: "தொடர்பும் வருகையும்",
   },
   devasahayam: {

@@ -202,8 +202,20 @@ export const ROUTES: Record<RouteKey, RouteDef> = {
     path: "/contact",
     title: "Contact & Visit",
     fullTitle: "Contact & Visit the Shrine",
+    // THE DESCRIPTION DELIBERATELY OMITS "LITTLE ROME" — the last of the three
+    // places this page used to claim the home page's name. See the long note in
+    // this route's page.tsx: the <title> was made absolute on 2 August 2026 and
+    // the h1 changed to "Come to the Shrine", and GSC shows the fix working —
+    // from 4 August the home page began winning the query at position 1.0 while
+    // this page slid to 8–10. But the description still LED with the phrase
+    // ("Reach the Holy Family Shrine at Vadakkankulam — Little Rome."), which is
+    // the snippet Google reads when deciding which page answers "little rome",
+    // and on a visit-intent query it read as the better answer. It now leads
+    // with the village and the errand instead. The page loses nothing it should
+    // win: it still ranks for contact, directions and phone queries, and the
+    // shrine schema still names every alias.
     description:
-      "Reach the Holy Family Shrine at Vadakkankulam — Little Rome. Parish office 04637 230134, Mass timings, directions from Nagercoil and Tirunelveli, and how to request a Mass intention or a certificate from the parish register.",
+      "Visit or contact the Holy Family Shrine at Vadakkankulam, Tamil Nadu. Parish office 04637 230134, Mass timings, directions from Nagercoil and Tirunelveli, and how to request a Mass intention or a certificate from the parish register.",
     crumb: "Contact & Visit",
     priority: 0.9,
     changeFrequency: "monthly",
