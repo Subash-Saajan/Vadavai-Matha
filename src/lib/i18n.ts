@@ -5,6 +5,7 @@ export const dict = {
     nav: {
       home: "Home",
       history: "History",
+      miracle: "The Weeping of 1803",
       priests: "The Parish Register",
       mass: "Mass & Festivals",
       festivals: "Festivals",
@@ -26,7 +27,7 @@ export const dict = {
       patronessTitle: "Our Lady of Assumption",
       patronessSubtitle: "Paraloga Matha",
       patronessP1:
-        "For centuries, the small village of Vadakankulam in the Tirunelveli district has been home to one of South India's most cherished Marian shrines. Our Lady of the Assumption — known to her devotees as Vadakankulam Matha — has watched over generations of the faithful, drawing pilgrims from every corner of Tamil Nadu and beyond.",
+        "For centuries, the small village of Vadakankulam in the Tirunelveli district has been home to one of South India's most cherished Marian shrines. Our Lady of the Assumption, known to her devotees as Vadakankulam Matha, has watched over generations of the faithful, drawing pilgrims from every corner of Tamil Nadu and beyond.",
       patronessP2:
         "The image of Our Blessed Mother, draped in royal red and gold and crowned with stars, embodies the love and reverence of countless families who have placed their joys, sorrows, and silent prayers before her. Each year during her August feast, the village transforms into a sea of light and song, as thousands gather to honour the Mother who has never refused a sincere prayer.",
       patronessQuote: "Pray for us, O Holy Mother of God.",
@@ -37,7 +38,7 @@ export const dict = {
       aboutP1:
         "Vadakankulam Matha Church stands as a beacon of spirituality and community in the heart of Vadakankulam. Founded in 1685 by the Jesuit missionary St. John de Britto, this sacred place has been a home for the faithful, a shelter for the weary, and a testament to unwavering devotion for over three hundred years.",
       aboutP2:
-        "Dedicated to the Holy Family and lovingly known as Vadavai Matha, every corner of this holy ground echoes with prayers, hymns, and the warmth of a community bound together by love and faith — a heritage so deep the first Bishop of Thoothukudi called it 'Little Rome.'",
+        "Dedicated to the Holy Family and lovingly known as Vadavai Matha, every corner of this holy ground echoes with prayers, hymns, and the warmth of a community bound together by love and faith. It is a heritage so deep that the first Bishop of Thoothukudi called it 'Little Rome.'",
       aboutQuote:
         "A home for the faithful, a shelter for the weary, a sanctuary for every soul.",
 
@@ -49,12 +50,12 @@ export const dict = {
       welcomeLabel: "Welcome",
       welcomeTitle: "A Sanctuary of Stillness",
       welcomeBody:
-        "Vadakankulam Matha Church has stood as a quiet refuge for generations of devotees — a place to pause, to pray, and to be at peace. Whether you come in faith, in seeking, or in sorrow, you are welcome here.",
+        "Vadakankulam Matha Church has stood as a quiet refuge for generations of devotees: a place to pause, to pray, and to be at peace. Whether you come in faith, in seeking, or in sorrow, you are welcome here.",
 
       showcaseLabel: "Sacred Moments",
       showcaseTitle: "Where Light Meets Devotion",
       showcaseBody:
-        "Every candle lit, every silent prayer, every shaft of morning light — together they form the rhythm of our parish life.",
+        "Every candle lit, every silent prayer, every shaft of morning light: together they form the rhythm of our parish life.",
 
       festivalsLabel: "Sacred Calendar",
       festivalsTitle: "Festivals & Feasts",
@@ -95,12 +96,12 @@ export const dict = {
       chronicleLabel: "The Chronicle",
       chronicleTitle: "Everything that happened here was written down",
       chronicleBody:
-        "{n} moments, from a woman's cross in a forest clearing to a canonisation in Rome. Not one of them is claimed here without the book it came out of — and where the books disagree, this parish prints both.",
+        "{n} moments, from a woman's cross in a forest clearing to a canonisation in Rome. Not one of them is claimed here without the book it came out of, and where the books disagree, this parish prints both.",
       chronicleCta: "Read the chronicle",
       chronicleHeaderCta: "Read the full history",
       chronicleDoorTitle: "It does not end at {y}",
       chronicleDoorBody:
-        "{n} more moments wait across the {c} chapters — and the last one is still open. This parish has not gone a single year without a priest since 1697, and it is still being written into.",
+        "{n} more moments wait across the {c} chapters, and the last one is still open. This parish has not gone a single year without a priest since 1697, and it is still being written into.",
       chronicleFrames: [
         {
           year: "c.1680",
@@ -121,7 +122,7 @@ export const dict = {
           chapter: "The Statue and the Saint",
           title: "There is no cause for delay",
           line:
-            "The priest kept postponing him — a convert of that rank would draw persecution. The king's officer answered: “I shall even give up my life to maintain the Truth.” He was baptised here on 14 May. He did.",
+            "The priest kept postponing him: a convert of that rank would draw persecution. The king's officer answered: “I shall even give up my life to maintain the Truth.” He was baptised here on 14 May. He did.",
         },
         {
           year: "1803",
@@ -135,7 +136,7 @@ export const dict = {
           chapter: "The Great Two-Nave Church",
           title: "Seventeen years, and no iron in it",
           line:
-            "Lime and palm-toddy mortar, twenty-four arches, two towers of ninety-two feet — and two naves that run side by side the whole length of the church to meet at one altar. There is not another like it.",
+            "Lime and palm-toddy mortar, twenty-four arches, two towers of ninety-two feet, and two naves that run side by side the whole length of the church to meet at one altar. There is not another like it.",
         },
         {
           year: "1926",
@@ -187,9 +188,9 @@ export const dict = {
       weepingBody2:
         "What he said afterwards is that a thin cloud gathered behind her and wrapped her round; that her eyes lifted and filled, and the tears ran down her face; and that her folded hands parted and reached out until they touched the walls of the niche. Certain his own eyes were deceiving him, he went out and brought back the catechist Yagappar Pillai, and Henriette, the daughter of the house. They said they saw it too. A catechist climbed up to the altar and wiped her face, and the tears came again, and would not stop.",
       weepingBody3:
-        "Then they rang the bell. It was not an hour at which the bell was ever rung, and the whole village put down its work and came in from the fields to find out why. They filled the church, lit the candles, knelt, and sang what a frightened people sings — Parce Domine, parce populo tuo, spare, O Lord, spare your people. And while they were praying, the face above the altar became an ordinary carved face again. Not a sign given to a bishop or a scholar, they say, but to farmers with the field still on them — and the village has come back to it every October for the two hundred and twenty-three years since.",
+        "Then they rang the bell. It was not an hour at which the bell was ever rung, and the whole village put down its work and came in from the fields to find out why. They filled the church, lit the candles, knelt, and sang what a frightened people sings: Parce Domine, parce populo tuo, spare, O Lord, spare your people. And while they were praying, the face above the altar became an ordinary carved face again. Not a sign given to a bishop or a scholar, they say, but to farmers with the field still on them. And the village has come back to it every October for the two hundred and twenty-three years since.",
       weepingHonest:
-        "This is a local and diocesan devotional tradition, recorded by the Jesuit historian Léon Besse. It has never been the subject of a Vatican investigation. The parish has commemorated it on 22–23 October ever since — and the date is settled at 1803, not 1805.",
+        "This is a local and diocesan devotional tradition, recorded by the Jesuit historian Léon Besse. It has never been the subject of a Vatican investigation. The parish has commemorated it on 22–23 October ever since, and the date is settled at 1803, not 1805.",
       weepingCta: "Read the three accounts",
 
       /* ── IV · The Fathers of Vadavai ────────────────────────────────────
@@ -210,9 +211,9 @@ export const dict = {
       fathersLabel: "The Succession",
       fathersTitle: "The altar has not gone cold since 1697.",
       fathersBody:
-        "Sixty-nine priests have stood at this stone — Jesuits sent out from Rome and from France, and then the sons of this village itself. Fever took some of them young. Others were recalled, or buried here, or watched their Society suppressed under them and lived long enough to see it rise again. Not one of the three hundred and twenty-nine years since has passed without a man at this altar to say the five words over bread.",
+        "Sixty-nine priests have stood at this stone: Jesuits sent out from Rome and from France, and then the sons of this village itself. Fever took some of them young. Others were recalled, or buried here, or watched their Society suppressed under them and lived long enough to see it rise again. Not one of the three hundred and twenty-nine years since has passed without a man at this altar to say the five words over bread.",
       fathersBody2:
-        "This is what the Church means by succession: not a monument, but a handing-on. Each of them received what he had not earned, spent a life giving it away, and laid it down for the next man to take up. Their names stand in the parish register in the order they came — and the register is still open.",
+        "This is what the Church means by succession: not a monument, but a handing-on. Each of them received what he had not earned, spent a life giving it away, and laid it down for the next man to take up. Their names stand in the parish register in the order they came, and the register is still open.",
       fathersStat1: "pastorates",
       fathersStat2: "since",
       fathersStat3: "years unbroken",
@@ -726,9 +727,9 @@ export const dict = {
       list: [
         {
           name: "St. Devasahayam Pillai",
-          feast: "Feast — January 14",
+          feast: "Feast: January 14",
           epithet: "First Indian Layman Saint",
-          body: "Baptised at this very church in 1745 and martyred for his faith in 1752, he was canonised in 2022 — the first Indian-born Catholic layman raised to the altars.",
+          body: "Baptised at this very church in 1745 and martyred for his faith in 1752, he was canonised in 2022, the first Indian-born Catholic layman raised to the altars.",
           // The parish's own devotional image of the martyr in chains, from the
           // 150-year souvenir book (p. 20, the sub-station patrons plate).
           image: "/images/saints/devasahayam-pillai-chains.jpg",
@@ -736,7 +737,7 @@ export const dict = {
         },
         {
           name: "St. John de Britto",
-          feast: "Feast — February 4",
+          feast: "Feast: February 4",
           epithet: "Arulanandar, Our Founder",
           body: "Known in Tamil as Arulanandar, the Jesuit who raised our first thatched chapel here in 1685 and dedicated it to the Holy Family, before his martyrdom in 1693.",
           // Arulanandar as the parish itself pictures him — white cloak, red
@@ -1169,6 +1170,302 @@ export const dict = {
         heading: "Sources",
         body: "This page is built from the saint's own letter from the prison of Oriyur (3 February 1693); the earliest printed martyrology of his death (Antwerp, 1697); the Roman life written for his beatification by Giuseppe Boero, S.J. (1853); F. W. Faber's English life (London, 1851); Joseph Bertrand's La Mission du Maduré; the Madras District Gazetteer of Tinnevelly (1917); Bishop Stephen Neill and Robert Hardgrave; Besse's history of the mission in the parish's own English typescript; and the parish's own records. Each chapter above names the witnesses it rests on. Every one of them is listed in full on the Sources page.",
         chipsLabel: "Every source on this page",
+      },
+    },
+    /* ── /miracle ──────────────────────────────────────────────────────────
+       The page a QR code at the shrine opens. One morning, told whole.
+
+       ⚠ THE VOICE. This page never says the statue wept. It says what the
+       witnesses said, who they were, and when it was written down. Every
+       sentence about the event itself is attributed — "he said", "what the
+       record has", "as they told it afterwards" — because the parish does not
+       claim a miracle in the canonical sense and neither may its website. The
+       moment the prose slips into asserting it, the page stops being citable
+       and starts being a poster. See the head of lib/miracle.ts.
+
+       ⚠ THE LIMITS BLOCK IS NOT OPTIONAL AND IS NOT A DISCLAIMER. It carries
+       the counter-witness (mismatch H18) beside the parish's own memory,
+       because keeping conflicting readings side by side is this parish's
+       standing rule and this is the one page where a reader can watch it
+       being followed. Cutting it would make everything above it weaker, not
+       stronger.                                                              */
+    miracle: {
+      back: `The history of this shrine`,
+      label: `Vadakkankulam · 21 October 1803`,
+      title: `The Weeping of Our Lady`,
+      intro:
+        `A man who had no business in the church went in to pray on a Friday forenoon, and came out saying he had seen the statue above the altar weep and open her carved hands. This is the whole of what is known about that morning: who was there, what each of them said, who wrote it down and when — and what has never been established.`,
+      heroAlt:
+        `Painting — inside a candlelit church, a man on a ladder reaches up to wipe the face of the crowned statue of Our Lady above the altar, while a boy pulls the bell rope and the whole village kneels in the nave below`,
+
+      factsLabel: `The morning, in short`,
+      facts: [
+        { label: `The day`, value: `Friday, 21 October 1803 — a day that was in fact a Friday` },
+        { label: `In the Tamil calendar`, value: `Aippasi 7, in the year 979 — the one date every source agrees on` },
+        { label: `The hour`, value: `A little after eleven in the forenoon` },
+        { label: `The place`, value: `Before the high altar of the brick church of 1752, where the statue stood in a recess with double doors` },
+        { label: `Who saw it first`, value: `Savarimuthu Pillai, son of Sattiavasagam Pillai — a visitor, up from Tirunelveli` },
+        { label: `What he said he saw`, value: `A cloud, tears, and two hands carved from one piece of wood opening outward` },
+        { label: `Who else`, value: `The catechist Yagappar Pillai, then Miss Henrietta Bilderbeck, then the whole village` },
+        { label: `First written down`, value: `That same day — as a song of five stanzas, by the village schoolmaster` },
+        { label: `First printed`, value: `1905, by a Jesuit of this mission; again in 1914; again in 1930, in Malayalam` },
+      ],
+
+      quote:
+        `During the sixty-three years between the death of Fr Thomassini and the arrival of the new Jesuits in 1838, many interesting events took place but have not come to our knowledge, or have been more or less disfigured by tradition. One however seems to have all guarantees of its authenticity.`,
+      quoteAttribution:
+        `Léon Besse, S.J., historian of the Madurai Mission, opening his account of this morning — read here in the parish's own English typescript of his history, page 842. He is hedging everything else in those sixty-three years, and not this`,
+
+      storyLabel: `The Story`,
+      storyTitle: `One morning in Aippasi`,
+      storyIntro:
+        `What follows is told from the books, in order, with nothing added. Each chapter says underneath it what it rests on and how strong that is — and where two accounts disagree, both are printed and neither is quietly dropped.`,
+      noteLabel: `Note`,
+
+      alts: {
+        sixtyThreeYears:
+          `Painting — a night vigil in the old village church: a man kneels alone before the crowned statue with a rosary in his hands, an oil lamp burning at her feet, families praying in the shadows behind him and the moon at a high window`,
+        statue:
+          `Photograph — the statue of Our Lady of the Assumption at Vadakkankulam, crowned and haloed with stars, robed in gold and cream, her carved hands joined at her breast in prayer`,
+        signs:
+          `Painting — a man in a white dhoti kneels at the altar holding up a small oil lamp, one hand to his mouth, looking up at the crowned statue above him, whose hands are open and whose cheek carries a tear`,
+        henriette:
+          `Painting — around the altar, one man on a ladder wipes the statue's face with a cloth, another reaches up with a candle, a young European woman in a lace cap stands with her hand at her heart, and a priest in a black cassock looks up beside her`,
+        bell:
+          `Painting — the church packed with kneeling villagers, a catechist high on a ladder wiping the statue's face, a boy hauling on the bell rope, and light falling from a high window through the smoke of many candles`,
+        family:
+          `Painting — a European merchant's household of the early nineteenth century in a South Indian town, the family gathered in a shuttered room with ledgers and papers on the table`,
+        record:
+          `Photograph — an old leather-bound folio lying closed on a desk in a candlelit archive, spectacles and a magnifying glass beside it, bundles of manuscript on the shelves behind`,
+      },
+
+      chapters: [
+        {
+          key: `sixtyThreeYears`,
+          heading: `The years no Jesuit came`,
+          body:
+            `In 1773 Pope Clement XIV suppressed the Society of Jesus in every country in the world. The last of the old Jesuit fathers here, Clement Thomassini, died two years later, and for the next sixty-three years no Jesuit served this parish.\n\nIt was not abandoned. Priests came from Goa under the Bishop of Cochin, and the roll of them runs without a gap — Deva Varadhanar, Ignatius, John Louis Cardoza and their successors. The feast was kept, the children were baptised, the dead were buried. The village did more than hold on: from about 1780 it became, in the words of a government gazetteer with no interest in flattering it, “the sole centre of the inland mission”, with four divisional centres set under it.\n\nSo there was no Jesuit in the district, the see of Cochin stood vacant, and the priest who administered this village came and went. That is the state of things in which the most extraordinary thing that has ever happened here happened.`,
+          note: ``,
+        },
+        {
+          key: `statue`,
+          heading: `The statue above the altar`,
+          body:
+            `She is carved of wood and she is not large. She stands crowned. Her hands are joined at her breast in prayer, and her arms are carved close against her body — not attached, not hinged, not jointed: cut from the same block.\n\nThat is not a devotional description. It is a measurement, taken by the one man on record who ever examined her closely, and printed in 1905: “the arms are firmly fixed to the body; there is nothing pierced through in the joined hands.” A photograph taken in this century shows exactly the same thing.\n\nOn that morning she stood above the altar inside a recess closed by a double door that could be opened or shut at will, and both leaves of it were open. Hold on to the hands and the doors. Everything that follows turns on them.`,
+          note:
+            `The Child Jesus seen in modern photographs of her is a separate small figure, set in place when the statue is vested for a feast. The carved image itself has empty joined hands — which is why the 1905 description and the camera agree across a hundred and twenty years.`,
+        },
+        {
+          key: `provenance`,
+          heading: `Where she came from`,
+          body:
+            `The parish's own account is this. In 1742 or 1743 a wooden box came ashore on the beach at Koottappuli, down on the Travancore coast, and fishermen found it. Stencilled on the outside were the words “To Vadakankulam, From Portugal.” Inside were three statues of Our Lady. The box was carried up to Fr John Baptist Buttari, the Jesuit of this village — the same priest who would build the church and baptise St Devasahayam Pillai — and he gave one statue to Kamanayakkanpatti, sent one to the bishop, and kept one here.\n\nIt is a good story and this parish has told it for a long time. It should be said plainly that it is the parish's own.`,
+          note:
+            `No printed source before the parish's modern chronology carries the box, the sea or the sister statues — not Besse, not Coubé, and not Dessal, whose 1905 description of this statue is the fullest ever printed and who attributes her instead to “a native craftsman”, working in local wood. Kamanayakkanpatti, which is supposed to hold one of the three, tells a quite different story about its own. The tradition is printed here because it is the parish's; the earliest description is printed beside it because it is the earliest.`,
+        },
+        {
+          key: `morning`,
+          heading: `Friday, the twenty-first of October`,
+          body:
+            `Every account, in every language, anchors the day the same way: the seventh of Aippasi, in the Tamil year 979, a Friday. The twenty-first of October 1803 was a Friday.\n\nSavarimuthu Pillai, son of Sattiavasagam Pillai, had come up from Tirunelveli to see Mr Bilderbeck, the European settled in this village. He was a visitor. He had no office here, no part in the parish, and no reason at all to be in the church.\n\nA little after eleven in the morning he went in to pray. The doors of the niche were open “and nothing was hiding the statue of Our Lady”. He knelt down, and began.`,
+          note: ``,
+        },
+        {
+          key: `signs`,
+          heading: `What he said he saw`,
+          body:
+            `“All of a sudden a transparent cloud arose behind Our Lady and wrapped her up; the eyes of the Virgin looked up and filled up with tears; all her face expressed sadness; her joint hands parted and she stretched them out so far as to touch the walls of the recess.” The Tamil telling adds where the tears went: down her cheeks, which it calls coral. And the record does not stop at her — “at the same time all the other statues on the altar expressed compassion and mourning.”\n\nThree things, then. The face clouded over. The eyes filled and the tears ran. The two joined hands came apart and the arms opened until they touched the sides of the niche.\n\nWherever this account has travelled since — into French in 1905, into English, into Malayalam in 1930 — those three signs travel together, in that order, and no teller has ever added a fourth.`,
+          note: ``,
+        },
+        {
+          key: `delusion`,
+          heading: `He did not shout`,
+          body:
+            `What he did next is the most human thing in the whole record, and it is probably the reason the account survived at all.\n\nHe did not run into the street. He assumed he was mistaken. “Fearing to be the victim of a delusion” — the phrase is his historian's — he went out of the church to fetch somebody else, so that another pair of eyes could tell him he was wrong.\n\nIn the parish's own typescript of that sentence, a reader long ago struck out the word “virtue” and wrote “victim” above it in ink. The correction is still on the page.`,
+          note: ``,
+        },
+        {
+          key: `catechist`,
+          heading: `The catechist`,
+          body:
+            `The man he went for was Yagappar Pillai, the catechist — of a family that would serve this church in that office for generations, one of whom was still doing it sixty years later and was given a papal medal for it.\n\nThe catechist came in and saw it too, and described it differently. Where Savarimuthu had said a transparent cloud, Yagappar Pillai said he saw the Mother of God wrapped in smoke and in darkness, her face desolate, her arms open, her eyes raised and running with tears.\n\nTwo men, ten minutes apart, in the same church, looking at the same thing, and their words do not match. Both descriptions were printed, side by side, by the man who first put this into a book. This page keeps them both. A story in which every witness says the same words is a story somebody has tidied.`,
+          note: ``,
+        },
+        {
+          key: `henriette`,
+          heading: `They sent for Miss Bilderbeck`,
+          body:
+            `Then they sent, in haste, to the house Savarimuthu had come to visit, and the daughter of it ran to the church.\n\nHenrietta Bilderbeck was young and unmarried — both of the earliest printed accounts are careful to call her “Miss” — and she was European and literate, which is why she matters to the record more than devotion alone would make her. She did not simply look. She went up and examined the statue closely, and afterwards she affirmed that the three signs were genuine.\n\nWhat she described was the least restrained account anyone gave. She saw the eyes “like stars”; the tears breaking from them so abundantly that “they ran to the ground and wetted it”; and the statues of the saints, all together, bowing their heads.`,
+          note:
+            `She is the one witness of that morning who can be found outside this village's own telling. In 1930 a life of St Devasahayam Pillai, printed in Malayalam and belonging to an entirely different devotional tradition, records that “a European woman named Hendrikammal was residing at Vadakkankulam… she came, and saw in the statue the aforesaid three kinds of manifestations.” That book had no reason to know anything about this parish's memory of itself.`,
+        },
+        {
+          key: `tears`,
+          heading: `The tears that would not be wiped`,
+          body:
+            `The catechist Madurendira Annaviyar took a cloth, climbed up to the altar, and wiped her face.\n\nThe tears came again. He wiped again, and they came again, and they neither stopped nor grew less. Somebody lit the candles, and then all of them.\n\nOf everything that is told about that morning, this is the detail nobody has ever left out — not the parish, not the Jesuits, not the Tamil accounts nor the French. A man going up a ladder to dry a face, and failing. It was that, and not the wonder itself, that seems to have broken the people who were watching.`,
+          note: ``,
+        },
+        {
+          key: `bell`,
+          heading: `The bell, at an hour it was never rung`,
+          body:
+            `Then they rang the bell.\n\nNot the bells that ring here now — those were cast at Valence in France in 1861 and were not hung in these towers until 1872. This was the bell of Fr Buttari's church, the one that a Saivite priest, stopping in the forest to wash before his meal seventy years earlier, had heard through the trees and turned aside to follow.\n\nIt rang at an hour at which the bell was never rung, in a village where every person within earshot knew the hours it was rung. They came in from the fields and out of the houses to find out what had happened, and the church filled.`,
+          note: ``,
+        },
+        {
+          key: `people`,
+          heading: `What the village did`,
+          body:
+            `They stood and looked, and then they wept.\n\nThe parish's own Tamil account says they sang the old penitential chant that is sung when a people is afraid — “Parce Domine, parce populo tuo”: spare, O Lord, spare your people — and the Mea culpa, through my fault, through my most grievous fault.\n\nThe earliest printed account says something else, and says that every single person who told him about that morning put it in: they beat their breasts, they said “Lord, have mercy on us,” and they recited the Salve Regina.\n\nThere is no reason a frightened congregation should not have done all of it. This page prints both and does not put them in an order.`,
+          note: ``,
+        },
+        {
+          key: `stopped`,
+          heading: `And then it stopped`,
+          body:
+            `“Whilst they were weeping and praying, the statue of the Virgin and those of the other Saints resumed their customary aspect.” The French account says the same: she came back to her first pose, and all the other images of the saints took on their accustomed look again.\n\nThe face above the altar was an ordinary carved face.\n\nNobody wrote down how long any of it lasted. But it lasted long enough for one man to doubt himself and go and find a catechist; for the catechist to look, and for someone to be sent to a house in the village; for a European household to be roused and its daughter to come and examine the statue; for a man to fetch a ladder and a cloth and climb up and wipe a face more than once; for the candles to be lit; and for a bell to bring a whole village in from its fields.`,
+          note: ``,
+        },
+        {
+          key: `song`,
+          heading: `The first account was a song`,
+          body:
+            `The first record of that morning was not made by a priest, and it was not written in prose.\n\nIt was a song. The village schoolmaster made it immediately afterwards — five stanzas of verse — and he had been in the church and seen the whole of it with his own eyes. He was a worshipper of Siva.\n\nEverything that has been printed since is built on what that man composed on the day: the hour before noon, the open doors of the niche, the cloud that gathered behind her, the tears, the hands reaching out until they touched the walls. When a Jesuit finally set the account down in print a century later, he wrote that he was giving “the substance of the song and its commentary, leaving aside the poetry and the rhythm”.\n\nThe story survived. The verse of it did not.`,
+          note:
+            `A second account, in prose, followed the song and — in the words of the man who read them both — “reproduces the first exactly, paraphrases and completes it”. It was written by Ko. Sebastian Pillai, who never claims to have been present. The song came first, and no copy of it is known to exist anywhere.`,
+        },
+        {
+          key: `family`,
+          heading: `The family in the church that morning`,
+          body:
+            `The Bilderbecks were flesh and blood and they can be named.\n\nChristopher Bilderbeck, born about 1758, was a merchant of European descent who settled at Vadakkankulam late in the eighteenth century and died here in 1817. They were people of standing: the family held the revenue-farm of Nangunery, which is to say they collected the dues of a whole tract of country. Henrietta, who examined the statue that morning, was his daughter.\n\nA son, John, was born to the house in 1809, six years after the weeping. When John died in 1880, an English Protestant missionary journal recorded of him that he had been “born in India… of a Roman Catholic family, and trained for the priesthood of that Church”, and a Methodist directory supplies his birth year.\n\nSo the family that stood in this church on that Friday left a paper trail of its own — in Protestant hands, kept by people with no reason on earth to flatter a Catholic shrine.`,
+          note: ``,
+        },
+        {
+          key: `boon`,
+          heading: `What that house had asked for`,
+          body:
+            `This part belongs to the village, and it is told here as the village tells it.\n\nChristopher Bilderbeck and his wife had been married twenty-seven years without a child. He was past fifty by then, which is the age at which a man stops asking. They asked anyway: they prayed to Our Lady of this church, and before the year was out a son was born to them.\n\nWhat they gave afterwards, they gave in thanksgiving.`,
+          note:
+            `No source outside this parish records the prayer or the promise, and no source anywhere gives a figure for what was given. It is kept on this page because it is what the village has always said, and it is marked as tradition for the same reason.`,
+        },
+        {
+          key: `returned`,
+          heading: `Those who could still be asked`,
+          body:
+            `When the Society of Jesus came back into this mission in 1838, thirty-five years had gone by. Many of the people who had been in the church that morning were alive, and could be asked.\n\nThe first fathers to reach Vadakkankulam found themselves, as one of their own afterwards put it, “as if wrapped and steeped in the powerful atmosphere of that tradition”. They had only to listen to what the village willingly told them, and in listening they became witnesses in their turn.\n\nAnd there was one thing the village always put in, which nobody who told the story ever left out: how the church had filled and the many candles of the altar were lit and everyone was on their knees, and how someone went up to wipe the tears and could not stop them or make them less.`,
+          note: ``,
+        },
+        {
+          key: `centenary`,
+          heading: `The hundredth year`,
+          body:
+            `In 1903 the parish kept the centenary. It was folded into the great August feast rather than given a day of its own, and it fell on the fifteenth of August, the Assumption — the title under which the statue has always been venerated here.\n\nThe Bishop of Trichinopoly authorised it. Six priests were present. A new bell-tower had lately been raised. And the Mother was carried through the streets of the village, in the words of the man who printed the account two years later, “to the sound of the bells and the tam-tams”.\n\nA hundred years, and a village that had counted every one of them.`,
+          note: ``,
+        },
+        {
+          key: `examined`,
+          heading: `He tried to move her hands`,
+          body:
+            `Somewhere near that centenary a Jesuit of this mission came to see the thing for himself, and he is the only person on record who ever laid hands on the statue to test it.\n\nThe village had made a working copy: a hollow imitation with wires and rods inside, so that one pull raised the head, lifted the eyes to heaven, parted the hands and opened the arms, and a second pull put everything back. “They kindly re-did the miracle for us,” he wrote — drily, because it did not go smoothly, and the man working the strings tangled them more than once.\n\nThen he went to the statue itself, standing alone in its place of honour above the tabernacle, and put his own hands on it. He tried to straighten the head. He tried to lift the eyelids and roll the eyes. Above all he tried to separate those two hands carved from a single piece, and to force the rigid arms apart.\n\nWasted labour, he wrote. It was the dead resistance of raw matter, of a dried tree-trunk. And then he gave up what he called his usurped office of inquisitor of the Faith — gave it up gladly, he says — and knelt down.`,
+          note:
+            `He was a Jesuit of this mission and openly devout, and the page says so rather than presenting him as a neutral examiner. What his account establishes is not the miracle: it is what a named man did with his hands in about 1905, and what he found when he did it.`,
+        },
+        {
+          key: `record`,
+          heading: `How this morning reaches you`,
+          body:
+            `For a long time it was thought that everything known about that Friday came down a single line — Léon Besse's La Mission du Maduré, printed at Trichinopoly in 1914, four copies of which are known to exist and none of which had been opened.\n\nIt does not. Nine years before Besse, a Jesuit of this mission had already printed the full account, in French, in 1905; that volume is on this parish's own shelf and its pages have been read. Besse's own text has since been read too, in the English typescript the parish holds. And in 1930 a life of St Devasahayam Pillai, written in Malayalam and belonging to another tradition altogether, recorded the same European woman examining the same three signs.\n\nThree hands, none of them copying the others.\n\nOne thing is still missing, and this page would rather say so than pretend otherwise. In a footnote on his own page about this miracle, Besse writes that he is abbreviating, and points his readers to a fuller discussion in the mission's bulletin, La Gerbe du Maduré, for July–August 1911. That issue sits in a Jesuit archive in France. It has never been digitised, and nobody working on this parish's history has read it. The fullest account of this morning has been sitting unread for a hundred and fifteen years.`,
+          note: ``,
+        },
+      ],
+
+      limits: {
+        label: `Honestly`,
+        title: `How much of this is proved`,
+        intro:
+          `A shrine that asserts a miracle has given the argument away. So here is the same story again, sorted by how strong the evidence for each part of it actually is — including the parts where this parish's own sources contradict each other.`,
+        rows: [
+          {
+            tier: `documented`,
+            heading: `That it was told, that day, by those people`,
+            body: `This is the strong part, and it is stronger than most parish miracles anywhere. The witnesses are named, with patronymics, with the town one of them travelled from and the household he was visiting. The first account was made on the day itself by an eyewitness who was not a Christian. Three unconnected printed sources carry it — a French one of 1905, an English typescript of Besse's history, and a Malayalam one of 1930 — and they agree on the witness, the household, the catechist, the day, the hour and the centenary without having copied one another.`,
+          },
+          {
+            tier: `documented`,
+            heading: `The day`,
+            body: `Every source in every language gives the same Tamil date: the seventh of Aippasi, in the year 979, a Friday. The twenty-first of October 1803 was a Friday; the twenty-third was a Sunday. The diocese keeps the commemoration on the twenty-third, and the parish's 150-year souvenir once printed 1805 — a copying slip for 1803, which is corrected here rather than hidden. The year is not in doubt: the parish's own roll of priests puts Fr John Louis Cardoza in office in exactly 1803, and the centenary was kept in 1903.`,
+          },
+          {
+            tier: `devotion`,
+            heading: `The weeping itself`,
+            body: `Nobody photographed it. No commission examined it. The only man who ever tested the statue did so about a hundred years afterwards, and what he established was that its hands do not move, not that they once did. What exists is what the witnesses said, written down the same day, repeated to the returning Jesuits by people who had been in the church, printed three times in three languages, and kept as a feast for two hundred and twenty-three years. That is a devotion with an unusually good paper trail. It is not a proof, and this page does not offer it as one.`,
+          },
+          {
+            tier: `documented`,
+            heading: `What was never done`,
+            body: `This was never carried to Rome. There has been no canonical investigation and no decree; it appears in none of the standard registers of Marian apparitions. It is a local and diocesan devotion, and the parish has never claimed anything more. There is a live disagreement inside the record about the day itself, and both halves belong here: the parish remembers that the priest of that year, Fr John Louis Cardoza, examined the statue and declared the wonder genuine on the spot. The earliest printed account says the opposite — that the Goa priest who administered this village was not there when it happened and did not normally live here, that the see of Cochin stood vacant, and that no approving ecclesiastical document exists. Both readings are printed. Neither is deleted. That is this parish's rule for conflicting sources, and this is the page on which you can watch it being kept.`,
+          },
+          {
+            tier: `tradition`,
+            heading: `Where the statue came from`,
+            body: `The box marked “To Vadakankulam, From Portugal” is the parish's own memory and appears in no printed source before the parish's modern chronology. The fullest description of the statue ever printed, made in 1905 by a man who handled it, says instead that it is the work of a local craftsman in local wood. Both are on this page. What is certain about the statue is not where it came from but what it is: an image whose hands are joined and carved from one piece, which is exactly what the witnesses of 1803 said they saw come apart.`,
+          },
+        ],
+        closing:
+          `None of this is offered as proof. It is offered as a record — what people said, who they were, when it was written down, and what has never been established. Make of it what you will, which is what this village has been doing since 1803.`,
+      },
+
+      today: {
+        label: `Since that morning`,
+        title: `What the parish does with it now`,
+        intro:
+          `The statue is still here, in a shrine of her own beside the great church, and the village has not missed an anniversary.`,
+        items: [
+          {
+            heading: `Where she is`,
+            body: `The statue stands in the Apparition Shrine — Matha Kaatchi Aalayam, the shrine of the Mother's vision — built beside the two-nave church. She is vested and crowned for the feasts. You can walk up to her.`,
+          },
+          {
+            heading: `The October commemoration`,
+            body: `The parish keeps the anniversary of the apparition every October, with a special adoration in the evening. It is one of the two great observances of the year here; the other is the ten-day Assumption feast of 6–15 August, when something close to a hundred thousand people walk behind her chariot.`,
+          },
+          {
+            heading: `The first Saturday`,
+            body: `On the first Saturday of every month there is the novena to Our Lady and adoration of the Blessed Sacrament. It is the quietest way to see this shrine, and the way the people of the village themselves keep it.`,
+          },
+        ],
+      },
+
+      related: {
+        heading: `Read on`,
+        items: [
+          {
+            title: `The whole history`,
+            body: `Four centuries of this parish, moment by moment, from a woman's cross in a forest clearing to today — with the sources for each.`,
+            href: `/history`,
+            cta: `The chronicle`,
+          },
+          {
+            title: `The church she stands in`,
+            body: `Two naves that open apart at the doors and lean together until they meet at one altar — a plan believed to exist nowhere else.`,
+            href: `/architecture`,
+            cta: `The building`,
+          },
+          {
+            title: `St Devasahayam Pillai`,
+            body: `Baptised at this church in 1745 and canonised in 2022 — the best-attested fact this village has.`,
+            href: `/saints/devasahayam-pillai`,
+            cta: `His page`,
+          },
+        ],
+      },
+
+      sources: {
+        heading: `Sources`,
+        body: `This page is built from J.-B. Dessal, S.J., “Vadakencoulam: son histoire, sa merveille, son jubilé”, printed in the Lettres de Gemert in 1905 — the earliest known printed account, written by a Jesuit of this mission while the grandchildren of the 1803 generation were still living; from Léon Besse's La Mission du Maduré (1914), read in the English typescript the parish itself holds, page 842; from a Malayalam life of St Devasahayam Pillai printed in 1930; from the Protestant records of the Bilderbeck family; and from the parish's and the diocese's own accounts. Each chapter above names the witnesses it rests on, and every one of them is listed in full on the Sources page.`,
+        chipsLabel: `Every source on this page`,
       },
     },
     gallery: {
@@ -1934,6 +2231,7 @@ export const dict = {
     nav: {
       home: `முகப்பு`,
       history: `வரலாறு`,
+      miracle: `புதுமைக் காட்சி`,
       priests: `அருட்தந்தையர் பட்டியல்`,
       mass: `திருப்பலி & திருவிழாக்கள்`,
       festivals: `திருவிழாக்கள்`,
@@ -3007,6 +3305,298 @@ export const dict = {
       sources: {
         heading: `ஆதாரங்கள்`,
         body: `ஓரியூர் சிறையிலிருந்து புனிதர் தாமே எழுதிய கடிதம் (1693 பிப்ரவரி 3); அவரது மரணம் குறித்து அச்சான மிகப் பழைமையான இரத்தசாட்சி நூல் (அந்த்வெர்ப், 1697); அருளாளர் பட்டத்திற்காக ஜூசெப்பே போயெரோ, இ.ச., எழுதிய ரோமன் வாழ்க்கை வரலாறு (1853); F. W. Faber-இன் ஆங்கில வாழ்க்கை வரலாறு (லண்டன், 1851); ஜோசப் பெர்த்ரானின் La Mission du Maduré; திருநெல்வேலி மாவட்டக் குறிப்பேடு (1917); ஆயர் ஸ்டீஃபன் நீல், ரொபேர்ட் ஹார்ட்கிரேவ்; பங்கின் சொந்த ஆங்கில நகலிலுள்ள பெஸ்ஸின் மறைப்பணி வரலாறு; பங்கின் சொந்தப் பதிவுகள் — இவற்றிலிருந்து இப்பக்கம் கட்டப்பட்டுள்ளது. மேலுள்ள ஒவ்வொரு பகுதியும் தான் நிற்கும் சான்றுகளைத் தானே பெயர் சொல்லிக் காட்டுகிறது. அவை அனைத்தும் ஆதாரங்கள் பக்கத்தில் முழுமையாகப் பட்டியலிடப்பட்டுள்ளன.`,
+        chipsLabel: `இப்பக்கத்தின் அனைத்து மூலங்களும்`,
+      },
+    },
+    /* ── /miracle, in Tamil ────────────────────────────────────────────────
+       ⚠ FOR MOST READERS THIS IS THE PAGE, NOT THE TRANSLATION. The QR code
+       at the shrine points at /ta/miracle: a pilgrim standing in front of the
+       statue in Vadakkankulam reads Tamil. The English twin is what a
+       researcher or a distant reader opens. Translate accordingly — this block
+       is held to the same standard as the English, not to "good enough".
+
+       ⚠ THE VOICE IS THE SAME IN BOTH LANGUAGES. The Tamil never asserts the
+       weeping either. Every sentence about the event is attributed —
+       "என்று சொன்னார்", "பதிவு சொல்கிறது", "ஊர் சொல்வது" — and the honest-limits
+       block is translated in full, counter-witness and all. A Tamil page that
+       quietly firms up what the English hedges would be the most damaging edit
+       anyone could make to this site.                                        */
+    miracle: {
+      back: `இத்திருத்தலத்தின் வரலாறு`,
+      label: `வடக்கன்குளம் · 1803 அக்டோபர் 21`,
+      title: `அன்னையின் கண்ணீர்`,
+      intro:
+        `ஆலயத்தில் எந்த வேலையும் இல்லாத ஒருவர், ஒரு வெள்ளிக்கிழமை முற்பகல் செபிக்க உள்ளே சென்றார்; பலிபீடத்தின்மேல் நின்ற சுரூபம் கண்ணீர் சிந்தியதையும், செதுக்கப்பட்ட தன் கரங்களை விரித்ததையும் தான் கண்டதாகச் சொல்லிக்கொண்டு வெளியே வந்தார். அந்தக் காலைப்பொழுதைப் பற்றி அறியப்பட்டவை அனைத்தும் இங்கே: யார் இருந்தார்கள், ஒவ்வொருவரும் என்ன சொன்னார்கள், யார் எப்போது எழுதிவைத்தார்கள் — எது ஒருபோதும் நிரூபிக்கப்படவில்லை என்பதும் சேர்த்து.`,
+      heroAlt:
+        `ஓவியம் — மெழுகுதிரி ஒளியில் நிற்கும் ஆலயத்தில், ஏணிமேல் ஏறிய ஒருவர் பலிபீடத்தின்மேல் நிற்கும் மகுடம் சூடிய அன்னையின் முகத்தைத் துடைக்கிறார்; ஒரு சிறுவன் மணிக் கயிற்றை இழுக்கிறான்; ஊரே கீழே மண்டியிட்டுக் கிடக்கிறது`,
+
+      factsLabel: `அந்தக் காலைப்பொழுது, சுருக்கமாக`,
+      facts: [
+        { label: `நாள்`, value: `1803 அக்டோபர் 21, வெள்ளிக்கிழமை — அன்று உண்மையிலேயே வெள்ளிக்கிழமைதான்` },
+        { label: `தமிழ் நாட்காட்டியில்`, value: `தமிழ் வருடம் 979, ஐப்பசி 7 — எல்லா ஆதாரங்களும் ஒத்துக்கொள்ளும் ஒரே தேதி` },
+        { label: `நேரம்`, value: `முற்பகல் பதினொரு மணிக்குச் சற்றுப் பின்` },
+        { label: `இடம்`, value: `1752-ல் கட்டப்பட்ட செங்கல் ஆலயத்தின் பெரும்பீடத்தின்முன்; இரட்டைக் கதவுகளுள்ள மாடத்தில் சுரூபம் நின்றது` },
+        { label: `முதலில் கண்டவர்`, value: `சத்தியவாசகம் பிள்ளையின் மகன் சவரிமுத்துப் பிள்ளை — திருநெல்வேலியிலிருந்து வந்திருந்த விருந்தினர்` },
+        { label: `அவர் கண்டதாகச் சொன்னது`, value: `ஒரு மேகம், கண்ணீர், ஒரே மரத்துண்டில் செதுக்கப்பட்ட இரு கரங்கள் விரிந்தது` },
+        { label: `பின் கண்டவர்கள்`, value: `உபதேசியார் யாகப்பர் பிள்ளை, பின் ஹென்ரியெட்டா பில்டர்பெக் அம்மாள், பின் ஊரே` },
+        { label: `முதன்முதலில் எழுதப்பட்டது`, value: `அன்றே — ஊர்ப் பள்ளி ஆசிரியர் இயற்றிய ஐந்து பாடல்களாக` },
+        { label: `முதன்முதலில் அச்சானது`, value: `1905-ல், இம்மறைப்பணியின் இயேசு சபை அருட்தந்தை ஒருவரால்; மீண்டும் 1914-ல்; மீண்டும் 1930-ல், மலையாளத்தில்` },
+      ],
+
+      quote:
+        `அருட்தந்தை தோமஸினியின் மறைவுக்கும், 1838-ல் புதிய இயேசு சபையினர் வருகைக்கும் இடையிலான அறுபத்துமூன்று ஆண்டுகளில் பல சுவையான நிகழ்வுகள் நடந்தன; ஆனால் அவை நமக்கு எட்டவில்லை, அல்லது மரபால் குறைந்தோ மிகுந்தோ சிதைந்துவிட்டன. ஒன்று மட்டும், அதன் உண்மைத்தன்மைக்கான எல்லா உத்தரவாதங்களையும் கொண்டிருப்பதாகத் தோன்றுகிறது.`,
+      quoteAttribution:
+        `மதுரை மறைப்பணியின் வரலாற்றாசிரியர் லெயோன் பெஸ், இ.ச., இந்தக் காலைப்பொழுதைப் பற்றிய தம் பதிவைத் தொடங்கும் வரிகள் — பங்கு தன்னிடமே வைத்திருக்கும் அவரது வரலாற்றின் ஆங்கில நகல், பக்கம் 842. அந்த அறுபத்துமூன்று ஆண்டுகளின் மற்ற எல்லாவற்றையும் அவர் ஐயத்துடன் எழுதுகிறார்; இதை மட்டும் அல்ல`,
+
+      storyLabel: `நடந்தது`,
+      storyTitle: `ஐப்பசி மாதத்து ஒரு காலைப்பொழுது`,
+      storyIntro:
+        `கீழே வருவது நூல்களிலிருந்து, வரிசைப்படி, எதுவும் சேர்க்கப்படாமல் சொல்லப்படுகிறது. ஒவ்வொரு பகுதியின் கீழும் அது எதன்மேல் நிற்கிறது, அந்த ஆதாரம் எவ்வளவு வலிமையானது என்பது குறிக்கப்பட்டுள்ளது — இரு பதிவுகள் முரண்படும் இடங்களில் இரண்டுமே அச்சிடப்படுகின்றன; ஒன்று அமைதியாக நீக்கப்படுவதில்லை.`,
+      noteLabel: `குறிப்பு`,
+
+      alts: {
+        sixtyThreeYears:
+          `ஓவியம் — பழைய ஊர் ஆலயத்தில் இரவு விழிப்பு: மகுடம் சூடிய அன்னைமுன் ஒருவர் செபமாலையுடன் தனியே மண்டியிட்டிருக்கிறார், அவர் பாதத்தில் ஒரு நெய் விளக்கு எரிகிறது, பின்னால் நிழலில் குடும்பங்கள் செபிக்கின்றன, உயரமான ஜன்னலில் நிலவு`,
+        statue:
+          `புகைப்படம் — வடக்கன்குளம் விண்ணேற்பு மாதாவின் சுரூபம்; மகுடமும் விண்மீன் ஒளிவட்டமும் சூடி, பொன்னும் வெண்மையுமான ஆடையணிந்து, செதுக்கப்பட்ட கரங்கள் மார்பில் சேர்த்துக் கூப்பியிருக்க`,
+        signs:
+          `ஓவியம் — வெள்ளை வேட்டி அணிந்த ஒருவர் பலிபீடத்தருகே மண்டியிட்டு ஒரு சிறு அகல் விளக்கை உயர்த்திப் பிடித்திருக்கிறார், ஒரு கை வாயை மூட, தனக்கு மேலே நிற்கும் மகுடம் சூடிய சுரூபத்தை நிமிர்ந்து பார்க்கிறார்; அதன் கரங்கள் விரிந்திருக்கின்றன, கன்னத்தில் ஒரு கண்ணீர்த்துளி`,
+        henriette:
+          `ஓவியம் — பலிபீடத்தைச் சுற்றி, ஏணிமேல் ஒருவர் துணியால் சுரூபத்தின் முகத்தைத் துடைக்கிறார், இன்னொருவர் மெழுகுதிரியை உயர்த்துகிறார், சரிகைத் தொப்பி அணிந்த ஓர் இளம் ஐரோப்பியப் பெண் நெஞ்சில் கை வைத்து நிற்கிறாள், அவளருகே கறுப்பு நீளங்கி அணிந்த அருட்தந்தை ஒருவர் நிமிர்ந்து பார்க்கிறார்`,
+        bell:
+          `ஓவியம் — மண்டியிட்ட ஊர் மக்களால் ஆலயம் நிரம்பியிருக்கிறது, ஏணியின் உச்சியில் உபதேசியார் சுரூபத்தின் முகத்தைத் துடைக்கிறார், ஒரு சிறுவன் மணிக் கயிற்றை இழுக்கிறான், உயரமான ஜன்னல் வழியே ஒளி பல மெழுகுதிரிகளின் புகை ஊடே விழுகிறது`,
+        family:
+          `ஓவியம் — பத்தொன்பதாம் நூற்றாண்டின் தொடக்கத்தில் ஒரு தென்னிந்திய ஊரில் ஐரோப்பிய வணிகக் குடும்பம்; கணக்கேடுகளும் காகிதங்களும் மேசைமேல் இருக்க, குடும்பம் ஜன்னல் மூடிய அறையில் கூடியிருக்கிறது`,
+        record:
+          `புகைப்படம் — மெழுகுதிரி ஒளியில் ஓர் ஆவணக் கிடங்கின் மேசைமேல் மூடிக் கிடக்கும் பழைய தோல் அட்டை நூல், அருகில் மூக்குக் கண்ணாடியும் உருப்பெருக்கிக் கண்ணாடியும், பின்னால் அலமாரிகளில் கையெழுத்துக் கட்டுகள்`,
+      },
+
+      chapters: [
+        {
+          key: `sixtyThreeYears`,
+          heading: `இயேசு சபையார் வராத ஆண்டுகள்`,
+          body:
+            `1773-ல் திருத்தந்தை பதினான்காம் கிளமெண்ட் இயேசு சபையை உலகின் எல்லா நாடுகளிலும் ஒழித்தார். இங்கிருந்த பழைய இயேசு சபை அருட்தந்தையரில் கடைசியானவர் கிளமெண்ட் தோமஸினி; அவர் இரண்டு ஆண்டுகளுக்குப் பின் மறைந்தார். அதற்குப் பிறகு அறுபத்துமூன்று ஆண்டுகள் இந்தப் பங்கில் இயேசு சபை அருட்தந்தை எவரும் பணியாற்றவில்லை.\n\nஆனால் பங்கு கைவிடப்படவில்லை. கொச்சி ஆயரின்கீழ் கோவாவிலிருந்து அருட்தந்தையர் வந்தார்கள்; அவர்களின் பட்டியல் இடைவெளியின்றி நீள்கிறது — தேவ வரதனார், இஞ்ஞாசியார், ஜான் லூயிஸ் கர்டோசா, அவர்களுக்குப் பின் வந்தவர்கள். திருவிழா நடந்தது, குழந்தைகள் திருமுழுக்குப் பெற்றார்கள், இறந்தோர் அடக்கம் செய்யப்பட்டார்கள். ஊர் வெறுமனே பிடித்து நிற்கவில்லை: இப்பங்கைப் புகழ்வதில் எந்த ஆர்வமும் இல்லாத ஓர் அரசு ஆவணத்தின் சொற்களில், 1780 வாக்கில் இது “உள்நாட்டு மறைப்பணியின் ஒரே மையம்” ஆயிற்று; அதன்கீழ் நான்கு கோட்ட மையங்கள் வைக்கப்பட்டன.\n\nஎனவே: மாவட்டத்தில் இயேசு சபை அருட்தந்தை எவரும் இல்லை, கொச்சி ஆயர் பீடம் காலியாக இருந்தது, இவ்வூரை நிர்வகித்த அருட்தந்தை வந்துபோய்க்கொண்டிருந்தார். இந்நிலையில்தான், இவ்வூரில் இதுவரை நடந்தவற்றுள் மிக அசாதாரணமானது நடந்தது.`,
+          note: ``,
+        },
+        {
+          key: `statue`,
+          heading: `பலிபீடத்தின்மேல் நின்ற சுரூபம்`,
+          body:
+            `அவர் மரத்தில் செதுக்கப்பட்டவர்; பெரியவரும் அல்ல. மகுடம் சூடி நிற்கிறார். கரங்கள் மார்பில் சேர்த்துக் கூப்பப்பட்டிருக்கின்றன; கைகள் உடலோடு ஒட்டியே செதுக்கப்பட்டுள்ளன — பொருத்தப்பட்டவை அல்ல, கீல் இல்லை, இணைப்பு இல்லை: ஒரே மரத்துண்டிலிருந்து வெட்டப்பட்டவை.\n\nஇது பக்தி சார்ந்த வர்ணனை அல்ல. இது ஓர் அளவீடு; அவரை உற்று ஆய்ந்த ஒரே மனிதர் 1905-ல் எடுத்து அச்சிட்டது: “கைகள் உடலோடு உறுதியாக ஒட்டியுள்ளன; கூப்பிய கரங்களில் துளையிடப்பட்டது எதுவும் இல்லை.” இந்த நூற்றாண்டில் எடுக்கப்பட்ட புகைப்படமும் அதையேதான் காட்டுகிறது.\n\nஅந்தக் காலைப்பொழுதில் அவர் பலிபீடத்தின்மேல், விருப்பப்படித் திறக்கவும் மூடவும் கூடிய இரட்டைக் கதவுள்ள ஒரு மாடத்துக்குள் நின்றார்; அன்று அதன் இரு கதவுகளும் திறந்திருந்தன. அந்தக் கரங்களையும் அந்தக் கதவுகளையும் மனத்தில் வையுங்கள். இனி வருவது எல்லாம் அவற்றைச் சுற்றியே சுழல்கிறது.`,
+          note:
+            `இன்றைய புகைப்படங்களில் அவருடன் காணப்படும் குழந்தை இயேசு தனியான ஒரு சிறு உருவம்; திருவிழாக்களுக்கு அன்னைக்கு ஆடை அணிவிக்கும்போது வைக்கப்படுவது. செதுக்கப்பட்ட சுரூபத்தின் கரங்கள் வெறுமையாகவே கூப்பியிருக்கின்றன — நூற்று இருபது ஆண்டுகள் இடைவெளியில் 1905-ன் வர்ணனையும் புகைப்படக் கருவியும் ஒத்துப்போவது அதனால்தான்.`,
+        },
+        {
+          key: `provenance`,
+          heading: `அவர் எங்கிருந்து வந்தார்`,
+          body:
+            `பங்கின் சொந்தக் கதை இதுதான். 1742-லோ 1743-லோ, திருவிதாங்கூர் கடற்கரையில் கூட்டப்புளிக் கடற்கரைக்கு ஒரு மரப்பெட்டி ஒதுங்கியது; மீனவர்கள் அதைக் கண்டெடுத்தார்கள். வெளியே “வடக்கன்குளத்திற்கு, போர்ச்சுகலிலிருந்து” என்று பொறிக்கப்பட்டிருந்தது. உள்ளே அன்னையின் மூன்று சுரூபங்கள். பெட்டி இவ்வூரின் இயேசு சபை அருட்தந்தை ஜான் பாப்டிஸ்ட் புத்தாரியிடம் — ஆலயத்தைக் கட்டி, புனித தேவசகாயம் பிள்ளைக்குத் திருமுழுக்கு அளித்த அதே அருட்தந்தையிடம் — கொண்டுவரப்பட்டது. அவர் ஒரு சுரூபத்தைக் காமநாயக்கன்பட்டிக்குக் கொடுத்தார், ஒன்றை ஆயருக்கு அனுப்பினார், ஒன்றை இங்கே வைத்தார்.\n\nஇது ஓர் அழகான கதை; இப்பங்கு இதை நெடுங்காலமாகச் சொல்லிவருகிறது. இது பங்கின் சொந்தக் கதை என்பதைத் தெளிவாகச் சொல்லிவிடுவது நேர்மை.`,
+          note:
+            `பங்கின் இக்கால வரலாற்றுக்கு முந்தைய எந்த அச்சு மூலமும் இப்பெட்டியையோ, கடலையோ, சகோதரச் சுரூபங்களையோ சொல்லவில்லை — பெஸ் இல்லை, கூபே இல்லை, தெசாலும் இல்லை. இச்சுரூபத்தைப் பற்றி எப்போதும் அச்சான மிக விரிவான வர்ணனை தெசாலினுடையது; அவர் இதை “நாட்டு மரத்தில் வேலைசெய்த ஒரு நாட்டுக் கைவினைஞர்” செய்ததாகவே எழுதுகிறார். மூன்றில் ஒன்றை வைத்திருப்பதாகச் சொல்லப்படும் காமநாயக்கன்பட்டி, தன் சுரூபத்தைப் பற்றி முற்றிலும் வேறொரு கதையைச் சொல்கிறது. மரபு இங்கே அச்சிடப்படுகிறது, ஏனெனில் அது பங்குடையது; மிகப் பழைய வர்ணனையும் அதனருகே அச்சிடப்படுகிறது, ஏனெனில் அதுவே மிகப் பழையது.`,
+        },
+        {
+          key: `morning`,
+          heading: `அக்டோபர் இருபத்தொன்று, வெள்ளிக்கிழமை`,
+          body:
+            `எல்லா மொழிகளிலும் எல்லாப் பதிவுகளும் அந்நாளை ஒரே விதமாகவே நிலைநிறுத்துகின்றன: தமிழ் வருடம் 979, ஐப்பசி மாதம் ஏழாம் நாள், வெள்ளிக்கிழமை. 1803 அக்டோபர் இருபத்தொன்று வெள்ளிக்கிழமையாகவே இருந்தது.\n\nசத்தியவாசகம் பிள்ளையின் மகன் சவரிமுத்துப் பிள்ளை, இவ்வூரில் குடியிருந்த ஐரோப்பியரான பில்டர்பெக் ஐயாவைக் காண்பதற்காகத் திருநெல்வேலியிலிருந்து வந்திருந்தார். அவர் ஒரு விருந்தினர். இங்கே அவருக்கு எந்தப் பொறுப்பும் இல்லை, பங்கில் எந்தப் பங்கும் இல்லை, ஆலயத்திற்குச் செல்ல எந்தக் காரணமும் இல்லை.\n\nமுற்பகல் பதினொரு மணிக்குச் சற்றுப் பின் அவர் செபிக்க உள்ளே சென்றார். மாடத்தின் கதவுகள் திறந்திருந்தன, “அன்னையின் சுரூபத்தை மறைப்பது எதுவும் இல்லை.” அவர் மண்டியிட்டுத் தொடங்கினார்.`,
+          note: ``,
+        },
+        {
+          key: `signs`,
+          heading: `தான் கண்டதாக அவர் சொன்னது`,
+          body:
+            `“திடீரென்று அன்னைக்குப் பின்னால் ஒரு தெளிவான மேகம் எழுந்து அவரைச் சூழ்ந்தது; கன்னியின் கண்கள் மேல்நோக்கி உயர்ந்து கண்ணீரால் நிரம்பின; அவர் முகம் முழுவதும் துயரத்தைக் காட்டியது; கூப்பியிருந்த கரங்கள் பிரிந்து, மாடத்தின் சுவர்களைத் தொடும் அளவுக்கு விரிந்தன.” கண்ணீர் எங்கே சென்றது என்பதைத் தமிழ்ப் பதிவு சேர்க்கிறது: பவளம் போன்ற கன்னங்களின்மேல் அது வழிந்தோடியது. பதிவு அன்னையோடு நிற்கவில்லை — “அதே நேரத்தில் பலிபீடத்தின்மேல் இருந்த மற்ற எல்லாச் சுரூபங்களும் இரக்கத்தையும் துக்கத்தையும் காட்டின.”\n\nஎனவே மூன்று அடையாளங்கள். முகம் மேகத்தால் மங்கியது. கண்கள் நிரம்பிக் கண்ணீர் வழிந்தது. கூப்பியிருந்த இரு கரங்கள் பிரிந்து, மாடத்தின் ஓரங்களைத் தொடும்வரை விரிந்தன.\n\nஇப்பதிவு பின்னர் எங்கெல்லாம் பயணித்ததோ — 1905-ல் பிரெஞ்சு மொழிக்கு, ஆங்கிலத்திற்கு, 1930-ல் மலையாளத்திற்கு — அங்கெல்லாம் இந்த மூன்று அடையாளங்களும் சேர்ந்தே, இதே வரிசையிலேயே பயணித்தன. நான்காவது ஒன்றை எந்தச் சொல்லுநரும் சேர்த்ததில்லை.`,
+          note: ``,
+        },
+        {
+          key: `delusion`,
+          heading: `அவர் கத்தவில்லை`,
+          body:
+            `அடுத்து அவர் செய்தது இப்பதிவு முழுவதிலும் மிக மனிதத்தனமான செயல்; இப்பதிவு தப்பிப் பிழைத்ததற்கான காரணமும் அதுவாகவே இருக்கக்கூடும்.\n\nஅவர் தெருவுக்கு ஓடவில்லை. தான் தவறாகப் பார்த்திருக்க வேண்டும் என்றே எண்ணினார். “ஒரு மாயையின் பலியாகிவிடுவோமோ என்று அஞ்சி” — இது அவரது வரலாற்றாசிரியரின் சொற்கள் — வேறொரு ஜோடி கண்கள் தன்னைத் தவறு என்று சொல்லட்டும் என்பதற்காக, ஆலயத்தைவிட்டு வெளியே சென்று இன்னொருவரை அழைத்துவரப் போனார்.\n\nஅந்த வாக்கியத்தில், பங்கு வைத்திருக்கும் அந்த ஆங்கில நகலில், எப்போதோ ஒரு வாசகர் “virtue” என்ற சொல்லை அடித்துவிட்டு அதற்கு மேலே மையால் “victim” என்று எழுதியிருக்கிறார். அந்தத் திருத்தம் இன்னும் அப்பக்கத்தில் இருக்கிறது.`,
+          note: ``,
+        },
+        {
+          key: `catechist`,
+          heading: `உபதேசியார்`,
+          body:
+            `அவர் அழைக்கச் சென்றது உபதேசியார் யாகப்பர் பிள்ளையை — தலைமுறை தலைமுறையாக இப்பணியில் இவ்வாலயத்திற்குச் சேவைசெய்த ஒரு குடும்பத்தினரை; அக்குடும்பத்தில் ஒருவர் அறுபது ஆண்டுகளுக்குப் பின்னும் அப்பணியில் இருந்து, அதற்காகத் திருத்தந்தையின் பதக்கம் பெற்றார்.\n\nஉபதேசியார் உள்ளே வந்து அவரும் கண்டார்; ஆனால் வேறுவிதமாக விவரித்தார். சவரிமுத்து “தெளிவான மேகம்” என்று சொல்லியிருந்த இடத்தில், யாகப்பர் பிள்ளை தான் கண்டது புகையாலும் இருளாலும் சூழப்பட்ட இறைவனின் அன்னையை என்றார் — முகம் வெறுமையுற்று, கரங்கள் விரிந்து, கண்கள் மேல்நோக்கி உயர்ந்து கண்ணீர் வழிய.\n\nஇரு மனிதர்கள், பத்து நிமிட இடைவெளியில், ஒரே ஆலயத்தில், ஒரே பொருளைப் பார்த்து — அவர்கள் சொற்கள் ஒத்துப்போகவில்லை. இதை முதன்முதலில் நூலாக்கியவர் இரு வர்ணனைகளையும் அருகருகே அச்சிட்டார். இப்பக்கமும் இரண்டையும் வைத்திருக்கிறது. ஒவ்வொரு சாட்சியும் ஒரே சொற்களைச் சொல்லும் கதை, யாரோ ஒருவர் ஒழுங்குபடுத்திய கதை.`,
+          note: ``,
+        },
+        {
+          key: `henriette`,
+          heading: `பில்டர்பெக் அம்மாளை அழைத்தார்கள்`,
+          body:
+            `பின்னர், சவரிமுத்து காணவந்திருந்த அந்த வீட்டுக்கு அவசரமாக ஆள் அனுப்பப்பட்டது; அவ்வீட்டு மகள் ஆலயத்திற்கு ஓடிவந்தாள்.\n\nஹென்ரியெட்டா பில்டர்பெக் இளையவள், திருமணமாகாதவள் — மிகப் பழைய இரு அச்சுப் பதிவுகளுமே அவளைக் கவனமாக “Miss” என்றே குறிக்கின்றன — அவள் ஐரோப்பியள், எழுத்தறிவு பெற்றவள். பக்தி மட்டுமே அவளுக்குத் தரக்கூடிய இடத்தைவிட அதிகமான இடத்தை இப்பதிவில் அவள் பெறுவது அதனால்தான். அவள் வெறுமனே பார்க்கவில்லை. அருகில் சென்று சுரூபத்தை உற்று ஆய்ந்தாள்; பின்னர் அந்த மூன்று அடையாளங்களும் உண்மையானவை என்று உறுதிப்படுத்தினாள்.\n\nஅவள் விவரித்ததே அன்று யாரும் சொன்னவற்றுள் மிகக் குறைவாகக் கட்டுப்படுத்தப்பட்ட வர்ணனை. கண்கள் “விண்மீன்களைப் போல” இருந்ததாகவும், கண்ணீர் அவ்வளவு பெருகி வழிந்ததால் “அது தரையில் ஓடி நிலத்தை நனைத்தது” என்றும், புனிதர்களின் சுரூபங்கள் அனைத்தும் சேர்ந்து தலைவணங்கியதாகவும் அவள் சொன்னாள்.`,
+          note:
+            `அந்தக் காலைப்பொழுதின் சாட்சிகளுள், இவ்வூரின் சொந்தக் கதைக்கு வெளியே கண்டுபிடிக்கக்கூடிய ஒரே சாட்சி இவளே. 1930-ல் மலையாளத்தில் அச்சான புனித தேவசகாயம் பிள்ளையின் வாழ்க்கை வரலாறு ஒன்று — முற்றிலும் வேறொரு பக்தி மரபைச் சேர்ந்தது — “ஹென்ட்ரிக்கம்மாள் என்ற ஐரோப்பியப் பெண் ஒருத்தி வடக்கன்குளத்தில் தங்கியிருந்தாள்… அவள் வந்தாள், மேற்சொன்ன மூன்று வகை அடையாளங்களையும் சுரூபத்தில் கண்டாள்” என்று பதிவுசெய்கிறது. இப்பங்கு தன்னைப்பற்றி வைத்திருக்கும் நினைவை அறிய அந்நூலுக்கு எந்தக் காரணமும் இல்லை.`,
+        },
+        {
+          key: `tears`,
+          heading: `துடைத்தும் நிற்காத கண்ணீர்`,
+          body:
+            `உபதேசியார் மதுரேந்திர அண்ணாவியார் ஒரு துணியை எடுத்து, பலிபீடத்தின்மேல் ஏறி, அவர் முகத்தைத் துடைத்தார்.\n\nகண்ணீர் மீண்டும் வந்தது. மீண்டும் துடைத்தார், மீண்டும் வந்தது; அது நிற்கவும் இல்லை, குறையவும் இல்லை. யாரோ மெழுகுதிரிகளை ஏற்றினார்கள், பின் அத்தனையையும்.\n\nஅந்தக் காலைப்பொழுதைப் பற்றிச் சொல்லப்படும் அனைத்திலும், யாரும் எப்போதும் விட்டுவிடாத ஒரே விவரம் இதுதான் — பங்கும் இல்லை, இயேசு சபையாரும் இல்லை, தமிழ்ப் பதிவுகளும் பிரெஞ்சுப் பதிவுகளும் இல்லை. ஒரு மனிதர் ஏணிமேல் ஏறி ஒரு முகத்தை உலர்த்த முயன்று, தோற்பது. பார்த்துக்கொண்டிருந்தவர்களை உடைத்தது புதுமையல்ல; இதுவே என்றுதான் தெரிகிறது.`,
+          note: ``,
+        },
+        {
+          key: `bell`,
+          heading: `ஒருபோதும் அடிக்கப்படாத நேரத்தில் மணி`,
+          body:
+            `பின்பு மணியை அடித்தார்கள்.\n\nஇன்று இங்கே ஒலிக்கும் மணிகள் அல்ல — அவை 1861-ல் பிரான்சின் வலான்ஸில் வார்க்கப்பட்டு, 1872 வரை இக்கோபுரங்களில் தொங்கவிடப்படவே இல்லை. இது அருட்தந்தை புத்தாரியின் ஆலய மணி; எழுபது ஆண்டுகளுக்கு முன் காட்டில் உணவுக்குமுன் கை கழுவ நின்ற ஒரு சிவ வழிபாட்டாளர், மரங்களுக்கு ஊடே கேட்டு, வழிமாறி வந்து சேர்ந்த அதே மணி.\n\nமணி ஒருபோதும் அடிக்கப்படாத ஒரு நேரத்தில் அது ஒலித்தது — அது ஒலிக்கும் நேரங்களை, கேட்கும் தூரத்திலிருந்த ஒவ்வொருவரும் அறிந்திருந்த ஓர் ஊரில். என்ன நடந்தது என்று அறிய வயல்களிலிருந்தும் வீடுகளிலிருந்தும் மக்கள் வந்தார்கள்; ஆலயம் நிரம்பியது.`,
+          note: ``,
+        },
+        {
+          key: `people`,
+          heading: `ஊர் செய்தது`,
+          body:
+            `அவர்கள் நின்று பார்த்தார்கள்; பின் அழுதார்கள்.\n\nஒரு மக்கள்கூட்டம் அச்சம் கொள்ளும்போது பாடப்படும் பழைய பரிகாரப் பாடலை அவர்கள் பாடினார்கள் என்று பங்கின் சொந்தத் தமிழ்ப் பதிவு சொல்கிறது — “Parce Domine, parce populo tuo”: பொறுத்தருளும் ஆண்டவரே, உமது மக்களைப் பொறுத்தருளும் — மேலும் “என் பாவமே, என் பெரும் பாவமே.”\n\nமிகப் பழைய அச்சுப் பதிவு வேறொன்றைச் சொல்கிறது; அந்தக் காலைப்பொழுதைப் பற்றித் தன்னிடம் சொன்ன ஒவ்வொருவருமே இதைச் சேர்த்தார்கள் என்றும் சொல்கிறது: அவர்கள் மார்பில் அடித்துக்கொண்டார்கள், “ஆண்டவரே, எங்கள்மேல் இரக்கமாயிரும்” என்றார்கள், Salve Regina ஓதினார்கள்.\n\nஅஞ்சிய ஒரு சபை இவை அனைத்தையும் செய்திருக்கக் கூடாது என்பதற்கு எந்தக் காரணமும் இல்லை. இப்பக்கம் இரண்டையும் அச்சிடுகிறது; அவற்றை ஒரு வரிசையில் வைக்கவில்லை.`,
+          note: ``,
+        },
+        {
+          key: `stopped`,
+          heading: `பின் அது நின்றுவிட்டது`,
+          body:
+            `“அவர்கள் அழுது செபித்துக்கொண்டிருக்கும்போதே, கன்னியின் சுரூபமும் மற்ற புனிதர்களின் சுரூபங்களும் தங்கள் வழக்கமான தோற்றத்தை மீண்டும் கொண்டன.” பிரெஞ்சுப் பதிவும் அதையேதான் சொல்கிறது: அவர் தம் முந்தைய நிலைக்குத் திரும்பினார், மற்ற எல்லாப் புனிதர்களின் உருவங்களும் தங்கள் வழக்கமான தோற்றத்தை அடைந்தன.\n\nபலிபீடத்தின்மேல் இருந்த முகம் சாதாரணமாகச் செதுக்கப்பட்ட ஒரு முகமாக இருந்தது.\n\nஎவ்வளவு நேரம் நீடித்தது என்பதை யாரும் எழுதிவைக்கவில்லை. ஆனால் ஒருவர் தன்னையே ஐயுற்று உபதேசியாரைத் தேடிச் செல்ல, உபதேசியார் வந்து பார்க்க, ஊரிலுள்ள ஒரு வீட்டுக்கு ஆள் அனுப்பப்பட, ஓர் ஐரோப்பியக் குடும்பம் எழுப்பப்பட்டு அதன் மகள் வந்து சுரூபத்தை ஆய, ஒருவர் ஏணியும் துணியும் கொண்டுவந்து ஏறி ஒரு முகத்தை ஒன்றுக்கு மேற்பட்ட முறை துடைக்க, மெழுகுதிரிகள் ஏற்றப்பட, ஒரு மணி ஓர் ஊர் முழுவதையும் வயல்களிலிருந்து வரவழைக்க — அவ்வளவு நேரம் அது நீடித்தது.`,
+          note: ``,
+        },
+        {
+          key: `song`,
+          heading: `முதல் பதிவு ஒரு பாடல்`,
+          body:
+            `அந்தக் காலைப்பொழுதின் முதல் பதிவை எழுதியவர் ஓர் அருட்தந்தை அல்ல; அது உரைநடையிலும் எழுதப்படவில்லை.\n\nஅது ஒரு பாடல். ஊர்ப் பள்ளி ஆசிரியர் உடனடியாக அதை இயற்றினார் — ஐந்து பாடல்கள் — அவர் ஆலயத்தில் இருந்தார், அத்தனையையும் தன் கண்ணாலேயே கண்டார். அவர் சிவ வழிபாட்டாளர்.\n\nஅதற்குப் பின் அச்சான அனைத்தும் அவர் அன்று இயற்றியதன்மேலேயே கட்டப்பட்டுள்ளன: நண்பகலுக்கு முந்திய நேரம், மாடத்தின் திறந்த கதவுகள், அவருக்குப் பின் திரண்ட மேகம், கண்ணீர், சுவர்களைத் தொடும்வரை நீண்ட கரங்கள். ஒரு நூற்றாண்டுக்குப் பின் ஓர் இயேசு சபை அருட்தந்தை இப்பதிவை இறுதியாக அச்சில் ஏற்றியபோது, தாம் தருவது “அப்பாடலின் சாரமும் அதன் விளக்கமும், கவிதையையும் சந்தத்தையும் ஒதுக்கிவிட்டு” என்று எழுதினார்.\n\nகதை தப்பிப் பிழைத்தது. அதன் பாடல் பிழைக்கவில்லை.`,
+          note:
+            `பாடலுக்குப் பின் உரைநடையில் இரண்டாவது பதிவு ஒன்று வந்தது; இரண்டையும் படித்தவரின் சொற்களில், அது “முதலாவதைச் சரியாகவே மீட்டுத் தருகிறது, விரித்துரைக்கிறது, நிறைவுசெய்கிறது.” அதை எழுதியவர் கோ. சேபஸ்தியான் பிள்ளை; தான் அங்கு இருந்ததாக அவர் ஒருபோதும் உரிமை கோரவில்லை. பாடலே முதலில் வந்தது; அதன் ஒரு பிரதியும் எங்கும் இருப்பதாக அறியப்படவில்லை.`,
+        },
+        {
+          key: `family`,
+          heading: `அன்று ஆலயத்தில் இருந்த குடும்பம்`,
+          body:
+            `பில்டர்பெக் குடும்பத்தினர் ரத்தமும் சதையுமானவர்கள்; அவர்களைப் பெயர் சொல்லி அழைக்க முடியும்.\n\n1758 வாக்கில் பிறந்த கிறிஸ்டோஃபர் பில்டர்பெக், பதினெட்டாம் நூற்றாண்டின் இறுதியில் வடக்கன்குளத்தில் குடியேறிய ஐரோப்பிய வம்சாவளி வணிகர்; 1817-ல் இங்கேயே மறைந்தார். அவர்கள் செல்வாக்குள்ளவர்கள்: நாங்குநேரியின் வரிவசூல் உரிமையை அக்குடும்பம் வைத்திருந்தது — அதாவது ஒரு நிலப்பரப்பு முழுவதின் வரிகளை அவர்களே வசூலித்தார்கள். அன்று சுரூபத்தை ஆய்ந்த ஹென்ரியெட்டா அவரது மகள்.\n\nபுதுமைக் காட்சிக்கு ஆறு ஆண்டுகளுக்குப் பின், 1809-ல், அக்குடும்பத்தில் ஜான் என்ற மகன் பிறந்தார். 1880-ல் ஜான் இறந்தபோது, ஓர் ஆங்கிலப் புராட்டஸ்தாந்து மறைப்பணி இதழ் அவரைப்பற்றி “இந்தியாவில் பிறந்தவர்… ஒரு ரோமன் கத்தோலிக்கக் குடும்பத்தைச் சேர்ந்தவர், அச்சபையின் குருத்துவத்திற்குப் பயிற்றுவிக்கப்பட்டவர்” என்று பதிவுசெய்தது; ஒரு மெதடிஸ்ட் ஆவணப் பட்டியல் அவர் பிறந்த ஆண்டைத் தருகிறது.\n\nஎனவே அந்த வெள்ளிக்கிழமை இவ்வாலயத்தில் நின்ற குடும்பம் தனக்கென ஓர் ஆவணச் சுவட்டை விட்டுச்சென்றது — புராட்டஸ்தாந்தர் கைகளில், ஒரு கத்தோலிக்கத் திருத்தலத்தைப் புகழ எந்தக் காரணமும் இல்லாதவர்களால் காக்கப்பட்டது.`,
+          note: ``,
+        },
+        {
+          key: `boon`,
+          heading: `அந்த வீடு கேட்டது`,
+          body:
+            `இப்பகுதி ஊருக்குச் சொந்தமானது; ஊர் சொல்வதுபோலவே இங்கே சொல்லப்படுகிறது.\n\nகிறிஸ்டோஃபர் பில்டர்பெக்கும் அவர் மனைவியும் இருபத்தேழு ஆண்டுகள் மணவாழ்வில் இருந்தும் குழந்தையின்றி இருந்தார்கள். அப்போது அவருக்கு ஐம்பது வயதைத் தாண்டியிருந்தது — ஒரு மனிதன் கேட்பதை நிறுத்திவிடும் வயது. அவர்கள் கேட்டார்கள்: இவ்வாலயத்து அன்னையிடம் வேண்டினார்கள்; அந்த ஆண்டு முடிவதற்குள் அவர்களுக்கு ஒரு மகன் பிறந்தார்.\n\nபின்னர் அவர்கள் கொடுத்ததை நன்றியறிதலாகவே கொடுத்தார்கள்.`,
+          note:
+            `இப்பங்குக்கு வெளியே எந்த மூலமும் இந்த வேண்டுதலையோ பொருத்தனையையோ பதிவுசெய்யவில்லை; கொடுக்கப்பட்டதற்கு எந்தத் தொகையையும் எங்கும் எந்த மூலமும் தரவில்லை. ஊர் எப்போதும் சொல்லிவரும் ஒன்று என்பதால் இது இப்பக்கத்தில் வைக்கப்படுகிறது; அதே காரணத்தால் இது “மரபு” எனக் குறிக்கப்படுகிறது.`,
+        },
+        {
+          key: `returned`,
+          heading: `இன்னும் கேட்கக்கூடியவர்கள்`,
+          body:
+            `1838-ல் இயேசு சபை இம்மறைப்பணிக்குத் திரும்பி வந்தபோது முப்பத்தைந்து ஆண்டுகள் கடந்திருந்தன. அன்று ஆலயத்தில் இருந்த பலர் உயிரோடு இருந்தார்கள்; அவர்களைக் கேட்க முடிந்தது.\n\nவடக்கன்குளத்தை முதலில் வந்தடைந்த அருட்தந்தையர், அவர்களுள் ஒருவரே பின்னர் எழுதியதுபோல், “அந்த மரபின் வலிமையான சூழலில் சுற்றப்பட்டு, ஊறியிருப்பதுபோல்” தங்களைக் கண்டார்கள். ஊர் விருப்பத்துடன் சொன்னதைக் கேட்டால் போதும் என்றிருந்தது; கேட்டதன் மூலம் அவர்களே தங்கள் முறையில் சாட்சிகளாயினர்.\n\nஊர் எப்போதும் சேர்த்துச் சொன்ன ஒன்று இருந்தது; கதையைச் சொன்ன யாரும் அதை விட்டதில்லை: ஆலயம் நிரம்பியதையும், பலிபீடத்தின் பல மெழுகுதிரிகள் ஏற்றப்பட்டதையும், அனைவரும் மண்டியிட்டிருந்ததையும், ஒருவர் ஏறிச்சென்று கண்ணீரைத் துடைத்தும் அதை நிறுத்தவோ குறைக்கவோ முடியாமற் போனதையும்.`,
+          note: ``,
+        },
+        {
+          key: `centenary`,
+          heading: `நூறாவது ஆண்டு`,
+          body:
+            `1903-ல் பங்கு நூற்றாண்டு விழாவைக் கொண்டாடியது. அதற்கெனத் தனி நாள் ஒதுக்கப்படாமல், ஆகஸ்ட் மாதப் பெருந்திருவிழாவுடன் சேர்த்துக் கொண்டாடப்பட்டது; ஆகஸ்ட் பதினைந்தாம் நாள், விண்ணேற்புத் திருநாள் — இச்சுரூபம் இங்கே எப்போதும் வணங்கப்பட்டுவரும் பட்டமும் அதுவே.\n\nதிருச்சிராப்பள்ளி ஆயர் அதற்கு அனுமதி அளித்தார். ஆறு அருட்தந்தையர் கலந்துகொண்டார்கள். புதிய மணிக்கோபுரம் ஒன்று சற்று முன்பே எழுப்பப்பட்டிருந்தது. இரண்டு ஆண்டுகளுக்குப் பின் இப்பதிவை அச்சிட்டவரின் சொற்களில், அன்னை ஊர்த் தெருக்களில் “மணியோசையோடும் தம்பட்ட ஒலியோடும்” எழுந்தருளிச் சென்றார்.\n\nநூறு ஆண்டுகள்; ஒவ்வொன்றையும் எண்ணிவைத்திருந்த ஓர் ஊர்.`,
+          note: ``,
+        },
+        {
+          key: `examined`,
+          heading: `அவர் அன்னையின் கரங்களை அசைக்க முயன்றார்`,
+          body:
+            `அந்த நூற்றாண்டு விழாவின் அருகில் எப்போதோ, இம்மறைப்பணியின் இயேசு சபை அருட்தந்தை ஒருவர் தானே பார்க்க வந்தார்; சுரூபத்தைச் சோதிக்கத் தன் கையால் தொட்ட ஒரே மனிதர் இவரே.\n\nஊர் ஒரு செயல்படும் நகலைச் செய்துவைத்திருந்தது: உள்ளே கம்பிகளும் கோல்களும் கொண்ட ஒரு வெற்று உருவம்; ஒரு முறை இழுத்தால் தலை உயரும், கண்கள் வானம் நோக்கும், கரங்கள் பிரியும், கைகள் விரியும்; இரண்டாவது இழுப்பில் எல்லாம் பழையபடி. “எங்களுக்காக அவர்கள் அன்புடன் அப்புதுமையை மீண்டும் செய்துகாட்டினார்கள்” என்று அவர் எழுதினார் — உலர்ந்த நகைச்சுவையுடன், ஏனெனில் அது சரியாக நடக்கவில்லை; கயிறுகளை இயக்கியவர் அவற்றை ஒன்றுக்கு மேற்பட்ட முறை சிக்கவைத்தார்.\n\nபின்னர் நற்கருணைப் பேழைக்கு மேலே தன் மதிப்பிடத்தில் தனித்து நின்ற சுரூபத்திடமே சென்று, தன் கைகளை அதன்மேல் வைத்தார். தலையை நேராக்க முயன்றார். இமைகளைத் தூக்கிக் கண்களை உருட்ட முயன்றார். எல்லாவற்றுக்கும் மேலாக, ஒரே மரத்துண்டில் செதுக்கப்பட்ட அந்த இரு கரங்களைப் பிரிக்கவும், விறைத்த கைகளை விரிக்கவும் முயன்றார்.\n\nவீண் உழைப்பு என்று அவர் எழுதினார். அது மூலப்பொருளின், உலர்ந்த மரக்கட்டையின், உயிரற்ற எதிர்ப்பு. பின் தான் “பறித்துக்கொண்ட விசுவாச விசாரணை அதிகாரம்” என்று அழைத்ததை விட்டுவிட்டார் — மகிழ்ச்சியுடனேயே விட்டதாகச் சொல்கிறார் — மண்டியிட்டார்.`,
+          note:
+            `அவர் இம்மறைப்பணியின் இயேசு சபை அருட்தந்தை; வெளிப்படையாகவே பக்தி கொண்டவர். அவரை நடுநிலை ஆய்வாளராகக் காட்டாமல் இப்பக்கம் அதைச் சொல்லிவிடுகிறது. அவரது பதிவு நிறுவுவது புதுமையை அல்ல: 1905 வாக்கில் பெயர் தெரிந்த ஒரு மனிதர் தன் கைகளால் என்ன செய்தார், என்ன கண்டார் என்பதை மட்டுமே.`,
+        },
+        {
+          key: `record`,
+          heading: `இந்தக் காலைப்பொழுது உங்களை எப்படி வந்தடைகிறது`,
+          body:
+            `அந்த வெள்ளிக்கிழமையைப் பற்றி அறியப்பட்ட அனைத்தும் ஒரே வழியில் வந்தவை என்று நெடுங்காலம் கருதப்பட்டது — 1914-ல் திருச்சிராப்பள்ளியில் அச்சான லெயோன் பெஸ்ஸின் La Mission du Maduré; அதன் நான்கு பிரதிகளே இருப்பதாக அறியப்படுகிறது, அவற்றுள் ஒன்றும் திறக்கப்படவில்லை.\n\nஅது உண்மையல்ல. பெஸ்ஸுக்கு ஒன்பது ஆண்டுகள் முன்பே, இம்மறைப்பணியின் இயேசு சபை அருட்தந்தை ஒருவர் 1905-ல் முழுப் பதிவையும் பிரெஞ்சு மொழியில் அச்சிட்டுவிட்டார்; அந்நூல் இப்பங்கின் சொந்த அலமாரியில் இருக்கிறது, அதன் பக்கங்கள் படிக்கப்பட்டுவிட்டன. பங்கு வைத்திருக்கும் ஆங்கில நகலில் பெஸ்ஸின் சொந்தப் பதிவும் இப்போது படிக்கப்பட்டுவிட்டது. மேலும், 1930-ல் மலையாளத்தில் எழுதப்பட்ட, முற்றிலும் வேறொரு மரபைச் சேர்ந்த புனித தேவசகாயம் பிள்ளையின் வாழ்க்கை வரலாறு ஒன்று, அதே ஐரோப்பியப் பெண் அதே மூன்று அடையாளங்களை ஆய்ந்ததைப் பதிவுசெய்தது.\n\nமூன்று கைகள்; ஒன்று மற்றொன்றை நகலெடுக்கவில்லை.\n\nஒன்று இன்னும் விடுபட்டிருக்கிறது; அதை மறைப்பதைவிடச் சொல்லிவிடுவதே இப்பக்கத்திற்கு உகந்தது. இப்புதுமையைப் பற்றிய தம் சொந்தப் பக்கத்தின் அடிக்குறிப்பில், தாம் சுருக்கியே எழுதுவதாகவும், முழு விவாதத்தை மறைப்பணியின் இதழான La Gerbe du Maduré-ன் 1911 ஜூலை–ஆகஸ்ட் இதழில் காணலாம் என்றும் பெஸ் எழுதுகிறார். அந்த இதழ் பிரான்சிலுள்ள ஓர் இயேசு சபை ஆவணக் கிடங்கில் இருக்கிறது. அது இதுவரை மின்னாக்கம் செய்யப்படவில்லை; இப்பங்கின் வரலாற்றில் உழைப்பவர்களுள் யாரும் அதைப் படித்ததில்லை. இந்தக் காலைப்பொழுதைப் பற்றிய மிக விரிவான பதிவு நூற்றுப் பதினைந்து ஆண்டுகளாகப் படிக்கப்படாமலே இருக்கிறது.`,
+          note: ``,
+        },
+      ],
+
+      limits: {
+        label: `நேர்மையாக`,
+        title: `இதில் எவ்வளவு நிரூபிக்கப்பட்டுள்ளது`,
+        intro:
+          `ஒரு புதுமையை உறுதியாக அறிவிக்கும் திருத்தலம் தன் வாதத்தையே இழந்துவிடுகிறது. எனவே அதே கதை இங்கே மீண்டும் — ஒவ்வொரு பகுதிக்குமான ஆதாரம் உண்மையில் எவ்வளவு வலிமையானது என்பதன்படி வரிசைப்படுத்தப்பட்டு; இப்பங்கின் சொந்த மூலங்களே ஒன்றுக்கொன்று முரண்படும் இடங்களும் சேர்த்து.`,
+        rows: [
+          {
+            tier: `documented`,
+            heading: `அன்று, அவர்களால், இது சொல்லப்பட்டது`,
+            body: `இதுவே வலிமையான பகுதி; எங்கும் உள்ள பெரும்பாலான பங்குப் புதுமைகளைவிட வலிமையானது. சாட்சிகள் பெயருடன், தந்தையர் பெயருடன், ஒருவர் பயணித்து வந்த ஊருடன், அவர் காணவந்த வீட்டுடன் குறிக்கப்பட்டுள்ளனர். முதல் பதிவு அன்றே, கிறிஸ்தவர் அல்லாத ஒரு நேரடிச் சாட்சியால் செய்யப்பட்டது. தொடர்பற்ற மூன்று அச்சு மூலங்கள் இதைச் சுமக்கின்றன — 1905-ன் ஒரு பிரெஞ்சு நூல், பெஸ்ஸின் வரலாற்றின் ஆங்கில நகல், 1930-ன் ஒரு மலையாள நூல் — ஒன்று மற்றொன்றை நகலெடுக்காமலேயே சாட்சி, வீடு, உபதேசியார், நாள், நேரம், நூற்றாண்டு விழா ஆகியவற்றில் அவை ஒத்துப்போகின்றன.`,
+          },
+          {
+            tier: `documented`,
+            heading: `நாள்`,
+            body: `எல்லா மொழிகளிலும் எல்லா மூலங்களும் ஒரே தமிழ்த் தேதியையே தருகின்றன: தமிழ் வருடம் 979, ஐப்பசி ஏழாம் நாள், வெள்ளிக்கிழமை. 1803 அக்டோபர் இருபத்தொன்று வெள்ளிக்கிழமை; இருபத்துமூன்று ஞாயிற்றுக்கிழமை. மறைமாவட்டம் நினைவுநாளை இருபத்துமூன்றாம் தேதி கொண்டாடுகிறது; பங்கின் 150-ஆம் ஆண்டு மலர் ஒருமுறை 1805 என்று அச்சிட்டது — அது 1803-ன் நகல் பிழை; இங்கே அது மறைக்கப்படாமல் திருத்தப்படுகிறது. ஆண்டில் ஐயமில்லை: பங்கின் சொந்த அருட்தந்தையர் பட்டியல் அருட்தந்தை ஜான் லூயிஸ் கர்டோசாவைச் சரியாக 1803-ல் பணியில் வைக்கிறது; நூற்றாண்டு விழா 1903-ல் கொண்டாடப்பட்டது.`,
+          },
+          {
+            tier: `devotion`,
+            heading: `கண்ணீர், அதுவே`,
+            body: `யாரும் அதைப் புகைப்படம் எடுக்கவில்லை. எந்த ஆணையமும் அதை ஆயவில்லை. சுரூபத்தைச் சோதித்த ஒரே மனிதர் அதைச் சுமார் நூறு ஆண்டுகளுக்குப் பின்னரே செய்தார்; அவர் நிறுவியது அதன் கரங்கள் அசைவதில்லை என்பதையே தவிர, ஒருகாலத்தில் அசைந்தன என்பதை அல்ல. இருப்பது என்னவென்றால்: சாட்சிகள் சொன்னது, அன்றே எழுதிவைக்கப்பட்டது, ஆலயத்தில் இருந்தவர்களால் திரும்பிவந்த இயேசு சபையாரிடம் திரும்பச் சொல்லப்பட்டது, மூன்று மொழிகளில் மூன்று முறை அச்சானது, இருநூற்று இருபத்துமூன்று ஆண்டுகளாகத் திருவிழாவாகக் கடைப்பிடிக்கப்படுவது. இது வழக்கத்திற்கு மாறாக நல்ல ஆவணச் சுவடு கொண்ட ஒரு பக்தி. இது நிரூபணம் அல்ல; இப்பக்கம் அதை நிரூபணமாகத் தரவும் இல்லை.`,
+          },
+          {
+            tier: `documented`,
+            heading: `ஒருபோதும் செய்யப்படாதவை`,
+            body: `இது ரோமுக்குக் கொண்டுசெல்லப்படவே இல்லை. திருச்சபைச் சட்டப்படியான விசாரணையும் இல்லை, ஆணையும் இல்லை; அன்னையின் காட்சிகள் குறித்த நிலையான பட்டியல்கள் எதிலும் இது இடம்பெறவில்லை. இது இப்பகுதிக்கும் மறைமாவட்டத்திற்கும் உரிய ஒரு பக்தி; இதற்கு மேல் எதையும் பங்கு ஒருபோதும் உரிமை கோரியதில்லை. அந்நாளைப் பற்றியே பதிவுக்குள் ஒரு நேரடி முரண்பாடு இருக்கிறது; இரு பகுதிகளுமே இங்கே இடம்பெற வேண்டும். அவ்வாண்டின் பங்குத் தந்தை அருட்தந்தை ஜான் லூயிஸ் கர்டோசா சுரூபத்தை ஆய்ந்து, அப்புதுமையை உண்மையானது என்று அன்றே அறிவித்தார் என்பது பங்கின் நினைவு. மிகப் பழைய அச்சுப் பதிவு அதற்கு நேர்மாறாகச் சொல்கிறது — இவ்வூரை நிர்வகித்த கோவா அருட்தந்தை நடந்தபோது அங்கே இல்லை, வழக்கமாக இங்கே வசிப்பதும் இல்லை, கொச்சி ஆயர் பீடம் காலியாக இருந்தது, ஏற்புத் தரும் எந்தத் திருச்சபை ஆவணமும் இல்லை. இரு பதிவுகளும் அச்சிடப்படுகின்றன. ஒன்றும் நீக்கப்படவில்லை. முரண்படும் மூலங்களுக்கான இப்பங்கின் விதி இதுவே; அது கடைப்பிடிக்கப்படுவதை நீங்கள் பார்க்கக்கூடிய பக்கம் இதுவே.`,
+          },
+          {
+            tier: `tradition`,
+            heading: `சுரூபம் எங்கிருந்து வந்தது`,
+            body: `“வடக்கன்குளத்திற்கு, போர்ச்சுகலிலிருந்து” என்று பொறிக்கப்பட்ட பெட்டி பங்கின் சொந்த நினைவு; பங்கின் இக்கால வரலாற்றுக்கு முந்தைய எந்த அச்சு மூலத்திலும் அது இல்லை. சுரூபத்தைக் கையால் தொட்ட ஒருவரால் 1905-ல் எழுதப்பட்ட, எப்போதும் அச்சான மிக விரிவான வர்ணனை, அது நாட்டு மரத்தில் ஒரு நாட்டுக் கைவினைஞர் செய்த வேலை என்கிறது. இரண்டும் இப்பக்கத்தில் உள்ளன. சுரூபத்தைப் பற்றி உறுதியானது அது எங்கிருந்து வந்தது என்பதல்ல, அது என்ன என்பதே: கரங்கள் கூப்பப்பட்டு, ஒரே மரத்துண்டில் செதுக்கப்பட்ட ஓர் உருவம் — 1803-ன் சாட்சிகள் பிரிந்ததாகச் சொன்னது சரியாக அதையேதான்.`,
+          },
+        ],
+        closing:
+          `இவை எதுவும் நிரூபணமாகத் தரப்படவில்லை. ஒரு பதிவாகவே தரப்படுகிறது — மக்கள் என்ன சொன்னார்கள், அவர்கள் யார், எப்போது எழுதிவைக்கப்பட்டது, எது ஒருபோதும் நிறுவப்படவில்லை. அதை வைத்து நீங்கள் எதை வேண்டுமானாலும் முடிவுசெய்யலாம்; 1803 முதல் இவ்வூர் செய்துவருவதும் அதுவேதான்.`,
+      },
+
+      today: {
+        label: `அந்தக் காலைப்பொழுதுக்குப் பின்`,
+        title: `இன்று பங்கு இதை என்ன செய்கிறது`,
+        intro:
+          `சுரூபம் இன்னும் இங்கேதான் இருக்கிறது — பெரிய ஆலயத்தையொட்டி அவருக்கெனத் தனித் திருத்தலத்தில்; ஊர் ஓர் ஆண்டு நினைவையும் தவறவிட்டதில்லை.`,
+        items: [
+          {
+            heading: `அவர் இருக்கும் இடம்`,
+            body: `இரட்டை மண்டப ஆலயத்தையொட்டிக் கட்டப்பட்ட மாதாவின் புதுமைக் காட்சி ஆலயத்தில் சுரூபம் நிற்கிறது. திருவிழாக்களுக்கு அவருக்கு ஆடையணிவித்து மகுடம் சூட்டப்படுகிறது. நீங்கள் அவரருகே சென்று நிற்கலாம்.`,
+          },
+          {
+            heading: `அக்டோபர் நினைவுத் திருவிழா`,
+            body: `புதுமைக் காட்சியின் ஆண்டு நினைவை ஒவ்வோர் அக்டோபரிலும் பங்கு கொண்டாடுகிறது; மாலையில் சிறப்பு ஆராதனையுடன். இது இங்கே ஆண்டின் இரு பெரும் கொண்டாட்டங்களுள் ஒன்று; மற்றது ஆகஸ்ட் 6–15 பத்துநாள் விண்ணேற்பு மாதா திருவிழா — அன்று அவரது தேரின் பின்னால் ஏறத்தாழ ஒரு லட்சம் பேர் நடக்கிறார்கள்.`,
+          },
+          {
+            heading: `முதல் சனிக்கிழமை`,
+            body: `ஒவ்வொரு மாதத்தின் முதல் சனிக்கிழமையும் அன்னைக்கு நவநாள் செபமும் நற்கருணை ஆராதனையும் நடைபெறுகின்றன. இத்திருத்தலத்தைக் காண இதுவே மிக அமைதியான வழி; ஊர் மக்களே இதைக் கடைப்பிடிக்கும் வழியும் இதுவே.`,
+          },
+        ],
+      },
+
+      related: {
+        heading: `மேலும் படிக்க`,
+        items: [
+          {
+            title: `முழு வரலாறு`,
+            body: `காட்டு வெளியில் ஒரு பெண் நட்ட சிலுவையிலிருந்து இன்றுவரை — இப்பங்கின் நானூறு ஆண்டுகள், தருணம் தருணமாக, ஒவ்வொன்றுக்குமான ஆதாரங்களுடன்.`,
+            href: `/history`,
+            cta: `வரலாற்று ஏடு`,
+          },
+          {
+            title: `அவர் நிற்கும் ஆலயம்`,
+            body: `வாசலில் விரிந்து, நீளத்தில் நெருங்கி, ஒரே பலிபீடத்தில் சந்திக்கும் இரு மண்டபங்கள் — வேறெங்கும் இல்லை எனக் கருதப்படும் வடிவம்.`,
+            href: `/architecture`,
+            cta: `கட்டிடம்`,
+          },
+          {
+            title: `புனித தேவசகாயம் பிள்ளை`,
+            body: `1745-ல் இவ்வாலயத்தில் திருமுழுக்குப் பெற்று, 2022-ல் புனிதராக அறிவிக்கப்பட்டவர் — இவ்வூரின் மிகச் சிறந்த ஆவண ஆதாரம் கொண்ட உண்மை.`,
+            href: `/saints/devasahayam-pillai`,
+            cta: `அவரது பக்கம்`,
+          },
+        ],
+      },
+
+      sources: {
+        heading: `ஆதாரங்கள்`,
+        body: `1905-ல் Lettres de Gemert-இல் அச்சான ழ.-ப. தெசால், இ.ச., எழுதிய “Vadakencoulam: son histoire, sa merveille, son jubilé” — அறியப்பட்ட மிகப் பழைய அச்சுப் பதிவு; 1803-ன் தலைமுறையின் பேரக்குழந்தைகள் உயிரோடிருக்கும்போதே இம்மறைப்பணியின் இயேசு சபை அருட்தந்தை ஒருவரால் எழுதப்பட்டது. லெயோன் பெஸ்ஸின் La Mission du Maduré (1914), பங்கு தன்னிடமே வைத்திருக்கும் ஆங்கில நகலில், பக்கம் 842. 1930-ல் அச்சான புனித தேவசகாயம் பிள்ளையின் மலையாள வாழ்க்கை வரலாறு. பில்டர்பெக் குடும்பம் குறித்த புராட்டஸ்தாந்து ஆவணங்கள். பங்கின், மறைமாவட்டத்தின் சொந்தப் பதிவுகள். மேலுள்ள ஒவ்வொரு பகுதியும் தான் நிற்கும் சான்றுகளைப் பெயர் சொல்லிக் காட்டுகிறது; அவை அனைத்தும் ஆதாரங்கள் பக்கத்தில் முழுமையாகப் பட்டியலிடப்பட்டுள்ளன.`,
         chipsLabel: `இப்பக்கத்தின் அனைத்து மூலங்களும்`,
       },
     },

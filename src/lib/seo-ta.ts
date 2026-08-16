@@ -68,6 +68,19 @@ export const ROUTES_TA: Partial<Record<RouteKey, RouteCopy>> = {
       "வடக்கன்குளம் வடவை மாதாவின் வரலாறு: 1685-ல் ஓலைச் சிற்றாலயம், 1745-ல் தேவசகாயம் பிள்ளையின் திருமுழுக்கு, 1803-ன் புதுமைக் காட்சி, 1872-ல் இரட்டை மண்டப ஆலயம், 1993-ல் திருத்தலம்.",
     crumb: "வரலாறு",
   },
+  // The QR code at the shrine points at /ta/miracle, so for most of the people
+  // who ever open this page THIS is the page — the English twin is the
+  // translation, not the other way round. The title uses the parish's own name
+  // for the event, மாதாவின் புதுமைக் காட்சி ("the Mother's miraculous vision"),
+  // which is what vadavaimatha.net has always called it and therefore what a
+  // Tamil reader searching for it types.
+  miracle: {
+    title: "மாதாவின் புதுமைக் காட்சி, 1803",
+    fullTitle: "வடக்கன்குளம் மாதாவின் புதுமைக் காட்சி — 1803 அக்டோபர் 21",
+    description:
+      "1803 அக்டோபர் 21, வெள்ளிக்கிழமை முற்பகல்: வடக்கன்குளம் ஆலயத்தில் செபித்துக்கொண்டிருந்த ஒருவர், பலிபீடத்தின்மேல் நின்ற விண்ணேற்பு மாதாவின் சுரூபம் கண்ணீர் சிந்திக் கரங்களை விரித்ததாகச் சொன்னார். சாட்சிகள், மணியோசை, அன்றே எழுதப்பட்ட பாடல் — ஆவணங்களுடன், முழு வரலாறு.",
+    crumb: "1803 புதுமைக் காட்சி",
+  },
   architecture: {
     title: "கட்டிடக்கலை",
     fullTitle: "இரட்டை மண்டப ஆலயம் — சின்ன ரோமின் கட்டிடக்கலை",

@@ -52,6 +52,7 @@ export function abs(path: string): string {
 export type RouteKey =
   | "home"
   | "history"
+  | "miracle"
   | "architecture"
   | "massTimings"
   | "contact"
@@ -135,6 +136,36 @@ export const ROUTES: Record<RouteKey, RouteDef> = {
     changeFrequency: "yearly",
     lastModified: "2026-08-04",
     image: "/images/bw-old-pic.jpg",
+    ogImage: "/og/history.jpg",
+  },
+  // The page a QR code at the shrine opens, so the URL is load-bearing in a way
+  // no other route's is: it gets printed onto a board and cannot be changed
+  // afterwards without orphaning every code already in the village. /miracle,
+  // and it stays /miracle.
+  //
+  // It is also the site's best shot at a query it does not currently rank for
+  // at all. "vadakkankulam miracle", "weeping statue tamil nadu" and "மாதாவின்
+  // புதுமைக் காட்சி" are what people actually type about this place, and until
+  // now the only page answering them was a chapter buried a third of the way
+  // down four centuries of /history. The description leads with the date and
+  // the fact that the account is printed, because those are what distinguish
+  // this page from the dozen devotional blogs that retell it without a source.
+  miracle: {
+    path: "/miracle",
+    title: "The Weeping of Our Lady, 1803",
+    fullTitle: "The Weeping of Our Lady at Vadakkankulam — 21 October 1803",
+    description:
+      "On the forenoon of Friday, 21 October 1803, a visitor praying at the Holy Family Church, Vadakkankulam, said the statue of Our Lady of the Assumption clouded over, wept, and opened her carved hands. The whole account: every named witness, the catechist who could not wipe the tears, the bell rung at the wrong hour, the schoolmaster's song written that day — and an honest note on what is documented and what has never been established.",
+    crumb: "The Weeping of 1803",
+    priority: 0.9,
+    changeFrequency: "yearly",
+    lastModified: "2026-08-13",
+    image: "/images/history/the-weeping-madonna-3.jpg",
+    // ⚠ BORROWED FROM /history UNTIL A CARD OF ITS OWN IS CUT. A share card must
+    // be exactly 1.91:1 or the platforms crop it themselves, and the paintings
+    // for this era are all 4:5. Cut public/og/miracle.jpg from
+    // the-weeping-madonna-3.jpg — the ladder, the bell rope and the crowd — and
+    // point this at it.
     ogImage: "/og/history.jpg",
   },
   architecture: {
@@ -310,6 +341,7 @@ export const INDEXABLE: RouteKey[] = [
   "massTimings",
   "contact",
   "history",
+  "miracle",
   "devasahayam",
   "deBritto",
   "faq",

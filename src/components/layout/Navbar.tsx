@@ -81,8 +81,14 @@ export function Navbar() {
     { href: "/", label: t.nav.home },
     { href: "/history", label: t.nav.history },
     { href: "/mass-timings", label: t.nav.mass },
-    /* The building and the men who served in it, under the same heading the
-       footer already files them under. */
+    /* The building, the morning, and the men who served in it — under the same
+       heading the footer already files them under.
+       ⚠ /miracle IS DELIBERATELY IN HERE AND NOT ON THE BAR (owner's call,
+       August 2026). It shipped as a top-level item for exactly one day. The bar
+       is the site's scarcest surface and it already carries five things; the
+       page's real front door is the QR code in the village, not the navbar, and
+       a reader who wants to find it again looks under The Shrine. It is placed
+       FIRST in this panel because it is the most-wanted page in it. */
     {
       label: t.footer.shrine,
       /* ⚠ /gallery IS DELIBERATELY NOT HERE (owner's call, August 2026). It was
@@ -93,6 +99,7 @@ export function Navbar() {
          which is where a reader who wants pictures is already looking. Do not
          put it back without asking. */
       children: [
+        { href: "/miracle", label: t.nav.miracle },
         { href: "/architecture", label: t.nav.architecture },
         { href: "/priests", label: t.nav.priests },
       ],

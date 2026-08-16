@@ -106,6 +106,7 @@ export function Footer() {
           </p>
           <ul className={COL_LIST}>
             <li><Link href="/history" className={COL_LINK}>{t.nav.history}</Link></li>
+            <li><Link href="/miracle" className={COL_LINK}>{t.nav.miracle}</Link></li>
             {/* /priests was reachable from nowhere on this site until July 2026
                 — not the navbar, not here, not one link on one page. It has a
                 section on the home page now; this is its second way in. */}

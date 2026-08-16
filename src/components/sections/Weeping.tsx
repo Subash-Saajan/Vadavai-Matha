@@ -184,8 +184,14 @@ export function Weeping() {
             {/* `py-2 -my-2` gives the inline link a 44px tap target without
                 moving a pixel of it — the text is 18px tall on its own, which
                 is a third of what a thumb needs. */}
+            {/* → /miracle since August 2026, not /history#the-weeping-madonna.
+                This section is a teaser for one morning, and until now the only
+                thing it could open was that morning told in ten dots inside
+                four centuries — a reader who wanted MORE of this got a page
+                about something larger. /miracle is the whole account, and the
+                way back to the chronicle is at the foot of it. */}
             <Link
-              href="/history#the-weeping-madonna"
+              href="/miracle"
               className="ui-label group -my-2 inline-flex items-center gap-2 py-2 text-gold transition-colors hover:text-white"
             >
               {t.home.weepingCta}

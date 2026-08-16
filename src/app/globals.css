@@ -1143,6 +1143,49 @@ html[lang|="ta"] .prose-term {
   border-radius: 3px;
 }
 
+/* ── The same apparatus, on a dark ground ─────────────────────────────────
+   /miracle turns dark exactly once — for the chapter that quotes the witness
+   — and the note, the tier badge and the source chips have to come with it.
+   Everything above is drawn for near-black type on cream: `--gold-dark` on
+   `--night-deep` is around 2:1, and the chips are `--navy` at 68% opacity,
+   which on that ground is very nearly invisible.
+
+   ⚠ WHAT MUST NOT CHANGE IS THE GRAMMAR OF THE BADGE. Filled still means
+   documented and outlined still means everything else; only the ink is lifted
+   from `--gold-dark` to `--gold` so it can be read. A reader who learned what
+   a filled badge means on /history or on a saint's page must not have to
+   relearn it here because the paper went dark. */
+.saint-page .saint-note--dark {
+  border-left-color: rgba(196, 160, 73, 0.45);
+  color: rgba(255, 255, 255, 0.62);
+  opacity: 1;
+}
+.saint-page .saint-note--dark .saint-note-label {
+  color: var(--gold);
+}
+.saint-page .saint-cite--dark .saint-tier--documented {
+  color: var(--gold);
+  background: rgba(196, 160, 73, 0.18);
+  box-shadow: inset 0 0 0 1px rgba(196, 160, 73, 0.55);
+}
+.saint-page .saint-cite--dark .saint-tier--tradition {
+  color: rgba(255, 255, 255, 0.7);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+}
+.saint-page .saint-cite--dark .saint-tier--devotion {
+  color: var(--gold);
+  box-shadow: inset 0 0 0 1px rgba(196, 160, 73, 0.45);
+}
+.saint-page .saint-cite--dark .saint-chip {
+  color: rgba(255, 255, 255, 0.75);
+  opacity: 1;
+  text-decoration-color: rgba(196, 160, 73, 0.55);
+}
+.saint-page .saint-cite--dark .saint-chip:hover {
+  color: var(--gold);
+  text-decoration-color: var(--gold);
+}
+
 /* ── The citation apparatus on a phone ────────────────────────────────────
    Three of these are monitor values that fall under the 11px floor on a
    handset: the tier badge is 0.58rem (9.3px) thrown 0.26em apart, the note

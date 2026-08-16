@@ -4,6 +4,7 @@ import { Geist, Cormorant_Garamond, Cinzel } from "next/font/google";
 import { LanguageProvider } from "@/components/layout/LanguageProvider";
 import { JsonLd } from "@/components/JsonLd";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { VercelInsights } from "@/components/VercelInsights";
 import { BlackboxScript } from "@/components/BlackboxScript";
 import { PreloadTamilFonts } from "@/components/PreloadTamilFonts";
 import { baseNodes, graph } from "@/lib/schema";
@@ -153,6 +154,11 @@ export default async function RootLayout({
         <BlackboxScript />
         {lang === "ta" ? <PreloadTamilFonts /> : null}
         <GoogleAnalytics />
+        {/* Counted alongside GA4, not instead of it — the two disagree by design
+            (own-origin beacon vs blockable third-party script) and the gap is
+            itself the useful number. Also our only source of field Core Web
+            Vitals, since CrUX has no data for this domain. */}
+        <VercelInsights />
         {/* The shrine, the parish and the website — asserted on every route.
             Pages add only their own nodes (a WebPage, a breadcrumb, the feast)
             and reference these by @id, so six pages describe one entity rather
