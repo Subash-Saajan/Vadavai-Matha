@@ -7,9 +7,11 @@
  * Tamil lives under `/ta` — `/ta/faq` — so it has its own indexable URL, its own
  * <title>, its own JSON-LD and an hreflang pair pointing at the English twin.
  *
- * The unprefixed English paths are served by `src/proxy.ts`, which REWRITES
- * (never redirects) `/faq` onto the internal `/en/faq` route. A rewrite keeps the
- * address bar — and the canonical — at `/faq`.
+ * The unprefixed English paths are served by a `rewrites()` rule in
+ * next.config.ts, which REWRITES (never redirects) `/faq` onto the internal
+ * `/en/faq` route. A rewrite keeps the address bar — and the canonical — at
+ * `/faq`. (This was src/proxy.ts until 25 Nov 2026; see the note in
+ * next.config.ts for why a proxy cost every visitor a cold start.)
  */
 
 export const LOCALES = ["en", "ta"] as const;

@@ -114,6 +114,43 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  /* ── THE LOCALE REWRITE LIVES HERE, NOT IN src/proxy.ts ─────────────────────
+     English URLs carry no prefix (/history), but every page is built under
+     app/[lang]/, so an unprefixed path has to be served from /en/… . That
+     used to be src/proxy.ts — and in Next 16 a proxy runs on the Node.js
+     runtime, which on Vercel means a SERVERLESS FUNCTION INVOKED ON EVERY
+     PAGE REQUEST, in front of pages that are otherwise fully static. On a
+     site with a few visits a day that function is almost always cold, and
+     waking it is what a reader saw: 1–2s of white screen before the first
+     byte (measured 25 Nov 2026: first hit 1.0–1.97s, the next 0.15s).
+
+     A config rewrite is compiled into Vercel's edge routing table instead —
+     no function, no cold start, nothing to wake. It is the same rule the
+     proxy applied, and the same exclusions as its old matcher:
+       · /en/… and /ta/… pass through untouched;
+       · _next/ and api/ are never touched;
+       · anything with a dot in it is a file (robots.txt, sitemap.xml,
+         favicon.ico, /og/*.jpg, the hero films) and is never rewritten.
+     `beforeFiles` so it runs ahead of the filesystem and the dynamic [lang]
+     route, exactly where the proxy ran — otherwise `/history` would match
+     [lang] with lang="history" and 404.
+
+     The pattern starts with "(" rather than "?" on purpose: Next's
+     path-to-regexp rejects a custom pattern whose first character is "?",
+     and allows nested groups only when they are non-capturing. */
+  async rewrites() {
+    return {
+      beforeFiles: [
+        { source: "/", destination: "/en" },
+        {
+          source: "/:path((?!en(?:/|$)|ta(?:/|$)|_next/|api/)[^.]*)",
+          destination: "/en/:path",
+        },
+      ],
+      afterFiles: [],
+      fallback: [],
+    };
+  },
   async redirects() {
     return [
       // The home moved from /home to the root at launch. Anything that ever
