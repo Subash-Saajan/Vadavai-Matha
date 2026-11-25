@@ -1278,13 +1278,14 @@ html[lang|="ta"] .prose-term {
 }
 
 /* ── The home loading screen's failsafe (Hero.tsx, desktop only) ──────────
-   React lifts the screen as soon as the film is in memory, or at 8s whatever
+   React lifts the screen as soon as the film is in memory, or at 25s whatever
    happens. This is for the one case React cannot handle: JavaScript that
    never runs (blocked, crashed, or a crawler that paints but does not
-   execute). Then the screen fades on its own at 10s, and the server-rendered
+   execute). Then the screen fades on its own at 30s (it must stay longer than
+   MAX_WAIT_MS in Hero.tsx), and the server-rendered
    hero underneath it is a perfectly good page. */
 .hero-loader {
-  animation: hero-loader-failsafe 0.6s ease 10s forwards;
+  animation: hero-loader-failsafe 0.6s ease 30s forwards;
 }
 
 @keyframes hero-loader-failsafe {

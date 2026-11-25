@@ -15,22 +15,31 @@
 // without it every frame comes out sideways.
 //
 // The delivery video itself is also derived from the master (1080p30,
-// reversed, dense keyframes for scrubbing, rotation flag cleared):
+// reversed, encoded FOR SEEKING, rotation flag cleared):
 //
 //   ffmpeg -display_rotation 0 -i ../IMG_3548.MP4 -map 0:0 \
-//     -vf "fps=30,scale=1920:1080,reverse" -c:v libx264 -crf 31 \
-//     -preset slower -g 15 -pix_fmt yuv420p -movflags +faststart -an \
+//     -vf "fps=30,scale=1920:1080,reverse" -c:v libx264 -crf 22 \
+//     -preset slow -x264-params \
+//       "keyint=10:min-keyint=10:scenecut=0:bframes=0:ref=3" \
+//     -pix_fmt yuv420p -movflags +faststart -an \
 //     public/hero-video.mp4     (copied to public/peel-film.mp4 while the
 //                                real AI peel film is pending)
+//   …then bump DESKTOP_CUT in Hero.tsx (the file has a day of max-age).
 //
-// ⚠ CRF 31, NOT 24 (25 Nov 2026). At CRF 24 the file was 18.6 MB, and since
-// the desktop hero now downloads the film WHOLE behind a loading screen (see
-// src/lib/heroFilm.ts) its size is the loading time. CRF 31 is 8.4 MB, SSIM
-// 0.944 against a near-lossless 1080p master (CRF 24 was 0.975), with the
-// same 600 frames and the same -g 15, so seeking costs exactly what it did.
-// Tested and rejected: 1600x900 CRF 27 came out at 9.3 MB, no smaller than
-// 1080p CRF 30, and softer. If quality complaints come back, CRF 30 (9.4 MB)
-// is the next step up; don't go back to 24 without revisiting the loader.
+// ⚠ WHY THESE SETTINGS (25 Nov 2026). The scrub's frame rate IS the seek rate:
+// every scroll position is a `currentTime` seek, and a seek decodes from the
+// last keyframe up to the target. The old encode (CRF 24, -g 15, x264's
+// default B-pyramid) cost ~8–9 decodes per seek plus B-frame reordering.
+// keyint 10 with NO B-frames is ~5 decodes and no reordering, so the same
+// machine retires roughly twice as many seeks per second. CRF 22 keeps it
+// sharper than the old file (SSIM 0.976 vs 0.975 against a near-lossless
+// 1080p master). Cost: 32 MB, which the desktop hero downloads WHOLE behind a
+// loading screen (src/lib/heroFilm.ts), so the scrub never waits on the
+// network. The owner's rule: load first, then the best experience.
+// Tried and rejected the same day: CRF 31 / -g 15 (8.4 MB) read as "laggy,
+// like frames reduced" to the owner, so never trade clarity for size here
+// again; keyint 6 (41 MB) and CRF 20 (54 MB) cost 10–20 MB for gains too
+// small to see.
 //
 // Frames are center-cropped to 4:5 (phones only ever see that center slice
 // through object-cover) and scaled to 864×1080 WebP. If a film changes,

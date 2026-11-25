@@ -54,7 +54,12 @@ import { ChevronDown } from "lucide-react";
    change often enough to be worth the plumbing. */
 const CUT = "3";
 
-const DESKTOP_SRC = "/hero-video.mp4";
+/* ⚠ BUMP DESKTOP_CUT WHENEVER hero-video.mp4 IS RE-ENCODED. The file is
+   served with a day of max-age (next.config.ts), so without a new query
+   string a returning reader keeps yesterday's encode, which is how a tester
+   ends up judging the wrong file. */
+const DESKTOP_CUT = "2";
+const DESKTOP_SRC = `/hero-video.mp4?c=${DESKTOP_CUT}`;
 const MOBILE_SRC = `/hero-mobile.mp4?c=${CUT}`;
 const FILM_SRC = `/hero-frames/film.h264?c=${CUT}`;
 const FILM_INDEX_SRC = `/hero-frames/film.json?c=${CUT}`;
@@ -67,12 +72,18 @@ const FRAME_COUNT = 150;
    rather than flashing in after hydration; phones never see it (`hidden
    md:flex`), and their hero paths are unchanged.
 
-   MAX_WAIT_MS is the promise to the reader: on a connection too slow to fetch
-   8 MB in time, the screen lifts anyway and the film streams as it always
-   used to. Nobody is held at a loading screen. The CSS failsafe in
-   globals.css (`.hero-loader`, 10s) covers the case where JavaScript never
-   runs at all. */
-const MAX_WAIT_MS = 8000;
+   The owner's brief (25 Nov 2026): "give them a loading screen, let them load
+   it, and then give them the best experience". So the film is encoded for
+   clarity and for seeking, not for size: 32 MB (see gen-scrub-frames.mjs),
+   about 3s on 100 Mbit/s and 5s on 50. A percentage sits under the line so
+   a longer wait reads as progress, not as a hang.
+
+   MAX_WAIT_MS is still a promise to the reader: on a connection too slow to
+   fetch it in 25s, the screen lifts anyway and the film streams as it always
+   used to. Nobody is held at a loading screen forever. The CSS failsafe in
+   globals.css (`.hero-loader`, 30s) covers the case where JavaScript never
+   runs at all, and must stay longer than this. */
+const MAX_WAIT_MS = 25000;
 const LOADER_FADE_MS = 700;
 
 type FilmPhase = "loading" | "ready" | "fallback";
@@ -520,7 +531,7 @@ export function Hero() {
           role="status"
           aria-live="polite"
           aria-hidden={!loaderUp}
-          className={`hero-loader fixed inset-0 z-[70] hidden md:flex flex-col items-center justify-center bg-navy transition-opacity ease-out ${
+          className={`hero-loader fixed inset-0 z-70 hidden md:flex flex-col items-center justify-center bg-navy transition-opacity ease-out ${
             loaderUp ? "opacity-100" : "pointer-events-none opacity-0"
           }`}
           style={{ transitionDuration: `${LOADER_FADE_MS}ms` }}
@@ -539,6 +550,11 @@ export function Hero() {
               style={{ transform: `scaleX(${Math.max(progress, 0.06)})` }}
             />
           </div>
+          {/* Reserved height, so the cross and kicker do not shift when the
+              first byte count arrives. */}
+          <span className="mt-3 h-4 text-[0.7rem] tabular-nums tracking-[0.2em] text-gold-light/60">
+            {progress > 0 ? `${Math.round(progress * 100)}%` : ""}
+          </span>
           <span className="sr-only">{t.hero.loading}</span>
         </div>
       )}
