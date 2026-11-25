@@ -116,7 +116,8 @@ export const ROUTES: Record<RouteKey, RouteDef> = {
     crumb: "Home",
     priority: 1.0,
     changeFrequency: "weekly",
-    lastModified: "2026-08-06",
+    // 25 Nov 2026: the hero's words now render in Tamil on /ta.
+    lastModified: "2026-11-25",
     image: "/images/architecture/facade.jpg",
     ogImage: "/og/home.jpg",
   },
@@ -161,12 +162,12 @@ export const ROUTES: Record<RouteKey, RouteDef> = {
     changeFrequency: "yearly",
     lastModified: "2026-08-13",
     image: "/images/history/the-weeping-madonna-3.jpg",
-    // ⚠ BORROWED FROM /history UNTIL A CARD OF ITS OWN IS CUT. A share card must
-    // be exactly 1.91:1 or the platforms crop it themselves, and the paintings
-    // for this era are all 4:5. Cut public/og/miracle.jpg from
-    // the-weeping-madonna-3.jpg — the ladder, the bell rope and the crowd — and
-    // point this at it.
-    ogImage: "/og/history.jpg",
+    // Cut 25 Nov 2026 from the-weeping-madonna-3.jpg (1200×1500): the full-width
+    // band y=115–745, which keeps the whole crown and halo, the cloth at her
+    // face, the ladder, the bell and the boy on its rope, and the first raised
+    // hands of the crowd. A share card must be exactly 1.91:1 or the platforms
+    // crop it themselves. Re-cut from the same source if the painting changes.
+    ogImage: "/og/miracle.jpg",
   },
   architecture: {
     path: "/architecture",
