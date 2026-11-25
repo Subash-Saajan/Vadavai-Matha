@@ -156,6 +156,12 @@ export function PageHero({
           className={`object-cover ${imagePosition ?? "object-center"}`}
           sizes={cappedSizes("100vw")}
           preload
+          /* `preload` alone put the <link> in the head but at the browser's
+             default image priority, so Chrome held it back behind the fonts and
+             stylesheets — 0.75–0.95s of "resource load delay" on the LCP of
+             /history and /miracle (Lighthouse, 25 Nov 2026). Next forwards
+             this onto the preload link as well as the <img>. */
+          fetchPriority="high"
         />
         <div className={`absolute inset-0 ${overlayClassName ?? DEFAULT_OVERLAY}`} />
       </div>

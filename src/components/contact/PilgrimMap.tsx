@@ -1,20 +1,56 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { Navigation, MapPin, Check } from "lucide-react";
 import { useLang } from "@/components/layout/LanguageProvider";
 import { GEO, MAP_LINKS, ADDRESS } from "@/lib/contact";
 
 // `ssr: false` is only legal inside a Client Component in Next 16, which this
-// is. The map is shown open, not hidden behind a click — but the iframe below
-// carries `loading="lazy"`, so Google is not fetched until the section nears
-// the viewport. The engraving sits behind it as an on-brand poster until the
-// map tiles paint over it.
+// is. The map is shown open, not hidden behind a click.
 const InteractiveMap = dynamic(() => import("./InteractiveMap"), {
   ssr: false,
   loading: () => null,
 });
+
+/* ── THE MAP WAITS UNTIL THE READER IS NEARLY THERE ───────────────────────
+   `dynamic()` only splits the code; it still FETCHES it the moment this
+   component mounts. On /contact that meant the whole of MapLibre — 281 KB
+   over the wire, the longest task on the page at ~300ms of script — plus the
+   style, sprite, glyph and tile requests, all on page open, while the hero
+   photograph was still waiting to paint (Lighthouse, 25 Nov 2026: 1.7s of
+   "element render delay" on the LCP image). The map sits a screen and more
+   below the fold, so it now mounts when its plate comes within NEAR_MARGIN
+   of the viewport: early enough that the tiles are up by the time anyone
+   arrives at it, late enough that it no longer competes with the first
+   paint. A reader who lands on /contact#map is already inside the margin,
+   so the observer fires at once and nothing is lost. */
+const NEAR_MARGIN = "900px 0px";
+
+function useNearViewport<T extends Element>() {
+  const ref = useRef<T>(null);
+  const [near, setNear] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || near) return;
+    // No fallback branch: every browser that can run MapLibre 6 (WebGL2)
+    // has had IntersectionObserver for years.
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setNear(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: NEAR_MARGIN },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [near]);
+
+  return [ref, near] as const;
+}
 
 const COORDS = `${GEO.lat}, ${GEO.lng}`;
 
@@ -42,6 +78,7 @@ function AppleMark({ className }: { className?: string }) {
 export function PilgrimMap({ id }: { id?: string }) {
   const { t } = useLang();
   const [copied, setCopied] = useState(false);
+  const [plateRef, mapNear] = useNearViewport<HTMLDivElement>();
 
   async function copyCoords() {
     try {
@@ -80,8 +117,11 @@ export function PilgrimMap({ id }: { id?: string }) {
             more map for 28px of scroll, on the one section of this page whose
             entire purpose is showing somebody where to go. The desktop plate is
             the drawn 2:1 and is untouched. */}
-        <div className="reveal relative aspect-4/3 md:aspect-2/1 rounded-[1.75rem] overflow-hidden shadow-2xl ring-1 ring-gold/25 bg-cream">
-          <InteractiveMap title={t.contact.map.iframeTitle} />
+        <div
+          ref={plateRef}
+          className="reveal relative aspect-4/3 md:aspect-2/1 rounded-[1.75rem] overflow-hidden shadow-2xl ring-1 ring-gold/25 bg-cream"
+        >
+          {mapNear && <InteractiveMap title={t.contact.map.iframeTitle} />}
 
           {/* Corner serifs, the site's framing motif */}
           <span className="pointer-events-none absolute top-4 left-4 w-7 h-7 border-t border-l border-gold/50 z-10" aria-hidden="true" />
