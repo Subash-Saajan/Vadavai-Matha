@@ -26,7 +26,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Plus, Minus } from "lucide-react";
-import maplibregl, { type Map as MapLibreMap } from "maplibre-gl";
+/* maplibre-gl 6 is ESM-only and has no default export; the namespace import
+   is the documented replacement for v5's `import maplibregl from`. */
+import * as maplibregl from "maplibre-gl";
+import type { Map as MapLibreMap } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { GEO, MAP_ZOOM, ADDRESS } from "@/lib/contact";
 
