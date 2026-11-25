@@ -8,6 +8,7 @@ import { useHeroMedia } from "@/hooks/useHeroMedia";
 import { useScrubFilm } from "@/hooks/useScrubFilm";
 import { useScrubVideo } from "@/hooks/useScrubVideo";
 import { VARIANT_SCRUB } from "@/lib/heroVariants";
+import { useLang } from "@/components/layout/LanguageProvider";
 import { ChevronDown } from "lucide-react";
 
 /* ── THREE HEROES, ONE SCRUB ───────────────────────────────────────────────
@@ -76,6 +77,7 @@ export function Hero() {
      non-null ONLY when ?hero=<rung> names one of the test cuts — see
      src/lib/heroVariants.ts. Temporary; goes when the ladder does. */
   const { mode, variant, demoteFilm } = useHeroMedia();
+  const { t } = useLang();
 
   const videoSrc = variant
     ? (variant.videoSrc ?? null)
@@ -320,8 +322,12 @@ export function Hero() {
             {/* 0.55em of tracking on an 11.5px word needs about 150px to sit
                 in and is the first thing to crowd on a narrow screen. Up in
                 size, in on tracking — the same trade the `.kicker` makes. */}
-            <span className="font-display text-[0.78rem] tracking-[0.38em] uppercase text-gold-light drop-shadow-[0_2px_8px_rgba(0,0,0,0.55)] md:text-sm md:tracking-[0.55em]">
-              Little Rome
+            {/* Tamil: wide tracking pulls a Tamil syllable apart into what reads
+                as broken text, and `.font-display` outside the nav is the 58%
+                cut, so the word is sized up and the tracking taken to the
+                `.kicker`'s Tamil 0.1em. */}
+            <span className="font-display text-[0.78rem] tracking-[0.38em] uppercase text-gold-light drop-shadow-[0_2px_8px_rgba(0,0,0,0.55)] md:text-sm md:tracking-[0.55em] ta:text-[1.15rem] ta:tracking-widest ta:normal-case">
+              {t.hero.kicker}
             </span>
           </div>
 
@@ -341,14 +347,15 @@ export function Hero() {
            *
            * `.title-line` stays only on the visible spans, so the GSAP entrance
            * (which queries for it inside `headingRef`) is untouched. */}
+          {/* Tamil leading: each line sits in an `overflow-hidden` mask for the
+              reveal, and at 0.92 that mask would shear the vowel signs that
+              rise above a Tamil line (ி ீ) and the hooks that hang below it
+              (ு ூ). 1.3 gives them room inside the mask. */}
           <h1
             ref={headingRef}
-            className="font-display font-semibold text-white uppercase tracking-[0.04em] leading-[0.92]"
+            className="font-display font-semibold text-white uppercase tracking-[0.04em] leading-[0.92] ta:tracking-normal ta:leading-[1.3]"
           >
-            <span className="sr-only">
-              Our Lady of Assumption — the Holy Family Shrine, Vadakkankulam,
-              called Little Rome
-            </span>
+            <span className="sr-only">{t.hero.titleFull}</span>
             {/* ── THE TWO LINES ARE FLUID BELOW `md`, AND LINE TWO WAS BROKEN ──
                 "of Assumption" was a flat 2.75rem (44px). Thirteen characters
                 of Cinzel at 44px want roughly 345px; a 390px phone minus the
@@ -368,12 +375,12 @@ export function Hero() {
             <span aria-hidden="true" className="block">
               <span className="block overflow-hidden">
                 <span className="title-line block text-[clamp(2.35rem,11.5vw,3rem)] md:text-7xl lg:text-[7.5rem]">
-                  Our Lady
+                  {t.hero.titleLine1}
                 </span>
               </span>
               <span className="block overflow-hidden mt-1 md:mt-2">
                 <span className="title-line block text-[clamp(1.8rem,8.8vw,2.75rem)] text-gradient-gold md:text-6xl lg:text-[6rem]">
-                  of Assumption
+                  {t.hero.titleLine2}
                 </span>
               </span>
             </span>
@@ -390,7 +397,7 @@ export function Hero() {
                 number — see the note on the serif body sizes in Patroness.tsx.
                 It sits a step above the page's sans body, not level with it. */}
             <p className="text-[1.02rem] md:text-lg text-white/75 font-serif italic tracking-wide leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
-              A sacred sanctuary of faith, prayer &amp; community
+              {t.hero.tagline}
             </p>
           </div>
 
@@ -404,8 +411,8 @@ export function Hero() {
             ref={scrollRef}
             className="absolute bottom-24 flex flex-col items-center gap-2 md:bottom-10"
           >
-            <span className="font-display text-[0.68rem] uppercase tracking-[0.26em] text-white/60 md:text-[0.6rem] md:tracking-[0.35em]">
-              Scroll to enter
+            <span className="font-display text-[0.68rem] uppercase tracking-[0.26em] text-white/60 md:text-[0.6rem] md:tracking-[0.35em] ta:text-[1rem] ta:tracking-[0.04em] ta:normal-case">
+              {t.hero.scrollCue}
             </span>
             <ChevronDown className="w-5 h-5 text-gold animate-scroll-bounce" />
           </div>

@@ -21,6 +21,15 @@ export const dict = {
     hero: {
       visit: "Plan Your Visit",
       explore: "Explore Our Story",
+      kicker: "Little Rome",
+      /* The two carved lines of the <h1>, and the fuller reading a crawler and
+         a screen reader get beside them (see the note in Hero.tsx). */
+      titleLine1: "Our Lady",
+      titleLine2: "of Assumption",
+      titleFull:
+        "Our Lady of Assumption — the Holy Family Shrine, Vadakkankulam, called Little Rome",
+      tagline: "A sacred sanctuary of faith, prayer & community",
+      scrollCue: "Scroll to enter",
     },
     home: {
       patronessLabel: "Our Patroness",
@@ -2251,6 +2260,13 @@ export const dict = {
     hero: {
       visit: `உங்கள் வருகையைத் திட்டமிடுங்கள்`,
       explore: `எங்கள் வரலாற்றை அறியுங்கள்`,
+      kicker: `சின்ன ரோமாபுரி`,
+      // glossary decision 2: the hero leads with பரலோக மாதா, விண்ணேற்பு மாதா beneath it
+      titleLine1: `பரலோக மாதா`,
+      titleLine2: `விண்ணேற்பு மாதா`,
+      titleFull: `பரலோக மாதா, விண்ணேற்பு மாதா — சின்ன ரோமாபுரி என்று அழைக்கப்படும் வடக்கன்குளம் திருக்குடும்பத் திருத்தலம்`,
+      tagline: `விசுவாசமும் செபமும் ஒன்றிப்பும் தழைக்கும் புனிதத் திருத்தலம்`,
+      scrollCue: `உருட்டி உள்ளே வாருங்கள்`,
     },
     home: {
       patronessLabel: `எங்கள் பாதுகாவலி`,
