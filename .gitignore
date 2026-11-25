@@ -49,3 +49,6 @@ next-env.d.ts
 # be publicly served and bloat every deploy. Kept on disk, never committed.
 *.original.*
 _original/
+
+.vercel
+.env*
