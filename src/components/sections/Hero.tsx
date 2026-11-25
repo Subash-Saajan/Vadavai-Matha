@@ -1,7 +1,8 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import Image from "next/image";
+import { abandonHeroFilm, cachedHeroFilm, loadHeroFilm } from "@/lib/heroFilm";
 import { cappedSizes } from "@/lib/imageSizes";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { useHeroMedia } from "@/hooks/useHeroMedia";
@@ -59,6 +60,24 @@ const FILM_SRC = `/hero-frames/film.h264?c=${CUT}`;
 const FILM_INDEX_SRC = `/hero-frames/film.json?c=${CUT}`;
 const FRAME_COUNT = 150;
 
+/* ── THE DESKTOP LOADING SCREEN ───────────────────────────────────────────
+   On a monitor the film is downloaded whole before the hero is shown, so the
+   scrub never waits on the network (see lib/heroFilm.ts for why). The screen
+   is server-rendered for `md` and up, so it is there from the first paint
+   rather than flashing in after hydration; phones never see it (`hidden
+   md:flex`), and their hero paths are unchanged.
+
+   MAX_WAIT_MS is the promise to the reader: on a connection too slow to fetch
+   8 MB in time, the screen lifts anyway and the film streams as it always
+   used to. Nobody is held at a loading screen. The CSS failsafe in
+   globals.css (`.hero-loader`, 10s) covers the case where JavaScript never
+   runs at all. */
+const MAX_WAIT_MS = 8000;
+const LOADER_FADE_MS = 700;
+
+type FilmPhase = "loading" | "ready" | "fallback";
+type LenisLike = { stop(): void; start(): void };
+
 export function Hero() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -79,10 +98,82 @@ export function Hero() {
   const { mode, variant, demoteFilm } = useHeroMedia();
   const { t } = useLang();
 
+  /* Desktop film: null until downloaded (the poster carries the frame), then a
+     blob: URL, or the plain file URL if we gave up waiting. Already "ready"
+     when this session has downloaded it before (client-side navigation home). */
+  const [film, setFilm] = useState<{ src: string | null; phase: FilmPhase }>(() => {
+    const cached = cachedHeroFilm();
+    return cached ? { src: cached, phase: "ready" } : { src: null, phase: "loading" };
+  });
+  const [progress, setProgress] = useState(0);
+  const [loaderGone, setLoaderGone] = useState(() => cachedHeroFilm() !== null);
+
+  /* Up while the desktop film is downloading. `mode === null` is SSR and the
+     hydrating render, where we cannot know the device yet; the CSS decides
+     then (md:flex), so a monitor sees the screen from the first paint. */
+  const desktopFilm = mode === "desktop" && !variant;
+  const loaderUp = film.phase === "loading" && (mode === null || desktopFilm);
+
+  useEffect(() => {
+    if (!desktopFilm || film.phase !== "loading") return;
+    let settled = false;
+    const { promise, unsubscribe } = loadHeroFilm(DESKTOP_SRC, setProgress);
+    const giveUp = window.setTimeout(() => {
+      if (settled) return;
+      settled = true;
+      abandonHeroFilm();
+      setFilm({ src: DESKTOP_SRC, phase: "fallback" });
+    }, MAX_WAIT_MS);
+    promise.then(
+      (url) => {
+        if (settled) return;
+        settled = true;
+        setFilm({ src: url, phase: "ready" });
+      },
+      () => {
+        if (settled) return;
+        settled = true;
+        setFilm({ src: DESKTOP_SRC, phase: "fallback" });
+      },
+    );
+    return () => {
+      settled = true;
+      window.clearTimeout(giveUp);
+      unsubscribe();
+    };
+  }, [desktopFilm, film.phase]);
+
+  /* Hold the page still while the screen is up: a reader who wheels during
+     the load would otherwise arrive halfway down the hero. A stopped Lenis
+     cancels wheel events outright, so nothing about the layout changes (no
+     overflow toggling, no scrollbar jump). Lenis is created by the layout,
+     whose effect runs AFTER this child's, so wait a frame or two for it. */
+  useEffect(() => {
+    if (!desktopFilm || film.phase !== "loading") return;
+    const w = window as Window & { __lenis?: LenisLike };
+    let raf = 0;
+    const stop = () => {
+      if (w.__lenis) w.__lenis.stop();
+      else raf = requestAnimationFrame(stop);
+    };
+    stop();
+    return () => {
+      cancelAnimationFrame(raf);
+      w.__lenis?.start();
+    };
+  }, [desktopFilm, film.phase]);
+
+  // Unmount the screen once its fade-out has finished.
+  useEffect(() => {
+    if (loaderUp || loaderGone) return;
+    const id = window.setTimeout(() => setLoaderGone(true), LOADER_FADE_MS);
+    return () => window.clearTimeout(id);
+  }, [loaderUp, loaderGone]);
+
   const videoSrc = variant
     ? (variant.videoSrc ?? null)
     : mode === "desktop"
-      ? DESKTOP_SRC
+      ? film.src
       : mode === "mobileVideo"
         ? MOBILE_SRC
         : null;
@@ -418,6 +509,39 @@ export function Hero() {
           </div>
         </div>
       </div>
+
+      {/* The desktop loading screen. Above the navbar (z-50), navy like the
+          hero's own first frame, so lifting it reads as the hero arriving
+          rather than as a page swap. The bar scales on the compositor
+          (transform, never width). Indeterminate (pulsing) until the first
+          byte count arrives, or for good if the server sends no length. */}
+      {!loaderGone && (
+        <div
+          role="status"
+          aria-live="polite"
+          aria-hidden={!loaderUp}
+          className={`hero-loader fixed inset-0 z-[70] hidden md:flex flex-col items-center justify-center bg-navy transition-opacity ease-out ${
+            loaderUp ? "opacity-100" : "pointer-events-none opacity-0"
+          }`}
+          style={{ transitionDuration: `${LOADER_FADE_MS}ms` }}
+        >
+          <svg width="16" height="24" viewBox="0 0 13 20" fill="none" className="text-gold" aria-hidden="true">
+            <path d="M6.5 0v20M0.5 6h12" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+          </svg>
+          <span className="mt-4 font-display text-sm uppercase tracking-[0.55em] text-gold-light ta:text-[1.15rem] ta:tracking-widest ta:normal-case">
+            {t.hero.kicker}
+          </span>
+          <div className="mt-8 h-px w-48 overflow-hidden bg-white/10">
+            <div
+              className={`h-full w-full origin-left bg-gold transition-transform duration-300 ease-out ${
+                progress === 0 ? "animate-pulse" : ""
+              }`}
+              style={{ transform: `scaleX(${Math.max(progress, 0.06)})` }}
+            />
+          </div>
+          <span className="sr-only">{t.hero.loading}</span>
+        </div>
+      )}
     </section>
   );
 }

@@ -30,6 +30,7 @@ export const dict = {
         "Our Lady of Assumption — the Holy Family Shrine, Vadakkankulam, called Little Rome",
       tagline: "A sacred sanctuary of faith, prayer & community",
       scrollCue: "Scroll to enter",
+      loading: "Loading",
     },
     home: {
       patronessLabel: "Our Patroness",
@@ -2267,6 +2268,7 @@ export const dict = {
       titleFull: `பரலோக மாதா, விண்ணேற்பு மாதா — சின்ன ரோமாபுரி என்று அழைக்கப்படும் வடக்கன்குளம் திருக்குடும்பத் திருத்தலம்`,
       tagline: `விசுவாசமும் செபமும் ஒன்றிப்பும் தழைக்கும் புனிதத் திருத்தலம்`,
       scrollCue: `உருட்டி உள்ளே வாருங்கள்`,
+      loading: `ஏற்றப்படுகிறது`,
     },
     home: {
       patronessLabel: `எங்கள் பாதுகாவலி`,

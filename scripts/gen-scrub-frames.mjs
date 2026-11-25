@@ -18,10 +18,19 @@
 // reversed, dense keyframes for scrubbing, rotation flag cleared):
 //
 //   ffmpeg -display_rotation 0 -i ../IMG_3548.MP4 -map 0:0 \
-//     -vf "fps=30,scale=1920:1080,reverse" -c:v libx264 -crf 24 \
-//     -preset slow -g 15 -pix_fmt yuv420p -movflags +faststart -an \
+//     -vf "fps=30,scale=1920:1080,reverse" -c:v libx264 -crf 31 \
+//     -preset slower -g 15 -pix_fmt yuv420p -movflags +faststart -an \
 //     public/hero-video.mp4     (copied to public/peel-film.mp4 while the
 //                                real AI peel film is pending)
+//
+// ⚠ CRF 31, NOT 24 (25 Nov 2026). At CRF 24 the file was 18.6 MB, and since
+// the desktop hero now downloads the film WHOLE behind a loading screen (see
+// src/lib/heroFilm.ts) its size is the loading time. CRF 31 is 8.4 MB, SSIM
+// 0.944 against a near-lossless 1080p master (CRF 24 was 0.975), with the
+// same 600 frames and the same -g 15, so seeking costs exactly what it did.
+// Tested and rejected: 1600x900 CRF 27 came out at 9.3 MB, no smaller than
+// 1080p CRF 30, and softer. If quality complaints come back, CRF 30 (9.4 MB)
+// is the next step up; don't go back to 24 without revisiting the loader.
 //
 // Frames are center-cropped to 4:5 (phones only ever see that center slice
 // through object-cover) and scaled to 864×1080 WebP. If a film changes,
